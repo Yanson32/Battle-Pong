@@ -2,9 +2,9 @@
 #define PADDLE_H
 class Paddle
 {
-public:
-	Paddle();
-	~Paddle();
+    public:
+        Paddle();
+        ~Paddle();
 };
 
 #endif

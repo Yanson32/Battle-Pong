@@ -10,9 +10,9 @@ namespace sf
     class RenderTarget;
 }
 
-class b2Vec2;
-class b2Color;
-class b2Transform;
+struct b2Vec2;
+struct b2Color;
+struct b2Transform;
 
 /************************************************************************************************************
 *   Author:     Wayne J Larson Jr.
@@ -26,7 +26,7 @@ class DebugDraw: public b2Draw, public sf::Drawable
         *   Purpose:    This method is a constructor.
         *   Input:      sf::RenderWindow &newWindow this is the window where the Box2D bodies will be drawn
         ****************************************************************************************************/
-        DebugDraw(sf::RenderWindow &newWindow, const float newPixelsPerMeter = 40.0f);
+        DebugDraw(const float newPixelsPerMeter = 40.0f);
 
 		/*******************************************************************************************************************
 		*   Purpose:    This method draws axis alligned bounding boxes.
@@ -99,6 +99,10 @@ class DebugDraw: public b2Draw, public sf::Drawable
         *******************************************************************************************************************/
         virtual void DrawTransform(const b2Transform& xf) override;
 
+		virtual void DrawPoint(const b2Vec2& p, float32 size, const b2Color& color) override
+		{
+			DrawCircle(p, size, color);
+		}
 
         /*******************************************************************************************************************
         *   Purpose:    This method does per frame logic and must be called once per frame.
@@ -130,7 +134,6 @@ class DebugDraw: public b2Draw, public sf::Drawable
 
         sf::VertexArray lines;
         sf::VertexArray triangles;
-        sf::RenderWindow &window;
         unsigned linesUsed = 0;
         unsigned trianglesUsed = 0;
         sf::FloatRect viewBounds;

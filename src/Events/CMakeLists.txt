@@ -1,6 +1,5 @@
-set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/StateBase.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/PlayState.cpp"
+set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/EventBase.cpp"
+
 )
 set(SUB_DIRECTORIES "")
 

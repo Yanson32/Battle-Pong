@@ -31,7 +31,7 @@ namespace
     *   Input:      const sf::View the view that we want to create a bounding box for.
     *   Return:     sf::FloatRect represents the bounding box for the input view.
     **********************************************************************************************/
-    sf::FloatRect getBounds(const sf::View &view);
+    //sf::FloatRect getBounds(const sf::View &view);
 
 
     /****************************************************************************************
@@ -50,7 +50,7 @@ namespace
     *               const sf::Vector2f the second point of the line.
     *   Return:     sf::FloatRect the bounding rectangle for the line
     ****************************************************************************************/
-    sf::FloatRect getBounds(const sf::Vector2f first, const sf::Vector2f second);
+    //sf::FloatRect getBounds(const sf::Vector2f first, const sf::Vector2f second);
 }
 
 
@@ -58,10 +58,11 @@ namespace
     *   Purpose:    This method is a constructor.
     *   Input:      sf::RenderWindow &newWindow this is the window where the Box2D bodies will be drawn
     ****************************************************************************************************/
-	DebugDraw::DebugDraw(sf::RenderWindow &newWindow, const float newPixelsPerMeter): window(newWindow), pixelsPerMeter(newPixelsPerMeter)
+	DebugDraw::DebugDraw(const float newPixelsPerMeter): pixelsPerMeter(newPixelsPerMeter)
     {
         lines.setPrimitiveType(sf::Lines);
         triangles.setPrimitiveType(sf::Triangles);
+		SetFlags(b2Draw::e_shapeBit);
     }
 
 
@@ -75,6 +76,7 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
     {
+		std::cout << "DrawPolygon" << std::endl;
         for(int i = 0; i < vertexCount - 1; ++i)
         {
             DrawSegment(vertices[i], vertices[i + 1], color);
@@ -94,6 +96,7 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
     {
+		std::cout << "DrawSolidPolygon" << std::endl;
         const sf::Color COLOR = toSfColor(color);
 
         for(int i = 0; i < vertexCount - 2; ++i)
@@ -142,7 +145,8 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color)
     {
-        const unsigned      POINT_COUNT = 10 + radius;
+		std::cout << "DrawCircle " << std::endl;
+        const unsigned      POINT_COUNT = 10 + (unsigned)radius;
         std::vector<b2Vec2> points = getPoints(center, radius, POINT_COUNT);
         assert(points.size() != 0);
 
@@ -166,6 +170,8 @@ namespace
     ********************************************************************************************************************/
     void DebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
     {
+		std::cout << "DrawSolidCircle " << std::endl;
+
         const unsigned POINT_COUNT = (10 + static_cast<int>(radius));
         const sf::Color COLOR = toSfColor(color);
 
@@ -224,6 +230,7 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color)
     {
+		std::cout << "DrawSegment " << std::endl;
         //Convert Box2D parameters to SFML
         const sf::Color     COLOR           = toSfColor(color);
         const sf::Vector2f  FIRST_POINT     = this->toPixels(p1);
@@ -264,6 +271,7 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawTransform(const b2Transform& xf)
     {
+		std::cout << "DrawTransform" << std::endl;
         const float32 LENGTH            = 0.2f;
         const b2Vec2 CENTER_POINT       = (xf.p);
         const b2Vec2 HORIZONTAL_POINT   = (xf.p + (LENGTH * xf.q.GetXAxis()));
@@ -371,7 +379,7 @@ namespace
     ****************************************************************************************/
     sf::Color toSfColor(const b2Color &color, int alpha)
     {
-        return sf::Color (color.r * 255, color.g * 255, color.b * 255);
+        return sf::Color (sf::Uint8(color.r * 255), sf::Uint8(color.g * 255), sf::Uint8(color.b * 255));
     }
 
 
@@ -381,13 +389,13 @@ namespace
     *               const sf::Vector2f the second point of the line.
     *   Return:     sf::FloatRect the bounding rectangle for the line
     ****************************************************************************************/
-    sf::FloatRect getBounds(const sf::Vector2f first, const sf::Vector2f second)
-    {
+    //sf::FloatRect getBounds(const sf::Vector2f first, const sf::Vector2f second)
+    //{
         //sf::FloatRect rt;
         //rt.left = view.getCenter().x - view.getSize().x / 2.0f;
         //rt.top = view.getCenter().y - view.getSize().y / 2.0f;
         //rt.width = view.getSize().x;
         //rt.height = view.getSize().y;
-		return sf::FloatRect();
-    }
+		//return sf::FloatRect();
+    //}
 }

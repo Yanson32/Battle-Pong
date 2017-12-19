@@ -1,5 +1,6 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/StateBase.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/PlayState.h"
 
 )
 set(SUB_DIRECTORIES "")

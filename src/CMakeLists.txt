@@ -1,9 +1,16 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Paddle.cpp"
-		"${CMAKE_CURRENT_SOURCE_DIR}/Settings.cpp"
-		"${CMAKE_CURRENT_SOURCE_DIR}/DebugDraw.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Settings.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/DebugDraw.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Game.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/Ball.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Box2DFunctions.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Wall.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/ObjectBase.cpp"
 
 )
-set(SUB_DIRECTORIES "States")
+set(SUB_DIRECTORIES "States"
+					"Events"
+)
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

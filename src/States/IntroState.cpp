@@ -7,7 +7,9 @@
 #include <SFML/Graphics/Font.hpp>
 #include <iostream>
 
-IntroState::IntroState(): StateBase()
+#include "States/PlayState.h"
+
+IntroState::IntroState(Engin::Engin& newEngin): StateBase(), engin(newEngin)
 {
     //ctor
 
@@ -23,12 +25,17 @@ IntroState::IntroState(): StateBase()
     header.setFont(headerFont);
     header.setPosition(sf::Vector2f(0, 0));
     header.setStyle(sf::Text::Bold | sf::Text::Underlined);
+
+    tgui::Button::Ptr button = tgui::Button::create("Start");
+    button->connect("pressed", &IntroState::onStartPressed, this);
+    button->setPosition({300, 300});
+    button->setSize(200, 25);
+    gui.add(button);
 }
 
 
 void IntroState::HandleEvents(Engin::Engin& engin)
 {
-
     if(window.isOpen())
     {
         sf::Event event;
@@ -36,6 +43,7 @@ void IntroState::HandleEvents(Engin::Engin& engin)
         while (window.pollEvent(event))
         {
 
+            gui.handleEvent(event);
             switch (event.type)
             {
 
@@ -51,14 +59,16 @@ void IntroState::HandleEvents(Engin::Engin& engin)
                     break;
             }
         }
+
     }
 }
 
 void IntroState::Update(Engin::Engin& engin)
 {
+
     if(!IsPaused())
     {
-        world->Step(timeStep, velocityIterations, positionIterations);
+
     }
 }
 
@@ -66,7 +76,20 @@ void IntroState::Draw(Engin::Engin& engin)
 {
 	window.clear(background);
     window.draw(header);
+    gui.draw();
 	window.display();
+}
+
+
+void IntroState::onStartPressed()
+{
+    clean();
+    engin.ChangeState<PlayState>();
+}
+
+void IntroState::clean()
+{
+
 }
 
 IntroState::~IntroState()

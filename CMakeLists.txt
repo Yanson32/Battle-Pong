@@ -54,6 +54,10 @@ find_package(Box2D REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${BOX2D_INCLUDE_DIRS})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${BOX2D_LIBRARIES})
 
+find_package(TGUI 0.7 REQUIRED)
+target_include_directories("${PROJECT_NAME}" PUBLIC ${TGUI_INCLUDE_DIR})
+target_link_libraries("${PROJECT_NAME}" PUBLIC ${TGUI_LIBRARY})
+
 #Install Source Files
 install(TARGETS "${PROJECT_NAME}" DESTINATION lib EXPORT "${PROJECT_NAME}-Exports")
 install(EXPORT "${PROJECT_NAME}-Exports" DESTINATION "lib/cmake/${PROJECT_NAME}")

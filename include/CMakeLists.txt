@@ -1,9 +1,16 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Paddle.h"
-		"${CMAKE_CURRENT_SOURCE_DIR}/Settings.h"
-		"${CMAKE_CURRENT_SOURCE_DIR}/DebugDraw.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Settings.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/DebugDraw.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Game.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/Ball.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Box2DFunctions.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Wall.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/ObjectBase.h"
 
 )
-set(SUB_DIRECTORIES "States")
+set(SUB_DIRECTORIES "States"
+					"Events"
+)
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})
