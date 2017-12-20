@@ -35,20 +35,16 @@ Ball::Ball(b2World &world)
 
     body->ApplyLinearImpulse(toMeters(sf::Vector2f(4, 4)), toMeters(sf::Vector2f(0, 0)), true);
 
-    circle.setFillColor(sf::Color::Green);
-    circle.setRadius(RADIOUS);
-    circle.setOrigin(RADIOUS, RADIOUS);
+    shape.setFillColor(sf::Color::Green);
+    shape.setRadius(RADIOUS);
+    shape.setOrigin(RADIOUS, RADIOUS);
 }
 
 void Ball::update()
 {
-    circle.setPosition(toPixles(body->GetPosition()));
+    shape.setPosition(toPixles(body->GetPosition()));
 }
 
-void Ball::draw(sf::RenderTarget &target, sf::RenderStates states) const
-{
-    target.draw(circle);
-}
 
 Ball::~Ball()
 {

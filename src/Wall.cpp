@@ -3,7 +3,7 @@
 #include "Box2DFunctions.h"
 #include "sfFixture.h"
 
-Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert)
+Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert): ObjectBase<sf::ConvexShape>::ObjectBase()
 {
     //ctor
     const int WIDTH = 800;

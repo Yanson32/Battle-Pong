@@ -5,7 +5,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <array>
 
-class Wall: public ObjectBase
+class Wall: public ObjectBase<sf::ConvexShape>
 {
     public:
         Wall(b2World &world, const std::array<sf::Vector2f, 4> vert);
