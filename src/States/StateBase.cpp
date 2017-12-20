@@ -4,10 +4,11 @@
 sf::RenderWindow StateBase::window(Settings::inst().getWindowSettings().getVideoMode(), Settings::inst().getTitle());
 std::unique_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
 tgui::Gui StateBase::gui(window);
+DebugDraw StateBase::debugDraw(*world);
 
 StateBase::StateBase(): Engin::GameState()
 {
-    world->SetDebugDraw(&debugDraw);
+
 }
 
 

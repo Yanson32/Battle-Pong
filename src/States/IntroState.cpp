@@ -8,6 +8,7 @@
 #include <iostream>
 
 #include "States/PlayState.h"
+#include "Settings.h"
 
 IntroState::IntroState(Engin::Engin& newEngin): StateBase(), engin(newEngin)
 {
@@ -19,12 +20,12 @@ IntroState::IntroState(Engin::Engin& newEngin): StateBase(), engin(newEngin)
         std::cerr << "Error loading font" << std::endl;
         std::exit(1);
     }
-    header.setString("Test");
-    header.setCharacterSize(28);
-    header.setColor(sf::Color::Blue);
+    header.setString(Settings::inst().getTitle());
+    header.setCharacterSize(54);
+    header.setColor(sf::Color::White);
     header.setFont(headerFont);
-    header.setPosition(sf::Vector2f(0, 0));
-    header.setStyle(sf::Text::Bold | sf::Text::Underlined);
+    header.setPosition(sf::Vector2f(350, 0));
+    header.setStyle(sf::Text::Bold);
 
     tgui::Button::Ptr button = tgui::Button::create("Start");
     button->connect("pressed", &IntroState::onStartPressed, this);

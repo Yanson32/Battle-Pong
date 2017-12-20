@@ -7,7 +7,7 @@
 
 
 #include <Box2D/Common/b2Math.h>
-
+#include <Box2D/Dynamics/b2World.h>
 #include <cassert>
 #include <algorithm>
 #include <iostream>
@@ -58,11 +58,17 @@ namespace
     *   Purpose:    This method is a constructor.
     *   Input:      sf::RenderWindow &newWindow this is the window where the Box2D bodies will be drawn
     ****************************************************************************************************/
-	DebugDraw::DebugDraw(const float newPixelsPerMeter): pixelsPerMeter(newPixelsPerMeter)
+	DebugDraw::DebugDraw(b2World& newWorld, const float newPixelsPerMeter): pixelsPerMeter(newPixelsPerMeter), world(newWorld)
     {
         lines.setPrimitiveType(sf::Lines);
         triangles.setPrimitiveType(sf::Triangles);
-		SetFlags(b2Draw::e_shapeBit);
+
+//        e_shapeBit ( draw shapes )
+//        e_jointBit ( draw joint connections
+//        e_aabbBit ( draw axis aligned bounding boxes )
+//        e_pairBit ( draw broad-phase pairs )
+//        e_centerOfMassBit ( draw a marker at body CoM )
+
     }
 
 
@@ -76,7 +82,6 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
     {
-		std::cout << "DrawPolygon" << std::endl;
         for(int i = 0; i < vertexCount - 1; ++i)
         {
             DrawSegment(vertices[i], vertices[i + 1], color);
@@ -96,11 +101,13 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
     {
-		std::cout << "DrawSolidPolygon" << std::endl;
         const sf::Color COLOR = toSfColor(color);
 
         for(int i = 0; i < vertexCount - 2; ++i)
         {
+            if(lines.getVertexCount() - trianglesUsed < 3)
+                lines.resize(lines.getVertexCount() + 3);
+
             sf::Vertex vertA;
             vertA.position = this->toPixels(vertices[i]);
             vertA.color = COLOR;
@@ -115,8 +122,11 @@ namespace
             vertC.position = this->toPixels(vertices[i + 2]);
             vertC.color = COLOR;
             triangles.append(vertC);
+            trianglesUsed += 3;
         }
 
+        if(lines.getVertexCount() - trianglesUsed < 3)
+            lines.resize(lines.getVertexCount() + 3);
 
         sf::Vertex vertA;
         vertA.position = this->toPixels(vertices[vertexCount - 2]);
@@ -133,6 +143,7 @@ namespace
         triangles.append(vertA);
         triangles.append(vertB);
         triangles.append(vertC);
+        trianglesUsed += 3;
     }
 
 
@@ -145,7 +156,6 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color)
     {
-		std::cout << "DrawCircle " << std::endl;
         const unsigned      POINT_COUNT = 10 + (unsigned)radius;
         std::vector<b2Vec2> points = getPoints(center, radius, POINT_COUNT);
         assert(points.size() != 0);
@@ -170,7 +180,6 @@ namespace
     ********************************************************************************************************************/
     void DebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
     {
-		std::cout << "DrawSolidCircle " << std::endl;
 
         const unsigned POINT_COUNT = (10 + static_cast<int>(radius));
         const sf::Color COLOR = toSfColor(color);
@@ -183,6 +192,9 @@ namespace
         assert(points.size() != 0);
         for(std::size_t i = 0; i < points.size() - 1; ++i)
         {
+            if(lines.getVertexCount() - trianglesUsed < 3)
+                lines.resize(lines.getVertexCount() + 3);
+
             sf::Vertex vertA;
             vertA.position = CENTER_POINT;
             vertA.color = COLOR;
@@ -198,8 +210,11 @@ namespace
             triangles.append(vertA);
             triangles.append(vertB);
             triangles.append(vertC);
+            trianglesUsed += 3;
         }
 
+        if(lines.getVertexCount() - trianglesUsed < 3)
+            lines.resize(lines.getVertexCount() + 3);
 
         sf::Vertex vertA;
         vertA.position = CENTER_POINT;
@@ -216,6 +231,7 @@ namespace
         triangles.append(vertA);
         triangles.append(vertB);
         triangles.append(vertC);
+        trianglesUsed += 3;
     }
 
 
@@ -230,7 +246,6 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawSegment(const b2Vec2& p1, const b2Vec2& p2, const b2Color& color)
     {
-		std::cout << "DrawSegment " << std::endl;
         //Convert Box2D parameters to SFML
         const sf::Color     COLOR           = toSfColor(color);
         const sf::Vector2f  FIRST_POINT     = this->toPixels(p1);
@@ -271,7 +286,6 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::DrawTransform(const b2Transform& xf)
     {
-		std::cout << "DrawTransform" << std::endl;
         const float32 LENGTH            = 0.2f;
         const b2Vec2 CENTER_POINT       = (xf.p);
         const b2Vec2 HORIZONTAL_POINT   = (xf.p + (LENGTH * xf.q.GetXAxis()));
@@ -289,11 +303,15 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::update()
     {
+
         triangles.resize(0);
-        lines.resize(linesUsed);
+        lines.resize(0);
         linesUsed = 0;
+        trianglesUsed = 0;
+        world.DrawDebugData();
         //viewBounds = getBounds(window.getView());
     }
+
 
     /*******************************************************************************************************************
     *   Purpose:    This method converts b2Vec2 in box2d meters to sf::Vector2f in pixles.

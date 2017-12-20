@@ -24,6 +24,7 @@ Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert)
     bodyDef.type = b2_staticBody;
     bodyDef.position.Set(0, 0);
     bodyDef.angle = 0;
+    bodyDef.gravityScale = 0;
 
     body = world.CreateBody(&bodyDef);
 
@@ -34,7 +35,8 @@ Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert)
     b2FixtureDef bodyFixture;
     bodyFixture.shape = &polyShape;
     bodyFixture.friction = 0;
-    bodyFixture.restitution = 1;
+    bodyFixture.restitution = 100;
+    bodyFixture.density = 100;
 
     b2Fixture *fix = body->CreateFixture(&bodyFixture);
 

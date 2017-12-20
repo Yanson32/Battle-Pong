@@ -6,9 +6,6 @@
 int main()
 {
 
-
-
-
 	Game engin;
 	engin.Push<IntroState>(engin);
 

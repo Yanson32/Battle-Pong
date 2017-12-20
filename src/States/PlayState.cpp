@@ -31,8 +31,15 @@ PlayState::PlayState(): ball(*world)
     leftWall->setPosition(sf::Vector2f(0, 300));
     RightWall->setPosition(sf::Vector2f(800, 300));
 
-    debugDraw.AppendFlags(b2Draw::e_shapeBit);
-    debugDraw.AppendFlags(b2Draw::e_aabbBit);
+    world->SetDebugDraw(&debugDraw);
+
+    debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
+
+    //        e_shapeBit ( draw shapes )
+//        e_jointBit ( draw joint connections
+//        e_aabbBit ( draw axis aligned bounding boxes )
+//        e_pairBit ( draw broad-phase pairs )
+//        e_centerOfMassBit ( draw a marker at body CoM )
 }
 
 void PlayState::HandleEvents(Engin::Engin& engin)
@@ -66,20 +73,21 @@ void PlayState::Update(Engin::Engin& engin)
 {
     if(!IsPaused())
     {
+        world->Step( timeStep, velocityIterations, positionIterations);
         debugDraw.update();
         ball.update();
         ground->update();
         celing->update();
         leftWall->update();
         RightWall->update();
-        world->Step( timeStep, velocityIterations, positionIterations);
+
     }
 }
 
 void PlayState::Draw(Engin::Engin& engin)
 {
     window.clear();
-    window.draw(debugDraw);
+    //window.draw(debugDraw);
     window.draw(ball);
     window.draw(*celing);
     window.draw(*leftWall);

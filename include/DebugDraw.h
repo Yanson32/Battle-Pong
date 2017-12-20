@@ -13,6 +13,7 @@ namespace sf
 struct b2Vec2;
 struct b2Color;
 struct b2Transform;
+struct b2World;
 
 /************************************************************************************************************
 *   Author:     Wayne J Larson Jr.
@@ -26,7 +27,7 @@ class DebugDraw: public b2Draw, public sf::Drawable
         *   Purpose:    This method is a constructor.
         *   Input:      sf::RenderWindow &newWindow this is the window where the Box2D bodies will be drawn
         ****************************************************************************************************/
-        DebugDraw(const float newPixelsPerMeter = 40.0f);
+        DebugDraw(b2World& newWorld, const float newPixelsPerMeter = 40.0f);
 
 		/*******************************************************************************************************************
 		*   Purpose:    This method draws axis alligned bounding boxes.
@@ -138,6 +139,7 @@ class DebugDraw: public b2Draw, public sf::Drawable
         unsigned trianglesUsed = 0;
         sf::FloatRect viewBounds;
         const float pixelsPerMeter;
+        b2World &world;
 };
 
 #endif // DEBUGDRAW_H

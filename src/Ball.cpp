@@ -14,7 +14,8 @@ Ball::Ball(b2World &world)
     bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(toMeters(100), toMeters(100));
     bodyDef.angle = 0;
-
+    bodyDef.gravityScale = 0;
+    bodyDef.bullet = true;
 
     body = world.CreateBody(&bodyDef);
 
@@ -26,16 +27,17 @@ Ball::Ball(b2World &world)
     b2FixtureDef bodyFixture;
     bodyFixture.shape = &circleShape;
     bodyFixture.friction = 0;
-    bodyFixture.restitution = 1;
+    bodyFixture.restitution = 0.6;
+    bodyFixture.density = 1;
 
     b2Fixture *fix = body->CreateFixture(&bodyFixture);
 
 
-    body->ApplyLinearImpulse(toMeters(sf::Vector2f(45, 45)), toMeters(sf::Vector2f(0, 0)), true);
+    body->ApplyLinearImpulse(toMeters(sf::Vector2f(4, 4)), toMeters(sf::Vector2f(0, 0)), true);
 
     circle.setFillColor(sf::Color::Green);
     circle.setRadius(RADIOUS);
-    circle.setOrigin(RADIOUS / 2, RADIOUS / 2);
+    circle.setOrigin(RADIOUS, RADIOUS);
 }
 
 void Ball::update()

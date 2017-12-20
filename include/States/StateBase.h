@@ -16,10 +16,11 @@ class StateBase: public Engin::GameState
         static sf::RenderWindow window;
         static tgui::Gui gui;
         static std::unique_ptr<b2World> world;
-        	float32 timeStep = 1 / 20.0;      //the length of time passed to simulate (seconds)
-            int32 velocityIterations = 8;   //how strongly to correct velocity
-            int32 positionIterations = 3;   //how strongly to correct position
-            DebugDraw debugDraw;
+        static DebugDraw debugDraw;
+        float32 timeStep = 1 / 20.0;      //the length of time passed to simulate (seconds)
+        int32 velocityIterations = 8;   //how strongly to correct velocity
+        int32 positionIterations = 3;   //how strongly to correct position
+
 
 };
 
