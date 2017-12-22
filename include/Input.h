@@ -7,7 +7,7 @@ class Input
 {
     public:
         Input(Paddle &newPaddle);
-        virtual void handleInput(const Ball &ball);
+        virtual void handleInput(const Ball &ball) = 0;
         virtual ~Input();
     protected:
         Paddle &paddle;

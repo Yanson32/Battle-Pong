@@ -33,7 +33,7 @@ ObjectBase<sf::ConvexShape>::ObjectBase()
 
     b2FixtureDef bodyFixture;
     bodyFixture.shape = &polyShape;
-    bodyFixture.friction = 0;
+    bodyFixture.friction = 1;
     bodyFixture.restitution = 0;
     bodyFixture.density = 100;
 

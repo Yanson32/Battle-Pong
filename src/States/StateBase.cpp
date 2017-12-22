@@ -10,46 +10,38 @@ std::unique_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
 tgui::Gui StateBase::gui(window);
 DebugDraw StateBase::debugDraw(*world);
 
+Ball* StateBase::ball = new Ball(*world);
+
+namespace
+{
+    std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(-400, -25), sf::Vector2f(400, -25), sf::Vector2f(400, 25), sf::Vector2f(-400, 25)};
+    std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(-25, -300), sf::Vector2f(25, -300), sf::Vector2f(25, 300), sf::Vector2f(-25, 300)};
+    std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(-10, -50), sf::Vector2f(10, -50), sf::Vector2f(10, 50),sf::Vector2f(-10, 50)};
+}
+Wall* StateBase::ground = new Wall(*world, horizontalPoints);
+Wall* StateBase::celing = new Wall(*world, horizontalPoints);
+Wall* StateBase::leftWall = new Wall(*world, verticalPoints);
+Wall* StateBase::RightWall = new Wall(*world, verticalPoints);
+
+
+Paddle* StateBase::leftPaddle = new Paddle(*world, paddlePoints);
+Paddle* StateBase::rightPaddle = new Paddle(*world, paddlePoints);
+
 StateBase::StateBase(): Engin::GameState()
 {
-    ball = new Ball(*world);
+
     ball->setPosition({400, 300});
     ball->setVelocity({100, 100});
 
-    std::array<sf::Vector2f, 4> horizontalPoints;
-    horizontalPoints[0] = sf::Vector2f(-400, -25);
-    horizontalPoints[1] = sf::Vector2f(400, -25);
-    horizontalPoints[2] = sf::Vector2f(400, 25);
-    horizontalPoints[3] = sf::Vector2f(-400, 25);
 
-    std::array<sf::Vector2f, 4> verticalPoints;
-    verticalPoints[0] = sf::Vector2f(-25, -300);
-    verticalPoints[1] = sf::Vector2f(25, -300);
-    verticalPoints[2] = sf::Vector2f(25, 300);
-    verticalPoints[3] = sf::Vector2f(-25, 300);
 
-    ground = new Wall(*world, horizontalPoints);
-    celing = new Wall(*world, horizontalPoints);
-    leftWall = new Wall(*world, verticalPoints);
-    RightWall = new Wall(*world, verticalPoints);
 
-    std::array<sf::Vector2f, 4> leftPaddlePoints;
-    leftPaddlePoints[0] = sf::Vector2f(-10, -50);
-    leftPaddlePoints[1] = sf::Vector2f(10, -50);
-    leftPaddlePoints[2] = sf::Vector2f(10, 50);
-    leftPaddlePoints[3] = sf::Vector2f(-10, 50);
 
-    leftPaddle = new Paddle(*world, leftPaddlePoints);
+
     leftPaddle->setPosition(sf::Vector2f(100, 100));
     leftPaddle->setInput(std::unique_ptr<AI>(new AI(*leftPaddle)));
 
-    std::array<sf::Vector2f, 4> rightPaddlePoints;
-    rightPaddlePoints[0] = sf::Vector2f(-10, -50);
-    rightPaddlePoints[1] = sf::Vector2f(10, -50);
-    rightPaddlePoints[2] = sf::Vector2f(10, 50);
-    rightPaddlePoints[3] = sf::Vector2f(-10, 50);
 
-    rightPaddle = new Paddle(*world, rightPaddlePoints);
     rightPaddle->setPosition(sf::Vector2f(700, 100));
     rightPaddle->setInput(std::unique_ptr<AI>(new AI(*rightPaddle)));
 

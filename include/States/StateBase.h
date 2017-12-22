@@ -21,13 +21,13 @@ class StateBase: public Engin::GameState
         static tgui::Gui gui;
         static std::unique_ptr<b2World> world;
         static DebugDraw debugDraw;
-        Ball* ball = nullptr;
-        Wall* ground = nullptr;
-        Wall* celing = nullptr;
-        Wall* leftWall = nullptr;
-        Wall* RightWall = nullptr;
-        Paddle* leftPaddle = nullptr;
-        Paddle* rightPaddle = nullptr;
+        static Ball* ball;
+        static Wall* ground;
+        static Wall* celing;
+        static Wall* leftWall;
+        static Wall* RightWall;
+        static Paddle* leftPaddle;
+        static Paddle* rightPaddle;
         float32 timeStep = 1 / 20.0;      //the length of time passed to simulate (seconds)
         int32 velocityIterations = 8;   //how strongly to correct velocity
         int32 positionIterations = 3;   //how strongly to correct position

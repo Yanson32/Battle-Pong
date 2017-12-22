@@ -8,6 +8,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Paddle.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ObjectBase.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Input.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/AI.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/PlayerInput.h"
 
 )
 set(SUB_DIRECTORIES "States"

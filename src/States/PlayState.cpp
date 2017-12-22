@@ -10,9 +10,11 @@
 #include "Wall.h"
 #include "Paddle.h"
 #include "AI.h"
+#include "PlayerInput.h"
 PlayState::PlayState()
 {
-
+    //leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*leftPaddle)));
+    ball->setVelocity({100, 100});
 }
 
 void PlayState::HandleEvents(Engin::Engin& engin)
@@ -69,7 +71,7 @@ void PlayState::Update(Engin::Engin& engin)
 void PlayState::Draw(Engin::Engin& engin)
 {
     window.clear();
-    //window.draw(debugDraw);
+    window.draw(debugDraw);
     window.draw(*leftPaddle);
     window.draw(*rightPaddle);
     window.draw(*ball);
