@@ -15,6 +15,7 @@ class StateBase: public Engin::GameState
 {
     public:
         StateBase(Engin::Engin& newEngin);
+        virtual void Draw(Engin::Engin& engin) override;
         virtual ~StateBase();
     protected:
         static sf::RenderWindow window;

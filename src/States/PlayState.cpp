@@ -13,8 +13,8 @@
 #include "PlayerInput.h"
 PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin)
 {
-    //leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*leftPaddle)));
-    ball->setVelocity({100, 100});
+    leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*leftPaddle)));
+
 }
 
 void PlayState::HandleEvents(Engin::Engin& engin)
@@ -70,15 +70,8 @@ void PlayState::Update(Engin::Engin& engin)
 
 void PlayState::Draw(Engin::Engin& engin)
 {
-    window.clear();
-    //window.draw(debugDraw);
-    window.draw(*leftPaddle);
-    window.draw(*rightPaddle);
-    window.draw(*ball);
-    window.draw(*celing);
-    window.draw(*leftWall);
-    window.draw(*RightWall);
-    window.draw(*ground);
+
+    StateBase::Draw(engin);
     window.display();
 }
 

@@ -93,17 +93,10 @@ void IntroState::Update(Engin::Engin& engin)
 
 void IntroState::Draw(Engin::Engin& engin)
 {
-	window.clear(background);
-    window.draw(*leftPaddle);
-    window.draw(*rightPaddle);
-    window.draw(*ball);
-    window.draw(*celing);
-    window.draw(*leftWall);
-    window.draw(*RightWall);
-    window.draw(*ground);
-    window.draw(header);
+	StateBase::Draw(engin);
+	window.draw(header);
     gui.draw();
-	window.display();
+    window.display();
 }
 
 

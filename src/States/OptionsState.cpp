@@ -9,8 +9,6 @@
 OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
 {
     //ctor
-    ball->setPosition({400, 300});
-    ball->setVelocity({100, 100});
 
 
     tgui::Button::Ptr controlsButton = tgui::Button::create("Controls");
@@ -77,15 +75,7 @@ void OptionsState::Update(Engin::Engin& engin)
 
 void OptionsState::Draw(Engin::Engin& engin)
 {
-    window.clear();
-    //window.draw(debugDraw);
-    window.draw(*leftPaddle);
-    window.draw(*rightPaddle);
-    window.draw(*ball);
-    window.draw(*celing);
-    window.draw(*leftWall);
-    window.draw(*RightWall);
-    window.draw(*ground);
+    StateBase::Draw(engin);
     gui.draw();
     window.display();
 }

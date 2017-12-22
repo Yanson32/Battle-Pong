@@ -32,6 +32,7 @@ StateBase::StateBase(Engin::Engin& newEngin): Engin::GameState(), engin(newEngin
 
     ball->setPosition({400, 300});
     ball->setVelocity({100, 100});
+
     leftPaddle->setColor(sf::Color(255, 100, 0));
     rightPaddle->setColor(sf::Color::Blue);
 
@@ -63,6 +64,18 @@ StateBase::StateBase(Engin::Engin& newEngin): Engin::GameState(), engin(newEngin
 //}
 
 
+void StateBase::Draw(Engin::Engin& engin)
+{
+    window.clear();
+    window.draw(debugDraw);
+    window.draw(*leftPaddle);
+    window.draw(*rightPaddle);
+    window.draw(*ball);
+    window.draw(*celing);
+    window.draw(*leftWall);
+    window.draw(*RightWall);
+    window.draw(*ground);
+}
 
 StateBase::~StateBase()
 {

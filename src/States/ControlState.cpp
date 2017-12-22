@@ -55,16 +55,9 @@ void ControlState::Update(Engin::Engin& engin)
 
 void ControlState::Draw(Engin::Engin& engin)
 {
-	window.clear();
-    window.draw(*leftPaddle);
-    window.draw(*rightPaddle);
-    window.draw(*ball);
-    window.draw(*celing);
-    window.draw(*leftWall);
-    window.draw(*RightWall);
-    window.draw(*ground);
+	StateBase::Draw(engin);
     gui.draw();
-	window.display();
+    window.display();
 }
 
 ControlState::~ControlState()
