@@ -46,7 +46,7 @@ void Ball::update()
 
 void Ball::setVelocity(const sf::Vector2f &newVelocity)
 {
-    body->ApplyLinearImpulse(toMeters(newVelocity), toMeters(sf::Vector2f(0, 0)), true);
+    body->SetLinearVelocity(toMeters(newVelocity));
 }
 
 Ball::~Ball()

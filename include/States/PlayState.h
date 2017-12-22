@@ -10,8 +10,8 @@
 class PlayState: public StateBase
 {
     public:
-        PlayState();
-        void HandleEvents(Engin::Engin& engin);
+        PlayState(Engin::Engin& newEngin);
+        void HandleEvents(Engin::Engin& newEngin);
         void Update(Engin::Engin& engin);
         void Draw(Engin::Engin& engin);
         ~PlayState();

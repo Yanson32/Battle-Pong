@@ -1,23 +1,34 @@
-#include "States/PlayState.h"
-#include "Ball.h"
-#include <SFML/Window/Event.hpp>
-#include "Game.h"
-#include <Box2D/Box2D.h>
-#include <iostream>
-#include "Box2DFunctions.h"
-#include <SFML/Graphics/CircleShape.hpp>
-
-#include "Wall.h"
+#include "States/OptionsState.h"
+#include <GameUtilities/Engin/Engin.h>
 #include "Paddle.h"
-#include "AI.h"
-#include "PlayerInput.h"
-PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin)
+#include "Ball.h"
+#include "Wall.h"
+#include "States/IntroState.h"
+#include "States/ControlState.h"
+
+OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
 {
-    //leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*leftPaddle)));
+    //ctor
+    ball->setPosition({400, 300});
     ball->setVelocity({100, 100});
+
+
+    tgui::Button::Ptr controlsButton = tgui::Button::create("Controls");
+    controlsButton->connect("pressed", &OptionsState::onControlsPressed, this);
+    controlsButton->setPosition({300, 300});
+    controlsButton->setSize(200, 25);
+    gui.add(controlsButton);
+
+    tgui::Button::Ptr backButton = tgui::Button::create("Back");
+    backButton->connect("pressed", &OptionsState::onBackPressed, this);
+    backButton->setPosition({300, 350});
+    backButton->setSize(200, 25);
+    gui.add(backButton);
 }
 
-void PlayState::HandleEvents(Engin::Engin& engin)
+
+
+void OptionsState::HandleEvents(Engin::Engin& engin)
 {
     if(window.isOpen())
     {
@@ -25,7 +36,7 @@ void PlayState::HandleEvents(Engin::Engin& engin)
 
         while (window.pollEvent(event))
         {
-
+            gui.handleEvent(event);
             switch (event.type)
             {
 
@@ -51,10 +62,8 @@ void PlayState::HandleEvents(Engin::Engin& engin)
     }
 }
 
-void PlayState::Update(Engin::Engin& engin)
+void OptionsState::Update(Engin::Engin& engin)
 {
-    if(!IsPaused())
-    {
         world->Step( timeStep, velocityIterations, positionIterations);
         debugDraw.update();
         ball->update();
@@ -64,11 +73,9 @@ void PlayState::Update(Engin::Engin& engin)
         RightWall->update();
         leftPaddle->update();
         rightPaddle->update();
-
-    }
 }
 
-void PlayState::Draw(Engin::Engin& engin)
+void OptionsState::Draw(Engin::Engin& engin)
 {
     window.clear();
     //window.draw(debugDraw);
@@ -79,14 +86,23 @@ void PlayState::Draw(Engin::Engin& engin)
     window.draw(*leftWall);
     window.draw(*RightWall);
     window.draw(*ground);
+    gui.draw();
     window.display();
 }
 
-
-PlayState::~PlayState()
+void OptionsState::onControlsPressed()
 {
-    delete celing;
-    delete ground;
-    delete leftWall;
-    delete RightWall;
+    gui.removeAllWidgets();
+    engin.ChangeState<ControlState>(engin);
+}
+
+void OptionsState::onBackPressed()
+{
+    gui.removeAllWidgets();
+    engin.ChangeState<IntroState>(engin);
+}
+
+OptionsState::~OptionsState()
+{
+    //dtor
 }

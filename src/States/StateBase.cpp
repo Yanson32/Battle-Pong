@@ -27,15 +27,13 @@ Wall* StateBase::RightWall = new Wall(*world, verticalPoints);
 Paddle* StateBase::leftPaddle = new Paddle(*world, paddlePoints);
 Paddle* StateBase::rightPaddle = new Paddle(*world, paddlePoints);
 
-StateBase::StateBase(): Engin::GameState()
+StateBase::StateBase(Engin::Engin& newEngin): Engin::GameState(), engin(newEngin)
 {
 
     ball->setPosition({400, 300});
     ball->setVelocity({100, 100});
-
-
-
-
+    leftPaddle->setColor(sf::Color(255, 100, 0));
+    rightPaddle->setColor(sf::Color::Blue);
 
 
     leftPaddle->setPosition(sf::Vector2f(100, 100));

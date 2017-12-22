@@ -14,7 +14,7 @@ class Ball;
 class StateBase: public Engin::GameState
 {
     public:
-        StateBase();
+        StateBase(Engin::Engin& newEngin);
         virtual ~StateBase();
     protected:
         static sf::RenderWindow window;
@@ -31,7 +31,7 @@ class StateBase: public Engin::GameState
         float32 timeStep = 1 / 20.0;      //the length of time passed to simulate (seconds)
         int32 velocityIterations = 8;   //how strongly to correct velocity
         int32 positionIterations = 3;   //how strongly to correct position
-
+        Engin::Engin &engin;
 
 };
 

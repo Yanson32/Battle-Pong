@@ -16,11 +16,18 @@ class ObjectBase: public sf::Drawable
         virtual void update() = 0;
         sf::Vector2f getPosition() const;
         void setPosition(const sf::Vector2f &newPosition);
+        void setColor(const sf::Color &newColor);
         virtual ~ObjectBase();
     protected:
         b2Body *body = nullptr;
         SFShape shape;
 };
+
+template <class SFShape>
+void ObjectBase<SFShape>::setColor(const sf::Color &newColor)
+{
+    shape.setFillColor(newColor);
+}
 
 template <class SFShape>
 sf::Vector2f ObjectBase<SFShape>::getPosition() const

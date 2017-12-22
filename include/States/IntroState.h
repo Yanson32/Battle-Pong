@@ -20,10 +20,11 @@ class IntroState: public StateBase
         virtual ~IntroState();
     private:
         void onStartPressed();
+        void onOptionsPressed();
         sf::Text header;
         sf::Color background = sf::Color::Black;
         sf::Font headerFont;
-        Engin::Engin& engin;
+
 };
 
 #endif // INTROSTATE_H
