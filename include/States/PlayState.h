@@ -1,9 +1,11 @@
 #ifndef PONG_PLAYSTATE_H
 #define PONG_PLAYSTATE_H
 #include "States/StateBase.h"
-#include "Ball.h"
-#include "Wall.h"
 #include <memory>
+#include "Ball.h"
+
+
+
 
 class PlayState: public StateBase
 {
@@ -14,10 +16,6 @@ class PlayState: public StateBase
         void Draw(Engin::Engin& engin);
         ~PlayState();
     private:
-        Ball ball;
-        Wall* ground = nullptr;
-        Wall* celing = nullptr;
-        Wall* leftWall = nullptr;
-        Wall* RightWall = nullptr;
+
 };
 #endif

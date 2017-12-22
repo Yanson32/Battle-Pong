@@ -11,7 +11,10 @@ class b2World;
 class Ball: public ObjectBase<sf::CircleShape>
 {
     public:
-        Ball(b2World &world);
+        Ball(b2World &world, const unsigned radious = 8);
+
+        void setVelocity(const sf::Vector2f &newVelocity);
+
         void update();
         virtual ~Ball();
 };

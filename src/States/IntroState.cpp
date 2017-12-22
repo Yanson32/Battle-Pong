@@ -10,6 +10,10 @@
 #include "States/PlayState.h"
 #include "Settings.h"
 
+#include "Wall.h"
+#include "Ball.h"
+#include "Paddle.h"
+
 IntroState::IntroState(Engin::Engin& newEngin): StateBase(), engin(newEngin)
 {
     //ctor
@@ -24,7 +28,7 @@ IntroState::IntroState(Engin::Engin& newEngin): StateBase(), engin(newEngin)
     header.setCharacterSize(54);
     header.setColor(sf::Color::White);
     header.setFont(headerFont);
-    header.setPosition(sf::Vector2f(350, 0));
+    header.setPosition(sf::Vector2f(335, 25));
     header.setStyle(sf::Text::Bold);
 
     tgui::Button::Ptr button = tgui::Button::create("Start");
@@ -60,6 +64,8 @@ void IntroState::HandleEvents(Engin::Engin& engin)
                     break;
             }
         }
+        leftPaddle->handleInput(*ball);
+        rightPaddle->handleInput(*ball);
 
     }
 }
@@ -67,15 +73,27 @@ void IntroState::HandleEvents(Engin::Engin& engin)
 void IntroState::Update(Engin::Engin& engin)
 {
 
-    if(!IsPaused())
-    {
-
-    }
+        world->Step( timeStep, velocityIterations, positionIterations);
+        debugDraw.update();
+        ball->update();
+        ground->update();
+        celing->update();
+        leftWall->update();
+        RightWall->update();
+        leftPaddle->update();
+        rightPaddle->update();
 }
 
 void IntroState::Draw(Engin::Engin& engin)
 {
 	window.clear(background);
+    window.draw(*leftPaddle);
+    window.draw(*rightPaddle);
+    window.draw(*ball);
+    window.draw(*celing);
+    window.draw(*leftWall);
+    window.draw(*RightWall);
+    window.draw(*ground);
     window.draw(header);
     gui.draw();
 	window.display();

@@ -3,16 +3,15 @@
 #include "Box2DFunctions.h"
 #include <iostream>
 
-Ball::Ball(b2World &world)
+Ball::Ball(b2World &world, const unsigned radious)
 {
-    const int RADIOUS = 10;
 
     b2BodyDef bodyDef;
     b2PolygonShape bodyShape;
 
     //ctor
     bodyDef.type = b2_dynamicBody;
-    bodyDef.position.Set(toMeters(100), toMeters(100));
+    bodyDef.position.Set(0, 0);
     bodyDef.angle = 0;
     bodyDef.gravityScale = 0;
     bodyDef.bullet = true;
@@ -21,23 +20,23 @@ Ball::Ball(b2World &world)
 
     b2CircleShape circleShape;
     circleShape.m_p.Set(0, 0);
-    circleShape.m_radius = toMeters(RADIOUS);
+    circleShape.m_radius = toMeters(radious);
 
 
     b2FixtureDef bodyFixture;
     bodyFixture.shape = &circleShape;
-    bodyFixture.friction = 0;
-    bodyFixture.restitution = 0.6;
-    bodyFixture.density = 1;
+    bodyFixture.friction = 0.0f;
+    bodyFixture.restitution = 1.0f;
+    //bodyFixture.density = 1.0f;
 
     b2Fixture *fix = body->CreateFixture(&bodyFixture);
 
 
-    body->ApplyLinearImpulse(toMeters(sf::Vector2f(4, 4)), toMeters(sf::Vector2f(0, 0)), true);
+
 
     shape.setFillColor(sf::Color::Green);
-    shape.setRadius(RADIOUS);
-    shape.setOrigin(RADIOUS, RADIOUS);
+    shape.setRadius(radious);
+    shape.setOrigin(radious, radious);
 }
 
 void Ball::update()
@@ -45,6 +44,10 @@ void Ball::update()
     shape.setPosition(toPixles(body->GetPosition()));
 }
 
+void Ball::setVelocity(const sf::Vector2f &newVelocity)
+{
+    body->ApplyLinearImpulse(toMeters(newVelocity), toMeters(sf::Vector2f(0, 0)), true);
+}
 
 Ball::~Ball()
 {

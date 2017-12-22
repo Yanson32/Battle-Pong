@@ -6,6 +6,8 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Paddle.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Box2DFunctions.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Wall.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ObjectBase.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Input.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/AI.cpp"
 
 )
 set(SUB_DIRECTORIES "States"

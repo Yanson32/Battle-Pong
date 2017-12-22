@@ -5,6 +5,8 @@
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
+#include "Box2DFunctions.h"
+
 template <class SFShape>
 class ObjectBase: public sf::Drawable
 {
@@ -12,12 +14,25 @@ class ObjectBase: public sf::Drawable
         ObjectBase();
         virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
         virtual void update() = 0;
+        sf::Vector2f getPosition() const;
+        void setPosition(const sf::Vector2f &newPosition);
         virtual ~ObjectBase();
     protected:
         b2Body *body = nullptr;
         SFShape shape;
 };
 
+template <class SFShape>
+sf::Vector2f ObjectBase<SFShape>::getPosition() const
+{
+    return toPixles(body->GetPosition());
+}
+
+template <class SFShape>
+void ObjectBase<SFShape>::setPosition(const sf::Vector2f &newPosition)
+{
+    body->SetTransform(toMeters(newPosition), body->GetAngle());
+}
 
 template <class SFShape>
 ObjectBase<SFShape>::ObjectBase()

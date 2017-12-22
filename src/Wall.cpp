@@ -35,7 +35,7 @@ Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert): ObjectBase<s
     b2FixtureDef bodyFixture;
     bodyFixture.shape = &polyShape;
     bodyFixture.friction = 0;
-    bodyFixture.restitution = 100;
+    bodyFixture.restitution = 0;
     bodyFixture.density = 100;
 
     b2Fixture *fix = body->CreateFixture(&bodyFixture);

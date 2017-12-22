@@ -100,10 +100,7 @@ class DebugDraw: public b2Draw, public sf::Drawable
         *******************************************************************************************************************/
         virtual void DrawTransform(const b2Transform& xf) override;
 
-		virtual void DrawPoint(const b2Vec2& p, float32 size, const b2Color& color) override
-		{
-			DrawCircle(p, size, color);
-		}
+		virtual void DrawPoint(const b2Vec2& p, float32 size, const b2Color& color) override;
 
         /*******************************************************************************************************************
         *   Purpose:    This method does per frame logic and must be called once per frame.

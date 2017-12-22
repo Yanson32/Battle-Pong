@@ -7,39 +7,12 @@
 #include "Box2DFunctions.h"
 #include <SFML/Graphics/CircleShape.hpp>
 
-PlayState::PlayState(): ball(*world)
+#include "Wall.h"
+#include "Paddle.h"
+#include "AI.h"
+PlayState::PlayState()
 {
-    std::array<sf::Vector2f, 4> horizontalPoints;
-    horizontalPoints[0] = sf::Vector2f(-400, -25);
-    horizontalPoints[1] = sf::Vector2f(400, -25);
-    horizontalPoints[2] = sf::Vector2f(400, 25);
-    horizontalPoints[3] = sf::Vector2f(-400, 25);
 
-    std::array<sf::Vector2f, 4> verticalPoints;
-    verticalPoints[0] = sf::Vector2f(-25, -300);
-    verticalPoints[1] = sf::Vector2f(25, -300);
-    verticalPoints[2] = sf::Vector2f(25, 300);
-    verticalPoints[3] = sf::Vector2f(-25, 300);
-
-    ground = new Wall(*world, horizontalPoints);
-    celing = new Wall(*world, horizontalPoints);
-    leftWall = new Wall(*world, verticalPoints);
-    RightWall = new Wall(*world, verticalPoints);
-
-    ground->setPosition(sf::Vector2f(400, 600));
-    celing->setPosition(sf::Vector2f(400, 0));
-    leftWall->setPosition(sf::Vector2f(0, 300));
-    RightWall->setPosition(sf::Vector2f(800, 300));
-
-    world->SetDebugDraw(&debugDraw);
-
-    debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
-
-    //        e_shapeBit ( draw shapes )
-//        e_jointBit ( draw joint connections
-//        e_aabbBit ( draw axis aligned bounding boxes )
-//        e_pairBit ( draw broad-phase pairs )
-//        e_centerOfMassBit ( draw a marker at body CoM )
 }
 
 void PlayState::HandleEvents(Engin::Engin& engin)
@@ -60,12 +33,19 @@ void PlayState::HandleEvents(Engin::Engin& engin)
 
 
                 case sf::Event::KeyPressed:
+                    if(event.key.code == sf::Keyboard::P)
+                    {
+                        Pause(!IsPaused());
+                    }
                     break;
 
                 default:
                     break;
             }
         }
+
+        leftPaddle->handleInput(*ball);
+        rightPaddle->handleInput(*ball);
     }
 }
 
@@ -75,11 +55,13 @@ void PlayState::Update(Engin::Engin& engin)
     {
         world->Step( timeStep, velocityIterations, positionIterations);
         debugDraw.update();
-        ball.update();
+        ball->update();
         ground->update();
         celing->update();
         leftWall->update();
         RightWall->update();
+        leftPaddle->update();
+        rightPaddle->update();
 
     }
 }
@@ -88,7 +70,9 @@ void PlayState::Draw(Engin::Engin& engin)
 {
     window.clear();
     //window.draw(debugDraw);
-    window.draw(ball);
+    window.draw(*leftPaddle);
+    window.draw(*rightPaddle);
+    window.draw(*ball);
     window.draw(*celing);
     window.draw(*leftWall);
     window.draw(*RightWall);
