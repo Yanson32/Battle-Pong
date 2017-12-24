@@ -1,9 +1,10 @@
 #include "States/StateBase.h"
 #include "Settings.h"
-#include "Ball.h"
-#include "Wall.h"
-#include "Paddle.h"
-#include "AI.h"
+#include "Objects/Ball.h"
+#include "Objects/Wall.h"
+#include "Objects/Paddle.h"
+#include "Input/AI.h"
+#include <GameUtilities/Engin/Engin.h>
 
 sf::RenderWindow StateBase::window(Settings::inst().getWindowSettings().getVideoMode(), Settings::inst().getTitle());
 std::unique_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -27,7 +28,7 @@ Wall* StateBase::RightWall = new Wall(*world, verticalPoints);
 Paddle* StateBase::leftPaddle = new Paddle(*world, paddlePoints);
 Paddle* StateBase::rightPaddle = new Paddle(*world, paddlePoints);
 
-StateBase::StateBase(Engin::Engin& newEngin): Engin::GameState(), engin(newEngin), theme{"TGUI/themes/Black.txt"}, sysPause(false)
+StateBase::StateBase(Engin::Engin& newEngin): Engin::GameState(), engin(newEngin), sysPause(false)
 {
 
 

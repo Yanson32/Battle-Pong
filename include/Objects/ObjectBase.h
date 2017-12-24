@@ -5,7 +5,7 @@
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
-#include "Box2DFunctions.h"
+#include "Box2D/Box2DFunctions.h"
 
 template <class SFShape>
 class ObjectBase: public sf::Drawable

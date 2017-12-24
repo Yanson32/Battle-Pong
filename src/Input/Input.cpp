@@ -1,5 +1,5 @@
-#include "Input.h"
-#include "Ball.h"
+#include "Input/Input.h"
+#include "Objects/Ball.h"
 
 
 Input::Input(Paddle &newPaddle):paddle(newPaddle)

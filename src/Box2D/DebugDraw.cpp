@@ -1,4 +1,4 @@
-#include "DebugDraw.h"
+#include "Box2D/DebugDraw.h"
 
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

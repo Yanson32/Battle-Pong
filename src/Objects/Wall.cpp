@@ -1,7 +1,6 @@
-#include "Wall.h"
+#include "Objects/Wall.h"
 #include <SFML/System/Vector2.hpp>
-#include "Box2DFunctions.h"
-#include "sfFixture.h"
+#include "Box2D/Box2DFunctions.h"
 
 Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert): ObjectBase<sf::ConvexShape>::ObjectBase()
 {

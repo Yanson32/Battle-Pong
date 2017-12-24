@@ -1,13 +1,13 @@
 #include "States/PaddleState.h"
 #include <GameUtilities/Engin/Engin.h>
-#include "Paddle.h"
-#include "Wall.h"
-#include "Ball.h"
+#include "Objects/Paddle.h"
+#include "Objects/Wall.h"
+#include "Objects/Ball.h"
 #include "States/ControlState.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 
-PaddleState::PaddleState(Engin::Engin& newEngin, tgui::Panel::Ptr newPSettings): StateBase(newEngin), pSettings(newPSettings)
+PaddleState::PaddleState(Engin::Engin& newEngin, tgui::Panel::Ptr pSettings): StateBase(newEngin)
 {
     //ctor
     gui.add(pSettings);

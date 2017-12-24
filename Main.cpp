@@ -7,7 +7,7 @@
 #include <SFML/System/Time.hpp>
 
 #include "Game.h"
-#include "MusicListener.h"
+#include "Events/Listeners/MusicListener.h"
 #include "Events/EventManager.h"
 #include <SFML/Audio/Music.hpp>
 
@@ -20,7 +20,7 @@ int main()
     ResourceManager::sound.load("List Box Selected Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     ResourceManager::sound.load("Edit Box Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/BallCollision.ogg");
-
+    ResourceManager::font.load("Header Font", "/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
     sf::Clock timer;
     const sf::Time deltaTime = sf::seconds(1.0f / 60.0f);
     sf::Time accumulator = sf::seconds(0);

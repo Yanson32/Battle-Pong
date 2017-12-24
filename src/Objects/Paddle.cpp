@@ -1,5 +1,5 @@
-#include "Paddle.h"
-#include "Box2DFunctions.h"
+#include "Objects/Paddle.h"
+#include "Box2D/Box2DFunctions.h"
 #include <iostream>
 
 

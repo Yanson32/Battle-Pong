@@ -1,6 +1,6 @@
-#include "Ball.h"
+#include "Objects/Ball.h"
 #include <Box2D/Box2D.h>
-#include "Box2DFunctions.h"
+#include "Box2D/Box2DFunctions.h"
 #include <iostream>
 
 Ball::Ball(b2World &world, const unsigned radious)

@@ -1,12 +1,9 @@
-set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Game.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.cpp"
+set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Paddle.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/Ball.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Wall.cpp"
+
 )
-set(SUB_DIRECTORIES "States"
-					"Events"
-					"Objects"
-					"Input"
-					"Box2D"
+set(SUB_DIRECTORIES ""
 )
 
 #Add subdirectories

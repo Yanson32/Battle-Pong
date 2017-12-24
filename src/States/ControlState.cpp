@@ -1,8 +1,8 @@
 #include "States/ControlState.h"
 #include <GameUtilities/Engin/Engin.h>
-#include "Paddle.h"
-#include "Ball.h"
-#include "Wall.h"
+#include "Objects/Paddle.h"
+#include "Objects/Ball.h"
+#include "Objects/Wall.h"
 #include "Settings.h"
 #include "States/PaddleState.h"
 #include "States/OptionsState.h"

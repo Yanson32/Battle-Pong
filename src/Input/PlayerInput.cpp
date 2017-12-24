@@ -1,7 +1,7 @@
-#include "PlayerInput.h"
+#include "Input/PlayerInput.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/System/Vector2.hpp>
-#include "Paddle.h"
+#include "Objects/Paddle.h"
 #include <iostream>
 
 PlayerInput::PlayerInput(Paddle &newPaddle): Input(newPaddle)

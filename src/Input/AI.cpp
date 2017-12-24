@@ -1,6 +1,6 @@
-#include "AI.h"
-#include "Ball.h"
-#include "Paddle.h"
+#include "Input/AI.h"
+#include "Objects/Ball.h"
+#include "Objects/Paddle.h"
 #include <cmath>
 
 AI::AI(Paddle &newPaddle): Input(newPaddle)

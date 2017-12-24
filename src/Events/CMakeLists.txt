@@ -6,7 +6,7 @@ set(FILES
 			"${CMAKE_CURRENT_SOURCE_DIR}/BallCollision.cpp"
 
 )
-set(SUB_DIRECTORIES "")
+set(SUB_DIRECTORIES "Listener")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

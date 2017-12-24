@@ -1,8 +1,8 @@
 #include "States/OptionsState.h"
 #include <GameUtilities/Engin/Engin.h>
-#include "Paddle.h"
-#include "Ball.h"
-#include "Wall.h"
+#include "Objects/Paddle.h"
+#include "Objects/Ball.h"
+#include "Objects/Wall.h"
 #include "States/IntroState.h"
 #include "States/ControlState.h"
 #include "Settings.h"
@@ -18,6 +18,12 @@ OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
     controlsButton->setPosition(Settings::inst().buttonPosition(0));
     controlsButton->setSize(Settings::inst().buttonSize());
     gui.add(controlsButton);
+
+    tgui::Button::Ptr musicButton = tgui::Button::create("Music");
+    musicButton->connect("pressed", &OptionsState::onMusicPressed, this);
+    musicButton->setPosition(Settings::inst().buttonPosition(1));
+    musicButton->setSize(Settings::inst().buttonSize());
+    gui.add(musicButton);
 
     tgui::Button::Ptr backButton = tgui::Button::create("Back");
     backButton->connect("pressed", &OptionsState::onBackPressed, this);
@@ -100,6 +106,11 @@ void OptionsState::onBackPressed()
 {
     gui.removeAllWidgets();
     engin.ChangeState<IntroState>(engin);
+    EventManager::inst().Post<PlaySound>("Button Sound");
+}
+
+void OptionsState::onMusicPressed()
+{
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 

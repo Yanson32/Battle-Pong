@@ -14,12 +14,14 @@
 #include "States/PlayState.h"
 #include "Settings.h"
 
-#include "Wall.h"
-#include "Ball.h"
-#include "Paddle.h"
+#include "Objects/Wall.h"
+#include "Objects/Ball.h"
+#include "Objects/Paddle.h"
 #include "States/OptionsState.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
+#include "ResourceManager.h"
+
 IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
 {
     //ctor
@@ -35,7 +37,7 @@ IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
     header.setString(Settings::inst().getTitle());
     header.setCharacterSize(54);
     header.setColor(sf::Color::White);
-    header.setFont(headerFont);
+    header.setFont(ResourceManager::font.get("Header Font"));
     header.setPosition(sf::Vector2f(335, 25));
     header.setStyle(sf::Text::Bold);
 
@@ -118,21 +120,16 @@ void IntroState::Draw(Engin::Engin& engin)
 
 void IntroState::onStartPressed()
 {
-    clean();
+    gui.removeAllWidgets();
     engin.ChangeState<PlayState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void IntroState::onOptionsPressed()
 {
-    clean();
+    gui.removeAllWidgets();
     engin.ChangeState<OptionsState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
-}
-
-void IntroState::clean()
-{
-    gui.removeAllWidgets();
 }
 
 IntroState::~IntroState()

@@ -4,7 +4,7 @@
 #include "ObjectBase.h"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
-#include "Input.h"
+#include "Input/Input.h"
 #include <memory>
 
 class Ball;

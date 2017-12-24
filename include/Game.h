@@ -3,9 +3,9 @@
 
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Event/Manager.h>
-#include "MusicListener.h"
-#include "SoundListener.h"
-#include "BallCollisionListener.h"
+#include "Events/Listeners/MusicListener.h"
+#include "Events/Listeners/SoundListener.h"
+#include "Events/Listeners/BallCollisionListener.h"
 
 class Game: public Engin::Engin, public Evt::Manager
 {

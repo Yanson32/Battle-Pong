@@ -1,19 +1,20 @@
 #include "States/PlayState.h"
-#include "Ball.h"
+#include "Objects/Ball.h"
 #include <SFML/Window/Event.hpp>
 #include "Game.h"
 #include <Box2D/Box2D.h>
 #include <iostream>
-#include "Box2DFunctions.h"
+#include "Box2D/Box2DFunctions.h"
 #include <SFML/Graphics/CircleShape.hpp>
 
-#include "Wall.h"
-#include "Paddle.h"
-#include "AI.h"
-#include "PlayerInput.h"
+#include "Objects/Wall.h"
+#include "Objects/Paddle.h"
+#include "Input/AI.h"
+#include "Input/PlayerInput.h"
 #include "Settings.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
+#include "ResourceManager.h"
 
 PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin)
 {
@@ -38,15 +39,7 @@ PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin)
     rightPaddle->setPosition(sf::Vector2f(700, 300));
 
     systemPause(true);
-
-
-    if(!font.loadFromFile("/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf"))
-    {
-        std::cerr << "Error loading font" << std::endl;
-        std::exit(1);
-    }
-
-    userMessage.setFont(font);
+    userMessage.setFont(ResourceManager::font.get("Header Font"));
     userMessage.setCharacterSize(34);
     userMessage.setString("Ready!");
     userMessage.setPosition(sf::Vector2f(400, 300));
