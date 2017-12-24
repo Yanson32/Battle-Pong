@@ -1,7 +1,7 @@
 #include "Events/EventBase.h"
 
 
-EventBase::EventBase(): Evt::Event()
+EventBase::EventBase(const int newId): Evt::Event(newId)
 {
 
 }

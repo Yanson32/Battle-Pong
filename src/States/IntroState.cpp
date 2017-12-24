@@ -1,5 +1,9 @@
 #include "States/IntroState.h"
 #include "GameUtilities/Engin/Engin.h"
+#include <GameUtilities/Event/Event.h>
+#include <GameUtilities/Event/EventQueue.h>
+
+
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/VideoMode.hpp>
@@ -14,11 +18,15 @@
 #include "Ball.h"
 #include "Paddle.h"
 #include "States/OptionsState.h"
-
+#include "Events/EventManager.h"
+#include "Events/PlaySound.h"
 IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
 {
     //ctor
-
+    ball->setPosition({400, 300});
+    ball->setVelocity({100, 100});
+    leftPaddle->setPosition(sf::Vector2f(100, 300));
+    rightPaddle->setPosition(sf::Vector2f(700, 300));
     if(!headerFont.loadFromFile("/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf"))
     {
         std::cerr << "Error loading font" << std::endl;
@@ -43,6 +51,7 @@ IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
     optionButton->setPosition({300, 350});
     optionButton->setSize(200, 25);
     gui.add(optionButton);
+
 }
 
 
@@ -74,6 +83,13 @@ void IntroState::HandleEvents(Engin::Engin& engin)
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
 
+        //GameUtilities event loop
+        Evt::EventPtr evtPtr;
+        while(EventManager::inst().Poll((evtPtr)))
+        {
+            EventManager::inst().Dispatch((evtPtr));
+        }
+
     }
 }
 
@@ -104,12 +120,14 @@ void IntroState::onStartPressed()
 {
     clean();
     engin.ChangeState<PlayState>(engin);
+    EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void IntroState::onOptionsPressed()
 {
     clean();
     engin.ChangeState<OptionsState>(engin);
+    EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void IntroState::clean()

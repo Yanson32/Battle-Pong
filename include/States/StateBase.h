@@ -6,6 +6,7 @@
 #include <memory>
 #include "DebugDraw.h"
 #include <TGUI/TGUI.hpp>
+#include "ContactListener.h"
 
 class Wall;
 class Paddle;
@@ -16,6 +17,8 @@ class StateBase: public Engin::GameState
     public:
         StateBase(Engin::Engin& newEngin);
         virtual void Draw(Engin::Engin& engin) override;
+        void systemPause(const bool newSysPause);
+        bool isSystemPaused() const;
         virtual ~StateBase();
     protected:
         static sf::RenderWindow window;
@@ -33,6 +36,9 @@ class StateBase: public Engin::GameState
         int32 velocityIterations = 8;   //how strongly to correct velocity
         int32 positionIterations = 3;   //how strongly to correct position
         Engin::Engin &engin;
+        tgui::Theme theme;
+        bool sysPause;
+        ContactListener contactListener;
 
 };
 

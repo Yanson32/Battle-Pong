@@ -9,6 +9,11 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Paddle.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Input.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/AI.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PlayerInput.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/MusicListener.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/SoundListener.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/ContactListener.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/BallCollisionListener.cpp"
 
 )
 set(SUB_DIRECTORIES "States"

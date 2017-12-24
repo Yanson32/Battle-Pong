@@ -5,7 +5,7 @@
 class EventBase: public Evt::Event
 {
     public:
-        EventBase();
+        EventBase(const int newId);
     protected:
 
     private:

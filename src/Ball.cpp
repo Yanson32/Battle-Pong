@@ -15,6 +15,7 @@ Ball::Ball(b2World &world, const unsigned radious)
     bodyDef.angle = 0;
     bodyDef.gravityScale = 0;
     bodyDef.bullet = true;
+    bodyDef.userData = new int(1);
 
     body = world.CreateBody(&bodyDef);
 

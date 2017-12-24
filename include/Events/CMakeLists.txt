@@ -1,4 +1,9 @@
-set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/EventBase.h"
+set(FILES
+            "${CMAKE_CURRENT_SOURCE_DIR}/EventBase.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/PlayMusic.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/EventManager.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/PlaySound.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/BallCollision.h"
 
 )
 set(SUB_DIRECTORIES "")

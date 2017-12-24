@@ -5,7 +5,9 @@
 #include "Wall.h"
 #include "States/IntroState.h"
 #include "States/ControlState.h"
-
+#include "Settings.h"
+#include "Events/EventManager.h"
+#include "Events/PlaySound.h"
 OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
 {
     //ctor
@@ -13,14 +15,14 @@ OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
 
     tgui::Button::Ptr controlsButton = tgui::Button::create("Controls");
     controlsButton->connect("pressed", &OptionsState::onControlsPressed, this);
-    controlsButton->setPosition({300, 300});
-    controlsButton->setSize(200, 25);
+    controlsButton->setPosition(Settings::inst().buttonPosition(0));
+    controlsButton->setSize(Settings::inst().buttonSize());
     gui.add(controlsButton);
 
     tgui::Button::Ptr backButton = tgui::Button::create("Back");
     backButton->connect("pressed", &OptionsState::onBackPressed, this);
-    backButton->setPosition({300, 350});
-    backButton->setSize(200, 25);
+    backButton->setPosition(Settings::inst().buttonPosition(4));
+    backButton->setSize(Settings::inst().buttonSize());
     gui.add(backButton);
 }
 
@@ -55,6 +57,13 @@ void OptionsState::HandleEvents(Engin::Engin& engin)
             }
         }
 
+        //GameUtilities event loop
+        Evt::EventPtr evtPtr;
+        while(EventManager::inst().Poll((evtPtr)))
+        {
+            EventManager::inst().Dispatch((evtPtr));
+        }
+
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
     }
@@ -84,12 +93,14 @@ void OptionsState::onControlsPressed()
 {
     gui.removeAllWidgets();
     engin.ChangeState<ControlState>(engin);
+    EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void OptionsState::onBackPressed()
 {
     gui.removeAllWidgets();
     engin.ChangeState<IntroState>(engin);
+    EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 OptionsState::~OptionsState()

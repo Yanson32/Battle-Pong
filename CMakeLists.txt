@@ -19,9 +19,9 @@ add_subdirectory("src")
 #Change the library output path
 set_target_properties( "${PROJECT_NAME}"
     PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/lib"
-    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/lib"
-    RUNTIME_OUTPUT_DIRECTORY "${CMAKE_CURRENT_BINARY_DIR}/bin"
+    ARCHIVE_OUTPUT_DIRECTORY lib
+    LIBRARY_OUTPUT_DIRECTORY lib
+    RUNTIME_OUTPUT_DIRECTORY bin
 )
 
 #Define compiler features
@@ -69,17 +69,5 @@ export(TARGETS "${PROJECT_NAME}" FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJE
 
 #Make the BUILD_TESTING variable show up in the cmake gui
 option(BUILD_TESTING "Set to TRUE if you want to build unit tests" FALSE)
-
-if(BUILD_TESTING)
-	
-	include("${CMAKE_CURRENT_SOURCE_DIR}/cmake/Modules/BoostTestHelpers.cmake")
-
-	#Find boost
-	find_package(Boost 1.60.0 COMPONENTS system unit_test_framework REQUIRED)
-
-	include(CTest)
-	add_subdirectory("test")
-	add_definitions("-DBUILD_TESTING")
-endif()
 
 

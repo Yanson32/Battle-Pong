@@ -6,8 +6,9 @@
 #include <SFML/System/Vector2.hpp>
 #include "Input.h"
 #include <memory>
-class Ball;
 
+class Ball;
+class b2Body;
 class Paddle: public ObjectBase<sf::ConvexShape>
 {
     public:
@@ -16,10 +17,13 @@ class Paddle: public ObjectBase<sf::ConvexShape>
         sf::Vector2f getPosition() const;
         void handleInput(const Ball &ball);
         void setInput(std::unique_ptr<Input> newInput);
+        void move(const sf::Vector2f &direction);
         virtual void update();
         ~Paddle();
     private:
         std::unique_ptr<Input> input;
+        b2Body *jointBody = nullptr;
+        b2PrismaticJoint *prisJoint;
 };
 
 #endif

@@ -9,6 +9,12 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Paddle.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Input.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/AI.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PlayerInput.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Resource Holder.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/MusicListener.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/SoundListener.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/ContactListener.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/BallCollisionListener.h"
 
 )
 set(SUB_DIRECTORIES "States"

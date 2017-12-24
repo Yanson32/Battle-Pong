@@ -27,21 +27,19 @@ Wall* StateBase::RightWall = new Wall(*world, verticalPoints);
 Paddle* StateBase::leftPaddle = new Paddle(*world, paddlePoints);
 Paddle* StateBase::rightPaddle = new Paddle(*world, paddlePoints);
 
-StateBase::StateBase(Engin::Engin& newEngin): Engin::GameState(), engin(newEngin)
+StateBase::StateBase(Engin::Engin& newEngin): Engin::GameState(), engin(newEngin), theme{"TGUI/themes/Black.txt"}, sysPause(false)
 {
 
-    ball->setPosition({400, 300});
-    ball->setVelocity({100, 100});
 
     leftPaddle->setColor(sf::Color(255, 100, 0));
     rightPaddle->setColor(sf::Color::Blue);
 
 
-    leftPaddle->setPosition(sf::Vector2f(100, 100));
+
     leftPaddle->setInput(std::unique_ptr<AI>(new AI(*leftPaddle)));
 
 
-    rightPaddle->setPosition(sf::Vector2f(700, 100));
+
     rightPaddle->setInput(std::unique_ptr<AI>(new AI(*rightPaddle)));
 
     ground->setPosition({400, 600});
@@ -52,6 +50,9 @@ StateBase::StateBase(Engin::Engin& newEngin): Engin::GameState(), engin(newEngin
     world->SetDebugDraw(&debugDraw);
 
     debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
+
+    world->SetContactListener(&contactListener);
+
 }
 
 
@@ -67,7 +68,7 @@ StateBase::StateBase(Engin::Engin& newEngin): Engin::GameState(), engin(newEngin
 void StateBase::Draw(Engin::Engin& engin)
 {
     window.clear();
-    window.draw(debugDraw);
+    //window.draw(debugDraw);
     window.draw(*leftPaddle);
     window.draw(*rightPaddle);
     window.draw(*ball);
@@ -75,6 +76,16 @@ void StateBase::Draw(Engin::Engin& engin)
     window.draw(*leftWall);
     window.draw(*RightWall);
     window.draw(*ground);
+}
+
+void StateBase::systemPause(const bool newSysPause)
+{
+    sysPause = newSysPause;
+}
+
+bool StateBase::isSystemPaused() const
+{
+    return sysPause;
 }
 
 StateBase::~StateBase()

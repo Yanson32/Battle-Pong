@@ -1,12 +1,13 @@
 #include "Paddle.h"
 #include "Box2DFunctions.h"
-
+#include <iostream>
 
 
 
 Paddle::Paddle(b2World &world, const std::array<sf::Vector2f, 4> vert):
 ObjectBase<sf::ConvexShape>::ObjectBase()
 {
+
     const int SIZE = 4;
 
     b2Vec2 vertices[SIZE];
@@ -20,12 +21,17 @@ ObjectBase<sf::ConvexShape>::ObjectBase()
 
 
     //ctor
-    bodyDef.type = b2_staticBody;
+    bodyDef.type = b2_dynamicBody;
     bodyDef.position.Set(0, 0);
     bodyDef.angle = 0;
     bodyDef.gravityScale = 0;
+    bodyDef.fixedRotation = true;
+    bodyDef.bullet = true;
 
     body = world.CreateBody(&bodyDef);
+
+    bodyDef.type = b2_staticBody;
+    jointBody = world.CreateBody(&bodyDef);
 
     b2PolygonShape polyShape;
     polyShape.Set(vertices, SIZE);
@@ -39,10 +45,27 @@ ObjectBase<sf::ConvexShape>::ObjectBase()
 
     b2Fixture *fix = body->CreateFixture(&bodyFixture);
 
+    //Create the joint
+    b2PrismaticJointDef jointDef;
+    jointDef.bodyA = jointBody;
+    jointDef.bodyB = body;
+    jointDef.collideConnected = false;
+    jointDef.localAxisA = b2Vec2(0.0f, 1.0f);
+    jointDef.enableLimit = true;
+    jointDef.upperTranslation = toMeters(225);
+    jointDef.lowerTranslation = toMeters(-225);
+
+    prisJoint = static_cast<b2PrismaticJoint*>(world.CreateJoint(&jointDef));
 
     shape.setFillColor(sf::Color::Red);
     shape.setPointCount(SIZE);
 
+
+}
+
+void Paddle::move(const sf::Vector2f &direction)
+{
+    body->SetLinearVelocity(toMeters(direction));
 }
 
 void Paddle::update()
@@ -86,6 +109,9 @@ void Paddle::update()
 void Paddle::setPosition(const sf::Vector2f &position)
 {
     body->SetTransform(toMeters(position), body->GetAngle());
+    sf::Vector2f tempPos = position;
+    tempPos.y -= toMeters(200);
+    jointBody->SetTransform(toMeters(position), jointBody->GetAngle());
 }
 
 sf::Vector2f Paddle::getPosition() const
