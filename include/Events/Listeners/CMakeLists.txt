@@ -1,6 +1,9 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/MusicListener.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SoundListener.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/BallCollisionListener.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/GoalCollisionListener.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/LeftPaddleGoalListener.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/RightPaddleGoalListener.h"
 
 )
 set(SUB_DIRECTORIES ""

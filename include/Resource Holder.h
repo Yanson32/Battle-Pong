@@ -1,5 +1,13 @@
 #ifndef RESOURCEHOLDER_H
 #define RESOURCEMANAGER_H
+/**********************************************************//**
+*   @brief  This class is designed to hold game resources.
+*           game resources should only be loaded into memory
+*           once and used repeatedly. The RessourceHolder
+*           class is designed to facilitate this. The
+*           ResourceHolder class was not written by me
+*           and has been modified from the original code.
+**************************************************************/
 
 #include <map>
 #include <memory>
@@ -7,7 +15,8 @@
 #include <stdexcept>
 #include <cassert>
 #include <stdexcept>
-//#include "NonCopyable.h"
+
+
 template <typename Resource, typename Identifier>
 class ResourceHolder//: NonCopyable
 {
@@ -28,7 +37,13 @@ class ResourceHolder//: NonCopyable
         std::map<Identifier, std::unique_ptr<Resource>> resourceMap;
 };
 
-//Load resource
+
+/************************************************************//**
+*   @brief  Load a resource into the ResourceHolder
+*   @param  id identifier used to retrive the resource with
+*           get method.
+*   @param  filename path to the resource to be loaded
+****************************************************************/
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename)
 {
@@ -41,7 +56,13 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
 }
 
 
-//Load resource
+/************************************************************//**
+*   @brief  Load a resource into the ResourceHolder
+*   @param  id identifier used to retrive the resource with
+*           get method.
+*   @param  filename path to the resource to be loaded
+*   @param  secondParam
+****************************************************************/
 template <typename Resource, typename Identifier>
 template <typename Parameter>
 void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string& filename,
@@ -56,7 +77,11 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
 }
 
 
-//check to see if a resource has already been loaded
+/************************************************************//**
+*   @brief  Determine if a resource has already been loaded
+*   @return true is returned if the resource is loaded and
+*           false is returned otherwise.
+****************************************************************/
 template <typename Resource, typename Identifier>
 bool ResourceHolder<Resource, Identifier>::isLoaded(const Identifier id) const
 {
@@ -67,7 +92,13 @@ bool ResourceHolder<Resource, Identifier>::isLoaded(const Identifier id) const
 }
 
 
-//Get a reference to resource
+/************************************************************//**
+*   @brief  Get the specified resource. The resource should
+*           already be loaded. In debug mode, if the resource
+*           hasen't been loaded, an error will result.
+*   @param  id the identifier if the resource to be retrieved.
+*   @return The resource identifed by id.
+****************************************************************/
 template <typename Resource, typename Identifier>
 Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
 {
@@ -77,7 +108,14 @@ Resource& ResourceHolder<Resource, Identifier>::get(Identifier id)
     return *foundResource->second;
 }
 
-//Get const reference to resource
+
+/************************************************************//**
+*   @brief  Get the specified resource. The resource should
+*           already be loaded. In debug mode, if the resource
+*           hasen't been loaded, an error will result.
+*   @param  id the identifier if the resource to be retrieved.
+*   @return The resource identifed by id.
+****************************************************************/
 template <typename Resource, typename Identifier>
 const Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) const
 {
@@ -88,7 +126,10 @@ const Resource& ResourceHolder<Resource, Identifier>::get(Identifier id) const
 }
 
 
-//Remove resource
+/************************************************************//**
+*   @brief  Remove a resource from the ResourceHolder.
+*   @param  id the identifier if the resource to be retrieved.
+****************************************************************/
 template <typename Resource, typename Identifier>
 void ResourceHolder<Resource, Identifier>::remove(const Identifier id)
 {

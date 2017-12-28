@@ -11,7 +11,7 @@
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/Font.hpp>
+//#include <SFML/Graphics/Font.hpp>
 
 #include "States/StateBase.h"
 
@@ -71,7 +71,7 @@ class IntroState: public StateBase
 
         sf::Text header;                            ///Text displayed at the top of the screen
         sf::Color background = sf::Color::Black;    ///Color used to clear the screen background
-        sf::Font headerFont;                        ///Font used for the screens header
+        //sf::Font headerFont;                      ///Font used for the screens header
 
 };
 

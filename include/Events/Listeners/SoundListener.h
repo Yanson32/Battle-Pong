@@ -11,7 +11,7 @@ class SoundListener: public Evt::Listener
         virtual ~SoundListener();
     protected:
     private:
-        sf::Sound listenerSound;
+        static sf::Sound listenerSound;
 };
 
 #endif // SOUNDLISTENER_H

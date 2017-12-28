@@ -1,6 +1,7 @@
 #include "Events/PlayMusic.h"
+#include "Events/Id.h"
 
-PlayMusic::PlayMusic(const sf::String &musicFile): EventBase(1), file(musicFile)
+PlayMusic::PlayMusic(const sf::String &musicFile): EventBase(EventId::PLAY_MUSIC), file(musicFile)
 {
     //ctor
 }

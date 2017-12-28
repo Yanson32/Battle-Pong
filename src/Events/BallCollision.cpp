@@ -1,6 +1,7 @@
 #include "Events/BallCollision.h"
+#include "Events/Id.h"
 
-BallCollision::BallCollision(): EventBase(3)
+BallCollision::BallCollision(): EventBase(EventId::BALL_COLLISION)
 {
     //ctor
 }

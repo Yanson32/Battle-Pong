@@ -20,7 +20,7 @@ class PaddleState: public StateBase
         *   @param  pSettings a pointer to a tgui panel containing
         *           paddle settings.
         ********************************************************************/
-        PaddleState(Engin::Engin& newEngin, tgui::Panel::Ptr pSettings);
+        PaddleState(Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings);
 
 
         /****************************************************************//**
@@ -59,6 +59,23 @@ class PaddleState: public StateBase
         *   @brief  This method is a callback for the music button
         ********************************************************************/
         void onBack();
+
+
+        /****************************************************************//**
+        *   @brief
+        ********************************************************************/
+        void onNameBox();
+
+
+        /****************************************************************//**
+        *   @brief
+        ********************************************************************/
+        void onListItemSelected();
+
+        tgui::EditBox::Ptr eBox;
+        tgui::ComboBox::Ptr cBox;
+        std::shared_ptr<PaddleSettings> paddleSettings;
+
 };
 
 #endif // PADDLESTATE_H

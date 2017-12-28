@@ -3,14 +3,10 @@
 #include <memory>
 #include "Events/PlayMusic.h"
 #include "Events/Listeners/BallCollisionListener.h"
-
+#include "Events/Id.h"
+#include "Events/Listeners/LeftPaddleGoalListener.h"
 Game::Game(): Engin::Engin(),
-Evt::Manager(),
-musicListener(new MusicListener()),
-soundListener(new SoundListener),
-ballCollisionListener(new BallCollisionListener)
+Evt::Manager()
 {
-    EventManager::inst().RegisterListener(std::move(musicListener), 1);
-    EventManager::inst().RegisterListener(std::move(soundListener), 2);
-    EventManager::inst().RegisterListener(std::move(ballCollisionListener), 3);
+
 }

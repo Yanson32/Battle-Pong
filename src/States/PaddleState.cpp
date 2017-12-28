@@ -6,11 +6,39 @@
 #include "States/ControlState.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
-
-PaddleState::PaddleState(Engin::Engin& newEngin, tgui::Panel::Ptr pSettings): StateBase(newEngin)
+#include "Settings.h"
+PaddleState::PaddleState(Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings):
+StateBase(newEngin),
+paddleSettings(pSettings)
 {
     //ctor
-    gui.add(pSettings);
+//    gui.add(pSettings);
+
+    const float labelX = 200;
+    const float x = 300;
+    auto nameLable = tgui::Label::create("Name");
+    nameLable->setPosition({labelX, 50});
+    gui.add(nameLable);
+
+    eBox = tgui::EditBox::create();
+    eBox->connect("ReturnKeyPressed", &PaddleState::onNameBox, this);
+    eBox->setDefaultText(pSettings->getPlayerName());
+    eBox->setPosition({x, 50});
+    gui.add(eBox);
+
+    auto inputLable = tgui::Label::create("AI");
+    inputLable->setPosition({labelX, 100});
+    gui.add(inputLable);
+
+    cBox = tgui::ComboBox::create();
+    cBox->connect("ItemSelected", &PaddleState::onListItemSelected, this);
+    cBox->setPosition({x, 100});
+    cBox->addItem("Hard");
+    cBox->addItem("Medium");
+    cBox->addItem("Easy");
+    cBox->addItem("None");
+    cBox->setSelectedItem(paddleSettings->getInputType());
+    gui.add(cBox);
 
     auto backButton = tgui::Button::create("Back");
     backButton->setSize(Settings::inst().buttonSize());
@@ -50,16 +78,11 @@ void PaddleState::HandleEvents(Engin::Engin& newEngin)
             }
         }
 
-        //GameUtilities event loop
-        Evt::EventPtr evtPtr;
-        while(EventManager::inst().Poll((evtPtr)))
-        {
-            EventManager::inst().Dispatch((evtPtr));
-        }
-
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
     }
+
+    gameEvents();
 }
 
 void PaddleState::Update(Engin::Engin& engin)
@@ -87,6 +110,28 @@ void PaddleState::onBack()
     gui.removeAllWidgets();
     engin.ChangeState<ControlState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
+}
+
+void PaddleState::onNameBox()
+{
+    paddleSettings->setPlayerName(eBox->getText());
+
+    switch(paddleSettings->getId())
+    {
+        case ObjectId::LEFT_PADDLE:
+            paddle1Hud->setName(eBox->getText());
+        break;
+
+        case ObjectId::RIGHT_PADDLE:
+            paddle2Hud->setName(eBox->getText());
+        break;
+    }
+}
+
+void PaddleState::onListItemSelected()
+{
+    paddleSettings->setInputType(cBox->getSelectedItem());
+
 }
 
 PaddleState::~PaddleState()

@@ -9,6 +9,7 @@
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 
+
 ControlState::ControlState(Engin::Engin& newEngin): StateBase(newEngin)
 {
     //ctor
@@ -58,17 +59,12 @@ void ControlState::HandleEvents(Engin::Engin& newEngin)
             }
         }
 
-        //GameUtilities event loop
-        Evt::EventPtr evtPtr;
-        while(EventManager::inst().Poll((evtPtr)))
-        {
-            EventManager::inst().Dispatch((evtPtr));
-        }
-
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
 
     }
+
+    gameEvents();
 }
 
 void ControlState::Update(Engin::Engin& engin)

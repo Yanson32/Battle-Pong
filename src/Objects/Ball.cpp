@@ -2,8 +2,8 @@
 #include <Box2D/Box2D.h>
 #include "Box2D/Box2DFunctions.h"
 #include <iostream>
-
-Ball::Ball(b2World &world, const unsigned radious)
+#include "Events/Id.h"
+Ball::Ball(b2World &world, const unsigned radius)
 {
 
     b2BodyDef bodyDef;
@@ -15,13 +15,13 @@ Ball::Ball(b2World &world, const unsigned radious)
     bodyDef.angle = 0;
     bodyDef.gravityScale = 0;
     bodyDef.bullet = true;
-    bodyDef.userData = new int(1);
+    bodyDef.userData = new int(ObjectId::BALL);
 
     body = world.CreateBody(&bodyDef);
 
     b2CircleShape circleShape;
     circleShape.m_p.Set(0, 0);
-    circleShape.m_radius = toMeters(radious);
+    circleShape.m_radius = toMeters(radius);
 
 
     b2FixtureDef bodyFixture;
@@ -36,8 +36,8 @@ Ball::Ball(b2World &world, const unsigned radious)
 
 
     shape.setFillColor(sf::Color::Green);
-    shape.setRadius(radious);
-    shape.setOrigin(radious, radious);
+    shape.setRadius(radius);
+    shape.setOrigin(radius, radius);
 }
 
 void Ball::update()

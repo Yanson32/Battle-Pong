@@ -4,7 +4,7 @@
 
 
 
-Paddle::Paddle(b2World &world, const std::array<sf::Vector2f, 4> vert):
+Paddle::Paddle(b2World &world, const ObjectId &newId, const std::array<sf::Vector2f, 4> vert):
 ObjectBase<sf::ConvexShape>::ObjectBase()
 {
 
@@ -27,6 +27,7 @@ ObjectBase<sf::ConvexShape>::ObjectBase()
     bodyDef.gravityScale = 0;
     bodyDef.fixedRotation = true;
     bodyDef.bullet = true;
+    bodyDef.userData = new int(newId);
 
     body = world.CreateBody(&bodyDef);
 

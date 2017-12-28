@@ -4,6 +4,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/OptionsState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ControlState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleState.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/MusicState.cpp"
 )
 set(SUB_DIRECTORIES "")
 

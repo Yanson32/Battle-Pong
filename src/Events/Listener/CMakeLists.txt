@@ -1,6 +1,9 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/MusicListener.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SoundListener.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/BallCollisionListener.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/GoalCollisionListener.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/LeftPaddleGoalListener.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/RightPaddleGoalListener.cpp"
 
 )
 set(SUB_DIRECTORIES ""

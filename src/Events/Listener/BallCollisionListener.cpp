@@ -10,7 +10,6 @@ BallCollisionListener::BallCollisionListener()
 
 void BallCollisionListener::OnEvent(Evt::EventPtr event)
 {
-    std::cout << "Ball Collision" << std::endl;
     EventManager::inst().Post<PlaySound>("Ball Sound");
 }
 

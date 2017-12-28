@@ -60,7 +60,6 @@ class PlayState: public StateBase
         ********************************************************************/
         ~PlayState();
     private:
-        sf::Text userMessage;       ///Text displayed in the center of the screen
-        sf::Clock messageClock;     ///This clock object is used to time the beginning message "Ready!, 3, 2, 1, Go!
+
 };
 #endif

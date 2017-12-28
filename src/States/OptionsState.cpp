@@ -8,6 +8,8 @@
 #include "Settings.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
+#include "States/MusicState.h"
+
 OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
 {
     //ctor
@@ -63,16 +65,11 @@ void OptionsState::HandleEvents(Engin::Engin& engin)
             }
         }
 
-        //GameUtilities event loop
-        Evt::EventPtr evtPtr;
-        while(EventManager::inst().Poll((evtPtr)))
-        {
-            EventManager::inst().Dispatch((evtPtr));
-        }
-
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
     }
+
+    gameEvents();
 }
 
 void OptionsState::Update(Engin::Engin& engin)
@@ -105,12 +102,14 @@ void OptionsState::onControlsPressed()
 void OptionsState::onBackPressed()
 {
     gui.removeAllWidgets();
-    engin.ChangeState<IntroState>(engin);
+    engin.Pop();
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void OptionsState::onMusicPressed()
 {
+    gui.removeAllWidgets();
+    engin.ChangeState<MusicState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 

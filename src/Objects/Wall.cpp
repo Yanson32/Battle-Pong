@@ -1,6 +1,7 @@
 #include "Objects/Wall.h"
 #include <SFML/System/Vector2.hpp>
 #include "Box2D/Box2DFunctions.h"
+#include "Events/Id.h"
 
 Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert): ObjectBase<sf::ConvexShape>::ObjectBase()
 {
@@ -24,6 +25,7 @@ Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert): ObjectBase<s
     bodyDef.position.Set(0, 0);
     bodyDef.angle = 0;
     bodyDef.gravityScale = 0;
+    bodyDef.userData = new int(ObjectId::WALL);
 
     body = world.CreateBody(&bodyDef);
 

@@ -1,0 +1,26 @@
+#ifndef EVENT_ID_H
+#define EVENT_ID_H
+
+enum EventId
+{
+    BALL_COLLISION,
+    GOAL_COLLISION,
+    PLAY_MUSIC,
+    PLAY_SOUND,
+    MUSIC_VOLUME_CHANGED,
+    SOUND_VOLUME_CHANGED,
+    LEFT_GOAL_COLLISION,
+    RIGHT_GOAL_COLLISION
+};
+
+enum ObjectId
+{
+    BALL,
+    LEFT_GOAL,
+    RIGHT_GOAL,
+    LEFT_PADDLE,
+    RIGHT_PADDLE,
+    WALL
+};
+
+#endif // ID_H

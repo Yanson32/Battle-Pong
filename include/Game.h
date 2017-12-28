@@ -3,9 +3,7 @@
 
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Event/Manager.h>
-#include "Events/Listeners/MusicListener.h"
-#include "Events/Listeners/SoundListener.h"
-#include "Events/Listeners/BallCollisionListener.h"
+
 
 class Game: public Engin::Engin, public Evt::Manager
 {
@@ -14,8 +12,6 @@ class Game: public Engin::Engin, public Evt::Manager
     protected:
 
     private:
-        MusicListener* musicListener;
-        SoundListener* soundListener;
-        BallCollisionListener* ballCollisionListener;
+
 };
 #endif

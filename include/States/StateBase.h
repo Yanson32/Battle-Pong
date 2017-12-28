@@ -16,6 +16,17 @@
 #include "Box2D/DebugDraw.h"
 #include "Box2D/ContactListener.h"
 
+#include "Objects/Goal.h"
+
+#include "Events/Listeners/MusicListener.h"
+#include "Events/Listeners/SoundListener.h"
+#include "Events/Listeners/BallCollisionListener.h"
+#include "Events/Listeners/GoalCollisionListener.h"
+#include "Events/Listeners/LeftPaddleGoalListener.h"
+#include "Events/Listeners/RightPaddleGoalListener.h"
+
+#include "PaddleHud.h"
+
 class Wall;
 class Paddle;
 class Ball;
@@ -80,7 +91,8 @@ class StateBase: public Engin::GameState
         ********************************************************************/
         bool isSystemPaused() const;
 
-
+        void gameEvents();
+        void reset();
         /****************************************************************//**
         *   @brief  Destructor
         ********************************************************************/
@@ -97,6 +109,15 @@ class StateBase: public Engin::GameState
         static Wall* RightWall;                 ///Pointer to the right wall Box2D object
         static Paddle* leftPaddle;              ///Pointer to the paddle on the left side of the screen
         static Paddle* rightPaddle;             ///Pointer to the paddle on the right side of the screen
+        static Goal* leftGoal;
+        static Goal* rightGoal;
+        static LeftPaddleGoalListener*     leftPaddleGoalListener;
+        static sf::Sound sound;
+        static sf::Music music;
+        static std::shared_ptr<PaddleHud> paddle1Hud;
+        static std::shared_ptr<PaddleHud> paddle2Hud;
+        static sf::Text userMessage;            ///Text displayed in the center of the screen
+        static sf::Clock messageClock;          ///This clock object is used to time the beginning message "Ready!, 3, 2, 1, Go!
         float32 timeStep = 1 / 20.0;            ///Box2D the length of time passed to simulate (seconds)
         int32 velocityIterations = 8;           ///Box2D how strongly to correct velocity
         int32 positionIterations = 3;           ///Box2D how strongly to correct position

@@ -58,6 +58,10 @@ find_package(TGUI 0.7 REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${TGUI_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${TGUI_LIBRARY})
 
+find_package(Boost 1.60.0 COMPONENTS thread date_time filesystem system log log_setup REQUIRED)
+target_link_libraries("${PROJECT_NAME}" PUBLIC ${Boost_LIBRARIES})
+target_include_directories("${PROJECT_NAME}" PUBLIC ${Boost_INCLUDE_DIRS})
+
 #Install Source Files
 install(TARGETS "${PROJECT_NAME}" DESTINATION lib EXPORT "${PROJECT_NAME}-Exports")
 install(EXPORT "${PROJECT_NAME}-Exports" DESTINATION "lib/cmake/${PROJECT_NAME}")

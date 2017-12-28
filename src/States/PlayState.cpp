@@ -14,7 +14,9 @@
 #include "Settings.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
+#include "Events/PlayMusic.h"
 #include "ResourceManager.h"
+#include "States/OptionsState.h"
 
 PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin)
 {
@@ -33,16 +35,12 @@ PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin)
     else
         rightPaddle->setInput(std::unique_ptr<Input>(new AI(*rightPaddle)));
 
-    ball->setPosition({400, 300});
-    ball->setVelocity({100, 100});
-    leftPaddle->setPosition(sf::Vector2f(100, 300));
-    rightPaddle->setPosition(sf::Vector2f(700, 300));
-
     systemPause(true);
     userMessage.setFont(ResourceManager::font.get("Header Font"));
     userMessage.setCharacterSize(34);
-    userMessage.setString("Ready!");
     userMessage.setPosition(sf::Vector2f(400, 300));
+    reset();
+
 
 }
 
@@ -75,25 +73,23 @@ void PlayState::HandleEvents(Engin::Engin& engin)
                     break;
             }
         }
+        gameEvents();
+        leftPaddle->handleInput(*ball);
+        rightPaddle->handleInput(*ball);
 
-        //GameUtilities event loop
-        Evt::EventPtr evtPtr;
-        while(EventManager::inst().Poll((evtPtr)))
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         {
-            EventManager::inst().Dispatch((evtPtr));
+            Pause();
+            engin.Push<OptionsState>(engin);
         }
-
-        if(!isSystemPaused())
-        {
-            leftPaddle->handleInput(*ball);
-            rightPaddle->handleInput(*ball);
-        }
-
     }
+
 }
 
 void PlayState::Update(Engin::Engin& engin)
 {
+    //gui.add(paddle1Hud);
+    //gui.add(paddle2Hud);
     const int SECONDS = 1;
 
         if(!IsPaused())
@@ -168,6 +164,7 @@ void PlayState::Draw(Engin::Engin& engin)
 
     StateBase::Draw(engin);
     window.draw(userMessage);
+    gui.draw();
     window.display();
 }
 
