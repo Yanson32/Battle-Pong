@@ -100,7 +100,6 @@ void PaddleState::Update(Engin::Engin& engin, const int &deltaTime)
 void PaddleState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
-    gui.draw();
     window.display();
 }
 

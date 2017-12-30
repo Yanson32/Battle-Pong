@@ -105,7 +105,6 @@ void IntroState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
 	window.draw(header);
-    gui.draw();
     window.display();
 }
 

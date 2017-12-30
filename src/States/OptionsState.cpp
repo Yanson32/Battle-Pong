@@ -89,7 +89,6 @@ void OptionsState::Update(Engin::Engin& engin, const int &deltaTime)
 void OptionsState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
-    gui.draw();
     window.display();
 }
 
@@ -113,8 +112,6 @@ void OptionsState::onMusicPressed()
 
 void OptionsState::Init()
 {
-
-
     gui.add(musicButton);
     gui.add(backButton);
     gui.add(controlsButton);

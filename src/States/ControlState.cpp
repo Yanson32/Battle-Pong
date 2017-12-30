@@ -82,7 +82,6 @@ void ControlState::Update(Engin::Engin& engin, const int &deltaTime)
 void ControlState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
-    gui.draw();
     window.display();
 }
 

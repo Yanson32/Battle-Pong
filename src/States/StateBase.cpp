@@ -14,7 +14,7 @@
 
 sf::RenderWindow StateBase::window(Settings::inst().getWindowSettings().getVideoMode(), Settings::inst().getTitle());
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
-//tgui::Gui StateBase::gui(window);
+tgui::Gui StateBase::gui(window);
 DebugDraw StateBase::debugDraw(*world);
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
@@ -26,17 +26,17 @@ namespace
     std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(-10, -50), sf::Vector2f(10, -50), sf::Vector2f(10, 50),sf::Vector2f(-10, 50)};
     std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(-15, -600), sf::Vector2f(15, -600), sf::Vector2f(15, 600), sf::Vector2f(-15, 600)};
 }
-Wall* StateBase::ground = new Wall(world, horizontalPoints);
-Wall* StateBase::celing = new Wall(world, horizontalPoints);
-Wall* StateBase::leftWall = new Wall(world, verticalPoints);
-Wall* StateBase::RightWall = new Wall(world, verticalPoints);
+std::unique_ptr<Wall> StateBase::ground(new Wall(world, horizontalPoints));
+std::unique_ptr<Wall> StateBase::celing(new Wall(world, horizontalPoints));
+std::unique_ptr<Wall> StateBase::leftWall(new Wall(world, verticalPoints));
+std::unique_ptr<Wall> StateBase::RightWall(new Wall(world, verticalPoints));
 
 
-Paddle* StateBase::leftPaddle = new Paddle(world, ObjectId::LEFT_PADDLE, paddlePoints);
-Paddle* StateBase::rightPaddle = new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints);
+std::unique_ptr<Paddle> StateBase::leftPaddle(new Paddle(world, ObjectId::LEFT_PADDLE, paddlePoints));
+std::unique_ptr<Paddle> StateBase::rightPaddle(new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints));
 
-Goal* StateBase::leftGoal = new Goal(world, ObjectId::LEFT_GOAL, goalPoints);
-Goal* StateBase::rightGoal = new Goal(world, ObjectId::RIGHT_GOAL, goalPoints);
+std::unique_ptr<Goal> StateBase::leftGoal(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
+std::unique_ptr<Goal> StateBase::rightGoal(new Goal(world, ObjectId::RIGHT_GOAL, goalPoints));
 std::unique_ptr<Ball> StateBase::ball(new Ball(world));
 
 sf::Sound StateBase::sound;
@@ -50,8 +50,7 @@ ContactListener StateBase::contactListener;
 StateBase::StateBase(Engin::Engin& newEngin):
 Engin::GameState(),
 engin(newEngin),
-sysPause(false),
-gui(window)
+sysPause(false)
 {
 
     rightGoal->setPosition(sf::Vector2f(760, 300));
@@ -104,6 +103,9 @@ void StateBase::Draw(Engin::Engin& engin, const int &deltaTime)
     window.draw(*leftWall);
     window.draw(*RightWall);
     window.draw(*ground);
+    window.draw(*paddle1Hud);
+    window.draw(*paddle2Hud);
+    gui.draw();
 }
 
 void StateBase::systemPause(const bool newSysPause)

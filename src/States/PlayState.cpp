@@ -164,7 +164,6 @@ void PlayState::Draw(Engin::Engin& engin, const int &deltaTime)
 
     StateBase::Draw(engin, deltaTime);
     window.draw(userMessage);
-    gui.draw();
     window.display();
 }
 

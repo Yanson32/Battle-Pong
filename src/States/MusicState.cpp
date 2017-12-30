@@ -76,7 +76,6 @@ void MusicState::Update(Engin::Engin& engin, const int &deltaTime)
 void MusicState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
-    gui.draw();
     window.display();
 }
 

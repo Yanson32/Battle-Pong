@@ -14,63 +14,63 @@ ContactListener::ContactListener()
 
 void ContactListener::BeginContact(b2Contact* contact)
 {
-//    if(contact == nullptr)
-//        return;
-//
-//    b2Fixture* fixtureA = contact->GetFixtureA();
-//    b2Fixture* fixtureB = contact->GetFixtureB();
-//
-//    if(fixtureA == nullptr)
-//        return;
-//
-//    if(fixtureB == nullptr)
-//        return;
-//
-//    b2Body *bodyA = fixtureA->GetBody();
-//    b2Body *bodyB = fixtureB->GetBody();
-//
-//    if(bodyA == nullptr)
-//        return;
-//
-//    if(bodyB == nullptr)
-//        return;
-//
-//    void* vA = bodyA->GetUserData();
-//    void* vB = bodyB->GetUserData();
-//
-//    if(vA)
-//    {
-//        int intA = (*static_cast<int*>(vA));
-//        dispatchEvent(intA, fixtureB->IsSensor());
-//    }
-//
-//    if(vB)
-//    {
-//        int intB = (*static_cast<int*>(vB));
-//        dispatchEvent(intB, fixtureA->IsSensor());
-//    }
+    if(contact == nullptr)
+        return;
+
+    b2Fixture* fixtureA = contact->GetFixtureA();
+    b2Fixture* fixtureB = contact->GetFixtureB();
+
+    if(fixtureA == nullptr)
+        return;
+
+    if(fixtureB == nullptr)
+        return;
+
+    b2Body *bodyA = fixtureA->GetBody();
+    b2Body *bodyB = fixtureB->GetBody();
+
+    if(bodyA == nullptr)
+        return;
+
+    if(bodyB == nullptr)
+        return;
+
+    void* vA = bodyA->GetUserData();
+    void* vB = bodyB->GetUserData();
+
+    if(vA)
+    {
+        int intA = (*static_cast<int*>(vA));
+        dispatchEvent(intA, fixtureB->IsSensor());
+    }
+
+    if(vB)
+    {
+        int intB = (*static_cast<int*>(vB));
+        dispatchEvent(intB, fixtureA->IsSensor());
+    }
 
 
 
-//    if(IsBall(contact->GetFixtureA()))
-//    {
-//        EventManager::inst().Post<BallCollision>();
-//    }
-//
-//    if(IsBall(contact->GetFixtureB()))
-//    {
-//        EventManager::inst().Post<BallCollision>();
-//    }
-//
-//    if(IsGoal(contact->GetFixtureA()))
-//    {
-//        EventManager::inst().Post<GoalCollision>();
-//    }
-//
-//    if(IsGoal(contact->GetFixtureB()))
-//    {
-//        EventManager::inst().Post<GoalCollision>();
-//    }
+    if(IsBall(contact->GetFixtureA()))
+    {
+        EventManager::inst().Post<BallCollision>();
+    }
+
+    if(IsBall(contact->GetFixtureB()))
+    {
+        EventManager::inst().Post<BallCollision>();
+    }
+
+    if(IsGoal(contact->GetFixtureA()))
+    {
+        EventManager::inst().Post<GoalCollision>();
+    }
+
+    if(IsGoal(contact->GetFixtureB()))
+    {
+        EventManager::inst().Post<GoalCollision>();
+    }
 }
 
 bool ContactListener::IsBall(b2Fixture* fixture)
