@@ -13,30 +13,26 @@
 OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
 {
     //ctor
-
-
-    tgui::Button::Ptr controlsButton = tgui::Button::create("Controls");
+    controlsButton = tgui::Button::create("Controls");
     controlsButton->connect("pressed", &OptionsState::onControlsPressed, this);
     controlsButton->setPosition(Settings::inst().buttonPosition(0));
     controlsButton->setSize(Settings::inst().buttonSize());
-    gui.add(controlsButton);
 
-    tgui::Button::Ptr musicButton = tgui::Button::create("Music");
+    musicButton = tgui::Button::create("Music");
     musicButton->connect("pressed", &OptionsState::onMusicPressed, this);
     musicButton->setPosition(Settings::inst().buttonPosition(1));
     musicButton->setSize(Settings::inst().buttonSize());
-    gui.add(musicButton);
 
-    tgui::Button::Ptr backButton = tgui::Button::create("Back");
+    backButton = tgui::Button::create("Back");
     backButton->connect("pressed", &OptionsState::onBackPressed, this);
     backButton->setPosition(Settings::inst().buttonPosition(4));
     backButton->setSize(Settings::inst().buttonSize());
-    gui.add(backButton);
+
 }
 
 
 
-void OptionsState::HandleEvents(Engin::Engin& engin)
+void OptionsState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -67,12 +63,17 @@ void OptionsState::HandleEvents(Engin::Engin& engin)
 
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
+
+        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+        {
+            engin.Pop();
+        }
     }
 
     gameEvents();
 }
 
-void OptionsState::Update(Engin::Engin& engin)
+void OptionsState::Update(Engin::Engin& engin, const int &deltaTime)
 {
         world->Step( timeStep, velocityIterations, positionIterations);
         debugDraw.update();
@@ -85,32 +86,43 @@ void OptionsState::Update(Engin::Engin& engin)
         rightPaddle->update();
 }
 
-void OptionsState::Draw(Engin::Engin& engin)
+void OptionsState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
-    StateBase::Draw(engin);
+    StateBase::Draw(engin, deltaTime);
     gui.draw();
     window.display();
 }
 
 void OptionsState::onControlsPressed()
 {
-    gui.removeAllWidgets();
-    engin.ChangeState<ControlState>(engin);
+    engin.Push<ControlState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void OptionsState::onBackPressed()
 {
-    gui.removeAllWidgets();
     engin.Pop();
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void OptionsState::onMusicPressed()
 {
-    gui.removeAllWidgets();
-    engin.ChangeState<MusicState>(engin);
+    engin.Push<MusicState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
+}
+
+void OptionsState::Init()
+{
+
+
+    gui.add(musicButton);
+    gui.add(backButton);
+    gui.add(controlsButton);
+}
+
+void OptionsState::Clean()
+{
+    gui.removeAllWidgets();
 }
 
 OptionsState::~OptionsState()

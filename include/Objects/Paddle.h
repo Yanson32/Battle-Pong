@@ -12,7 +12,7 @@ class b2Body;
 class Paddle: public ObjectBase<sf::ConvexShape>
 {
     public:
-        Paddle(b2World &world, const ObjectId &newId, const std::array<sf::Vector2f, 4> vert);
+        Paddle(std::shared_ptr<b2World> world, const ObjectId &newId, const std::array<sf::Vector2f, 4> vert);
         void setPosition(const sf::Vector2f &position);
         sf::Vector2f getPosition() const;
         void handleInput(const Ball &ball);

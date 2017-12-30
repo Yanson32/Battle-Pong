@@ -3,7 +3,7 @@
 #include "Box2D/Box2DFunctions.h"
 #include <iostream>
 #include "Events/Id.h"
-Ball::Ball(b2World &world, const unsigned radius)
+Ball::Ball(std::shared_ptr<b2World> world, const unsigned radius): ObjectBase(world)
 {
 
     b2BodyDef bodyDef;
@@ -17,7 +17,7 @@ Ball::Ball(b2World &world, const unsigned radius)
     bodyDef.bullet = true;
     bodyDef.userData = new int(ObjectId::BALL);
 
-    body = world.CreateBody(&bodyDef);
+    body = world->CreateBody(&bodyDef);
 
     b2CircleShape circleShape;
     circleShape.m_p.Set(0, 0);

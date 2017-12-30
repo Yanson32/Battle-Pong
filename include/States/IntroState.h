@@ -32,7 +32,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(Engin::Engin& engin);
+        virtual void HandleEvents(Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -41,7 +41,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(Engin::Engin& engin);
+        virtual void Update(Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -50,8 +50,10 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(Engin::Engin& engin);
+        virtual void Draw(Engin::Engin& engin, const int &deltaTime);
 
+        virtual void Init() override;
+        virtual void Clean() override;
 
         /****************************************************************//**
         *   @brief  Destructor
@@ -72,7 +74,8 @@ class IntroState: public StateBase
         sf::Text header;                            ///Text displayed at the top of the screen
         sf::Color background = sf::Color::Black;    ///Color used to clear the screen background
         //sf::Font headerFont;                      ///Font used for the screens header
-
+        tgui::Button::Ptr startButton;
+        tgui::Button::Ptr optionButton;
 };
 
 #endif // INTROSTATE_H

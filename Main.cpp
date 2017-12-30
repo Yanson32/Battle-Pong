@@ -59,13 +59,13 @@ int main()
 	while (engin.IsRunning())
 	{
         accumulator += timer.restart();
-        engin.HandleEvents();
+        engin.HandleEvents(deltaTime.asSeconds());
         while(accumulator.asSeconds() >= deltaTime.asSeconds())
         {
-            engin.Update();
+            engin.Update(deltaTime.asSeconds());
             accumulator -= deltaTime;
         }
-		engin.Draw();
+		engin.Draw(deltaTime.asSeconds());
 	}
 
 }

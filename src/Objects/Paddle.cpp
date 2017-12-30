@@ -4,8 +4,8 @@
 
 
 
-Paddle::Paddle(b2World &world, const ObjectId &newId, const std::array<sf::Vector2f, 4> vert):
-ObjectBase<sf::ConvexShape>::ObjectBase()
+Paddle::Paddle(std::shared_ptr<b2World> world, const ObjectId &newId, const std::array<sf::Vector2f, 4> vert):
+ObjectBase<sf::ConvexShape>::ObjectBase(world)
 {
 
     const int SIZE = 4;
@@ -29,10 +29,10 @@ ObjectBase<sf::ConvexShape>::ObjectBase()
     bodyDef.bullet = true;
     bodyDef.userData = new int(newId);
 
-    body = world.CreateBody(&bodyDef);
+    body = world->CreateBody(&bodyDef);
 
     bodyDef.type = b2_staticBody;
-    jointBody = world.CreateBody(&bodyDef);
+    jointBody = world->CreateBody(&bodyDef);
 
     b2PolygonShape polyShape;
     polyShape.Set(vertices, SIZE);
@@ -56,7 +56,7 @@ ObjectBase<sf::ConvexShape>::ObjectBase()
     jointDef.upperTranslation = toMeters(225);
     jointDef.lowerTranslation = toMeters(-225);
 
-    prisJoint = static_cast<b2PrismaticJoint*>(world.CreateJoint(&jointDef));
+    prisJoint = static_cast<b2PrismaticJoint*>(world->CreateJoint(&jointDef));
 
     shape.setFillColor(sf::Color::Red);
     shape.setPointCount(SIZE);

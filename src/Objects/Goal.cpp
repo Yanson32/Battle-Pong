@@ -1,5 +1,5 @@
 #include "Objects/Goal.h"
-Goal::Goal(b2World &world, ObjectId newId, const std::array<sf::Vector2f, 4> vert)
+Goal::Goal(std::shared_ptr<b2World> world, ObjectId newId, const std::array<sf::Vector2f, 4> vert): ObjectBase(world)
 {
     //ctor
         const int SIZE = 4;
@@ -22,7 +22,7 @@ Goal::Goal(b2World &world, ObjectId newId, const std::array<sf::Vector2f, 4> ver
     bodyDef.fixedRotation = true;
     bodyDef.bullet = true;
     bodyDef.userData = new int(newId);
-    body = world.CreateBody(&bodyDef);
+    body = world->CreateBody(&bodyDef);
 
 
     b2PolygonShape polyShape;

@@ -3,7 +3,7 @@
 #include "Box2D/Box2DFunctions.h"
 #include "Events/Id.h"
 
-Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert): ObjectBase<sf::ConvexShape>::ObjectBase()
+Wall::Wall(std::shared_ptr<b2World> world, const std::array<sf::Vector2f, 4> vert): ObjectBase<sf::ConvexShape>::ObjectBase(world)
 {
     //ctor
     const int WIDTH = 800;
@@ -27,7 +27,7 @@ Wall::Wall(b2World &world, const std::array<sf::Vector2f, 4> vert): ObjectBase<s
     bodyDef.gravityScale = 0;
     bodyDef.userData = new int(ObjectId::WALL);
 
-    body = world.CreateBody(&bodyDef);
+    body = world->CreateBody(&bodyDef);
 
     b2PolygonShape polyShape;
     polyShape.Set(vertices, SIZE);

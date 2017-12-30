@@ -20,14 +20,15 @@ class ControlState: public StateBase
         ********************************************************************/
         ControlState(Engin::Engin& newEngin);
 
-
+        virtual void Init();
+        virtual void Clean();
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
         *           This should be called once per frame.
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(Engin::Engin& newEngin) override;
+        virtual void HandleEvents(Engin::Engin& newEngin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -36,7 +37,7 @@ class ControlState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(Engin::Engin& engin) override;
+        virtual void Update(Engin::Engin& engin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -45,7 +46,7 @@ class ControlState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(Engin::Engin& engin) override;
+        virtual void Draw(Engin::Engin& engin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -69,6 +70,11 @@ class ControlState: public StateBase
         *   @brief  This method is a callback for the back button
         ********************************************************************/
         void onBack();
+
+
+        tgui::Button::Ptr paddle1;
+        tgui::Button::Ptr paddle2;
+        tgui::Button::Ptr backButton;
 };
 
 #endif // CONTROLSTATE_H

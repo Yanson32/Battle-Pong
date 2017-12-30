@@ -23,13 +23,16 @@ class PaddleState: public StateBase
         PaddleState(Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings);
 
 
+        virtual void Init();
+        virtual void Clean();
+
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
         *           This should be called once per frame.
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(Engin::Engin& newEngin) override;
+        virtual void HandleEvents(Engin::Engin& newEngin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -38,7 +41,7 @@ class PaddleState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(Engin::Engin& engin) override;
+        virtual void Update(Engin::Engin& engin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -47,7 +50,7 @@ class PaddleState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(Engin::Engin& engin) override;
+        virtual void Draw(Engin::Engin& engin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -74,6 +77,9 @@ class PaddleState: public StateBase
 
         tgui::EditBox::Ptr eBox;
         tgui::ComboBox::Ptr cBox;
+        tgui::Button::Ptr backButton;
+        tgui::Label::Ptr inputLable;
+        tgui::Label::Ptr nameLable;
         std::shared_ptr<PaddleSettings> paddleSettings;
 
 };

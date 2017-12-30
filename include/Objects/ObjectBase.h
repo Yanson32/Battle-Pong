@@ -5,13 +5,14 @@
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
+
 #include "Box2D/Box2DFunctions.h"
 
 template <class SFShape>
 class ObjectBase: public sf::Drawable
 {
     public:
-        ObjectBase();
+        ObjectBase(std::shared_ptr<b2World> newWorld);
         virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
         virtual void update() = 0;
         sf::Vector2f getPosition() const;
@@ -21,6 +22,7 @@ class ObjectBase: public sf::Drawable
     protected:
         b2Body *body = nullptr;
         SFShape shape;
+        std::shared_ptr<b2World> world;
 };
 
 template <class SFShape>
@@ -42,7 +44,7 @@ void ObjectBase<SFShape>::setPosition(const sf::Vector2f &newPosition)
 }
 
 template <class SFShape>
-ObjectBase<SFShape>::ObjectBase()
+ObjectBase<SFShape>::ObjectBase(std::shared_ptr<b2World> newWorld): world(newWorld)
 {
     //ctor
 }
@@ -57,5 +59,6 @@ template <class SFShape>
 ObjectBase<SFShape>::~ObjectBase()
 {
     //dtor
+    world->DestroyBody(body);
 }
 #endif // OBJECTBASE_H

@@ -28,7 +28,7 @@ class Ball: public ObjectBase<sf::CircleShape>
         *           the ball will exist.
         *   @param  radius the radius of the ball object
         **************************************************************/
-        Ball(b2World &world, const unsigned radius = 8);
+        Ball(std::shared_ptr<b2World> world, const unsigned radius = 8);
 
 
         /**********************************************************//**

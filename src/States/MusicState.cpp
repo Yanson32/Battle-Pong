@@ -14,7 +14,7 @@
 MusicState::MusicState(Engin::Engin& engin): StateBase(engin)
 {
     //ctor
-    tgui::Button::Ptr backButton = tgui::Button::create("Back");
+    backButton = tgui::Button::create("Back");
     backButton->connect("pressed", &MusicState::onBackPressed, this);
     backButton->setPosition(Settings::inst().buttonPosition(4));
     backButton->setSize(Settings::inst().buttonSize());
@@ -24,7 +24,7 @@ MusicState::MusicState(Engin::Engin& engin): StateBase(engin)
     gui.add(Settings::inst().musicSettings);
 }
 
-void MusicState::HandleEvents(Engin::Engin& engin)
+void MusicState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -60,7 +60,7 @@ void MusicState::HandleEvents(Engin::Engin& engin)
     gameEvents();
 }
 
-void MusicState::Update(Engin::Engin& engin)
+void MusicState::Update(Engin::Engin& engin, const int &deltaTime)
 {
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -73,18 +73,28 @@ void MusicState::Update(Engin::Engin& engin)
     rightPaddle->update();
 }
 
-void MusicState::Draw(Engin::Engin& engin)
+void MusicState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
-    StateBase::Draw(engin);
+    StateBase::Draw(engin, deltaTime);
     gui.draw();
     window.display();
 }
 
 void MusicState::onBackPressed()
 {
-    gui.removeAllWidgets();
-    engin.ChangeState<OptionsState>(engin);
+
+    engin.Pop();
     EventManager::inst().Post<PlaySound>("Button Sound");
+}
+
+void MusicState::Init()
+{
+    gui.add(backButton);
+    gui.add(Settings::inst().musicSettings);
+}
+void MusicState::Clean()
+{
+    gui.removeAllWidgets();
 }
 
 MusicState::~MusicState()

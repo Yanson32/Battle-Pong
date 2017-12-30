@@ -5,7 +5,7 @@
 class Goal: public ObjectBase<sf::ConvexShape>
 {
     public:
-        Goal(b2World &world, ObjectId newId, const std::array<sf::Vector2f, 4> vert);
+        Goal(std::shared_ptr<b2World> world, ObjectId newId, const std::array<sf::Vector2f, 4> vert);
         void update() override;
         virtual ~Goal();
     protected:

@@ -13,27 +13,26 @@
 ControlState::ControlState(Engin::Engin& newEngin): StateBase(newEngin)
 {
     //ctor
-    auto paddle1 = tgui::Button::create("Paddle 1");
+    paddle1 = tgui::Button::create("Paddle 1");
     paddle1->setPosition(Settings::inst().buttonPosition(0));
     paddle1->setSize(Settings::inst().buttonSize());
     paddle1->connect("pressed", &ControlState::onPaddle1, this);
-    gui.add(paddle1);
 
-    auto paddle2 = tgui::Button::create("Paddle 2");
+
+    paddle2 = tgui::Button::create("Paddle 2");
     paddle2->setSize(Settings::inst().buttonSize());
     paddle2->setPosition(Settings::inst().buttonPosition(1));
     paddle2->connect("pressed", &ControlState::onPaddle2, this);
-    gui.add(paddle2);
 
-    auto backButton = tgui::Button::create("Back");
+
+    backButton = tgui::Button::create("Back");
     backButton->setSize(Settings::inst().buttonSize());
     backButton->setPosition(Settings::inst().buttonPosition(4));
     backButton->connect("pressed", &ControlState::onBack, this);
-    gui.add(backButton);
 
 }
 
-void ControlState::HandleEvents(Engin::Engin& newEngin)
+void ControlState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -67,7 +66,7 @@ void ControlState::HandleEvents(Engin::Engin& newEngin)
     gameEvents();
 }
 
-void ControlState::Update(Engin::Engin& engin)
+void ControlState::Update(Engin::Engin& engin, const int &deltaTime)
 {
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -80,9 +79,9 @@ void ControlState::Update(Engin::Engin& engin)
     rightPaddle->update();
 }
 
-void ControlState::Draw(Engin::Engin& engin)
+void ControlState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
-	StateBase::Draw(engin);
+	StateBase::Draw(engin, deltaTime);
     gui.draw();
     window.display();
 }
@@ -90,22 +89,34 @@ void ControlState::Draw(Engin::Engin& engin)
 void ControlState::onPaddle1()
 {
     gui.removeAllWidgets();
-    engin.ChangeState<PaddleState>(engin, Settings::inst().paddle1);
+    engin.Push<PaddleState>(engin, Settings::inst().paddle1);
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void ControlState::onPaddle2()
 {
     gui.removeAllWidgets();
-    engin.ChangeState<PaddleState>(engin, Settings::inst().paddle2);
+    engin.Push<PaddleState>(engin, Settings::inst().paddle2);
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void ControlState::onBack()
 {
-    gui.removeAllWidgets();
-    engin.ChangeState<OptionsState>(engin);
+    engin.Pop();
     EventManager::inst().Post<PlaySound>("Button Sound");
+}
+
+void ControlState::Init()
+{
+    gui.add(paddle1);
+    gui.add(paddle2);
+    gui.add(backButton);
+}
+
+void ControlState::Clean()
+{
+    gui.removeAllWidgets();
+
 }
 
 ControlState::~ControlState()

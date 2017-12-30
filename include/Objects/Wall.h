@@ -8,7 +8,7 @@
 class Wall: public ObjectBase<sf::ConvexShape>
 {
     public:
-        Wall(b2World &world, const std::array<sf::Vector2f, 4> vert);
+        Wall(std::shared_ptr<b2World> world, const std::array<sf::Vector2f, 4> vert);
         void setPosition(const sf::Vector2f &position);
         void setSize(const sf::Vector2f &size);
         void update();

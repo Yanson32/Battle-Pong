@@ -44,7 +44,7 @@ PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin)
 
 }
 
-void PlayState::HandleEvents(Engin::Engin& engin)
+void PlayState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -86,7 +86,7 @@ void PlayState::HandleEvents(Engin::Engin& engin)
 
 }
 
-void PlayState::Update(Engin::Engin& engin)
+void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
 {
     //gui.add(paddle1Hud);
     //gui.add(paddle2Hud);
@@ -159,10 +159,10 @@ void PlayState::Update(Engin::Engin& engin)
     }
 }
 
-void PlayState::Draw(Engin::Engin& engin)
+void PlayState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
 
-    StateBase::Draw(engin);
+    StateBase::Draw(engin, deltaTime);
     window.draw(userMessage);
     gui.draw();
     window.display();
@@ -171,8 +171,8 @@ void PlayState::Draw(Engin::Engin& engin)
 
 PlayState::~PlayState()
 {
-    delete celing;
-    delete ground;
-    delete leftWall;
-    delete RightWall;
+//    delete celing;
+//    delete ground;
+//    delete leftWall;
+//    delete RightWall;
 }

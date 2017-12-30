@@ -38,25 +38,24 @@ IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
     header.setPosition(sf::Vector2f(335, 25));
     header.setStyle(sf::Text::Bold);
 
-    tgui::Button::Ptr startButton = tgui::Button::create("Start");
+
+    startButton = tgui::Button::create("Start");
     startButton->connect("pressed", &IntroState::onStartPressed, this);
     startButton->setPosition({300, 300});
     startButton->setSize(200, 25);
-    gui.add(startButton);
 
-
-    tgui::Button::Ptr optionButton = tgui::Button::create("Options");
+    optionButton = tgui::Button::create("Options");
     optionButton->connect("pressed", &IntroState::onOptionsPressed, this);
     optionButton->setPosition({300, 350});
     optionButton->setSize(200, 25);
-    gui.add(optionButton);
+
 
     reset();
 
 }
 
 
-void IntroState::HandleEvents(Engin::Engin& engin)
+void IntroState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -89,9 +88,8 @@ void IntroState::HandleEvents(Engin::Engin& engin)
 
 }
 
-void IntroState::Update(Engin::Engin& engin)
+void IntroState::Update(Engin::Engin& engin, const int &deltaTime)
 {
-
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
     ball->update();
@@ -103,9 +101,9 @@ void IntroState::Update(Engin::Engin& engin)
     rightPaddle->update();
 }
 
-void IntroState::Draw(Engin::Engin& engin)
+void IntroState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
-	StateBase::Draw(engin);
+	StateBase::Draw(engin, deltaTime);
 	window.draw(header);
     gui.draw();
     window.display();
@@ -114,16 +112,27 @@ void IntroState::Draw(Engin::Engin& engin)
 
 void IntroState::onStartPressed()
 {
-    gui.removeAllWidgets();
     engin.Push<PlayState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 void IntroState::onOptionsPressed()
 {
-    gui.removeAllWidgets();
     engin.Push<OptionsState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
+}
+
+void IntroState::Init()
+{
+    //StateBase::Init();
+    gui.add(startButton);
+    gui.add(optionButton);
+}
+
+void IntroState::Clean()
+{
+    gui.removeAllWidgets();
+
 }
 
 IntroState::~IntroState()

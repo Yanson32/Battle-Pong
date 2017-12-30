@@ -16,7 +16,7 @@ paddleSettings(pSettings)
 
     const float labelX = 200;
     const float x = 300;
-    auto nameLable = tgui::Label::create("Name");
+    nameLable = tgui::Label::create("Name");
     nameLable->setPosition({labelX, 50});
     gui.add(nameLable);
 
@@ -24,11 +24,11 @@ paddleSettings(pSettings)
     eBox->connect("ReturnKeyPressed", &PaddleState::onNameBox, this);
     eBox->setDefaultText(pSettings->getPlayerName());
     eBox->setPosition({x, 50});
-    gui.add(eBox);
 
-    auto inputLable = tgui::Label::create("AI");
+
+    inputLable = tgui::Label::create("AI");
     inputLable->setPosition({labelX, 100});
-    gui.add(inputLable);
+
 
     cBox = tgui::ComboBox::create();
     cBox->connect("ItemSelected", &PaddleState::onListItemSelected, this);
@@ -38,18 +38,17 @@ paddleSettings(pSettings)
     cBox->addItem("Easy");
     cBox->addItem("None");
     cBox->setSelectedItem(paddleSettings->getInputType());
-    gui.add(cBox);
 
-    auto backButton = tgui::Button::create("Back");
+
+    backButton = tgui::Button::create("Back");
     backButton->setSize(Settings::inst().buttonSize());
     backButton->setPosition(Settings::inst().buttonPosition(4));
     backButton->connect("pressed", &PaddleState::onBack, this);
-    gui.add(backButton);
 
 }
 
 
-void PaddleState::HandleEvents(Engin::Engin& newEngin)
+void PaddleState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -85,7 +84,7 @@ void PaddleState::HandleEvents(Engin::Engin& newEngin)
     gameEvents();
 }
 
-void PaddleState::Update(Engin::Engin& engin)
+void PaddleState::Update(Engin::Engin& engin, const int &deltaTime)
 {
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -98,17 +97,16 @@ void PaddleState::Update(Engin::Engin& engin)
     rightPaddle->update();
 }
 
-void PaddleState::Draw(Engin::Engin& engin)
+void PaddleState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
-    StateBase::Draw(engin);
+    StateBase::Draw(engin, deltaTime);
     gui.draw();
     window.display();
 }
 
 void PaddleState::onBack()
 {
-    gui.removeAllWidgets();
-    engin.ChangeState<ControlState>(engin);
+    engin.Pop();
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
@@ -132,6 +130,19 @@ void PaddleState::onListItemSelected()
 {
     paddleSettings->setInputType(cBox->getSelectedItem());
 
+}
+
+void PaddleState::Init()
+{
+    gui.add(eBox);
+    gui.add(inputLable);
+    gui.add(cBox);
+    gui.add(backButton);
+}
+
+void PaddleState::Clean()
+{
+    gui.removeAllWidgets();
 }
 
 PaddleState::~PaddleState()

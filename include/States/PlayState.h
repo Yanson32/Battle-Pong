@@ -28,13 +28,16 @@ class PlayState: public StateBase
         PlayState(Engin::Engin& newEngin);
 
 
+        virtual void Init() override {}
+        virtual void Clean() override {}
+
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
         *           This should be called once per frame.
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void HandleEvents(Engin::Engin& newEngin);
+        void HandleEvents(Engin::Engin& newEngin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -43,7 +46,7 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Update(Engin::Engin& engin);
+        void Update(Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -52,7 +55,7 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Draw(Engin::Engin& engin);
+        void Draw(Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
