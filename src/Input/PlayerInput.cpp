@@ -2,7 +2,6 @@
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/System/Vector2.hpp>
 #include "Objects/Paddle.h"
-#include <iostream>
 
 PlayerInput::PlayerInput(Paddle &newPaddle): Input(newPaddle)
 {

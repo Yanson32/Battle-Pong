@@ -118,6 +118,7 @@ class StateBase: public Engin::GameState
         static sf::Music music;
         static std::shared_ptr<PaddleHud> paddle1Hud;
         static std::shared_ptr<PaddleHud> paddle2Hud;
+        static ContactListener contactListener;         ///Subclass of Box2D b2ContactListener used to detect Box2D collisions
         static sf::Text userMessage;                    ///Text displayed in the center of the screen
         static sf::Clock messageClock;                  ///This clock object is used to time the beginning message "Ready!, 3, 2, 1, Go!
         float32 timeStep = 1 / 20.0;                    ///Box2D the length of time passed to simulate (seconds)
@@ -125,7 +126,6 @@ class StateBase: public Engin::GameState
         int32 positionIterations = 3;                   ///Box2D how strongly to correct position
         Engin::Engin &engin;                            ///The Main game engin
         bool sysPause;                                  ///True when the system is paused and false otherwise
-        static ContactListener contactListener;         ///Subclass of Box2D b2ContactListener used to detect Box2D collisions
 
 };
 

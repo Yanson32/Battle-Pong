@@ -42,7 +42,7 @@ Wall::Wall(std::shared_ptr<b2World> world, const std::array<sf::Vector2f, 4> ver
     b2Fixture *fix = body->CreateFixture(&bodyFixture);
 
 
-    shape.setFillColor(sf::Color::Red);
+    shape.setFillColor(sf::Color::Cyan);
     shape.setPointCount(SIZE);
 
 

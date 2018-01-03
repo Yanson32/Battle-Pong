@@ -59,6 +59,13 @@ template <class SFShape>
 ObjectBase<SFShape>::~ObjectBase()
 {
     //dtor
+    if(body->GetUserData())
+    {
+        int * temp = static_cast<int*>(body->GetUserData());
+        delete temp;
+    }
+
     world->DestroyBody(body);
 }
+
 #endif // OBJECTBASE_H

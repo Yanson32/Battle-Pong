@@ -1,5 +1,4 @@
 #include "Events/Listeners/LeftPaddleGoalListener.h"
-#include <iostream>
 
 LeftPaddleGoalListener::LeftPaddleGoalListener()
 {
@@ -8,7 +7,7 @@ LeftPaddleGoalListener::LeftPaddleGoalListener()
 
 void LeftPaddleGoalListener::OnEvent(Evt::EventPtr event)
 {
-    std::cout << "LeftPaddleGoalListener event" << std::endl;
+    //std::cout << "LeftPaddleGoalListener event" << std::endl;
 }
 
 LeftPaddleGoalListener::~LeftPaddleGoalListener()

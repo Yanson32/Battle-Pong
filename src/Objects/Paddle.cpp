@@ -1,8 +1,5 @@
 #include "Objects/Paddle.h"
 #include "Box2D/Box2DFunctions.h"
-#include <iostream>
-
-
 
 Paddle::Paddle(std::shared_ptr<b2World> world, const ObjectId &newId, const std::array<sf::Vector2f, 4> vert):
 ObjectBase<sf::ConvexShape>::ObjectBase(world)

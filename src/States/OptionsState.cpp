@@ -9,6 +9,7 @@
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 #include "States/MusicState.h"
+#include "ResourceManager.h"
 
 OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
 {
@@ -115,11 +116,25 @@ void OptionsState::Init()
     gui.add(musicButton);
     gui.add(backButton);
     gui.add(controlsButton);
+
+    ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("List Box Selected Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Edit Box Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::font.load("Header Font", "/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 }
 
 void OptionsState::Clean()
 {
     gui.removeAllWidgets();
+
+    ResourceManager::sound.remove("Message Sound");
+    ResourceManager::sound.remove("Button Sound");
+    ResourceManager::sound.remove("List Box Selected Sound");
+    ResourceManager::sound.remove("Edit Box Sound");
+    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::font.remove("Header Font");
 }
 
 OptionsState::~OptionsState()

@@ -1,8 +1,8 @@
 #include "Objects/Ball.h"
 #include <Box2D/Box2D.h>
 #include "Box2D/Box2DFunctions.h"
-#include <iostream>
 #include "Events/Id.h"
+
 Ball::Ball(std::shared_ptr<b2World> world, const unsigned radius): ObjectBase(world)
 {
 
@@ -28,7 +28,7 @@ Ball::Ball(std::shared_ptr<b2World> world, const unsigned radius): ObjectBase(wo
     bodyFixture.shape = &circleShape;
     bodyFixture.friction = 0.0f;
     bodyFixture.restitution = 1.0f;
-    //bodyFixture.density = 1.0f;
+    bodyFixture.density = 1.0f;
 
     b2Fixture *fix = body->CreateFixture(&bodyFixture);
 

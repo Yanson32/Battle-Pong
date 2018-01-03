@@ -3,6 +3,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Debugging.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleHud.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Logging.cpp"
 )
 set(SUB_DIRECTORIES "States"
 					"Events"

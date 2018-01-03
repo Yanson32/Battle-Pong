@@ -1,10 +1,9 @@
 #include "Events/Listeners/GoalCollisionListener.h"
-#include <iostream>
 #include "Events/EventManager.h"
 #include "Events/LeftPaddleGoal.h"
 #include "Events/RightPaddleGoal.h"
 #include "Events/Id.h"
-
+#include <iostream>
 GoalCollisionListener::GoalCollisionListener()
 {
     //ctor

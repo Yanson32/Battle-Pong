@@ -28,8 +28,8 @@ class PlayState: public StateBase
         PlayState(Engin::Engin& newEngin);
 
 
-        virtual void Init() override {}
-        virtual void Clean() override {}
+        virtual void Init() override;
+        virtual void Clean() override;
 
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.

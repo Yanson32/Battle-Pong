@@ -1,4 +1,5 @@
 #include "Objects/Goal.h"
+
 Goal::Goal(std::shared_ptr<b2World> world, ObjectId newId, const std::array<sf::Vector2f, 4> vert): ObjectBase(world)
 {
     //ctor

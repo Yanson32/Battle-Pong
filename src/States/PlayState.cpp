@@ -88,8 +88,6 @@ void PlayState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 
 void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
 {
-    //gui.add(paddle1Hud);
-    //gui.add(paddle2Hud);
     const int SECONDS = 1;
 
         if(!IsPaused())
@@ -167,11 +165,32 @@ void PlayState::Draw(Engin::Engin& engin, const int &deltaTime)
     window.display();
 }
 
+void PlayState::Init()
+{
+    //StateBase::Init();
+//    gui.add(startButton);
+//    gui.add(optionButton);
+
+    ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::font.load("Header Font", "/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
+
+    //header.setFont(ResourceManager::font.get("Header Font"));
+}
+
+void PlayState::Clean()
+{
+    gui.removeAllWidgets();
+
+    ResourceManager::sound.remove("Message Sound");
+    ResourceManager::sound.remove("Button Sound");
+    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::font.remove("Header Font");
+
+}
 
 PlayState::~PlayState()
 {
-//    delete celing;
-//    delete ground;
-//    delete leftWall;
-//    delete RightWall;
+
 }

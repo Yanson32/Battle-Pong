@@ -1,5 +1,4 @@
 #include "Box2D/ContactListener.h"
-#include <iostream>
 #include "Events/EventManager.h"
 #include "Events/BallCollision.h"
 #include "Events/GoalCollision.h"
@@ -14,42 +13,39 @@ ContactListener::ContactListener()
 
 void ContactListener::BeginContact(b2Contact* contact)
 {
-    if(contact == nullptr)
+    if(!contact)
         return;
 
     b2Fixture* fixtureA = contact->GetFixtureA();
     b2Fixture* fixtureB = contact->GetFixtureB();
 
-    if(fixtureA == nullptr)
-        return;
-
-    if(fixtureB == nullptr)
-        return;
-
-    b2Body *bodyA = fixtureA->GetBody();
-    b2Body *bodyB = fixtureB->GetBody();
-
-    if(bodyA == nullptr)
-        return;
-
-    if(bodyB == nullptr)
-        return;
-
-    void* vA = bodyA->GetUserData();
-    void* vB = bodyB->GetUserData();
-
-    if(vA)
+    if(fixtureA)
     {
-        int intA = (*static_cast<int*>(vA));
-        dispatchEvent(intA, fixtureB->IsSensor());
+        b2Body *bodyA = fixtureA->GetBody();
+        if(bodyA)
+        {
+            void* vA = bodyA->GetUserData();
+            if(vA)
+            {
+                int intA = (*static_cast<int*>(vA));
+                dispatchEvent(intA, fixtureB->IsSensor());
+            }
+        }
     }
 
-    if(vB)
+    if(fixtureB)
     {
-        int intB = (*static_cast<int*>(vB));
-        dispatchEvent(intB, fixtureA->IsSensor());
+        b2Body *bodyB = fixtureB->GetBody();
+        if(bodyB)
+        {
+            void* vB = bodyB->GetUserData();
+            if(vB)
+            {
+                int intB = (*static_cast<int*>(vB));
+                dispatchEvent(intB, fixtureA->IsSensor());
+            }
+        }
     }
-
 
 
     if(IsBall(contact->GetFixtureA()))
@@ -131,10 +127,8 @@ void ContactListener::dispatchEvent(const int &id, const bool sensor) const
             EventManager::inst().Post<RightPaddleGoal>();
         break;
         case ObjectId::RIGHT_PADDLE:
-            std::cout << "right paddle" << std::endl;
         break;
         case ObjectId::LEFT_PADDLE:
-            std::cout << "Left Paddle" << std::endl;
         break;
     }
 }

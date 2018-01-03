@@ -1,7 +1,6 @@
 #include "Events/Listeners/MusicListener.h"
 #include "Events/PlayMusic.h"
 #include <memory>
-#include <iostream>
 #include "Events/Id.h"
 #include "Events/MusicVolumeChanged.h"
 #include "Settings.h"

@@ -1,6 +1,5 @@
 #include "Events/Listeners/SoundListener.h"
 #include "ResourceManager.h"
-#include <iostream>
 #include <SFML/System/String.hpp>
 #include "Events/PlaySound.h"
 #include "Settings.h"

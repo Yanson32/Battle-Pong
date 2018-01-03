@@ -1,5 +1,4 @@
 #include "Settings.h"
-#include <iostream>
 #include "Events/PlaySound.h"
 #include "Events/EventManager.h"
 #include "Events/MusicVolumeChanged.h"

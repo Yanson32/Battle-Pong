@@ -9,7 +9,6 @@
 #include <SFML/Window/VideoMode.hpp>
 
 #include <SFML/Graphics/Font.hpp>
-#include <iostream>
 
 #include "States/PlayState.h"
 #include "Settings.h"
@@ -23,18 +22,30 @@
 
 
 #include "ResourceManager.h"
+#include "Logging.h"
 
 IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
 {
+   //logging::add_common_attributes();
+
+    using namespace logging::trivial;
+    src::severity_logger< severity_level > lg;
+
+    BOOST_LOG_SEV(lg, trace) << "Intro A trace severity message";
+    BOOST_LOG_SEV(lg, debug) << "Intro A debug severity message";
+    BOOST_LOG_SEV(lg, info) << "Intro An informational severity message";
+    BOOST_LOG_SEV(lg, warning) << "Intro A warning severity message";
+    BOOST_LOG_SEV(lg, error) << "Intro An error severity message";
+
     //ctor
     ball->setPosition({400, 300});
     ball->setVelocity({100, 100});
     leftPaddle->setPosition(sf::Vector2f(100, 300));
     rightPaddle->setPosition(sf::Vector2f(700, 300));
+
     header.setString(Settings::inst().getTitle());
     header.setCharacterSize(54);
     header.setColor(sf::Color::White);
-    header.setFont(ResourceManager::font.get("Header Font"));
     header.setPosition(sf::Vector2f(335, 25));
     header.setStyle(sf::Text::Bold);
 
@@ -126,11 +137,23 @@ void IntroState::Init()
     //StateBase::Init();
     gui.add(startButton);
     gui.add(optionButton);
+
+    ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::font.load("Header Font", "/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
+
+    header.setFont(ResourceManager::font.get("Header Font"));
 }
 
 void IntroState::Clean()
 {
     gui.removeAllWidgets();
+
+    ResourceManager::sound.remove("Message Sound");
+    ResourceManager::sound.remove("Button Sound");
+    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::font.remove("Header Font");
 
 }
 
