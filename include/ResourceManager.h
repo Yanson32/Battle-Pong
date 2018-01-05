@@ -11,8 +11,8 @@
 
 #include "Resource Holder.h"
 #include <SFML/Audio/SoundBuffer.hpp>
-#include <SFML/Graphics/Font.hpp>
 #include <SFML/System/String.hpp>
+#include <SFML/Graphics/Font.hpp>
 
 namespace ResourceManager
 {

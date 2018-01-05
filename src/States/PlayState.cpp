@@ -36,7 +36,6 @@ PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin)
         rightPaddle->setInput(std::unique_ptr<Input>(new AI(*rightPaddle)));
 
     systemPause(true);
-    userMessage.setFont(ResourceManager::font.get("Header Font"));
     userMessage.setCharacterSize(34);
     userMessage.setPosition(sf::Vector2f(400, 300));
     reset();
@@ -167,16 +166,12 @@ void PlayState::Draw(Engin::Engin& engin, const int &deltaTime)
 
 void PlayState::Init()
 {
-    //StateBase::Init();
-//    gui.add(startButton);
-//    gui.add(optionButton);
-
     ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     ResourceManager::font.load("Header Font", "/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 
-    //header.setFont(ResourceManager::font.get("Header Font"));
+    userMessage.setFont(ResourceManager::font.get("Header Font"));
 }
 
 void PlayState::Clean()

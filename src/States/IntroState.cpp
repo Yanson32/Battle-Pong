@@ -26,16 +26,6 @@
 
 IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
 {
-   //logging::add_common_attributes();
-
-    using namespace logging::trivial;
-    src::severity_logger< severity_level > lg;
-
-    BOOST_LOG_SEV(lg, trace) << "Intro A trace severity message";
-    BOOST_LOG_SEV(lg, debug) << "Intro A debug severity message";
-    BOOST_LOG_SEV(lg, info) << "Intro An informational severity message";
-    BOOST_LOG_SEV(lg, warning) << "Intro A warning severity message";
-    BOOST_LOG_SEV(lg, error) << "Intro An error severity message";
 
     //ctor
     ball->setPosition({400, 300});

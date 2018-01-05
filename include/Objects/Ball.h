@@ -19,6 +19,7 @@ class b2Body;
 class b2World;
 
 
+
 class Ball: public ObjectBase<sf::CircleShape>
 {
     public:
@@ -49,6 +50,9 @@ class Ball: public ObjectBase<sf::CircleShape>
         *   @brief  Destructor
         **************************************************************/
         virtual ~Ball();
+    private:
+        const int MINIMUM_X_VEL = 50;
+        const int MINIMUM_Y_VEL = 50;
 };
 
 #endif // BALL_H

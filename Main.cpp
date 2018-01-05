@@ -15,30 +15,47 @@
 
 #include "ResourceManager.h"
 #include "Logging.h"
+#include <boost/program_options.hpp>
 
+#include <sstream>
 
-int main()
+#ifndef MAJOR_VERSION
+    #define MAJOR_VERSION 1
+#endif // MAJOR_VERSION
+
+int main(int argc, char* argv[])
 {
 
+    std::stringstream ss;
+    ss << MAJOR_VERSION << " " << ".0.0.0";
+
+    boost::program_options::options_description desc("Allowed options");
+    desc.add_options()
+        ("version", MAJOR_VERSION + ".0.0.0")
+        ("help", "produce help message");
 
 
+    boost::program_options::variables_map vm;
+    boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).run(), vm);
+    boost::program_options::notify(vm);
 
 
-
-
+    if (vm.count("help"))
+    {
+        std::cout << desc << "\n";
+        return 1;
+    }
 
 
     init();
 
+    boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
 
-    using namespace logging::trivial;
-    src::severity_logger< severity_level > lg;
-
-    BOOST_LOG_SEV(lg, trace) << "A trace severity message";
-    BOOST_LOG_SEV(lg, debug) << "A debug severity message";
-    BOOST_LOG_SEV(lg, info) << "An informational severity message";
-    BOOST_LOG_SEV(lg, warning) << "A warning severity message";
-    BOOST_LOG_SEV(lg, error) << "An error severity message";
+//    BOOST_LOG_SEV(lg, logging::trivial::trace) << "A trace severity message";
+//    BOOST_LOG_SEV(lg, logging::trivial::debug) << "A debug severity message";
+//    BOOST_LOG_SEV(lg, logging::trivial::info) << "An informational severity message";
+//    BOOST_LOG_SEV(lg, logging::trivial::warning) << "A warning severity message";
+//    BOOST_LOG_SEV(lg, logging::trivial::error) << "An error severity message";
     //BOOST_LOG_SEV(lg, fatal) << "A fatal severity message";
 //    ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
@@ -64,16 +81,23 @@ int main()
 	EventManager::inst().Post<MusicVolumeChanged>();
 	EventManager::inst().Post<SoundVolumeChanged>();
 
-	while (engin.IsRunning())
-	{
-        accumulator += timer.restart();
-        engin.HandleEvents(deltaTime.asSeconds());
-        while(accumulator.asSeconds() >= deltaTime.asSeconds())
+    try
+    {
+        while (engin.IsRunning())
         {
-            engin.Update(deltaTime.asSeconds());
-            accumulator -= deltaTime;
+            accumulator += timer.restart();
+            engin.HandleEvents(deltaTime.asSeconds());
+            while(accumulator.asSeconds() >= deltaTime.asSeconds())
+            {
+                engin.Update(deltaTime.asSeconds());
+                accumulator -= deltaTime;
+            }
+            engin.Draw(deltaTime.asSeconds());
         }
-		engin.Draw(deltaTime.asSeconds());
-	}
+    }
+    catch(...)
+    {
+        BOOST_LOG_SEV(lg, logging::trivial::error) << "Unhandled exception";
+    }
 
 }

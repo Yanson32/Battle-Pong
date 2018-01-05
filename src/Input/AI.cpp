@@ -15,14 +15,20 @@ void AI::handleInput(const Ball &ball)
     sf::Vector2f ballPos = ball.getPosition();
     sf::Vector2f paddlePos = paddle.getPosition();
 
+    float difference = std::abs(ballPos.y - paddlePos.y);
+    float movement = (difference > MOVE_SPEED)? MOVE_SPEED : difference;
     if(ballPos.y > paddlePos.y)
     {
-        paddle.move({0, MOVE_SPEED});
+        paddle.move({0, movement});
+        //paddlePos.y = movement;
+        //paddle.setVelocity(paddlePos);
     }
     else if(ballPos.y < paddlePos.y)
     {
-        paddle.move({0, -MOVE_SPEED});
+        paddle.move({0, -movement});
     }
+
+    //paddle.setPosition({paddlePos.x, ballPos.y});
 }
 
 

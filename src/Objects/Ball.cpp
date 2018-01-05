@@ -47,7 +47,10 @@ void Ball::update()
 
 void Ball::setVelocity(const sf::Vector2f &newVelocity)
 {
-    body->SetLinearVelocity(toMeters(newVelocity));
+    float x = (newVelocity.x > MINIMUM_X_VEL)? newVelocity.x : MINIMUM_X_VEL;
+    float y = (newVelocity.y > MINIMUM_Y_VEL)? newVelocity.y : MINIMUM_Y_VEL;
+
+    body->SetLinearVelocity(toMeters({x, y}));
 }
 
 Ball::~Ball()

@@ -58,7 +58,7 @@ find_package(TGUI 0.7 REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${TGUI_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${TGUI_LIBRARY})
 
-find_package(Boost 1.60.0 COMPONENTS thread date_time filesystem regex system log log_setup REQUIRED)
+find_package(Boost 1.60.0 COMPONENTS thread date_time filesystem system program_options regex system log log_setup REQUIRED)
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${Boost_LIBRARIES})
 target_include_directories("${PROJECT_NAME}" PUBLIC ${Boost_INCLUDE_DIRS})
 
