@@ -14,7 +14,6 @@
 #include <SFML/Audio/Music.hpp>
 
 #include "ResourceManager.h"
-#include "Logging.h"
 #include <boost/program_options.hpp>
 
 #include <sstream>
@@ -45,9 +44,6 @@ int main(int argc, char* argv[])
         std::cout << desc << "\n";
         return 1;
     }
-
-
-    init();
 
     boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
 
@@ -97,7 +93,7 @@ int main(int argc, char* argv[])
     }
     catch(...)
     {
-        BOOST_LOG_SEV(lg, logging::trivial::error) << "Unhandled exception";
+
     }
 
 }

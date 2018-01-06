@@ -26,7 +26,7 @@
 #include "Events/Listeners/RightPaddleGoalListener.h"
 
 #include "PaddleHud.h"
-
+#include "Logging.h"
 class Wall;
 class Paddle;
 class Ball;
@@ -126,7 +126,7 @@ class StateBase: public Engin::GameState
         int32 positionIterations = 3;                   ///Box2D how strongly to correct position
         Engin::Engin &engin;                            ///The Main game engin
         bool sysPause;                                  ///True when the system is paused and false otherwise
-
+        boost::log::sources::severity_logger< logging::trivial::severity_level > log;
 
 
 };
