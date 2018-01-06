@@ -4,7 +4,6 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Debugging.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleHud.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Logging.h"
 
 )
 set(SUB_DIRECTORIES "States"
