@@ -121,7 +121,6 @@ bool StateBase::isSystemPaused() const
 
 void StateBase::reset()
 {
-    BOOST_LOG_SEV(log, logging::trivial::trace) << "StateBase::reset() Line: " << __LINE__ << " File: " << std::endl;
     ball->setPosition({400, 300});
     ball->setVelocity({100, 100});
     leftPaddle->setPosition(sf::Vector2f(100, 300));
@@ -133,7 +132,6 @@ void StateBase::reset()
 
 void StateBase::gameEvents()
 {
-    BOOST_LOG_SEV(log, logging::trivial::trace) << "StateBase::gameEvents() Line: " << __LINE__ << " File: " << std::endl;
 
         //GameUtilities event loop
         Evt::EventPtr evtPtr;
@@ -148,7 +146,6 @@ void StateBase::gameEvents()
                     Settings::inst().paddle1->setScore(currentScore + 1);
                     paddle1Hud->setScore(currentScore + 1);
                     reset();
-                    BOOST_LOG_SEV(log, logging::trivial::info) << "Left goal event";
                 }
                 break;
                 case EventId::RIGHT_GOAL_COLLISION:
@@ -157,12 +154,10 @@ void StateBase::gameEvents()
                     Settings::inst().paddle2->setScore(currentScore + 1);
                     paddle2Hud->setScore(currentScore + 1);
                     reset();
-                    BOOST_LOG_SEV(log, logging::trivial::info) << "Right goal event";
                 }
                 break;
                 case EventId::PLAY_MUSIC:
                 {
-                    BOOST_LOG_SEV(log, logging::trivial::info) << "Play music Event";
                     std::shared_ptr<PlayMusic> temp =  std::dynamic_pointer_cast<PlayMusic>(evtPtr);
                     if(temp)
                     {
@@ -185,7 +180,6 @@ void StateBase::gameEvents()
                 break;
                 case EventId::PLAY_SOUND:
                 {
-                    BOOST_LOG_SEV(log, logging::trivial::info) << "Play sound Event";
                     std::shared_ptr<PlaySound> temp =  std::dynamic_pointer_cast<PlaySound>(evtPtr);
 
                     if(temp && ResourceManager::sound.isLoaded(temp->soundId))
@@ -197,21 +191,17 @@ void StateBase::gameEvents()
                 break;
                 case EventId::MUSIC_VOLUME_CHANGED:
                 {
-                    BOOST_LOG_SEV(log, logging::trivial::info) << "Music volume changed Event";
                     int volume = Settings::inst().musicSettings->getVolume();
                     music.setVolume(volume);
                 }
                 break;
                 case EventId::SOUND_VOLUME_CHANGED:
-                    BOOST_LOG_SEV(log, logging::trivial::info) << "Sound volume changed Event " << "Not Implimented yet";
                 break;
                 case BALL_COLLISION:
-                    BOOST_LOG_SEV(log, logging::trivial::info) << "Ball Collision Event";
                     EventManager::inst().Post<PlaySound>("Ball Sound");
                 break;
                 case EventId::GOAL_COLLISION:
                 {
-                    BOOST_LOG_SEV(log, logging::trivial::info) << "Goal collision";
                     sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
                 }
                 break;
@@ -222,5 +212,4 @@ void StateBase::gameEvents()
 }
 StateBase::~StateBase()
 {
-    BOOST_LOG_SEV(log, logging::trivial::trace) << "StateBase::~StateBase() Line: " << __LINE__ << " File: " << std::endl;
 }

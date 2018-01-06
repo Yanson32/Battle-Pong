@@ -14,7 +14,6 @@
 OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
 {
     //ctor
-    BOOST_LOG_SEV(log, logging::trivial::trace) << "OptionsState::OptionsState Line: " << __LINE__ << " File: " << std::endl;
     controlsButton = tgui::Button::create("Controls");
     controlsButton->connect("pressed", &OptionsState::onControlsPressed, this);
     controlsButton->setPosition(Settings::inst().buttonPosition(0));
@@ -114,7 +113,6 @@ void OptionsState::onMusicPressed()
 
 void OptionsState::Init()
 {
-    BOOST_LOG_SEV(log, logging::trivial::trace) << "OptionsState::Init() Line: " << __LINE__ << " File: " << std::endl;
     gui.add(musicButton);
     gui.add(backButton);
     gui.add(controlsButton);
@@ -126,7 +124,6 @@ void OptionsState::Init()
 
 void OptionsState::Clean()
 {
-    BOOST_LOG_SEV(log, logging::trivial::trace) << "OptionsState::Clean() Line: " << __LINE__ << " File: " << std::endl;
     gui.removeAllWidgets();
 
     ResourceManager::sound.remove("Button Sound");
