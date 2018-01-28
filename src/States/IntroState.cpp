@@ -50,9 +50,6 @@ IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
     optionButton->setPosition({300, 350});
     optionButton->setSize(200, 25);
 
-
-    reset();
-
 }
 
 
@@ -84,8 +81,10 @@ void IntroState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
 
-        gameEvents();
+
     }
+
+    gameEvents();
 
 }
 
@@ -106,6 +105,7 @@ void IntroState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
 	window.draw(header);
+	window.draw(*ball);
     window.display();
 }
 
@@ -124,7 +124,7 @@ void IntroState::onOptionsPressed()
 
 void IntroState::Init()
 {
-    //StateBase::Init();
+    StateBase::Init();
     gui.add(startButton);
     gui.add(optionButton);
 

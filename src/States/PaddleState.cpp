@@ -7,6 +7,7 @@
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 #include "Settings.h"
+#include "ResourceManager.h"
 PaddleState::PaddleState(Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings):
 StateBase(newEngin),
 paddleSettings(pSettings)
@@ -100,6 +101,7 @@ void PaddleState::Update(Engin::Engin& engin, const int &deltaTime)
 void PaddleState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
+    window.draw(*ball);
     window.display();
 }
 
@@ -133,6 +135,9 @@ void PaddleState::onListItemSelected()
 
 void PaddleState::Init()
 {
+    StateBase::Init();
+    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     gui.add(eBox);
     gui.add(inputLable);
     gui.add(cBox);
@@ -142,6 +147,8 @@ void PaddleState::Init()
 void PaddleState::Clean()
 {
     gui.removeAllWidgets();
+    ResourceManager::sound.remove("Button Sound");
+    ResourceManager::sound.remove("Ball Sound");
 }
 
 PaddleState::~PaddleState()

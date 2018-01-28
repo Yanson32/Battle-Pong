@@ -1,13 +1,19 @@
 #include "Box2D/DebugDraw.h"
 
+
+//SFML includes
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Graphics/Color.hpp>
 #include <SFML/System/Vector2.hpp>
 
 
+//Box2D includes
 #include <Box2D/Common/b2Math.h>
 #include <Box2D/Dynamics/b2World.h>
+
+
+//STD includes
 #include <cassert>
 #include <algorithm>
 #include <iostream>
@@ -309,7 +315,6 @@ namespace
         linesUsed = 0;
         trianglesUsed = 0;
         world.DrawDebugData();
-        //viewBounds = getBounds(window.getView());
     }
 
 

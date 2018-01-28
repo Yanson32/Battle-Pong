@@ -47,7 +47,7 @@ class StateBase: public Engin::GameState
         StateBase(Engin::Engin& newEngin);
 
 
-        virtual void Init() override = 0;
+        virtual void Init() override;
         virtual void Clean() override = 0;
 
         /****************************************************************//**
@@ -65,7 +65,7 @@ class StateBase: public Engin::GameState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(Engin::Engin& engin, const int &deltaTime) = 0;
+        virtual void Update(Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -101,6 +101,8 @@ class StateBase: public Engin::GameState
         ********************************************************************/
         virtual ~StateBase();
     protected:
+        void centerText();
+        bool isBallOnScreen();
         static sf::RenderWindow window;                 ///The game's window
         static tgui::Gui gui;                           ///The Main TGUI object
         static std::shared_ptr<b2World> world;          ///The Box2D physics engin world object
@@ -112,8 +114,8 @@ class StateBase: public Engin::GameState
         static std::unique_ptr<Wall> RightWall;         ///Pointer to the right wall Box2D object
         static std::unique_ptr<Paddle> leftPaddle;      ///Pointer to the paddle on the left side of the screen
         static std::unique_ptr<Paddle> rightPaddle;     ///Pointer to the paddle on the right side of the screen
-        static std::unique_ptr<Goal> leftGoal;
-        static std::unique_ptr<Goal> rightGoal;
+        static std::unique_ptr<Goal> leftGoal;          ///Pointer to the goal sensor which determines is a goal has been scored on the left player
+        static std::unique_ptr<Goal> rightGoal;         ///Pointer to the goal sensor which determines is a goal has been scored on the right player
         static sf::Sound sound;
         static sf::Music music;
         static std::shared_ptr<PaddleHud> paddle1Hud;

@@ -82,23 +82,40 @@ sysPause(false)
 
 }
 
+bool StateBase::isBallOnScreen()
+{
+    sf::Vector2f pos = ball->getPosition();
+    auto size = window.getSize();
+    sf::FloatRect windowBounds;
+    windowBounds.top = 0;
+    windowBounds.left = 0;
+    windowBounds.width = size.x;
+    windowBounds.height = size.y;
 
-//void StateBase::Update(Engin::Engin& engin)
-//{
-//    if(!IsPaused())
-//    {
-//        world->Step(timeStep, velocityIterations, positionIterations);
-//    }
-//}
+    return windowBounds.contains(pos);
+
+}
+
+void StateBase::Update(Engin::Engin& engin, const int &deltaTime)
+{
+    if(!IsPaused())
+    {
+
+        if(!isBallOnScreen())
+        {
+            reset();
+        }
+        //world->Step(timeStep, velocityIterations, positionIterations);
+    }
+}
 
 
 void StateBase::Draw(Engin::Engin& engin, const int &deltaTime)
 {
     window.clear();
-    //window.draw(debugDraw);
     window.draw(*leftPaddle);
     window.draw(*rightPaddle);
-    window.draw(*ball);
+
     window.draw(*celing);
     window.draw(*leftWall);
     window.draw(*RightWall);
@@ -106,6 +123,7 @@ void StateBase::Draw(Engin::Engin& engin, const int &deltaTime)
     window.draw(*paddle1Hud);
     window.draw(*paddle2Hud);
     gui.draw();
+    //window.draw(debugDraw);
 }
 
 void StateBase::systemPause(const bool newSysPause)
@@ -125,7 +143,9 @@ void StateBase::reset()
     ball->setVelocity({100, 100});
     leftPaddle->setPosition(sf::Vector2f(100, 300));
     rightPaddle->setPosition(sf::Vector2f(700, 300));
+    rightPaddle->handleInput(*ball);
     userMessage.setString("Ready!");
+    centerText();
     messageClock.restart();
     systemPause(true);
 }
@@ -196,13 +216,18 @@ void StateBase::gameEvents()
                 }
                 break;
                 case EventId::SOUND_VOLUME_CHANGED:
+                {
+                    int volume = Settings::inst().musicSettings->getSoundVolume();
+                    sound.setVolume(volume);
+                    std::cout << "Sound Volume Changed " << volume << std::endl;
+                }
                 break;
                 case BALL_COLLISION:
                     EventManager::inst().Post<PlaySound>("Ball Sound");
                 break;
                 case EventId::GOAL_COLLISION:
                 {
-                    sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
+                    //sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
                 }
                 break;
 
@@ -210,6 +235,25 @@ void StateBase::gameEvents()
         }
 
 }
+
+void StateBase::centerText()
+{
+    sf::FloatRect bounds = userMessage.getGlobalBounds();
+
+    float originX = bounds.width / 2;
+    float originY = bounds.height / 2;
+
+    userMessage.setOrigin({originX, originY});
+
+}
+
+void StateBase::Init()
+{
+
+    music.setVolume(Settings::inst().musicSettings->getVolume());
+    sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
+}
+
 StateBase::~StateBase()
 {
 }

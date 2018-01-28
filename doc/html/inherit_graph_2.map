@@ -1,0 +1,10 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classDebugDraw.html" title="DebugDraw" alt="" coords="193,5,283,32"/>
+<area shape="rect" id="node4" href="$classObjectBase.html" title="ObjectBase\&lt; SFShape \&gt;" alt="" coords="154,56,322,83"/>
+<area shape="rect" id="node5" href="$classObjectBase.html" title="ObjectBase\&lt; sf::CircleShape \&gt;" alt="" coords="136,107,340,133"/>
+<area shape="rect" id="node7" href="$classObjectBase.html" title="ObjectBase\&lt; sf::ConvexShape \&gt;" alt="" coords="131,183,345,209"/>
+<area shape="rect" id="node6" href="$classBall.html" title="Ball" alt="" coords="403,93,447,120"/>
+<area shape="rect" id="node8" href="$classGoal.html" title="Goal" alt="" coords="400,144,449,171"/>
+<area shape="rect" id="node9" href="$classPaddle.html" title="Paddle" alt="" coords="393,195,456,221"/>
+<area shape="rect" id="node10" href="$classWall.html" title="Wall" alt="" coords="401,245,449,272"/>
+</map>

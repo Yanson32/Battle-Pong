@@ -1,0 +1,10 @@
+<map id="EventBase" name="EventBase">
+<area shape="rect" id="node3" href="$classBallCollision.html" title="BallCollision" alt="" coords="302,5,397,32"/>
+<area shape="rect" id="node4" href="$classGoalCollision.html" title="GoalCollision" alt="" coords="300,56,399,83"/>
+<area shape="rect" id="node5" href="$classLeftPaddleGoal.html" title="LeftPaddleGoal" alt="" coords="294,107,405,133"/>
+<area shape="rect" id="node6" href="$classMusicVolumeChanged.html" title="MusicVolumeChanged" alt="" coords="273,157,426,184"/>
+<area shape="rect" id="node7" href="$classPlayMusic.html" title="PlayMusic" alt="" coords="308,208,391,235"/>
+<area shape="rect" id="node8" href="$classPlaySound.html" title="PlaySound" alt="" coords="307,259,392,285"/>
+<area shape="rect" id="node9" href="$classRightPaddleGoal.html" title="RightPaddleGoal" alt="" coords="289,309,409,336"/>
+<area shape="rect" id="node10" href="$classSoundVolumeChanged.html" title="SoundVolumeChanged" alt="" coords="272,360,427,387"/>
+</map>

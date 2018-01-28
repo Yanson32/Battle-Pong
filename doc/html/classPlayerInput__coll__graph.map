@@ -1,0 +1,5 @@
+<map id="PlayerInput" name="PlayerInput">
+<area shape="rect" id="node2" href="$classInput.html" title="Input" alt="" coords="87,247,138,273"/>
+<area shape="rect" id="node3" href="$classPaddle.html" title="Paddle" alt="" coords="81,157,144,184"/>
+<area shape="rect" id="node4" href="$classObjectBase.html" title="ObjectBase\&lt; sf::ConvexShape \&gt;" alt="" coords="5,81,220,108"/>
+</map>

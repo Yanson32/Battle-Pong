@@ -1,0 +1,11 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node2" href="$classEventBase.html" title="EventBase" alt="" coords="109,183,196,209"/>
+<area shape="rect" id="node3" href="$classBallCollision.html" title="BallCollision" alt="" coords="274,5,369,32"/>
+<area shape="rect" id="node4" href="$classGoalCollision.html" title="GoalCollision" alt="" coords="272,56,371,83"/>
+<area shape="rect" id="node5" href="$classLeftPaddleGoal.html" title="LeftPaddleGoal" alt="" coords="266,107,377,133"/>
+<area shape="rect" id="node6" href="$classMusicVolumeChanged.html" title="MusicVolumeChanged" alt="" coords="245,157,398,184"/>
+<area shape="rect" id="node7" href="$classPlayMusic.html" title="PlayMusic" alt="" coords="280,208,363,235"/>
+<area shape="rect" id="node8" href="$classPlaySound.html" title="PlaySound" alt="" coords="279,259,364,285"/>
+<area shape="rect" id="node9" href="$classRightPaddleGoal.html" title="RightPaddleGoal" alt="" coords="261,309,381,336"/>
+<area shape="rect" id="node10" href="$classSoundVolumeChanged.html" title="SoundVolumeChanged" alt="" coords="244,360,399,387"/>
+</map>

@@ -72,10 +72,13 @@ int main(int argc, char* argv[])
     sf::Time accumulator = sf::seconds(0);
 
 	Game engin;
-	engin.Push<IntroState>(engin);
+
+	std::unique_ptr<IntroState> state(new IntroState(engin));
+    state->reset();
+	engin.Push(std::move(state));
 	EventManager::inst().Post<PlayMusic>("/home/me/Desktop/Pong/Build/Resources/Music/Electro_Zombies.ogg");
-	EventManager::inst().Post<MusicVolumeChanged>();
-	EventManager::inst().Post<SoundVolumeChanged>();
+	//EventManager::inst().Post<MusicVolumeChanged>();
+	//EventManager::inst().Post<SoundVolumeChanged>();
 
     try
     {

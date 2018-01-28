@@ -10,6 +10,7 @@
 #include "Events/PlaySound.h"
 #include "Events/EventManager.h"
 #include "Settings.h"
+#include "ResourceManager.h"
 
 MusicState::MusicState(Engin::Engin& engin): StateBase(engin)
 {
@@ -76,6 +77,7 @@ void MusicState::Update(Engin::Engin& engin, const int &deltaTime)
 void MusicState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
+    window.draw(*ball);
     window.display();
 }
 
@@ -88,11 +90,16 @@ void MusicState::onBackPressed()
 
 void MusicState::Init()
 {
+    StateBase::Init();
+    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     gui.add(backButton);
     gui.add(Settings::inst().musicSettings);
 }
 void MusicState::Clean()
 {
+    ResourceManager::sound.remove("Button Sound");
+    ResourceManager::sound.remove("Ball Sound");
     gui.removeAllWidgets();
 }
 

@@ -1,0 +1,8 @@
+<map id="StateBase" name="StateBase">
+<area shape="rect" id="node3" href="$classControlState.html" title="ControlState Displays a screen with two buttons. One for each paddle. Selecting one will bring you in..." alt="" coords="5,155,100,181"/>
+<area shape="rect" id="node4" href="$classIntroState.html" title="IntroState is the first state seen by the user. " alt="" coords="124,155,203,181"/>
+<area shape="rect" id="node5" href="$classMusicState.html" title="MusicState" alt="" coords="227,155,315,181"/>
+<area shape="rect" id="node6" href="$classOptionsState.html" title="OptionsState is a screen where the user can navigate to the various game options. ..." alt="" coords="339,155,438,181"/>
+<area shape="rect" id="node7" href="$classPaddleState.html" title="PaddleState is a screen where options are presented for a single paddle. " alt="" coords="462,155,555,181"/>
+<area shape="rect" id="node8" href="$classPlayState.html" title="PlayState This state is where the game logic is executed. " alt="" coords="580,155,659,181"/>
+</map>

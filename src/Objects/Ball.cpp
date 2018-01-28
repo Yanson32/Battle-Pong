@@ -16,6 +16,7 @@ Ball::Ball(std::shared_ptr<b2World> world, const unsigned radius): ObjectBase(wo
     bodyDef.gravityScale = 0;
     bodyDef.bullet = true;
     bodyDef.userData = new int(ObjectId::BALL);
+    bodyDef.fixedRotation = false;
 
     body = world->CreateBody(&bodyDef);
 
@@ -52,6 +53,9 @@ void Ball::setVelocity(const sf::Vector2f &newVelocity)
 
     body->SetLinearVelocity(toMeters({x, y}));
 }
+
+
+
 
 Ball::~Ball()
 {

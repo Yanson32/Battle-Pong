@@ -10,13 +10,16 @@ PlayerInput::PlayerInput(Paddle &newPaddle): Input(newPaddle)
 
 void PlayerInput::handleInput(const Ball &ball)
 {
+    const  int MOVE_SPEED = 200;
+    sf::Vector2f up(0, -MOVE_SPEED);
+    sf::Vector2f down(0, MOVE_SPEED);
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
     {
-        paddle.move({0, 200});
+        paddle.move(down);
     }
     else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
     {
-        paddle.move({0, -200});
+        paddle.move(up);
     }
     else
     {

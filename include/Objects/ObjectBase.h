@@ -1,18 +1,42 @@
 #ifndef OBJECTBASE_H
 #define OBJECTBASE_H
-#include <Box2D/Box2D.h>
+/**********************************************************//**
+*   @author Wayne J Larson Jr.
+*   @date   1/13/18
+*   @brief  The base class for all objects in the game
+**************************************************************/
+
+
+//Box2D includes
+#include <Box2D/Dynamics/b2World.h>
+#include <Box2D/Dynamics/b2Body.h>
+
+
+//SFML includes
 #include <SFML/Graphics/Drawable.hpp>
 #include <SFML/Graphics/ConvexShape.hpp>
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 
+
+//User defined includes
 #include "Box2D/Box2DFunctions.h"
 
 template <class SFShape>
 class ObjectBase: public sf::Drawable
 {
     public:
+        /**********************************************************//**
+        *   @brief  Constructor
+        *   @param  [in] newWorld is a pointer to the Box2D world object
+        *           where the game object exists.
+        **************************************************************/
         ObjectBase(std::shared_ptr<b2World> newWorld);
+
+
+        /**********************************************************//**
+        *
+        **************************************************************/
         virtual void draw(sf::RenderTarget &target, sf::RenderStates states) const override;
         virtual void update() = 0;
         sf::Vector2f getPosition() const;

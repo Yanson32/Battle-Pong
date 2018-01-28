@@ -2,7 +2,7 @@
 #include "Objects/Ball.h"
 #include "Objects/Paddle.h"
 #include <cmath>
-
+#include <iostream>
 AI::AI(Paddle &newPaddle): Input(newPaddle)
 {
     //ctor
@@ -12,11 +12,13 @@ AI::AI(Paddle &newPaddle): Input(newPaddle)
 void AI::handleInput(const Ball &ball)
 {
     const int MOVE_SPEED = 200;
+
     sf::Vector2f ballPos = ball.getPosition();
     sf::Vector2f paddlePos = paddle.getPosition();
 
     float difference = std::abs(ballPos.y - paddlePos.y);
     float movement = (difference > MOVE_SPEED)? MOVE_SPEED : difference;
+    //std::cout << "Movement " << movement << std::endl;
     if(ballPos.y > paddlePos.y)
     {
         paddle.move({0, movement});

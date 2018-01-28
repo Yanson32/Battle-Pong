@@ -189,6 +189,7 @@ paddle2(new PaddleSettings("Paddle 2", ObjectId::RIGHT_PADDLE)),
 musicSettings(new MusicSettings())
 {
 	title = "Pong";
+	paddle1->setInputType(sf::String("None"));
 }
 
 sf::String Settings::getTitle() const

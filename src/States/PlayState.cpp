@@ -89,6 +89,8 @@ void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
 {
     const int SECONDS = 1;
 
+        StateBase::Update(engin, deltaTime);
+
         if(!IsPaused())
         {
             if(!isSystemPaused())
@@ -112,6 +114,7 @@ void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
             if(messageClock.getElapsedTime().asSeconds() > SECONDS)
             {
                 userMessage.setString("3");
+                centerText();
                 messageClock.restart();
                 EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
             }
@@ -121,6 +124,7 @@ void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
             if(messageClock.getElapsedTime().asSeconds() > SECONDS)
             {
                 userMessage.setString("2");
+                centerText();
                 messageClock.restart();
                 EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
             }
@@ -130,6 +134,7 @@ void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
             if(messageClock.getElapsedTime().asSeconds() > SECONDS)
             {
                 userMessage.setString("1");
+                centerText();
                 messageClock.restart();
                 EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
             }
@@ -139,6 +144,7 @@ void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
             if(messageClock.getElapsedTime().asSeconds() > SECONDS)
             {
                 userMessage.setString("Go!");
+                centerText();
                 messageClock.restart();
                 EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
             }
@@ -161,17 +167,26 @@ void PlayState::Draw(Engin::Engin& engin, const int &deltaTime)
 
     StateBase::Draw(engin, deltaTime);
     window.draw(userMessage);
+
+    if(userMessage.getString() == "")
+        window.draw(*ball);
     window.display();
 }
 
 void PlayState::Init()
 {
+    StateBase::Init();
     ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     ResourceManager::font.load("Header Font", "/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 
     userMessage.setFont(ResourceManager::font.get("Header Font"));
+    Settings::inst().paddle1->setScore(0);
+    Settings::inst().paddle2->setScore(0);
+    paddle1Hud->setScore(0);
+    paddle2Hud->setScore(0);
+    centerText();
 }
 
 void PlayState::Clean()

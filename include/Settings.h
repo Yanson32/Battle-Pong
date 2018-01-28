@@ -69,8 +69,8 @@ class MusicSettings: public tgui::Panel
     private:
         tgui::Slider::Ptr musicVolume;
         tgui::Slider::Ptr soundVolume;
-        int mVolume = 254;
-        int sVolume = 254;
+        int mVolume = 200;
+        int sVolume = 150;
         void onMusicVolume();
         void onSoundVolume();
 

@@ -8,7 +8,7 @@
 #include "States/OptionsState.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
-
+#include "ResourceManager.h"
 
 ControlState::ControlState(Engin::Engin& newEngin): StateBase(newEngin)
 {
@@ -82,6 +82,7 @@ void ControlState::Update(Engin::Engin& engin, const int &deltaTime)
 void ControlState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
+	window.draw(*ball);
     window.display();
 }
 
@@ -107,6 +108,9 @@ void ControlState::onBack()
 
 void ControlState::Init()
 {
+    StateBase::Init();
+    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
     gui.add(paddle1);
     gui.add(paddle2);
     gui.add(backButton);
@@ -115,6 +119,8 @@ void ControlState::Init()
 void ControlState::Clean()
 {
     gui.removeAllWidgets();
+    ResourceManager::sound.remove("Button Sound");
+    ResourceManager::sound.remove("Ball Sound");
 
 }
 

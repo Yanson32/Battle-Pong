@@ -1,0 +1,9 @@
+<map id="/home/me/Desktop/Pong/src/Settings.cpp" name="/home/me/Desktop/Pong/src/Settings.cpp">
+<area shape="rect" id="node2" href="$Settings_8h.html" title="Settings.h" alt="" coords="515,95,596,121"/>
+<area shape="rect" id="node8" href="$PlaySound_8h.html" title="Events/PlaySound.h" alt="" coords="682,95,823,121"/>
+<area shape="rect" id="node11" href="$EventManager_8h.html" title="Events/EventManager.h" alt="" coords="1317,95,1479,121"/>
+<area shape="rect" id="node13" href="$MusicVolumeChanged_8h.html" title="Events/MusicVolumeChanged.h" alt="" coords="848,95,1057,121"/>
+<area shape="rect" id="node14" href="$SoundVolumeChanged_8h.html" title="Events/SoundVolumeChanged.h" alt="" coords="1082,95,1293,121"/>
+<area shape="rect" id="node7" href="$Id_8h.html" title="Events/Id.h" alt="" coords="576,177,665,203"/>
+<area shape="rect" id="node9" href="$EventBase_8h.html" title="EventBase.h" alt="" coords="904,177,1001,203"/>
+</map>
