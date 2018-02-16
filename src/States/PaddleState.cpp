@@ -136,8 +136,8 @@ void PaddleState::onListItemSelected()
 void PaddleState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
     gui.add(eBox);
     gui.add(inputLable);
     gui.add(cBox);

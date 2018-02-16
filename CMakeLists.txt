@@ -2,7 +2,7 @@
 cmake_minimum_required(VERSION 3.5.1)
 
 #Give the project a name
-project("Pong" VERSION "1.0.0.0")
+project("BattlePong" VERSION "1.0.0.0")
 string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
@@ -74,4 +74,4 @@ export(TARGETS "${PROJECT_NAME}" FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJE
 #Make the BUILD_TESTING variable show up in the cmake gui
 option(BUILD_TESTING "Set to TRUE if you want to build unit tests" FALSE)
 
-
+file(COPY "Resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")

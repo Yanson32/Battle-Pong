@@ -128,10 +128,10 @@ void IntroState::Init()
     gui.add(startButton);
     gui.add(optionButton);
 
-    ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::font.load("Header Font", "/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
+    ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::font.load("Header Font", "/home/me/Desktop/Battle Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 
     header.setFont(ResourceManager::font.get("Header Font"));
 }
