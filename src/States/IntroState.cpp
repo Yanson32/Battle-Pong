@@ -96,6 +96,7 @@ void IntroState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 
 void IntroState::Update(Engin::Engin& engin, const int &deltaTime)
 {
+    StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
     ball->update();

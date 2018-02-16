@@ -123,6 +123,7 @@ class StateBase: public Engin::GameState
         static ContactListener contactListener;         ///Subclass of Box2D b2ContactListener used to detect Box2D collisions
         static sf::Text userMessage;                    ///Text displayed in the center of the screen
         static sf::Clock messageClock;                  ///This clock object is used to time the beginning message "Ready!, 3, 2, 1, Go!
+        static sf::Clock roundClock;                    ///This clock tracks the time for each round and resets the game when the time has expired
         float32 timeStep = 1 / 20.0;                    ///Box2D the length of time passed to simulate (seconds)
         int32 velocityIterations = 8;                   ///Box2D how strongly to correct velocity
         int32 positionIterations = 3;                   ///Box2D how strongly to correct position

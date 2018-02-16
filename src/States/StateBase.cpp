@@ -47,6 +47,7 @@ std::shared_ptr<PaddleHud> StateBase::paddle1Hud(new PaddleHud(Settings::inst().
 std::shared_ptr<PaddleHud> StateBase::paddle2Hud(new PaddleHud(Settings::inst().paddle2));
 
 ContactListener StateBase::contactListener;
+sf::Clock StateBase::roundClock;
 
 StateBase::StateBase(Engin::Engin& newEngin):
 Engin::GameState(),
@@ -106,7 +107,10 @@ void StateBase::Update(Engin::Engin& engin, const int &deltaTime)
         {
             reset();
         }
-        //world->Step(timeStep, velocityIterations, positionIterations);
+        if(roundClock.getElapsedTime().asSeconds() >= 30)
+        {
+            reset();
+        }
     }
 }
 
@@ -148,6 +152,7 @@ void StateBase::reset()
     userMessage.setString("Ready!");
     centerText();
     messageClock.restart();
+    roundClock.restart();
     systemPause(true);
 }
 
