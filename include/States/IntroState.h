@@ -71,11 +71,13 @@ class IntroState: public StateBase
         ********************************************************************/
         void onOptionsPressed();
 
+        void onMultiplayerPressed();
         sf::Text header;                            ///Text displayed at the top of the screen
         sf::Color background = sf::Color::Black;    ///Color used to clear the screen background
         //sf::Font headerFont;                      ///Font used for the screens header
         tgui::Button::Ptr startButton;
         tgui::Button::Ptr optionButton;
+        tgui::Button::Ptr multiplayerButton;
 };
 
 #endif // INTROSTATE_H

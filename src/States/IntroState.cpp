@@ -42,13 +42,19 @@ IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
 
     startButton = tgui::Button::create("Start");
     startButton->connect("pressed", &IntroState::onStartPressed, this);
-    startButton->setPosition({300, 300});
-    startButton->setSize(200, 25);
+    startButton->setPosition(Settings::inst().buttonPosition(0));
+    startButton->setSize(Settings::inst().buttonSize());
+
+    multiplayerButton = tgui::Button::create("Multiplayer");
+    multiplayerButton->connect("pressed", &IntroState::onMultiplayerPressed, this);
+    multiplayerButton->setPosition(Settings::inst().buttonPosition(1));
+    multiplayerButton->setSize(Settings::inst().buttonSize());
 
     optionButton = tgui::Button::create("Options");
     optionButton->connect("pressed", &IntroState::onOptionsPressed, this);
-    optionButton->setPosition({300, 350});
-    optionButton->setSize(200, 25);
+    optionButton->setPosition(Settings::inst().buttonPosition(2));
+    optionButton->setSize(Settings::inst().buttonSize());
+
 
 }
 
@@ -125,8 +131,10 @@ void IntroState::onOptionsPressed()
 void IntroState::Init()
 {
     StateBase::Init();
+
     gui.add(startButton);
     gui.add(optionButton);
+    gui.add(multiplayerButton);
 
     ResourceManager::sound.load("Message Sound", "../Resources/Sounds/tone1.ogg");
     ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
@@ -145,6 +153,11 @@ void IntroState::Clean()
     ResourceManager::sound.remove("Ball Sound");
     ResourceManager::font.remove("Header Font");
 
+}
+
+void IntroState::onMultiplayerPressed()
+{
+    EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
 IntroState::~IntroState()
