@@ -176,10 +176,10 @@ void PlayState::Draw(Engin::Engin& engin, const int &deltaTime)
 void PlayState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::font.load("Header Font", "/home/me/Desktop/Battle Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
+    ResourceManager::sound.load("Message Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 
     userMessage.setFont(ResourceManager::font.get("Header Font"));
     Settings::inst().paddle1->setScore(0);

@@ -91,8 +91,8 @@ void MusicState::onBackPressed()
 void MusicState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
     gui.add(backButton);
     gui.add(Settings::inst().musicSettings);
 }

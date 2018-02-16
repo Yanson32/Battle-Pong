@@ -119,9 +119,9 @@ void OptionsState::Init()
     gui.add(backButton);
     gui.add(controlsButton);
 
-    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::font.load("Header Font", "/home/me/Desktop/Battle Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
+    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 }
 
 void OptionsState::Clean()

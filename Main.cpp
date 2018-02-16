@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
 	std::unique_ptr<IntroState> state(new IntroState(engin));
     state->reset();
 	engin.Push(std::move(state));
-	EventManager::inst().Post<PlayMusic>("/home/me/Desktop/Battle Pong/Build/Resources/Music/Electro_Zombies.ogg");
+	EventManager::inst().Post<PlayMusic>("../Resources/Music/Electro_Zombies.ogg");
 	//EventManager::inst().Post<MusicVolumeChanged>();
 	//EventManager::inst().Post<SoundVolumeChanged>();
 

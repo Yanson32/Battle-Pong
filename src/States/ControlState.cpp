@@ -109,8 +109,8 @@ void ControlState::onBack()
 void ControlState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Battle Pong/Build/Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
     gui.add(paddle1);
     gui.add(paddle2);
     gui.add(backButton);
