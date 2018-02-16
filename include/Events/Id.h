@@ -10,7 +10,8 @@ enum EventId
     MUSIC_VOLUME_CHANGED,
     SOUND_VOLUME_CHANGED,
     LEFT_GOAL_COLLISION,
-    RIGHT_GOAL_COLLISION
+    RIGHT_GOAL_COLLISION,
+	PADDLE_COLLISION
 };
 
 enum ObjectId
@@ -20,7 +21,8 @@ enum ObjectId
     RIGHT_GOAL,
     LEFT_PADDLE,
     RIGHT_PADDLE,
-    WALL
+    WALL,
+    NONE
 };
 
 #endif // ID_H

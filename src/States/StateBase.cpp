@@ -10,6 +10,7 @@
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 #include "Events/PlayMusic.h"
+#include "Events/PaddleCollision.h"
 #include "ResourceManager.h"
 
 sf::RenderWindow StateBase::window(Settings::inst().getWindowSettings().getVideoMode(), Settings::inst().getTitle());
@@ -229,6 +230,16 @@ void StateBase::gameEvents()
                 {
                     //sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
                 }
+                break;
+
+                case PADDLE_COLLISION:
+                    std::shared_ptr<PaddleCollision> temp =  std::dynamic_pointer_cast<PaddleCollision>(evtPtr);
+
+                    if(temp)
+                    {
+                        std::cout << "Paddle and ball collided id " << temp->paddle << std::endl;
+                    }
+
                 break;
 
             }

@@ -10,6 +10,7 @@ set(FILES
 			"${CMAKE_CURRENT_SOURCE_DIR}/GoalCollision.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/LeftPaddleGoal.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/RightPaddleGoal.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleCollision.cpp"
 
 )
 set(SUB_DIRECTORIES "Listener")

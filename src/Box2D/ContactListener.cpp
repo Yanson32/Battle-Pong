@@ -5,6 +5,8 @@
 #include "Events/Id.h"
 #include "Events/LeftPaddleGoal.h"
 #include "Events/RightPaddleGoal.h"
+#include "Events/PaddleCollision.h"
+#include <iostream>
 
 ContactListener::ContactListener()
 {
@@ -67,6 +69,16 @@ void ContactListener::BeginContact(b2Contact* contact)
     {
         EventManager::inst().Post<GoalCollision>();
     }
+
+    if(IsPaddle(fixtureA) && IsBall(fixtureB))
+    {
+        EventManager::inst().Post<PaddleCollision>(*static_cast<ObjectId*>(fixtureA->GetBody()->GetUserData()));
+    }
+
+    if(IsPaddle(fixtureB) && IsBall(fixtureA))
+    {
+        EventManager::inst().Post<PaddleCollision>(*static_cast<ObjectId*>(fixtureB->GetBody()->GetUserData()));
+    }
 }
 
 bool ContactListener::IsBall(b2Fixture* fixture)
@@ -79,7 +91,7 @@ bool ContactListener::IsBall(b2Fixture* fixture)
     if(body->GetUserData() == nullptr)
         return false;
 
-    if(*static_cast<int *>(body->GetUserData()) == EventId::BALL_COLLISION)
+    if(*static_cast<int *>(body->GetUserData()) == ObjectId::BALL)
         return true;
 
     return false;
@@ -112,6 +124,20 @@ bool ContactListener::IsRightGoal(b2Fixture* fixture)
 
 }
 
+bool ContactListener::IsPaddle(b2Fixture* fixture)
+{
+
+
+    if(getObjectId(fixture) == ObjectId::LEFT_PADDLE || getObjectId(fixture) == ObjectId::RIGHT_PADDLE)
+    {
+        return true;
+    }
+
+
+
+    return false;
+}
+
 void ContactListener::dispatchEvent(const int &id, const bool sensor) const
 {
     switch(id)
@@ -133,6 +159,21 @@ void ContactListener::dispatchEvent(const int &id, const bool sensor) const
     }
 }
 
+ObjectId ContactListener::getObjectId(b2Fixture* fixture)
+{
+
+    if(fixture == nullptr)
+        return ObjectId::NONE;
+
+    b2Body *body = fixture->GetBody();
+
+    if(body->GetUserData() == nullptr)
+        return ObjectId::NONE;
+
+    return *static_cast<ObjectId *>(body->GetUserData());
+
+
+}
 ContactListener::~ContactListener()
 {
     //dtor

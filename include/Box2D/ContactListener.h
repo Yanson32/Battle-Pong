@@ -7,7 +7,7 @@
 *           passing collision information to the user.
 **************************************************************/
 #include <Box2D/Box2D.h>
-//#include "Events/Id.h"
+#include "Events/Id.h"
 
 class ContactListener: public b2ContactListener
 {
@@ -41,7 +41,9 @@ class ContactListener: public b2ContactListener
         bool IsGoal(b2Fixture* fixture);
         bool IsLeftGoal(b2Fixture* fixture);
         bool IsRightGoal(b2Fixture* fixture);
+        bool IsPaddle(b2Fixture * fixture);
         void dispatchEvent(const int &id, const bool sensor) const;
+        ObjectId getObjectId(b2Fixture* fixture);
         /**********************************************************//**
         *   @brief  Destructor
         **************************************************************/
