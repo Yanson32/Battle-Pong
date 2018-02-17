@@ -21,7 +21,7 @@
 #ifndef MAJOR_VERSION
     #define MAJOR_VERSION 1
 #endif // MAJOR_VERSION
-
+//This is a comment
 int main(int argc, char* argv[])
 {
 
