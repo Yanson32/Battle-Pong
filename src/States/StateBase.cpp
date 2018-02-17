@@ -242,6 +242,11 @@ void StateBase::gameEvents()
 
                     if(temp)
                     {
+//                        static ObjectId currentPaddle = ObjectId::NONE;
+//                        if(temp->paddle == currentPaddle)
+//                            reset();
+//                        else
+//                            currentPaddle = temp->paddle;
                         std::cout << "Paddle and ball collided id " << temp->paddle << std::endl;
                     }
 
@@ -265,7 +270,8 @@ void StateBase::centerText()
 
 void StateBase::Init()
 {
-
+    systemPause(false);
+    Pause(false);
     music.setVolume(Settings::inst().musicSettings->getVolume());
     sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
 }

@@ -11,6 +11,7 @@
 #include <SFML/Graphics/Font.hpp>
 
 #include "States/PlayState.h"
+#include "States/MultiplayerState.h"
 #include "Settings.h"
 
 #include "Objects/Wall.h"
@@ -119,14 +120,14 @@ void IntroState::Draw(Engin::Engin& engin, const int &deltaTime)
 
 void IntroState::onStartPressed()
 {
-    engin.Push<PlayState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
+    engin.Push<PlayState>(engin);
 }
 
 void IntroState::onOptionsPressed()
 {
-    engin.Push<OptionsState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
+    engin.Push<OptionsState>(engin);
 }
 
 void IntroState::Init()
@@ -159,6 +160,7 @@ void IntroState::Clean()
 void IntroState::onMultiplayerPressed()
 {
     EventManager::inst().Post<PlaySound>("Button Sound");
+    engin.Push<MultiplayerState>(engin);
 }
 
 IntroState::~IntroState()
