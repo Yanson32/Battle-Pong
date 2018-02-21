@@ -1,6 +1,6 @@
 #include "States/SingleplayerState.h"
 
-SingleplayerState::SingleplayerState()
+SingleplayerState::SingleplayerState(Engin::Engin& newEngin): PlayState(newEngin)
 {
     //ctor
 }

@@ -8,6 +8,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/MultiplayerControlsState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/MultiPlayerState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SingleplayerState.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/DemoState.h"
 
 )
 set(SUB_DIRECTORIES "")

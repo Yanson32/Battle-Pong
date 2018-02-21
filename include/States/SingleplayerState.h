@@ -1,11 +1,11 @@
 #ifndef SINGLEPLAYERSTATE_H
 #define SINGLEPLAYERSTATE_H
+#include "States/PlayState.h"
 
-
-class SingleplayerState
+class SingleplayerState: public PlayState
 {
     public:
-        SingleplayerState();
+        SingleplayerState(Engin::Engin& newEngin);
         virtual ~SingleplayerState();
     protected:
     private:
