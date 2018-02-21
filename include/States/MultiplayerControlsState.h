@@ -1,6 +1,21 @@
 #ifndef MULTIPLAYERSTATE_H
 #define MULTIPLAYERSTATE_H
+#include <TGUI/TGUI.hpp>
 #include "States/StateBase.h"
+
+class MultiplayerPanel: public tgui::Panel
+{
+    public:
+        MultiplayerPanel();
+        void Init();
+    private:
+        tgui::Label::Ptr ipLabel;
+        tgui::EditBox::Ptr ipBox;
+        tgui::Label::Ptr portLabel;
+        tgui::EditBox::Ptr portBox;
+        tgui::Button::Ptr hostButton;
+        void onHostPressed();
+};
 
 class MultiplayerState: public StateBase
 {
@@ -40,6 +55,7 @@ class MultiplayerState: public StateBase
     protected:
     private:
         tgui::Button::Ptr backButton;
+        static std::shared_ptr<MultiplayerPanel> panel;
 };
 
 #endif // MULTIPLAYERSTATE_H

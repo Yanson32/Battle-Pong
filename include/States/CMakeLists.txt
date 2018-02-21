@@ -5,7 +5,9 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ControlState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/MusicState.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/MultiplayerState.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/MultiplayerControlsState.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/MultiPlayerState.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/SingleplayerState.h"
 
 )
 set(SUB_DIRECTORIES "")

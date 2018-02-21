@@ -1,4 +1,4 @@
-#include "States/MultiplayerState.h"
+#include "States/MultiplayerControlsState.h"
 #include "GameUtilities/Engin/Engin.h"
 #include <GameUtilities/Event/Event.h>
 #include <GameUtilities/Event/EventQueue.h>
@@ -12,6 +12,51 @@
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 #include "ResourceManager.h"
+
+
+std::shared_ptr<MultiplayerPanel> MultiplayerState::panel(new MultiplayerPanel());
+
+MultiplayerPanel::MultiplayerPanel()
+{
+    //Ip address label
+    ipLabel = tgui::Label::create("Ip Lable");
+    ipLabel->setText("Ip address");
+    this->add(ipLabel);
+
+    //EditBox to enter ip address
+    ipBox = tgui::EditBox::create();
+    ipBox->setPosition({150, 0});
+    this->add(ipBox);
+
+    //Port number lable
+    portLabel = tgui::Label::create("Port Lable");
+    portLabel->setText("Port Number");
+    portLabel->setPosition({0, 50});
+    this->add(portLabel);
+
+    //EditBox to enter port number
+    portBox = tgui::EditBox::create();
+    portBox->setPosition({150, 50});
+    this->add(portBox);
+
+
+    hostButton = tgui::Button::create("Host");
+    hostButton->connect("pressed", &MultiplayerPanel::onHostPressed, this);
+    hostButton->setPosition({0, 100});
+    this->add(hostButton);
+
+    setBackgroundColor(sf::Color::Transparent);
+}
+
+void MultiplayerPanel::Init()
+{
+
+}
+
+void MultiplayerPanel::onHostPressed()
+{
+
+}
 MultiplayerState::MultiplayerState(Engin::Engin& engin): StateBase(engin)
 {
     //ctor
@@ -19,6 +64,7 @@ MultiplayerState::MultiplayerState(Engin::Engin& engin): StateBase(engin)
     backButton->connect("pressed", &MultiplayerState::onBackPressed, this);
     backButton->setPosition(Settings::inst().buttonPosition(4));
     backButton->setSize(Settings::inst().buttonSize());
+
 
 }
 
@@ -28,6 +74,11 @@ void MultiplayerState::Init()
     ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
     ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
     gui.add(backButton);
+
+    panel->setSize({400, 300});
+    panel->setPosition({100, 100});
+
+    gui.add(panel);
 }
 void MultiplayerState::Clean()
 {
