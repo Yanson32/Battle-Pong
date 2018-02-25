@@ -5,8 +5,8 @@
 #include "ResourceManager.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
-#include "States/MultiPlayerState.h"
-
+#include "States/HostPlayState.h"
+#include "SFMLFunctions.h"
 //std::shared_ptr<HostPanel> HostState::panel(new HostPanel());
 //
 //HostPanel::HostPanel()
@@ -66,6 +66,9 @@ HostState::HostState(Engin::Engin& engin): StateBase(engin)
     hostButton = tgui::Button::create("Host");
     hostButton->connect("pressed", &HostState::onHostPressed, this);
     hostButton->setPosition({200, 250});
+
+    portBox->setInputValidator("[1-9]+");
+    portBox->setDefaultText("5000");
 }
 
 void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
@@ -150,14 +153,16 @@ void HostState::Clean()
 
 void HostState::onBackPressed()
 {
-    engin.Pop();
     EventManager::inst().Post<PlaySound>("Button Sound");
+    engin.Pop();
 }
 
 void HostState::onHostPressed()
 {
-    engin.Push<MultiPlayerState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
+    sf::String value = portBox->getText();
+    std::unique_ptr<Server> serverPtr(new Server(toInt(value)));
+    engin.Push<HostPlayState>(engin, std::move(serverPtr));
 }
 
 HostState::~HostState()

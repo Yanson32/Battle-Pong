@@ -1,7 +1,7 @@
 #include "Server.h"
 #include <iostream>
 
-Server::Server()
+Server::Server(const int newPort): port(newPort)
 {
     //ctor
 }

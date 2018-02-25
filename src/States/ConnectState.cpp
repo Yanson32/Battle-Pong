@@ -6,6 +6,7 @@
 #include "ResourceManager.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
+#include "States/ClientPlayState.h"
 
 //std::shared_ptr<ConnectPanel> ConnectState::panel(new ConnectPanel());
 
@@ -36,6 +37,7 @@ ConnectPanel::ConnectPanel()
     connectButton->connect("pressed", &ConnectPanel::onConnectPressed, this);
     connectButton->setPosition({0, 100});
     this->add(connectButton);
+
 
     setBackgroundColor(sf::Color::Transparent);
 }
@@ -79,6 +81,11 @@ ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin)
     connectButton = tgui::Button::create("Connect");
     connectButton->connect("pressed", &ConnectState::onConnectPressed, this);
     connectButton->setPosition({200, 300});
+
+    portBox->setText("5000");
+    portBox->setInputValidator("[1-9]+");
+    ipBox->setText("localhost");
+    ipBox->setInputValidator("[1-9.]+");
 }
 
 void ConnectState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
@@ -165,14 +172,14 @@ void ConnectState::Clean()
 
 void ConnectState::onBackPressed()
 {
-    engin.Pop();
     EventManager::inst().Post<PlaySound>("Button Sound");
+    engin.Pop();
 }
 
 void ConnectState::onConnectPressed()
 {
-    engin.Push<MultiPlayerState>(engin);
     EventManager::inst().Post<PlaySound>("Button Sound");
+    engin.Push<ClientPlayState>(engin);
 }
 
 ConnectState::~ConnectState()

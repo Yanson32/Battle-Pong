@@ -5,7 +5,7 @@
 class Server
 {
     public:
-        Server();
+        Server(const int newPort);
         bool isConnected();
         bool connect();
         sf::Packet recieve();
