@@ -1,5 +1,4 @@
 #include "States/ConnectState.h"
-#include "States/MultiPlayerState.h"
 #include <GameUtilities/Engin/Engin.h>
 #include "Objects/Paddle.h"
 #include "Objects/Ball.h"
