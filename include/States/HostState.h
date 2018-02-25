@@ -1,15 +1,27 @@
-#ifndef MULTIPLAYERSTATE_H
-#define MULTIPLAYERSTATE_H
+#ifndef HOSTSTATE_H
+#define HOSTSTATE_H
+#include "States/StateBase.h"
 
-#include "States/PlayState.h"
+#include <TGUI/TGUI.hpp>
+#include <memory>
+//class HostPanel: public tgui::Panel
+//{
+//    public:
+//        HostPanel();
+//        void Init();
+//        void Clean();
+//    private:
+////        tgui::Label::Ptr portLabel;
+////        tgui::EditBox::Ptr portBox;
+////        tgui::Button::Ptr hostButton;
+//        void onBackPressed();
+//
+//};
 
-class MultiPlayerState: public PlayState
+class HostState: public StateBase
 {
     public:
-        MultiPlayerState(Engin::Engin& engin,
-                        const std::string ipAddress = "",
-                        const std::string port = "",
-                        const bool host = true);
+        HostState(Engin::Engin& engin);
 
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
@@ -39,9 +51,16 @@ class MultiPlayerState: public PlayState
 
         virtual void Init() override;
         virtual void Clean() override;
-        virtual ~MultiPlayerState();
+        virtual ~HostState();
     protected:
     private:
+        //static std::shared_ptr<HostPanel> panel;
+        tgui::Button::Ptr backButton;
+        tgui::Label::Ptr portLabel;
+        tgui::EditBox::Ptr portBox;
+        tgui::Button::Ptr hostButton;
+        void onBackPressed();
+        void onHostPressed();
 };
 
-#endif // MULTIPLAYERSTATE_H
+#endif // HOSTSTATE_H

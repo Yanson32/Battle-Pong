@@ -1,16 +1,26 @@
-#ifndef MULTIPLAYERSTATE_H
-#define MULTIPLAYERSTATE_H
-
-#include "States/PlayState.h"
-
-class MultiPlayerState: public PlayState
+#ifndef CONTROLSTATE_H
+#define CONTROLSTATE_H
+#include "States/StateBase.h"
+#include <TGUI/TGUI.hpp>
+class ConnectPanel: public tgui::Panel
 {
     public:
-        MultiPlayerState(Engin::Engin& engin,
-                        const std::string ipAddress = "",
-                        const std::string port = "",
-                        const bool host = true);
+        ConnectPanel();
+        void Init();
+    private:
+        tgui::Label::Ptr ipLabel;
+        tgui::EditBox::Ptr ipBox;
+        tgui::Label::Ptr portLabel;
+        tgui::EditBox::Ptr portBox;
+        tgui::Button::Ptr connectButton;
+        void onConnectPressed();
 
+};
+
+class ConnectState: public StateBase
+{
+    public:
+        ConnectState(Engin::Engin& engin);
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
         *           This should be called once per frame.
@@ -39,9 +49,18 @@ class MultiPlayerState: public PlayState
 
         virtual void Init() override;
         virtual void Clean() override;
-        virtual ~MultiPlayerState();
+        virtual ~ConnectState();
     protected:
     private:
+        //static std::shared_ptr<ConnectPanel> panel;
+        tgui::Button::Ptr backButton;
+        tgui::Label::Ptr ipLabel;
+        tgui::EditBox::Ptr ipBox;
+        tgui::Label::Ptr portLabel;
+        tgui::EditBox::Ptr portBox;
+        tgui::Button::Ptr connectButton;
+        void onConnectPressed();
+        void onBackPressed();
 };
 
-#endif // MULTIPLAYERSTATE_H
+#endif // CONTROLSTATE_H

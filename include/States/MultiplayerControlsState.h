@@ -1,26 +1,14 @@
-#ifndef MULTIPLAYERSTATE_H
-#define MULTIPLAYERSTATE_H
+#ifndef MultiplayerControlState_H
+#define MultiplayerControlState_H
 #include <TGUI/TGUI.hpp>
 #include "States/StateBase.h"
 
-class MultiplayerPanel: public tgui::Panel
-{
-    public:
-        MultiplayerPanel();
-        void Init();
-    private:
-        tgui::Label::Ptr ipLabel;
-        tgui::EditBox::Ptr ipBox;
-        tgui::Label::Ptr portLabel;
-        tgui::EditBox::Ptr portBox;
-        tgui::Button::Ptr hostButton;
-        void onHostPressed();
-};
 
-class MultiplayerState: public StateBase
+
+class MultiplayerControlState: public StateBase
 {
     public:
-        MultiplayerState(Engin::Engin& engin);
+        MultiplayerControlState(Engin::Engin& engin);
 
         virtual void Init();
         virtual void Clean();
@@ -51,11 +39,14 @@ class MultiplayerState: public StateBase
         virtual void Draw(Engin::Engin& engin, const int &deltaTime) override;
 
         void onBackPressed();
-        virtual ~MultiplayerState();
+        virtual ~MultiplayerControlState();
     protected:
     private:
         tgui::Button::Ptr backButton;
-        static std::shared_ptr<MultiplayerPanel> panel;
+        tgui::Button::Ptr hostButton;
+        tgui::Button::Ptr connectButton;
+        void onHostPressed();
+        void onConnectPressed();
 };
 
-#endif // MULTIPLAYERSTATE_H
+#endif // MultiplayerControlState_H

@@ -83,7 +83,6 @@ void MusicState::Draw(Engin::Engin& engin, const int &deltaTime)
 
 void MusicState::onBackPressed()
 {
-
     engin.Pop();
     EventManager::inst().Post<PlaySound>("Button Sound");
 }

@@ -6,9 +6,11 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/MusicState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/MultiPlayerControlsState.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/MultiplayerState.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/MultiPlayerState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SingleplayerState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/DemoState.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/HostState.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/ConnectState.cpp"
 )
 set(SUB_DIRECTORIES "")
 

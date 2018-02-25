@@ -160,7 +160,7 @@ void IntroState::Clean()
 void IntroState::onMultiplayerPressed()
 {
     EventManager::inst().Post<PlaySound>("Button Sound");
-    engin.Push<MultiplayerState>(engin);
+    engin.Push<MultiplayerControlState>(engin);
 }
 
 IntroState::~IntroState()

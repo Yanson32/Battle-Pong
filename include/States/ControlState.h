@@ -78,4 +78,3 @@ class ControlState: public StateBase
 };
 
 #endif // CONTROLSTATE_H
-
