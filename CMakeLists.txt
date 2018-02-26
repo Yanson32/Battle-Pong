@@ -1,6 +1,9 @@
 #for backwards compatibility
 cmake_minimum_required(VERSION 3.5.1)
 
+#This must be above the project command
+set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The projects build for example Debug/Release")
+
 #Give the project a name
 project("BattlePong" VERSION "1.0.0.0")
 string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
@@ -15,6 +18,14 @@ add_executable("${PROJECT_NAME}" "Main.cpp")
 
 add_subdirectory("include")
 add_subdirectory("src")
+
+
+
+
+string(TOUPPER "${CMAKE_BUILD_TYPE}" BUILD_TYPE_UPPER)
+if("${BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
+	add_definitions("-DDEBUG")
+endif()
 
 #Change the library output path
 set_target_properties( "${PROJECT_NAME}"

@@ -128,7 +128,10 @@ void StateBase::Draw(Engin::Engin& engin, const int &deltaTime)
     window.draw(*paddle1Hud);
     window.draw(*paddle2Hud);
     gui.draw();
-    //window.draw(debugDraw);
+
+    #ifdef DEBUG
+        window.draw(debugDraw);
+    #endif
 }
 
 void StateBase::systemPause(const bool newSysPause)
