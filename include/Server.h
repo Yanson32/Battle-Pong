@@ -7,7 +7,10 @@ class Server
     public:
         Server(const int newPort);
         bool isConnected();
-        bool connect();
+        void init();
+        void clean();
+        void handleEvents();
+        bool update();
         sf::Packet recieve();
         virtual ~Server();
     protected:

@@ -39,6 +39,7 @@ class HostPlayState: public PlayState
         virtual ~HostPlayState();
     protected:
     private:
+        std::unique_ptr<Server> server;
 };
 
 #endif // HOSTPLAYSTATE_H

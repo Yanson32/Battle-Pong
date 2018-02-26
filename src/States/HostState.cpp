@@ -67,8 +67,9 @@ HostState::HostState(Engin::Engin& engin): StateBase(engin)
     hostButton->connect("pressed", &HostState::onHostPressed, this);
     hostButton->setPosition({200, 250});
 
-    portBox->setInputValidator("[1-9]+");
-    portBox->setDefaultText("5000");
+    portBox->setInputValidator("[0-9]+");
+    portBox->setDefaultText("150");
+    portBox->setText("150");
 }
 
 void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)

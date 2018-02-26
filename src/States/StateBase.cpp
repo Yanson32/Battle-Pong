@@ -247,7 +247,7 @@ void StateBase::gameEvents()
 //                            reset();
 //                        else
 //                            currentPaddle = temp->paddle;
-                        std::cout << "Paddle and ball collided id " << temp->paddle << std::endl;
+                        //std::cout << "Paddle and ball collided id " << temp->paddle << std::endl;
                     }
 
                 break;

@@ -4,9 +4,26 @@
 Server::Server(const int newPort): port(newPort)
 {
     //ctor
+    listener.setBlocking(false);
 }
 
-bool Server::connect()
+void Server::init()
+{
+
+}
+
+void Server::clean()
+{
+
+}
+
+void Server::handleEvents()
+{
+
+}
+
+
+bool Server::update()
 {
     if (listener.listen(port) != sf::Socket::Done)
     {

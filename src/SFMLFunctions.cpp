@@ -1,6 +1,10 @@
 #include "SFMLFunctions.h"
+#include <string>
+#include <iostream>
 
 int toInt(const sf::String num)
 {
-    return 2202;
+    std::string temp = num.toAnsiString();
+
+    return std::atoi(num.toAnsiString().c_str());
 }

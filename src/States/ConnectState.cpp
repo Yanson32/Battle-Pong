@@ -10,6 +10,7 @@
 //std::shared_ptr<ConnectPanel> ConnectState::panel(new ConnectPanel());
 
 ConnectPanel::ConnectPanel()
+
 {
     //Ip address label
     ipLabel = tgui::Label::create("Ip Lable");
@@ -81,10 +82,14 @@ ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin)
     connectButton->connect("pressed", &ConnectState::onConnectPressed, this);
     connectButton->setPosition({200, 300});
 
-    portBox->setText("5000");
-    portBox->setInputValidator("[1-9]+");
+    portBox->setInputValidator("[0-9]+");
+    portBox->setDefaultText("150");
+    portBox->setText("150");
+
     ipBox->setText("localhost");
-    ipBox->setInputValidator("[1-9.]+");
+    ipBox->setInputValidator("[0-9.]+");
+
+
 }
 
 void ConnectState::HandleEvents(Engin::Engin& engin, const int &deltaTime)

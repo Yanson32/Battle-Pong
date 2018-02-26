@@ -6,6 +6,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleHud.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Logging.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Server.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Client.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SFMLFunctions.h"
 
 )
