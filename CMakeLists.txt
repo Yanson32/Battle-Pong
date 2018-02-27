@@ -6,7 +6,7 @@ set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The projects build for example Debu
 
 #Give the project a name
 project("BattlePong" VERSION "1.0.0.0")
-string(TOUPPER ${PROJECT_NAME} PROJECT_NAME_UPPER)
+string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
 
@@ -22,8 +22,8 @@ add_subdirectory("src")
 
 
 
-string(TOUPPER "${CMAKE_BUILD_TYPE}" BUILD_TYPE_UPPER)
-if("${BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
+string(TOUPPER "${CMAKE_BUILD_TYPE}" BP_BUILD_TYPE_UPPER)
+if("${BP_BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
 	add_definitions("-DDEBUG")
 endif()
 
@@ -42,8 +42,6 @@ target_compile_features("${PROJECT_NAME}"
 			cxx_right_angle_brackets
 			)
 
-#Set the c++ standard
-set_property(TARGET "${PROJECT_NAME}" PROPERTY CXX_STANDARD 11)
 
 #Add includes to target
 target_include_directories("${PROJECT_NAME}" PUBLIC

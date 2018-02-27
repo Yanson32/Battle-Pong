@@ -6,6 +6,7 @@
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 #include "States/ClientPlayState.h"
+#include "SFMLFunctions.h"
 
 //std::shared_ptr<ConnectPanel> ConnectState::panel(new ConnectPanel());
 
@@ -183,7 +184,10 @@ void ConnectState::onBackPressed()
 void ConnectState::onConnectPressed()
 {
     EventManager::inst().Post<PlaySound>("Button Sound");
-    engin.Push<ClientPlayState>(engin);
+    sf::String value = portBox->getText();
+    sf::String ip = ipBox->getText();
+    std::unique_ptr<Client> client(new Client(ip, toInt(value)));
+    engin.Push<ClientPlayState>(engin, std::move(client));
 }
 
 ConnectState::~ConnectState()

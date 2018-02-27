@@ -1,7 +1,8 @@
 #include "States/ClientPlayState.h"
 
-ClientPlayState::ClientPlayState(Engin::Engin& newEngin):
-PlayState::PlayState(newEngin)
+ClientPlayState::ClientPlayState(Engin::Engin& newEngin, std::unique_ptr<Client> newClient):
+PlayState::PlayState(newEngin),
+client(std::move(newClient))
 {
     //ctor
 }
@@ -9,6 +10,7 @@ PlayState::PlayState(newEngin)
 void ClientPlayState::Init()
 {
     PlayState::Init();
+    client->init();
 }
 void ClientPlayState::Clean()
 {
