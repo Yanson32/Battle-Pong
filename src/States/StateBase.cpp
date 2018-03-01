@@ -12,6 +12,7 @@
 #include "Events/PlayMusic.h"
 #include "Events/PaddleCollision.h"
 #include "ResourceManager.h"
+#include "Events/ChangeState.h"
 
 sf::RenderWindow StateBase::window(Settings::inst().getWindowSettings().getVideoMode(), Settings::inst().getTitle());
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -241,6 +242,7 @@ void StateBase::gameEvents()
                 break;
 
                 case PADDLE_COLLISION:
+                {
                     std::shared_ptr<PaddleCollision> temp =  std::dynamic_pointer_cast<PaddleCollision>(evtPtr);
 
                     if(temp)
@@ -252,7 +254,16 @@ void StateBase::gameEvents()
 //                            currentPaddle = temp->paddle;
                         //std::cout << "Paddle and ball collided id " << temp->paddle << std::endl;
                     }
-
+                }
+                break;
+                case EventId::CHANGE_STATE:
+                    std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(evtPtr);
+                    switch(temp->state)
+                    {
+                        case stateId::CONNECT_STATE:
+                            std::cout << "Connect state" << std::endl;
+                        break;
+                    }
                 break;
 
             }

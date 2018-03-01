@@ -1,4 +1,6 @@
 #include "States/ClientPlayState.h"
+#include "Events/EventManager.h"
+#include "States/Id.h"
 
 ClientPlayState::ClientPlayState(Engin::Engin& newEngin, std::unique_ptr<Client> newClient):
 PlayState::PlayState(newEngin),
@@ -11,6 +13,7 @@ void ClientPlayState::Init()
 {
     PlayState::Init();
     client->init();
+
 }
 void ClientPlayState::Clean()
 {

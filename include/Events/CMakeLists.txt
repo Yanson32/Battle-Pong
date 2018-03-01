@@ -11,6 +11,8 @@ set(FILES
 			"${CMAKE_CURRENT_SOURCE_DIR}/LeftPaddleGoal.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/RightPaddleGoal.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleCollision.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/ChangeState.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Events.h"
 
 )
 set(SUB_DIRECTORIES "Listeners")
