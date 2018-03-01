@@ -11,7 +11,7 @@
 #include "States/MusicState.h"
 #include "ResourceManager.h"
 
-OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin)
+OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin, stateId::OPTIONS_STATE)
 {
     //ctor
     controlsButton = tgui::Button::create("Controls");

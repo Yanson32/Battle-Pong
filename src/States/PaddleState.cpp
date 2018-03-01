@@ -4,12 +4,13 @@
 #include "Objects/Wall.h"
 #include "Objects/Ball.h"
 #include "States/ControlState.h"
+#include "States/Id.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 #include "Settings.h"
 #include "ResourceManager.h"
 PaddleState::PaddleState(Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings):
-StateBase(newEngin),
+StateBase(newEngin, stateId::PADDLE_STATE),
 paddleSettings(pSettings)
 {
     //ctor

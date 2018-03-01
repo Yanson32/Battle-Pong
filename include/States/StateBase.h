@@ -27,6 +27,7 @@
 
 #include "PaddleHud.h"
 #include "Logging.h"
+#include "States/Id.h"
 class Wall;
 class Paddle;
 class Ball;
@@ -44,7 +45,7 @@ class StateBase: public Engin::GameState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        StateBase(Engin::Engin& newEngin);
+        StateBase(Engin::Engin& newEngin, const stateId newState);
 
 
         virtual void Init() override;
@@ -130,7 +131,7 @@ class StateBase: public Engin::GameState
         Engin::Engin &engin;                            ///The Main game engin
         bool sysPause;                                  ///True when the system is paused and false otherwise
         boost::log::sources::severity_logger< logging::trivial::severity_level > log;
-
+        stateId state;
 
 };
 

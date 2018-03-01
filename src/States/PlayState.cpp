@@ -18,7 +18,7 @@
 #include "ResourceManager.h"
 #include "States/OptionsState.h"
 
-PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin)
+PlayState::PlayState(Engin::Engin& newEngin): StateBase(newEngin, stateId::PLAY_STATE)
 {
 
 

@@ -7,11 +7,12 @@
 #include "Settings.h"
 #include "States/PaddleState.h"
 #include "States/OptionsState.h"
+#include "States/Id.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 #include "ResourceManager.h"
 
-ControlState::ControlState(Engin::Engin& newEngin): StateBase(newEngin)
+ControlState::ControlState(Engin::Engin& newEngin): StateBase(newEngin, stateId::CONTROL_STATE)
 {
     //ctor
     paddle1 = tgui::Button::create("Paddle 1");

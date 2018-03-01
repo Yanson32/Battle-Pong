@@ -12,7 +12,7 @@
 #include "Settings.h"
 #include "ResourceManager.h"
 
-MusicState::MusicState(Engin::Engin& engin): StateBase(engin)
+MusicState::MusicState(Engin::Engin& engin): StateBase(engin, stateId::MUSIC_STATE)
 {
     //ctor
     backButton = tgui::Button::create("Back");

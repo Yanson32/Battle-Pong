@@ -50,7 +50,8 @@ std::shared_ptr<PaddleHud> StateBase::paddle2Hud(new PaddleHud(Settings::inst().
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
 
-StateBase::StateBase(Engin::Engin& newEngin):
+StateBase::StateBase(Engin::Engin& newEngin, const stateId newState):
+state(newState),
 Engin::GameState(),
 engin(newEngin),
 sysPause(false)

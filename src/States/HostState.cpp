@@ -45,7 +45,7 @@
 //
 //}
 
-HostState::HostState(Engin::Engin& engin): StateBase(engin)
+HostState::HostState(Engin::Engin& engin): StateBase(engin, stateId::HOST_STATE)
 {
     //ctor
     backButton = tgui::Button::create("Back");

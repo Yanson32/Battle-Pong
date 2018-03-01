@@ -18,6 +18,7 @@
 #include "Objects/Ball.h"
 #include "Objects/Paddle.h"
 #include "States/OptionsState.h"
+#include "States/Id.h"
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 
@@ -25,7 +26,7 @@
 #include "ResourceManager.h"
 #include "Logging.h"
 
-IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin)
+IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin, stateId::INTRO_STATE)
 {
 
     //ctor

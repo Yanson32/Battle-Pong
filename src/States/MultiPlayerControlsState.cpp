@@ -22,7 +22,7 @@
 
 
 
-MultiplayerControlState::MultiplayerControlState(Engin::Engin& engin): StateBase(engin)
+MultiplayerControlState::MultiplayerControlState(Engin::Engin& engin): StateBase(engin, stateId::MULTICONTROL_STATE)
 {
     //ctor
     backButton = tgui::Button::create("Back");

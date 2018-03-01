@@ -53,7 +53,7 @@ void ConnectPanel::onConnectPressed()
 
 }
 
-ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin)
+ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin, stateId::CONNECT_STATE)
 {
     //ctor
     backButton = tgui::Button::create("Back");
