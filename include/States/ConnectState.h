@@ -2,20 +2,6 @@
 #define CONTROLSTATE_H
 #include "States/StateBase.h"
 #include <TGUI/TGUI.hpp>
-class ConnectPanel: public tgui::Panel
-{
-    public:
-        ConnectPanel();
-        void Init();
-    private:
-        tgui::Label::Ptr ipLabel;
-        tgui::EditBox::Ptr ipBox;
-        tgui::Label::Ptr portLabel;
-        tgui::EditBox::Ptr portBox;
-        tgui::Button::Ptr connectButton;
-        void onConnectPressed();
-
-};
 
 class ConnectState: public StateBase
 {

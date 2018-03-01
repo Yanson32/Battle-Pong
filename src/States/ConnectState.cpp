@@ -8,50 +8,6 @@
 #include "States/ClientPlayState.h"
 #include "SFMLFunctions.h"
 
-//std::shared_ptr<ConnectPanel> ConnectState::panel(new ConnectPanel());
-
-ConnectPanel::ConnectPanel()
-
-{
-    //Ip address label
-    ipLabel = tgui::Label::create("Ip Lable");
-    ipLabel->setText("Ip address");
-    this->add(ipLabel);
-
-    //EditBox to enter ip address
-    ipBox = tgui::EditBox::create();
-    ipBox->setPosition({150, 0});
-    this->add(ipBox);
-
-    //Port number lable
-    portLabel = tgui::Label::create("Port Lable");
-    portLabel->setText("Port Number");
-    portLabel->setPosition({0, 50});
-    this->add(portLabel);
-
-    //EditBox to enter port number
-    portBox = tgui::EditBox::create();
-    portBox->setPosition({150, 50});
-    this->add(portBox);
-
-    connectButton = tgui::Button::create("Connect");
-    connectButton->connect("pressed", &ConnectPanel::onConnectPressed, this);
-    connectButton->setPosition({0, 100});
-    this->add(connectButton);
-
-
-    setBackgroundColor(sf::Color::Transparent);
-}
-
-void ConnectPanel::Init()
-{
-
-}
-
-void ConnectPanel::onConnectPressed()
-{
-
-}
 
 ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin, stateId::CONNECT_STATE)
 {
