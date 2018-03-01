@@ -3,8 +3,7 @@
 #include "Objects/Paddle.h"
 #include "Objects/Ball.h"
 #include "ResourceManager.h"
-#include "Events/EventManager.h"
-#include "Events/PlaySound.h"
+#include "Events/Events.h"
 #include "States/HostPlayState.h"
 #include "Events/ChangeState.h"
 #include "SFMLFunctions.h"
@@ -110,7 +109,6 @@ void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        //EventManager::inst().Dispatch((evtPtr));
         switch(evtPtr->id)
         {
             case EventId::LEFT_GOAL_COLLISION:
@@ -156,6 +154,10 @@ void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
                     break;
                 }
             }
+            break;
+            case EventId::POP_STATE:
+                EventManager::inst().Post<PlaySound>("Button Sound");
+                engin.Pop();
             break;
         }
 
@@ -212,8 +214,7 @@ void HostState::Clean()
 
 void HostState::onBackPressed()
 {
-    EventManager::inst().Post<PlaySound>("Button Sound");
-    engin.Pop();
+    EventManager::inst().Post<Pop>();
 }
 
 void HostState::onHostPressed()

@@ -12,6 +12,7 @@
 #include "Events/PlaySound.h"
 #include "Events/RightPaddleGoal.h"
 #include "Events/SoundVolumeChanged.h"
+#include "Events/Pop.h"
 
 
 #endif // EVENTS_H

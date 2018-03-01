@@ -1,8 +1,8 @@
 #ifndef POP_H
 #define POP_H
+#include "EventBase.h"
 
-
-class Pop
+class Pop: public EventBase
 {
     public:
         Pop();

@@ -1,6 +1,6 @@
 #include "Events/Pop.h"
-
-Pop::Pop()
+#include "Events/Id.h"
+Pop::Pop(): EventBase::EventBase(EventId::POP_STATE)
 {
     //ctor
 }
