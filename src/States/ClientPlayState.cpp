@@ -3,7 +3,7 @@
 #include "States/Id.h"
 
 ClientPlayState::ClientPlayState(Engin::Engin& newEngin, std::unique_ptr<Client> newClient):
-PlayState::PlayState(newEngin),
+PlayState::PlayState(newEngin, stateId::CLIENT_PLAY_STATE),
 client(std::move(newClient))
 {
     //ctor

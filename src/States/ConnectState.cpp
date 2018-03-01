@@ -40,10 +40,14 @@ ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin, stateId::CONNE
     connectButton->setPosition({200, 300});
 
     portBox->setInputValidator("[0-9]+");
-    portBox->setDefaultText("150");
-    portBox->setText("150");
 
-    ipBox->setText("localhost");
+    sf::String port("5000");
+    portBox->setDefaultText(port);
+    portBox->setText(port);
+
+    sf::String ip("127.0.0.1");
+    ipBox->setText(ip);
+    ipBox->setText(ip);
     ipBox->setInputValidator("[0-9.]+");
 
 

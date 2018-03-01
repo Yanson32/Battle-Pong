@@ -1,7 +1,7 @@
 #include "States/HostPlayState.h"
 
 HostPlayState::HostPlayState(Engin::Engin& newEngin, std::unique_ptr<Server> serverPtr):
-PlayState::PlayState(newEngin),
+PlayState::PlayState(newEngin, stateId::HOST_PLAY_STATE),
 server(std::move(serverPtr))
 {
     //ctor

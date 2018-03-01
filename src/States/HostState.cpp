@@ -6,6 +6,7 @@
 #include "Events/EventManager.h"
 #include "Events/PlaySound.h"
 #include "States/HostPlayState.h"
+#include "Events/ChangeState.h"
 #include "SFMLFunctions.h"
 //std::shared_ptr<HostPanel> HostState::panel(new HostPanel());
 //
@@ -68,8 +69,10 @@ HostState::HostState(Engin::Engin& engin): StateBase(engin, stateId::HOST_STATE)
     hostButton->setPosition({200, 250});
 
     portBox->setInputValidator("[0-9]+");
-    portBox->setDefaultText("150");
-    portBox->setText("150");
+
+    sf::String port("5000");
+    portBox->setDefaultText(port);
+    portBox->setText(port);
 }
 
 void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
@@ -103,7 +106,60 @@ void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 
     }
 
-    gameEvents();
+    //GameUtilities event loop
+    Evt::EventPtr evtPtr;
+    while(EventManager::inst().Poll((evtPtr)))
+    {
+        //EventManager::inst().Dispatch((evtPtr));
+        switch(evtPtr->id)
+        {
+            case EventId::LEFT_GOAL_COLLISION:
+            {
+                int currentScore = Settings::inst().paddle1->getScore();
+                Settings::inst().paddle1->setScore(currentScore + 1);
+                paddle1Hud->setScore(currentScore + 1);
+                reset();
+            }
+            break;
+            case EventId::RIGHT_GOAL_COLLISION:
+            {
+                int currentScore = Settings::inst().paddle2->getScore();
+                Settings::inst().paddle2->setScore(currentScore + 1);
+                paddle2Hud->setScore(currentScore + 1);
+                reset();
+            }
+            break;
+            case EventId::PLAY_SOUND:
+            {
+                std::shared_ptr<PlaySound> temp =  std::dynamic_pointer_cast<PlaySound>(evtPtr);
+
+                if(temp && ResourceManager::sound.isLoaded(temp->soundId))
+                {
+                    sound.setBuffer(ResourceManager::sound.get(temp->soundId));
+                    sound.play();
+                }
+            }
+            break;
+            case BALL_COLLISION:
+                EventManager::inst().Post<PlaySound>("Ball Sound");
+            break;
+            case EventId::CHANGE_STATE:
+            {
+                std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(evtPtr);
+                switch(temp->state)
+                {
+                    case stateId::HOST_PLAY_STATE:
+                            EventManager::inst().Post<PlaySound>("Button Sound");
+                            sf::String value = portBox->getText();
+                            std::unique_ptr<Server> serverPtr(new Server(toInt(value)));
+                            engin.Push<HostPlayState>(engin, std::move(serverPtr));
+                    break;
+                }
+            }
+            break;
+        }
+
+    }
 }
 
 void HostState::Update(Engin::Engin& engin, const int &deltaTime)
@@ -162,11 +218,10 @@ void HostState::onBackPressed()
 
 void HostState::onHostPressed()
 {
-    EventManager::inst().Post<PlaySound>("Button Sound");
-    sf::String value = portBox->getText();
-    std::unique_ptr<Server> serverPtr(new Server(toInt(value)));
-    engin.Push<HostPlayState>(engin, std::move(serverPtr));
+    EventManager::inst().Post<ChangeState>(stateId::HOST_PLAY_STATE);
 }
+
+
 
 HostState::~HostState()
 {

@@ -195,7 +195,7 @@ void StateBase::gameEvents()
                         if(music.openFromFile(temp->file))
                         {
                             music.play();
-                            music.setVolume(254);
+                            //music.setVolume(254);
                         }
                         else
                         {
@@ -258,16 +258,20 @@ void StateBase::gameEvents()
                 }
                 break;
                 case EventId::CHANGE_STATE:
+                {
                     std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(evtPtr);
                     switch(temp->state)
                     {
                         case stateId::CONNECT_STATE:
                             std::cout << "Connect state" << std::endl;
                         break;
+
                     }
+                }
                 break;
 
             }
+
         }
 
 }

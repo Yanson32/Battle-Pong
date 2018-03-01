@@ -25,7 +25,7 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        PlayState(Engin::Engin& newEngin);
+        PlayState(Engin::Engin& newEngin, const stateId newId = stateId::PLAY_STATE);
 
 
         virtual void Init() override;

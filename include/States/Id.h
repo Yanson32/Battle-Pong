@@ -12,6 +12,8 @@ enum stateId
     MUSIC_STATE,
     MULTICONTROL_STATE,
     DEMO_STATE,
-    HOST_STATE
+    HOST_STATE,
+    HOST_PLAY_STATE,
+    CLIENT_PLAY_STATE
 };
 #endif // STATES_ID_H
