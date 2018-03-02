@@ -22,7 +22,8 @@ class PaddleState: public StateBase
         ********************************************************************/
         PaddleState(Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings);
 
-
+        void sfEvent(Engin::Engin& engin, const sf::Event &event);
+        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
         virtual void Init();
         virtual void Clean();
 

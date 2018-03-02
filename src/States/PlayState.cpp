@@ -51,38 +51,21 @@ void PlayState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 
         while (window.pollEvent(event))
         {
-
-            switch (event.type)
-            {
-
-                case sf::Event::Closed:
-					engin.Quit();
-                    break;
-
-
-                case sf::Event::KeyPressed:
-                    if(event.key.code == sf::Keyboard::P)
-                    {
-                        if(!isSystemPaused())
-                            Pause(!IsPaused());
-                    }
-                    break;
-
-                default:
-                    break;
-            }
+            StateBase::sfEvent(engin, event);
+            sfEvent(engin, event);
+            gui.handleEvent(event);
         }
-        gameEvents();
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
-
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-        {
-            Pause();
-            engin.Push<OptionsState>(engin);
-        }
     }
 
+    //GameUtilities event loop
+    Evt::EventPtr evtPtr;
+    while(EventManager::inst().Poll((evtPtr)))
+    {
+        StateBase::guEvent(engin, evtPtr);
+        guEvent(engin, evtPtr);
+    }
 }
 
 void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
@@ -197,6 +180,16 @@ void PlayState::Clean()
     ResourceManager::sound.remove("Button Sound");
     ResourceManager::sound.remove("Ball Sound");
     ResourceManager::font.remove("Header Font");
+
+}
+
+void PlayState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+{
+
+}
+
+void PlayState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+{
 
 }
 

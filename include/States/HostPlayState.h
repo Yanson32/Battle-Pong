@@ -8,7 +8,9 @@ class HostPlayState: public PlayState
 {
     public:
         HostPlayState(Engin::Engin& newEngin, std::unique_ptr<Server> serverPtr);
-                virtual void Init() override;
+        void sfEvent(Engin::Engin& engin, const sf::Event &event);
+        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
+        virtual void Init() override;
         virtual void Clean() override;
 
         /****************************************************************//**

@@ -78,6 +78,9 @@ class StateBase: public Engin::GameState
         virtual void Draw(Engin::Engin& engin, const int &deltaTime) override;
 
 
+
+        void sfEvent(Engin::Engin& engin, const sf::Event &event);
+        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
         /****************************************************************//**
         *   @brief  This method allows the system to pause the game.
         *           When system pause is in effect regular pause won't

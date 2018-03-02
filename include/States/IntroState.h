@@ -54,6 +54,8 @@ class IntroState: public StateBase
 
         virtual void Init() override;
         virtual void Clean() override;
+        void sfEvent(Engin::Engin& engin, const sf::Event &event);
+        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
 
         /****************************************************************//**
         *   @brief  Destructor

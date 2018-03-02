@@ -8,7 +8,8 @@ class MusicState: public StateBase
 {
     public:
         MusicState(Engin::Engin& engin);
-
+        void sfEvent(Engin::Engin& engin, const sf::Event &event);
+        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
         virtual void Init();
         virtual void Clean();
 

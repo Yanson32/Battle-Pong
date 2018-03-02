@@ -27,6 +27,7 @@ void HostPlayState::Clean()
 void HostPlayState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
 {
     PlayState::HandleEvents(newEngin, deltaTime);
+
 }
 
 
@@ -51,6 +52,16 @@ void HostPlayState::Update(Engin::Engin& engin, const int &deltaTime)
 void HostPlayState::Draw(Engin::Engin& engin, const int &deltaTime)
 {
     PlayState::Draw(engin, deltaTime);
+}
+
+void HostPlayState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+{
+
+}
+
+void HostPlayState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+{
+
 }
 
 HostPlayState::~HostPlayState()

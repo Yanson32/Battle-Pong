@@ -9,17 +9,17 @@ Server::Server(const int newPort): port(newPort)
 
 void Server::init()
 {
-    std::cout << "Server::init " << std::endl;
+
     if (listener.listen(port) != sf::Socket::Done)
     {
-        std::cerr << "unable to listen on port " << port << std::endl;
+        std::cerr << "unable to listen on port " << listener.getLocalPort() << std::endl;
         return;
     }
 
 
     if (listener.accept(socket) != sf::Socket::Done)
     {
-        std::cerr << "unable to accept a connection on port " << port << std::endl;
+        std::cerr << "unable to accept a connection on port " << listener.getLocalPort() << std::endl;
         return;
     }
 }

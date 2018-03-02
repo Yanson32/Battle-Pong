@@ -69,30 +69,21 @@ void IntroState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 
         while (window.pollEvent(event))
         {
-
+            StateBase::sfEvent(engin, event);
+            sfEvent(engin, event);
             gui.handleEvent(event);
-            switch (event.type)
-            {
-
-                case sf::Event::Closed:
-					engin.Quit();
-                    break;
-
-
-                case sf::Event::KeyPressed:
-                    break;
-
-                default:
-                    break;
-            }
         }
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
-
-
     }
 
-    gameEvents();
+    //GameUtilities event loop
+    Evt::EventPtr evtPtr;
+    while(EventManager::inst().Poll((evtPtr)))
+    {
+        StateBase::guEvent(engin, evtPtr);
+        guEvent(engin, evtPtr);
+    }
 
 }
 
@@ -162,6 +153,16 @@ void IntroState::onMultiplayerPressed()
 {
     EventManager::inst().Post<PlaySound>("Button Sound");
     engin.Push<MultiplayerControlState>(engin);
+}
+
+void IntroState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+{
+
+}
+
+void IntroState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+{
+
 }
 
 IntroState::~IntroState()

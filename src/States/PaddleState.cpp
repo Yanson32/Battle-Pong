@@ -58,32 +58,21 @@ void PaddleState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
 
         while (window.pollEvent(event))
         {
+            StateBase::sfEvent(engin, event);
+            sfEvent(engin, event);
             gui.handleEvent(event);
-            switch (event.type)
-            {
-
-                case sf::Event::Closed:
-					engin.Quit();
-                    break;
-
-
-                case sf::Event::KeyPressed:
-                    if(event.key.code == sf::Keyboard::P)
-                    {
-                        Pause(!IsPaused());
-                    }
-                    break;
-
-                default:
-                    break;
-            }
         }
-
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
     }
 
-    gameEvents();
+    //GameUtilities event loop
+    Evt::EventPtr evtPtr;
+    while(EventManager::inst().Poll((evtPtr)))
+    {
+        StateBase::guEvent(engin, evtPtr);
+        guEvent(engin, evtPtr);
+    }
 }
 
 void PaddleState::Update(Engin::Engin& engin, const int &deltaTime)
@@ -150,6 +139,16 @@ void PaddleState::Clean()
     gui.removeAllWidgets();
     ResourceManager::sound.remove("Button Sound");
     ResourceManager::sound.remove("Ball Sound");
+}
+
+void PaddleState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+{
+
+}
+
+void PaddleState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+{
+
 }
 
 PaddleState::~PaddleState()

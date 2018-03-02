@@ -41,37 +41,21 @@ void OptionsState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 
         while (window.pollEvent(event))
         {
+            StateBase::sfEvent(engin, event);
+            sfEvent(engin, event);
             gui.handleEvent(event);
-            switch (event.type)
-            {
-
-                case sf::Event::Closed:
-					engin.Quit();
-                    break;
-
-
-                case sf::Event::KeyPressed:
-                    if(event.key.code == sf::Keyboard::P)
-                    {
-                        Pause(!IsPaused());
-                    }
-                    break;
-
-                default:
-                    break;
-            }
         }
-
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
-
-        if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-        {
-            engin.Pop();
-        }
     }
 
-    gameEvents();
+    //GameUtilities event loop
+    Evt::EventPtr evtPtr;
+    while(EventManager::inst().Poll((evtPtr)))
+    {
+        StateBase::guEvent(engin, evtPtr);
+        guEvent(engin, evtPtr);
+    }
 }
 
 void OptionsState::Update(Engin::Engin& engin, const int &deltaTime)
@@ -131,6 +115,16 @@ void OptionsState::Clean()
     ResourceManager::sound.remove("Button Sound");
     ResourceManager::sound.remove("Ball Sound");
     ResourceManager::font.remove("Header Font");
+}
+
+void OptionsState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+{
+
+}
+
+void OptionsState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+{
+
 }
 
 OptionsState::~OptionsState()

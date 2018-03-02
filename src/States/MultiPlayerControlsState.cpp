@@ -84,30 +84,21 @@ void MultiplayerControlState::HandleEvents(Engin::Engin& newEngin, const int &de
 
         while (window.pollEvent(event))
         {
-
+            StateBase::sfEvent(engin, event);
+            sfEvent(engin, event);
             gui.handleEvent(event);
-            switch (event.type)
-            {
-
-                case sf::Event::Closed:
-					engin.Quit();
-                    break;
-
-
-                case sf::Event::KeyPressed:
-                    break;
-
-                default:
-                    break;
-            }
         }
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
-
-
     }
 
-    gameEvents();
+    //GameUtilities event loop
+    Evt::EventPtr evtPtr;
+    while(EventManager::inst().Poll((evtPtr)))
+    {
+        StateBase::guEvent(engin, evtPtr);
+        guEvent(engin, evtPtr);
+    }
 }
 
 /****************************************************************//**
@@ -150,6 +141,16 @@ void MultiplayerControlState::onBackPressed()
     std::cout << "onBackPressed" << std::endl;
     engin.Pop();
     EventManager::inst().Post<PlaySound>("Button Sound");
+}
+
+void MultiplayerControlState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+{
+
+}
+
+void MultiplayerControlState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+{
+
 }
 
 MultiplayerControlState::~MultiplayerControlState()

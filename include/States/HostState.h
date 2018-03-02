@@ -23,6 +23,9 @@ class HostState: public StateBase
     public:
         HostState(Engin::Engin& engin);
 
+        void sfEvent(Engin::Engin& engin, const sf::Event &event);
+        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
+
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
         *           This should be called once per frame.
@@ -56,6 +59,10 @@ class HostState: public StateBase
     private:
         //static std::shared_ptr<HostPanel> panel;
         tgui::Button::Ptr backButton;
+        tgui::Label::Ptr localIpLabel;
+        tgui::EditBox::Ptr localIpBox;
+        tgui::Label::Ptr globalIpLabel;
+        tgui::EditBox::Ptr globalIpBox;
         tgui::Label::Ptr portLabel;
         tgui::EditBox::Ptr portBox;
         tgui::Button::Ptr hostButton;

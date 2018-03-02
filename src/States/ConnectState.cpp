@@ -17,7 +17,7 @@ ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin, stateId::CONNE
     backButton->setPosition(Settings::inst().buttonPosition(4));
     backButton->setSize(Settings::inst().buttonSize());
 
-        //Ip address label
+    //Ip address label
     ipLabel = tgui::Label::create("Ip Lable");
     ipLabel->setText("Ip address");
     ipLabel->setPosition({200, 200});

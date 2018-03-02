@@ -295,6 +295,56 @@ void StateBase::Init()
     sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
 }
 
+
+void StateBase::sfEvent(Engin::Engin& engin, const sf::Event &event)
+{
+    switch (event.type)
+    {
+
+        case sf::Event::Closed:
+            engin.Quit();
+            break;
+    }
+}
+
+void StateBase::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+{
+    switch(event->id)
+    {
+        case EventId::LEFT_GOAL_COLLISION:
+        {
+            int currentScore = Settings::inst().paddle1->getScore();
+            Settings::inst().paddle1->setScore(currentScore + 1);
+            paddle1Hud->setScore(currentScore + 1);
+            reset();
+        }
+        break;
+        case EventId::RIGHT_GOAL_COLLISION:
+        {
+            int currentScore = Settings::inst().paddle2->getScore();
+            Settings::inst().paddle2->setScore(currentScore + 1);
+            paddle2Hud->setScore(currentScore + 1);
+            reset();
+        }
+        break;
+        case EventId::PLAY_SOUND:
+        {
+            std::shared_ptr<PlaySound> temp =  std::dynamic_pointer_cast<PlaySound>(event);
+
+            if(temp && ResourceManager::sound.isLoaded(temp->soundId))
+            {
+                sound.setBuffer(ResourceManager::sound.get(temp->soundId));
+                sound.play();
+            }
+        }
+        break;
+        case BALL_COLLISION:
+            EventManager::inst().Post<PlaySound>("Ball Sound");
+        break;
+    }
+}
+
+
 StateBase::~StateBase()
 {
 }

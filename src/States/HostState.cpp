@@ -7,6 +7,8 @@
 #include "States/HostPlayState.h"
 #include "Events/ChangeState.h"
 #include "SFMLFunctions.h"
+#include <SFML/Network.hpp>
+#include <SFML/Network/IpAddress.hpp>
 //std::shared_ptr<HostPanel> HostState::panel(new HostPanel());
 //
 //HostPanel::HostPanel()
@@ -53,25 +55,57 @@ HostState::HostState(Engin::Engin& engin): StateBase(engin, stateId::HOST_STATE)
     backButton->setPosition(Settings::inst().buttonPosition(4));
     backButton->setSize(Settings::inst().buttonSize());
 
+    //Global Ip address label
+    globalIpLabel = tgui::Label::create("Global Ip");
+    globalIpLabel->setPosition({200, 200});
+
+    //EditBox to enter ip address
+    globalIpBox = tgui::EditBox::create();
+    globalIpBox->setPosition({350, 200});
+
+    //Global Ip address label
+    localIpLabel = tgui::Label::create("Local Ip");
+    localIpLabel->setPosition({200, 250});
+
+    //EditBox to enter ip address
+    localIpBox = tgui::EditBox::create();
+    localIpBox->setPosition({350, 250});
+
     //Port number lable
     portLabel = tgui::Label::create("Port");
-    portLabel->setPosition({200, 200});
+    portLabel->setPosition({200, 300});
 
 
     //EditBox to enter port number
     portBox = tgui::EditBox::create();
-    portBox->setPosition({350, 200});
+    portBox->setPosition({350, 300});
 
 
     hostButton = tgui::Button::create("Host");
     hostButton->connect("pressed", &HostState::onHostPressed, this);
-    hostButton->setPosition({200, 250});
+    hostButton->setPosition({200, 350});
 
     portBox->setInputValidator("[0-9]+");
 
     sf::String port("5000");
     portBox->setDefaultText(port);
     portBox->setText(port);
+
+    sf::IpAddress address = sf::IpAddress::getPublicAddress();
+    sf::String globalIp = address.toString();
+    globalIpBox->setText(globalIp);
+    globalIpBox->setText(globalIp);
+
+    globalIpBox->setInputValidator("[0-9.]+");
+
+    sf::IpAddress address2 = sf::IpAddress::getLocalAddress();
+    sf::String localIp = address2.toString();
+    localIpBox->setText(localIp);
+    localIpBox->setText(localIp);
+
+
+
+
 }
 
 void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
@@ -82,85 +116,20 @@ void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 
         while (window.pollEvent(event))
         {
-
+            StateBase::sfEvent(engin, event);
+            sfEvent(engin, event);
             gui.handleEvent(event);
-            switch (event.type)
-            {
-
-                case sf::Event::Closed:
-					engin.Quit();
-                    break;
-
-
-                case sf::Event::KeyPressed:
-                    break;
-
-                default:
-                    break;
-            }
         }
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
-
-
     }
 
     //GameUtilities event loop
     Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        switch(evtPtr->id)
-        {
-            case EventId::LEFT_GOAL_COLLISION:
-            {
-                int currentScore = Settings::inst().paddle1->getScore();
-                Settings::inst().paddle1->setScore(currentScore + 1);
-                paddle1Hud->setScore(currentScore + 1);
-                reset();
-            }
-            break;
-            case EventId::RIGHT_GOAL_COLLISION:
-            {
-                int currentScore = Settings::inst().paddle2->getScore();
-                Settings::inst().paddle2->setScore(currentScore + 1);
-                paddle2Hud->setScore(currentScore + 1);
-                reset();
-            }
-            break;
-            case EventId::PLAY_SOUND:
-            {
-                std::shared_ptr<PlaySound> temp =  std::dynamic_pointer_cast<PlaySound>(evtPtr);
-
-                if(temp && ResourceManager::sound.isLoaded(temp->soundId))
-                {
-                    sound.setBuffer(ResourceManager::sound.get(temp->soundId));
-                    sound.play();
-                }
-            }
-            break;
-            case BALL_COLLISION:
-                EventManager::inst().Post<PlaySound>("Ball Sound");
-            break;
-            case EventId::CHANGE_STATE:
-            {
-                std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(evtPtr);
-                switch(temp->state)
-                {
-                    case stateId::HOST_PLAY_STATE:
-                            EventManager::inst().Post<PlaySound>("Button Sound");
-                            sf::String value = portBox->getText();
-                            std::unique_ptr<Server> serverPtr(new Server(toInt(value)));
-                            engin.Push<HostPlayState>(engin, std::move(serverPtr));
-                    break;
-                }
-            }
-            break;
-            case EventId::POP_STATE:
-                EventManager::inst().Post<PlaySound>("Button Sound");
-                engin.Pop();
-            break;
-        }
-
+        StateBase::guEvent(engin, evtPtr);
+        guEvent(engin, evtPtr);
     }
 }
 
@@ -198,8 +167,10 @@ void HostState::Init()
     gui.add(portLabel);
     //gui.add(panel);
     gui.add(backButton);
-
-
+    gui.add(globalIpLabel);
+    gui.add(globalIpBox);
+    gui.add(localIpLabel);
+    gui.add(localIpBox);
 
 }
 
@@ -222,6 +193,36 @@ void HostState::onHostPressed()
     EventManager::inst().Post<ChangeState>(stateId::HOST_PLAY_STATE);
 }
 
+
+void HostState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+{
+
+}
+
+void HostState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+{
+    switch(event->id)
+    {
+        case EventId::CHANGE_STATE:
+        {
+            std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(event);
+            switch(temp->state)
+            {
+                case stateId::HOST_PLAY_STATE:
+                        EventManager::inst().Post<PlaySound>("Button Sound");
+                        sf::String value = portBox->getText();
+                        std::unique_ptr<Server> serverPtr(new Server(toInt(value)));
+                        engin.Push<HostPlayState>(engin, std::move(serverPtr));
+                break;
+            }
+        }
+        break;
+        case EventId::POP_STATE:
+            EventManager::inst().Post<PlaySound>("Button Sound");
+            engin.Pop();
+        break;
+    }
+}
 
 
 HostState::~HostState()
