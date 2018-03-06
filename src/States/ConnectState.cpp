@@ -7,7 +7,7 @@
 #include "Events/PlaySound.h"
 #include "States/ClientPlayState.h"
 #include "SFMLFunctions.h"
-
+#include "Events/ChangeState.h"
 
 ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin, stateId::CONNECT_STATE)
 {
@@ -61,30 +61,21 @@ void ConnectState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 
         while (window.pollEvent(event))
         {
-
+            StateBase::sfEvent(engin, event);
+            sfEvent(engin, event);
             gui.handleEvent(event);
-            switch (event.type)
-            {
-
-                case sf::Event::Closed:
-					engin.Quit();
-                    break;
-
-
-                case sf::Event::KeyPressed:
-                    break;
-
-                default:
-                    break;
-            }
         }
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
-
-
     }
 
-    gameEvents();
+    //GameUtilities event loop
+    Evt::EventPtr evtPtr;
+    while(EventManager::inst().Poll((evtPtr)))
+    {
+        StateBase::guEvent(engin, evtPtr);
+        guEvent(engin, evtPtr);
+    }
 }
 
 void ConnectState::Update(Engin::Engin& engin, const int &deltaTime)
@@ -148,6 +139,38 @@ void ConnectState::onConnectPressed()
     sf::String ip = ipBox->getText();
     std::unique_ptr<Client> client(new Client(ip, toInt(value)));
     engin.Push<ClientPlayState>(engin, std::move(client));
+}
+
+void ConnectState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+{
+
+}
+
+void ConnectState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+{
+        //GameUtilities event loop
+        while(EventManager::inst().Poll((event)))
+        {
+            //EventManager::inst().Dispatch((evtPtr));
+            switch(event->id)
+            {
+
+                case EventId::CHANGE_STATE:
+                {
+                    std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(event);
+                    switch(temp->state)
+                    {
+                        case stateId::CONNECT_STATE:
+                            std::cout << "Connect state" << std::endl;
+                        break;
+
+                    }
+                }
+                break;
+
+            }
+
+        }
 }
 
 ConnectState::~ConnectState()

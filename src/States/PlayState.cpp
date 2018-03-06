@@ -17,6 +17,7 @@
 #include "Events/PlayMusic.h"
 #include "ResourceManager.h"
 #include "States/OptionsState.h"
+#include "Events/ChangeState.h"
 
 PlayState::PlayState(Engin::Engin& newEngin, const stateId newId): StateBase(newEngin, newId)
 {
@@ -190,7 +191,29 @@ void PlayState::sfEvent(Engin::Engin& engin, const sf::Event &event)
 
 void PlayState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
 {
+        //GameUtilities event loop
+        while(EventManager::inst().Poll((event)))
+        {
+            //EventManager::inst().Dispatch((evtPtr));
+            switch(event->id)
+            {
 
+                case EventId::CHANGE_STATE:
+                {
+                    std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(event);
+                    switch(temp->state)
+                    {
+                        case stateId::CONNECT_STATE:
+                            std::cout << "Playstate Connect state" << std::endl;
+                        break;
+
+                    }
+                }
+                break;
+
+            }
+
+        }
 }
 
 PlayState::~PlayState()
