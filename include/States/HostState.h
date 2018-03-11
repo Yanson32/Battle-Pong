@@ -60,9 +60,9 @@ class HostState: public StateBase
         //static std::shared_ptr<HostPanel> panel;
         tgui::Button::Ptr backButton;
         tgui::Label::Ptr localIpLabel;
-        tgui::EditBox::Ptr localIpBox;
+        tgui::Label::Ptr localIpBox;
         tgui::Label::Ptr globalIpLabel;
-        tgui::EditBox::Ptr globalIpBox;
+        tgui::Label::Ptr globalIpBox;
         tgui::Label::Ptr portLabel;
         tgui::EditBox::Ptr portBox;
         tgui::Button::Ptr hostButton;

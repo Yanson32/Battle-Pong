@@ -59,16 +59,22 @@ HostState::HostState(Engin::Engin& engin): StateBase(engin, stateId::HOST_STATE)
     globalIpLabel = tgui::Label::create("Global Ip");
     globalIpLabel->setPosition({200, 200});
 
+    sf::IpAddress address = sf::IpAddress::getPublicAddress();
+    sf::String globalIp = address.toString();
+
     //EditBox to enter ip address
-    globalIpBox = tgui::EditBox::create();
+    globalIpBox = tgui::Label::create(globalIp);
     globalIpBox->setPosition({350, 200});
 
     //Global Ip address label
     localIpLabel = tgui::Label::create("Local Ip");
     localIpLabel->setPosition({200, 250});
 
+    sf::IpAddress address2 = sf::IpAddress::getLocalAddress();
+    sf::String localIp = address2.toString();
+
     //EditBox to enter ip address
-    localIpBox = tgui::EditBox::create();
+    localIpBox = tgui::Label::create(localIp);
     localIpBox->setPosition({350, 250});
 
     //Port number lable
@@ -85,27 +91,14 @@ HostState::HostState(Engin::Engin& engin): StateBase(engin, stateId::HOST_STATE)
     hostButton->connect("pressed", &HostState::onHostPressed, this);
     hostButton->setPosition({200, 350});
 
-    portBox->setInputValidator("[0-9]+");
+    //portBox->setInputValidator("[0-9]+");
 
     sf::String port("5000");
     portBox->setDefaultText(port);
     portBox->setText(port);
 
-    sf::IpAddress address = sf::IpAddress::getPublicAddress();
-    sf::String globalIp = address.toString();
-    globalIpBox->setText(globalIp);
-    globalIpBox->setText(globalIp);
 
-    globalIpBox->setInputValidator("[0-9.]+");
-
-    sf::IpAddress address2 = sf::IpAddress::getLocalAddress();
-    sf::String localIp = address2.toString();
-    localIpBox->setText(localIp);
-    localIpBox->setText(localIp);
-
-
-
-
+    //globalIpBox->setInputValidator("[0-9.]+");
 }
 
 void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
