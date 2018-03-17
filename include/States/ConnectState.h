@@ -6,14 +6,14 @@
 class ConnectState: public StateBase
 {
     public:
-        ConnectState(Engin::Engin& engin);
+        ConnectState(GU::Engin::Engin& engin);
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
         *           This should be called once per frame.
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(Engin::Engin& engin, const int &deltaTime);
+        virtual void HandleEvents(GU::Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -22,7 +22,7 @@ class ConnectState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(Engin::Engin& engin, const int &deltaTime);
+        virtual void Update(GU::Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -31,12 +31,12 @@ class ConnectState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(Engin::Engin& engin, const int &deltaTime);
+        virtual void Draw(GU::Engin::Engin& engin, const int &deltaTime);
 
         virtual void Init() override;
         virtual void Clean() override;
-        void sfEvent(Engin::Engin& engin, const sf::Event &event);
-        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
+        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual ~ConnectState();
     protected:
     private:

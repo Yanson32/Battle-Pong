@@ -7,9 +7,9 @@
 class MusicState: public StateBase
 {
     public:
-        MusicState(Engin::Engin& engin);
-        void sfEvent(Engin::Engin& engin, const sf::Event &event);
-        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
+        MusicState(GU::Engin::Engin& engin);
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
+        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual void Init();
         virtual void Clean();
 
@@ -19,7 +19,7 @@ class MusicState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(Engin::Engin& newEngin, const int &deltaTime) override;
+        virtual void HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -28,7 +28,7 @@ class MusicState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(Engin::Engin& engin, const int &deltaTime) override;
+        virtual void Update(GU::Engin::Engin& engin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -37,7 +37,7 @@ class MusicState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(Engin::Engin& engin, const int &deltaTime) override;
+        virtual void Draw(GU::Engin::Engin& engin, const int &deltaTime) override;
 
         virtual ~MusicState();
     protected:

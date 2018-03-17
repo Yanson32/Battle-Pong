@@ -31,13 +31,14 @@
 class Wall;
 class Paddle;
 class Ball;
-
-namespace Engin
+namespace GU
 {
-    class Engin;
+    namespace Engin
+    {
+        class Engin;
+    }
 }
-
-class StateBase: public Engin::GameState
+class StateBase: public GU::Engin::GameState
 {
     public:
         /****************************************************************//**
@@ -45,7 +46,7 @@ class StateBase: public Engin::GameState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        StateBase(Engin::Engin& newEngin, const stateId newState);
+        StateBase(GU::Engin::Engin& newEngin, const stateId newState);
 
 
         virtual void Init() override;
@@ -57,7 +58,7 @@ class StateBase: public Engin::GameState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(Engin::Engin& engin, const int &deltaTime) = 0;
+        virtual void HandleEvents(GU::Engin::Engin& engin, const int &deltaTime) = 0;
 
 
         /****************************************************************//**
@@ -66,7 +67,7 @@ class StateBase: public Engin::GameState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(Engin::Engin& engin, const int &deltaTime);
+        virtual void Update(GU::Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -75,12 +76,12 @@ class StateBase: public Engin::GameState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(Engin::Engin& engin, const int &deltaTime) override;
+        virtual void Draw(GU::Engin::Engin& engin, const int &deltaTime) override;
 
 
 
-        void sfEvent(Engin::Engin& engin, const sf::Event &event);
-        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
+        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         /****************************************************************//**
         *   @brief  This method allows the system to pause the game.
         *           When system pause is in effect regular pause won't
@@ -131,7 +132,7 @@ class StateBase: public Engin::GameState
         float32 timeStep = 1 / 20.0;                    ///Box2D the length of time passed to simulate (seconds)
         int32 velocityIterations = 8;                   ///Box2D how strongly to correct velocity
         int32 positionIterations = 3;                   ///Box2D how strongly to correct position
-        Engin::Engin &engin;                            ///The Main game engin
+        GU::Engin::Engin &engin;                        ///The Main game engin
         bool sysPause;                                  ///True when the system is paused and false otherwise
         boost::log::sources::severity_logger< logging::trivial::severity_level > log;
         stateId state;

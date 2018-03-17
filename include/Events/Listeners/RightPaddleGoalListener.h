@@ -3,11 +3,11 @@
 #include <GameUtilities/Event/Listener.h>
 
 
-class RightPaddleGoalListener: public Evt::Listener
+class RightPaddleGoalListener: public GU::Evt::Listener
 {
     public:
         RightPaddleGoalListener();
-        virtual void OnEvent(Evt::EventPtr event) override;
+        virtual void OnEvent(GU::Evt::EventPtr event) override;
         virtual ~RightPaddleGoalListener();
     protected:
     private:

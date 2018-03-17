@@ -12,7 +12,7 @@
 #include "Events/PlaySound.h"
 #include "ResourceManager.h"
 
-ControlState::ControlState(Engin::Engin& newEngin): StateBase(newEngin, stateId::CONTROL_STATE)
+ControlState::ControlState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::CONTROL_STATE)
 {
     //ctor
     paddle1 = tgui::Button::create("Paddle 1");
@@ -34,7 +34,7 @@ ControlState::ControlState(Engin::Engin& newEngin): StateBase(newEngin, stateId:
 
 }
 
-void ControlState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
+void ControlState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -68,7 +68,7 @@ void ControlState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
     gameEvents();
 }
 
-void ControlState::Update(Engin::Engin& engin, const int &deltaTime)
+void ControlState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -81,7 +81,7 @@ void ControlState::Update(Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void ControlState::Draw(Engin::Engin& engin, const int &deltaTime)
+void ControlState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
 	window.draw(*ball);

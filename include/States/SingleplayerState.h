@@ -5,9 +5,9 @@
 class SingleplayerState: public PlayState
 {
     public:
-        SingleplayerState(Engin::Engin& newEngin);
-        void sfEvent(Engin::Engin& engin, const sf::Event &event);
-        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
+        SingleplayerState(GU::Engin::Engin& newEngin);
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
+        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual ~SingleplayerState();
     protected:
     private:

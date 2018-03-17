@@ -12,7 +12,7 @@
 #include "Settings.h"
 #include "ResourceManager.h"
 
-MusicState::MusicState(Engin::Engin& engin): StateBase(engin, stateId::MUSIC_STATE)
+MusicState::MusicState(GU::Engin::Engin& engin): StateBase(engin, stateId::MUSIC_STATE)
 {
     //ctor
     backButton = tgui::Button::create("Back");
@@ -25,7 +25,7 @@ MusicState::MusicState(Engin::Engin& engin): StateBase(engin, stateId::MUSIC_STA
     gui.add(Settings::inst().musicSettings);
 }
 
-void MusicState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
+void MusicState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -42,7 +42,7 @@ void MusicState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 
     //GameUtilities event loop
-    Evt::EventPtr evtPtr;
+    GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
         StateBase::guEvent(engin, evtPtr);
@@ -50,7 +50,7 @@ void MusicState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void MusicState::Update(Engin::Engin& engin, const int &deltaTime)
+void MusicState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -63,7 +63,7 @@ void MusicState::Update(Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void MusicState::Draw(Engin::Engin& engin, const int &deltaTime)
+void MusicState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
     window.draw(*ball);
@@ -91,12 +91,12 @@ void MusicState::Clean()
     gui.removeAllWidgets();
 }
 
-void MusicState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void MusicState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
 
 }
 
-void MusicState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void MusicState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
 
 }

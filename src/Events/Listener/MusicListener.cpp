@@ -14,7 +14,7 @@ MusicListener::MusicListener()
     music.setVolume(255);
 }
 
-void MusicListener::OnEvent(Evt::EventPtr event)
+void MusicListener::OnEvent(GU::Evt::EventPtr event)
 {
 
     switch(event->id)

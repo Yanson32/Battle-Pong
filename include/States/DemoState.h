@@ -5,7 +5,7 @@
 class DemoState: public StateBase
 {
     public:
-        DemoState(Engin::Engin& newEngin);
+        DemoState(GU::Engin::Engin& newEngin);
         virtual ~DemoState();
     protected:
     private:

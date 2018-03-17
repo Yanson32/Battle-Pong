@@ -13,7 +13,7 @@ SoundListener::SoundListener()
     listenerSound.setVolume(255);
 }
 
-void SoundListener::OnEvent(Evt::EventPtr event)
+void SoundListener::OnEvent(GU::Evt::EventPtr event)
 {
     switch(event->id)
     {

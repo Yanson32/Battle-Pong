@@ -22,7 +22,7 @@
 
 
 
-MultiplayerControlState::MultiplayerControlState(Engin::Engin& engin): StateBase(engin, stateId::MULTICONTROL_STATE)
+MultiplayerControlState::MultiplayerControlState(GU::Engin::Engin& engin): StateBase(engin, stateId::MULTICONTROL_STATE)
 {
     //ctor
     backButton = tgui::Button::create("Back");
@@ -76,7 +76,7 @@ void MultiplayerControlState::onConnectPressed()
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void MultiplayerControlState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
+void MultiplayerControlState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -93,7 +93,7 @@ void MultiplayerControlState::HandleEvents(Engin::Engin& newEngin, const int &de
     }
 
     //GameUtilities event loop
-    Evt::EventPtr evtPtr;
+    GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
         StateBase::guEvent(engin, evtPtr);
@@ -107,7 +107,7 @@ void MultiplayerControlState::HandleEvents(Engin::Engin& newEngin, const int &de
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void MultiplayerControlState::Update(Engin::Engin& engin, const int &deltaTime)
+void MultiplayerControlState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
@@ -128,7 +128,7 @@ void MultiplayerControlState::Update(Engin::Engin& engin, const int &deltaTime)
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void MultiplayerControlState::Draw(Engin::Engin& engin, const int &deltaTime)
+void MultiplayerControlState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
 	window.draw(*ball);
@@ -143,12 +143,12 @@ void MultiplayerControlState::onBackPressed()
     EventManager::inst().Post<PlaySound>("Button Sound");
 }
 
-void MultiplayerControlState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void MultiplayerControlState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
 
 }
 
-void MultiplayerControlState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void MultiplayerControlState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
 
 }

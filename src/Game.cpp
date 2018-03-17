@@ -5,8 +5,8 @@
 #include "Events/Listeners/BallCollisionListener.h"
 #include "Events/Id.h"
 #include "Events/Listeners/LeftPaddleGoalListener.h"
-Game::Game(): Engin::Engin(),
-Evt::Manager()
+Game::Game(): GU::Engin::Engin(),
+GU::Evt::Manager()
 {
 
 }

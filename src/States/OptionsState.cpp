@@ -11,7 +11,7 @@
 #include "States/MusicState.h"
 #include "ResourceManager.h"
 
-OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin, stateId::OPTIONS_STATE)
+OptionsState::OptionsState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::OPTIONS_STATE)
 {
     //ctor
     controlsButton = tgui::Button::create("Controls");
@@ -33,7 +33,7 @@ OptionsState::OptionsState(Engin::Engin& newEngin): StateBase(newEngin, stateId:
 
 
 
-void OptionsState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
+void OptionsState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -50,7 +50,7 @@ void OptionsState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 
     //GameUtilities event loop
-    Evt::EventPtr evtPtr;
+    GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
         StateBase::guEvent(engin, evtPtr);
@@ -58,7 +58,7 @@ void OptionsState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void OptionsState::Update(Engin::Engin& engin, const int &deltaTime)
+void OptionsState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
         world->Step( timeStep, velocityIterations, positionIterations);
         debugDraw.update();
@@ -71,7 +71,7 @@ void OptionsState::Update(Engin::Engin& engin, const int &deltaTime)
         rightPaddle->update();
 }
 
-void OptionsState::Draw(Engin::Engin& engin, const int &deltaTime)
+void OptionsState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
     window.draw(*ball);
@@ -117,12 +117,12 @@ void OptionsState::Clean()
     ResourceManager::font.remove("Header Font");
 }
 
-void OptionsState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void OptionsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
 
 }
 
-void OptionsState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void OptionsState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
 
 }

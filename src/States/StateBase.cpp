@@ -50,9 +50,9 @@ std::shared_ptr<PaddleHud> StateBase::paddle2Hud(new PaddleHud(Settings::inst().
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
 
-StateBase::StateBase(Engin::Engin& newEngin, const stateId newState):
+StateBase::StateBase(GU::Engin::Engin& newEngin, const stateId newState):
 state(newState),
-Engin::GameState(),
+GU::Engin::GameState(),
 engin(newEngin),
 sysPause(false)
 {
@@ -100,7 +100,7 @@ bool StateBase::isBallOnScreen()
 
 }
 
-void StateBase::Update(Engin::Engin& engin, const int &deltaTime)
+void StateBase::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     if(!IsPaused())
     {
@@ -117,7 +117,7 @@ void StateBase::Update(Engin::Engin& engin, const int &deltaTime)
 }
 
 
-void StateBase::Draw(Engin::Engin& engin, const int &deltaTime)
+void StateBase::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
     window.clear();
     window.draw(*leftPaddle);
@@ -165,7 +165,7 @@ void StateBase::gameEvents()
 {
 
         //GameUtilities event loop
-        Evt::EventPtr evtPtr;
+        GU::Evt::EventPtr evtPtr;
         while(EventManager::inst().Poll((evtPtr)))
         {
             //EventManager::inst().Dispatch((evtPtr));
@@ -296,7 +296,7 @@ void StateBase::Init()
 }
 
 
-void StateBase::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
     switch (event.type)
     {
@@ -307,7 +307,7 @@ void StateBase::sfEvent(Engin::Engin& engin, const sf::Event &event)
     }
 }
 
-void StateBase::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void StateBase::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
     switch(event->id)
     {

@@ -26,7 +26,7 @@
 #include "ResourceManager.h"
 #include "Logging.h"
 
-IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin, stateId::INTRO_STATE)
+IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::INTRO_STATE)
 {
 
     //ctor
@@ -61,7 +61,7 @@ IntroState::IntroState(Engin::Engin& newEngin): StateBase(newEngin, stateId::INT
 }
 
 
-void IntroState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
+void IntroState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -78,7 +78,7 @@ void IntroState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 
     //GameUtilities event loop
-    Evt::EventPtr evtPtr;
+    GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
         StateBase::guEvent(engin, evtPtr);
@@ -87,7 +87,7 @@ void IntroState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
 
 }
 
-void IntroState::Update(Engin::Engin& engin, const int &deltaTime)
+void IntroState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
@@ -101,7 +101,7 @@ void IntroState::Update(Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void IntroState::Draw(Engin::Engin& engin, const int &deltaTime)
+void IntroState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
 	window.draw(header);
@@ -155,12 +155,12 @@ void IntroState::onMultiplayerPressed()
     engin.Push<MultiplayerControlState>(engin);
 }
 
-void IntroState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
 
 }
 
-void IntroState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void IntroState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
 
 }

@@ -7,9 +7,9 @@
 class HostPlayState: public PlayState
 {
     public:
-        HostPlayState(Engin::Engin& newEngin, std::unique_ptr<Server> serverPtr);
-        void sfEvent(Engin::Engin& engin, const sf::Event &event);
-        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
+        HostPlayState(GU::Engin::Engin& newEngin, std::unique_ptr<Server> serverPtr);
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
+        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual void Init() override;
         virtual void Clean() override;
 
@@ -19,7 +19,7 @@ class HostPlayState: public PlayState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void HandleEvents(Engin::Engin& newEngin, const int &deltaTime);
+        void HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -28,7 +28,7 @@ class HostPlayState: public PlayState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Update(Engin::Engin& engin, const int &deltaTime);
+        void Update(GU::Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -37,7 +37,7 @@ class HostPlayState: public PlayState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Draw(Engin::Engin& engin, const int &deltaTime);
+        void Draw(GU::Engin::Engin& engin, const int &deltaTime);
         virtual ~HostPlayState();
     protected:
     private:

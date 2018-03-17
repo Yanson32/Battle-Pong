@@ -5,7 +5,7 @@
 #include <GameUtilities/Event/Manager.h>
 
 
-class Game: public Engin::Engin, public Evt::Manager
+class Game: public GU::Engin::Engin, public GU::Evt::Manager
 {
     public:
         Game();
