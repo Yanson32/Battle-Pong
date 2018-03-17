@@ -3,11 +3,11 @@
 #include <GameUtilities/Event/Listener.h>
 #include <SFML/Audio/Sound.hpp>
 
-class SoundListener: public Evt::Listener
+class SoundListener: public GU::Evt::Listener
 {
     public:
         SoundListener();
-        virtual void OnEvent(Evt::EventPtr event) override;
+        virtual void OnEvent(GU::Evt::EventPtr event) override;
         virtual ~SoundListener();
     protected:
     private:

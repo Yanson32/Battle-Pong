@@ -19,7 +19,7 @@
 #include "States/OptionsState.h"
 #include "Events/ChangeState.h"
 
-PlayState::PlayState(Engin::Engin& newEngin, const stateId newId): StateBase(newEngin, newId)
+PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase(newEngin, newId)
 {
 
 
@@ -44,7 +44,7 @@ PlayState::PlayState(Engin::Engin& newEngin, const stateId newId): StateBase(new
 
 }
 
-void PlayState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
+void PlayState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -61,7 +61,7 @@ void PlayState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 
     //GameUtilities event loop
-    Evt::EventPtr evtPtr;
+    GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
         StateBase::guEvent(engin, evtPtr);
@@ -69,7 +69,7 @@ void PlayState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
+void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     const int SECONDS = 1;
 
@@ -146,7 +146,7 @@ void PlayState::Update(Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void PlayState::Draw(Engin::Engin& engin, const int &deltaTime)
+void PlayState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
 
     StateBase::Draw(engin, deltaTime);
@@ -184,12 +184,12 @@ void PlayState::Clean()
 
 }
 
-void PlayState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
 
 }
 
-void PlayState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void PlayState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
         //GameUtilities event loop
         while(EventManager::inst().Poll((event)))

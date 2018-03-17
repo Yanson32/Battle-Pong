@@ -23,7 +23,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        IntroState(Engin::Engin& engin);
+        IntroState(GU::Engin::Engin& engin);
 
 
         /****************************************************************//**
@@ -32,7 +32,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(Engin::Engin& engin, const int &deltaTime);
+        virtual void HandleEvents(GU::Engin::Engin& engin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -41,7 +41,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(Engin::Engin& engin, const int &deltaTime);
+        virtual void Update(GU::Engin::Engin& engin, const int &deltaTime) override;
 
 
         /****************************************************************//**
@@ -50,12 +50,12 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(Engin::Engin& engin, const int &deltaTime);
+        virtual void Draw(GU::Engin::Engin& engin, const int &deltaTime) override;
 
         virtual void Init() override;
         virtual void Clean() override;
-        void sfEvent(Engin::Engin& engin, const sf::Event &event);
-        void guEvent(Engin::Engin& engin, Evt::EventPtr event);
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
+        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
 
         /****************************************************************//**
         *   @brief  Destructor

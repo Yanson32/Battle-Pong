@@ -2,7 +2,7 @@
 #include "Events/EventManager.h"
 #include "States/Id.h"
 
-ClientPlayState::ClientPlayState(Engin::Engin& newEngin, std::unique_ptr<Client> newClient):
+ClientPlayState::ClientPlayState(GU::Engin::Engin& newEngin, std::unique_ptr<Client> newClient):
 PlayState::PlayState(newEngin, stateId::CLIENT_PLAY_STATE),
 client(std::move(newClient))
 {
@@ -26,7 +26,7 @@ void ClientPlayState::Clean()
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void ClientPlayState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
+void ClientPlayState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
 {
     PlayState::HandleEvents(newEngin, deltaTime);
 }
@@ -38,7 +38,7 @@ void ClientPlayState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void ClientPlayState::Update(Engin::Engin& engin, const int &deltaTime)
+void ClientPlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     PlayState::Update(engin, deltaTime);
 }
@@ -50,7 +50,7 @@ void ClientPlayState::Update(Engin::Engin& engin, const int &deltaTime)
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void ClientPlayState::Draw(Engin::Engin& engin, const int &deltaTime)
+void ClientPlayState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
     PlayState::Draw(engin, deltaTime);
 }

@@ -1,7 +1,7 @@
 #include "Events/EventBase.h"
 
 
-EventBase::EventBase(const int newId): Evt::Event(newId)
+EventBase::EventBase(const int newId): GU::Evt::Event(newId)
 {
 
 }

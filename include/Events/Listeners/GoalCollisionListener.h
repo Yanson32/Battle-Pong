@@ -2,11 +2,11 @@
 #define GOALCOLLISION_LISTENER_H
 #include <GameUtilities/Event/Listener.h>
 
-class GoalCollisionListener: public Evt::Listener
+class GoalCollisionListener: public GU::Evt::Listener
 {
     public:
         GoalCollisionListener();
-        virtual void OnEvent(Evt::EventPtr event) override;
+        virtual void OnEvent(GU::Evt::EventPtr event) override;
         virtual ~GoalCollisionListener();
     protected:
     private:

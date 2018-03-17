@@ -9,7 +9,7 @@
 #include "SFMLFunctions.h"
 #include "Events/ChangeState.h"
 
-ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin, stateId::CONNECT_STATE)
+ConnectState::ConnectState(GU::Engin::Engin& engin): StateBase(engin, stateId::CONNECT_STATE)
 {
     //ctor
     backButton = tgui::Button::create("Back");
@@ -53,7 +53,7 @@ ConnectState::ConnectState(Engin::Engin& engin): StateBase(engin, stateId::CONNE
 
 }
 
-void ConnectState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
+void ConnectState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -70,7 +70,7 @@ void ConnectState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 
     //GameUtilities event loop
-    Evt::EventPtr evtPtr;
+    GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
         StateBase::guEvent(engin, evtPtr);
@@ -78,7 +78,7 @@ void ConnectState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void ConnectState::Update(Engin::Engin& engin, const int &deltaTime)
+void ConnectState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
@@ -92,7 +92,7 @@ void ConnectState::Update(Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void ConnectState::Draw(Engin::Engin& engin, const int &deltaTime)
+void ConnectState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
 	//window.draw(header);
@@ -141,12 +141,12 @@ void ConnectState::onConnectPressed()
     engin.Push<ClientPlayState>(engin, std::move(client));
 }
 
-void ConnectState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void ConnectState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
 
 }
 
-void ConnectState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void ConnectState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
         //GameUtilities event loop
         while(EventManager::inst().Poll((event)))

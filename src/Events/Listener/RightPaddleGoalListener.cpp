@@ -5,7 +5,7 @@ RightPaddleGoalListener::RightPaddleGoalListener()
     //ctor
 }
 
-void RightPaddleGoalListener::OnEvent(Evt::EventPtr event)
+void RightPaddleGoalListener::OnEvent(GU::Evt::EventPtr event)
 {
     //std::cout << "RightPaddleGoalListener" << std::endl;
 }

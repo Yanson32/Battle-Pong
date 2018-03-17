@@ -2,7 +2,7 @@
 #define EVENTMANAGER_H
 #include <GameUtilities/Event/Manager.h>
 
-class EventManager: public Evt::Manager
+class EventManager: public GU::Evt::Manager
 {
     public:
         static EventManager& inst();

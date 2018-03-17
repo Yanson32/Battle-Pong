@@ -2,11 +2,11 @@
 #define LEFTPADDLEGOALLISTENER_H
 #include <GameUtilities/Event/Listener.h>
 
-class LeftPaddleGoalListener: public Evt::Listener
+class LeftPaddleGoalListener: public GU::Evt::Listener
 {
     public:
         LeftPaddleGoalListener();
-        virtual void OnEvent(Evt::EventPtr event) override;
+        virtual void OnEvent(GU::Evt::EventPtr event) override;
         virtual ~LeftPaddleGoalListener();
     protected:
     private:

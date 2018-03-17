@@ -13,11 +13,11 @@
 namespace logging = boost::log;
 namespace src = boost::log::sources;
 
-class BallCollisionListener: public Evt::Listener
+class BallCollisionListener: public GU::Evt::Listener
 {
     public:
         BallCollisionListener();
-        void OnEvent(Evt::EventPtr event);
+        void OnEvent(GU::Evt::EventPtr event);
         virtual ~BallCollisionListener();
     protected:
     private:

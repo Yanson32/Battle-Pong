@@ -9,7 +9,7 @@
 #include "Events/PlaySound.h"
 #include "Settings.h"
 #include "ResourceManager.h"
-PaddleState::PaddleState(Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings):
+PaddleState::PaddleState(GU::Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings):
 StateBase(newEngin, stateId::PADDLE_STATE),
 paddleSettings(pSettings)
 {
@@ -50,7 +50,7 @@ paddleSettings(pSettings)
 }
 
 
-void PaddleState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
+void PaddleState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -67,7 +67,7 @@ void PaddleState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
     }
 
     //GameUtilities event loop
-    Evt::EventPtr evtPtr;
+    GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
         StateBase::guEvent(engin, evtPtr);
@@ -75,7 +75,7 @@ void PaddleState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
     }
 }
 
-void PaddleState::Update(Engin::Engin& engin, const int &deltaTime)
+void PaddleState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -88,7 +88,7 @@ void PaddleState::Update(Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void PaddleState::Draw(Engin::Engin& engin, const int &deltaTime)
+void PaddleState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
     window.draw(*ball);
@@ -141,12 +141,12 @@ void PaddleState::Clean()
     ResourceManager::sound.remove("Ball Sound");
 }
 
-void PaddleState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void PaddleState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
 
 }
 
-void PaddleState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void PaddleState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
 
 }

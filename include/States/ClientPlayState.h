@@ -9,7 +9,7 @@
 class ClientPlayState: public PlayState
 {
     public:
-        ClientPlayState(Engin::Engin& newEngin, std::unique_ptr<Client> newClient);
+        ClientPlayState(GU::Engin::Engin& newEngin, std::unique_ptr<Client> newClient);
 
         virtual void Init() override;
         virtual void Clean() override;
@@ -20,7 +20,7 @@ class ClientPlayState: public PlayState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void HandleEvents(Engin::Engin& newEngin, const int &deltaTime);
+        void HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -29,7 +29,7 @@ class ClientPlayState: public PlayState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Update(Engin::Engin& engin, const int &deltaTime);
+        void Update(GU::Engin::Engin& engin, const int &deltaTime);
 
 
         /****************************************************************//**
@@ -38,7 +38,7 @@ class ClientPlayState: public PlayState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Draw(Engin::Engin& engin, const int &deltaTime);
+        void Draw(GU::Engin::Engin& engin, const int &deltaTime);
 
 
         virtual ~ClientPlayState();

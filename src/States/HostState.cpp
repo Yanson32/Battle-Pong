@@ -47,7 +47,7 @@
 //
 //}
 
-HostState::HostState(Engin::Engin& engin): StateBase(engin, stateId::HOST_STATE)
+HostState::HostState(GU::Engin::Engin& engin): StateBase(engin, stateId::HOST_STATE)
 {
     //ctor
     backButton = tgui::Button::create("Back");
@@ -108,7 +108,7 @@ HostState::HostState(Engin::Engin& engin): StateBase(engin, stateId::HOST_STATE)
 
 }
 
-void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
+void HostState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
 {
     if(window.isOpen())
     {
@@ -125,7 +125,7 @@ void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 
     //GameUtilities event loop
-    Evt::EventPtr evtPtr;
+    GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
         StateBase::guEvent(engin, evtPtr);
@@ -133,7 +133,7 @@ void HostState::HandleEvents(Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void HostState::Update(Engin::Engin& engin, const int &deltaTime)
+void HostState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
@@ -147,7 +147,7 @@ void HostState::Update(Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void HostState::Draw(Engin::Engin& engin, const int &deltaTime)
+void HostState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
 	//window.draw(header);
@@ -194,12 +194,12 @@ void HostState::onHostPressed()
 }
 
 
-void HostState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void HostState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
 
 }
 
-void HostState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void HostState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
     switch(event->id)
     {

@@ -9,7 +9,7 @@ GoalCollisionListener::GoalCollisionListener()
     //ctor
 }
 
-void GoalCollisionListener::OnEvent(Evt::EventPtr event)
+void GoalCollisionListener::OnEvent(GU::Evt::EventPtr event)
 {
     switch(event->id)
     {

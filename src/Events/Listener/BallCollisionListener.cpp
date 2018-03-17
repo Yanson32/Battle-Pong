@@ -7,7 +7,7 @@ BallCollisionListener::BallCollisionListener()
     //ctor
 }
 
-void BallCollisionListener::OnEvent(Evt::EventPtr event)
+void BallCollisionListener::OnEvent(GU::Evt::EventPtr event)
 {
     EventManager::inst().Post<PlaySound>("Ball Sound");
 }

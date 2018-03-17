@@ -1,6 +1,6 @@
 #include "States/HostPlayState.h"
 
-HostPlayState::HostPlayState(Engin::Engin& newEngin, std::unique_ptr<Server> serverPtr):
+HostPlayState::HostPlayState(GU::Engin::Engin& newEngin, std::unique_ptr<Server> serverPtr):
 PlayState::PlayState(newEngin, stateId::HOST_PLAY_STATE),
 server(std::move(serverPtr))
 {
@@ -24,7 +24,7 @@ void HostPlayState::Clean()
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void HostPlayState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
+void HostPlayState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
 {
     PlayState::HandleEvents(newEngin, deltaTime);
 
@@ -37,7 +37,7 @@ void HostPlayState::HandleEvents(Engin::Engin& newEngin, const int &deltaTime)
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void HostPlayState::Update(Engin::Engin& engin, const int &deltaTime)
+void HostPlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 {
     PlayState::Update(engin, deltaTime);
 }
@@ -49,17 +49,17 @@ void HostPlayState::Update(Engin::Engin& engin, const int &deltaTime)
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void HostPlayState::Draw(Engin::Engin& engin, const int &deltaTime)
+void HostPlayState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
     PlayState::Draw(engin, deltaTime);
 }
 
-void HostPlayState::sfEvent(Engin::Engin& engin, const sf::Event &event)
+void HostPlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
 
 }
 
-void HostPlayState::guEvent(Engin::Engin& engin, Evt::EventPtr event)
+void HostPlayState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
 
 }
