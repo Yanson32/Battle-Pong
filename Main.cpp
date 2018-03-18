@@ -1,15 +1,12 @@
 #include "States/IntroState.h"
-#include "Events/PlayMusic.h"
+#include "Events/Events.h"
 #include <Box2D/Box2D.h>
 
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
 
 #include "Game.h"
-#include "Events/Listeners/MusicListener.h"
-#include "Events/EventManager.h"
-#include "Events/MusicVolumeChanged.h"
-#include "Events/SoundVolumeChanged.h"
+#include "Events/Events.h"
 
 #include <SFML/Audio/Music.hpp>
 
@@ -76,7 +73,7 @@ int main(int argc, char* argv[])
 	std::unique_ptr<IntroState> state(new IntroState(engin));
     state->reset();
 	engin.Push(std::move(state));
-	EventManager::inst().Post<PlayMusic>("../Resources/Music/Electro_Zombies.ogg");
+	EventManager::inst().Post<GU::Evt::PlayMusic>("../Resources/Music/Electro_Zombies.ogg");
 	//EventManager::inst().Post<MusicVolumeChanged>();
 	//EventManager::inst().Post<SoundVolumeChanged>();
 

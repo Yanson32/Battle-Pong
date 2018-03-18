@@ -3,11 +3,9 @@
 #include "Objects/Paddle.h"
 #include "Objects/Ball.h"
 #include "ResourceManager.h"
-#include "Events/EventManager.h"
-#include "Events/PlaySound.h"
 #include "States/ClientPlayState.h"
 #include "SFMLFunctions.h"
-#include "Events/ChangeState.h"
+#include "Events/Events.h"
 
 ConnectState::ConnectState(GU::Engin::Engin& engin): StateBase(engin, stateId::CONNECT_STATE)
 {
@@ -128,13 +126,13 @@ void ConnectState::Clean()
 
 void ConnectState::onBackPressed()
 {
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
     engin.Pop();
 }
 
 void ConnectState::onConnectPressed()
 {
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
     sf::String value = portBox->getText();
     sf::String ip = ipBox->getText();
     std::unique_ptr<Client> client(new Client(ip, toInt(value)));
@@ -157,8 +155,8 @@ void ConnectState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 
                 case EventId::CHANGE_STATE:
                 {
-                    std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(event);
-                    switch(temp->state)
+                    std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
+                    switch(temp->id)
                     {
                         case stateId::CONNECT_STATE:
                             std::cout << "Connect state" << std::endl;

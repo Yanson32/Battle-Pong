@@ -12,12 +12,8 @@
 #include "Input/AI.h"
 #include "Input/PlayerInput.h"
 #include "Settings.h"
-#include "Events/EventManager.h"
-#include "Events/PlaySound.h"
-#include "Events/PlayMusic.h"
 #include "ResourceManager.h"
-#include "States/OptionsState.h"
-#include "Events/ChangeState.h"
+#include "Events/Events.h"
 
 PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase(newEngin, newId)
 {
@@ -100,7 +96,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
                 userMessage.setString("3");
                 centerText();
                 messageClock.restart();
-                EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
+                EventManager::inst().Post<GU::Evt::PlaySound>(sf::String("Message Sound"));
             }
         }
         else if(userMessage.getString() == "3")
@@ -110,7 +106,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
                 userMessage.setString("2");
                 centerText();
                 messageClock.restart();
-                EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
+                EventManager::inst().Post<GU::Evt::PlaySound>(sf::String("Message Sound"));
             }
         }
         else if(userMessage.getString() == "2")
@@ -120,7 +116,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
                 userMessage.setString("1");
                 centerText();
                 messageClock.restart();
-                EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
+                EventManager::inst().Post<GU::Evt::PlaySound>(sf::String("Message Sound"));
             }
         }
         else if(userMessage.getString() == "1")
@@ -130,7 +126,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
                 userMessage.setString("Go!");
                 centerText();
                 messageClock.restart();
-                EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
+                EventManager::inst().Post<GU::Evt::PlaySound>(sf::String("Message Sound"));
             }
         }
         else if(userMessage.getString() == "Go!")
@@ -200,8 +196,8 @@ void PlayState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 
                 case EventId::CHANGE_STATE:
                 {
-                    std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(event);
-                    switch(temp->state)
+                    std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
+                    switch(temp->id)
                     {
                         case stateId::CONNECT_STATE:
                             std::cout << "Playstate Connect state" << std::endl;

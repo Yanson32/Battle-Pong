@@ -1,6 +1,5 @@
 #include "Events/Listeners/BallCollisionListener.h"
-#include "Events/EventManager.h"
-#include "Events/PlaySound.h"
+#include "Events/Events.h"
 
 BallCollisionListener::BallCollisionListener()
 {
@@ -9,7 +8,7 @@ BallCollisionListener::BallCollisionListener()
 
 void BallCollisionListener::OnEvent(GU::Evt::EventPtr event)
 {
-    EventManager::inst().Post<PlaySound>("Ball Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Ball Sound");
 }
 
 

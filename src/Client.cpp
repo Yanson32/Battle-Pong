@@ -1,7 +1,7 @@
 #include "Client.h"
 #include <iostream>
-#include "Events/EventManager.h"
-#include "Events/ChangeState.h"
+#include "Events/Events.h"
+#include "States/Id.h"
 
 Client::Client(const sf::String newIp, const int newPort):
 port(newPort),
@@ -23,7 +23,7 @@ void Client::init()
     if (status != sf::Socket::Done)
     {
         // error...
-        EventManager::inst().Post<ChangeState>(stateId::CONNECT_STATE);
+        EventManager::inst().Post<GU::Evt::ChangeState>(stateId::CONNECT_STATE);
     }
 
 }

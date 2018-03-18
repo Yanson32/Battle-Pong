@@ -4,11 +4,12 @@
 #include "Objects/Ball.h"
 #include "ResourceManager.h"
 #include "Events/Events.h"
-#include "States/HostPlayState.h"
-#include "Events/ChangeState.h"
 #include "SFMLFunctions.h"
 #include <SFML/Network.hpp>
 #include <SFML/Network/IpAddress.hpp>
+#include "Server.h"
+#include "States/HostPlayState.h"
+
 //std::shared_ptr<HostPanel> HostState::panel(new HostPanel());
 //
 //HostPanel::HostPanel()
@@ -178,12 +179,12 @@ void HostState::Clean()
 
 void HostState::onBackPressed()
 {
-    EventManager::inst().Post<Pop>();
+    EventManager::inst().Post<GU::Evt::Pop>();
 }
 
 void HostState::onHostPressed()
 {
-    EventManager::inst().Post<ChangeState>(stateId::HOST_PLAY_STATE);
+    EventManager::inst().Post<GU::Evt::ChangeState>(stateId::HOST_PLAY_STATE);
 }
 
 
@@ -198,11 +199,11 @@ void HostState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
     {
         case EventId::CHANGE_STATE:
         {
-            std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(event);
-            switch(temp->state)
+            std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
+            switch(temp->id)
             {
                 case stateId::HOST_PLAY_STATE:
-                        EventManager::inst().Post<PlaySound>("Button Sound");
+                        EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
                         sf::String value = portBox->getText();
                         std::unique_ptr<Server> serverPtr(new Server(toInt(value)));
                         engin.Push<HostPlayState>(engin, std::move(serverPtr));
@@ -211,7 +212,7 @@ void HostState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
         }
         break;
         case EventId::POP_STATE:
-            EventManager::inst().Post<PlaySound>("Button Sound");
+            EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
             engin.Pop();
         break;
     }

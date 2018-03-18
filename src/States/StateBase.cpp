@@ -7,12 +7,9 @@
 #include <GameUtilities/Engin/Engin.h>
 #include "Objects/Goal.h"
 #include <array>
-#include "Events/EventManager.h"
-#include "Events/PlaySound.h"
-#include "Events/PlayMusic.h"
-#include "Events/PaddleCollision.h"
 #include "ResourceManager.h"
-#include "Events/ChangeState.h"
+#include "States/PlayState.h"
+#include "Events/Events.h"
 
 sf::RenderWindow StateBase::window(Settings::inst().getWindowSettings().getVideoMode(), Settings::inst().getTitle());
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -164,115 +161,116 @@ void StateBase::reset()
 void StateBase::gameEvents()
 {
 
-        //GameUtilities event loop
-        GU::Evt::EventPtr evtPtr;
-        while(EventManager::inst().Poll((evtPtr)))
-        {
-            //EventManager::inst().Dispatch((evtPtr));
-            switch(evtPtr->id)
-            {
-                case EventId::LEFT_GOAL_COLLISION:
-                {
-                    int currentScore = Settings::inst().paddle1->getScore();
-                    Settings::inst().paddle1->setScore(currentScore + 1);
-                    paddle1Hud->setScore(currentScore + 1);
-                    reset();
-                }
-                break;
-                case EventId::RIGHT_GOAL_COLLISION:
-                {
-                    int currentScore = Settings::inst().paddle2->getScore();
-                    Settings::inst().paddle2->setScore(currentScore + 1);
-                    paddle2Hud->setScore(currentScore + 1);
-                    reset();
-                }
-                break;
-                case EventId::PLAY_MUSIC:
-                {
-                    std::shared_ptr<PlayMusic> temp =  std::dynamic_pointer_cast<PlayMusic>(evtPtr);
-                    if(temp)
-                    {
-                        if(music.openFromFile(temp->file))
-                        {
-                            music.play();
-                            //music.setVolume(254);
-                        }
-                        else
-                        {
-                            std::cout << "Unable to open music file " << std::endl;
-                        }
-
-                    }
-                    else
-                    {
-                        std::cout << "Cast failes MusicListener::OnEvent" << std::endl;
-                    }
-                }
-                break;
-                case EventId::PLAY_SOUND:
-                {
-                    std::shared_ptr<PlaySound> temp =  std::dynamic_pointer_cast<PlaySound>(evtPtr);
-
-                    if(temp && ResourceManager::sound.isLoaded(temp->soundId))
-                    {
-                        sound.setBuffer(ResourceManager::sound.get(temp->soundId));
-                        sound.play();
-                    }
-                }
-                break;
-                case EventId::MUSIC_VOLUME_CHANGED:
-                {
-                    int volume = Settings::inst().musicSettings->getVolume();
-                    music.setVolume(volume);
-                }
-                break;
-                case EventId::SOUND_VOLUME_CHANGED:
-                {
-                    int volume = Settings::inst().musicSettings->getSoundVolume();
-                    sound.setVolume(volume);
-                    std::cout << "Sound Volume Changed " << volume << std::endl;
-                }
-                break;
-                case BALL_COLLISION:
-                    EventManager::inst().Post<PlaySound>("Ball Sound");
-                break;
-                case EventId::GOAL_COLLISION:
-                {
-                    //sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
-                }
-                break;
-
-                case PADDLE_COLLISION:
-                {
-                    std::shared_ptr<PaddleCollision> temp =  std::dynamic_pointer_cast<PaddleCollision>(evtPtr);
-
-                    if(temp)
-                    {
-//                        static ObjectId currentPaddle = ObjectId::NONE;
-//                        if(temp->paddle == currentPaddle)
-//                            reset();
+//        //GameUtilities event loop
+//        GU::Evt::EventPtr evtPtr;
+//        while(EventManager::inst().Poll((evtPtr)))
+//        {
+//            //EventManager::inst().Dispatch((evtPtr));
+//            switch(evtPtr->id)
+//            {
+//                case EventId::LEFT_GOAL_COLLISION:
+//                {
+//                    int currentScore = Settings::inst().paddle1->getScore();
+//                    Settings::inst().paddle1->setScore(currentScore + 1);
+//                    paddle1Hud->setScore(currentScore + 1);
+//                    reset();
+//                }
+//                break;
+//                case EventId::RIGHT_GOAL_COLLISION:
+//                {
+//                    int currentScore = Settings::inst().paddle2->getScore();
+//                    Settings::inst().paddle2->setScore(currentScore + 1);
+//                    paddle2Hud->setScore(currentScore + 1);
+//                    reset();
+//                }
+//                break;
+//                case EventId::PLAY_MUSIC:
+//                {
+//                    std::shared_ptr<PlayMusic> temp =  std::dynamic_pointer_cast<PlayMusic>(evtPtr);
+//                    if(temp)
+//                    {
+//                        if(music.openFromFile(temp->file))
+//                        {
+//                            music.play();
+//                            //music.setVolume(254);
+//                        }
 //                        else
-//                            currentPaddle = temp->paddle;
-                        //std::cout << "Paddle and ball collided id " << temp->paddle << std::endl;
-                    }
-                }
-                break;
-                case EventId::CHANGE_STATE:
-                {
-                    std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(evtPtr);
-                    switch(temp->state)
-                    {
-                        case stateId::CONNECT_STATE:
-                            std::cout << "Connect state" << std::endl;
-                        break;
-
-                    }
-                }
-                break;
-
-            }
-
-        }
+//                        {
+//                            std::cout << "Unable to open music file " << std::endl;
+//                        }
+//
+//                    }
+//                    else
+//                    {
+//                        std::cout << "Cast failes MusicListener::OnEvent" << std::endl;
+//                    }
+//                }
+//                break;
+//                case EventId::PLAY_SOUND:
+//                {
+//                    std::cout << "Play Sound" << std::endl;
+//                    std::shared_ptr<PlaySound> temp =  std::dynamic_pointer_cast<PlaySound>(evtPtr);
+//
+//                    if(temp && ResourceManager::sound.isLoaded(temp->soundId))
+//                    {
+//                        sound.setBuffer(ResourceManager::sound.get(temp->soundId));
+//                        sound.play();
+//                    }
+//                }
+//                break;
+//                case EventId::MUSIC_VOLUME_CHANGED:
+//                {
+//                    int volume = Settings::inst().musicSettings->getVolume();
+//                    music.setVolume(volume);
+//                }
+//                break;
+//                case EventId::SOUND_VOLUME_CHANGED:
+//                {
+//                    int volume = Settings::inst().musicSettings->getSoundVolume();
+//                    sound.setVolume(volume);
+//                    std::cout << "Sound Volume Changed " << volume << std::endl;
+//                }
+//                break;
+//                case BALL_COLLISION:
+//                    EventManager::inst().Post<PlaySound>("Ball Sound");
+//                break;
+//                case EventId::GOAL_COLLISION:
+//                {
+//                    //sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
+//                }
+//                break;
+//
+//                case PADDLE_COLLISION:
+//                {
+//                    std::shared_ptr<PaddleCollision> temp =  std::dynamic_pointer_cast<PaddleCollision>(evtPtr);
+//
+//                    if(temp)
+//                    {
+////                        static ObjectId currentPaddle = ObjectId::NONE;
+////                        if(temp->paddle == currentPaddle)
+////                            reset();
+////                        else
+////                            currentPaddle = temp->paddle;
+//                        //std::cout << "Paddle and ball collided id " << temp->paddle << std::endl;
+//                    }
+//                }
+//                break;
+//                case EventId::CHANGE_STATE:
+//                {
+//                    std::shared_ptr<ChangeState> temp =  std::dynamic_pointer_cast<ChangeState>(evtPtr);
+//                    switch(temp->state)
+//                    {
+//                        case stateId::CONNECT_STATE:
+//                            std::cout << "Connect state" << std::endl;
+//                        break;
+//
+//                    }
+//                }
+//                break;
+//
+//            }
+//
+//        }
 
 }
 
@@ -329,7 +327,7 @@ void StateBase::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
         break;
         case EventId::PLAY_SOUND:
         {
-            std::shared_ptr<PlaySound> temp =  std::dynamic_pointer_cast<PlaySound>(event);
+            std::shared_ptr<GU::Evt::PlaySound> temp =  std::dynamic_pointer_cast<GU::Evt::PlaySound>(event);
 
             if(temp && ResourceManager::sound.isLoaded(temp->soundId))
             {
@@ -338,8 +336,22 @@ void StateBase::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
             }
         }
         break;
-        case BALL_COLLISION:
-            EventManager::inst().Post<PlaySound>("Ball Sound");
+        case EventId::BALL_COLLISION:
+            EventManager::inst().Post<GU::Evt::PlaySound>("Ball Sound");
+        break;
+        case EventId::PUSH_STATE:
+            std::cout << "Push state " << std::endl;
+            std::shared_ptr<GU::Evt::PushState> temp =  std::dynamic_pointer_cast<GU::Evt::PushState>(event);
+            if(temp)
+            {
+                switch(temp->id)
+                {
+                    case stateId::PLAY_STATE:
+                        engin.Push<PlayState>(engin);
+                    break;
+                }
+            }
+
         break;
     }
 }

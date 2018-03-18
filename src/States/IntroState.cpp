@@ -2,7 +2,7 @@
 #include "GameUtilities/Engin/Engin.h"
 #include <GameUtilities/Event/Event.h>
 #include <GameUtilities/Event/EventQueue.h>
-
+#include <GameUtilities/Event/PushState.h>
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -20,7 +20,7 @@
 #include "States/OptionsState.h"
 #include "States/Id.h"
 #include "Events/EventManager.h"
-#include "Events/PlaySound.h"
+#include "GameUtilities/Event/PlaySound.h"
 
 
 #include "ResourceManager.h"
@@ -81,7 +81,6 @@ void IntroState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        StateBase::guEvent(engin, evtPtr);
         guEvent(engin, evtPtr);
     }
 
@@ -112,13 +111,13 @@ void IntroState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 
 void IntroState::onStartPressed()
 {
-    EventManager::inst().Post<PlaySound>("Button Sound");
-    engin.Push<PlayState>(engin);
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PushState>(stateId::PLAY_STATE);
 }
 
 void IntroState::onOptionsPressed()
 {
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
     engin.Push<OptionsState>(engin);
 }
 
@@ -151,19 +150,11 @@ void IntroState::Clean()
 
 void IntroState::onMultiplayerPressed()
 {
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
     engin.Push<MultiplayerControlState>(engin);
 }
 
-void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
-{
 
-}
-
-void IntroState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
-{
-
-}
 
 IntroState::~IntroState()
 {

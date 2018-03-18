@@ -7,8 +7,7 @@
 #include "Events/EventManager.h"
 #include "Settings.h"
 #include "States/OptionsState.h"
-#include "Events/PlaySound.h"
-#include "Events/EventManager.h"
+#include "Events/Events.h"
 #include "Settings.h"
 #include "ResourceManager.h"
 
@@ -73,7 +72,7 @@ void MusicState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 void MusicState::onBackPressed()
 {
     engin.Pop();
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
 }
 
 void MusicState::Init()

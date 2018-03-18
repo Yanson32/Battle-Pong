@@ -1,8 +1,5 @@
 #include "Settings.h"
-#include "Events/PlaySound.h"
-#include "Events/EventManager.h"
-#include "Events/MusicVolumeChanged.h"
-#include "Events/SoundVolumeChanged.h"
+#include "Events/Events.h"
 
 /**********************************************************//**
 *   @brief  Settings for the game window
@@ -167,14 +164,14 @@ int MusicSettings::getSoundVolume() const
 void MusicSettings::onMusicVolume()
 {
     mVolume = musicVolume->getValue();
-    EventManager::inst().Post<MusicVolumeChanged>();
+    EventManager::inst().Post<GU::Evt::MusicVolumeChanged>();
 }
 
 
 void MusicSettings::onSoundVolume()
 {
     sVolume = soundVolume->getValue();
-    EventManager::inst().Post<SoundVolumeChanged>();
+    EventManager::inst().Post<GU::Evt::SoundVolumeChanged>();
 }
 
 

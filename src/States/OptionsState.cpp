@@ -6,8 +6,7 @@
 #include "States/IntroState.h"
 #include "States/ControlState.h"
 #include "Settings.h"
-#include "Events/EventManager.h"
-#include "Events/PlaySound.h"
+#include "Events/Events.h"
 #include "States/MusicState.h"
 #include "ResourceManager.h"
 
@@ -81,19 +80,19 @@ void OptionsState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 void OptionsState::onControlsPressed()
 {
     engin.Push<ControlState>(engin);
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
 }
 
 void OptionsState::onBackPressed()
 {
     engin.Pop();
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
 }
 
 void OptionsState::onMusicPressed()
 {
     engin.Push<MusicState>(engin);
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
 }
 
 void OptionsState::Init()

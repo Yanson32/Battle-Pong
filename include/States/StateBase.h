@@ -131,7 +131,7 @@ class StateBase: public GU::Engin::GameState
         static sf::Clock roundClock;                    ///This clock tracks the time for each round and resets the game when the time has expired
         float32 timeStep = 1 / 20.0;                    ///Box2D the length of time passed to simulate (seconds)
         int32 velocityIterations = 8;                   ///Box2D how strongly to correct velocity
-        int32 positionIterations = 3;                   ///Box2D how strongly to correct position
+        int32 positionIterations = 8;                   ///Box2D how strongly to correct position
         GU::Engin::Engin &engin;                        ///The Main game engin
         bool sysPause;                                  ///True when the system is paused and false otherwise
         boost::log::sources::severity_logger< logging::trivial::severity_level > log;

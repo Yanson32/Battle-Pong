@@ -12,8 +12,7 @@
 #include "Objects/Ball.h"
 #include "Objects/Paddle.h"
 
-#include "Events/EventManager.h"
-#include "Events/PlaySound.h"
+#include "Events/Events.h"
 #include "ResourceManager.h"
 
 
@@ -61,13 +60,13 @@ void MultiplayerControlState::Clean()
 
 void MultiplayerControlState::onHostPressed()
 {
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
     engin.Push<HostState>(engin);
 }
 
 void MultiplayerControlState::onConnectPressed()
 {
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
     engin.Push<ConnectState>(engin);
 }
 /****************************************************************//**
@@ -140,7 +139,7 @@ void MultiplayerControlState::onBackPressed()
 {
     std::cout << "onBackPressed" << std::endl;
     engin.Pop();
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
 }
 
 void MultiplayerControlState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)

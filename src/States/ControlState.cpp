@@ -8,8 +8,7 @@
 #include "States/PaddleState.h"
 #include "States/OptionsState.h"
 #include "States/Id.h"
-#include "Events/EventManager.h"
-#include "Events/PlaySound.h"
+#include "Events/Events.h"
 #include "ResourceManager.h"
 
 ControlState::ControlState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::CONTROL_STATE)
@@ -92,20 +91,20 @@ void ControlState::onPaddle1()
 {
     gui.removeAllWidgets();
     engin.Push<PaddleState>(engin, Settings::inst().paddle1);
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
 }
 
 void ControlState::onPaddle2()
 {
     gui.removeAllWidgets();
     engin.Push<PaddleState>(engin, Settings::inst().paddle2);
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
 }
 
 void ControlState::onBack()
 {
     engin.Pop();
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
 }
 
 void ControlState::Init()

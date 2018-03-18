@@ -5,8 +5,7 @@
 #include "Objects/Ball.h"
 #include "States/ControlState.h"
 #include "States/Id.h"
-#include "Events/EventManager.h"
-#include "Events/PlaySound.h"
+#include "Events/Events.h"
 #include "Settings.h"
 #include "ResourceManager.h"
 PaddleState::PaddleState(GU::Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings):
@@ -98,7 +97,7 @@ void PaddleState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 void PaddleState::onBack()
 {
     engin.Pop();
-    EventManager::inst().Post<PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
 }
 
 void PaddleState::onNameBox()
