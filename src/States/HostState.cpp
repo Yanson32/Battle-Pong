@@ -193,7 +193,7 @@ void HostState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 
 }
 
-void HostState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
+void HostState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
 
     switch(event->id)

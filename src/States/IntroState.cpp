@@ -57,7 +57,6 @@ IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId:
     optionButton->setPosition(Settings::inst().buttonPosition(2));
     optionButton->setSize(Settings::inst().buttonSize());
 
-
 }
 
 

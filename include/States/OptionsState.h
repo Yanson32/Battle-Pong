@@ -74,8 +74,14 @@ class OptionsState: public StateBase
     ********************************************************************/
     void onBackPressed();
 
+    void onLoadPressed();
+
+    void onSavePressed();
+
     tgui::Button::Ptr controlsButton;
     tgui::Button::Ptr musicButton;
+    tgui::Button::Ptr loadButton;
+    tgui::Button::Ptr saveButton;
     tgui::Button::Ptr backButton;
 
 };

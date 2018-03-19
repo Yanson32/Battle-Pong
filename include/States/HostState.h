@@ -24,7 +24,7 @@ class HostState: public StateBase
         HostState(GU::Engin::Engin& engin);
 
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
-        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
 
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.

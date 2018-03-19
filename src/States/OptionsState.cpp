@@ -23,6 +23,16 @@ OptionsState::OptionsState(GU::Engin::Engin& newEngin): StateBase(newEngin, stat
     musicButton->setPosition(Settings::inst().buttonPosition(1));
     musicButton->setSize(Settings::inst().buttonSize());
 
+    saveButton = tgui::Button::create("Load");
+    saveButton->connect("pressed", &OptionsState::onLoadPressed, this);
+    saveButton->setPosition(Settings::inst().buttonPosition(2));
+    saveButton->setSize(Settings::inst().buttonSize());
+
+    loadButton = tgui::Button::create("Save");
+    loadButton->connect("pressed", &OptionsState::onSavePressed, this);
+    loadButton->setPosition(Settings::inst().buttonPosition(3));
+    loadButton->setSize(Settings::inst().buttonSize());
+
     backButton = tgui::Button::create("Back");
     backButton->connect("pressed", &OptionsState::onBackPressed, this);
     backButton->setPosition(Settings::inst().buttonPosition(4));
@@ -101,6 +111,8 @@ void OptionsState::Init()
     gui.add(musicButton);
     gui.add(backButton);
     gui.add(controlsButton);
+    gui.add(loadButton);
+    gui.add(saveButton);
 
     ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
     ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
@@ -125,6 +137,17 @@ void OptionsState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
 
 }
+
+void OptionsState::onLoadPressed()
+{
+
+}
+
+void OptionsState::onSavePressed()
+{
+
+}
+
 
 OptionsState::~OptionsState()
 {
