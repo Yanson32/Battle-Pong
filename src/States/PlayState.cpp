@@ -60,8 +60,8 @@ void PlayState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        StateBase::guEvent(engin, evtPtr);
-        guEvent(engin, evtPtr);
+        StateBase::handleGUEvent(engin, evtPtr);
+        handleGUEvent(engin, evtPtr);
     }
 }
 

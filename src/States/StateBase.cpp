@@ -305,7 +305,7 @@ void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
     }
 }
 
-void StateBase::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
+void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
     switch(event->id)
     {

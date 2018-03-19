@@ -8,6 +8,8 @@
 ****************************************************************/
 
 #include <GameUtilities/Engin/GameState.h>
+#include <GameUtilities/Event/EventHandler.h>
+
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <Box2D/Box2D.h>
 #include <memory>
@@ -38,7 +40,7 @@ namespace GU
         class Engin;
     }
 }
-class StateBase: public GU::Engin::GameState
+class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
 {
     public:
         /****************************************************************//**
@@ -81,7 +83,7 @@ class StateBase: public GU::Engin::GameState
 
 
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
-        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         /****************************************************************//**
         *   @brief  This method allows the system to pause the game.
         *           When system pause is in effect regular pause won't
