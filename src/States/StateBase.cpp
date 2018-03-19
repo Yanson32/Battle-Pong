@@ -8,7 +8,7 @@
 #include "Objects/Goal.h"
 #include <array>
 #include "ResourceManager.h"
-#include "States/PlayState.h"
+#include "States/States.h"
 #include "Events/Events.h"
 
 sf::RenderWindow StateBase::window(Settings::inst().getWindowSettings().getVideoMode(), Settings::inst().getTitle());

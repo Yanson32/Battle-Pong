@@ -13,6 +13,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/HostPlayState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ClientPlayState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Id.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/States.h"
 
 )
 set(SUB_DIRECTORIES "")
