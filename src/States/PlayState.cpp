@@ -61,7 +61,6 @@ void PlayState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        StateBase::handleGUEvent(engin, evtPtr);
         handleGUEvent(engin, evtPtr);
     }
 }
@@ -186,8 +185,10 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 
 }
 
-void PlayState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
+void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
+        StateBase::handleGUEvent(engin, event);
+
         //GameUtilities event loop
         while(EventManager::inst().Poll((event)))
         {

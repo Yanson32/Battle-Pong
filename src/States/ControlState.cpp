@@ -42,30 +42,20 @@ void ControlState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime
 
         while (window.pollEvent(event))
         {
-
+            StateBase::sfEvent(engin, event);
+            sfEvent(engin, event);
             gui.handleEvent(event);
-            switch (event.type)
-            {
-
-                case sf::Event::Closed:
-					engin.Quit();
-                    break;
-
-
-                case sf::Event::KeyPressed:
-                    break;
-
-                default:
-                    break;
-            }
         }
-
         leftPaddle->handleInput(*ball);
         rightPaddle->handleInput(*ball);
-
     }
 
-    gameEvents();
+    //GameUtilities event loop
+    GU::Evt::EventPtr evtPtr;
+    while(EventManager::inst().Poll((evtPtr)))
+    {
+        handleGUEvent(engin, evtPtr);
+    }
 }
 
 void ControlState::Update(GU::Engin::Engin& engin, const int &deltaTime)
@@ -93,19 +83,20 @@ void ControlState::onPaddle1()
     gui.removeAllWidgets();
     engin.Push<PaddleState>(engin, Settings::inst().paddle1);
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+    EventManager::inst().Post<GU::Evt::PushState>(stateId::PADDLE_ONE_STATE);
 }
 
 void ControlState::onPaddle2()
 {
-    gui.removeAllWidgets();
-    engin.Push<PaddleState>(engin, Settings::inst().paddle2);
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+    EventManager::inst().Post<GU::Evt::PushState>(stateId::PADDLE_TWO_STATE);
 }
 
 void ControlState::onBack()
 {
-    engin.Pop();
+    std::cout << "ControlState::onBack" << std::endl;
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+    EventManager::inst().Post<GU::Evt::Pop>();
 }
 
 void ControlState::Init()

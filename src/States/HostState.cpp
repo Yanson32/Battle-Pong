@@ -123,7 +123,6 @@ void HostState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        StateBase::handleGUEvent(engin, evtPtr);
         handleGUEvent(engin, evtPtr);
     }
 }
@@ -180,11 +179,13 @@ void HostState::Clean()
 
 void HostState::onBackPressed()
 {
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     EventManager::inst().Post<GU::Evt::Pop>();
 }
 
 void HostState::onHostPressed()
 {
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     EventManager::inst().Post<GU::Evt::ChangeState>(stateId::HOST_PLAY_STATE);
 }
 
@@ -196,38 +197,7 @@ void HostState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 
 void HostState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
-
-    switch(event->id)
-    {
-        case EventId::CHANGE_STATE:
-        {
-
-            std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
-
-            if(!temp)
-                std::cout << "Unable to cast to std::shared_ptr<GU::Evt::ChangeState>" << std::endl;
-            switch(temp->stateId)
-            {
-                case stateId::HOST_PLAY_STATE:
-                {
-                        std::cout << "Host Play State" << std::endl;
-                        EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-                        sf::String value = portBox->getText();
-                        std::unique_ptr<Server> serverPtr(new Server(toInt(value)));
-                        engin.Push<HostPlayState>(engin, std::move(serverPtr));
-                }
-                break;
-                default:
-                    std::cout << "state is " << temp->id << std::endl;
-                break;
-            }
-        }
-        break;
-        case EventId::POP_STATE:
-            EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-            engin.Pop();
-        break;
-    }
+    StateBase::handleGUEvent(engin, event);
 }
 
 

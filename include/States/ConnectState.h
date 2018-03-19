@@ -36,7 +36,7 @@ class ConnectState: public StateBase
         virtual void Init() override;
         virtual void Clean() override;
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
-        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual ~ConnectState();
     protected:
     private:

@@ -21,7 +21,7 @@
 
 
 
-MultiplayerControlState::MultiplayerControlState(GU::Engin::Engin& engin): StateBase(engin, stateId::MULTICONTROL_STATE)
+MultiplayerControlState::MultiplayerControlState(GU::Engin::Engin& engin): StateBase(engin, stateId::MULTIPLAYER_CONTROL_STATE)
 {
     //ctor
     backButton = tgui::Button::create("Back");
@@ -95,7 +95,6 @@ void MultiplayerControlState::HandleEvents(GU::Engin::Engin& newEngin, const int
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        StateBase::handleGUEvent(engin, evtPtr);
         handleGUEvent(engin, evtPtr);
     }
 }
@@ -137,9 +136,8 @@ void MultiplayerControlState::Draw(GU::Engin::Engin& engin, const int &deltaTime
 
 void MultiplayerControlState::onBackPressed()
 {
-    std::cout << "onBackPressed" << std::endl;
-    engin.Pop();
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+    EventManager::inst().Post<GU::Evt::Pop>();
 }
 
 void MultiplayerControlState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)

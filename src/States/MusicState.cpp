@@ -45,7 +45,6 @@ void MusicState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        StateBase::handleGUEvent(engin, evtPtr);
         handleGUEvent(engin, evtPtr);
     }
 }
@@ -72,8 +71,8 @@ void MusicState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 
 void MusicState::onBackPressed()
 {
-    engin.Pop();
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+    EventManager::inst().Post<GU::Evt::Pop>();
 }
 
 void MusicState::Init()
@@ -96,9 +95,9 @@ void MusicState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 
 }
 
-void MusicState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
+void MusicState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
-
+    StateBase::handleGUEvent(engin, event);
 }
 
 MusicState::~MusicState()

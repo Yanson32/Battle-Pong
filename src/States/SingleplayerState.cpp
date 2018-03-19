@@ -10,7 +10,7 @@ void SingleplayerState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 
 }
 
-void SingleplayerState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
+void SingleplayerState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
 
 }

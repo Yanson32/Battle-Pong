@@ -72,7 +72,6 @@ void ConnectState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        StateBase::handleGUEvent(engin, evtPtr);
         handleGUEvent(engin, evtPtr);
     }
 }
@@ -128,16 +127,17 @@ void ConnectState::Clean()
 void ConnectState::onBackPressed()
 {
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-    engin.Pop();
+    EventManager::inst().Post<GU::Evt::Pop>();
 }
 
 void ConnectState::onConnectPressed()
 {
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-    sf::String value = portBox->getText();
-    sf::String ip = ipBox->getText();
-    std::unique_ptr<Client> client(new Client(ip, toInt(value)));
-    engin.Push<ClientPlayState>(engin, std::move(client));
+//    sf::String value = portBox->getText();
+//    sf::String ip = ipBox->getText();
+//    std::unique_ptr<Client> client(new Client(ip, toInt(value)));
+//    engin.Push<ClientPlayState>(engin, std::move(client));
+    EventManager::inst().Post<GU::Evt::ChangeState>(stateId::CONNECT_STATE);
 }
 
 void ConnectState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
@@ -145,31 +145,33 @@ void ConnectState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 
 }
 
-void ConnectState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
+void ConnectState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
+        StateBase::handleGUEvent(engin, event);
+
         //GameUtilities event loop
-        while(EventManager::inst().Poll((event)))
-        {
-            //EventManager::inst().Dispatch((evtPtr));
-            switch(event->id)
-            {
-
-                case EventId::CHANGE_STATE:
-                {
-                    std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
-                    switch(temp->id)
-                    {
-                        case stateId::CONNECT_STATE:
-                            std::cout << "Connect state" << std::endl;
-                        break;
-
-                    }
-                }
-                break;
-
-            }
-
-        }
+//        while(EventManager::inst().Poll((event)))
+//        {
+//            //EventManager::inst().Dispatch((evtPtr));
+//            switch(event->id)
+//            {
+//
+//                case EventId::CHANGE_STATE:
+//                {
+//                    std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
+//                    switch(temp->id)
+//                    {
+//                        case stateId::CONNECT_STATE:
+//                            std::cout << "Connect state" << std::endl;
+//                        break;
+//
+//                    }
+//                }
+//                break;
+//
+//            }
+//
+//        }
 }
 
 ConnectState::~ConnectState()

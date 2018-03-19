@@ -20,8 +20,6 @@ class OptionsState: public StateBase
         ********************************************************************/
         OptionsState(GU::Engin::Engin& engin);
 
-        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
-        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual void Init();
         virtual void Clean();
         /****************************************************************//**

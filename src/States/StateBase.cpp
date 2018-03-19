@@ -341,6 +341,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
             EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BALL);
         break;
         case EventId::PUSH_STATE:
+        {
             std::cout << "Push state " << std::endl;
             std::shared_ptr<GU::Evt::PushState> temp =  std::dynamic_pointer_cast<GU::Evt::PushState>(event);
             if(temp)
@@ -350,9 +351,47 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     case stateId::PLAY_STATE:
                         engin.Push<PlayState>(engin);
                     break;
+                    case stateId::OPTIONS_STATE:
+                        engin.Push<OptionsState>(engin);
+                    break;
+                    case stateId::MULTIPLAYER_CONTROL_STATE:
+                        engin.Push<MultiplayerControlState>(engin);
+                    break;
+//                    case stateId::CLIENT_PLAY_STATE:
+//                        engin.Push<ClientPlayState>(engin);
+//                    break;
+                    case stateId::CONNECT_STATE:
+                        engin.Push<ConnectState>(engin);
+                    break;
+                    case stateId::CONTROL_STATE:
+                        engin.Push<ControlState>(engin);
+                    break;
+//                    case stateId::DEMO_STATE:
+//                        engin.Push<DemoState>(engin);
+//                    break;
+//                    case stateId::HOST_PLAY_STATE:
+//                        engin.Push<HostPlayState>(engin);
+//                    break;
+                    case stateId::HOST_STATE:
+                        engin.Push<HostState>(engin);
+                    break;
+                    case stateId::INTRO_STATE:
+                        engin.Push<IntroState>(engin);
+                    break;
+                    case stateId::MUSIC_STATE:
+                        engin.Push<MusicState>(engin);
+                    break;
+//                    case stateId::PADDLE_STATE:
+//                        engin.Push<PaddleState>(engin);
+//                    break;
                 }
             }
 
+        break;
+        }
+        case EventId::POP_STATE:
+            std::cout << "Pop state" << std::endl;
+            engin.Pop();
         break;
     }
 }

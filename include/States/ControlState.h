@@ -1,5 +1,5 @@
-#ifndef CONTROLSTATE_H
-#define CONTROLSTATE_H
+#ifndef BP_CONTROLSTATE_H
+#define BP_CONTROLSTATE_H
 /************************************************************//**
 *   @author Wayne J Larson Jr
 *   @date   12/24/17

@@ -63,7 +63,6 @@ void OptionsState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        StateBase::handleGUEvent(engin, evtPtr);
         handleGUEvent(engin, evtPtr);
     }
 }
@@ -90,20 +89,20 @@ void OptionsState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 
 void OptionsState::onControlsPressed()
 {
-    engin.Push<ControlState>(engin);
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+    EventManager::inst().Post<GU::Evt::PushState>(stateId::CONTROL_STATE);
 }
 
 void OptionsState::onBackPressed()
 {
-    engin.Pop();
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+    EventManager::inst().Post<GU::Evt::Pop>();
 }
 
 void OptionsState::onMusicPressed()
 {
-    engin.Push<MusicState>(engin);
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+    EventManager::inst().Post<GU::Evt::PushState>(stateId::MUSIC_STATE);
 }
 
 void OptionsState::Init()
@@ -127,16 +126,6 @@ void OptionsState::Clean()
     ResourceManager::sound.remove(Sound::Id::BUTTON);
     ResourceManager::sound.remove(Sound::Id::BALL);
     ResourceManager::font.remove("Header Font");
-}
-
-void OptionsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
-{
-
-}
-
-void OptionsState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
-{
-
 }
 
 void OptionsState::onLoadPressed()

@@ -71,7 +71,6 @@ void PaddleState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        StateBase::handleGUEvent(engin, evtPtr);
         handleGUEvent(engin, evtPtr);
     }
 }
@@ -98,8 +97,8 @@ void PaddleState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 
 void PaddleState::onBack()
 {
-    engin.Pop();
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+    EventManager::inst().Post<GU::Evt::Pop>();
 }
 
 void PaddleState::onNameBox()
@@ -147,9 +146,9 @@ void PaddleState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 
 }
 
-void PaddleState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
+void PaddleState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
-
+    StateBase::handleGUEvent(engin, event);
 }
 
 PaddleState::~PaddleState()

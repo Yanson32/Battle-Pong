@@ -118,7 +118,7 @@ void IntroState::onStartPressed()
 void IntroState::onOptionsPressed()
 {
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-    engin.Push<OptionsState>(engin);
+    EventManager::inst().Post<GU::Evt::PushState>(stateId::OPTIONS_STATE);
 }
 
 void IntroState::Init()
@@ -151,7 +151,7 @@ void IntroState::Clean()
 void IntroState::onMultiplayerPressed()
 {
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-    engin.Push<MultiplayerControlState>(engin);
+    EventManager::inst().Post<GU::Evt::PushState>(stateId::MULTIPLAYER_CONTROL_STATE);
 }
 
 

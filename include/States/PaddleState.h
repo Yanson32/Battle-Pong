@@ -23,7 +23,7 @@ class PaddleState: public StateBase
         PaddleState(GU::Engin::Engin& newEngin, std::shared_ptr<PaddleSettings> pSettings);
 
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
-        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual void Init();
         virtual void Clean();
 

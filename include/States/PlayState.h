@@ -28,7 +28,7 @@ class PlayState: public StateBase
         PlayState(GU::Engin::Engin& newEngin, const stateId newId = stateId::PLAY_STATE);
 
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
-        void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual void Init() override;
         virtual void Clean() override;
 
