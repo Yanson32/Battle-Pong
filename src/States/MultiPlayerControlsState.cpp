@@ -14,7 +14,7 @@
 
 #include "Events/Events.h"
 #include "ResourceManager.h"
-
+#include "Sounds/Id.h"
 
 
 
@@ -44,8 +44,8 @@ MultiplayerControlState::MultiplayerControlState(GU::Engin::Engin& engin): State
 void MultiplayerControlState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
 
     gui.add(backButton);
     gui.add(hostButton);
@@ -53,20 +53,20 @@ void MultiplayerControlState::Init()
 }
 void MultiplayerControlState::Clean()
 {
-    ResourceManager::sound.remove("Button Sound");
-    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::sound.remove(Sound::Id::BUTTON);
+    ResourceManager::sound.remove(Sound::Id::BALL);
     gui.removeAllWidgets();
 }
 
 void MultiplayerControlState::onHostPressed()
 {
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     engin.Push<HostState>(engin);
 }
 
 void MultiplayerControlState::onConnectPressed()
 {
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     engin.Push<ConnectState>(engin);
 }
 /****************************************************************//**
@@ -139,7 +139,7 @@ void MultiplayerControlState::onBackPressed()
 {
     std::cout << "onBackPressed" << std::endl;
     engin.Pop();
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
 }
 
 void MultiplayerControlState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)

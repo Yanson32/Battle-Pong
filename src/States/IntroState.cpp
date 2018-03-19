@@ -25,6 +25,7 @@
 
 #include "ResourceManager.h"
 #include "Logging.h"
+#include "Sounds/Id.h"
 
 IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::INTRO_STATE)
 {
@@ -110,13 +111,13 @@ void IntroState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 
 void IntroState::onStartPressed()
 {
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     EventManager::inst().Post<GU::Evt::PushState>(stateId::PLAY_STATE);
 }
 
 void IntroState::onOptionsPressed()
 {
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     engin.Push<OptionsState>(engin);
 }
 
@@ -128,9 +129,9 @@ void IntroState::Init()
     gui.add(optionButton);
     gui.add(multiplayerButton);
 
-    ResourceManager::sound.load("Message Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
     ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 
     header.setFont(ResourceManager::font.get("Header Font"));
@@ -140,16 +141,16 @@ void IntroState::Clean()
 {
     gui.removeAllWidgets();
 
-    ResourceManager::sound.remove("Message Sound");
-    ResourceManager::sound.remove("Button Sound");
-    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::sound.remove(Sound::Id::MESSAGE);
+    ResourceManager::sound.remove(Sound::Id::BUTTON);
+    ResourceManager::sound.remove(Sound::Id::BALL);
     ResourceManager::font.remove("Header Font");
 
 }
 
 void IntroState::onMultiplayerPressed()
 {
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     engin.Push<MultiplayerControlState>(engin);
 }
 

@@ -10,6 +10,7 @@
 #include "ResourceManager.h"
 #include "States/States.h"
 #include "Events/Events.h"
+#include "Sounds/Id.h"
 
 sf::RenderWindow StateBase::window(Settings::inst().getWindowSettings().getVideoMode(), Settings::inst().getTitle());
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -337,7 +338,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
         }
         break;
         case EventId::BALL_COLLISION:
-            EventManager::inst().Post<GU::Evt::PlaySound>("Ball Sound");
+            EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BALL);
         break;
         case EventId::PUSH_STATE:
             std::cout << "Push state " << std::endl;

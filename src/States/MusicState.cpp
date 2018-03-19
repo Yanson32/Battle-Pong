@@ -10,6 +10,7 @@
 #include "Events/Events.h"
 #include "Settings.h"
 #include "ResourceManager.h"
+#include "Sounds/Id.h"
 
 MusicState::MusicState(GU::Engin::Engin& engin): StateBase(engin, stateId::MUSIC_STATE)
 {
@@ -72,21 +73,21 @@ void MusicState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 void MusicState::onBackPressed()
 {
     engin.Pop();
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
 }
 
 void MusicState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
     gui.add(backButton);
     gui.add(Settings::inst().musicSettings);
 }
 void MusicState::Clean()
 {
-    ResourceManager::sound.remove("Button Sound");
-    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::sound.remove(Sound::Id::BUTTON);
+    ResourceManager::sound.remove(Sound::Id::BALL);
     gui.removeAllWidgets();
 }
 

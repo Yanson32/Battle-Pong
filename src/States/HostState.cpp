@@ -9,6 +9,7 @@
 #include <SFML/Network/IpAddress.hpp>
 #include "Server.h"
 #include "States/HostPlayState.h"
+#include "Sounds/Id.h"
 
 //std::shared_ptr<HostPanel> HostState::panel(new HostPanel());
 //
@@ -154,8 +155,8 @@ void HostState::Init()
     StateBase::Init();
     //panel->Init();
 
-    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
     gui.add(hostButton);
     gui.add(portBox);
     gui.add(portLabel);
@@ -171,8 +172,8 @@ void HostState::Init()
 void HostState::Clean()
 {
     //panel->Clean();
-    ResourceManager::sound.remove("Button Sound");
-    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::sound.remove(Sound::Id::BUTTON);
+    ResourceManager::sound.remove(Sound::Id::BALL);
 
     gui.removeAllWidgets();
 }
@@ -210,7 +211,7 @@ void HostState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 case stateId::HOST_PLAY_STATE:
                 {
                         std::cout << "Host Play State" << std::endl;
-                        EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+                        EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
                         sf::String value = portBox->getText();
                         std::unique_ptr<Server> serverPtr(new Server(toInt(value)));
                         engin.Push<HostPlayState>(engin, std::move(serverPtr));
@@ -223,7 +224,7 @@ void HostState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
         }
         break;
         case EventId::POP_STATE:
-            EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+            EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
             engin.Pop();
         break;
     }

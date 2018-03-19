@@ -2,7 +2,6 @@ set(FILES
             "${CMAKE_CURRENT_SOURCE_DIR}/EventBase.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/EventManager.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/BallCollision.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Id.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/GoalCollision.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/LeftPaddleGoal.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/RightPaddleGoal.cpp"

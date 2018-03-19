@@ -14,6 +14,7 @@
 #include "Settings.h"
 #include "ResourceManager.h"
 #include "Events/Events.h"
+#include "Sounds/Id.h"
 
 PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase(newEngin, newId)
 {
@@ -96,7 +97,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
                 userMessage.setString("3");
                 centerText();
                 messageClock.restart();
-                EventManager::inst().Post<GU::Evt::PlaySound>(sf::String("Message Sound"));
+                EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
             }
         }
         else if(userMessage.getString() == "3")
@@ -106,7 +107,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
                 userMessage.setString("2");
                 centerText();
                 messageClock.restart();
-                EventManager::inst().Post<GU::Evt::PlaySound>(sf::String("Message Sound"));
+                EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
             }
         }
         else if(userMessage.getString() == "2")
@@ -116,7 +117,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
                 userMessage.setString("1");
                 centerText();
                 messageClock.restart();
-                EventManager::inst().Post<GU::Evt::PlaySound>(sf::String("Message Sound"));
+                EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
             }
         }
         else if(userMessage.getString() == "1")
@@ -126,7 +127,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
                 userMessage.setString("Go!");
                 centerText();
                 messageClock.restart();
-                EventManager::inst().Post<GU::Evt::PlaySound>(sf::String("Message Sound"));
+                EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
             }
         }
         else if(userMessage.getString() == "Go!")
@@ -156,9 +157,9 @@ void PlayState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 void PlayState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load("Message Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
     ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 
     userMessage.setFont(ResourceManager::font.get("Header Font"));
@@ -173,9 +174,9 @@ void PlayState::Clean()
 {
     gui.removeAllWidgets();
 
-    ResourceManager::sound.remove("Message Sound");
-    ResourceManager::sound.remove("Button Sound");
-    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::sound.remove(Sound::Id::MESSAGE);
+    ResourceManager::sound.remove(Sound::Id::BUTTON);
+    ResourceManager::sound.remove(Sound::Id::BALL);
     ResourceManager::font.remove("Header Font");
 
 }

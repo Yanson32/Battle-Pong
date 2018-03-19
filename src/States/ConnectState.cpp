@@ -6,6 +6,7 @@
 #include "States/ClientPlayState.h"
 #include "SFMLFunctions.h"
 #include "Events/Events.h"
+#include "Sounds/Id.h"
 
 ConnectState::ConnectState(GU::Engin::Engin& engin): StateBase(engin, stateId::CONNECT_STATE)
 {
@@ -112,27 +113,27 @@ void ConnectState::Init()
 
     //gui.add(panel);
     gui.add(backButton);
-    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
 }
 
 void ConnectState::Clean()
 {
-    ResourceManager::sound.remove("Button Sound");
-    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::sound.remove(Sound::Id::BUTTON);
+    ResourceManager::sound.remove(Sound::Id::BALL);
 
     gui.removeAllWidgets();
 }
 
 void ConnectState::onBackPressed()
 {
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     engin.Pop();
 }
 
 void ConnectState::onConnectPressed()
 {
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     sf::String value = portBox->getText();
     sf::String ip = ipBox->getText();
     std::unique_ptr<Client> client(new Client(ip, toInt(value)));

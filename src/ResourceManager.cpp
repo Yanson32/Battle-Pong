@@ -3,7 +3,7 @@
 
 namespace ResourceManager
 {
-    ResourceHolder<sf::SoundBuffer, sf::String> sound;
+    ResourceHolder<sf::SoundBuffer, int> sound;
     ResourceHolder<sf::Font, sf::String> font;
 
 }

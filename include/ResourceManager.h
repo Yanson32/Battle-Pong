@@ -20,7 +20,7 @@ namespace ResourceManager
     *   @brief  The sound ResourceManager object holds sf::SoundBuffer
     *           objects.
     **************************************************************/
-    extern ResourceHolder<sf::SoundBuffer, sf::String> sound;
+    extern ResourceHolder<sf::SoundBuffer, int> sound;
 
 
     /**********************************************************//**

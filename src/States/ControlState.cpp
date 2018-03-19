@@ -10,6 +10,7 @@
 #include "States/Id.h"
 #include "Events/Events.h"
 #include "ResourceManager.h"
+#include "Sounds/Id.h"
 
 ControlState::ControlState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::CONTROL_STATE)
 {
@@ -91,27 +92,27 @@ void ControlState::onPaddle1()
 {
     gui.removeAllWidgets();
     engin.Push<PaddleState>(engin, Settings::inst().paddle1);
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
 }
 
 void ControlState::onPaddle2()
 {
     gui.removeAllWidgets();
     engin.Push<PaddleState>(engin, Settings::inst().paddle2);
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
 }
 
 void ControlState::onBack()
 {
     engin.Pop();
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
 }
 
 void ControlState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
     gui.add(paddle1);
     gui.add(paddle2);
     gui.add(backButton);
@@ -120,8 +121,8 @@ void ControlState::Init()
 void ControlState::Clean()
 {
     gui.removeAllWidgets();
-    ResourceManager::sound.remove("Button Sound");
-    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::sound.remove(Sound::Id::BUTTON);
+    ResourceManager::sound.remove(Sound::Id::BALL);
 
 }
 

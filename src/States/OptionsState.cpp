@@ -9,6 +9,7 @@
 #include "Events/Events.h"
 #include "States/MusicState.h"
 #include "ResourceManager.h"
+#include "Sounds/Id.h"
 
 OptionsState::OptionsState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::OPTIONS_STATE)
 {
@@ -90,19 +91,19 @@ void OptionsState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 void OptionsState::onControlsPressed()
 {
     engin.Push<ControlState>(engin);
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
 }
 
 void OptionsState::onBackPressed()
 {
     engin.Pop();
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
 }
 
 void OptionsState::onMusicPressed()
 {
     engin.Push<MusicState>(engin);
-    EventManager::inst().Post<GU::Evt::PlaySound>("Button Sound");
+    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
 }
 
 void OptionsState::Init()
@@ -114,8 +115,8 @@ void OptionsState::Init()
     gui.add(loadButton);
     gui.add(saveButton);
 
-    ResourceManager::sound.load("Button Sound", "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load("Ball Sound", "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
     ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 }
 
@@ -123,8 +124,8 @@ void OptionsState::Clean()
 {
     gui.removeAllWidgets();
 
-    ResourceManager::sound.remove("Button Sound");
-    ResourceManager::sound.remove("Ball Sound");
+    ResourceManager::sound.remove(Sound::Id::BUTTON);
+    ResourceManager::sound.remove(Sound::Id::BALL);
     ResourceManager::font.remove("Header Font");
 }
 
