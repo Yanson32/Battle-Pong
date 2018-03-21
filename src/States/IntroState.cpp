@@ -135,6 +135,7 @@ void IntroState::Init()
     ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 
     header.setFont(ResourceManager::font.get("Header Font"));
+    reset();
 }
 
 void IntroState::Clean()

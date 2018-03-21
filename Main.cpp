@@ -18,7 +18,7 @@
 #ifndef MAJOR_VERSION
     #define MAJOR_VERSION 1
 #endif // MAJOR_VERSION
-//This is a comment
+
 int main(int argc, char* argv[])
 {
 
@@ -44,38 +44,14 @@ int main(int argc, char* argv[])
 
     boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
 
-//    BOOST_LOG_SEV(lg, logging::trivial::trace) << "A trace severity message";
-//    BOOST_LOG_SEV(lg, logging::trivial::debug) << "A debug severity message";
-//    BOOST_LOG_SEV(lg, logging::trivial::info) << "An informational severity message";
-//    BOOST_LOG_SEV(lg, logging::trivial::warning) << "A warning severity message";
-//    BOOST_LOG_SEV(lg, logging::trivial::error) << "An error severity message";
-    //BOOST_LOG_SEV(lg, fatal) << "A fatal severity message";
-//    ResourceManager::sound.load("Message Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
-//    ResourceManager::sound.load("Button Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
-//    ResourceManager::sound.load("List Box Selected Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
-//    ResourceManager::sound.load("Edit Box Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
-//    ResourceManager::sound.load("Ball Sound", "/home/me/Desktop/Pong/Build/Resources/Sounds/tone1.ogg");
-//    ResourceManager::font.load("Header Font", "/home/me/Desktop/Pong/Build/Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
-
-//    ResourceManager::sound.remove("Message Sound");
-//    ResourceManager::sound.remove("Button Sound");
-//    ResourceManager::sound.remove("List Box Selected Sound");
-//    ResourceManager::sound.remove("Edit Box Sound");
-//    ResourceManager::sound.remove("Ball Sound");
-//    ResourceManager::font.remove("Header Font");
-
     sf::Clock timer;
     const sf::Time deltaTime = sf::seconds(1.0f / 60.0f);
     sf::Time accumulator = sf::seconds(0);
 
 	Game engin;
 
-	std::unique_ptr<IntroState> state(new IntroState(engin));
-    state->reset();
-	engin.Push(std::move(state));
+	engin.Push<IntroState>(engin);
 	EventManager::inst().Post<GU::Evt::PlayMusic>("../Resources/Music/Electro_Zombies.ogg");
-	//EventManager::inst().Post<MusicVolumeChanged>();
-	//EventManager::inst().Post<SoundVolumeChanged>();
 
     try
     {

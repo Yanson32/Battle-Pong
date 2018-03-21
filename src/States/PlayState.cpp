@@ -167,6 +167,7 @@ void PlayState::Init()
     paddle1Hud->setScore(0);
     paddle2Hud->setScore(0);
     centerText();
+    reset();
 }
 
 void PlayState::Clean()

@@ -125,13 +125,14 @@ void StateBase::Draw(GU::Engin::Engin& engin, const int &deltaTime)
     window.draw(*leftWall);
     window.draw(*RightWall);
     window.draw(*ground);
-    window.draw(*paddle1Hud);
-    window.draw(*paddle2Hud);
-    gui.draw();
 
     #ifdef DEBUG
         window.draw(debugDraw);
     #endif
+
+    gui.draw();
+    window.draw(*paddle1Hud);
+    window.draw(*paddle2Hud);
 }
 
 void StateBase::systemPause(const bool newSysPause)
