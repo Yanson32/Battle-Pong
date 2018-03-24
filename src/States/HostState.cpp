@@ -187,6 +187,7 @@ void HostState::onHostPressed()
 {
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     EventManager::inst().Post<GU::Evt::ChangeState>(stateId::HOST_PLAY_STATE);
+
 }
 
 

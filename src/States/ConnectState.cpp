@@ -133,10 +133,12 @@ void ConnectState::onBackPressed()
 void ConnectState::onConnectPressed()
 {
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-//    sf::String value = portBox->getText();
-//    sf::String ip = ipBox->getText();
-//    std::unique_ptr<Client> client(new Client(ip, toInt(value)));
-//    engin.Push<ClientPlayState>(engin, std::move(client));
+    int port = toInt(portBox->getText());
+    sf::String ip = ipBox->getText();
+
+    Settings::inst().clientSettings->setIp(ip);
+    Settings::inst().clientSettings->setPort(port);
+
     EventManager::inst().Post<GU::Evt::ChangeState>(stateId::CONNECT_STATE);
 }
 

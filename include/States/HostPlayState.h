@@ -7,7 +7,7 @@
 class HostPlayState: public PlayState
 {
     public:
-        HostPlayState(GU::Engin::Engin& newEngin, std::unique_ptr<Server> serverPtr);
+        HostPlayState(GU::Engin::Engin& newEngin);
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
         void guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual void Init() override;

@@ -2,14 +2,13 @@
 #define CLIENTPLAYSTATE_H
 
 #include "States/PlayState.h"
-#include "Client.h"
 #include <iostream>
 #include <memory>
 
 class ClientPlayState: public PlayState
 {
     public:
-        ClientPlayState(GU::Engin::Engin& newEngin, std::unique_ptr<Client> newClient);
+        ClientPlayState(GU::Engin::Engin& newEngin);
 
         virtual void Init() override;
         virtual void Clean() override;
@@ -44,7 +43,6 @@ class ClientPlayState: public PlayState
         virtual ~ClientPlayState();
     protected:
     private:
-        std::unique_ptr<Client> client = nullptr;
 };
 
 #endif // CLIENTPLAYSTATE_H

@@ -10,7 +10,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/VideoMode.hpp>
 #include <TGUI/TGUI.hpp>
-
+#include <SFML/Network.hpp>
 #include "Events/Id.h"
 
 /**********************************************************//**
@@ -76,6 +76,48 @@ class MusicSettings: public tgui::Panel
 
 };
 
+class ServerSettings
+{
+    public:
+        ServerSettings();
+        bool isConnected();
+        void init();
+        void clean();
+        void handleEvents();
+        bool update();
+        sf::Packet recieve();
+        virtual ~ServerSettings();
+    protected:
+    private:
+        sf::TcpSocket socket;
+        sf::TcpListener listener;
+        bool connected = false;
+        int port = 4000;
+        sf::IpAddress address;
+};
+
+class ClientSettings
+{
+    public:
+        ClientSettings();
+        bool isConnected();
+        void init();
+        void clean();
+        void handleEvents();
+        bool update();
+        void setTimeOut(const sf::Time &newTime);
+        void setIp(const sf::String newIp);
+        void setPort(const int newPort);
+        sf::String getIp() const;
+        int getPort() const;
+        virtual ~ClientSettings();
+    protected:
+    private:
+        int port = 5000;
+        sf::String ip = "127.0.0.0.1";
+        sf::TcpSocket socket;
+        sf::Time timeOut;
+};
 
 /**********************************************************//**
 *   @brief  A singleton that contains all game settings
@@ -91,6 +133,8 @@ public:
     std::shared_ptr<PaddleSettings> paddle1;
 	std::shared_ptr<PaddleSettings> paddle2;
 	std::shared_ptr<MusicSettings> musicSettings;
+	std::shared_ptr<ClientSettings> clientSettings;
+	std::shared_ptr<ServerSettings> serverSettings;
 	WindowSettings windowSettings;
 	~Settings();
 private:

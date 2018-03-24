@@ -1,6 +1,6 @@
 #include "Settings.h"
 #include "Events/Events.h"
-
+#include "States/Id.h"
 /**********************************************************//**
 *   @brief  Settings for the game window
 **************************************************************/
@@ -175,6 +175,134 @@ void MusicSettings::onSoundVolume()
 }
 
 
+ServerSettings::ServerSettings()
+{
+    //ctor
+    listener.setBlocking(true);
+}
+
+void ServerSettings::init()
+{
+
+    if (listener.listen(port) != sf::Socket::Done)
+    {
+        std::cerr << "unable to listen on port " << listener.getLocalPort() << std::endl;
+        return;
+    }
+
+
+    if (listener.accept(socket) != sf::Socket::Done)
+    {
+        std::cerr << "unable to accept a connection on port " << listener.getLocalPort() << std::endl;
+        return;
+    }
+}
+
+void ServerSettings::clean()
+{
+
+}
+
+void ServerSettings::handleEvents()
+{
+
+}
+
+
+bool ServerSettings::update()
+{
+
+
+
+    return true;
+}
+
+bool ServerSettings::isConnected()
+{
+    return connected;
+}
+
+
+sf::Packet ServerSettings::recieve()
+{
+
+}
+
+ServerSettings::~ServerSettings()
+{
+    //dtor
+}
+
+ClientSettings::ClientSettings()
+{
+    //ctor
+    setTimeOut(sf::seconds(5));
+}
+
+bool ClientSettings::isConnected()
+{
+
+}
+
+void ClientSettings::init()
+{
+
+    sf::Socket::Status status = socket.connect({ip}, port, sf::seconds(5));
+    if (status != sf::Socket::Done)
+    {
+        // error...
+        EventManager::inst().Post<GU::Evt::ChangeState>(stateId::CONNECT_STATE);
+    }
+
+}
+
+void ClientSettings::clean()
+{
+
+}
+
+void ClientSettings::handleEvents()
+{
+
+}
+
+bool ClientSettings::update()
+{
+
+}
+
+void ClientSettings::setTimeOut(const sf::Time &newTime)
+{
+    timeOut = newTime;
+}
+
+
+void ClientSettings::setIp(const sf::String newIp)
+{
+    ip = newIp;
+}
+
+void ClientSettings::setPort(const int newPort)
+{
+    port = newPort;
+}
+
+sf::String ClientSettings::getIp() const
+{
+    return ip;
+}
+
+int ClientSettings::getPort() const
+{
+    return port;
+}
+
+ClientSettings::~ClientSettings()
+{
+    //dtor
+}
+
+
 /**********************************************************//**
 *   @brief  A singleton that contains all game settings
 **************************************************************/
@@ -183,6 +311,8 @@ bSize(200, 25),
 bPosition(300, 300),
 paddle1(new PaddleSettings("Paddle 1", ObjectId::LEFT_PADDLE)),
 paddle2(new PaddleSettings("Paddle 2", ObjectId::RIGHT_PADDLE)),
+clientSettings(new ClientSettings()),
+serverSettings(new ServerSettings()),
 musicSettings(new MusicSettings())
 {
 	title = "Pong";

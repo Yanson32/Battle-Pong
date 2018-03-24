@@ -1,8 +1,7 @@
 #include "States/HostPlayState.h"
 
-HostPlayState::HostPlayState(GU::Engin::Engin& newEngin, std::unique_ptr<Server> serverPtr):
-PlayState::PlayState(newEngin, stateId::HOST_PLAY_STATE),
-server(std::move(serverPtr))
+HostPlayState::HostPlayState(GU::Engin::Engin& newEngin):
+PlayState::PlayState(newEngin, stateId::HOST_PLAY_STATE)
 {
     //ctor
 }
@@ -10,9 +9,8 @@ server(std::move(serverPtr))
 void HostPlayState::Init()
 {
     PlayState::Init();
-
-    server->init();
 }
+
 void HostPlayState::Clean()
 {
     PlayState::Clean();

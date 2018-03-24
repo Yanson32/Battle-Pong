@@ -2,9 +2,8 @@
 #include "Events/EventManager.h"
 #include "States/Id.h"
 
-ClientPlayState::ClientPlayState(GU::Engin::Engin& newEngin, std::unique_ptr<Client> newClient):
-PlayState::PlayState(newEngin, stateId::CLIENT_PLAY_STATE),
-client(std::move(newClient))
+ClientPlayState::ClientPlayState(GU::Engin::Engin& newEngin):
+PlayState::PlayState(newEngin, stateId::CLIENT_PLAY_STATE)
 {
     //ctor
 }
@@ -12,9 +11,8 @@ client(std::move(newClient))
 void ClientPlayState::Init()
 {
     PlayState::Init();
-    client->init();
-
 }
+
 void ClientPlayState::Clean()
 {
     PlayState::Clean();

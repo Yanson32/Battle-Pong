@@ -343,7 +343,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
         break;
         case EventId::PUSH_STATE:
         {
-            std::cout << "Push state " << std::endl;
             std::shared_ptr<GU::Evt::PushState> temp =  std::dynamic_pointer_cast<GU::Evt::PushState>(event);
             if(temp)
             {
@@ -358,9 +357,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     case stateId::MULTIPLAYER_CONTROL_STATE:
                         engin.Push<MultiplayerControlState>(engin);
                     break;
-//                    case stateId::CLIENT_PLAY_STATE:
-//                        engin.Push<ClientPlayState>(engin);
-//                    break;
+                    case stateId::CLIENT_PLAY_STATE:
+                        engin.Push<ClientPlayState>(engin);
+                    break;
                     case stateId::CONNECT_STATE:
                         engin.Push<ConnectState>(engin);
                     break;
@@ -370,9 +369,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 //                    case stateId::DEMO_STATE:
 //                        engin.Push<DemoState>(engin);
 //                    break;
-//                    case stateId::HOST_PLAY_STATE:
-//                        engin.Push<HostPlayState>(engin);
-//                    break;
+                    case stateId::HOST_PLAY_STATE:
+                        engin.Push<HostPlayState>(engin);
+                    break;
                     case stateId::HOST_STATE:
                         engin.Push<HostState>(engin);
                     break;
@@ -391,8 +390,25 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
         break;
         }
         case EventId::POP_STATE:
-            std::cout << "Pop state" << std::endl;
             engin.Pop();
+        break;
+        case EventId::CHANGE_STATE:
+
+            std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
+            if(temp)
+            {
+                switch(temp->stateId)
+                {
+                    case stateId::HOST_PLAY_STATE:
+                        engin.ChangeState<HostPlayState>(engin);
+                    break;
+                    case stateId::CONNECT_STATE:
+                        engin.ChangeState<ClientPlayState>(engin);
+                    break;
+                }
+            }
+            else
+                std::cout << "Unable to change state " << std::endl;
         break;
     }
 }

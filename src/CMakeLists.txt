@@ -4,8 +4,6 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Debugging.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleHud.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Logging.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Server.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Client.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SFMLFunctions.cpp"
 )
 set(SUB_DIRECTORIES "States"
