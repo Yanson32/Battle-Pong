@@ -1,5 +1,5 @@
 #include "States/HostPlayState.h"
-
+#include "Settings.h"
 HostPlayState::HostPlayState(GU::Engin::Engin& newEngin):
 PlayState::PlayState(newEngin, stateId::HOST_PLAY_STATE)
 {
@@ -9,6 +9,7 @@ PlayState::PlayState(newEngin, stateId::HOST_PLAY_STATE)
 void HostPlayState::Init()
 {
     PlayState::Init();
+    Settings::inst().clientSettings->init();
 }
 
 void HostPlayState::Clean()

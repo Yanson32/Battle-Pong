@@ -1,6 +1,7 @@
 #include "States/ClientPlayState.h"
 #include "Events/EventManager.h"
 #include "States/Id.h"
+#include "Settings.h"
 
 ClientPlayState::ClientPlayState(GU::Engin::Engin& newEngin):
 PlayState::PlayState(newEngin, stateId::CLIENT_PLAY_STATE)
@@ -11,6 +12,7 @@ PlayState::PlayState(newEngin, stateId::CLIENT_PLAY_STATE)
 void ClientPlayState::Init()
 {
     PlayState::Init();
+    Settings::inst().clientSettings->init();
 }
 
 void ClientPlayState::Clean()

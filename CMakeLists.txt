@@ -27,13 +27,6 @@ if("${BP_BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
 	add_definitions("-DDEBUG")
 endif()
 
-#Change the library output path
-set_target_properties( "${PROJECT_NAME}"
-    PROPERTIES
-    ARCHIVE_OUTPUT_DIRECTORY lib
-    LIBRARY_OUTPUT_DIRECTORY lib
-    RUNTIME_OUTPUT_DIRECTORY bin
-)
 
 #Define compiler features
 target_compile_features("${PROJECT_NAME}" 
@@ -52,7 +45,7 @@ target_include_directories("${PROJECT_NAME}" PUBLIC
 
 find_package(GameUtilities REQUIRED)
 # and for each of your dependent executable/library targets:
-target_link_libraries("${PROJECT_NAME}" PUBLIC "GameUtilities")
+target_link_libraries("${PROJECT_NAME}" PRIVATE GameUtilities)
 
 
 find_package(SFML 2 COMPONENTS system window graphics audio network REQUIRED)
@@ -70,10 +63,6 @@ target_link_libraries("${PROJECT_NAME}" PUBLIC ${TGUI_LIBRARY})
 find_package(Boost 1.60.0 COMPONENTS thread date_time filesystem system program_options regex system log log_setup REQUIRED)
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${Boost_LIBRARIES})
 target_include_directories("${PROJECT_NAME}" PUBLIC ${Boost_INCLUDE_DIRS})
-
-#Install Source Files
-install(TARGETS "${PROJECT_NAME}" DESTINATION lib EXPORT "${PROJECT_NAME}-Exports")
-install(EXPORT "${PROJECT_NAME}-Exports" DESTINATION "lib/cmake/${PROJECT_NAME}")
 
 
 #Export targets to the build tree

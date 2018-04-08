@@ -407,8 +407,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     break;
                 }
             }
-            else
-                std::cout << "Unable to change state " << std::endl;
         break;
     }
 }
