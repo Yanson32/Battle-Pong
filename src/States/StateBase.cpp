@@ -35,8 +35,8 @@ std::unique_ptr<Wall> StateBase::RightWall(new Wall(world, verticalPoints));
 std::unique_ptr<Paddle> StateBase::leftPaddle(new Paddle(world, ObjectId::LEFT_PADDLE, paddlePoints));
 std::unique_ptr<Paddle> StateBase::rightPaddle(new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints));
 
-std::unique_ptr<Goal> StateBase::leftGoal(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
-std::unique_ptr<Goal> StateBase::rightGoal(new Goal(world, ObjectId::RIGHT_GOAL, goalPoints));
+std::unique_ptr<Goal> StateBase::leftGoal(new Goal(world, ObjectId::RIGHT_GOAL, goalPoints));
+std::unique_ptr<Goal> StateBase::rightGoal(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
 std::unique_ptr<Ball> StateBase::ball(new Ball(world));
 
 sf::Sound StateBase::sound;
