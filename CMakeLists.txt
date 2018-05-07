@@ -44,7 +44,6 @@ target_include_directories("${PROJECT_NAME}" PUBLIC
 	)
 
 find_package(GameUtilities REQUIRED)
-# and for each of your dependent executable/library targets:
 target_link_libraries("${PROJECT_NAME}" PRIVATE GameUtilities)
 
 

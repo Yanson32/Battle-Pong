@@ -31,15 +31,6 @@ namespace
     std::vector<b2Vec2> getPoints(const b2Vec2& center, float32 radius, const unsigned pointCount);
 
 
-
-    /**********************************************************************************************
-    *   Purpose:    Create a bounding box for a view.
-    *   Input:      const sf::View the view that we want to create a bounding box for.
-    *   Return:     sf::FloatRect represents the bounding box for the input view.
-    **********************************************************************************************/
-    //sf::FloatRect getBounds(const sf::View &view);
-
-
     /****************************************************************************************
     *   Purpose:    This converts a box2d color object to an SFML color object.
     *   Input:      const b2Color &color this parameter is a box2d color which will be
@@ -48,15 +39,6 @@ namespace
     *   Return:     sf::Color object which is created from the input parameters.
     ****************************************************************************************/
     sf::Color toSfColor(const b2Color &color, int alpha = 255);
-
-
-    /****************************************************************************************
-    *   Purpose:    This function creates a bounding box for a line segment.
-    *   Input:      const sf::Vector2f the first point of the line.
-    *               const sf::Vector2f the second point of the line.
-    *   Return:     sf::FloatRect the bounding rectangle for the line
-    ****************************************************************************************/
-    //sf::FloatRect getBounds(const sf::Vector2f first, const sf::Vector2f second);
 }
 
 
@@ -410,22 +392,5 @@ namespace
     {
         return sf::Color (sf::Uint8(color.r * 255), sf::Uint8(color.g * 255), sf::Uint8(color.b * 255));
     }
-
-
-    /****************************************************************************************
-    *   Purpose:    This function creates a bounding box for a line segment.
-    *   Input:      const sf::Vector2f the first point of the line.
-    *               const sf::Vector2f the second point of the line.
-    *   Return:     sf::FloatRect the bounding rectangle for the line
-    ****************************************************************************************/
-    //sf::FloatRect getBounds(const sf::Vector2f first, const sf::Vector2f second)
-    //{
-        //sf::FloatRect rt;
-        //rt.left = view.getCenter().x - view.getSize().x / 2.0f;
-        //rt.top = view.getCenter().y - view.getSize().y / 2.0f;
-        //rt.width = view.getSize().x;
-        //rt.height = view.getSize().y;
-		//return sf::FloatRect();
-    //}
 
 }
