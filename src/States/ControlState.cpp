@@ -73,8 +73,8 @@ void ControlState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 
 void ControlState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
-	StateBase::Draw(engin, deltaTime);
 	window.draw(*ball);
+	StateBase::Draw(engin, deltaTime);
     window.display();
 }
 
