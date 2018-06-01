@@ -21,6 +21,9 @@
 #include <vector>
 namespace
 {
+    const float PIE = 3.141592654f;
+    const float TAU = 2 * PIE;
+
     /**********************************************************************************************
     *   Purpose:    This method converts a circle to points along the circumference of the circle.
     *   Input:      const b2Vec2& the center of the circle.
@@ -39,14 +42,22 @@ namespace
     *   Return:     sf::Color object which is created from the input parameters.
     ****************************************************************************************/
     sf::Color toSfColor(const b2Color &color, int alpha = 255);
+
 }
 
 
-    /****************************************************************************************************
-    *   Purpose:    This method is a constructor.
-    *   Input:      sf::RenderWindow &newWindow this is the window where the Box2D bodies will be drawn
-    ****************************************************************************************************/
-	DebugDraw::DebugDraw(b2World& newWorld, const float newPixelsPerMeter): pixelsPerMeter(newPixelsPerMeter), world(newWorld)
+    /***************************************************************************************************************//**
+    *   @brief  This method is a constructor.
+    *   @param  newWorld a reference to a Box2D world object which will
+    *           be stored internally untill object deletion.
+    *   @param  newPixelsPerMeter is used to convert between pixles and
+    *           Box2D meters
+    *   @param  circleScaling effects the number of points used to draw a circle
+    *******************************************************************************************************************/
+    DebugDraw::DebugDraw(b2World& newWorld, const float newPixelsPerMeter, const float circleScaling):
+    pixelsPerMeter(newPixelsPerMeter),
+    world(newWorld),
+    m_circleScaling(circleScaling)
     {
         lines.setPrimitiveType(sf::Lines);
         triangles.setPrimitiveType(sf::Triangles);
@@ -79,22 +90,20 @@ namespace
     }
 
 
-    /*******************************************************************************************************************
-    *   Purpose:    This method draws axis alligned bounding boxes.
-    *   Input:      b2Vec2* vertices which is an array of verticies.
-    *               int32 vertexCount the number of vertices in the vertices parameter.
-    *               const b2Color which is the color the axis aligned bounding box should be drawn with
-    *   pre:        This class must first be registered with a box2d world object.
-    *               The e_aabbBit must be set.
-    *******************************************************************************************************************/
+	/***************************************************************************************************************//**
+	*   @brief  This method draws all shapes except circles.
+	*   @param  vertices which is an array of verticies.
+	*   @param  vertexCount the number of vertices in the vertices parameter.
+	*   @param  color which is the color the axis aligned bounding box should be drawn with
+	*   pre:    This class must first be registered with a box2d world object.
+	*           The e_shapeBit must be set.
+	*******************************************************************************************************************/
     void DebugDraw::DrawSolidPolygon(const b2Vec2* vertices, int32 vertexCount, const b2Color& color)
     {
         const sf::Color COLOR = toSfColor(color);
 
         for(int i = 0; i < vertexCount - 2; ++i)
         {
-            if(lines.getVertexCount() - trianglesUsed < 3)
-                lines.resize(lines.getVertexCount() + 3);
 
             sf::Vertex vertA;
             vertA.position = this->toPixels(vertices[i]);
@@ -110,11 +119,8 @@ namespace
             vertC.position = this->toPixels(vertices[i + 2]);
             vertC.color = COLOR;
             triangles.append(vertC);
-            trianglesUsed += 3;
         }
 
-        if(lines.getVertexCount() - trianglesUsed < 3)
-            lines.resize(lines.getVertexCount() + 3);
 
         sf::Vertex vertA;
         vertA.position = this->toPixels(vertices[vertexCount - 2]);
@@ -131,20 +137,19 @@ namespace
         triangles.append(vertA);
         triangles.append(vertB);
         triangles.append(vertC);
-        trianglesUsed += 3;
     }
 
 
-    /*******************************************************************************************************************
-    *   Purpose:    This method draws the outline of a circle.
-    *   Input:      const b2Vec2& center this parameter is the center of the circle.
-    *               float32 radius this parameter is the radius of the circle.
-    *               const b2Color& color this parameter is the color that the circle will be drawn with
-    *   Pre:        This class must first be registered with a box2d world object.
+    /***************************************************************************************************************//**
+    *   @brief  This method draws the outline of a circle.
+    *   @param  const b2Vec2& center this parameter is the center of the circle.
+    *   @param  radius this parameter is the radius of the circle.
+    *   @param  color this parameter is the color that the circle will be drawn with
+    *   Pre:    This class must first be registered with a box2d world object.
     *******************************************************************************************************************/
     void DebugDraw::DrawCircle(const b2Vec2& center, float32 radius, const b2Color& color)
     {
-        const unsigned      POINT_COUNT = 10 + (unsigned)radius;
+        const unsigned      POINT_COUNT = ((toPixels(radius) * TAU) * m_circleScaling);
         std::vector<b2Vec2> points = getPoints(center, radius, POINT_COUNT);
         assert(points.size() != 0);
 
@@ -157,19 +162,20 @@ namespace
     }
 
 
-    /*******************************************************************************************************************
-    *   Purpose:    This method draws circle objects. The circle will be drawn as a circle filled with color.
-    *               float32 radius this is the radius of the circle.
-    *               const b2Vec2 axis is a direction vector relative to the center of the circle. The axis parameter must
-    *               be scaled by the radius of the circle to compensate for the diameter of the circle.
-    *               const b2Color color this is the color the circle will be drawn in.
+    /***************************************************************************************************************//**
+    *   @brief  This method draws circle objects. The circle will be drawn as a circle filled with color.
+    *   @param  center the center point of the circle to be drawn
+    *   @param  radius this is the radius of the circle.
+    *   @param  axis is a direction vector relative to the center of the circle. The axis is used
+	* 			to draw a line from the center of the circle to the circumference to indicate thie circle's rotation.
+    *   @param  color this is the color the circle will be drawn in.
     *   Pre:        This class must first be registered with a box2d world object.
     *               The e_shapeBit must be set.
     ********************************************************************************************************************/
     void DebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
     {
 
-        const unsigned POINT_COUNT = (10 + static_cast<int>(radius));
+        const unsigned POINT_COUNT = (unsigned) ((toPixels(radius) * TAU) * m_circleScaling);
         const sf::Color COLOR = toSfColor(color);
 
 
@@ -180,8 +186,6 @@ namespace
         assert(points.size() != 0);
         for(std::size_t i = 0; i < points.size() - 1; ++i)
         {
-            if(lines.getVertexCount() - trianglesUsed < 3)
-                lines.resize(lines.getVertexCount() + 3);
 
             sf::Vertex vertA;
             vertA.position = CENTER_POINT;
@@ -198,11 +202,8 @@ namespace
             triangles.append(vertA);
             triangles.append(vertB);
             triangles.append(vertC);
-            trianglesUsed += 3;
         }
 
-        if(lines.getVertexCount() - trianglesUsed < 3)
-            lines.resize(lines.getVertexCount() + 3);
 
         sf::Vertex vertA;
         vertA.position = CENTER_POINT;
@@ -219,16 +220,15 @@ namespace
         triangles.append(vertA);
         triangles.append(vertB);
         triangles.append(vertC);
-        trianglesUsed += 3;
     }
 
 
 
     /*******************************************************************************************************************
-    *   Purpose:    This method draws a line segment to the screen.
-    *   Input:      const b2Vec2 p1 this is the first point of the line segment.
-    *               const b2Vec2 p2 this is the second point of the line segment.
-    *               const b2Color color this is a struct that defines the blue, green, red color values.
+    *   @brief  This method draws a line segment to the screen.
+    *   @param  p1 this is the first point of the line segment.
+    *   @param  p2 this is the second point of the line segment.
+    *   @param  color this is a struct that defines the blue, green, red color values.
     *   Pre:        This class must first be registered with a box2d world object.
     *               The e_shapeBit must be set.
     *******************************************************************************************************************/
@@ -239,38 +239,27 @@ namespace
         const sf::Vector2f  FIRST_POINT     = this->toPixels(p1);
         const sf::Vector2f  SECOND_POINT    = this->toPixels(p2);
 
-        //Make sure one of the points is on the screen
-        //if(viewBounds.contains(FIRST_POINT) || viewBounds.contains(SECOND_POINT))
-        //if(viewBounds.intersects(getBounds(FIRST_POINT, SECOND_POINT)))
-        {
-            //Allocate memory if needed
-            if(lines.getVertexCount() - linesUsed < 2)
-                lines.resize(lines.getVertexCount() + 2);
 
+        //Create two points
+        sf::Vertex vertA;
+        vertA.position      = FIRST_POINT;
+        vertA.color         = COLOR;
 
-            //Create two points
-            sf::Vertex vertA;
-            vertA.position      = FIRST_POINT;
-            vertA.color         = COLOR;
+        sf::Vertex vertB;
+        vertB.position      = SECOND_POINT;
+        vertB.color         = COLOR;
 
-            sf::Vertex vertB;
-            vertB.position      = SECOND_POINT;
-            vertB.color         = COLOR;
-
-            //Add points to lines VertexArray
-            lines[linesUsed]    = vertA;
-            ++linesUsed;
-            lines[linesUsed]    = vertB;
-            ++linesUsed;
-        }
+        //Add points to lines VertexArray
+        lines.append(vertA);
+        lines.append(vertB);
     }
 
 
-    /*******************************************************************************************************************
-    *   Purpose:    This method draws a transform to the screen when the e_centerOfMassBit is set.
-    *   Input:      const b2Transform xf which is the transform to be drawn to the screen.
-    *   Pre:        This class must first be registered with a box2d world object.
-    *               The e_centerOfMassBit must be set or the function won't be called
+    /***************************************************************************************************************//**
+    *   @brief  This method draws a transform to the screen when the e_centerOfMassBit is set.
+    *   @param  xf which is the transform to be drawn to the screen.
+    *   Pre:    This class must first be registered with a box2d world object.
+    *           The e_centerOfMassBit must be set or the function won't be called
     *******************************************************************************************************************/
     void DebugDraw::DrawTransform(const b2Transform& xf)
     {
@@ -286,16 +275,13 @@ namespace
     }
 
 
-    /*******************************************************************************************************************
-    *   Purpose:    This method does per frame logic and must be called once per frame.
+    /***************************************************************************************************************//**
+    *   @param  This method does per frame logic and must be called once per frame.
     *******************************************************************************************************************/
     void DebugDraw::update()
     {
-
         triangles.resize(0);
         lines.resize(0);
-        linesUsed = 0;
-        trianglesUsed = 0;
         world.DrawDebugData();
     }
 
@@ -325,16 +311,30 @@ namespace
     }
 
 
-    /****************************************************************************************************
-    *   Purpose:    This method draws all box2d objects to the screen.
-    *   Input:      sf::RenderTarget the window or other render target where the objects will be drawn.
-    *               sf::RenderStates struct that contains different rendering properties.
+    /***************************************************************************************************************//**
+    *   @brief  This method draws all box2d objects to the screen.
+    *   @param  target the window or other render target where the objects will be drawn.
+    *   @param  states struct that contains different rendering properties.
+	*   pre:        This class must first be registered with a box2d world object.
+	*   pre:        The update method must be called before draw.
     *   side:       modifies the target by drawing to it
-    ****************************************************************************************************/
+    *******************************************************************************************************************/
     void DebugDraw::draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
         target.draw(triangles);
         target.draw(lines);
+    }
+
+
+    /*******************************************************************************************************************
+    *   @brief  This method draws a single point.
+    *   @param  p The center point of the point to be drawn.
+    *   @param  size the radius of the point to be drawn.
+    *   @param  color the color of the point to be drawn.
+    *******************************************************************************************************************/
+    void DebugDraw::DrawPoint(const b2Vec2& p, float32 size, const b2Color& color)
+    {
+        DrawCircle(p, size, color);
     }
 
 
@@ -345,12 +345,6 @@ namespace
     {
         //dtor
     }
-
-    void DebugDraw::DrawPoint(const b2Vec2& p, float32 size, const b2Color& color)
-    {
-        DrawCircle(p, size, color);
-    }
-
 
 namespace
 {
@@ -363,11 +357,8 @@ namespace
     **********************************************************************************************/
     std::vector<b2Vec2> getPoints(const b2Vec2& center, float32 radius, const unsigned pointCount)
     {
-        static const float PIE = 3.141592654f;
-        static const float TAU = 2 * PIE;
+
         std::vector<b2Vec2> tempVec;
-
-
         for(unsigned i = 1; i <= pointCount; ++i)
         {
             b2Vec2 point;

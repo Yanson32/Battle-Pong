@@ -145,11 +145,12 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 void PlayState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
 
+    if(userMessage.getString() == "")
+        window.draw(*ball);
     StateBase::Draw(engin, deltaTime);
     window.draw(userMessage);
 
-    if(userMessage.getString() == "")
-        window.draw(*ball);
+
     window.display();
 }
 

@@ -102,9 +102,9 @@ void IntroState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 
 void IntroState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
 {
+	window.draw(*ball);
 	StateBase::Draw(engin, deltaTime);
 	window.draw(header);
-	window.draw(*ball);
     window.display();
 }
 
