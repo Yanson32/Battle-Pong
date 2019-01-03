@@ -26,7 +26,7 @@ void ClientPlayState::Clean()
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void ClientPlayState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
+void ClientPlayState::HandleEvents(GU::Engin::Engin& newEngin, const float &deltaTime)
 {
     PlayState::HandleEvents(newEngin, deltaTime);
 }
@@ -38,7 +38,7 @@ void ClientPlayState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaT
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void ClientPlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void ClientPlayState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     PlayState::Update(engin, deltaTime);
 }
@@ -50,7 +50,7 @@ void ClientPlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void ClientPlayState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void ClientPlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
     PlayState::Draw(engin, deltaTime);
 }

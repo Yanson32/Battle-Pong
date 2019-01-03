@@ -32,7 +32,7 @@ class HostState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(GU::Engin::Engin& engin, const int &deltaTime);
+        virtual void HandleEvents(GU::Engin::Engin& engin, const float &deltaTime) override;
 
 
         /****************************************************************//**
@@ -41,7 +41,7 @@ class HostState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(GU::Engin::Engin& engin, const int &deltaTime);
+        virtual void Update(GU::Engin::Engin& engin, const float &deltaTime) override;
 
 
         /****************************************************************//**
@@ -50,7 +50,7 @@ class HostState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(GU::Engin::Engin& engin, const int &deltaTime);
+        virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime) override;
 
         virtual void Init() override;
         virtual void Clean() override;

@@ -68,40 +68,40 @@ void Paddle::move(const sf::Vector2f &direction)
 
 void Paddle::update()
 {
-    sf::Vector2f bodyPosition = toPixles(body->GetPosition());
-
-    for(b2Fixture *fix = body->GetFixtureList(); fix; fix = fix->GetNext())
-    {
-        b2Shape::Type shapeType = fix->GetType();
-
-        if(shapeType == b2Shape::e_circle)
-        {
-            b2CircleShape* circleShape = (b2CircleShape*)fix->GetShape();
-            int vertCount = circleShape->GetVertexCount();
-            shape.setPointCount(vertCount);
-            for(int i = 0; i < vertCount; ++i)
-            {
-                b2Vec2 vert = body->GetWorldPoint(circleShape->GetVertex(i));
-                sf::Vector2f sfVert(toPixles(vert));
-                shape.setPoint(i, sfVert);
-
-            }
-
-        }
-        if(shapeType == b2Shape::e_polygon)
-        {
-            b2PolygonShape* poly = (b2PolygonShape*)fix->GetShape();
-            int vertCount = poly->GetVertexCount();
-            shape.setPointCount(vertCount);
-            for(int i = 0; i < vertCount; ++i)
-            {
-                b2Vec2 vert = body->GetWorldPoint(poly->GetVertex(i));
-                sf::Vector2f sfVert(toPixles(vert));
-                shape.setPoint(i, sfVert);
-
-            }
-        }
-    }
+//    sf::Vector2f bodyPosition = toPixles(body->GetPosition());
+//
+//    for(b2Fixture *fix = body->GetFixtureList(); fix; fix = fix->GetNext())
+//    {
+//        b2Shape::Type shapeType = fix->GetType();
+//
+//        if(shapeType == b2Shape::e_circle)
+//        {
+//            b2CircleShape* circleShape = (b2CircleShape*)fix->GetShape();
+//            int vertCount = circleShape->GetVertexCount();
+//            shape.setPointCount(vertCount);
+//            for(int i = 0; i < vertCount; ++i)
+//            {
+//                b2Vec2 vert = body->GetWorldPoint(circleShape->GetVertex(i));
+//                sf::Vector2f sfVert(toPixles(vert));
+//                shape.setPoint(i, sfVert);
+//
+//            }
+//
+//        }
+//        if(shapeType == b2Shape::e_polygon)
+//        {
+//            b2PolygonShape* poly = (b2PolygonShape*)fix->GetShape();
+//            int vertCount = poly->GetVertexCount();
+//            shape.setPointCount(vertCount);
+//            for(int i = 0; i < vertCount; ++i)
+//            {
+//                b2Vec2 vert = body->GetWorldPoint(poly->GetVertex(i));
+//                sf::Vector2f sfVert(toPixles(vert));
+//                shape.setPoint(i, sfVert);
+//
+//            }
+//        }
+//    }
 }
 
 void Paddle::setPosition(const sf::Vector2f &position)

@@ -61,7 +61,7 @@ IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId:
 }
 
 
-void IntroState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
+void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
     if(window.isOpen())
     {
@@ -86,7 +86,7 @@ void IntroState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
 
 }
 
-void IntroState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
@@ -100,7 +100,7 @@ void IntroState::Update(GU::Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void IntroState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 	window.draw(*ball);
 	StateBase::Draw(engin, deltaTime);

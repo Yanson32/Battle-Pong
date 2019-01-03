@@ -75,7 +75,7 @@ void MultiplayerControlState::onConnectPressed()
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void MultiplayerControlState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
+void MultiplayerControlState::HandleEvents(GU::Engin::Engin& newEngin, const float &deltaTime)
 {
     if(window.isOpen())
     {
@@ -105,7 +105,7 @@ void MultiplayerControlState::HandleEvents(GU::Engin::Engin& newEngin, const int
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void MultiplayerControlState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void MultiplayerControlState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
@@ -126,7 +126,7 @@ void MultiplayerControlState::Update(GU::Engin::Engin& engin, const int &deltaTi
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void MultiplayerControlState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void MultiplayerControlState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
 	window.draw(*ball);

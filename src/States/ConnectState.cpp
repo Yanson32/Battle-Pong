@@ -52,7 +52,7 @@ ConnectState::ConnectState(GU::Engin::Engin& engin): StateBase(engin, stateId::C
 
 }
 
-void ConnectState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
+void ConnectState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
     if(window.isOpen())
     {
@@ -76,7 +76,7 @@ void ConnectState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void ConnectState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void ConnectState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
@@ -90,7 +90,7 @@ void ConnectState::Update(GU::Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void ConnectState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void ConnectState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 	window.draw(*ball);
 	StateBase::Draw(engin, deltaTime);

@@ -52,10 +52,6 @@ find_package(SFML 2 COMPONENTS system window graphics audio network REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${SFML_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${SFML_LIBRARIES})
 
-find_package(Box2D REQUIRED)
-target_include_directories("${PROJECT_NAME}" PUBLIC ${BOX2D_INCLUDE_DIRS})
-target_link_libraries("${PROJECT_NAME}" PUBLIC ${BOX2D_LIBRARIES})
-
 find_package(TGUI 0.7 REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${TGUI_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${TGUI_LIBRARY})
@@ -64,6 +60,15 @@ find_package(Boost 1.60.0 COMPONENTS thread date_time filesystem system program_
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${Boost_LIBRARIES})
 target_include_directories("${PROJECT_NAME}" PUBLIC ${Boost_INCLUDE_DIRS})
 
+file(GLOB_RECURSE
+	PONG_B2_SOURCES
+	"${CMAKE_CURRENT_SOURCE_DIR}/Box2D/Box2D/*.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Box2D/Box2D/*.cpp"
+)
+
+target_sources("${PROJECT_NAME}" PRIVATE ${PONG_B2_SOURCES})
+
+target_include_directories("${PROJECT_NAME}" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Box2D")
 
 #Export targets to the build tree
 export(TARGETS "${PROJECT_NAME}" FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}-Exports.cmake")

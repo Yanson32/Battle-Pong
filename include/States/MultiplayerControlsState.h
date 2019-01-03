@@ -19,7 +19,7 @@ class MultiplayerControlState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime) override;
+        virtual void HandleEvents(GU::Engin::Engin& newEngin, const float &deltaTime) override;
 
 
         /****************************************************************//**
@@ -28,7 +28,7 @@ class MultiplayerControlState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(GU::Engin::Engin& engin, const int &deltaTime) override;
+        virtual void Update(GU::Engin::Engin& engin, const float &deltaTime) override;
 
 
         /****************************************************************//**
@@ -37,7 +37,7 @@ class MultiplayerControlState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(GU::Engin::Engin& engin, const int &deltaTime) override;
+        virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime) override;
 
         void onBackPressed();
         virtual ~MultiplayerControlState();

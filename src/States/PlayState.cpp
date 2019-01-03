@@ -41,7 +41,7 @@ PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase
 
 }
 
-void PlayState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
+void PlayState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
     if(window.isOpen())
     {
@@ -65,7 +65,7 @@ void PlayState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     const int SECONDS = 1;
 
@@ -142,7 +142,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void PlayState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 
     if(userMessage.getString() == "")

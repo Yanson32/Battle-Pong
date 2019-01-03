@@ -98,7 +98,7 @@ bool StateBase::isBallOnScreen()
 
 }
 
-void StateBase::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     if(!IsPaused())
     {
@@ -115,7 +115,7 @@ void StateBase::Update(GU::Engin::Engin& engin, const int &deltaTime)
 }
 
 
-void StateBase::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
     window.clear();
     window.draw(*leftPaddle);

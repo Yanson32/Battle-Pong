@@ -34,7 +34,7 @@ ControlState::ControlState(GU::Engin::Engin& newEngin): StateBase(newEngin, stat
 
 }
 
-void ControlState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
+void ControlState::HandleEvents(GU::Engin::Engin& newEngin, const float &deltaTime)
 {
     if(window.isOpen())
     {
@@ -58,7 +58,7 @@ void ControlState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime
     }
 }
 
-void ControlState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void ControlState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -71,7 +71,7 @@ void ControlState::Update(GU::Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void ControlState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void ControlState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 	window.draw(*ball);
 	StateBase::Draw(engin, deltaTime);

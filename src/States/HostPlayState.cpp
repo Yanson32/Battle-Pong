@@ -23,7 +23,7 @@ void HostPlayState::Clean()
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void HostPlayState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
+void HostPlayState::HandleEvents(GU::Engin::Engin& newEngin, const float &deltaTime)
 {
     PlayState::HandleEvents(newEngin, deltaTime);
 
@@ -36,7 +36,7 @@ void HostPlayState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTim
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void HostPlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void HostPlayState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     PlayState::Update(engin, deltaTime);
 }
@@ -48,7 +48,7 @@ void HostPlayState::Update(GU::Engin::Engin& engin, const int &deltaTime)
 *   @param  engin A reference to an Engin::Engin object.
 *           This is the main game object.
 ********************************************************************/
-void HostPlayState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void HostPlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
     PlayState::Draw(engin, deltaTime);
 }
