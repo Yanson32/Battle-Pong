@@ -1,8 +1,14 @@
 #for backwards compatibility
 cmake_minimum_required(VERSION 3.5.1)
 
-#This must be above the project command
-set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The projects build for example Debug/Release")
+#make sure we are using a single configuration generator
+if(CMAKE_BUILD_TYPE)
+    #set CMAKE_BUILD_TYPE as a dropdown list in cmake gui
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Release" "Debug" "RelWithDebInfo" "MinRizeRel")
+else()
+    #set default value for CMAKE_BUILD_TYPE in multi-configuration generators.
+    set(CMAKE_BUILD_TYPE CACHE STRING "Build configuration" "Release")
+endif()
 
 #Give the project a name
 project("BattlePong" VERSION "1.0.0.0")
