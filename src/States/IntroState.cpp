@@ -129,12 +129,12 @@ void IntroState::Init()
     gui.add(optionButton);
     gui.add(multiplayerButton);
 
-    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
+    //ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
+    //ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    //ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
+    //ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 
-    header.setFont(ResourceManager::font.get("Header Font"));
+    //header.setFont(ResourceManager::font.get("Header Font"));
     reset();
 }
 

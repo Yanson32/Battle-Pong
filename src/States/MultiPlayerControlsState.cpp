@@ -129,8 +129,6 @@ void MultiplayerControlState::Update(GU::Engin::Engin& engin, const float &delta
 void MultiplayerControlState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
-	window.draw(*ball);
-	window.draw(*backButton);
     window.display();
 }
 

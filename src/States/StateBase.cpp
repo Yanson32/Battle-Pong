@@ -131,8 +131,6 @@ void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime)
     #endif
 
     gui.draw();
-    window.draw(*paddle1Hud);
-    window.draw(*paddle2Hud);
 }
 
 void StateBase::systemPause(const bool newSysPause)
