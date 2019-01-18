@@ -39,6 +39,7 @@ target_compile_features("${PROJECT_NAME}"
 			PRIVATE 
 			cxx_nullptr
 			cxx_right_angle_brackets
+			cxx_decltype_auto
 			)
 
 
