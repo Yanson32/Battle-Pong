@@ -51,7 +51,7 @@ paddleSettings(pSettings)
 }
 
 
-void PaddleState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
+void PaddleState::HandleEvents(GU::Engin::Engin& newEngin, const float &deltaTime)
 {
     if(window.isOpen())
     {
@@ -75,7 +75,7 @@ void PaddleState::HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime)
     }
 }
 
-void PaddleState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void PaddleState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -88,7 +88,7 @@ void PaddleState::Update(GU::Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void PaddleState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void PaddleState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
     window.draw(*ball);

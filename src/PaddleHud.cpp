@@ -17,7 +17,7 @@ PaddleHud::PaddleHud(std::shared_ptr<PaddleSettings> newPaddleSettings): paddleS
     scoreLabel->setText("0");
     this->add(scoreLabel);
 
-    this->setBackgroundColor(sf::Color::Transparent);
+    this->getRenderer()->setBackgroundColor(sf::Color::Transparent);
 
 }
 

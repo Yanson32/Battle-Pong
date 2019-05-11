@@ -60,7 +60,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(GU::Engin::Engin& engin, const int &deltaTime) = 0;
+        virtual void HandleEvents(GU::Engin::Engin& engin, const float &deltaTime) = 0;
 
 
         /****************************************************************//**
@@ -69,7 +69,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(GU::Engin::Engin& engin, const int &deltaTime);
+        virtual void Update(GU::Engin::Engin& engin, const float &deltaTime);
 
 
         /****************************************************************//**
@@ -78,7 +78,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(GU::Engin::Engin& engin, const int &deltaTime) override;
+        virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime) override;
 
 
 

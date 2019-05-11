@@ -61,7 +61,7 @@ IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId:
 }
 
 
-void IntroState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
+void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
     if(window.isOpen())
     {
@@ -86,7 +86,7 @@ void IntroState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
 
 }
 
-void IntroState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
@@ -100,7 +100,7 @@ void IntroState::Update(GU::Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void IntroState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 	window.draw(*ball);
 	StateBase::Draw(engin, deltaTime);
@@ -129,12 +129,12 @@ void IntroState::Init()
     gui.add(optionButton);
     gui.add(multiplayerButton);
 
-    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
+    //ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
+    //ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+    //ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
+    //ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 
-    header.setFont(ResourceManager::font.get("Header Font"));
+    //header.setFont(ResourceManager::font.get("Header Font"));
     reset();
 }
 

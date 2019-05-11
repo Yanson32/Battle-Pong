@@ -1,8 +1,14 @@
 #for backwards compatibility
 cmake_minimum_required(VERSION 3.5.1)
 
-#This must be above the project command
-set(CMAKE_BUILD_TYPE "Release" CACHE STRING "The projects build for example Debug/Release")
+#make sure we are using a single configuration generator
+if(CMAKE_BUILD_TYPE)
+    #set CMAKE_BUILD_TYPE as a dropdown list in cmake gui
+    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Release" "Debug" "RelWithDebInfo" "MinRizeRel")
+else()
+    #set default value for CMAKE_BUILD_TYPE in multi-configuration generators.
+    set(CMAKE_BUILD_TYPE CACHE STRING "Build configuration" "Release")
+endif()
 
 #Give the project a name
 project("BattlePong" VERSION "1.0.0.0")
@@ -33,6 +39,7 @@ target_compile_features("${PROJECT_NAME}"
 			PRIVATE 
 			cxx_nullptr
 			cxx_right_angle_brackets
+			cxx_decltype_auto
 			)
 
 
@@ -51,11 +58,7 @@ find_package(SFML 2 COMPONENTS system window graphics audio network REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${SFML_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${SFML_LIBRARIES})
 
-find_package(Box2D REQUIRED)
-target_include_directories("${PROJECT_NAME}" PUBLIC ${BOX2D_INCLUDE_DIRS})
-target_link_libraries("${PROJECT_NAME}" PUBLIC ${BOX2D_LIBRARIES})
-
-find_package(TGUI 0.7 REQUIRED)
+find_package(TGUI REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${TGUI_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${TGUI_LIBRARY})
 
@@ -63,6 +66,15 @@ find_package(Boost 1.60.0 COMPONENTS thread date_time filesystem system program_
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${Boost_LIBRARIES})
 target_include_directories("${PROJECT_NAME}" PUBLIC ${Boost_INCLUDE_DIRS})
 
+file(GLOB_RECURSE
+	PONG_B2_SOURCES
+	"${CMAKE_CURRENT_SOURCE_DIR}/Box2D/Box2D/*.h"
+	"${CMAKE_CURRENT_SOURCE_DIR}/Box2D/Box2D/*.cpp"
+)
+
+target_sources("${PROJECT_NAME}" PRIVATE ${PONG_B2_SOURCES})
+
+target_include_directories("${PROJECT_NAME}" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Box2D")
 
 #Export targets to the build tree
 export(TARGETS "${PROJECT_NAME}" FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}-Exports.cmake")

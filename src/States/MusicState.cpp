@@ -25,7 +25,7 @@ MusicState::MusicState(GU::Engin::Engin& engin): StateBase(engin, stateId::MUSIC
     gui.add(Settings::inst().musicSettings);
 }
 
-void MusicState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
+void MusicState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
     if(window.isOpen())
     {
@@ -49,7 +49,7 @@ void MusicState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void MusicState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void MusicState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -62,7 +62,7 @@ void MusicState::Update(GU::Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void MusicState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void MusicState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
     StateBase::Draw(engin, deltaTime);
     window.draw(*ball);

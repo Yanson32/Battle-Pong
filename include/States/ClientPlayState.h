@@ -19,7 +19,7 @@ class ClientPlayState: public PlayState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void HandleEvents(GU::Engin::Engin& newEngin, const int &deltaTime);
+        void HandleEvents(GU::Engin::Engin& newEngin, const float &deltaTime) override;
 
 
         /****************************************************************//**
@@ -28,7 +28,7 @@ class ClientPlayState: public PlayState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Update(GU::Engin::Engin& engin, const int &deltaTime);
+        void Update(GU::Engin::Engin& engin, const float &deltaTime) override;
 
 
         /****************************************************************//**
@@ -37,7 +37,7 @@ class ClientPlayState: public PlayState
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Draw(GU::Engin::Engin& engin, const int &deltaTime);
+        void Draw(GU::Engin::Engin& engin, const float &deltaTime) override;
 
 
         virtual ~ClientPlayState();

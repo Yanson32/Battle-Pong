@@ -1,6 +1,7 @@
 #include "Settings.h"
 #include "Events/Events.h"
 #include "States/Id.h"
+#include <iostream>
 /**********************************************************//**
 *   @brief  Settings for the game window
 **************************************************************/
@@ -127,7 +128,7 @@ MusicSettings::MusicSettings(): tgui::Panel()
 {
     this->setPosition({200, 300});
     this->setSize({450, 100});
-    this->setBackgroundColor(sf::Color::Transparent);
+    this->getRenderer()->setBackgroundColor(sf::Color::Transparent);
 
     auto musicLabel = tgui::Label::create("Music Volume");
     this->add(musicLabel);

@@ -103,7 +103,7 @@ HostState::HostState(GU::Engin::Engin& engin): StateBase(engin, stateId::HOST_ST
     //globalIpBox->setInputValidator("[0-9.]+");
 }
 
-void HostState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
+void HostState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
     if(window.isOpen())
     {
@@ -127,7 +127,7 @@ void HostState::HandleEvents(GU::Engin::Engin& engin, const int &deltaTime)
     }
 }
 
-void HostState::Update(GU::Engin::Engin& engin, const int &deltaTime)
+void HostState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     world->Step( timeStep, velocityIterations, positionIterations);
@@ -141,7 +141,7 @@ void HostState::Update(GU::Engin::Engin& engin, const int &deltaTime)
     rightPaddle->update();
 }
 
-void HostState::Draw(GU::Engin::Engin& engin, const int &deltaTime)
+void HostState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
 	//window.draw(header);
