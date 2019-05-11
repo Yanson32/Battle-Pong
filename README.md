@@ -10,7 +10,7 @@
 	<li>Seperate the ObjectId and EventId code</li>
 	<li>Create SoundId for different sound effects</li>
 	<li>Create MusicId for different music</li>
-	<li></li>
+	<li>Create user Login so different stats can be stored.</li>
 </ul>
 
 
@@ -18,4 +18,4 @@
 
 
 
-Create user Login so different stats can be stored.
+
