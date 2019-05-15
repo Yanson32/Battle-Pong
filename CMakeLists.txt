@@ -25,14 +25,10 @@ add_executable("${PROJECT_NAME}" "Main.cpp")
 add_subdirectory("include")
 add_subdirectory("src")
 
-
-
-
 string(TOUPPER "${CMAKE_BUILD_TYPE}" BP_BUILD_TYPE_UPPER)
 if("${BP_BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
 	add_definitions("-DDEBUG")
 endif()
-
 
 #Define compiler features
 target_compile_features("${PROJECT_NAME}" 
@@ -50,8 +46,8 @@ target_include_directories("${PROJECT_NAME}" PUBLIC
   $<INSTALL_INTERFACE:include>
 	)
 
-find_package(GameUtilities REQUIRED)
-target_link_libraries("${PROJECT_NAME}" PRIVATE GameUtilities)
+find_package(GameUtilities COMPONENTS core Event Engin REQUIRED)
+target_link_libraries("${PROJECT_NAME}" PRIVATE GU::Core GU::Event GU::Engin)
 
 
 find_package(SFML 2 COMPONENTS system window graphics audio network REQUIRED)
