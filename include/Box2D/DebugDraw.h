@@ -1,6 +1,6 @@
 #ifndef DEBUGDRAW_H
 #define DEBUGDRAW_H
-#include "Box2D/Common/b2Draw.h"
+#include <Box2D/Box2D.h>
 #include <SFML/Graphics/VertexArray.hpp>
 #include <SFML/Graphics/Drawable.hpp>
 /***************************************************************************

@@ -12,6 +12,7 @@ endif()
 
 #Give the project a name
 project("BattlePong" VERSION "1.0.0.0")
+
 string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
@@ -22,6 +23,9 @@ option(BUILD_SHARED_LIBS "True for shared libraries" TRUE)
 #Create our target
 add_executable("${PROJECT_NAME}" "Main.cpp")
 
+set_property(TARGET "${PROJECT_NAME}" PROPERTY CXX_STANDARD 14)
+
+add_subdirectory("extlibs")
 add_subdirectory("include")
 add_subdirectory("src")
 
@@ -31,8 +35,8 @@ if("${BP_BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
 endif()
 
 #Define compiler features
-target_compile_features("${PROJECT_NAME}" 
-			PRIVATE 
+target_compile_features("${PROJECT_NAME}"
+			PRIVATE
 			cxx_nullptr
 			cxx_right_angle_brackets
 			cxx_decltype_auto
@@ -46,9 +50,8 @@ target_include_directories("${PROJECT_NAME}" PUBLIC
   $<INSTALL_INTERFACE:include>
 	)
 
-find_package(GameUtilities COMPONENTS core Event Engin REQUIRED)
+find_package(GameUtilities COMPONENTS Core Event Engin REQUIRED)
 target_link_libraries("${PROJECT_NAME}" PRIVATE GU::Core GU::Event GU::Engin)
-
 
 find_package(SFML 2 COMPONENTS system window graphics audio network REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${SFML_INCLUDE_DIR})
@@ -62,15 +65,8 @@ find_package(Boost 1.60.0 COMPONENTS thread date_time filesystem system program_
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${Boost_LIBRARIES})
 target_include_directories("${PROJECT_NAME}" PUBLIC ${Boost_INCLUDE_DIRS})
 
-file(GLOB_RECURSE
-	PONG_B2_SOURCES
-	"${CMAKE_CURRENT_SOURCE_DIR}/Box2D/Box2D/*.h"
-	"${CMAKE_CURRENT_SOURCE_DIR}/Box2D/Box2D/*.cpp"
-)
-
-target_sources("${PROJECT_NAME}" PRIVATE ${PONG_B2_SOURCES})
-
-target_include_directories("${PROJECT_NAME}" PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/Box2D")
+target_include_directories("${PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/extlibs/Box2D")
+target_link_libraries("${PROJECT_NAME}" PUBLIC Box2D)
 
 #Export targets to the build tree
 export(TARGETS "${PROJECT_NAME}" FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}-Exports.cmake")
