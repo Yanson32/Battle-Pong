@@ -171,8 +171,8 @@ void HostState::Init()
 void HostState::Clean()
 {
     //panel->Clean();
-    ResourceManager::sound.remove(Sound::Id::BUTTON);
-    ResourceManager::sound.remove(Sound::Id::BALL);
+//    ResourceManager::sound.remove(Sound::Id::BUTTON);
+//    ResourceManager::sound.remove(Sound::Id::BALL);
 
     gui.removeAllWidgets();
 }

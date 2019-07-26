@@ -118,8 +118,8 @@ void ConnectState::Init()
 
 void ConnectState::Clean()
 {
-    ResourceManager::sound.remove(Sound::Id::BUTTON);
-    ResourceManager::sound.remove(Sound::Id::BALL);
+//    ResourceManager::sound.remove(Sound::Id::BUTTON);
+//    ResourceManager::sound.remove(Sound::Id::BALL);
 
     gui.removeAllWidgets();
 }

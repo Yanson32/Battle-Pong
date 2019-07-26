@@ -112,8 +112,8 @@ void ControlState::Init()
 void ControlState::Clean()
 {
     gui.removeAllWidgets();
-    ResourceManager::sound.remove(Sound::Id::BUTTON);
-    ResourceManager::sound.remove(Sound::Id::BALL);
+//    ResourceManager::sound.remove(Sound::Id::BUTTON);
+//    ResourceManager::sound.remove(Sound::Id::BALL);
 
 }
 

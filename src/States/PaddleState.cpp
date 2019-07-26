@@ -137,8 +137,8 @@ void PaddleState::Init()
 void PaddleState::Clean()
 {
     gui.removeAllWidgets();
-    ResourceManager::sound.remove(Sound::Id::BUTTON);
-    ResourceManager::sound.remove(Sound::Id::BALL);
+//    ResourceManager::sound.remove(Sound::Id::BUTTON);
+//    ResourceManager::sound.remove(Sound::Id::BALL);
 }
 
 void PaddleState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)

@@ -53,8 +53,8 @@ void MultiplayerControlState::Init()
 }
 void MultiplayerControlState::Clean()
 {
-    ResourceManager::sound.remove(Sound::Id::BUTTON);
-    ResourceManager::sound.remove(Sound::Id::BALL);
+//    ResourceManager::sound.remove(Sound::Id::BUTTON);
+//    ResourceManager::sound.remove(Sound::Id::BALL);
     gui.removeAllWidgets();
 }
 

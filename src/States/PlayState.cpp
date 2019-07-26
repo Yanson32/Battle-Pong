@@ -174,11 +174,11 @@ void PlayState::Init()
 void PlayState::Clean()
 {
     gui.removeAllWidgets();
-
-    ResourceManager::sound.remove(Sound::Id::MESSAGE);
-    ResourceManager::sound.remove(Sound::Id::BUTTON);
-    ResourceManager::sound.remove(Sound::Id::BALL);
-    ResourceManager::font.remove("Header Font");
+//
+//    ResourceManager::sound.remove(Sound::Id::MESSAGE);
+//    ResourceManager::sound.remove(Sound::Id::BUTTON);
+//    ResourceManager::sound.remove(Sound::Id::BALL);
+//    ResourceManager::font.remove("Header Font");
 
 }
 
