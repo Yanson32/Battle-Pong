@@ -112,8 +112,8 @@ void ConnectState::Init()
 
     //gui.add(panel);
     gui.add(backButton);
-    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
 }
 
 void ConnectState::Clean()

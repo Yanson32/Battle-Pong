@@ -157,12 +157,12 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 void PlayState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
-
-    userMessage.setFont(ResourceManager::font.get("Header Font"));
+//    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
+//
+//    userMessage.setFont(ResourceManager::font.get("Header Font"));
     Settings::inst().paddle1->setScore(0);
     Settings::inst().paddle2->setScore(0);
     paddle1Hud->setScore(0);

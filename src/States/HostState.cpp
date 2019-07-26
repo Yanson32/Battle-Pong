@@ -153,9 +153,9 @@ void HostState::Init()
 {
     StateBase::Init();
     //panel->Init();
-
-    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
+//
+//    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
     gui.add(hostButton);
     gui.add(portBox);
     gui.add(portLabel);

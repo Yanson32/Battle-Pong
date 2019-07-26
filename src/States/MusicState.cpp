@@ -78,8 +78,8 @@ void MusicState::onBackPressed()
 void MusicState::Init()
 {
     StateBase::Init();
-    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
-    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
     gui.add(backButton);
     gui.add(Settings::inst().musicSettings);
 }
