@@ -314,7 +314,8 @@ paddle1(new PaddleSettings("Paddle 1", ObjectId::LEFT_PADDLE)),
 paddle2(new PaddleSettings("Paddle 2", ObjectId::RIGHT_PADDLE)),
 clientSettings(new ClientSettings()),
 serverSettings(new ServerSettings()),
-musicSettings(new MusicSettings())
+musicSettings(new MusicSettings()),
+screen(800, 600)
 {
 	title = "Pong";
 	paddle1->setInputType(sf::String("None"));
@@ -354,3 +355,4 @@ sf::Vector2f Settings::buttonPosition(const unsigned pos) const
 
     return temp;
 }
+

@@ -26,7 +26,16 @@
 #include "ResourceManager.h"
 #include "Logging.h"
 #include "Sounds/Id.h"
-
+#include "Gui/IntroGui.h"
+#include "Events/Click.h"
+#include "Gui/OptionsPanel.h"
+#include "Gui/ButtonId.h"
+#include "Gui/ControlPanel.h"
+#include "Gui/DevPanel.h"
+#include "Gui/SoundPanel.h"
+#include "Gui/GeneralPanel.h"
+#include "Gui/MultiplayerPanel.h"
+#include <memory>
 IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::INTRO_STATE)
 {
 
@@ -42,22 +51,8 @@ IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId:
     header.setPosition(sf::Vector2f(335, 25));
     header.setStyle(sf::Text::Bold);
 
-
-    startButton = tgui::Button::create("Start");
-    startButton->connect("pressed", &IntroState::onStartPressed, this);
-    startButton->setPosition(Settings::inst().buttonPosition(0));
-    startButton->setSize(Settings::inst().buttonSize());
-
-    multiplayerButton = tgui::Button::create("Multiplayer");
-    multiplayerButton->connect("pressed", &IntroState::onMultiplayerPressed, this);
-    multiplayerButton->setPosition(Settings::inst().buttonPosition(1));
-    multiplayerButton->setSize(Settings::inst().buttonSize());
-
-    optionButton = tgui::Button::create("Options");
-    optionButton->connect("pressed", &IntroState::onOptionsPressed, this);
-    optionButton->setPosition(Settings::inst().buttonPosition(2));
-    optionButton->setSize(Settings::inst().buttonSize());
-
+        tgui::Panel::Ptr cust(new IntroGui());
+    gui.add(cust);
 }
 
 
@@ -109,32 +104,20 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 }
 
 
-void IntroState::onStartPressed()
-{
-    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-    EventManager::inst().Post<GU::Evt::PushState>(stateId::PLAY_STATE);
-}
-
-void IntroState::onOptionsPressed()
-{
-    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-    EventManager::inst().Post<GU::Evt::PushState>(stateId::OPTIONS_STATE);
-}
 
 void IntroState::Init()
 {
     StateBase::Init();
 
-    gui.add(startButton);
-    gui.add(optionButton);
-    gui.add(multiplayerButton);
+    tgui::Panel::Ptr cust(new IntroGui());
+    gui.add(cust);
 
-    //ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
-    //ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
-    //ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
-    //ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
-
-    //header.setFont(ResourceManager::font.get("Header Font"));
+//    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
+//    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
+//
+//    header.setFont(ResourceManager::font.get("Header Font"));
     reset();
 }
 
@@ -149,13 +132,88 @@ void IntroState::Clean()
 
 }
 
-void IntroState::onMultiplayerPressed()
+
+void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
-    EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-    EventManager::inst().Post<GU::Evt::PushState>(stateId::MULTIPLAYER_CONTROL_STATE);
+    StateBase::handleGUEvent(engin, event);
+
+
+    switch(event->id)
+    {
+        case EventId::CLICK:
+            std::shared_ptr<Click> temp =  std::dynamic_pointer_cast<Click>(event);
+            if(temp)
+            {
+                switch(temp->buttonId)
+                {
+                    case Button::id::START:
+                        engin.Push<PlayState>(engin);
+                    break;
+                    case Button::id::INTRO_PANEL:
+                    {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new IntroGui());
+                        gui.add(cust);
+                    }
+                    break;
+                    case Button::id::GENERAL_TAB:
+                    {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new Gui::GeneralPanel(nullptr));
+                        std::shared_ptr<Gui::GeneralPanel> p = std::dynamic_pointer_cast<Gui::GeneralPanel>(cust);
+                        p->init();
+                        gui.add(cust);
+                    }
+                    break;
+                    case Button::id::CONTROLS_TAB:
+                        std::cout << "Controls tab" << std::endl;
+                    {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new Gui::ControlPanel(nullptr));
+                        std::shared_ptr<Gui::ControlPanel> p = std::dynamic_pointer_cast<Gui::ControlPanel>(cust);
+                        p->init();
+                        gui.add(cust);
+                    }
+                    break;
+                    case Button::id::SOUND_TAB:
+                     {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new Gui::SoundPanel(nullptr));
+                        std::shared_ptr<Gui::SoundPanel> p = std::dynamic_pointer_cast<Gui::SoundPanel>(cust);
+                        //p->init();
+                        gui.add(cust);
+                    }
+                    break;
+                    case Button::id::DEV_TAB:
+                     {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new Gui::DevPanel());
+                        std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
+                        //p->init();
+                        gui.add(cust);
+                    }
+                    break;
+                    case Button::id::MULTIPLAYER:
+                     {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new MultiplayerPanel());
+                        std::shared_ptr<MultiplayerPanel> p = std::dynamic_pointer_cast<MultiplayerPanel>(cust);
+                        //p->init();
+                        gui.add(cust);
+                    }
+                    break;
+                }
+            }
+
+        break;
+    }
 }
-
-
 
 IntroState::~IntroState()
 {

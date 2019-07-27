@@ -135,6 +135,7 @@ public:
 	std::shared_ptr<MusicSettings> musicSettings;
 	std::shared_ptr<ClientSettings> clientSettings;
 	std::shared_ptr<ServerSettings> serverSettings;
+	sf::Vector2f screen;
 	WindowSettings windowSettings;
 	~Settings();
 private:

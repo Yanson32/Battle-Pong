@@ -391,7 +391,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
             engin.Pop();
         break;
         case EventId::CHANGE_STATE:
-
+        {
             std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
             if(temp)
             {
@@ -405,6 +405,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     break;
                 }
             }
+        }
         break;
     }
 }

@@ -8,6 +8,7 @@ set(FILES
 			"${CMAKE_CURRENT_SOURCE_DIR}/RightPaddleGoal.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleCollision.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Events.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/Click.h"
 
 )
 set(SUB_DIRECTORIES "Listeners")

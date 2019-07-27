@@ -16,7 +16,7 @@
 #include "Events/LeftPaddleGoal.h"
 #include "Events/PaddleCollision.h"
 #include "Events/RightPaddleGoal.h"
-
+#include "Events/Click.h"
 
 
 #endif // EVENTS_H

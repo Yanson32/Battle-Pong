@@ -14,6 +14,7 @@
 //#include <SFML/Graphics/Font.hpp>
 
 #include "States/StateBase.h"
+#include "Gui/GuiManager.h"
 
 class IntroState: public StateBase
 {
@@ -52,6 +53,7 @@ class IntroState: public StateBase
         ********************************************************************/
         virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime) override;
 
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
         virtual void Init() override;
         virtual void Clean() override;
 
@@ -61,23 +63,9 @@ class IntroState: public StateBase
         virtual ~IntroState();
     private:
 
-        /****************************************************************//**
-        *   @brief  This method is a callback for the start button
-        ********************************************************************/
-        void onStartPressed();
-
-        /****************************************************************//**
-        *   @brief  This method is a callback for the options button
-        ********************************************************************/
-        void onOptionsPressed();
-
-        void onMultiplayerPressed();
         sf::Text header;                            ///Text displayed at the top of the screen
         sf::Color background = sf::Color::Black;    ///Color used to clear the screen background
         //sf::Font headerFont;                      ///Font used for the screens header
-        tgui::Button::Ptr startButton;
-        tgui::Button::Ptr optionButton;
-        tgui::Button::Ptr multiplayerButton;
 };
 
 #endif // INTROSTATE_H

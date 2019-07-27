@@ -14,6 +14,7 @@ set(SUB_DIRECTORIES "States"
 					"Input"
 					"Box2D"
 					"Sounds"
+					"Gui"
 )
 
 #Add subdirectories
