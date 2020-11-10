@@ -24,6 +24,7 @@ namespace Gui
         //Create down button editbox
         downEditBox = tgui::EditBox::create();
         layout3->add(downEditBox);
+
     }
 
     void ControlPanel::init()

@@ -2,10 +2,10 @@
 #define PONG_ENGIN_H
 
 #include <GameUtilities/Engin/Engin.h>
-#include <GameUtilities/Event/Manager.h>
+#include <GameUtilities/Event/EventManager.h>
 
 
-class Game: public GU::Engin::Engin, public GU::Evt::Manager
+class Game: public GU::Engin::Engin, public GU::Evt::EventManager
 {
     public:
         Game();

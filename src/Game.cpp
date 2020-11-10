@@ -3,7 +3,7 @@
 #include "Events/Events.h"
 
 Game::Game(): GU::Engin::Engin(),
-GU::Evt::Manager()
+GU::Evt::EventManager()
 {
 
 }
