@@ -67,7 +67,7 @@ sysPause(false)
 
     rightPaddle->setInput(std::unique_ptr<AI>(new AI(*rightPaddle)));
 
-    ground->setPosition({400, 600});
+    ground->setPosition({400, 525});
     celing->setPosition({400, 0});
     leftWall->setPosition({0, 300});
     RightWall->setPosition({800, 300});
