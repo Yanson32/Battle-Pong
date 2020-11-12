@@ -1,8 +1,6 @@
-<h1>Battle Pong</h1>
+## Battle Pong
 
-<p>
-	Battle pong is a video game that adds some additional features to the original pong game, to make it more fun.
-</p>
+Battle pong is a video game that adds some additional features to the original pong game, to make it more fun.
 
 
 <h1>To Do List</h1>
@@ -14,6 +12,12 @@
 </ul>
 
 
+## Dependencies
+
+- [SFML](http://www.sfml-dev.org)
+- [TGUI](https://tgui.eu/)
+- [Boost](https://www.boost.org/)
+- [GameUtilities](https://github.com/Yanson32/GameUtilities)
 
 
 
