@@ -31,5 +31,7 @@ endif()
 #Make the BUILD_TESTING variable show up in the cmake gui
 option(BUILD_TESTING "Set to TRUE if you want to build unit tests" FALSE)
 
-file(COPY "Resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
-
+if(NOT CMAKE_CONFIGURATION_TYPES)
+	file(COPY "Resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+	file(COPY "TGUI/Theme" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+endif()
