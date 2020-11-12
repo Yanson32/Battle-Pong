@@ -35,8 +35,7 @@ target_include_directories("${PROJECT_NAME}" PUBLIC ${SFML_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${SFML_LIBRARIES})
 
 find_package(TGUI REQUIRED)
-target_include_directories("${PROJECT_NAME}" PUBLIC ${TGUI_INCLUDE_DIR})
-target_link_libraries("${PROJECT_NAME}" PUBLIC ${TGUI_LIBRARY})
+target_link_libraries("${PROJECT_NAME}" PUBLIC tgui)
 
 find_package(Boost 1.60.0 COMPONENTS thread date_time filesystem system program_options regex system log log_setup REQUIRED)
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${Boost_LIBRARIES})
@@ -47,3 +46,4 @@ target_link_libraries("${PROJECT_NAME}" PUBLIC Box2D)
 
 #Export targets to the build tree
 export(TARGETS "${PROJECT_NAME}" FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}-Exports.cmake")
+

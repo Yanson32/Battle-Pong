@@ -32,3 +32,4 @@ endif()
 option(BUILD_TESTING "Set to TRUE if you want to build unit tests" FALSE)
 
 file(COPY "Resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+
