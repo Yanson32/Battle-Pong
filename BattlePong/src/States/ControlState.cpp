@@ -5,7 +5,7 @@
 #include "Objects/Ball.h"
 #include "Objects/Wall.h"
 #include "Settings.h"
-#include "States/PaddleState.h"
+//#include "States/PaddleState.h"
 #include "States/OptionsState.h"
 #include "States/Id.h"
 #include "Events/Events.h"
@@ -81,7 +81,7 @@ void ControlState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 void ControlState::onPaddle1()
 {
     gui.removeAllWidgets();
-    engin.Push<PaddleState>(engin, Settings::inst().paddle1);
+    //engin.Push<PaddleState>(engin, Settings::inst().paddle1);
     EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
     EventManager::inst().Post<GU::Evt::PushState>(stateId::PADDLE_ONE_STATE);
 }
