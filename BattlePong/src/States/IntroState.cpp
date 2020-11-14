@@ -17,7 +17,6 @@
 #include "Objects/Wall.h"
 #include "Objects/Ball.h"
 #include "Objects/Paddle.h"
-#include "States/OptionsState.h"
 #include "States/Id.h"
 #include "Events/EventManager.h"
 #include "GameUtilities/Event/PlaySound.h"

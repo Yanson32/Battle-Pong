@@ -1,7 +1,6 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/StateBase.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PlayState.h"
-#			"${CMAKE_CURRENT_SOURCE_DIR}/OptionsState.h"
 #			"${CMAKE_CURRENT_SOURCE_DIR}/ControlState.h"
 #			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleState.h"
 #			"${CMAKE_CURRENT_SOURCE_DIR}/MusicState.h"
