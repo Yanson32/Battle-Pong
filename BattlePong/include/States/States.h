@@ -10,7 +10,6 @@
 #include "States/IntroState.h"
 //#include "States/MultiplayerControlsState.h"
 //#include "States/MusicState.h"
-//#include "States/PaddleState.h"
 #include "States/PlayState.h"
 #include "States/SingleplayerState.h"
 #include "States/StateBase.h"
