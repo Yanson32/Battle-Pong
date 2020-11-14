@@ -3,7 +3,6 @@
 
 #include "States/ClientPlayState.h"
 //#include "States/ConnectState.h"
-//#include "States/ControlState.h"
 #include "States/DemoState.h"
 #include "States/HostPlayState.h"
 #include "States/HostState.h"
