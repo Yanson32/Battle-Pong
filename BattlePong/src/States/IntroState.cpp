@@ -11,7 +11,6 @@
 #include <SFML/Graphics/Font.hpp>
 
 #include "States/PlayState.h"
-#include "States/MultiplayerControlsState.h"
 #include "Settings.h"
 
 #include "Objects/Wall.h"
