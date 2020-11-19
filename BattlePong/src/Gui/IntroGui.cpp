@@ -10,38 +10,37 @@
 IntroGui::IntroGui()
 {
     //Create start button
-
-    layout1->add(spacer);
     start = tgui::Button::create();
     start->setText("Start");
     start->connect("pressed", [](){
         EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<Click>(Button::id::START);
     });
+    layout1->addSpace(1);
     layout1->add(start);
-    layout1->add(spacer);
+    layout1->addSpace(1);
 
     //Create MultiPlayer button
-    layout3->add(spacer);
     multiPlayer = tgui::Button::create();
     multiPlayer->setText("Multiplayer");
     multiPlayer->connect("pressed", [](){
         EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<Click>(Button::id::MULTIPLAYER);
     });
+    layout3->addSpace(1);
     layout3->add(multiPlayer);
-    layout3->add(spacer);
+    layout3->addSpace(1);
 
     //Create Options button
-    layout5->add(spacer);
     options = tgui::Button::create();
     options->setText("Options");
     options->connect("pressed", [](){
         EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<Click>(Button::id::GENERAL_TAB);
     });
+    layout5->addSpace(1);
     layout5->add(options);
-    layout5->add(spacer);
+    layout5->addSpace(1);
 }
 
 IntroGui::~IntroGui()
