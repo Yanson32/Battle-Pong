@@ -13,6 +13,13 @@
 #include <SFML/Network.hpp>
 #include "Events/Id.h"
 
+namespace tempSettings 
+{
+	extern std::string playerControlUp;
+	extern std::string playerControlDown;
+}
+
+
 /**********************************************************//**
 *   @brief  Settings for the game window
 **************************************************************/

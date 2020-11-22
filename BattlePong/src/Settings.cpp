@@ -2,6 +2,13 @@
 #include "Events/Events.h"
 #include "States/Id.h"
 #include <iostream>
+
+namespace tempSettings
+{
+	std::string playerControlUp = "Up Arrow";
+	std::string playerControlDown = "Down Arrow";
+}
+
 /**********************************************************//**
 *   @brief  Settings for the game window
 **************************************************************/

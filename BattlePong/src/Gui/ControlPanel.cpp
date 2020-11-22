@@ -1,4 +1,5 @@
 #include "Gui/ControlPanel.h"
+#include "Settings.h"
 
 namespace Gui
 {
@@ -13,17 +14,18 @@ namespace Gui
 
         //Create up button editbox
         upEditBox = tgui::EditBox::create();
+	upEditBox->setText(tempSettings::playerControlUp);
         layout2->add(upEditBox);
 
 
         //Create down button lable
         downLabel = tgui::Label::create("Down");
         layout3->add(downLabel);
-
-
+	 
         //Create down button editbox
         downEditBox = tgui::EditBox::create();
-        layout3->add(downEditBox);
+        downEditBox->setText(tempSettings::playerControlDown); 
+	layout3->add(downEditBox);
 
     }
 
