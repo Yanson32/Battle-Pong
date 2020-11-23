@@ -18,36 +18,18 @@ namespace tempSettings
 	extern std::string playerControlUp;
 	extern std::string playerControlDown;
 	extern sf::Vector2f wDimensions;
+	
+	struct PaddleSettings
+	{
+		std::string input;
+		std::string name;
+		int score;
+	};
+
+	extern PaddleSettings paddle1;
+	extern PaddleSettings paddle2;
 }
 
-
-/**********************************************************//**
-*   @brief  Settings for a single paddle
-**************************************************************/
-class PaddleSettings: public tgui::Panel
-{
-    public:
-        PaddleSettings(const sf::String &newName, ObjectId newId);
-        sf::String getPlayerName() const;
-        void setPlayerName(const sf::String &newName);
-        sf::String getInputType() const;
-        void setInputType(const sf::String &newInput);
-        int getScore() const;
-        void setScore(const int newScore);
-        ObjectId getId() const;
-        ~PaddleSettings();
-    private:
-        //sf::String name;
-        sf::String input;
-        sf::String playerName;
-        sf::String cBoxItem;
-        tgui::EditBox::Ptr eBox;
-        tgui::ComboBox::Ptr cBox;
-        int score = 0;
-        ObjectId paddleId;
-        //void onNameBox();
-        //void onListItemSelected();
-};
 
 
 /**********************************************************//**
@@ -122,8 +104,8 @@ public:
 	static Settings& inst();
 	sf::Vector2f buttonSize() const;
 	sf::Vector2f buttonPosition(const unsigned pos = 0) const;
-    std::shared_ptr<PaddleSettings> paddle1;
-	std::shared_ptr<PaddleSettings> paddle2;
+    	//std::shared_ptr<PaddleSettings> paddle1;
+	//std::shared_ptr<PaddleSettings> paddle2;
 	std::shared_ptr<MusicSettings> musicSettings;
 	std::shared_ptr<ClientSettings> clientSettings;
 	std::shared_ptr<ServerSettings> serverSettings;

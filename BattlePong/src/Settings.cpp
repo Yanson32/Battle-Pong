@@ -8,50 +8,15 @@ namespace tempSettings
 	std::string playerControlUp = "Up Arrow";
 	std::string playerControlDown = "Down Arrow";
 	sf::Vector2f wDimensions = sf::Vector2f(800, 600);
+	
+	PaddleSettings paddel1;
+	PaddleSettings paddel2;
+
+	std::string input  = "Medium";
+	std::string playerName = "Player 1";
+	int score = 0;
 }
 
-
-/**********************************************************//**
-*   @brief  Settings for a single paddle
-**************************************************************/
-PaddleSettings::PaddleSettings(const sf::String &newName, ObjectId newId):
-tgui::Panel(),
-playerName(newName),
-paddleId(newId)
-{
-//    this->setSize({400, 130});
-//    this->setPosition({225, 100});
-//    this->setBackgroundColor(sf::Color::Transparent);
-//
-//
-//    auto panleLable = tgui::Label::create(name);
-//    this->add(panleLable);
-//
-//    auto nameLable = tgui::Label::create("Name");
-//    nameLable->setPosition({0, 50});
-//    this->add(nameLable);
-//
-//    eBox = tgui::EditBox::create();
-//    eBox->connect("ReturnKeyPressed", &PaddleSettings::onNameBox, this);
-//    eBox->setDefaultText(playerName);
-//    eBox->setPosition({100, 50});
-//    this->add(eBox);
-//
-//    auto inputLable = tgui::Label::create("AI");
-//    inputLable->setPosition({0, 100});
-//    this->add(inputLable);
-//
-//    cBox = tgui::ComboBox::create();
-//    cBox->connect("ItemSelected", &PaddleSettings::onListItemSelected, this);
-//    cBox->setPosition({100, 100});
-//    cBox->addItem("Hard");
-//    cBox->addItem("Medium");
-//    cBox->addItem("Easy");
-//    cBox->addItem("None");
-//    cBox->setSelectedItem("Medium");
-//    this->add(cBox);
-    input = "Medium";
-}
 
 //void PaddleSettings::onNameBox()
 //{

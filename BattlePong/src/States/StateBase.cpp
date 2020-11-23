@@ -35,8 +35,8 @@ std::unique_ptr<Ball> StateBase::ball;
 sf::Sound StateBase::sound;
 sf::Music StateBase::music;
 
-std::shared_ptr<PaddleHud> StateBase::paddle1Hud(new PaddleHud(Settings::inst().paddle1));
-std::shared_ptr<PaddleHud> StateBase::paddle2Hud(new PaddleHud(Settings::inst().paddle2));
+std::shared_ptr<PaddleHud> StateBase::paddle1Hud(new PaddleHud(tempSettings::paddle1));
+std::shared_ptr<PaddleHud> StateBase::paddle2Hud(new PaddleHud(tempSettings::paddle2));
 
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
@@ -323,16 +323,16 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
     {
         case EventId::LEFT_GOAL_COLLISION:
         {
-            int currentScore = Settings::inst().paddle1->getScore();
-            Settings::inst().paddle1->setScore(currentScore + 1);
+            int currentScore = tempSettings::paddle1.score;
+	    tempSettings::paddle1.score = currentScore + 1;
             paddle1Hud->setScore(currentScore + 1);
             reset();
         }
         break;
         case EventId::RIGHT_GOAL_COLLISION:
         {
-            int currentScore = Settings::inst().paddle2->getScore();
-            Settings::inst().paddle2->setScore(currentScore + 1);
+            int currentScore = tempSettings::paddle2.score;
+	    tempSettings::paddle2.score = currentScore + 1;
             paddle2Hud->setScore(currentScore + 1);
             reset();
         }
