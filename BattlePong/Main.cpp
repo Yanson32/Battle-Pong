@@ -45,7 +45,7 @@ int main(int argc, char* argv[])
     boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
 	
 	//Load tgui theme
-	tgui::Theme *theme = new tgui::Theme("Theme/Black.txt");
+	tgui::Theme *theme = new tgui::Theme("Resources/TGUI/Theme/Black.txt");
 	tgui::Theme::setDefault(theme);
 
     sf::Clock timer;

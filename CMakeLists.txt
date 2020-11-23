@@ -32,6 +32,5 @@ endif()
 option(BUILD_TESTING "Set to TRUE if you want to build unit tests" FALSE)
 
 if(NOT CMAKE_CONFIGURATION_TYPES)
-	file(COPY "Resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
-	file(COPY "TGUI/Theme" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}")
+	file(COPY "Resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}")
 endif()
