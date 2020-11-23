@@ -17,22 +17,8 @@ namespace tempSettings
 {
 	extern std::string playerControlUp;
 	extern std::string playerControlDown;
+	extern sf::Vector2f wDimensions;
 }
-
-
-/**********************************************************//**
-*   @brief  Settings for the game window
-**************************************************************/
-class WindowSettings
-{
-    public:
-        WindowSettings();
-        sf::VideoMode getVideoMode() const;
-        ~WindowSettings();
-    private:
-        sf::VideoMode vMode;
-
-};
 
 
 /**********************************************************//**
@@ -134,7 +120,6 @@ class Settings
 public:
 	sf::String getTitle() const;
 	static Settings& inst();
-	WindowSettings getWindowSettings() const;
 	sf::Vector2f buttonSize() const;
 	sf::Vector2f buttonPosition(const unsigned pos = 0) const;
     std::shared_ptr<PaddleSettings> paddle1;
@@ -143,7 +128,6 @@ public:
 	std::shared_ptr<ClientSettings> clientSettings;
 	std::shared_ptr<ServerSettings> serverSettings;
 	sf::Vector2f screen;
-	WindowSettings windowSettings;
 	~Settings();
 private:
 	sf::String title;

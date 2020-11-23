@@ -7,26 +7,7 @@ namespace tempSettings
 {
 	std::string playerControlUp = "Up Arrow";
 	std::string playerControlDown = "Down Arrow";
-}
-
-/**********************************************************//**
-*   @brief  Settings for the game window
-**************************************************************/
-WindowSettings::WindowSettings(): vMode(800, 600)
-{
-
-}
-
-
-sf::VideoMode WindowSettings::getVideoMode() const
-{
-    return vMode;
-}
-
-
-WindowSettings::~WindowSettings()
-{
-
+	sf::Vector2f wDimensions = sf::Vector2f(800, 600);
 }
 
 
@@ -342,11 +323,6 @@ Settings& Settings::inst()
 {
 	static Settings settings;
 	return settings;
-}
-
-WindowSettings Settings::getWindowSettings() const
-{
-    return windowSettings;
 }
 
 sf::Vector2f Settings::buttonSize() const

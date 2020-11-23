@@ -12,7 +12,7 @@
 #include "Events/Events.h"
 #include "Sounds/Id.h"
 
-sf::RenderWindow StateBase::window(Settings::inst().getWindowSettings().getVideoMode(), Settings::inst().getTitle());
+sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
 tgui::Gui StateBase::gui(window);
 DebugDraw StateBase::debugDraw(*world);
@@ -54,7 +54,8 @@ GU::Engin::GameState(),
 engin(newEngin),
 sysPause(false)
 {
-
+    StateBase::window.create(sf::VideoMode(tempSettings::wDimensions.x, tempSettings::wDimensions.y), Settings::inst().getTitle());
+	
     rightGoal->setPosition(sf::Vector2f(760, 300));
     leftPaddle->setColor(sf::Color(255, 100, 0));
     rightPaddle->setColor(sf::Color::Blue);
