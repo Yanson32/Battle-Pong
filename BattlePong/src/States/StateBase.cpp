@@ -19,25 +19,18 @@ DebugDraw StateBase::debugDraw(*world);
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 
-namespace
-{
-    std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(-400, -25), sf::Vector2f(400, -25), sf::Vector2f(400, 25), sf::Vector2f(-400, 25)};
-    std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(-25, -300), sf::Vector2f(25, -300), sf::Vector2f(25, 300), sf::Vector2f(-25, 300)};
-    std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(-10, -50), sf::Vector2f(10, -50), sf::Vector2f(10, 50),sf::Vector2f(-10, 50)};
-    std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(-15, -600), sf::Vector2f(15, -600), sf::Vector2f(15, 600), sf::Vector2f(-15, 600)};
-}
-std::unique_ptr<Wall> StateBase::ground(new Wall(world, horizontalPoints));
-std::unique_ptr<Wall> StateBase::celing(new Wall(world, horizontalPoints));
-std::unique_ptr<Wall> StateBase::leftWall(new Wall(world, verticalPoints));
-std::unique_ptr<Wall> StateBase::RightWall(new Wall(world, verticalPoints));
+std::unique_ptr<Wall> StateBase::ground;
+std::unique_ptr<Wall> StateBase::celing;
+std::unique_ptr<Wall> StateBase::leftWall;
+std::unique_ptr<Wall> StateBase::RightWall;
 
 
-std::unique_ptr<Paddle> StateBase::leftPaddle(new Paddle(world, ObjectId::LEFT_PADDLE, paddlePoints));
-std::unique_ptr<Paddle> StateBase::rightPaddle(new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints));
+std::unique_ptr<Paddle> StateBase::leftPaddle;
+std::unique_ptr<Paddle> StateBase::rightPaddle;
 
-std::unique_ptr<Goal> StateBase::leftGoal(new Goal(world, ObjectId::RIGHT_GOAL, goalPoints));
-std::unique_ptr<Goal> StateBase::rightGoal(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
-std::unique_ptr<Ball> StateBase::ball(new Ball(world));
+std::unique_ptr<Goal> StateBase::leftGoal;
+std::unique_ptr<Goal> StateBase::rightGoal;
+std::unique_ptr<Ball> StateBase::ball;
 
 sf::Sound StateBase::sound;
 sf::Music StateBase::music;
@@ -54,7 +47,25 @@ GU::Engin::GameState(),
 engin(newEngin),
 sysPause(false)
 {
-    StateBase::window.create(sf::VideoMode(tempSettings::wDimensions.x, tempSettings::wDimensions.y), Settings::inst().getTitle());
+    float &width = tempSettings::wDimensions.x;
+    float &height = tempSettings::wDimensions.y;
+
+    StateBase::window.create(sf::VideoMode(width, height), Settings::inst().getTitle());
+    std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(-width, -25), sf::Vector2f(width, -25), sf::Vector2f(width, 25), sf::Vector2f(-width, 25)};
+    std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(-25, -height), sf::Vector2f(25, -height), sf::Vector2f(25, height), sf::Vector2f(-25, height)};
+    std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(-10, -50), sf::Vector2f(10, -50), sf::Vector2f(10, 50),sf::Vector2f(-10, 50)};
+    std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(-15, -height), sf::Vector2f(15, -height), sf::Vector2f(15, height), sf::Vector2f(-15, height)};
+
+    ground.reset(new Wall(world, horizontalPoints));
+    celing.reset(new Wall(world, horizontalPoints));
+    leftWall.reset(new Wall(world, verticalPoints));
+    RightWall.reset(new Wall(world, verticalPoints));
+    leftPaddle.reset(new Paddle(world, ObjectId::LEFT_PADDLE, paddlePoints));
+    rightPaddle.reset(new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints));
+
+    leftGoal.reset(new Goal(world, ObjectId::RIGHT_GOAL, goalPoints));
+    rightGoal.reset(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
+    ball.reset(new Ball(world));
 	
     rightGoal->setPosition(sf::Vector2f(760, 300));
     leftPaddle->setColor(sf::Color(255, 100, 0));
