@@ -19,6 +19,8 @@
     #define MAJOR_VERSION 1
 #endif // MAJOR_VERSION
 
+#define BOOST_LOG_DYN_LINK
+
 int main(int argc, char* argv[])
 {
 

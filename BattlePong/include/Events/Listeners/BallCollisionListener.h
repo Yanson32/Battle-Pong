@@ -1,6 +1,5 @@
 #ifndef BALLCOLLISIONLISTENER_H
 #define BALLCOLLISIONLISTENER_H
-#define BOOST_LOG_DYN_LINK
 
 #include <GameUtilities/Event/Listener.h>
 
