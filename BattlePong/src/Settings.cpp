@@ -17,63 +17,6 @@ namespace tempSettings
 	int score = 0;
 }
 
-
-//void PaddleSettings::onNameBox()
-//{
-//
-//    playerName = eBox->getText();
-//    EventManager::inst().Post<PlaySound>("Edit Box Sound");
-//}
-//
-//void PaddleSettings::onListItemSelected()
-//{
-//    cBoxItem = cBox->getSelectedItem();
-//    EventManager::inst().Post<PlaySound>("List Box Selected Sound");
-//}
-
-sf::String PaddleSettings::getPlayerName() const
-{
-    return playerName;
-}
-
-sf::String PaddleSettings::getInputType() const
-{
-    return input;
-}
-
-int PaddleSettings::getScore() const
-{
-    return score;
-}
-
-void PaddleSettings::setScore(const int newScore)
-{
-    score = newScore;
-}
-
-void PaddleSettings::setPlayerName(const sf::String &newName)
-{
-    playerName = newName;
-}
-
-
-
-void PaddleSettings::setInputType(const sf::String &newInput)
-{
-    input = newInput;
-}
-
-ObjectId PaddleSettings::getId() const
-{
-    return paddleId;
-}
-
-PaddleSettings::~PaddleSettings()
-{
-
-}
-
-
 /**********************************************************//**
 *   @brief  The MusicSettings constructor
 *************************************************************/
