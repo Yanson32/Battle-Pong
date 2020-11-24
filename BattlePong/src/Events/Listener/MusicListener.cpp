@@ -42,8 +42,7 @@ void MusicListener::OnEvent(GU::Evt::EventPtr event)
 
         case EventId::MUSIC_VOLUME_CHANGED:
         {
-            int volume = Settings::inst().musicSettings->getVolume();
-            music.setVolume(volume);
+            music.setVolume(tempSettings::music.mVolume);
         }
         break;
     }

@@ -36,8 +36,7 @@ void SoundListener::OnEvent(GU::Evt::EventPtr event)
         case EventId::SOUND_VOLUME_CHANGED:
         {
 
-            listenerSound.setVolume(Settings::inst().musicSettings->getSoundVolume());
-            std::cout << "Sound Volume " << Settings::inst().musicSettings->getSoundVolume() << std::endl;
+            listenerSound.setVolume(tempSettings::music.sVolume);
         }
         break;
     }

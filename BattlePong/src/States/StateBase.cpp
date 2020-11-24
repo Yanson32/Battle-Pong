@@ -301,8 +301,8 @@ void StateBase::Init()
 {
     systemPause(false);
     Pause(false);
-    music.setVolume(Settings::inst().musicSettings->getVolume());
-    sound.setVolume(Settings::inst().musicSettings->getSoundVolume());
+    music.setVolume(tempSettings::music.mVolume);
+    sound.setVolume(tempSettings::music.sVolume);
 }
 
 

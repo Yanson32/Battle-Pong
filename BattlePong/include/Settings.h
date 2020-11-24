@@ -15,41 +15,28 @@
 
 namespace tempSettings 
 {
-	extern std::string playerControlUp;
-	extern std::string playerControlDown;
-	extern sf::Vector2f wDimensions;
-	
 	struct PaddleSettings
 	{
 		std::string input;
 		std::string name;
 		int score;
 	};
+        struct MusicSettings
+	{
+		int mVolume = 200;
+        	int sVolume = 150;
+	};
+
+	extern std::string playerControlUp;
+	extern std::string playerControlDown;
+	extern sf::Vector2f wDimensions;
+	
 
 	extern PaddleSettings paddle1;
 	extern PaddleSettings paddle2;
+	extern MusicSettings music;
+
 }
-
-
-
-/**********************************************************//**
-*   @brief  Settings for music
-**************************************************************/
-class MusicSettings: public tgui::Panel
-{
-    public:
-        MusicSettings();
-        int getVolume() const;
-        int getSoundVolume() const;
-    private:
-        tgui::Slider::Ptr musicVolume;
-        tgui::Slider::Ptr soundVolume;
-        int mVolume = 200;
-        int sVolume = 150;
-        void onMusicVolume();
-        void onSoundVolume();
-
-};
 
 class ServerSettings
 {
@@ -106,7 +93,6 @@ public:
 	sf::Vector2f buttonPosition(const unsigned pos = 0) const;
     	//std::shared_ptr<PaddleSettings> paddle1;
 	//std::shared_ptr<PaddleSettings> paddle2;
-	std::shared_ptr<MusicSettings> musicSettings;
 	std::shared_ptr<ClientSettings> clientSettings;
 	std::shared_ptr<ServerSettings> serverSettings;
 	sf::Vector2f screen;

@@ -9,73 +9,18 @@ namespace tempSettings
 	std::string playerControlDown = "Down Arrow";
 	sf::Vector2f wDimensions = sf::Vector2f(800, 600);
 	
-	PaddleSettings paddel1;
-	PaddleSettings paddel2;
-
+	PaddleSettings paddle1;
+	PaddleSettings paddle2;
+	MusicSettings music;
 	std::string input  = "Medium";
 	std::string playerName = "Player 1";
 	int score = 0;
 }
 
-/**********************************************************//**
-*   @brief  The MusicSettings constructor
-*************************************************************/
-MusicSettings::MusicSettings(): tgui::Panel()
-{
-    this->setPosition({200, 300});
-    this->setSize({450, 100});
-    this->getRenderer()->setBackgroundColor(sf::Color::Transparent);
-
-    auto musicLabel = tgui::Label::create("Music Volume");
-    this->add(musicLabel);
-
-    musicVolume = tgui::Slider::create();
-    musicVolume->connect("ValueChanged", &MusicSettings::onMusicVolume, this);
-    musicVolume->setPosition({200, 0});
-    musicVolume->setValue(getVolume());
-    musicVolume->setMaximum(255);
-    this->add(musicVolume);
-
-    auto soundLabel = tgui::Label::create("Sound Volume");
-    soundLabel->setPosition(0, 50);
-    this->add(soundLabel);
-
-    soundVolume = tgui::Slider::create();
-    soundVolume->connect("ValueChanged", &MusicSettings::onSoundVolume, this);
-    soundVolume->setPosition({200, 50});
-    soundVolume->setValue(getSoundVolume());
-    soundVolume->setMaximum(255);
-    this->add(soundVolume);
-}
-
-int MusicSettings::getVolume() const
-{
-    return mVolume;
-}
-
-int MusicSettings::getSoundVolume() const
-{
-    return sVolume;
-}
-
-void MusicSettings::onMusicVolume()
-{
-    mVolume = musicVolume->getValue();
-    EventManager::inst().Post<GU::Evt::MusicVolumeChanged>();
-}
-
-
-void MusicSettings::onSoundVolume()
-{
-    sVolume = soundVolume->getValue();
-    EventManager::inst().Post<GU::Evt::SoundVolumeChanged>();
-}
-
 
 ServerSettings::ServerSettings()
 {
-    //ctor
-    listener.setBlocking(true);
+
 }
 
 void ServerSettings::init()
@@ -206,15 +151,11 @@ ClientSettings::~ClientSettings()
 Settings::Settings():
 bSize(200, 25),
 bPosition(300, 300),
-paddle1(new PaddleSettings("Paddle 1", ObjectId::LEFT_PADDLE)),
-paddle2(new PaddleSettings("Paddle 2", ObjectId::RIGHT_PADDLE)),
 clientSettings(new ClientSettings()),
 serverSettings(new ServerSettings()),
-musicSettings(new MusicSettings()),
 screen(800, 600)
 {
 	title = "Pong";
-	paddle1->setInputType(sf::String("None"));
 }
 
 sf::String Settings::getTitle() const

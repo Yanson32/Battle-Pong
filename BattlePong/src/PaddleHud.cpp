@@ -1,13 +1,13 @@
 #include "PaddleHud.h"
 #include <sstream>
-PaddleHud::PaddleHud(std::shared_ptr<PaddleSettings> newPaddleSettings): paddleSettings(newPaddleSettings)
+PaddleHud::PaddleHud(tempSettings::PaddleSettings &newPaddleSettings): paddleSettings(newPaddleSettings)
 {
     //ctor
-    panleLable = tgui::Label::create(paddleSettings->getPlayerName());
-    panleLable->setText(paddleSettings->getPlayerName());
+    panleLable = tgui::Label::create(paddleSettings.name);
+    panleLable->setText(paddleSettings.name);
     this->add(panleLable);
 
-    setScore(paddleSettings->getScore());
+    setScore(paddleSettings.score);
 
     this->setSize({150, 25});
 
@@ -31,8 +31,7 @@ void PaddleHud::setScore(const int newScore)
     if(scoreLabel)
         scoreLabel->setText(temp);
 
-    if(paddleSettings)
-        paddleSettings->setScore(newScore);
+    paddleSettings.score = newScore;
 }
 
 void PaddleHud::setName(const sf::String &name)

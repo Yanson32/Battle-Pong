@@ -20,15 +20,13 @@ PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase
 {
 
 
-    sf::String p1Input = Settings::inst().paddle1->getInputType();
-    if(p1Input == "None")
+    if(tempSettings::paddle1.input == "None")
         leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*leftPaddle)));
     else
         leftPaddle->setInput(std::unique_ptr<Input>(new AI(*leftPaddle)));
 
 
-    sf::String p1Input2 = Settings::inst().paddle2->getInputType();
-    if(p1Input2 == "None")
+    if(tempSettings::paddle2.input  == "None")
         rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*rightPaddle)));
     else
         rightPaddle->setInput(std::unique_ptr<Input>(new AI(*rightPaddle)));
@@ -163,8 +161,8 @@ void PlayState::Init()
 //    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 //
 //    userMessage.setFont(ResourceManager::font.get("Header Font"));
-    Settings::inst().paddle1->setScore(0);
-    Settings::inst().paddle2->setScore(0);
+    tempSettings::paddle1.score = 0;
+    tempSettings::paddle2.score = 0;
     paddle1Hud->setScore(0);
     paddle2Hud->setScore(0);
     centerText();
