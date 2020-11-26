@@ -21,14 +21,16 @@ namespace tempSettings
 
 	//Client Settings
 	ClientSettings client;
+
+	//Ball
+	ButtonSettings button;
+
 }
 
 /**********************************************************//**
 *   @brief  A singleton that contains all game settings
 **************************************************************/
 Settings::Settings():
-bSize(200, 25),
-bPosition(300, 300),
 screen(800, 600)
 {
 	title = "Pong";
@@ -48,19 +50,5 @@ Settings& Settings::inst()
 {
 	static Settings settings;
 	return settings;
-}
-
-sf::Vector2f Settings::buttonSize() const
-{
-    return bSize;
-}
-
-sf::Vector2f Settings::buttonPosition(const unsigned pos) const
-{
-
-    sf::Vector2f temp = bPosition;
-    temp.y += 50 * pos;
-
-    return temp;
 }
 

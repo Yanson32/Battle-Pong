@@ -45,7 +45,14 @@ namespace tempSettings
         	sf::TcpSocket socket;
         	sf::Time timeOut;
 	};
-    extern std::string playerControlUp;
+	
+	struct ButtonSettings
+	{	
+		sf::Vector2f bSize = sf::Vector2f(200, 25);
+		sf::Vector2f bPosition = sf::Vector2f(300, 300);
+	};
+    
+	extern std::string playerControlUp;
 	extern std::string playerControlDown;
 	extern sf::Vector2f wDimensions;
 	
@@ -59,6 +66,9 @@ namespace tempSettings
 
 	//Client
 	extern ClientSettings client;
+
+	//Ball
+	extern	ButtonSettings button;
 }
 
 
@@ -70,8 +80,6 @@ class Settings
 public:
 	sf::String getTitle() const;
 	static Settings& inst();
-	sf::Vector2f buttonSize() const;
-	sf::Vector2f buttonPosition(const unsigned pos = 0) const;
     	//std::shared_ptr<PaddleSettings> paddle1;
 	//std::shared_ptr<PaddleSettings> paddle2;
 	sf::Vector2f screen;
@@ -82,8 +90,6 @@ private:
 	Settings operator = (const Settings settings) = delete;
 	Settings(const Settings &settings) = delete;
 
-	sf::Vector2f bSize;
-	sf::Vector2f bPosition;
 };
 
 

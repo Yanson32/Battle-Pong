@@ -54,8 +54,8 @@ HostState::HostState(GU::Engin::Engin& engin): StateBase(engin, stateId::HOST_ST
     //ctor
     backButton = tgui::Button::create("Back");
     backButton->connect("pressed", &HostState::onBackPressed, this);
-    backButton->setPosition(Settings::inst().buttonPosition(4));
-    backButton->setSize(Settings::inst().buttonSize());
+    backButton->setPosition(tempSettings::button.bPosition);
+    backButton->setSize(tempSettings::button.bSize);
 
     //Global Ip address label
     globalIpLabel = tgui::Label::create("Global Ip");
