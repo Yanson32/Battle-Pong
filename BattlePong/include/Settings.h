@@ -80,22 +80,4 @@ namespace tempSettings
 }
 
 
-/**********************************************************//**
-*   @brief  A singleton that contains all game settings
-**************************************************************/
-class Settings
-{
-public:
-	static Settings& inst();
-    	//std::shared_ptr<PaddleSettings> paddle1;
-	//std::shared_ptr<PaddleSettings> paddle2;
-	~Settings();
-private:
-	Settings();
-	Settings operator = (const Settings settings) = delete;
-	Settings(const Settings &settings) = delete;
-
-};
-
-
 #endif

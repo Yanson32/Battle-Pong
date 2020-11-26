@@ -29,21 +29,3 @@ namespace tempSettings
 	WindowSettings window;
 }
 
-/**********************************************************//**
-*   @brief  A singleton that contains all game settings
-**************************************************************/
-Settings::Settings()
-{
-	
-}
-Settings::~Settings()
-{
-}
-
-
-Settings& Settings::inst()
-{
-	static Settings settings;
-	return settings;
-}
-
