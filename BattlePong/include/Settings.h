@@ -21,12 +21,22 @@ namespace tempSettings
 		std::string name;
 		int score;
 	};
-        struct MusicSettings
+    
+    struct MusicSettings
 	{
 		int mVolume = 200;
         	int sVolume = 150;
 	};
+	
+    struct ServerSettings
+	{
+        	sf::TcpSocket socket;
+        	sf::TcpListener listener;
+        	bool connected = false;
+        	int port = 4000;
+        	sf::IpAddress address;
 
+	};
 	extern std::string playerControlUp;
 	extern std::string playerControlDown;
 	extern sf::Vector2f wDimensions;
@@ -35,28 +45,10 @@ namespace tempSettings
 	extern PaddleSettings paddle1;
 	extern PaddleSettings paddle2;
 	extern MusicSettings music;
-
+	
+	//Server
+	extern ServerSettings server;
 }
-
-class ServerSettings
-{
-    public:
-        ServerSettings();
-        bool isConnected();
-        void init();
-        void clean();
-        void handleEvents();
-        bool update();
-        sf::Packet recieve();
-        virtual ~ServerSettings();
-    protected:
-    private:
-        sf::TcpSocket socket;
-        sf::TcpListener listener;
-        bool connected = false;
-        int port = 4000;
-        sf::IpAddress address;
-};
 
 class ClientSettings
 {
@@ -94,7 +86,6 @@ public:
     	//std::shared_ptr<PaddleSettings> paddle1;
 	//std::shared_ptr<PaddleSettings> paddle2;
 	std::shared_ptr<ClientSettings> clientSettings;
-	std::shared_ptr<ServerSettings> serverSettings;
 	sf::Vector2f screen;
 	~Settings();
 private:

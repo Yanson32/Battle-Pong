@@ -15,64 +15,9 @@ namespace tempSettings
 	std::string input  = "Medium";
 	std::string playerName = "Player 1";
 	int score = 0;
-}
 
-
-ServerSettings::ServerSettings()
-{
-
-}
-
-void ServerSettings::init()
-{
-
-    if (listener.listen(port) != sf::Socket::Done)
-    {
-        std::cerr << "unable to listen on port " << listener.getLocalPort() << std::endl;
-        return;
-    }
-
-
-    if (listener.accept(socket) != sf::Socket::Done)
-    {
-        std::cerr << "unable to accept a connection on port " << listener.getLocalPort() << std::endl;
-        return;
-    }
-}
-
-void ServerSettings::clean()
-{
-
-}
-
-void ServerSettings::handleEvents()
-{
-
-}
-
-
-bool ServerSettings::update()
-{
-
-
-
-    return true;
-}
-
-bool ServerSettings::isConnected()
-{
-    return connected;
-}
-
-
-sf::Packet ServerSettings::recieve()
-{
-
-}
-
-ServerSettings::~ServerSettings()
-{
-    //dtor
+	//Server Settings
+	ServerSettings server;
 }
 
 ClientSettings::ClientSettings()
@@ -152,7 +97,6 @@ Settings::Settings():
 bSize(200, 25),
 bPosition(300, 300),
 clientSettings(new ClientSettings()),
-serverSettings(new ServerSettings()),
 screen(800, 600)
 {
 	title = "Pong";
