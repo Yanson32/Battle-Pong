@@ -24,23 +24,18 @@ namespace tempSettings
 
 	//Ball
 	ButtonSettings button;
-
+	
+	//Window
+	WindowSettings window;
 }
 
 /**********************************************************//**
 *   @brief  A singleton that contains all game settings
 **************************************************************/
-Settings::Settings():
-screen(800, 600)
+Settings::Settings()
 {
-	title = "Pong";
+	
 }
-
-sf::String Settings::getTitle() const
-{
-	return title;
-}
-
 Settings::~Settings()
 {
 }

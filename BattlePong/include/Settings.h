@@ -51,10 +51,15 @@ namespace tempSettings
 		sf::Vector2f bSize = sf::Vector2f(200, 25);
 		sf::Vector2f bPosition = sf::Vector2f(300, 300);
 	};
-    
+	    
+	struct WindowSettings
+	{
+		sf::String title = "Test";
+		sf::Vector2f dimensions = sf::Vector2f(800, 600);
+	};
+
 	extern std::string playerControlUp;
 	extern std::string playerControlDown;
-	extern sf::Vector2f wDimensions;
 	
 
 	extern PaddleSettings paddle1;
@@ -69,6 +74,9 @@ namespace tempSettings
 
 	//Ball
 	extern	ButtonSettings button;
+
+	//Window
+	extern WindowSettings window;
 }
 
 
@@ -78,14 +86,11 @@ namespace tempSettings
 class Settings
 {
 public:
-	sf::String getTitle() const;
 	static Settings& inst();
     	//std::shared_ptr<PaddleSettings> paddle1;
 	//std::shared_ptr<PaddleSettings> paddle2;
-	sf::Vector2f screen;
 	~Settings();
 private:
-	sf::String title;
 	Settings();
 	Settings operator = (const Settings settings) = delete;
 	Settings(const Settings &settings) = delete;

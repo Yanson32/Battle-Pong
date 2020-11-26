@@ -47,10 +47,10 @@ GU::Engin::GameState(),
 engin(newEngin),
 sysPause(false)
 {
-    float &width = tempSettings::wDimensions.x;
-    float &height = tempSettings::wDimensions.y;
+    float &width = tempSettings::window.dimensions.x;
+    float &height = tempSettings::window.dimensions.y;
 
-    StateBase::window.create(sf::VideoMode(width, height), Settings::inst().getTitle());
+    StateBase::window.create(sf::VideoMode(width, height),tempSettings::window.title); 
     std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(-width, -25), sf::Vector2f(width, -25), sf::Vector2f(width, 25), sf::Vector2f(-width, 25)};
     std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(-25, -height), sf::Vector2f(25, -height), sf::Vector2f(25, height), sf::Vector2f(-25, height)};
     std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(-10, -50), sf::Vector2f(10, -50), sf::Vector2f(10, 50),sf::Vector2f(-10, 50)};
