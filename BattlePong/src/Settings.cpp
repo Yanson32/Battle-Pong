@@ -18,77 +18,10 @@ namespace tempSettings
 
 	//Server Settings
 	ServerSettings server;
+
+	//Client Settings
+	ClientSettings client;
 }
-
-ClientSettings::ClientSettings()
-{
-    //ctor
-    setTimeOut(sf::seconds(5));
-}
-
-bool ClientSettings::isConnected()
-{
-
-}
-
-void ClientSettings::init()
-{
-
-    sf::Socket::Status status = socket.connect({ip}, port, sf::seconds(5));
-    if (status != sf::Socket::Done)
-    {
-        // error...
-        EventManager::inst().Post<GU::Evt::ChangeState>(stateId::CONNECT_STATE);
-    }
-
-}
-
-void ClientSettings::clean()
-{
-
-}
-
-void ClientSettings::handleEvents()
-{
-
-}
-
-bool ClientSettings::update()
-{
-
-}
-
-void ClientSettings::setTimeOut(const sf::Time &newTime)
-{
-    timeOut = newTime;
-}
-
-
-void ClientSettings::setIp(const sf::String newIp)
-{
-    ip = newIp;
-}
-
-void ClientSettings::setPort(const int newPort)
-{
-    port = newPort;
-}
-
-sf::String ClientSettings::getIp() const
-{
-    return ip;
-}
-
-int ClientSettings::getPort() const
-{
-    return port;
-}
-
-ClientSettings::~ClientSettings()
-{
-    //dtor
-}
-
 
 /**********************************************************//**
 *   @brief  A singleton that contains all game settings
@@ -96,7 +29,6 @@ ClientSettings::~ClientSettings()
 Settings::Settings():
 bSize(200, 25),
 bPosition(300, 300),
-clientSettings(new ClientSettings()),
 screen(800, 600)
 {
 	title = "Pong";

@@ -37,7 +37,15 @@ namespace tempSettings
         	sf::IpAddress address;
 
 	};
-	extern std::string playerControlUp;
+
+	struct ClientSettings 
+	{
+        	int port = 5000;
+        	sf::String ip = "127.0.0.0.1";
+        	sf::TcpSocket socket;
+        	sf::Time timeOut;
+	};
+    extern std::string playerControlUp;
 	extern std::string playerControlDown;
 	extern sf::Vector2f wDimensions;
 	
@@ -48,30 +56,11 @@ namespace tempSettings
 	
 	//Server
 	extern ServerSettings server;
+
+	//Client
+	extern ClientSettings client;
 }
 
-class ClientSettings
-{
-    public:
-        ClientSettings();
-        bool isConnected();
-        void init();
-        void clean();
-        void handleEvents();
-        bool update();
-        void setTimeOut(const sf::Time &newTime);
-        void setIp(const sf::String newIp);
-        void setPort(const int newPort);
-        sf::String getIp() const;
-        int getPort() const;
-        virtual ~ClientSettings();
-    protected:
-    private:
-        int port = 5000;
-        sf::String ip = "127.0.0.0.1";
-        sf::TcpSocket socket;
-        sf::Time timeOut;
-};
 
 /**********************************************************//**
 *   @brief  A singleton that contains all game settings
@@ -85,7 +74,6 @@ public:
 	sf::Vector2f buttonPosition(const unsigned pos = 0) const;
     	//std::shared_ptr<PaddleSettings> paddle1;
 	//std::shared_ptr<PaddleSettings> paddle2;
-	std::shared_ptr<ClientSettings> clientSettings;
 	sf::Vector2f screen;
 	~Settings();
 private:

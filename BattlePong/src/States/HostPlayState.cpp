@@ -9,7 +9,6 @@ PlayState::PlayState(newEngin, stateId::HOST_PLAY_STATE)
 void HostPlayState::Init()
 {
     PlayState::Init();
-    Settings::inst().clientSettings->init();
 }
 
 void HostPlayState::Clean()
