@@ -26,6 +26,9 @@ namespace Settings
 	ButtonSettings button;
 	
 	//Window
-	WindowSettings window;
+	WindowSettings window; 
+
+	const float wallThickness = 25;
+
 }
 

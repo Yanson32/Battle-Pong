@@ -77,6 +77,9 @@ namespace Settings
 
 	//Window
 	extern WindowSettings window;
+
+
+	extern const float wallThickness;
 }
 
 

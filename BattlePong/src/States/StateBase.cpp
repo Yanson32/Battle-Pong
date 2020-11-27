@@ -47,14 +47,14 @@ GU::Engin::GameState(),
 engin(newEngin),
 sysPause(false)
 {
-    float &width = Settings::window.dimensions.x;
-    float &height = Settings::window.dimensions.y;
-
-    StateBase::window.create(sf::VideoMode(width, height),Settings::window.title); 
-    std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(-width, -25), sf::Vector2f(width, -25), sf::Vector2f(width, 25), sf::Vector2f(-width, 25)};
-    std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(-25, -height), sf::Vector2f(25, -height), sf::Vector2f(25, height), sf::Vector2f(-25, height)};
+    float &wWidth = Settings::window.dimensions.x;
+    float &wHeight = Settings::window.dimensions.y;
+    const float &wallTh = Settings::wallThickness;
+    StateBase::window.create(sf::VideoMode(wWidth, wHeight),Settings::window.title); 
+    std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(-wWidth, -wallTh), sf::Vector2f(wWidth, -wallTh), sf::Vector2f(wWidth, wallTh), sf::Vector2f(-wWidth, wallTh)};
+    std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(-wallTh, -wHeight), sf::Vector2f(wallTh, -wHeight), sf::Vector2f(wallTh, wHeight), sf::Vector2f(-wallTh, wHeight)};
     std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(-10, -50), sf::Vector2f(10, -50), sf::Vector2f(10, 50),sf::Vector2f(-10, 50)};
-    std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(-15, -height), sf::Vector2f(15, -height), sf::Vector2f(15, height), sf::Vector2f(-15, height)};
+    std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(-15, -wHeight), sf::Vector2f(15, -wHeight), sf::Vector2f(15, wHeight), sf::Vector2f(-15, wHeight)};
 
     ground.reset(new Wall(world, horizontalPoints));
     celing.reset(new Wall(world, horizontalPoints));
