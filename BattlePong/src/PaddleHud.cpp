@@ -1,6 +1,6 @@
 #include "PaddleHud.h"
 #include <sstream>
-PaddleHud::PaddleHud(tempSettings::PaddleSettings &newPaddleSettings): paddleSettings(newPaddleSettings)
+PaddleHud::PaddleHud(Settings::PaddleSettings &newPaddleSettings): paddleSettings(newPaddleSettings)
 {
     //ctor
     panleLable = tgui::Label::create(paddleSettings.name);

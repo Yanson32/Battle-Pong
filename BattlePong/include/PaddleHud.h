@@ -7,13 +7,13 @@
 class PaddleHud: public tgui::Panel
 {
     public:
-        PaddleHud(tempSettings::PaddleSettings &newPaddleSettings);
+        PaddleHud(Settings::PaddleSettings &newPaddleSettings);
         void setScore(const int newScore);
         void setName(const sf::String &name);
         virtual ~PaddleHud();
     protected:
     private:
-        tempSettings::PaddleSettings &paddleSettings;
+        Settings::PaddleSettings &paddleSettings;
         tgui::Label::Ptr scoreLabel;
         tgui::Label::Ptr panleLable;
 };

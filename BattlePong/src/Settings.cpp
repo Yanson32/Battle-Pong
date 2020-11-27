@@ -3,7 +3,7 @@
 #include "States/Id.h"
 #include <iostream>
 
-namespace tempSettings
+namespace Settings
 {
 	std::string playerControlUp = "Up Arrow";
 	std::string playerControlDown = "Down Arrow";

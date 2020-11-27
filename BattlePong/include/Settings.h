@@ -13,7 +13,7 @@
 #include <SFML/Network.hpp>
 #include "Events/Id.h"
 
-namespace tempSettings 
+namespace Settings 
 {
 	struct PaddleSettings
 	{

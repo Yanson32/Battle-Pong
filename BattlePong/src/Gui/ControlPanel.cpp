@@ -14,7 +14,7 @@ namespace Gui
 
         //Create up button editbox
         upEditBox = tgui::EditBox::create();
-	upEditBox->setText(tempSettings::playerControlUp);
+	upEditBox->setText(Settings::playerControlUp);
         layout2->add(upEditBox);
 
 
@@ -24,7 +24,7 @@ namespace Gui
 	 
         //Create down button editbox
         downEditBox = tgui::EditBox::create();
-        downEditBox->setText(tempSettings::playerControlDown); 
+        downEditBox->setText(Settings::playerControlDown); 
 	layout3->add(downEditBox);
 
     }

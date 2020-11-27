@@ -43,7 +43,7 @@ IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId:
     leftPaddle->setPosition(sf::Vector2f(100, 300));
     rightPaddle->setPosition(sf::Vector2f(700, 300));
 
-    header.setString(tempSettings::window.title);
+    header.setString(Settings::window.title);
     header.setCharacterSize(54);
     header.setColor(sf::Color::White);
     header.setPosition(sf::Vector2f(335, 25));

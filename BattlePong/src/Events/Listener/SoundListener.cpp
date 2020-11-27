@@ -36,7 +36,7 @@ void SoundListener::OnEvent(GU::Evt::EventPtr event)
         case EventId::SOUND_VOLUME_CHANGED:
         {
 
-            listenerSound.setVolume(tempSettings::music.sVolume);
+            listenerSound.setVolume(Settings::music.sVolume);
         }
         break;
     }

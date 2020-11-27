@@ -35,8 +35,8 @@ std::unique_ptr<Ball> StateBase::ball;
 sf::Sound StateBase::sound;
 sf::Music StateBase::music;
 
-std::shared_ptr<PaddleHud> StateBase::paddle1Hud(new PaddleHud(tempSettings::paddle1));
-std::shared_ptr<PaddleHud> StateBase::paddle2Hud(new PaddleHud(tempSettings::paddle2));
+std::shared_ptr<PaddleHud> StateBase::paddle1Hud(new PaddleHud(Settings::paddle1));
+std::shared_ptr<PaddleHud> StateBase::paddle2Hud(new PaddleHud(Settings::paddle2));
 
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
@@ -47,10 +47,10 @@ GU::Engin::GameState(),
 engin(newEngin),
 sysPause(false)
 {
-    float &width = tempSettings::window.dimensions.x;
-    float &height = tempSettings::window.dimensions.y;
+    float &width = Settings::window.dimensions.x;
+    float &height = Settings::window.dimensions.y;
 
-    StateBase::window.create(sf::VideoMode(width, height),tempSettings::window.title); 
+    StateBase::window.create(sf::VideoMode(width, height),Settings::window.title); 
     std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(-width, -25), sf::Vector2f(width, -25), sf::Vector2f(width, 25), sf::Vector2f(-width, 25)};
     std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(-25, -height), sf::Vector2f(25, -height), sf::Vector2f(25, height), sf::Vector2f(-25, height)};
     std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(-10, -50), sf::Vector2f(10, -50), sf::Vector2f(10, 50),sf::Vector2f(-10, 50)};
@@ -301,8 +301,8 @@ void StateBase::Init()
 {
     systemPause(false);
     Pause(false);
-    music.setVolume(tempSettings::music.mVolume);
-    sound.setVolume(tempSettings::music.sVolume);
+    music.setVolume(Settings::music.mVolume);
+    sound.setVolume(Settings::music.sVolume);
 }
 
 
@@ -323,16 +323,16 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
     {
         case EventId::LEFT_GOAL_COLLISION:
         {
-            int currentScore = tempSettings::paddle1.score;
-	    tempSettings::paddle1.score = currentScore + 1;
+            int currentScore = Settings::paddle1.score;
+	    Settings::paddle1.score = currentScore + 1;
             paddle1Hud->setScore(currentScore + 1);
             reset();
         }
         break;
         case EventId::RIGHT_GOAL_COLLISION:
         {
-            int currentScore = tempSettings::paddle2.score;
-	    tempSettings::paddle2.score = currentScore + 1;
+            int currentScore = Settings::paddle2.score;
+	    Settings::paddle2.score = currentScore + 1;
             paddle2Hud->setScore(currentScore + 1);
             reset();
         }
