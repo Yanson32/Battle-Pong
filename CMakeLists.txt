@@ -20,6 +20,15 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
 #Build shared library by default
 option(BUILD_SHARED_LIBS "True for shared libraries" TRUE)
 
+#Set default compiler flags
+if(NOT DEFINED ${PROJECT_NAME}_IS_FIRST_RUN)
+	set(${PROJECT_NAME}_IS_FIRST_RUN False CACHE INTERNAL "Used to determine if current run is first run")
+
+	if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
+		set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wextra -Wall -pedantic" CACHE STRING "Compiler variables for debug mode" FORCE)
+	endif()
+endif()
+
 add_subdirectory("extlibs")
 add_subdirectory("BattlePong")
 
