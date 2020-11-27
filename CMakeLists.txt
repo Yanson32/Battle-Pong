@@ -20,6 +20,20 @@ list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
 #Build shared library by default
 option(BUILD_SHARED_LIBS "True for shared libraries" TRUE)
 
+set(${PROJECT_NAME}_VALID_BUILD_TYPES "Release" "Debug" "MinSizeRel" "RelWithDebInfo")
+
+#set default build type
+if(NOT CMAKE_CONFIGUREATION_TYPES)
+	if(CMAKE_BUILD_TYPE STREQUAL "")
+		set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Select build type [${${PROJECT_NAME}_VALID_BUILD_TYPES}]" FORCE)
+	endif()
+endif()
+
+#set dropdown list in cmake gui
+if(NOT CMAKE_CONFIGUREATION_TYPES)
+	set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${${PROJECT_NAME}_VALID_BUILD_TYPES})
+endif()
+
 #Set default compiler flags
 if(NOT DEFINED ${PROJECT_NAME}_IS_FIRST_RUN)
 	set(${PROJECT_NAME}_IS_FIRST_RUN False CACHE INTERNAL "Used to determine if current run is first run")
