@@ -1,0 +1,7 @@
+#ifndef CMAKE_CONFIG_FILE_H
+#define CMAKE_CONFIG_FILE_H
+
+#include <string>
+
+const std::string exePath = "@CMAKE_INSTALL_PREFIX@";
+#endif	

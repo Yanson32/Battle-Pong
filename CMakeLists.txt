@@ -1,6 +1,10 @@
 #for backwards compatibility
 cmake_minimum_required(VERSION 3.5.1)
 
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "lib")
+set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "lib")
+
 #make sure we are using a single configuration generator
 if(CMAKE_BUILD_TYPE)
     #set CMAKE_BUILD_TYPE as a dropdown list in cmake gui
@@ -46,14 +50,29 @@ endif()
 add_subdirectory("extlibs")
 add_subdirectory("BattlePong")
 
+# uninstall target
+if(NOT TARGET uninstall)
+  configure_file(
+    "${CMAKE_CURRENT_SOURCE_DIR}/cmake/cmake_uninstall.cmake.in"
+    "${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake"
+    IMMEDIATE @ONLY)
+
+  add_custom_target(uninstall
+    COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
+endif()
+
 string(TOUPPER "${CMAKE_BUILD_TYPE}" BP_BUILD_TYPE_UPPER)
 if("${BP_BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
 	add_definitions("-DDEBUG")
 endif()
 
+configure_file("${${PROJECT_NAME}_SOURCE_DIR}/cmake/config.h.in" "${${PROJECT_NAME}_BINARY_DIR}/${PROJECT_NAME}/config.h")
+
 #Make the BUILD_TESTING variable show up in the cmake gui
 option(BUILD_TESTING "Set to TRUE if you want to build unit tests" FALSE)
 
 if(NOT CMAKE_CONFIGURATION_TYPES)
-	file(COPY "Resources" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}")
+	file(COPY "Resources/" DESTINATION "${CMAKE_BINARY_DIR}/${PROJECT_NAME}/Resources/")
 endif()
+
+install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Resources/" DESTINATION "Resources")

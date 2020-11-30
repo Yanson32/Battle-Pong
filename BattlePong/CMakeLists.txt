@@ -1,6 +1,8 @@
 #Create our target
 add_executable("${PROJECT_NAME}" "Main.cpp")
 
+install(TARGETS "${PROJECT_NAME}" DESTINATION bin)
+
 set_property(TARGET "${PROJECT_NAME}" PROPERTY CXX_STANDARD 14)
 
 add_subdirectory("include")

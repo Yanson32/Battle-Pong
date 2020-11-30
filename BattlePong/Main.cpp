@@ -21,6 +21,8 @@
 
 #define BOOST_LOG_DYN_LINK
 
+#include "config.h"
+
 int main(int argc, char* argv[])
 {
 
@@ -45,11 +47,24 @@ int main(int argc, char* argv[])
     }
 
     boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
-	
-	//Load tgui theme
-	tgui::Theme *theme = new tgui::Theme("Resources/TGUI/Theme/Black.txt");
-	tgui::Theme::setDefault(theme);
+    
+    //Load tgui theme
+    tgui::Theme *theme;
 
+    try
+    {
+
+        theme = new tgui::Theme("../TGUI/Theme/Black.txt");
+	tgui::Theme::setDefault(theme);
+    }
+    catch(...)
+    {
+        std::string base = exePath;
+        base += "/Resources/TGUI/Theme/Black.txt";	
+        theme = new tgui::Theme(base);
+        tgui::Theme::setDefault(theme);
+    }
+    
     sf::Clock timer;
     const sf::Time deltaTime = sf::seconds(1.0f / 60.0f);
     sf::Time accumulator = sf::seconds(0);
