@@ -14,7 +14,7 @@ CustomPanel::CustomPanel()
     sf::String globalIp = address.toString();
 
     //EditBox to enter ip address
-    globalIpAdress = tgui::Label::create(globalIp);
+    globalIpAdress = tgui::Label::create(globalIp.toAnsiString());
     layout1->add(globalIpAdress);
 
     //Local Ip address label
@@ -25,7 +25,7 @@ CustomPanel::CustomPanel()
     sf::String localIp = address2.toString();
 
     //EditBox to enter ip address
-    localIpBox = tgui::Label::create(localIp);
+    localIpBox = tgui::Label::create(localIp.toAnsiString());
     layout2->add(localIpBox);
 
     //Port number lable
@@ -38,7 +38,7 @@ CustomPanel::CustomPanel()
 
     //Create back button
     backBtn = tgui::Button::create("Back");
-    backBtn->connect("pressed", [](){
+    backBtn->onPress([](){
 //            Event::Object event(Event::Object::Type::BUTTON_PRESSED);
 //            event.buttonPressed.id = Event::ButtonPressed::BACK_BUTTON;
 //            Event::Manager::inst().push(event);

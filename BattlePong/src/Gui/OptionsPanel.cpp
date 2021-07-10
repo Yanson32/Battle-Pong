@@ -17,9 +17,9 @@ namespace Gui
     #ifdef DEBUG
         tabs->add("Dev");
     #endif
-    tabs->select(tab);
+    tabs->select(tab.toAnsiString());
     tabs->setTabVisible(0, true);
-    tabs->connect("TabSelected", [&](){
+    /*tabs->connect("TabSelected", [&](){
         sf::String text = tabs->getSelected();
         Button::id id;
         if(text == "General")
@@ -34,11 +34,11 @@ namespace Gui
         EventManager::inst().Post<Click>(id);
     });
 
-
+*/
 
 
     backBtn = tgui::Button::create("Back");
-    backBtn->connect("pressed", [](){
+    backBtn->onPress([](){
 //            Event::Object event(Event::Object::Type::BUTTON_PRESSED);
 //            event.buttonPressed.id = Event::ButtonPressed::BACK_BUTTON;
 //            Event::Manager::inst().push(event);

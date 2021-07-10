@@ -1,6 +1,9 @@
 #for backwards compatibility
 cmake_minimum_required(VERSION 3.5.1)
 
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
+include ("defaults")
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "lib")
@@ -19,8 +22,6 @@ project("BattlePong" VERSION "1.0.0.0")
 
 string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
-
 #Build shared library by default
 option(BUILD_SHARED_LIBS "True for shared libraries" TRUE)
 
@@ -36,15 +37,6 @@ endif()
 #set dropdown list in cmake gui
 if(NOT CMAKE_CONFIGUREATION_TYPES)
 	set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${${PROJECT_NAME}_VALID_BUILD_TYPES})
-endif()
-
-#Set default compiler flags
-if(NOT DEFINED ${PROJECT_NAME}_IS_FIRST_RUN)
-	set(${PROJECT_NAME}_IS_FIRST_RUN False CACHE INTERNAL "Used to determine if current run is first run")
-
-	if(CMAKE_CXX_COMPILER_ID STREQUAL "GNU")
-		set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} -Wextra -Wall -pedantic" CACHE STRING "Compiler variables for debug mode" FORCE)
-	endif()
 endif()
 
 add_subdirectory("extlibs")

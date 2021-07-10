@@ -15,7 +15,7 @@ namespace Gui
         comboBox->addItem("45");
         comboBox->addItem("60");
         comboBox->setSelectedItem("30");
-        comboBox->connect("ItemSelected", [&](){
+        comboBox->onItemSelect([&](){
 //            sf::String text = comboBox->getSelectedItem();
 //            Event::Object event(Event::Object::Type::TIME_CHANGED);
 //
@@ -38,7 +38,7 @@ namespace Gui
         aiCombo->addItem("Medium");
         aiCombo->addItem("Hard");
         aiCombo->setSelectedItem("Medium");
-        aiCombo->connect("ItemSelected", [&](){
+        aiCombo->onItemSelect([&](){
 //            sf::String text = comboBox->getSelectedItem();
 //            Event::Object event(Event::Object::Type::AI_CHANGED);
 //            Event::Manager::inst().push(event);

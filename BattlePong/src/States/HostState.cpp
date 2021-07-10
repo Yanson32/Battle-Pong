@@ -53,9 +53,9 @@ HostState::HostState(GU::Engin::Engin& engin): StateBase(engin, stateId::HOST_ST
 {
     //ctor
     backButton = tgui::Button::create("Back");
-    backButton->connect("pressed", &HostState::onBackPressed, this);
-    backButton->setPosition(Settings::button.bPosition);
-    backButton->setSize(Settings::button.bSize);
+    backButton->onPress(&HostState::onBackPressed, this);
+    backButton->setPosition({Settings::button.bPosition.x, Settings::button.bPosition.y});
+    backButton->setSize({Settings::button.bSize.x, Settings::button.bSize.y});
 
     //Global Ip address label
     globalIpLabel = tgui::Label::create("Global Ip");
@@ -65,7 +65,7 @@ HostState::HostState(GU::Engin::Engin& engin): StateBase(engin, stateId::HOST_ST
     sf::String globalIp = address.toString();
 
     //EditBox to enter ip address
-    globalIpBox = tgui::Label::create(globalIp);
+    globalIpBox = tgui::Label::create(globalIp.toAnsiString());
     globalIpBox->setPosition({350, 200});
 
     //Global Ip address label
@@ -76,7 +76,7 @@ HostState::HostState(GU::Engin::Engin& engin): StateBase(engin, stateId::HOST_ST
     sf::String localIp = address2.toString();
 
     //EditBox to enter ip address
-    localIpBox = tgui::Label::create(localIp);
+    localIpBox = tgui::Label::create(localIp.toAnsiString());
     localIpBox->setPosition({350, 250});
 
     //Port number lable
@@ -90,14 +90,14 @@ HostState::HostState(GU::Engin::Engin& engin): StateBase(engin, stateId::HOST_ST
 
 
     hostButton = tgui::Button::create("Host");
-    hostButton->connect("pressed", &HostState::onHostPressed, this);
+    hostButton->onPress(&HostState::onHostPressed, this);
     hostButton->setPosition({200, 350});
 
     //portBox->setInputValidator("[0-9]+");
 
     sf::String port("5000");
-    portBox->setDefaultText(port);
-    portBox->setText(port);
+    portBox->setDefaultText(port.toAnsiString());
+    portBox->setText(port.toAnsiString());
 
 
     //globalIpBox->setInputValidator("[0-9.]+");

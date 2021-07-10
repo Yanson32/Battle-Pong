@@ -54,15 +54,15 @@ int main(int argc, char* argv[])
     try
     {
 
-        theme = new tgui::Theme("../TGUI/Theme/Black.txt");
-	tgui::Theme::setDefault(theme);
+//        theme = new tgui::Theme("../TGUI/Theme/Black.txt");
+//	tgui::Theme::setDefault(theme);
     }
     catch(...)
     {
-        std::string base = exePath;
-        base += "/Resources/TGUI/Theme/Black.txt";	
-        theme = new tgui::Theme(base);
-        tgui::Theme::setDefault(theme);
+        //std::string base = exePath;
+        //base += "/Resources/TGUI/Theme/Black.txt";	
+        //theme = new tgui::Theme(base);
+        //tgui::Theme::setDefault(theme);
     }
     
     sf::Clock timer;

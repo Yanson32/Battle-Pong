@@ -29,14 +29,14 @@ void PaddleHud::setScore(const int newScore)
     sf::String temp(ss.str());
 
     if(scoreLabel)
-        scoreLabel->setText(temp);
+        scoreLabel->setText(temp.toAnsiString());
 
     paddleSettings.score = newScore;
 }
 
 void PaddleHud::setName(const sf::String &name)
 {
-    panleLable->setText(name);
+    panleLable->setText(name.toAnsiString());
 }
 
 PaddleHud::~PaddleHud()

@@ -12,7 +12,7 @@ IntroGui::IntroGui()
     //Create start button
     start = tgui::Button::create();
     start->setText("Start");
-    start->connect("pressed", [](){
+    start->onPress([](){
         EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<Click>(Button::id::START);
     });
@@ -23,7 +23,7 @@ IntroGui::IntroGui()
     //Create MultiPlayer button
     multiPlayer = tgui::Button::create();
     multiPlayer->setText("Multiplayer");
-    multiPlayer->connect("pressed", [](){
+    multiPlayer->onPress([](){
         EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<Click>(Button::id::MULTIPLAYER);
     });
@@ -34,7 +34,7 @@ IntroGui::IntroGui()
     //Create Options button
     options = tgui::Button::create();
     options->setText("Options");
-    options->connect("pressed", [](){
+    options->onPress([](){
         EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<Click>(Button::id::GENERAL_TAB);
     });
