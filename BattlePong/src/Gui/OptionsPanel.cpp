@@ -19,8 +19,8 @@ namespace Gui
     #endif
     tabs->select(tab.toAnsiString());
     tabs->setTabVisible(0, true);
-    /*tabs->connect("TabSelected", [&](){
-        sf::String text = tabs->getSelected();
+    tabs->onTabSelect([&](){
+        sf::String text = tabs->getSelected().toAnsiString();
         Button::id id;
         if(text == "General")
             id = Button::id::GENERAL_TAB;
@@ -34,7 +34,7 @@ namespace Gui
         EventManager::inst().Post<Click>(id);
     });
 
-*/
+
 
 
     backBtn = tgui::Button::create("Back");
