@@ -115,18 +115,17 @@ bool ContactListener::IsGoal(b2Fixture* fixture)
 
 bool ContactListener::IsLeftGoal(b2Fixture* fixture)
 {
-
+    return false;
 }
 
 
 bool ContactListener::IsRightGoal(b2Fixture* fixture)
 {
-
+    return false;
 }
 
 bool ContactListener::IsPaddle(b2Fixture* fixture)
 {
-
 
     if(getObjectId(fixture) == ObjectId::LEFT_PADDLE || getObjectId(fixture) == ObjectId::RIGHT_PADDLE)
     {

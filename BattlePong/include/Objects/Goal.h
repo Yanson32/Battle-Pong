@@ -2,6 +2,9 @@
 #define GOAL_H
 #include "Objects/ObjectBase.h"
 #include "Events/Id.h"
+#include <SFML/System/Vector2.hpp>
+#include <array>
+
 class Goal: public ObjectBase<sf::ConvexShape>
 {
     public:

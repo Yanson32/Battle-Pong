@@ -2,11 +2,13 @@
 #define PADDLE_H
 
 #include "ObjectBase.h"
+#include "Input/Input.h"
+#include "Events/Id.h"
 #include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Vector2.hpp>
-#include "Input/Input.h"
 #include <memory>
-#include "Events/Id.h"
+#include <array>
+
 class Ball;
 class b2Body;
 class Paddle: public ObjectBase<sf::ConvexShape>
