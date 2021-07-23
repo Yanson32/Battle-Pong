@@ -1,4 +1,5 @@
 #include "Gui/GuiManager.h"
+#include "Macros.h"
 
 GuiManager::GuiManager(tgui::Gui &newGui):
 gui(newGui)
@@ -15,6 +16,8 @@ void GuiManager::push(std::shared_ptr<Gui::CustomPanel> newGui)
 
 void GuiManager::pop(std::shared_ptr<Gui::CustomPanel> newGui)
 {
+    UNUSED(newGui);
+
     if(!guiStack.empty())
     {
         guiStack.pop();

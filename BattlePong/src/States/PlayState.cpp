@@ -15,6 +15,7 @@
 #include "ResourceManager.h"
 #include "Events/Events.h"
 #include "Sounds/Id.h"
+#include "Macros.h"
 
 PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase(newEngin, newId)
 {
@@ -41,6 +42,8 @@ PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase
 
 void PlayState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
+    UNUSED(deltaTime);
+    
     if(window.isOpen())
     {
         sf::Event event;
@@ -182,7 +185,8 @@ void PlayState::Clean()
 
 void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
-
+    UNUSED(engin);
+    UNUSED(event);
 }
 
 void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)

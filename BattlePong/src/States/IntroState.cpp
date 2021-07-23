@@ -23,6 +23,7 @@
 
 #include "ResourceManager.h"
 #include "Logging.h"
+#include "Macros.h"
 #include "Sounds/Id.h"
 #include "Gui/IntroGui.h"
 #include "Events/Click.h"
@@ -56,6 +57,7 @@ IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId:
 
 void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
+    UNUSED(deltaTime);
     if(window.isOpen())
     {
         sf::Event event;

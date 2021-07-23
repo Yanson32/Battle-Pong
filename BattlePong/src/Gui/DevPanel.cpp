@@ -1,6 +1,8 @@
 #include "Gui/DevPanel.h"
 //#include "Event/Manager.h"
 //#include "DebugDraw.h"
+#include "Macros.h"
+
 namespace Gui
 {
 	DevPanel::DevPanel():
@@ -11,7 +13,7 @@ namespace Gui
         //layout2->setSize("70%", "10%");
         //layout3->setSize("70%", "10%");
         //layout4->setSize("70%", "10%");
-		const float WIDTH = 0;
+		//const float WIDTH = 0;
 		//Create AABB checkbox
 		aabb = tgui::CheckBox::create("Show AABB");
 		//aabb->setPosition(sf::Vector2f(WIDTH, 100));
@@ -131,6 +133,9 @@ namespace Gui
 
     void DevPanel::init(const sf::String selected, const int32 flags)
     {
+
+        UNUSED(selected);
+        UNUSED(flags);        
 //        centerOfMass->setChecked(flags & b2Draw::e_centerOfMassBit);
 //        pair->setChecked(flags & b2Draw::e_centerOfMassBit);
 //        joints->setChecked(flags & b2Draw::e_jointBit);

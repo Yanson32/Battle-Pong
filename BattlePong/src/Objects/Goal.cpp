@@ -37,7 +37,7 @@ Goal::Goal(std::shared_ptr<b2World> world, ObjectId newId, const std::array<sf::
     bodyFixture.density = 100;
     bodyFixture.isSensor = true;
 
-    b2Fixture *fix = body->CreateFixture(&bodyFixture);
+    body->CreateFixture(&bodyFixture);
 
     shape.setFillColor(sf::Color::Red);
     shape.setPointCount(SIZE);

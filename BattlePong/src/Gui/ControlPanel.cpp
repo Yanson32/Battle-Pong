@@ -1,11 +1,13 @@
 #include "Gui/ControlPanel.h"
 #include "Settings.h"
+#include "Macros.h"
 
 namespace Gui
 {
     ControlPanel::ControlPanel(DebugDraw *debugDraw):
     OptionsPanel::OptionsPanel("Controls")
     {
+        UNUSED(debugDraw);
 
         //Create up button lable
         upLabel = tgui::Label::create("Up");

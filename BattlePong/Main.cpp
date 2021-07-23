@@ -49,7 +49,7 @@ int main(int argc, char* argv[])
     boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
     
     //Load tgui theme
-    tgui::Theme *theme;
+    //tgui::Theme *theme;
 
     try
     {

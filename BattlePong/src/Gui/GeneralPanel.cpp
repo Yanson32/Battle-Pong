@@ -1,11 +1,14 @@
 #include "Gui/GeneralPanel.h"
 //#include "Event/Object.h"
 //#include "Event/Manager.h"
+#include "Macros.h"
+
 namespace Gui
 {
     GeneralPanel::GeneralPanel(DebugDraw *debugDraw):
     OptionsPanel::OptionsPanel(sf::String("General"))
     {
+        UNUSED(debugDraw); 
         comboLable = tgui::Label::create("Time Limit");
         comboLable->setPosition({0, 100});
 

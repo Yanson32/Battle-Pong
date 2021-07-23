@@ -2,12 +2,11 @@
 #include <SFML/System/Vector2.hpp>
 #include "Box2D/Box2DFunctions.h"
 #include "Events/Id.h"
+#include "Macros.h"
 
 Wall::Wall(std::shared_ptr<b2World> world, const std::array<sf::Vector2f, 4> vert): ObjectBase<sf::ConvexShape>::ObjectBase(world)
 {
     //ctor
-    const int WIDTH = 800;
-    const int HEIGHT = 100;
     const int SIZE = 4;
 
     b2Vec2 vertices[SIZE];
@@ -39,7 +38,7 @@ Wall::Wall(std::shared_ptr<b2World> world, const std::array<sf::Vector2f, 4> ver
     bodyFixture.restitution = 1;
     bodyFixture.density = 100;
 
-    b2Fixture *fix = body->CreateFixture(&bodyFixture);
+    body->CreateFixture(&bodyFixture);
 
 
     shape.setFillColor(sf::Color::Cyan);
@@ -95,7 +94,7 @@ void Wall::setPosition(const sf::Vector2f &position)
 
 void Wall::setSize(const sf::Vector2f &size)
 {
-
+    UNUSED(size);
 }
 
 Wall::~Wall()

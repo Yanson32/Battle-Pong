@@ -41,7 +41,7 @@ ObjectBase<sf::ConvexShape>::ObjectBase(world)
     bodyFixture.restitution = 0;
     bodyFixture.density = 100;
 
-    b2Fixture *fix = body->CreateFixture(&bodyFixture);
+    body->CreateFixture(&bodyFixture);
 
     //Create the joint
     b2PrismaticJointDef jointDef;

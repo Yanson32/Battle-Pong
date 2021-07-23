@@ -1,5 +1,7 @@
 #include "States/HostPlayState.h"
 #include "Settings.h"
+#include "Macros.h"
+
 HostPlayState::HostPlayState(GU::Engin::Engin& newEngin):
 PlayState::PlayState(newEngin, stateId::HOST_PLAY_STATE)
 {
@@ -54,12 +56,14 @@ void HostPlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 
 void HostPlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
-
+    UNUSED(engin);
+    UNUSED(event);
 }
 
 void HostPlayState::guEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
-
+    UNUSED(engin);
+    UNUSED(event);
 }
 
 HostPlayState::~HostPlayState()

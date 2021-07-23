@@ -1,4 +1,5 @@
 #include "Events/Listeners/LeftPaddleGoalListener.h"
+#include "Macros.h"
 
 LeftPaddleGoalListener::LeftPaddleGoalListener()
 {
@@ -7,6 +8,7 @@ LeftPaddleGoalListener::LeftPaddleGoalListener()
 
 void LeftPaddleGoalListener::OnEvent(GU::Evt::EventPtr event)
 {
+    UNUSED(event);
     //std::cout << "LeftPaddleGoalListener event" << std::endl;
 }
 

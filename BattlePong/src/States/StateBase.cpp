@@ -11,6 +11,7 @@
 #include "States/States.h"
 #include "Events/Events.h"
 #include "Sounds/Id.h"
+#include "Macros.h"
 
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -112,6 +113,9 @@ bool StateBase::isBallOnScreen()
 
 void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
+    UNUSED(engin);
+    UNUSED(deltaTime);
+
     if(!IsPaused())
     {
 
@@ -129,6 +133,8 @@ void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime)
 
 void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
+    UNUSED(engin);
+    UNUSED(deltaTime);
     window.clear();
     window.draw(*leftPaddle);
     window.draw(*rightPaddle);

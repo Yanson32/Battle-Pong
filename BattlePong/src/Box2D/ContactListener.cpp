@@ -7,6 +7,7 @@
 #include "Events/RightPaddleGoal.h"
 #include "Events/PaddleCollision.h"
 #include <iostream>
+#include "Macros.h"
 
 ContactListener::ContactListener()
 {
@@ -115,12 +116,14 @@ bool ContactListener::IsGoal(b2Fixture* fixture)
 
 bool ContactListener::IsLeftGoal(b2Fixture* fixture)
 {
+    UNUSED(fixture);
     return false;
 }
 
 
 bool ContactListener::IsRightGoal(b2Fixture* fixture)
 {
+    UNUSED(fixture);
     return false;
 }
 

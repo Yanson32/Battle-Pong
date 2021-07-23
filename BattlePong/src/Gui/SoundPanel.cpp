@@ -1,11 +1,14 @@
 #include "Gui/SoundPanel.h"
 //#include "Event/Object.h"
 //#include "Event/Manager.h"
+#include "Macros.h"
+
 namespace Gui
 {
     SoundPanel::SoundPanel(DebugDraw *debugDraw):
     OptionsPanel::OptionsPanel(sf::String("Sound"))
     {
+        UNUSED(debugDraw); 
         effectsLable = tgui::Label::create("Sound Effects");
         effectsLable->setPosition({sf::Vector2f(0, 100)});
         layout2->add(effectsLable);

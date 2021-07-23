@@ -22,6 +22,8 @@
 //User defined includes
 #include "Box2D/Box2DFunctions.h"
 
+#include "Macros.h"
+
 template <class SFShape>
 class ObjectBase: public sf::Drawable
 {
@@ -76,6 +78,7 @@ ObjectBase<SFShape>::ObjectBase(std::shared_ptr<b2World> newWorld): world(newWor
 template <class SFShape>
 void ObjectBase<SFShape>::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
+    UNUSED(states);
     target.draw(shape);
 }
 

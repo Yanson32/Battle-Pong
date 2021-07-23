@@ -10,6 +10,7 @@
 #include "Server.h"
 #include "States/HostPlayState.h"
 #include "Sounds/Id.h"
+#include "Macros.h"
 
 //std::shared_ptr<HostPanel> HostState::panel(new HostPanel());
 //
@@ -105,6 +106,8 @@ HostState::HostState(GU::Engin::Engin& engin): StateBase(engin, stateId::HOST_ST
 
 void HostState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
+    UNUSED(deltaTime);
+
     if(window.isOpen())
     {
         sf::Event event;
@@ -193,7 +196,8 @@ void HostState::onHostPressed()
 
 void HostState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
-
+    UNUSED(engin);
+    UNUSED(event);
 }
 
 void HostState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)

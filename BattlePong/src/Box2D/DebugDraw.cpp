@@ -19,6 +19,9 @@
 #include <iostream>
 #include <cstddef> //std::size_t
 #include <vector>
+
+#include "Macros.h"
+
 namespace
 {
     const float PIE = 3.141592654f;
@@ -174,7 +177,8 @@ namespace
     ********************************************************************************************************************/
     void DebugDraw::DrawSolidCircle(const b2Vec2& center, float32 radius, const b2Vec2& axis, const b2Color& color)
     {
-
+        
+        UNUSED(axis);
         const unsigned POINT_COUNT = (unsigned) ((toPixels(radius) * TAU) * m_circleScaling);
         const sf::Color COLOR = toSfColor(color);
 
@@ -321,6 +325,7 @@ namespace
     *******************************************************************************************************************/
     void DebugDraw::draw(sf::RenderTarget& target, sf::RenderStates states) const
     {
+        UNUSED(states);
         target.draw(triangles);
         target.draw(lines);
     }
@@ -381,6 +386,7 @@ namespace
     ****************************************************************************************/
     sf::Color toSfColor(const b2Color &color, int alpha)
     {
+        UNUSED(alpha); 
         return sf::Color (sf::Uint8(color.r * 255), sf::Uint8(color.g * 255), sf::Uint8(color.b * 255));
     }
 

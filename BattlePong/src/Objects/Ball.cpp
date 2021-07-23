@@ -31,7 +31,7 @@ Ball::Ball(std::shared_ptr<b2World> world, const unsigned radius): ObjectBase(wo
     bodyFixture.restitution = 1.0f;
     bodyFixture.density = 1.0f;
 
-    b2Fixture *fix = body->CreateFixture(&bodyFixture);
+    body->CreateFixture(&bodyFixture);
 
 
 
