@@ -386,10 +386,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 //                        engin.Push<DemoState>(engin);
 //                    break;
                     case stateId::HOST_PLAY_STATE:
-                        engin.Push<HostPlayState>(engin);
-                    break;
-                    case stateId::HOST_STATE:
-                        engin.Push<HostState>(engin);
+                        //engin.Push<HostPlayState>(engin);
                     break;
                     case stateId::INTRO_STATE:
                         engin.Push<IntroState>(engin);
@@ -416,7 +413,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->stateId)
                 {
                     case stateId::HOST_PLAY_STATE:
-                        engin.ChangeState<HostPlayState>(engin);
+                        //engin.ChangeState<HostPlayState>(engin);
                     break;
                     case stateId::CONNECT_STATE:
                         engin.ChangeState<ClientPlayState>(engin);

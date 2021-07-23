@@ -11,6 +11,7 @@ set(FILES 	#"${CMAKE_CURRENT_SOURCE_DIR}/ScorePanel.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SoundPanel.cpp"
 			#"${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.cpp"
 			#"${CMAKE_CURRENT_SOURCE_DIR}/TimerPanel.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/HostPanel.cpp"
 )
 
 set(RELATIVE_PATH "src")

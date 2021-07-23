@@ -34,6 +34,8 @@
 #include "Gui/SoundPanel.h"
 #include "Gui/GeneralPanel.h"
 #include "Gui/MultiplayerPanel.h"
+#include "Gui/HostPanel.h"
+
 #include <memory>
 IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::INTRO_STATE)
 {
@@ -207,6 +209,16 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         //p->init();
                         gui.add(cust);
                     }
+                    break;
+                    case Button::id::HOST:
+                     {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new HostPanel());
+                        std::shared_ptr<HostPanel> p = std::dynamic_pointer_cast<HostPanel>(cust);
+                        //p->init();
+                        gui.add(cust);
+                     }
                     break;
                 }
             }

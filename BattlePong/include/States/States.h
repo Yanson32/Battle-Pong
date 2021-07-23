@@ -4,7 +4,6 @@
 #include "States/ClientPlayState.h"
 #include "States/DemoState.h"
 #include "States/HostPlayState.h"
-#include "States/HostState.h"
 #include "States/Id.h"
 #include "States/IntroState.h"
 #include "States/PlayState.h"

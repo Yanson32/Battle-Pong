@@ -3,8 +3,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PlayState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SingleplayerState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/DemoState.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/HostState.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/HostPlayState.cpp"
+            #"${CMAKE_CURRENT_SOURCE_DIR}/HostPlayState.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ClientPlayState.cpp"
 )
 set(SUB_DIRECTORIES "")

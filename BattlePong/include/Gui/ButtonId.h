@@ -12,7 +12,8 @@ namespace Button
         CONTROLS_TAB,
         SOUND_TAB,
         DEV_TAB,
-        INTRO_PANEL
+        INTRO_PANEL,
+        HOST
     };
 }
 #endif // BUTTONID_H_INCLUDED

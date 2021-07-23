@@ -57,6 +57,9 @@ CustomPanel::CustomPanel()
 
     //Create host button
     hostButton = tgui::Button::create("Host");
+    hostButton->onPress([](){
+        EventManager::inst().Post<Click>(Button::id::HOST);
+    });
     buttonLayout->add(hostButton);
 
     //Create connect button
