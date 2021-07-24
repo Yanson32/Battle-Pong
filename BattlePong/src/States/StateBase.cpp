@@ -43,9 +43,9 @@ ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
 
 StateBase::StateBase(GU::Engin::Engin& newEngin, const stateId newState):
-state(newState),
 GU::Engin::GameState(),
 engin(newEngin),
+state(newState),
 sysPause(false)
 {
     float &wWidth = Settings::window.dimensions.x;

@@ -110,6 +110,8 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
     protected:
         void centerText();
         bool isBallOnScreen();
+        GU::Engin::Engin &engin;                        ///The Main game engin
+        stateId state;
         static sf::RenderWindow window;                 ///The game's window
         static tgui::Gui gui;                           ///The Main TGUI object
         static std::shared_ptr<b2World> world;          ///The Box2D physics engin world object
@@ -134,10 +136,8 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         float32 timeStep = 1 / 20.0;                    ///Box2D the length of time passed to simulate (seconds)
         int32 velocityIterations = 8;                   ///Box2D how strongly to correct velocity
         int32 positionIterations = 8;                   ///Box2D how strongly to correct position
-        GU::Engin::Engin &engin;                        ///The Main game engin
         bool sysPause;                                  ///True when the system is paused and false otherwise
         boost::log::sources::severity_logger< logging::trivial::severity_level > log;
-        stateId state;
 
 };
 
