@@ -48,7 +48,7 @@ IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId:
 
     header.setString(Settings::window.title);
     header.setCharacterSize(54);
-    header.setColor(sf::Color::White);
+    header.setFillColor(sf::Color::White);
     header.setPosition(sf::Vector2f(335, 25));
     header.setStyle(sf::Text::Bold);
 
