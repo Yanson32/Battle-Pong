@@ -20,7 +20,7 @@ namespace Gui
     tabs->select(tab.toAnsiString());
     tabs->setTabVisible(0, true);
     tabs->onTabSelect([&](){
-        sf::String text = tabs->getSelected().toAnsiString();
+        sf::String text = tabs->getSelected().toStdString();
         Button::id id;
         if(text == "General")
             id = Button::id::GENERAL_TAB;
