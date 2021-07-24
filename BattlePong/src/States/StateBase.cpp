@@ -320,7 +320,10 @@ void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
         case sf::Event::Closed:
             engin.Quit();
             break;
-    }
+        default:
+            std::cerr << "StateBase::sfEvent Default switch triggered" << std::endl;
+            break;
+    }   
 }
 
 void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
