@@ -19,7 +19,9 @@
     #define MAJOR_VERSION 1
 #endif // MAJOR_VERSION
 
-#define BOOST_LOG_DYN_LINK
+#ifndef BOOST_LOG_DYN_LINK
+    #define BOOST_LOG_DYN_LINK
+#endif
 
 #include "config.h"
 
