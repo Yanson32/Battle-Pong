@@ -13,6 +13,7 @@ set(FILES 	#"${CMAKE_CURRENT_SOURCE_DIR}/ScorePanel.h"
 			#"${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.h"
 			#"${CMAKE_CURRENT_SOURCE_DIR}/TimerPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/HostPanel.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/ConnectPanel.h"
 )
 
 set(RELATIVE_PATH "include")

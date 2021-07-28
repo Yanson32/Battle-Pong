@@ -1,14 +1,15 @@
-#ifndef HOST_PANEL_H
-#define HOST_PANEL_H
+#ifndef CONNECT_PANEL_H 
+#define CONNECT_PANEL_H 
 
 #include "Gui/CustomPanel.h"
 #include <TGUI/TGUI.hpp>
-class HostPanel: public Gui::CustomPanel
+class ConnectPanel: public Gui::CustomPanel
 {
     public:
-        HostPanel();
-        ~HostPanel();
+        ConnectPanel();
+        ~ConnectPanel();
     private:
+        void onTextChanged();
         tgui::Button::Ptr backBtn;
         tgui::Label::Ptr globalIpLabel;
         tgui::Label::Ptr globalIpAdress;
@@ -17,5 +18,9 @@ class HostPanel: public Gui::CustomPanel
         tgui::Label::Ptr portLabel;
         tgui::EditBox::Ptr portBox;
         tgui::Button::Ptr hostButton;
+        tgui::Button::Ptr connectButton;
+
+        tgui::Label::Ptr ipLabel;
+        tgui::EditBox::Ptr ipBox;
 };
 #endif

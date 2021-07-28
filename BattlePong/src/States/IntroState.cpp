@@ -35,6 +35,7 @@
 #include "Gui/GeneralPanel.h"
 #include "Gui/MultiplayerPanel.h"
 #include "Gui/HostPanel.h"
+#include "Gui/ConnectPanel.h"
 
 #include <memory>
 IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::INTRO_STATE)
@@ -219,6 +220,16 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         //p->init();
                         gui.add(cust);
                      }
+                    break;
+                    case Button::id::CONNECT:
+                    {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new ConnectPanel());
+                        std::shared_ptr<ConnectPanel> p = std::dynamic_pointer_cast<ConnectPanel>(cust);
+                        gui.add(cust);
+                        
+                    }
                     break;
                 }
             }
