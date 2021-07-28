@@ -1,23 +1,14 @@
-set(FILES 	#"${CMAKE_CURRENT_SOURCE_DIR}/ScorePanel.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/ControlPanel.h"
+set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/ControlPanel.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/GuiManager.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/IntroGui.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/OptionsPanel.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ButtonId.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/DevPanel.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/GeneralPanel.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/MultiplayerPanel.h"
-			#"${CMAKE_CURRENT_SOURCE_DIR}/OptionsPanel.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SoundPanel.h"
-			#"${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/ScorePanel.h"
 			#"${CMAKE_CURRENT_SOURCE_DIR}/TimerPanel.h"
-            "${CMAKE_CURRENT_SOURCE_DIR}/HostPanel.h"
-            "${CMAKE_CURRENT_SOURCE_DIR}/ConnectPanel.h"
 )
 
 set(RELATIVE_PATH "include")
-set(SUB_DIRECTORIES ""
+set(SUB_DIRECTORIES "IntroState"
 )
 
 foreach(VAR ${SUB_DIRECTORIES})

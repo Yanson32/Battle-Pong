@@ -1,4 +1,4 @@
-#include "Gui/MultiplayerPanel.h"
+#include "Gui/IntroState/MultiplayerPanel.h"
 #include "Events/EventManager.h"
 #include "Events/Click.h"
 #include "Gui/ButtonId.h"

@@ -1,4 +1,4 @@
-#include "Gui/HostPanel.h"
+#include "Gui/IntroState/HostPanel.h"
 #include "Gui/ButtonId.h"
 #include "Events/EventManager.h"
 #include "Events/Click.h"

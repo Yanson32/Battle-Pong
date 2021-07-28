@@ -1,4 +1,4 @@
-#include "Gui/ConnectPanel.h"
+#include "Gui/IntroState/ConnectPanel.h"
 #include "Events/EventManager.h"
 #include "Events/Click.h"
 #include "Gui/ButtonId.h"

@@ -1,4 +1,4 @@
-#include "Gui/IntroGui.h"
+#include "Gui/IntroState/IntroGui.h"
 #include <iostream>
 #include "Events/EventManager.h"
 #include "GameUtilities/Event/PlaySound.h"

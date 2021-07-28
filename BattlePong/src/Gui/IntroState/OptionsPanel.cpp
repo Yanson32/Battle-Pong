@@ -1,4 +1,4 @@
-#include "Gui/OptionsPanel.h"
+#include "Gui/IntroState/OptionsPanel.h"
 #include "Events/EventManager.h"
 #include "Events/EventBase.h"
 #include "Events/Click.h"
