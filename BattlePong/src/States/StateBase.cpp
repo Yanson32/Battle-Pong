@@ -51,39 +51,40 @@ sysPause(false)
     float &wWidth = Settings::window.dimensions.x;
     float &wHeight = Settings::window.dimensions.y;
     const float &wallTh = Settings::wallThickness;
+    float paddleHeight = 100;
     StateBase::window.create(sf::VideoMode(wWidth, wHeight),Settings::window.title); 
-    std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(-wWidth, -wallTh), sf::Vector2f(wWidth, -wallTh), sf::Vector2f(wWidth, wallTh), sf::Vector2f(-wWidth, wallTh)};
-    std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(-wallTh, -wHeight), sf::Vector2f(wallTh, -wHeight), sf::Vector2f(wallTh, wHeight), sf::Vector2f(-wallTh, wHeight)};
-    std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(-10, -50), sf::Vector2f(10, -50), sf::Vector2f(10, 50),sf::Vector2f(-10, 50)};
-    std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(-15, -wHeight), sf::Vector2f(15, -wHeight), sf::Vector2f(15, wHeight), sf::Vector2f(-15, wHeight)};
+    std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wWidth, 0), sf::Vector2f(wWidth, wallTh), sf::Vector2f(-wWidth, wallTh)};
+    std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
+    std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, paddleHeight),sf::Vector2f(0, paddleHeight)};
+    std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
 
     ground.reset(new Wall(world, horizontalPoints));
+    ground->setPosition({0, wHeight - wallTh});
+    
     celing.reset(new Wall(world, horizontalPoints));
+    celing->setPosition({0, 0});
+    
     leftWall.reset(new Wall(world, verticalPoints));
+    leftWall->setPosition({0, 0});
+    
     RightWall.reset(new Wall(world, verticalPoints));
+    RightWall->setPosition({wWidth - wallTh, 0});
+    
     leftPaddle.reset(new Paddle(world, ObjectId::LEFT_PADDLE, paddlePoints));
-    rightPaddle.reset(new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints));
-
-    leftGoal.reset(new Goal(world, ObjectId::RIGHT_GOAL, goalPoints));
-    rightGoal.reset(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
-    ball.reset(new Ball(world));
-	
-    rightGoal->setPosition(sf::Vector2f(760, 300));
+    leftPaddle->setInput(std::unique_ptr<AI>(new AI(*leftPaddle)));
     leftPaddle->setColor(sf::Color(255, 100, 0));
+    
+    rightPaddle.reset(new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints));
+    rightPaddle->setInput(std::unique_ptr<AI>(new AI(*rightPaddle)));
     rightPaddle->setColor(sf::Color::Blue);
 
-
-
-    leftPaddle->setInput(std::unique_ptr<AI>(new AI(*leftPaddle)));
-
-
-
-    rightPaddle->setInput(std::unique_ptr<AI>(new AI(*rightPaddle)));
-
-    ground->setPosition({400, 525});
-    celing->setPosition({400, 0});
-    leftWall->setPosition({0, 300});
-    RightWall->setPosition({800, 300});
+    leftGoal.reset(new Goal(world, ObjectId::RIGHT_GOAL, goalPoints));
+    leftGoal->setPosition(sf::Vector2f(wallTh, 0)); 
+    
+    rightGoal.reset(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
+    rightGoal->setPosition(sf::Vector2f(wWidth - (wallTh * 2), 0));
+    
+    ball.reset(new Ball(world));
 
     world->SetDebugDraw(&debugDraw);
 
@@ -164,10 +165,11 @@ bool StateBase::isSystemPaused() const
 
 void StateBase::reset()
 {
-    ball->setPosition({400, 300});
+    float paddleOffset = Settings::wallThickness * 4;
+    ball->setPosition({Settings::window.dimensions.x / 2, Settings::window.dimensions.y / 2});
     ball->setVelocity({100, 100});
-    leftPaddle->setPosition(sf::Vector2f(100, 300));
-    rightPaddle->setPosition(sf::Vector2f(700, 300));
+    leftPaddle->setPosition(sf::Vector2f(paddleOffset - Settings::wallThickness, Settings::window.dimensions.y / 2));
+    rightPaddle->setPosition(sf::Vector2f(Settings::window.dimensions.x - paddleOffset, Settings::window.dimensions.y / 2));
     rightPaddle->handleInput(*ball);
     userMessage.setString("Ready!");
     centerText();
