@@ -31,7 +31,7 @@
 #include "Gui/ButtonId.h"
 #include "Gui/IntroState/ControlPanel.h"
 #include "Gui/IntroState/DevPanel.h"
-#include "Gui/SoundPanel.h"
+#include "Gui/IntroState/SoundPanel.h"
 #include "Gui/IntroState/GeneralPanel.h"
 #include "Gui/IntroState/MultiplayerPanel.h"
 #include "Gui/IntroState/HostPanel.h"
