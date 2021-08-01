@@ -29,7 +29,7 @@
 #include "Gui/IntroState/IntroGui.h"
 #include "Gui/IntroState/OptionsPanel.h"
 #include "Gui/ButtonId.h"
-#include "Gui/ControlPanel.h"
+#include "Gui/IntroState/ControlPanel.h"
 #include "Gui/IntroState/DevPanel.h"
 #include "Gui/SoundPanel.h"
 #include "Gui/IntroState/GeneralPanel.h"
