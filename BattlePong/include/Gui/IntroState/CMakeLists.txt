@@ -7,6 +7,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroGui.h"
 			#"${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/HostPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/ConnectPanel.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/ControlPanel.h"
 )
 
 set(RELATIVE_PATH "include")

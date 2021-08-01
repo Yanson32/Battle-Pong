@@ -1,5 +1,4 @@
-set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/ControlPanel.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.h"
+set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/GuiManager.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/ButtonId.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SoundPanel.h"

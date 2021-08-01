@@ -1,4 +1,4 @@
-#include "Gui/ControlPanel.h"
+#include "Gui/IntroState/ControlPanel.h"
 #include "Settings.h"
 #include "Macros.h"
 

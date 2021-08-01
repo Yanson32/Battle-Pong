@@ -1,5 +1,4 @@
-set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/ControlPanel.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.cpp"
+set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/GuiManager.cpp"
 			#"${CMAKE_CURRENT_SOURCE_DIR}/TimerPanel.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/ScorePanel.cpp"
