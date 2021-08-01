@@ -62,9 +62,11 @@ namespace Gui
         this->add(aiLayout);
 
     }
-    void GeneralPanel::init()
+    void GeneralPanel::init(const int &width, const int &height)
     {
         tabs->select("General");
+        this->setSize(width / 2, height / 2);
+        this->setPosition(width / 4, height / 4);
     }
     GeneralPanel::~GeneralPanel()
     {

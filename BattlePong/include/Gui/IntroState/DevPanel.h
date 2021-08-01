@@ -9,7 +9,7 @@ namespace Gui
     {
         public:
             DevPanel();
-            void init(const sf::String selected, const int32 flags);
+            void init(const sf::String selected, const int32 flags, const int &width, const int &height);
             virtual ~DevPanel();
         protected:
             tgui::CheckBox::Ptr aabb;

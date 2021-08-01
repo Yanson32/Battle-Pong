@@ -31,10 +31,11 @@ namespace Gui
 
     }
 
-    void ControlPanel::init()
+    void ControlPanel::init(const int &width, const int &height)
     {
         tabs->select("Controls");
-
+        this->setSize(width / 2, height / 2);
+        this->setPosition(width / 4, height / 4);
 
     }
     ControlPanel::~ControlPanel()

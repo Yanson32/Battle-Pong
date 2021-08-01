@@ -7,6 +7,7 @@ namespace Gui
     {
         public:
             CustomPanel();
+            void resize(const int &width, const int &height);
             virtual ~CustomPanel();
         protected:
             tgui::Panel::Ptr spacer;

@@ -1,5 +1,7 @@
 #include "Gui/CustomPanel.h"
 #include "Settings.h"
+#include <iostream>
+
 namespace Gui
 {
     CustomPanel::CustomPanel()
@@ -41,6 +43,13 @@ namespace Gui
         buttonLayout->setSize("100%", "20%");
         mainLayout->add(buttonLayout);
     }
+    
+    void CustomPanel::resize(const int &width, const int &height)
+    {
+        this->setSize(width / 2, height / 2);
+        this->setPosition(width / 4, height / 4); 
+    }
+
 
     CustomPanel::~CustomPanel()
     {

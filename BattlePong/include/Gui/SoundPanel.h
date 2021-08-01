@@ -8,7 +8,7 @@ namespace Gui
     {
         public:
             SoundPanel(DebugDraw *debugDraw);
-            void init();
+            void init(const int &width, const int &height);
             virtual ~SoundPanel();
         protected:
             tgui::Slider::Ptr effectsSlider;

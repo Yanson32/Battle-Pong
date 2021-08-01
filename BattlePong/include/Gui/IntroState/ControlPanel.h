@@ -8,7 +8,7 @@ namespace Gui
     {
         public:
             ControlPanel(DebugDraw *debugDraw);
-            void init();
+            void init(const int &width, const int &height);
             virtual ~ControlPanel();
         protected:
         tgui::Label::Ptr upLabel;

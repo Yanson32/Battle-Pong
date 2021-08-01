@@ -41,9 +41,11 @@ namespace Gui
         musicSlider->setMaximum(255);
 
     }
-    void SoundPanel::init()
+    void SoundPanel::init(const int &width, const int &height)
     {
         tabs->select("Sound");
+        this->setSize(width / 2, height / 2);
+        this->setPosition(width / 4, height / 4);
     }
     SoundPanel::~SoundPanel()
     {

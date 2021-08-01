@@ -7,6 +7,7 @@ class ConnectPanel: public Gui::CustomPanel
 {
     public:
         ConnectPanel();
+        void init(const int &width, const int &height);
         ~ConnectPanel();
     private:
         void onTextChanged();

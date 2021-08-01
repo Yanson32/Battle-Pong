@@ -131,11 +131,13 @@ namespace Gui
 
 	}
 
-    void DevPanel::init(const sf::String selected, const int32 flags)
+    void DevPanel::init(const sf::String selected, const int32 flags, const int &width, const int &height)
     {
 
         UNUSED(selected);
         UNUSED(flags);        
+        this->setSize(width / 2, height / 2);
+        this->setPosition(width / 4, height / 4);
 //        centerOfMass->setChecked(flags & b2Draw::e_centerOfMassBit);
 //        pair->setChecked(flags & b2Draw::e_centerOfMassBit);
 //        joints->setChecked(flags & b2Draw::e_jointBit);

@@ -12,6 +12,7 @@
 #include "Events/Events.h"
 #include "Sounds/Id.h"
 #include "Macros.h"
+#include "Gui/CustomPanel.h"
 
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -322,6 +323,13 @@ void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
         case sf::Event::Closed:
             engin.Quit();
             break;
+        case sf::Event::Resized:
+            {   
+                tgui::Widget::Ptr widget = gui.get("PanelPointer");             
+                std::shared_ptr<Gui::CustomPanel> temp =  std::dynamic_pointer_cast<Gui::CustomPanel>(widget);
+                temp->resize(event.size.width, event.size.height);      
+            }
+            break; 
         default:
             break;
     }   

@@ -8,7 +8,7 @@ namespace Gui
     {
         public:
             GeneralPanel(DebugDraw *debugDraw);
-            void init();
+            void init(const int &width, const int &height);
             virtual ~GeneralPanel();
         protected:
             tgui::ComboBox::Ptr comboBox;

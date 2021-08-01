@@ -6,6 +6,7 @@ class IntroGui: public Gui::CustomPanel
 {
     public:
         IntroGui();
+        void init(const int &width, const int &height);
         virtual ~IntroGui();
     protected:
     private:

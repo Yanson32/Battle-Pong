@@ -7,6 +7,7 @@ class MultiplayerPanel: public Gui::CustomPanel
 {
     public:
         MultiplayerPanel();
+        void init(const int &width, const int &height);
         ~MultiplayerPanel();
     private:
         tgui::Button::Ptr backBtn;

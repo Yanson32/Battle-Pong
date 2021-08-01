@@ -7,6 +7,7 @@ class HostPanel: public Gui::CustomPanel
 {
     public:
         HostPanel();
+        void init(const int &width, const int &height);
         ~HostPanel();
     private:
         tgui::Button::Ptr backBtn;
