@@ -1,4 +1,4 @@
-#include "PaddleHud.h"
+#include "Gui/PaddleHud.h"
 #include <sstream>
 PaddleHud::PaddleHud(Settings::PaddleSettings &newPaddleSettings): paddleSettings(newPaddleSettings)
 {

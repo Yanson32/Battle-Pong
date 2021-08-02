@@ -27,7 +27,7 @@
 #include "Events/Listeners/LeftPaddleGoalListener.h"
 #include "Events/Listeners/RightPaddleGoalListener.h"
 
-#include "PaddleHud.h"
+#include "Gui/PaddleHud.h"
 #include "Logging.h"
 #include "States/Id.h"
 class Wall;
