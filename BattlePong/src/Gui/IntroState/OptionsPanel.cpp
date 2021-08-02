@@ -48,7 +48,11 @@ namespace Gui
 
     buttonLayout->add(spacer);
     buttonLayout->add(backBtn);
-    buttonLayout->add(spacer);
+    
+    //Create spacer  
+    tgui::Panel::Ptr spacer2 = tgui::Panel::create();
+    spacer2->getRenderer()->setBackgroundColor(sf::Color::Transparent);
+    buttonLayout->add(spacer2);
 
     }
 

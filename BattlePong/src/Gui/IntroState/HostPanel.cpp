@@ -41,18 +41,18 @@ CustomPanel::CustomPanel()
     backBtn->onPress([](){
         EventManager::inst().Post<Click>(Button::id::MULTIPLAYER);
     });
-    buttonLayout->add(spacer);
-    buttonLayout->add(backBtn);
-
+   
+    //Create host button   
     hostButton = tgui::Button::create("Host");
     hostButton->setEnabled(false);
     buttonLayout->add(hostButton);
-    
-    
+   
+    //Create back button 
+    buttonLayout->add(backBtn);
+
+    //Create spacer 
     buttonLayout->add(spacer);
     
-    //setBackgroundColor(sf::Color::Transparent);
-
 }
 
 
