@@ -324,10 +324,11 @@ void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
             engin.Quit();
             break;
         case sf::Event::Resized:
-            {   
+            {  
                 tgui::Widget::Ptr widget = gui.get("PanelPointer");             
                 std::shared_ptr<Gui::CustomPanel> temp =  std::dynamic_pointer_cast<Gui::CustomPanel>(widget);
-                temp->resize(event.size.width, event.size.height);      
+                if(temp) 
+                    temp->resize(event.size.width, event.size.height);      
             }
             break; 
         default:
