@@ -102,12 +102,11 @@ sysPause(false)
 bool StateBase::isBallOnScreen()
 {
     sf::Vector2f pos = ball->getPosition();
-    auto size = window.getSize();
     sf::FloatRect windowBounds;
     windowBounds.top = 0;
     windowBounds.left = 0;
-    windowBounds.width = size.x;
-    windowBounds.height = size.y;
+    windowBounds.width = Settings::window.dimensions.x;
+    windowBounds.height = Settings::window.dimensions.y;
 
     return windowBounds.contains(pos);
 
@@ -123,7 +122,7 @@ void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime)
 
         if(!isBallOnScreen())
         {
-            reset();
+            //reset();
         }
         if(roundClock.getElapsedTime().asSeconds() >= 30)
         {
