@@ -112,8 +112,6 @@ void IntroState::Init()
 {
     StateBase::Init();
 
-    tgui::Panel::Ptr cust(new IntroGui());
-    gui.add(cust);
 
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
