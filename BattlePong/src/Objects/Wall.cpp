@@ -3,6 +3,7 @@
 #include "Box2D/Box2DFunctions.h"
 #include "Events/Id.h"
 #include "Macros.h"
+#include "Objects/ObjectId.h"
 
 Wall::Wall(std::shared_ptr<b2World> world, const std::array<sf::Vector2f, 4> vert): ObjectBase<sf::ConvexShape>::ObjectBase(world)
 {

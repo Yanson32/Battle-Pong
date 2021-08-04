@@ -2,6 +2,7 @@
 #include <Box2D/Box2D.h>
 #include "Box2D/Box2DFunctions.h"
 #include "Events/Id.h"
+#include "Objects/ObjectId.h"
 
 Ball::Ball(std::shared_ptr<b2World> world, const unsigned radius): ObjectBase(world)
 {

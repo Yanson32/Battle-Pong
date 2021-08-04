@@ -2,7 +2,7 @@
 #include "Events/EventManager.h"
 #include "Events/LeftPaddleGoal.h"
 #include "Events/RightPaddleGoal.h"
-#include "Events/Id.h"
+#include "Objects/ObjectId.h"
 #include <iostream>
 GoalCollisionListener::GoalCollisionListener()
 {

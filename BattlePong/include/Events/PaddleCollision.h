@@ -1,7 +1,7 @@
 #ifndef PADDLECOLLISION_H
 #define PADDLECOLLISION_H
 #include "Events/EventBase.h"
-#include "Events/Id.h"
+#include "Objects/ObjectId.h"
 class PaddleCollision: public EventBase
 {
     public:

@@ -19,15 +19,4 @@ enum EventId
 	CLICK
 };
 
-enum ObjectId
-{
-    BALL,
-    LEFT_GOAL,
-    RIGHT_GOAL,
-    LEFT_PADDLE,
-    RIGHT_PADDLE,
-    WALL,
-    NONE
-};
-
 #endif // ID_H

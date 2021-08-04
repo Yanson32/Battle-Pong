@@ -1,5 +1,6 @@
 #include "Objects/Paddle.h"
 #include "Box2D/Box2DFunctions.h"
+#include "Objects/ObjectId.h"
 
 Paddle::Paddle(std::shared_ptr<b2World> world, const ObjectId &newId, const std::array<sf::Vector2f, 4> vert):
 ObjectBase<sf::ConvexShape>::ObjectBase(world)
@@ -40,7 +41,8 @@ ObjectBase<sf::ConvexShape>::ObjectBase(world)
     bodyFixture.friction = 1;
     bodyFixture.restitution = 0;
     bodyFixture.density = 100;
-
+    bodyFixture.filter.categoryBits = ObjectId::RIGHT_PADDLE | ObjectId::LEFT_PADDLE; 
+    bodyFixture.filter.maskBits = ObjectId::BALL | ObjectId::PADDLE_STOP; 
     body->CreateFixture(&bodyFixture);
 
     //Create the joint

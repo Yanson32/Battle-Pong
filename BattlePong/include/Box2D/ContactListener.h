@@ -7,7 +7,7 @@
 *           passing collision information to the user.
 **************************************************************/
 #include <Box2D/Box2D.h>
-#include "Events/Id.h"
+#include "Objects/ObjectId.h"
 
 class ContactListener: public b2ContactListener
 {

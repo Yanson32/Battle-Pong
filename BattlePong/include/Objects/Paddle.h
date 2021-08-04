@@ -8,6 +8,7 @@
 #include <SFML/System/Vector2.hpp>
 #include <memory>
 #include <array>
+#include "Objects/ObjectId.h"
 
 class Ball;
 class b2Body;

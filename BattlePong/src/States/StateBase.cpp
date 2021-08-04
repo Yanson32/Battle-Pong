@@ -30,6 +30,9 @@ std::unique_ptr<Wall> StateBase::RightWall;
 std::unique_ptr<Paddle> StateBase::leftPaddle;
 std::unique_ptr<Paddle> StateBase::rightPaddle;
 
+std::unique_ptr<PaddleStop> StateBase::bottomPaddleStop = nullptr;
+std::unique_ptr<PaddleStop> StateBase::topPaddleStop = nullptr;
+
 std::unique_ptr<Goal> StateBase::leftGoal;
 std::unique_ptr<Goal> StateBase::rightGoal;
 std::unique_ptr<Ball> StateBase::ball;
@@ -84,7 +87,12 @@ sysPause(false)
     
     rightGoal.reset(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
     rightGoal->setPosition(sf::Vector2f(wWidth - (wallTh * 2), 0));
+   
+    bottomPaddleStop.reset(new PaddleStop(world)); 
+    bottomPaddleStop->setPosition({0, wHeight - (wallTh * 3)});
     
+    topPaddleStop.reset(new PaddleStop(world)); 
+    topPaddleStop->setPosition({0, (wallTh)});
     ball.reset(new Ball(world));
 
     world->SetDebugDraw(&debugDraw);

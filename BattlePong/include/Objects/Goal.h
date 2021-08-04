@@ -4,6 +4,7 @@
 #include "Events/Id.h"
 #include <SFML/System/Vector2.hpp>
 #include <array>
+#include "Objects/ObjectId.h"
 
 class Goal: public ObjectBase<sf::ConvexShape>
 {

@@ -19,6 +19,7 @@
 #include "Box2D/ContactListener.h"
 
 #include "Objects/Goal.h"
+#include "Objects/PaddleStop.h"
 
 #include "Events/Listeners/MusicListener.h"
 #include "Events/Listeners/SoundListener.h"
@@ -125,6 +126,8 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         static std::unique_ptr<Paddle> rightPaddle;     ///Pointer to the paddle on the right side of the screen
         static std::unique_ptr<Goal> leftGoal;          ///Pointer to the goal sensor which determines is a goal has been scored on the left player
         static std::unique_ptr<Goal> rightGoal;         ///Pointer to the goal sensor which determines is a goal has been scored on the right player
+        static std::unique_ptr<PaddleStop> bottomPaddleStop;
+        static std::unique_ptr<PaddleStop> topPaddleStop;
         static sf::Sound sound;
         static sf::Music music;
         static std::shared_ptr<PaddleHud> paddle1Hud;
