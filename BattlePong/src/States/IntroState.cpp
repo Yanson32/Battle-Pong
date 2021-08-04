@@ -171,7 +171,6 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     }
                     break;
                     case Button::id::CONTROLS_TAB:
-                        std::cout << "Controls tab" << std::endl;
                     {
                         gui.removeAllWidgets();
                         StateBase::Init();
