@@ -53,8 +53,6 @@ IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId:
     header.setPosition(sf::Vector2f(335, 25));
     header.setStyle(sf::Text::Bold);
 
-    tgui::Panel::Ptr cust(new IntroGui());
-    gui.add(cust, "PanelPointer");
 }
 
 
@@ -111,7 +109,8 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 void IntroState::Init()
 {
     StateBase::Init();
-
+    tgui::Panel::Ptr cust(new IntroGui());
+    gui.add(cust, "PanelPointer");
 
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");

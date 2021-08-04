@@ -16,6 +16,9 @@
 #include "Events/Events.h"
 #include "Sounds/Id.h"
 #include "Macros.h"
+#include "Gui/PlayPanel.h" 
+#include "Gui/ButtonId.h"
+#include "States/IntroState.h"
 
 PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase(newEngin, newId)
 {
@@ -187,36 +190,81 @@ void PlayState::Clean()
 void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
 {
     UNUSED(engin);
-    UNUSED(event);
+
+    switch(event.type)
+    {
+        case sf::Event::KeyPressed:
+            switch(event.key.code)
+            {
+                case sf::Keyboard::Escape:
+                { 
+                    if(gui.get("PanelPointer") == nullptr)
+                    { 
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new PlayPanel());
+                        std::shared_ptr<PlayPanel> p = std::dynamic_pointer_cast<PlayPanel>(cust);
+                        p->init(window.getSize().x, window.getSize().y);
+                        gui.add(cust, "PanelPointer");
+                    }
+                    else
+                    {
+                        tgui::Widget::Ptr widget = gui.get("PanelPointer");
+                        gui.remove(widget);
+                    }
+                }
+                    break;
+                default:
+                    break;
+            }
+            break;
+        default:
+            break;
+    }
+
+
 }
 
 void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 {
-        StateBase::handleGUEvent(engin, event);
+        
+    StateBase::handleGUEvent(engin, event);
 
-        //GameUtilities event loop
-        while(EventManager::inst().Poll((event)))
-        {
-            //EventManager::inst().Dispatch((evtPtr));
-            switch(event->id)
-            {
+    //EventManager::inst().Dispatch((evtPtr));
+    switch(event->id)
+    {
 
-                case EventId::CHANGE_STATE:
+        case EventId::CLICK:
+            { 
+                std::shared_ptr<Click> temp =  std::dynamic_pointer_cast<Click>(event);
+                if(temp)
                 {
-                    std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
-                    switch(temp->id)
+                    switch(temp->buttonId)
                     {
-                        case stateId::CONNECT_STATE:
-                            std::cout << "Playstate Connect state" << std::endl;
-                        break;
-
+                        case Button::id::BACK_INTRO_STATE:
+                            engin.ChangeState<IntroState>(engin);
+                            break;
                     }
+
                 }
+            }
+            
+            break;
+        
+        case EventId::CHANGE_STATE:
+        {
+            std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
+            switch(temp->id)
+            {
+                case stateId::CONNECT_STATE:
+                    std::cout << "Playstate Connect state" << std::endl;
                 break;
 
             }
-
         }
+        break;
+    }
+
 }
 
 PlayState::~PlayState()

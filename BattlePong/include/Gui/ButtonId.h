@@ -14,7 +14,8 @@ namespace Button
         DEV_TAB,
         INTRO_PANEL,
         HOST,
-        CONNECT
+        CONNECT,
+        BACK_INTRO_STATE
     };
 }
 #endif // BUTTONID_H_INCLUDED
