@@ -15,6 +15,8 @@
 
 #include <sstream>
 
+#include <time.h>
+
 #ifndef MAJOR_VERSION
     #define MAJOR_VERSION 1
 #endif // MAJOR_VERSION
@@ -27,6 +29,7 @@
 
 int main(int argc, char* argv[])
 {
+    srand (time(NULL));
 
     std::stringstream ss;
     ss << MAJOR_VERSION << " " << ".0.0.0";

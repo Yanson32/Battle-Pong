@@ -173,9 +173,16 @@ bool StateBase::isSystemPaused() const
 
 void StateBase::reset()
 {
+    int x = rand() % 100 + 50;
+    if(rand() % 2 == 0)
+        x *= -1;
+    int y = rand() % 100 + 50;
+    if(rand() % 2 == 0)
+       y *= -1;
+    
     float paddleOffset = Settings::wallThickness * 4;
     ball->setPosition({Settings::window.dimensions.x / 2, Settings::window.dimensions.y / 2});
-    ball->setVelocity({100, 100});
+    ball->setVelocity({x, y});
     leftPaddle->setPosition(sf::Vector2f(paddleOffset - Settings::wallThickness, Settings::window.dimensions.y / 2));
     rightPaddle->setPosition(sf::Vector2f(Settings::window.dimensions.x - paddleOffset, Settings::window.dimensions.y / 2));
     rightPaddle->handleInput(*ball);
