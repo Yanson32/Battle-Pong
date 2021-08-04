@@ -6,13 +6,39 @@
 PlayPanel::PlayPanel():
  Gui::CustomPanel()
 {
+    tabs = tgui::Tabs::create();
+    tabLayout->add(tabs);
+
+    tabs->add("General");
+    tabs->add("Controls");
+    tabs->add("Sound");
+    #ifdef DEBUG
+       tabs->add("Dev");
+    #endif
+    //tabs->select(tab.toAnsiString());
+    tabs->setTabVisible(0, true);
+    tabs->onTabSelect([&](){
+        sf::String text = tabs->getSelected().toStdString();
+        Button::id id;
+        if(text == "General")
+            id =  Button::id::GENERAL_TAB;
+        else if(text == "Controls")
+            id = Button::id::CONTROLS_TAB;
+        else if(text == "Sound")
+            id = Button::id::SOUND_TAB;
+        else if(text == "Dev")
+            id = Button::id::DEV_TAB;
+
+        EventManager::inst().Post<Click>(id);
+    });
+   
    tgui::Panel::Ptr spacer = tgui::Panel::create(""); 
    spacer->getRenderer()->setBackgroundColor(sf::Color::Transparent); 
    buttonLayout->add(spacer);
    
    tgui::Button::Ptr backButton = tgui::Button::create("Back"); 
     backButton->onPress([](){
-        EventManager::inst().Post<Click>(Button::id::BACK_INTRO_STATE);
+        EventManager::inst().Post<Click>(Button::id::INTRO_PANEL);
         });
     
    buttonLayout->add(backButton);

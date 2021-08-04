@@ -11,5 +11,6 @@ class PlayPanel: public Gui::CustomPanel
         ~PlayPanel();
     private:
         tgui::Button::Ptr backBtn;
+        tgui::Tabs::Ptr tabs;
 };
 #endif

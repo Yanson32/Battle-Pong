@@ -19,6 +19,11 @@
 #include "Gui/PlayPanel.h" 
 #include "Gui/ButtonId.h"
 #include "States/IntroState.h"
+#include "Gui/IntroState/GeneralPanel.h"
+#include "Gui/IntroState/ControlPanel.h"
+#include "Gui/IntroState/SoundPanel.h"
+#include "Gui/IntroState/DevPanel.h"
+
 
 PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase(newEngin, newId)
 {
@@ -206,6 +211,7 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
                         std::shared_ptr<PlayPanel> p = std::dynamic_pointer_cast<PlayPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        EventManager::inst().Post<Click>(Button::id::GENERAL_TAB);
                     }
                     else
                     {
@@ -241,9 +247,48 @@ void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 {
                     switch(temp->buttonId)
                     {
-                        case Button::id::BACK_INTRO_STATE:
+                        case Button::id::INTRO_PANEL:
                             engin.ChangeState<IntroState>(engin);
                             break;
+                        case Button::id::GENERAL_TAB:
+                        {
+                            gui.removeAllWidgets();
+                            StateBase::Init();
+                            tgui::Panel::Ptr cust(new Gui::GeneralPanel(nullptr));
+                            std::shared_ptr<Gui::GeneralPanel> p = std::dynamic_pointer_cast<Gui::GeneralPanel>(cust);
+                            p->init(window.getSize().x, window.getSize().y);
+                            gui.add(cust, "PanelPointer");
+                        }
+                        break;
+                        case Button::id::CONTROLS_TAB:
+                        {
+                            gui.removeAllWidgets();
+                            StateBase::Init();
+                            tgui::Panel::Ptr cust(new Gui::ControlPanel(nullptr));
+                            std::shared_ptr<Gui::ControlPanel> p = std::dynamic_pointer_cast<Gui::ControlPanel>(cust);
+                            p->init(window.getSize().x, window.getSize().y);
+                            gui.add(cust, "PanelPointer");
+                        }
+                        break;
+                        case Button::id::SOUND_TAB:
+                         {
+                            gui.removeAllWidgets();
+                            StateBase::Init();
+                            tgui::Panel::Ptr cust(new Gui::SoundPanel(nullptr));
+                            std::shared_ptr<Gui::SoundPanel> p = std::dynamic_pointer_cast<Gui::SoundPanel>(cust);
+                            p->init(window.getSize().x, window.getSize().y);
+                            gui.add(cust, "PanelPointer");
+                        }
+                        break;
+                        case Button::id::DEV_TAB:
+                         {
+                            gui.removeAllWidgets();
+                            StateBase::Init();
+                            tgui::Panel::Ptr cust(new Gui::DevPanel());
+                            std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
+                            p->init("blah", 0, window.getSize().x, window.getSize().y);
+                            gui.add(cust, "PanelPointer");
+                        }
                     }
 
                 }
