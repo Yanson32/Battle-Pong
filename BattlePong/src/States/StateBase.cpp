@@ -16,26 +16,26 @@
 
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
-tgui::Gui StateBase::gui(window);
+tgui::Gui StateBase::gui;
 DebugDraw StateBase::debugDraw(*world);
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 
-std::unique_ptr<Wall> StateBase::ground;
-std::unique_ptr<Wall> StateBase::celing;
-std::unique_ptr<Wall> StateBase::leftWall;
-std::unique_ptr<Wall> StateBase::RightWall;
+std::unique_ptr<Wall> StateBase::ground = nullptr;
+std::unique_ptr<Wall> StateBase::celing = nullptr;
+std::unique_ptr<Wall> StateBase::leftWall = nullptr;
+std::unique_ptr<Wall> StateBase::RightWall = nullptr;
 
 
-std::unique_ptr<Paddle> StateBase::leftPaddle;
-std::unique_ptr<Paddle> StateBase::rightPaddle;
+std::unique_ptr<Paddle> StateBase::leftPaddle = nullptr;
+std::unique_ptr<Paddle> StateBase::rightPaddle = nullptr;
 
 std::unique_ptr<PaddleStop> StateBase::bottomPaddleStop = nullptr;
 std::unique_ptr<PaddleStop> StateBase::topPaddleStop = nullptr;
 
-std::unique_ptr<Goal> StateBase::leftGoal;
-std::unique_ptr<Goal> StateBase::rightGoal;
-std::unique_ptr<Ball> StateBase::ball;
+std::unique_ptr<Goal> StateBase::leftGoal = nullptr;
+std::unique_ptr<Goal> StateBase::rightGoal = nullptr;
+std::unique_ptr<Ball> StateBase::ball = nullptr;
 
 sf::Sound StateBase::sound;
 sf::Music StateBase::music;
@@ -57,6 +57,7 @@ sysPause(false)
     const float &wallTh = Settings::wallThickness;
     float paddleHeight = 100;
     StateBase::window.create(sf::VideoMode(wWidth, wHeight),Settings::window.title); 
+    gui.setTarget(window); 
     std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wWidth, 0), sf::Vector2f(wWidth, wallTh), sf::Vector2f(-wWidth, wallTh)};
     std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
     std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, paddleHeight),sf::Vector2f(0, paddleHeight)};
