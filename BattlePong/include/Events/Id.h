@@ -16,7 +16,8 @@ enum EventId
     LEFT_GOAL_COLLISION,
     RIGHT_GOAL_COLLISION,
 	PADDLE_COLLISION,
-	CLICK
+	CLICK,
+    ON_CHECK
 };
 
 #endif // ID_H

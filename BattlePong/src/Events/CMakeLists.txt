@@ -7,6 +7,7 @@ set(FILES
 			"${CMAKE_CURRENT_SOURCE_DIR}/RightPaddleGoal.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PaddleCollision.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Click.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/OnCheck.cpp"
 
 )
 set(SUB_DIRECTORIES "Listener")

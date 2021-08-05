@@ -1,8 +1,10 @@
 #include "Gui/IntroState/DevPanel.h"
-//#include "Event/Manager.h"
+#include "Events/EventManager.h"
 //#include "DebugDraw.h"
 #include "Macros.h"
 #include "Box2D/Box2D.h"
+#include "Events/OnCheck.h"
+#include "Gui/CheckboxId.h"
 
 namespace Gui
 {
@@ -20,16 +22,10 @@ namespace Gui
 		//aabb->setPosition(sf::Vector2f(WIDTH, 100));
 		//aabb->setSize("10%", "100%");
 		aabb->onCheck([&](){
-//        Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//        event.checkboxPressed.id = Event::CheckboxPressed::AABB;
-//        event.checkboxPressed.checked = true;
-//        Event::Manager::inst().push(event);
-		});
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_AABB, true);	
+        });
 		aabb->onUncheck([&](){
-//        Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//        event.checkboxPressed.id = Event::CheckboxPressed::AABB;
-//        event.checkboxPressed.checked = false;
-//        Event::Manager::inst().push(event);
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_AABB, false);	
 		});
 
 		//layout2->add(aabb);
@@ -40,16 +36,10 @@ namespace Gui
 		//shapes->setSize("10%", "100%");
 		//shapes->setPosition(sf::Vector2f(WIDTH, 150));
 		shapes->onCheck([&](){
-//        Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//        event.checkboxPressed.id = Event::CheckboxPressed::SHAPES;
-//        event.checkboxPressed.checked = true;
-//        Event::Manager::inst().push(event);
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_SHAPE, true);	
 		});
 		shapes->onUncheck([&](){
-//        Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//        event.checkboxPressed.id = Event::CheckboxPressed::SHAPES;
-//        event.checkboxPressed.checked = false;
-//        Event::Manager::inst().push(event);
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_SHAPE, false);	
 		});
 		tgui::Panel::Ptr panel = tgui::Panel::create();
 		aabb->setPosition({position1.x, position1.y});
@@ -64,16 +54,10 @@ namespace Gui
 		//joints->setSize("10%", "100%");
 		//joints->setPosition(sf::Vector2f(WIDTH, 200));
 		joints->onCheck([&](){
-//            Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//            event.checkboxPressed.id = Event::CheckboxPressed::JOINT;
-//            event.checkboxPressed.checked = true;
-//            Event::Manager::inst().push(event);
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_JOINTS, true);	
 		});
-		joints->onCheck([&](){
-//            Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//            event.checkboxPressed.id = Event::CheckboxPressed::JOINT;
-//            event.checkboxPressed.checked = false;
-//            Event::Manager::inst().push(event);
+		joints->onUncheck([&](){
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_JOINTS, false);	
 		});
 
 		//layout3->add(joints);
@@ -83,17 +67,10 @@ namespace Gui
 		//centerOfMass->setSize("10%", "100%");
 		//centerOfMass->setPosition(sf::Vector2f(WIDTH, 250));
 		centerOfMass->onCheck([&](){
-//            Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//            event.checkboxPressed.id = Event::CheckboxPressed::CENTER_OF_MASS;
-//            event.checkboxPressed.checked = true;
-//            Event::Manager::inst().push(event);
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_MASS, true);	
 		});
 		centerOfMass->onUncheck([&](){
-
-//            Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//            event.checkboxPressed.id = Event::CheckboxPressed::CENTER_OF_MASS;
-//            event.checkboxPressed.checked = false;
-//            Event::Manager::inst().push(event);
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_MASS, false);	
 		});
 
 		//layout3->add(centerOfMass);
@@ -110,16 +87,10 @@ namespace Gui
 		//pair->setPosition(sf::Vector2f(WIDTH, 300));
 
 		pair->onCheck([&](){
-//            Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//            event.checkboxPressed.id = Event::CheckboxPressed::PAIR;
-//            event.checkboxPressed.checked = true;
-//            Event::Manager::inst().push(event);
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_PAIRS, true);	
 		});
 		pair->onUncheck([&](){
-//            Event::Object event(Event::Object::Type::CHECKBOX_PRESSED);
-//            event.checkboxPressed.id = Event::CheckboxPressed::PAIR;
-//            event.checkboxPressed.checked = false;
-//            Event::Manager::inst().push(event);
+	        EventManager::inst().Post<OnCheck>(checkBoxId::DEBUG_PAIRS, false);	
 		});
 
         tgui::Panel::Ptr panel3 = tgui::Panel::create();
@@ -132,10 +103,8 @@ namespace Gui
 
 	}
 
-    void DevPanel::init(const sf::String selected, const int32 flags, const int &width, const int &height)
+    void DevPanel::init(const int32 flags, const int &width, const int &height)
     {
-
-        UNUSED(selected);
         UNUSED(flags);        
         this->setSize(width / 2, height / 2);
         this->setPosition(width / 4, height / 4);
@@ -144,7 +113,6 @@ namespace Gui
         joints->setChecked(flags & b2Draw::e_jointBit);
         shapes->setChecked(flags & b2Draw::e_shapeBit);
         aabb->setChecked(flags & b2Draw::e_aabbBit);
-//        tabs->select(selected);
     }
 
 	DevPanel::~DevPanel()

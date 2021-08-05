@@ -286,7 +286,7 @@ void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                             StateBase::Init();
                             tgui::Panel::Ptr cust(new Gui::DevPanel());
                             std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
-                            p->init("blah", 0, window.getSize().x, window.getSize().y);
+                            p->init(debugDraw.GetFlags(), window.getSize().x, window.getSize().y);
                             gui.add(cust, "PanelPointer");
                         }
                     }

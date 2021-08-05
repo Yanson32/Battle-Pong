@@ -13,6 +13,7 @@
 #include "Sounds/Id.h"
 #include "Macros.h"
 #include "Gui/CustomPanel.h"
+#include "Gui/CheckboxId.h"
 
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -449,6 +450,48 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 }
             }
         }
+        break;
+        case EventId::ON_CHECK:
+            {     
+                std::shared_ptr<OnCheck> temp =  std::dynamic_pointer_cast<OnCheck>(event);
+                if(temp)
+                {
+                    //debugDraw.CleaFlags();
+                   switch(temp->checkboxId)
+                   {
+                       case checkBoxId::DEBUG_AABB:
+                            if(temp->checked)
+                               debugDraw.AppendFlags(b2Draw::e_aabbBit); 
+                            else
+                                debugDraw.ClearFlags(b2Draw::e_aabbBit);
+                       break;
+                       case checkBoxId::DEBUG_SHAPE:
+                            if(temp->checked)
+                               debugDraw.AppendFlags(b2Draw::e_shapeBit); 
+                            else
+                                debugDraw.ClearFlags(b2Draw::e_shapeBit);
+                       break;
+                       case checkBoxId::DEBUG_MASS:
+                            if(temp->checked)
+                               debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
+                            else
+                                debugDraw.ClearFlags(b2Draw::e_centerOfMassBit);
+                       break;
+                       case checkBoxId::DEBUG_JOINTS:
+                            if(temp->checked)
+                                debugDraw.AppendFlags(b2Draw::e_jointBit);
+                            else
+                                debugDraw.ClearFlags(b2Draw::e_jointBit);
+                       break;
+                       case checkBoxId::DEBUG_PAIRS:
+                            if(temp->checked)
+                                debugDraw.AppendFlags(b2Draw::e_pairBit);
+                            else
+                                debugDraw.ClearFlags(b2Draw::e_pairBit);
+                       break;
+                   }; 
+                }
+            }
         break;
     }
 }
