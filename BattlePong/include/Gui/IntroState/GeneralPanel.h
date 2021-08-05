@@ -7,7 +7,7 @@ namespace Gui
     class GeneralPanel: public OptionsPanel
     {
         public:
-            GeneralPanel(DebugDraw *debugDraw);
+            GeneralPanel(const bool isPlaying = false);
             void init(const int &width, const int &height);
             virtual ~GeneralPanel();
         protected:

@@ -164,7 +164,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     {
                         gui.removeAllWidgets();
                         StateBase::Init();
-                        tgui::Panel::Ptr cust(new Gui::GeneralPanel(nullptr));
+                        tgui::Panel::Ptr cust(new Gui::GeneralPanel());
                         std::shared_ptr<Gui::GeneralPanel> p = std::dynamic_pointer_cast<Gui::GeneralPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");

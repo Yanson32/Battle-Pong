@@ -27,7 +27,10 @@ namespace Settings
 	
 	//Window
 	WindowSettings window; 
-
+    
+    //Game settings
+    GameSettings game;
+    
 	const float wallThickness = 25;
 
 }

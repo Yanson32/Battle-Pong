@@ -15,6 +15,12 @@
 
 namespace Settings 
 {
+    struct GameSettings
+    {
+        sf::String time = "30";
+        sf::String ai = "Medium"; 
+    };
+
 	struct PaddleSettings
 	{
 		std::string input;
@@ -78,6 +84,8 @@ namespace Settings
 	//Window
 	extern WindowSettings window;
 
+    //Game settings
+    extern GameSettings game;
 
 	extern const float wallThickness;
 }

@@ -2,64 +2,60 @@
 //#include "Event/Object.h"
 //#include "Event/Manager.h"
 #include "Macros.h"
+#include "Settings.h"
 
 namespace Gui
 {
-    GeneralPanel::GeneralPanel(DebugDraw *debugDraw):
+    GeneralPanel::GeneralPanel(const bool isPlaying):
     OptionsPanel::OptionsPanel(sf::String("General"))
     {
-        UNUSED(debugDraw); 
         comboLable = tgui::Label::create("Time Limit");
-        comboLable->setPosition({0, 100});
-
-        comboBox = tgui::ComboBox::create();
-        comboBox->setPosition({100, 100});
-        comboBox->addItem("30");
-        comboBox->addItem("45");
-        comboBox->addItem("60");
-        comboBox->setSelectedItem("30");
-        comboBox->onItemSelect([&](){
-//            sf::String text = comboBox->getSelectedItem();
-//            Event::Object event(Event::Object::Type::TIME_CHANGED);
-//
-//            if(text == "30")
-//                event.timeChanged.time = 30;
-//            else if(text == "45")
-//                event.timeChanged.time = 45;
-//            else if(text == "60")
-//                event.timeChanged.time = 60;
-//
-//            Event::Manager::inst().push(event);
-        });
-
-        aiLable = tgui::Label::create("Ai");
-        aiLable->setPosition({0, 150});
-
-        aiCombo = tgui::ComboBox::create();
-        aiCombo->setPosition({100, 150});
-        aiCombo->addItem("Easy");
-        aiCombo->addItem("Medium");
-        aiCombo->addItem("Hard");
-        aiCombo->setSelectedItem("Medium");
-        aiCombo->onItemSelect([&](){
-//            sf::String text = comboBox->getSelectedItem();
-//            Event::Object event(Event::Object::Type::AI_CHANGED);
-//            Event::Manager::inst().push(event);
-        });
-
-        tgui::HorizontalLayout::Ptr timerLayout = tgui::HorizontalLayout::create();
-        timerLayout->setPosition(0, 100);
-        timerLayout->setSize("100%", "10%");
         layout2->add(comboLable);
-        layout2->add(comboBox);
-        this->add(timerLayout);
-
-        tgui::HorizontalLayout::Ptr aiLayout = tgui::HorizontalLayout::create();
-        aiLayout->setPosition(0, 150);
-        aiLayout->setSize("100%", "10%");
+        
+        //Create lable instead of combobox when the user is playing the game
+        if(isPlaying)
+        {
+            tgui::Label::Ptr tLimitLabel = tgui::Label::create(Settings::game.time.toAnsiString());
+            layout2->add(tLimitLabel);   
+             
+        }
+        else
+        {
+            comboBox = tgui::ComboBox::create();
+            comboBox->addItem("30");
+            comboBox->addItem("45");
+            comboBox->addItem("60");
+            comboBox->setSelectedItem(Settings::game.time.toAnsiString());
+            comboBox->setEnabled(!isPlaying); 
+            comboBox->onItemSelect([&](){
+                sf::String text = comboBox->getSelectedItem().toAnsiString();
+                Settings::game.time = text; 
+    //            Event::Manager::inst().push(event);
+            });
+            layout2->add(comboBox);
+        }
+        aiLable = tgui::Label::create("Ai");
         layout3->add(aiLable);
-        layout3->add(aiCombo);
-        this->add(aiLayout);
+
+        if(isPlaying)
+        {
+            tgui::Label::Ptr aiSettingLabel = tgui::Label::create(Settings::game.ai.toAnsiString());
+            layout3->add(aiSettingLabel);   
+        }
+        else
+        {
+            aiCombo = tgui::ComboBox::create();
+            aiCombo->addItem("Easy");
+            aiCombo->addItem("Medium");
+            aiCombo->addItem("Hard");
+            aiCombo->setSelectedItem(Settings::game.ai.toAnsiString());
+            aiCombo->setEnabled(!isPlaying); 
+            aiCombo->onItemSelect([&](){
+                Settings::game.ai = aiCombo->getSelectedItem().toAnsiString();
+                //            Event::Manager::inst().push(event);
+            });
+            layout3->add(aiCombo);
+        }
 
     }
     void GeneralPanel::init(const int &width, const int &height)

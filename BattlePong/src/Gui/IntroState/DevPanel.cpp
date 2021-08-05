@@ -2,6 +2,7 @@
 //#include "Event/Manager.h"
 //#include "DebugDraw.h"
 #include "Macros.h"
+#include "Box2D/Box2D.h"
 
 namespace Gui
 {
@@ -138,11 +139,11 @@ namespace Gui
         UNUSED(flags);        
         this->setSize(width / 2, height / 2);
         this->setPosition(width / 4, height / 4);
-//        centerOfMass->setChecked(flags & b2Draw::e_centerOfMassBit);
-//        pair->setChecked(flags & b2Draw::e_centerOfMassBit);
-//        joints->setChecked(flags & b2Draw::e_jointBit);
-//        shapes->setChecked(flags & b2Draw::e_shapeBit);
-//        aabb->setChecked(flags & b2Draw::e_aabbBit);
+        centerOfMass->setChecked(flags & b2Draw::e_centerOfMassBit);
+        pair->setChecked(flags & b2Draw::e_centerOfMassBit);
+        joints->setChecked(flags & b2Draw::e_jointBit);
+        shapes->setChecked(flags & b2Draw::e_shapeBit);
+        aabb->setChecked(flags & b2Draw::e_aabbBit);
 //        tabs->select(selected);
     }
 
