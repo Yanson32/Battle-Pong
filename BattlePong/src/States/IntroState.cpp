@@ -113,7 +113,9 @@ void IntroState::Init()
     StateBase::Init();
     tgui::Panel::Ptr cust(new IntroGui());
     gui.add(cust, "PanelPointer");
-    ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
+    
+    if(!ResourceManager::sound.isLoaded(soundId::BALL))
+        ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
     
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
