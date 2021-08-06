@@ -10,7 +10,6 @@
 #include "Resources/ResourceManager.h"
 #include "States/States.h"
 #include "Events/Events.h"
-#include "Sounds/Id.h"
 #include "Macros.h"
 #include "Gui/CustomPanel.h"
 #include "Gui/CheckboxId.h"

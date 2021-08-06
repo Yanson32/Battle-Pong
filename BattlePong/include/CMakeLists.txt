@@ -11,7 +11,6 @@ set(SUB_DIRECTORIES "States"
 					"Objects"
 					"Input"
 					"Box2D"
-					"Sounds"
 					"Gui"
                     "Resources"
 )

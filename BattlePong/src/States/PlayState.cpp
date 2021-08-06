@@ -14,7 +14,6 @@
 #include "Settings.h"
 #include "Resources/ResourceManager.h"
 #include "Events/Events.h"
-#include "Sounds/Id.h"
 #include "Macros.h"
 #include "Gui/PlayPanel.h" 
 #include "Gui/ButtonId.h"
@@ -105,7 +104,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime)
             userMessage.setString("3");
             centerText();
             messageClock.restart();
-            EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "3")
@@ -115,7 +114,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime)
             userMessage.setString("2");
             centerText();
             messageClock.restart();
-            EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "2")
@@ -125,7 +124,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime)
             userMessage.setString("1");
             centerText();
             messageClock.restart();
-            EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "1")
@@ -135,7 +134,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime)
             userMessage.setString("Go!");
             centerText();
             messageClock.restart();
-            EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "Go!")

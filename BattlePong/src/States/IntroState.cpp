@@ -24,7 +24,6 @@
 #include "Resources/ResourceManager.h"
 #include "Logging.h"
 #include "Macros.h"
-#include "Sounds/Id.h"
 #include "Events/Click.h"
 #include "Gui/IntroState/IntroGui.h"
 #include "Gui/IntroState/OptionsPanel.h"
