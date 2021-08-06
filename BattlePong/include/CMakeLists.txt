@@ -1,7 +1,5 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Game.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Resource Holder.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Debugging.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Logging.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SFMLFunctions.h"
@@ -15,6 +13,7 @@ set(SUB_DIRECTORIES "States"
 					"Box2D"
 					"Sounds"
 					"Gui"
+                    "Resources"
 )
 
 #Add subdirectories

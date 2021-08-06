@@ -10,7 +10,7 @@
 
 #include <SFML/Audio/Music.hpp>
 
-#include "ResourceManager.h"
+#include "Resources/ResourceManager.h"
 #include <boost/program_options.hpp>
 
 #include <sstream>

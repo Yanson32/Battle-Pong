@@ -12,7 +12,7 @@
 #include "Input/AI.h"
 #include "Input/PlayerInput.h"
 #include "Settings.h"
-#include "ResourceManager.h"
+#include "Resources/ResourceManager.h"
 #include "Events/Events.h"
 #include "Sounds/Id.h"
 #include "Macros.h"

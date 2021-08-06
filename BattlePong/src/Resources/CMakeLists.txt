@@ -1,16 +1,6 @@
-set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Game.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Debugging.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Logging.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/SFMLFunctions.cpp"
+set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.cpp"
 )
-set(SUB_DIRECTORIES "States"
-					"Events"
-					"Objects"
-					"Input"
-					"Box2D"
-					"Gui"
-                    "Resources"
+set(SUB_DIRECTORIES ""
 )
 
 #Add subdirectories

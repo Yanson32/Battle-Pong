@@ -21,7 +21,7 @@
 #include "GameUtilities/Event/PlaySound.h"
 
 
-#include "ResourceManager.h"
+#include "Resources/ResourceManager.h"
 #include "Logging.h"
 #include "Macros.h"
 #include "Sounds/Id.h"
