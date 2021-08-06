@@ -1,6 +1,5 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Game.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Debugging.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Logging.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SFMLFunctions.cpp"
 )
