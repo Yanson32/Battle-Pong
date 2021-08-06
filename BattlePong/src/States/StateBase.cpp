@@ -505,10 +505,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     switch(temp->sliderId)
                     {
                         case sliderId::SOUND_EFFECTS:
-                            std::cout << "Sound Effects" << std::endl;
+                            sound.setVolume(Settings::music.sVolume);
                             break;
                         case sliderId::MUSIC:
-                            std::cout << "Music Volume" << std::endl;
+                            music.setVolume(Settings::music.mVolume); 
                             break;
                     }; 
                 

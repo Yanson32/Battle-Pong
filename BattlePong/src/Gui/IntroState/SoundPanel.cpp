@@ -22,8 +22,8 @@ namespace Gui
         effectsSlider = tgui::Slider::create(0, 100);
         effectsSlider->setValue(Settings::music.mVolume); 
         effectsSlider->onValueChange([&](){
-            Settings::music.mVolume = effectsSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::SOUND_EFFECTS, Settings::music.mVolume);
+            Settings::music.sVolume = effectsSlider->getValue();
+            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::SOUND_EFFECTS, Settings::music.sVolume);
         });
         layout2->add(effectsSlider);
 
