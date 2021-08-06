@@ -12,10 +12,10 @@ namespace Gui
             virtual ~SoundPanel();
         protected:
             tgui::Slider::Ptr effectsSlider;
-            tgui::Label::Ptr effectsLable;
+            tgui::Label::Ptr effectsLabel;
 
             tgui::Slider::Ptr musicSlider;
-            tgui::Label::Ptr musicLable;
+            tgui::Label::Ptr musicLabel;
 
     };
 }

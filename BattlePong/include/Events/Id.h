@@ -11,6 +11,7 @@ enum EventId
     PLAY_MUSIC              = GU::Evt::Id::PLAY_MUSIC,
     PLAY_SOUND              = GU::Evt::Id::PLAY_SOUND,
     SOUND_VOLUME_CHANGED    = GU::Evt::Id::SOUND_EFFECTS_VOLUME_CHANGED,
+    SLIDER_CHANGED          = GU::Evt::Id::SLIDER_CHANGED,
     BALL_COLLISION,
     GOAL_COLLISION,
     LEFT_GOAL_COLLISION,

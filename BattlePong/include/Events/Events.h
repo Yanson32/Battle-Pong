@@ -8,6 +8,7 @@
 #include "GameUtilities/Event/PlaySound.h"
 #include "GameUtilities/Event/MusicVolumeChanged.h"
 #include "GameUtilities/Event/SoundVolumeChanged.h"
+#include "GameUtilities/Event/OnSliderChanged.h"
 
 #include "Events/BallCollision.h"
 #include "Events/EventManager.h"
@@ -18,6 +19,5 @@
 #include "Events/RightPaddleGoal.h"
 #include "Events/Click.h"
 #include "Events/OnCheck.h"
-
 
 #endif // EVENTS_H

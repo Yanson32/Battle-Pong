@@ -14,6 +14,7 @@
 #include "Macros.h"
 #include "Gui/CustomPanel.h"
 #include "Gui/CheckboxId.h"
+#include "Gui/SliderId.h"
 
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -375,17 +376,21 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
         case EventId::PLAY_SOUND:
         {
             std::shared_ptr<GU::Evt::PlaySound> temp =  std::dynamic_pointer_cast<GU::Evt::PlaySound>(event);
-
-            if(temp && ResourceManager::sound.isLoaded(temp->soundId))
+            if(temp)
             {
-                sound.setBuffer(ResourceManager::sound.get(temp->soundId));
-                sound.play();
+                if(ResourceManager::sound.isLoaded(static_cast<soundId>(temp->soundId)))
+                {
+                    sound.setBuffer(ResourceManager::sound.get(static_cast<soundId>(temp->soundId)));
+                    sound.play();
+                }
             }
         }
         break;
         case EventId::BALL_COLLISION:
-            EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BALL);
-        break;
+            {
+                EventManager::inst().Post<GU::Evt::PlaySound>(static_cast<int>(soundId::BALL));
+            }
+            break;
         case EventId::PUSH_STATE:
         {
             std::shared_ptr<GU::Evt::PushState> temp =  std::dynamic_pointer_cast<GU::Evt::PushState>(event);
@@ -490,6 +495,24 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                                 debugDraw.ClearFlags(b2Draw::e_pairBit);
                        break;
                    }; 
+                }
+            }
+        break;
+        case SLIDER_CHANGED:
+            {     
+                std::shared_ptr<GU::Evt::OnSliderChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnSliderChanged>(event);
+                if(temp)
+                {
+                    switch(temp->sliderId)
+                    {
+                        case sliderId::SOUND_EFFECTS:
+                            std::cout << "Sound Effects" << std::endl;
+                            break;
+                        case sliderId::MUSIC:
+                            std::cout << "Music Volume" << std::endl;
+                            break;
+                    }; 
+                
                 }
             }
         break;

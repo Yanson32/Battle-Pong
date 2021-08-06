@@ -30,8 +30,8 @@ namespace Settings
     
     struct MusicSettings
 	{
-		int mVolume = 200;
-        	int sVolume = 150;
+        int mVolume = 100;
+    	int sVolume = 100;
 	};
 	
     struct ServerSettings

@@ -5,6 +5,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.h"
 			#"${CMAKE_CURRENT_SOURCE_DIR}/TimerPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/PaddleHud.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/PlayPanel.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/SliderId.h"
 )
 
 set(RELATIVE_PATH "include")

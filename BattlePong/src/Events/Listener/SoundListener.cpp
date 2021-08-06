@@ -4,6 +4,7 @@
 #include "Events/Events.h"
 #include "Settings.h"
 #include "Events/Id.h"
+#include "Resources/SoundId.h"
 
 sf::Sound SoundListener::listenerSound;
 
@@ -15,6 +16,7 @@ SoundListener::SoundListener()
 
 void SoundListener::OnEvent(GU::Evt::EventPtr event)
 {
+    /*
     switch(event->id)
     {
 
@@ -24,7 +26,7 @@ void SoundListener::OnEvent(GU::Evt::EventPtr event)
 
             if(temp && ResourceManager::sound.isLoaded(temp->soundId))
             {
-                listenerSound.setBuffer(ResourceManager::sound.get(temp->soundId));
+                //listenerSound.setBuffer(ResourceManager::sound.get(static_cast<soundId>(temp->soundId)));
                 listenerSound.play();
             }
         }
@@ -37,6 +39,7 @@ void SoundListener::OnEvent(GU::Evt::EventPtr event)
         }
         break;
     }
+    */
 }
 
 SoundListener::~SoundListener()

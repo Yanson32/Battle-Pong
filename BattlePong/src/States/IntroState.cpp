@@ -37,6 +37,9 @@
 #include "Gui/IntroState/HostPanel.h"
 #include "Gui/IntroState/ConnectPanel.h"
 
+
+#include "Resources/SoundId.h"
+
 #include <memory>
 IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::INTRO_STATE)
 {
@@ -111,7 +114,8 @@ void IntroState::Init()
     StateBase::Init();
     tgui::Panel::Ptr cust(new IntroGui());
     gui.add(cust, "PanelPointer");
-
+    ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
+    
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
@@ -124,10 +128,9 @@ void IntroState::Init()
 void IntroState::Clean()
 {
     gui.removeAllWidgets();
-
+    
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);
-//    ResourceManager::sound.remove(Sound::Id::BALL);
 //    ResourceManager::font.remove("Header Font");
 
 }
