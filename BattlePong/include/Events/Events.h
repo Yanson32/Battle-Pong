@@ -13,7 +13,7 @@
 #include "Events/BallCollision.h"
 #include "Events/EventManager.h"
 #include "Events/GoalCollision.h"
-#include "Events/Id.h"
+#include "Events/EventId.h"
 #include "Events/LeftPaddleGoal.h"
 #include "Events/PaddleCollision.h"
 #include "Events/RightPaddleGoal.h"

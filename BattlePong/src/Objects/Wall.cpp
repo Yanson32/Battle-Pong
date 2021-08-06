@@ -1,7 +1,7 @@
 #include "Objects/Wall.h"
 #include <SFML/System/Vector2.hpp>
 #include "Box2D/Box2DFunctions.h"
-#include "Events/Id.h"
+#include "Events/EventId.h"
 #include "Macros.h"
 #include "Objects/ObjectId.h"
 

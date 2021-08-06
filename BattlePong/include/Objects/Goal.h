@@ -1,7 +1,7 @@
 #ifndef GOAL_H
 #define GOAL_H
 #include "Objects/ObjectBase.h"
-#include "Events/Id.h"
+#include "Events/EventId.h"
 #include <SFML/System/Vector2.hpp>
 #include <array>
 #include "Objects/ObjectId.h"

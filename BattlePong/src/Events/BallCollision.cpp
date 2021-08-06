@@ -1,5 +1,5 @@
 #include "Events/BallCollision.h"
-#include "Events/Id.h"
+#include "Events/EventId.h"
 
 BallCollision::BallCollision(): EventBase(EventId::BALL_COLLISION)
 {

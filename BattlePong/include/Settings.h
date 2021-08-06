@@ -11,7 +11,7 @@
 #include <SFML/Window/VideoMode.hpp>
 #include <TGUI/TGUI.hpp>
 #include <SFML/Network.hpp>
-#include "Events/Id.h"
+#include "Events/EventId.h"
 
 namespace Settings 
 {

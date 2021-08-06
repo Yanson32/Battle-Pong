@@ -1,5 +1,5 @@
 #include "Events/RightPaddleGoal.h"
-#include "Events/Id.h"
+#include "Events/EventId.h"
 
 RightPaddleGoal::RightPaddleGoal(): EventBase(EventId::RIGHT_GOAL_COLLISION)
 {

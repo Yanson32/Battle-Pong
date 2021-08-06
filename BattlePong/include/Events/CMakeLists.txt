@@ -2,7 +2,7 @@ set(FILES
             "${CMAKE_CURRENT_SOURCE_DIR}/EventBase.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/EventManager.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/BallCollision.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Id.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/EventId.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/GoalCollision.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/LeftPaddleGoal.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/RightPaddleGoal.h"
