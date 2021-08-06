@@ -32,7 +32,8 @@ namespace Settings
 	{
         int mVolume = 100;
     	int sVolume = 100;
-	};
+        sf::String currentSong = "Zombies";
+    };
 	
     struct ServerSettings
 	{

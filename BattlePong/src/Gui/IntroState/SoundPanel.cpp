@@ -32,11 +32,23 @@ namespace Gui
         musicSlider = tgui::Slider::create(0, 100);
         musicSlider->setValue(Settings::music.sVolume);
         musicSlider->onValueChange([&](){
-            Settings::music.sVolume = musicSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::MUSIC, Settings::music.sVolume);
+            Settings::music.mVolume = musicSlider->getValue();
+            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::MUSIC, Settings::music.mVolume);
         });
         layout3->add(musicSlider);
 
+        tgui::Label::Ptr comboLable = tgui::Label::create("Music");
+        layout4->add(comboLable);
+        
+             
+        musicBox = tgui::ComboBox::create();
+        musicBox->addItem("Zombies");
+        musicBox->setSelectedItem(Settings::music.currentSong.toAnsiString());
+        musicBox->onItemSelect([&](){
+            sf::String text = musicBox->getSelectedItem().toAnsiString();
+        
+       });
+        layout4->add(musicBox);
     }
     void SoundPanel::init(const int &width, const int &height)
     {

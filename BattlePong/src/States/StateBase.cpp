@@ -107,6 +107,7 @@ sysPause(false)
     gui.add(paddle1Hud);
     gui.add(paddle2Hud);
 
+    music.setLoop(true);
 }
 
 bool StateBase::isBallOnScreen()
@@ -497,7 +498,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 }
             }
         break;
-        case SLIDER_CHANGED:
+        case EventId::SLIDER_CHANGED:
             {     
                 std::shared_ptr<GU::Evt::OnSliderChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnSliderChanged>(event);
                 if(temp)
@@ -512,6 +513,19 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                             break;
                     }; 
                 
+                }
+            }
+        break;
+        case EventId::PLAY_MUSIC:
+            {     
+                std::shared_ptr<GU::Evt::PlayMusic> temp =  std::dynamic_pointer_cast<GU::Evt::PlayMusic>(event);
+                if(temp)
+                {
+                    //Load music
+                    if(music.openFromFile(sf::String("Resources/Music/Electro_Zombies.ogg")))
+                        music.play();
+                    else
+                       std::cout << "Unable to load music" << std::endl;
                 }
             }
         break;

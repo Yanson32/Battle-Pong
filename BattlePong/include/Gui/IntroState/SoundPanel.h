@@ -17,6 +17,7 @@ namespace Gui
             tgui::Slider::Ptr musicSlider;
             tgui::Label::Ptr musicLabel;
 
+            tgui::ComboBox::Ptr musicBox;
     };
 }
 

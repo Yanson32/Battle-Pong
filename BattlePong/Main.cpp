@@ -77,7 +77,7 @@ int main(int argc, char* argv[])
 	Game engin;
 
 	engin.Push<IntroState>(engin);
-	EventManager::inst().Post<GU::Evt::PlayMusic>("../Resources/Music/Electro_Zombies.ogg");
+	EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
 
     try
     {

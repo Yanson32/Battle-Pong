@@ -38,6 +38,7 @@
 
 
 #include "Resources/SoundId.h"
+#include "Resources/MusicId.h"
 
 #include <memory>
 IntroState::IntroState(GU::Engin::Engin& newEngin): StateBase(newEngin, stateId::INTRO_STATE)
@@ -113,10 +114,13 @@ void IntroState::Init()
     StateBase::Init();
     tgui::Panel::Ptr cust(new IntroGui());
     gui.add(cust, "PanelPointer");
-    
+  
+    //Load ball collision sound  
     if(!ResourceManager::sound.isLoaded(soundId::BALL))
         ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
-    
+
+   
+
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
