@@ -10,7 +10,7 @@ set(FILES
             "${CMAKE_CURRENT_SOURCE_DIR}/OnCheck.cpp"
 
 )
-set(SUB_DIRECTORIES "Listener")
+set(SUB_DIRECTORIES "")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

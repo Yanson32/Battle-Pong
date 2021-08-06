@@ -11,6 +11,9 @@
 #include <GameUtilities/Event/EventHandler.h>
 
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Audio/Sound.hpp>
+#include <SFML/Audio/Music.hpp>
+
 #include <Box2D/Box2D.h>
 #include <memory>
 #include <TGUI/TGUI.hpp>
@@ -20,13 +23,6 @@
 
 #include "Objects/Goal.h"
 #include "Objects/PaddleStop.h"
-
-#include "Events/Listeners/MusicListener.h"
-#include "Events/Listeners/SoundListener.h"
-#include "Events/Listeners/BallCollisionListener.h"
-#include "Events/Listeners/GoalCollisionListener.h"
-#include "Events/Listeners/LeftPaddleGoalListener.h"
-#include "Events/Listeners/RightPaddleGoalListener.h"
 
 #include "Gui/PaddleHud.h"
 #include "Logging.h"
@@ -140,7 +136,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         int32 velocityIterations = 8;                   ///Box2D how strongly to correct velocity
         int32 positionIterations = 8;                   ///Box2D how strongly to correct position
         bool sysPause;                                  ///True when the system is paused and false otherwise
-        boost::log::sources::severity_logger< logging::trivial::severity_level > log;
+        //boost::log::sources::severity_logger< logging::trivial::severity_level > log;
 
 };
 

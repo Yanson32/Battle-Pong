@@ -51,7 +51,7 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
+    //boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
     
     //Load tgui theme
     //tgui::Theme *theme;
