@@ -1,19 +1,19 @@
 #ifndef EVENT_ID_H
 #define EVENT_ID_H
-#include <GameUtilities/Event/Id.h>
+#include <GameUtilities/Event/EventId.h>
 
 enum EventId
 {
-    CHANGE_STATE            = GU::Evt::Id::CHANGE_STATE,
-    PUSH_STATE              = GU::Evt::Id::PUSH_STATE,
-    POP_STATE               = GU::Evt::Id::POP_STATE,
-    MUSIC_VOLUME_CHANGED    = GU::Evt::Id::MUSIC_VOLUME_CHANGED,
-    PLAY_MUSIC              = GU::Evt::Id::PLAY_MUSIC,
-    PLAY_SOUND              = GU::Evt::Id::PLAY_SOUND,
-    SOUND_VOLUME_CHANGED    = GU::Evt::Id::SOUND_EFFECTS_VOLUME_CHANGED,
-	CLICK                   = GU::Evt::Id::CLICK,
-    SLIDER_CHANGED          = GU::Evt::Id::SLIDER_CHANGED,
-    ON_CHECK                = GU::Evt::Id::ON_CHECK,
+    CHANGE_STATE            = static_cast<int>(GU::Evt::EventId::CHANGE_STATE),
+    PUSH_STATE              = static_cast<int>(GU::Evt::EventId::PUSH_STATE),
+    POP_STATE               = static_cast<int>(GU::Evt::EventId::POP_STATE),
+    MUSIC_VOLUME_CHANGED    = static_cast<int>(GU::Evt::EventId::MUSIC_VOLUME_CHANGED),
+    PLAY_MUSIC              = static_cast<int>(GU::Evt::EventId::PLAY_MUSIC),
+    PLAY_SOUND              = static_cast<int>(GU::Evt::EventId::PLAY_SOUND),
+    SOUND_VOLUME_CHANGED    = static_cast<int>(GU::Evt::EventId::SOUND_EFFECTS_VOLUME_CHANGED),
+    CLICK                   = static_cast<int>(GU::Evt::EventId::CLICK),
+    SLIDER_CHANGED          = static_cast<int>(GU::Evt::EventId::SLIDER_CHANGED),
+    ON_CHECK                = static_cast<int>(GU::Evt::EventId::ON_CHECK),
     BALL_COLLISION,
     GOAL_COLLISION,
     LEFT_GOAL_COLLISION,
