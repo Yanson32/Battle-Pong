@@ -5,6 +5,7 @@
 #include "Objects/Paddle.h"
 #include "Input/AI.h"
 #include <GameUtilities/Engin/Engin.h>
+#include <GameUtilities/Event/OnCheck.h>
 #include "Objects/Goal.h"
 #include <array>
 #include "Resources/ResourceManager.h"
@@ -458,7 +459,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
         break;
         case EventId::ON_CHECK:
             {     
-                std::shared_ptr<OnCheck> temp =  std::dynamic_pointer_cast<OnCheck>(event);
+                std::shared_ptr<GU::Evt::OnCheck> temp =  std::dynamic_pointer_cast<GU::Evt::OnCheck>(event);
                 if(temp)
                 {
                     //debugDraw.CleaFlags();
@@ -517,15 +518,16 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
             }
         break;
         case EventId::PLAY_MUSIC:
-            {     
-                std::shared_ptr<GU::Evt::PlayMusic> temp =  std::dynamic_pointer_cast<GU::Evt::PlayMusic>(event);
+            {    
+                std::shared_ptr<GU::Evt::PlayMusic> temp = std::dynamic_pointer_cast<GU::Evt::PlayMusic>(event);
                 if(temp)
                 {
                     //Load music
-                    if(music.openFromFile(sf::String("Resources/Music/Electro_Zombies.ogg")))
+                    if(music.openFromFile(temp->musicFile))
                         music.play();
                     else
-                       std::cout << "Unable to load music" << std::endl;
+                       music.stop();
+                    
                 }
             }
         break;

@@ -1,7 +1,7 @@
 #include "Gui/IntroState/OptionsPanel.h"
 #include "Events/EventManager.h"
 #include "Events/EventBase.h"
-#include "Events/Click.h"
+#include <GameUtilities/Event/Click.h>
 #include "Gui/ButtonId.h"
 namespace Gui
 {
@@ -31,7 +31,7 @@ namespace Gui
         else if(text == "Dev")
             id = Button::id::DEV_TAB;
 
-        EventManager::inst().Post<Click>(id);
+        EventManager::inst().Post<GU::Evt::Click>(id);
     });
 
 
@@ -42,7 +42,7 @@ namespace Gui
 //            Event::Object event(Event::Object::Type::BUTTON_PRESSED);
 //            event.buttonPressed.id = Event::ButtonPressed::BACK_BUTTON;
 //            Event::Manager::inst().push(event);
-        EventManager::inst().Post<Click>(Button::id::INTRO_PANEL);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::INTRO_PANEL);
     });
 
 

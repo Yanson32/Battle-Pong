@@ -1,7 +1,7 @@
 #include "Gui/PlayPanel.h"
 #include "Gui/ButtonId.h"
 #include "Events/EventManager.h"
-#include "Events/Click.h"
+#include <GameUtilities/Event/Click.h>
 #include <SFML/Network.hpp>
 PlayPanel::PlayPanel():
  Gui::CustomPanel()
@@ -29,7 +29,7 @@ PlayPanel::PlayPanel():
         else if(text == "Dev")
             id = Button::id::DEV_TAB;
 
-        EventManager::inst().Post<Click>(id);
+        EventManager::inst().Post<GU::Evt::Click>(id);
     });
    
    tgui::Panel::Ptr spacer = tgui::Panel::create(""); 
@@ -38,7 +38,7 @@ PlayPanel::PlayPanel():
    
    tgui::Button::Ptr backButton = tgui::Button::create("Back"); 
     backButton->onPress([](){
-        EventManager::inst().Post<Click>(Button::id::INTRO_PANEL);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::INTRO_PANEL);
         });
     
    buttonLayout->add(backButton);

@@ -11,14 +11,14 @@ enum EventId
     PLAY_MUSIC              = GU::Evt::Id::PLAY_MUSIC,
     PLAY_SOUND              = GU::Evt::Id::PLAY_SOUND,
     SOUND_VOLUME_CHANGED    = GU::Evt::Id::SOUND_EFFECTS_VOLUME_CHANGED,
+	CLICK                   = GU::Evt::Id::CLICK,
     SLIDER_CHANGED          = GU::Evt::Id::SLIDER_CHANGED,
+    ON_CHECK                = GU::Evt::Id::ON_CHECK,
     BALL_COLLISION,
     GOAL_COLLISION,
     LEFT_GOAL_COLLISION,
     RIGHT_GOAL_COLLISION,
 	PADDLE_COLLISION,
-	CLICK,
-    ON_CHECK
 };
 
 #endif // ID_H

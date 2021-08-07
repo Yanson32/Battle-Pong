@@ -14,7 +14,6 @@
 #include <boost/program_options.hpp>
 
 #include <sstream>
-
 #include <time.h>
 
 #ifndef MAJOR_VERSION

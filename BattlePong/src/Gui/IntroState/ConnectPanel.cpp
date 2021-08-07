@@ -1,6 +1,6 @@
 #include "Gui/IntroState/ConnectPanel.h"
 #include "Events/EventManager.h"
-#include "Events/Click.h"
+#include <GameUtilities/Event/Click.h>
 #include "Gui/ButtonId.h"
 #include <SFML/Network.hpp>
 ConnectPanel::ConnectPanel():
@@ -19,7 +19,7 @@ CustomPanel::CustomPanel()
     //Create back button
     backBtn = tgui::Button::create("Back");
     backBtn->onPress([](){
-        EventManager::inst().Post<Click>(Button::id::MULTIPLAYER);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
     });
 
     //Create ip label

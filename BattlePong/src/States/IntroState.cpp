@@ -3,6 +3,7 @@
 #include <GameUtilities/Event/Event.h>
 #include <GameUtilities/Event/EventQueue.h>
 #include <GameUtilities/Event/PushState.h>
+#include <GameUtilities/Event/Click.h>
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -24,7 +25,6 @@
 #include "Resources/ResourceManager.h"
 #include "Logging.h"
 #include "Macros.h"
-#include "Events/Click.h"
 #include "Gui/IntroState/IntroGui.h"
 #include "Gui/IntroState/OptionsPanel.h"
 #include "Gui/ButtonId.h"
@@ -149,7 +149,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
     switch(event->id)
     {
         case EventId::CLICK:
-            std::shared_ptr<Click> temp =  std::dynamic_pointer_cast<Click>(event);
+            std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
             if(temp)
             {
                 switch(temp->buttonId)

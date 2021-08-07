@@ -215,7 +215,7 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
                         std::shared_ptr<PlayPanel> p = std::dynamic_pointer_cast<PlayPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
-                        EventManager::inst().Post<Click>(Button::id::GENERAL_TAB);
+                        EventManager::inst().Post<GU::Evt::Click>(Button::id::GENERAL_TAB);
                     }
                     else
                     {
@@ -246,7 +246,7 @@ void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 
         case EventId::CLICK:
             { 
-                std::shared_ptr<Click> temp =  std::dynamic_pointer_cast<Click>(event);
+                std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
                 if(temp)
                 {
                     switch(temp->buttonId)

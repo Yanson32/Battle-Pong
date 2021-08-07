@@ -4,6 +4,7 @@
 #include "Macros.h"
 #include "Settings.h"
 #include <GameUtilities/Event/OnSliderChanged.h>
+#include <GameUtilities/Event/PlayMusic.h>
 #include "Gui/SliderId.h"
 
 namespace Gui
@@ -37,17 +38,33 @@ namespace Gui
         });
         layout3->add(musicSlider);
 
-        tgui::Label::Ptr comboLable = tgui::Label::create("Music");
-        layout4->add(comboLable);
+        tgui::Label::Ptr musicLable = tgui::Label::create("Music");
+        layout4->add(musicLable);
         
              
         musicBox = tgui::ComboBox::create();
         musicBox->addItem("Zombies");
+        musicBox->addItem("Dreams"); 
         musicBox->setSelectedItem(Settings::music.currentSong.toAnsiString());
         musicBox->onItemSelect([&](){
-            sf::String text = musicBox->getSelectedItem().toAnsiString();
-        
-       });
+            if(musicBox->getSelectedItem() == "Zombies")
+            {
+                EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
+                Settings::music.currentSong = "Zombies";
+            }
+            else if(musicBox->getSelectedItem() == "Dreams") 
+            {    
+                EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/the_field_of_dreams.ogg");
+                Settings::music.currentSong = "Dreams";
+            }
+            else
+            {     
+                EventManager::inst().Post<GU::Evt::PlayMusic>("");
+                Settings::music.currentSong = "";
+            } 
+
+                
+        });
         layout4->add(musicBox);
     }
     void SoundPanel::init(const int &width, const int &height)

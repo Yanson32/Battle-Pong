@@ -4,7 +4,7 @@
 #include "GameUtilities/Event/PlaySound.h"
 #include "States/Id.h"
 #include <GameUtilities/Event/PushState.h>
-#include "Events/Click.h"
+#include <GameUtilities/Event/Click.h>
 #include "Gui/ButtonId.h"
 IntroGui::IntroGui()
 {
@@ -13,7 +13,7 @@ IntroGui::IntroGui()
     start->setText("Start");
     start->onPress([](){
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-        EventManager::inst().Post<Click>(Button::id::START);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::START);
     });
     layout1->addSpace(1);
     layout1->add(start);
@@ -24,7 +24,7 @@ IntroGui::IntroGui()
     multiPlayer->setText("Multiplayer");
     multiPlayer->onPress([](){
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-        EventManager::inst().Post<Click>(Button::id::MULTIPLAYER);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
     });
     layout3->addSpace(1);
     layout3->add(multiPlayer);
@@ -35,7 +35,7 @@ IntroGui::IntroGui()
     options->setText("Options");
     options->onPress([](){
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-        EventManager::inst().Post<Click>(Button::id::GENERAL_TAB);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::GENERAL_TAB);
     });
     layout5->addSpace(1);
     layout5->add(options);

@@ -1,6 +1,6 @@
 #include "Gui/IntroState/MultiplayerPanel.h"
 #include "Events/EventManager.h"
-#include "Events/Click.h"
+#include <GameUtilities/Event/Click.h>
 #include "Gui/ButtonId.h"
 #include <SFML/Network.hpp>
 MultiplayerPanel::MultiplayerPanel():
@@ -10,7 +10,7 @@ CustomPanel::CustomPanel()
     //Create host button
     hostButton = tgui::Button::create("Host");
     hostButton->onPress([](){
-        EventManager::inst().Post<Click>(Button::id::HOST);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::HOST);
     });
     
     tgui::Panel::Ptr spacer2 = tgui::Panel::create();
@@ -24,7 +24,7 @@ CustomPanel::CustomPanel()
     //Create connect button
     connectButton = tgui::Button::create("Connect");
     connectButton->onPress([](){
-        EventManager::inst().Post<Click>(Button::id::CONNECT);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::CONNECT);
     });
     
     tgui::Panel::Ptr spacer4 = tgui::Panel::create();
@@ -45,7 +45,7 @@ CustomPanel::CustomPanel()
     backBtn = tgui::Button::create("Back");
     buttonLayout->add(backBtn);
     backBtn->onPress([](){
-        EventManager::inst().Post<Click>(Button::id::INTRO_PANEL);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::INTRO_PANEL);
     });
     
 
