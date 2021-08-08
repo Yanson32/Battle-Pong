@@ -8,6 +8,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroGui.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/ConnectPanel.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/ControlPanel.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/VideoPanel.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/NetworkPanel.cpp"
 )
 
 set(RELATIVE_PATH "src")

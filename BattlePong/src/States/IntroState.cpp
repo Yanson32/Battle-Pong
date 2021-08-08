@@ -36,6 +36,7 @@
 #include "Gui/IntroState/HostPanel.h"
 #include "Gui/IntroState/ConnectPanel.h"
 #include "Gui/IntroState/VideoPanel.h"
+#include "Gui/IntroState/NetworkPanel.h"
 
 
 #include "Resources/SoundId.h"
@@ -205,6 +206,16 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         StateBase::Init();
                         tgui::Panel::Ptr cust(new Gui::SoundPanel(nullptr));
                         std::shared_ptr<Gui::SoundPanel> p = std::dynamic_pointer_cast<Gui::SoundPanel>(cust);
+                        p->init(window.getSize().x, window.getSize().y);
+                        gui.add(cust, "PanelPointer");
+                    }
+                    break;
+                    case Button::id::NETWORK_TAB:
+                     {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new Gui::NetworkPanel());
+                        std::shared_ptr<Gui::NetworkPanel> p = std::dynamic_pointer_cast<Gui::NetworkPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }

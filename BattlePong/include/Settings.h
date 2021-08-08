@@ -89,6 +89,10 @@ namespace Settings
     extern GameSettings game;
 
 	extern const float wallThickness;
+
+    extern const std::string globalIp;
+    extern const std::string localIp;
+    extern const std::string port;
 }
 
 
