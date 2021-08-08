@@ -17,6 +17,7 @@
 #include "Gui/SliderId.h"
 #include "Gui/ComboId.h"
 #include "Gui/IntroState/GeneralPanel.h"
+#include "Gui/IntroState/VideoPanel.h"
 
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -559,8 +560,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                                     
                             } 
                             gui.removeAllWidgets();
-                            tgui::Panel::Ptr cust(new Gui::GeneralPanel());
-                            std::shared_ptr<Gui::GeneralPanel> p = std::dynamic_pointer_cast<Gui::GeneralPanel>(cust);
+                            tgui::Panel::Ptr cust(new Gui::VideoPanel());
+                            std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                             p->init(window.getSize().x, window.getSize().y);
                             gui.add(cust, "PanelPointer");
                             break;

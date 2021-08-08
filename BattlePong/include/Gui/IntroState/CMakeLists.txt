@@ -9,6 +9,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroGui.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/ConnectPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/ControlPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/SoundPanel.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/VideoPanel.h"
 )
 
 set(RELATIVE_PATH "include")

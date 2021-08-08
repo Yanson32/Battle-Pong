@@ -58,34 +58,6 @@ namespace Gui
             });
             layout3->add(aiCombo);
         }
-
-        tgui::Label::Ptr themeLabel = tgui::Label::create("Theme");
-        layout4->add(themeLabel);
-        
-        themeCombo = tgui::ComboBox::create();
-        themeCombo->addItem("Default");
-        themeCombo->addItem("Black");
-        themeCombo->addItem("Blue");
-        themeCombo->setSelectedItem(Settings::game.ai.toAnsiString());
-        themeCombo->setEnabled(!isPlaying); 
-        themeCombo->setSelectedItem(Settings::theme); 
-        themeCombo->onItemSelect([&](){
-            std::string theme = themeCombo->getSelectedItem().toAnsiString();
-            if(theme == "Default")
-            {
-                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::THEME, 0);
-            } 
-            else if(theme == "Black")
-            {
-                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::THEME, 1);
-            }
-            else if(theme == "Blue")
-            {
-                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::THEME, 2);
-            }
-             
-        });
-        layout4->add(themeCombo);
     }
     void GeneralPanel::init(const int &width, const int &height)
     {

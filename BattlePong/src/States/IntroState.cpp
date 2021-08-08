@@ -35,6 +35,7 @@
 #include "Gui/IntroState/MultiplayerPanel.h"
 #include "Gui/IntroState/HostPanel.h"
 #include "Gui/IntroState/ConnectPanel.h"
+#include "Gui/IntroState/VideoPanel.h"
 
 
 #include "Resources/SoundId.h"
@@ -184,6 +185,16 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         StateBase::Init();
                         tgui::Panel::Ptr cust(new Gui::ControlPanel(nullptr));
                         std::shared_ptr<Gui::ControlPanel> p = std::dynamic_pointer_cast<Gui::ControlPanel>(cust);
+                        p->init(window.getSize().x, window.getSize().y);
+                        gui.add(cust, "PanelPointer");
+                    }
+                    break;
+                    case Button::id::VIDEO_TAB:
+                     {
+                        gui.removeAllWidgets();
+                        StateBase::Init();
+                        tgui::Panel::Ptr cust(new Gui::VideoPanel());
+                        std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }

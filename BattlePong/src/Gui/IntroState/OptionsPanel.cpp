@@ -13,7 +13,9 @@ namespace Gui
     //tabs->setPosition({300, 100});
     tabs->add("General");
     tabs->add("Controls");
+    tabs->add("Video");
     tabs->add("Sound");
+    tabs->add("Network"); 
     #ifdef DEBUG
         tabs->add("Dev");
     #endif
@@ -26,8 +28,12 @@ namespace Gui
             id = Button::id::GENERAL_TAB;
         else if(text == "Controls")
             id = Button::id::CONTROLS_TAB;
+        else if(text == "Video")
+            id = Button::id::VIDEO_TAB;
         else if(text == "Sound")
             id = Button::id::SOUND_TAB;
+        else if(text == "Network")
+            id = Button::id::NETWORK_TAB;
         else if(text == "Dev")
             id = Button::id::DEV_TAB;
 

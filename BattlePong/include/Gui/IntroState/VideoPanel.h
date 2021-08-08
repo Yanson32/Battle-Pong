@@ -1,22 +1,23 @@
-#ifndef GUI_GENERALPANEL_H
-#define GUI_GENERALPANEL_H
+#ifndef GUI_VIDEOPANEL_H
+#define GUI_VIDEOPANEL_H
 #include "Gui/IntroState/OptionsPanel.h"
-class DebugDraw;
+
 namespace Gui
 {
-    class GeneralPanel: public OptionsPanel
+    class VideoPanel: public OptionsPanel
     {
         public:
-            GeneralPanel(const bool isPlaying = false);
+            VideoPanel();
             void init(const int &width, const int &height);
-            virtual ~GeneralPanel();
-        protected:
             tgui::ComboBox::Ptr comboBox;
             tgui::Label::Ptr comboLable;
 
             tgui::ComboBox::Ptr aiCombo;
             tgui::Label::Ptr aiLable;
+            
+            tgui::ComboBox::Ptr themeCombo;
+            virtual ~VideoPanel();
     };
 }
 
-#endif // GUI_GENERALPANEL_H
+#endif 
