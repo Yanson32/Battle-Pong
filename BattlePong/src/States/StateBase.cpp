@@ -4,8 +4,8 @@
 #include "Objects/Wall.h"
 #include "Objects/Paddle.h"
 #include "Input/AI.h"
+#include <GameUtilities/Event/Events.h>
 #include <GameUtilities/Engin/Engin.h>
-#include <GameUtilities/Event/OnCheck.h>
 #include "Objects/Goal.h"
 #include <array>
 #include "Resources/ResourceManager.h"
@@ -15,6 +15,8 @@
 #include "Gui/CustomPanel.h"
 #include "Gui/CheckboxId.h"
 #include "Gui/SliderId.h"
+#include "Gui/ComboId.h"
+#include "Gui/IntroState/GeneralPanel.h"
 
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -528,6 +530,40 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     else
                        music.stop();
                     
+                }
+            }
+        break;
+        case EventId::ON_COMBO_CHANGED:
+            {   
+                std::shared_ptr<GU::Evt::OnComboChanged> temp = std::dynamic_pointer_cast<GU::Evt::OnComboChanged>(event);
+                if(temp)
+                {
+                   switch(temp->comboId)
+                   {
+                        case Gui::Combo::comboId::THEME:
+                            switch(temp->index)
+                            {
+                                case 0:
+                                    tgui::Theme::setDefault(nullptr);
+                                    Settings::theme = "Default"; 
+                                    break;
+                                case 1:
+                                    tgui::Theme::setDefault("Resources/TGUI/Theme/Black.txt");
+                                    Settings::theme = "Black"; 
+                                    break;
+                                case 2:
+                                    tgui::Theme::setDefault("Resources/TGUI/Theme/BabyBlue.txt");
+                                    Settings::theme = "Blue"; 
+                                    break;
+                                    
+                            } 
+                            gui.removeAllWidgets();
+                            tgui::Panel::Ptr cust(new Gui::GeneralPanel());
+                            std::shared_ptr<Gui::GeneralPanel> p = std::dynamic_pointer_cast<Gui::GeneralPanel>(cust);
+                            p->init(window.getSize().x, window.getSize().y);
+                            gui.add(cust, "PanelPointer");
+                            break;
+                   } 
                 }
             }
         break;

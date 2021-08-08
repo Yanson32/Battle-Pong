@@ -64,7 +64,7 @@ namespace Settings
 		sf::String title = "Test";
 		sf::Vector2f dimensions = sf::Vector2f(800, 600);
 	};
-
+    extern std::string theme;
 	extern std::string playerControlUp;
 	extern std::string playerControlDown;
 	

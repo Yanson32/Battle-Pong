@@ -16,6 +16,8 @@ namespace Gui
 
             tgui::ComboBox::Ptr aiCombo;
             tgui::Label::Ptr aiLable;
+            
+            tgui::ComboBox::Ptr themeCombo;
     };
 }
 

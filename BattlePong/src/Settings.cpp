@@ -32,6 +32,7 @@ namespace Settings
     GameSettings game;
     
 	const float wallThickness = 25;
+    std::string theme = "Black";
 
 }
 

@@ -14,6 +14,8 @@ enum EventId
     CLICK                   = static_cast<int>(GU::Evt::EventId::CLICK),
     SLIDER_CHANGED          = static_cast<int>(GU::Evt::EventId::SLIDER_CHANGED),
     ON_CHECK                = static_cast<int>(GU::Evt::EventId::ON_CHECK),
+    ON_COMBO_CHANGED        = static_cast<int>(GU::Evt::EventId::ON_COMBO_CHANGED),
+    GU_HIGHEST              = static_cast<int>(GU::Evt::EventId::HIGHEST), 
     BALL_COLLISION,
     GOAL_COLLISION,
     LEFT_GOAL_COLLISION,

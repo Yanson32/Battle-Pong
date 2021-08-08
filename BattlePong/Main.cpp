@@ -25,9 +25,11 @@
 #endif
 
 #include "config.h"
+#include <GameUtilities/Core/String.h>
 
 int main(int argc, char* argv[])
 {
+
     srand (time(NULL));
 
     std::stringstream ss;
@@ -53,21 +55,8 @@ int main(int argc, char* argv[])
     //boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
     
     //Load tgui theme
-    //tgui::Theme *theme;
-
-    try
-    {
-
-//        theme = new tgui::Theme("../TGUI/Theme/Black.txt");
-//	tgui::Theme::setDefault(theme);
-    }
-    catch(...)
-    {
-        //std::string base = exePath;
-        //base += "/Resources/TGUI/Theme/Black.txt";	
-        //theme = new tgui::Theme(base);
-        //tgui::Theme::setDefault(theme);
-    }
+    tgui::Theme::setDefault("Resources/TGUI/Theme/Black.txt");
+    
     
     sf::Clock timer;
     const sf::Time deltaTime = sf::seconds(1.0f / 60.0f);
