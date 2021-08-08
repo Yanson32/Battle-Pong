@@ -56,11 +56,11 @@ engin(newEngin),
 state(newState),
 sysPause(false)
 {
-    float &wWidth = Settings::window.dimensions.x;
-    float &wHeight = Settings::window.dimensions.y;
+    StateBase::window.create(sf::VideoMode(Settings::window.dimensions.x, Settings::window.dimensions.y),Settings::window.title); 
+    const float &wWidth = window.getView().getSize().x;
+    const float &wHeight = window.getView().getSize().y;
     const float &wallTh = Settings::wallThickness;
     float paddleHeight = 100;
-    StateBase::window.create(sf::VideoMode(wWidth, wHeight),Settings::window.title); 
     gui.setTarget(window); 
     std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wWidth, 0), sf::Vector2f(wWidth, wallTh), sf::Vector2f(-wWidth, wallTh)};
     std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
@@ -93,10 +93,10 @@ sysPause(false)
     rightGoal.reset(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
     rightGoal->setPosition(sf::Vector2f(wWidth - (wallTh * 2), 0));
    
-    bottomPaddleStop.reset(new PaddleStop(world)); 
-    bottomPaddleStop->setPosition({0, wHeight - (wallTh * 3)});
+    bottomPaddleStop.reset(new PaddleStop(world, horizontalPoints)); 
+    bottomPaddleStop->setPosition({0, wHeight - (wallTh * 2)});
     
-    topPaddleStop.reset(new PaddleStop(world)); 
+    topPaddleStop.reset(new PaddleStop(world, horizontalPoints)); 
     topPaddleStop->setPosition({0, (wallTh)});
     ball.reset(new Ball(world));
 
@@ -111,6 +111,7 @@ sysPause(false)
     gui.add(paddle2Hud);
 
     music.setLoop(true);
+    reset();
 }
 
 bool StateBase::isBallOnScreen()

@@ -2,19 +2,17 @@
 #include "Settings.h"
 #include "Objects/ObjectId.h"
 
-PaddleStop::PaddleStop(std::shared_ptr<b2World> newWorld):
+PaddleStop::PaddleStop(std::shared_ptr<b2World> newWorld, const std::array<sf::Vector2f, 4> &vert):
 ObjectBase<sf::ConvexShape>::ObjectBase(newWorld)
 {
-    const float &wWidth = Settings::window.dimensions.x;
-    const float &wHeight = Settings::wallThickness;
-    
     const int SIZE = 4;
 
     b2Vec2 vertices[SIZE];
-    vertices[0].Set(toMeters(0), toMeters(0));
-    vertices[1].Set(toMeters(wWidth), toMeters(0));
-    vertices[2].Set(toMeters(wWidth), toMeters(wHeight * 2));
-    vertices[3].Set(toMeters(0), toMeters(wHeight * 2));
+    vertices[0].Set(toMeters(vert[0]).x, toMeters(vert[0]).y);
+    vertices[1].Set(toMeters(vert[1]).x, toMeters(vert[1]).y);
+    vertices[2].Set(toMeters(vert[2]).x, toMeters(vert[2]).y);
+    vertices[3].Set(toMeters(vert[3]).x, toMeters(vert[3]).y);
+
 
     b2BodyDef bodyDef;
     b2PolygonShape bodyShape;
