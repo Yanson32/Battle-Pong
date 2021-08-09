@@ -156,8 +156,7 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 
     StateBase::Draw(engin, deltaTime);
-    if(userMessage.getString() == "")
-        window.draw(*ball);
+    window.draw(*ball);
     window.draw(userMessage);
 
 
