@@ -136,6 +136,8 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         int32 velocityIterations = 8;                   ///Box2D how strongly to correct velocity
         int32 positionIterations = 8;                   ///Box2D how strongly to correct position
         bool sysPause;                                  ///True when the system is paused and false otherwise
+        static sf::Texture backgroundTexture;
+        static sf::RectangleShape backgroundRect;
         //boost::log::sources::severity_logger< logging::trivial::severity_level > log;
 
 };

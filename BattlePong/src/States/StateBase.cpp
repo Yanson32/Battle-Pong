@@ -18,6 +18,7 @@
 #include "Gui/ComboId.h"
 #include "Gui/IntroState/GeneralPanel.h"
 #include "Gui/IntroState/VideoPanel.h"
+#include <boost/filesystem.hpp>
 
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
@@ -50,6 +51,9 @@ std::shared_ptr<PaddleHud> StateBase::paddle2Hud(new PaddleHud(Settings::paddle2
 
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
+
+sf::Texture StateBase::backgroundTexture;
+sf::RectangleShape StateBase::backgroundRect;
 
 StateBase::StateBase(GU::Engin::Engin& newEngin, const stateId newState):
 GU::Engin::GameState(),
@@ -132,7 +136,7 @@ void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     UNUSED(engin);
     UNUSED(deltaTime);
-
+    backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
     if(!IsPaused())
     {
 
@@ -153,6 +157,7 @@ void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime)
     UNUSED(engin);
     UNUSED(deltaTime);
     window.clear();
+    window.draw(backgroundRect);
     window.draw(*leftPaddle);
     window.draw(*rightPaddle);
 
@@ -332,6 +337,20 @@ void StateBase::Init()
 {
     systemPause(false);
     Pause(false);
+    boost::filesystem::path p ("Resources/Backgrounds/");
+
+    boost::filesystem::directory_iterator end_itr;
+
+    for (boost::filesystem::directory_iterator itr(p); itr != end_itr; ++itr)
+    {
+        if(itr->path().stem().string() == Settings::background)
+        {    
+            if(backgroundTexture.loadFromFile(itr->path().string()))
+            {
+                backgroundRect.setTexture(&backgroundTexture);
+            }
+        }
+    }
     music.setVolume(Settings::music.mVolume);
     sound.setVolume(Settings::music.sVolume);
 }
@@ -543,6 +562,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                    switch(temp->comboId)
                    {
                         case Gui::Combo::comboId::THEME:
+                        {
                             switch(temp->index)
                             {
                                 case 0:
@@ -556,6 +576,32 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                                 case 2:
                                     tgui::Theme::setDefault("Resources/TGUI/Theme/BabyBlue.txt");
                                     Settings::theme = "Blue"; 
+                                    break;
+                                    
+                            } 
+                            gui.removeAllWidgets();
+                            tgui::Panel::Ptr cust(new Gui::VideoPanel());
+                            std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
+                            p->init(window.getSize().x, window.getSize().y);
+                            gui.add(cust, "PanelPointer");
+                            } 
+                            break;
+                        case Gui::Combo::comboId::BACKGROUND:
+                            switch(temp->index)
+                            {
+                                case 0:
+                                    if(backgroundTexture.loadFromFile("Resources/Backgrounds/Star.png"))
+                                    {
+                                        backgroundRect.setTexture(&backgroundTexture);
+                                        Settings::background = "Star";
+                                    }
+                                    break;
+                                case 1:
+                                    if(backgroundTexture.loadFromFile("Resources/Backgrounds/Nebula.png"))
+                                    {
+                                        backgroundRect.setTexture(&backgroundTexture);
+                                        Settings::background = "Nebula"; 
+                                    }
                                     break;
                                     
                             } 

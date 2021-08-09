@@ -6,7 +6,8 @@ namespace Gui
     {
         enum comboId
         {
-            THEME 
+            THEME,
+            BACKGROUND
         };
     }
 }

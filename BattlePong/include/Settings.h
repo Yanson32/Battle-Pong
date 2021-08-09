@@ -93,6 +93,7 @@ namespace Settings
     extern const std::string globalIp;
     extern const std::string localIp;
     extern const std::string port;
+    extern std::string background;
 }
 
 

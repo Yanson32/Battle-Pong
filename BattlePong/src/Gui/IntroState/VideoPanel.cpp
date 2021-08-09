@@ -43,10 +43,16 @@ namespace Gui
         
         backgroundCombo = tgui::ComboBox::create();
         backgroundCombo->addItem("Star");
-        //backgroundCombo->setSelectedItem(Settings::game.ai.toAnsiString());
-        backgroundCombo->setSelectedItem(Settings::theme); 
-        backgroundCombo->onItemSelect([&](){
-            std::string theme = backgroundCombo->getSelectedItem().toAnsiString();
+        backgroundCombo->addItem("Nebula");
+        backgroundCombo->setSelectedItem(Settings::background);
+        backgroundCombo->onItemSelect([&]()
+        {
+            std::string background = backgroundCombo->getSelectedItem().toAnsiString();
+            if(background == "Star")
+                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::BACKGROUND, 0);
+            else if(background == "Nebula")
+                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::BACKGROUND, 1);
+
         });
         layout3->add(backgroundCombo);
         
