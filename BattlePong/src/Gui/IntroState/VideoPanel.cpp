@@ -44,12 +44,23 @@ namespace Gui
         backgroundCombo = tgui::ComboBox::create();
         backgroundCombo->addItem("Star");
         //backgroundCombo->setSelectedItem(Settings::game.ai.toAnsiString());
-        //backgroundCombo->setEnabled(!isPlaying); 
         backgroundCombo->setSelectedItem(Settings::theme); 
         backgroundCombo->onItemSelect([&](){
             std::string theme = backgroundCombo->getSelectedItem().toAnsiString();
         });
         layout3->add(backgroundCombo);
+        
+        tgui::Label::Ptr resolutionLabel = tgui::Label::create("Resolution");
+        layout4->add(resolutionLabel);
+        
+        resolutionCombo = tgui::ComboBox::create();
+        resolutionCombo->addItem("Fulll Screen");
+        //resolutionCombo->setSelectedItem(Settings::game.ai.toAnsiString());
+        resolutionCombo->setSelectedItem(Settings::theme); 
+        resolutionCombo->onItemSelect([&](){
+            std::string theme = resolutionCombo->getSelectedItem().toAnsiString();
+        });
+        layout4->add(resolutionCombo);
     }
     void VideoPanel::init(const int &width, const int &height)
     {

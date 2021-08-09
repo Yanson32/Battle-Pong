@@ -9,13 +9,16 @@ namespace Gui
         public:
             VideoPanel();
             void init(const int &width, const int &height);
+            
+            tgui::Label::Ptr themeLabel; 
+            tgui::ComboBox::Ptr themeCombo;
+            
             tgui::Label::Ptr backgroundLable;
             tgui::ComboBox::Ptr backgroundCombo;
-
-            tgui::ComboBox::Ptr aiCombo;
-            tgui::Label::Ptr aiLable;
             
-            tgui::ComboBox::Ptr themeCombo;
+            tgui::Label::Ptr resolutionLable;
+            tgui::ComboBox::Ptr resolutionCombo;
+            
             virtual ~VideoPanel();
     };
 }
