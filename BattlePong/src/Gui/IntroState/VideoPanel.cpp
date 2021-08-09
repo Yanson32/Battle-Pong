@@ -4,7 +4,7 @@
 #include "Settings.h"
 #include <GameUtilities/Event/OnComboChanged.h>
 #include "Gui/ComboId.h"
-
+#include <sstream>
 namespace Gui
 {
     VideoPanel::VideoPanel():
@@ -61,7 +61,19 @@ namespace Gui
         
         resolutionCombo = tgui::ComboBox::create();
         resolutionCombo->addItem("Fulll Screen");
-        //resolutionCombo->setSelectedItem(Settings::game.ai.toAnsiString());
+
+        std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
+        for (std::size_t i = 0; i < modes.size(); ++i)
+        {
+            sf::VideoMode mode = modes[i];
+            std::stringstream ss;
+            ss << mode.width;
+            ss << "x";
+            ss << mode.height;
+
+            resolutionCombo->addItem(ss.str()); 
+        }
+        
         resolutionCombo->setSelectedItem(Settings::theme); 
         resolutionCombo->onItemSelect([&](){
             std::string theme = resolutionCombo->getSelectedItem().toAnsiString();
