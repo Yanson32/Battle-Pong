@@ -37,6 +37,19 @@ namespace Gui
              
         });
         layout2->add(themeCombo);
+        
+        tgui::Label::Ptr backgroundLabel = tgui::Label::create("Background");
+        layout3->add(backgroundLabel);
+        
+        backgroundCombo = tgui::ComboBox::create();
+        backgroundCombo->addItem("Star");
+        //backgroundCombo->setSelectedItem(Settings::game.ai.toAnsiString());
+        //backgroundCombo->setEnabled(!isPlaying); 
+        backgroundCombo->setSelectedItem(Settings::theme); 
+        backgroundCombo->onItemSelect([&](){
+            std::string theme = backgroundCombo->getSelectedItem().toAnsiString();
+        });
+        layout3->add(backgroundCombo);
     }
     void VideoPanel::init(const int &width, const int &height)
     {

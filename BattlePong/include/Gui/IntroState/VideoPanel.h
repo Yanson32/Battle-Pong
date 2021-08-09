@@ -9,8 +9,8 @@ namespace Gui
         public:
             VideoPanel();
             void init(const int &width, const int &height);
-            tgui::ComboBox::Ptr comboBox;
-            tgui::Label::Ptr comboLable;
+            tgui::Label::Ptr backgroundLable;
+            tgui::ComboBox::Ptr backgroundCombo;
 
             tgui::ComboBox::Ptr aiCombo;
             tgui::Label::Ptr aiLable;
