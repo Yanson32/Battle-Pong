@@ -23,7 +23,7 @@
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
 tgui::Gui StateBase::gui;
-DebugDraw StateBase::debugDraw(*world);
+DebugDraw* StateBase::debugDraw = nullptr; 
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 
@@ -62,6 +62,9 @@ state(newState),
 sysPause(false)
 {
     StateBase::window.create(sf::VideoMode(Settings::window.dimensions.x, Settings::window.dimensions.y),Settings::window.title); 
+    if(!debugDraw) 
+        debugDraw = new DebugDraw(*world);
+    
     const float &wWidth = window.getView().getSize().x;
     const float &wHeight = window.getView().getSize().y;
     const float &wallTh = Settings::wallThickness;
@@ -105,9 +108,9 @@ sysPause(false)
     topPaddleStop->setPosition({0, (wallTh)});
     ball.reset(new Ball(world));
 
-    world->SetDebugDraw(&debugDraw);
+    world->SetDebugDraw(debugDraw);
 
-    debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
+    //debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
 
     world->SetContactListener(&contactListener);
 
@@ -167,7 +170,7 @@ void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime)
     window.draw(*ground);
 
     #ifdef DEBUG
-        window.draw(debugDraw);
+        window.draw(*debugDraw);
     #endif
 
     gui.draw();
@@ -490,33 +493,33 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                    {
                        case checkBoxId::DEBUG_AABB:
                             if(temp->checked)
-                               debugDraw.AppendFlags(b2Draw::e_aabbBit); 
+                               debugDraw->AppendFlags(b2Draw::e_aabbBit); 
                             else
-                                debugDraw.ClearFlags(b2Draw::e_aabbBit);
+                                debugDraw->ClearFlags(b2Draw::e_aabbBit);
                        break;
                        case checkBoxId::DEBUG_SHAPE:
                             if(temp->checked)
-                               debugDraw.AppendFlags(b2Draw::e_shapeBit); 
+                               debugDraw->AppendFlags(b2Draw::e_shapeBit); 
                             else
-                                debugDraw.ClearFlags(b2Draw::e_shapeBit);
+                                debugDraw->ClearFlags(b2Draw::e_shapeBit);
                        break;
                        case checkBoxId::DEBUG_MASS:
                             if(temp->checked)
-                               debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
+                               debugDraw->AppendFlags(b2Draw::e_centerOfMassBit);
                             else
-                                debugDraw.ClearFlags(b2Draw::e_centerOfMassBit);
+                                debugDraw->ClearFlags(b2Draw::e_centerOfMassBit);
                        break;
                        case checkBoxId::DEBUG_JOINTS:
                             if(temp->checked)
-                                debugDraw.AppendFlags(b2Draw::e_jointBit);
+                                debugDraw->AppendFlags(b2Draw::e_jointBit);
                             else
-                                debugDraw.ClearFlags(b2Draw::e_jointBit);
+                                debugDraw->ClearFlags(b2Draw::e_jointBit);
                        break;
                        case checkBoxId::DEBUG_PAIRS:
                             if(temp->checked)
-                                debugDraw.AppendFlags(b2Draw::e_pairBit);
+                                debugDraw->AppendFlags(b2Draw::e_pairBit);
                             else
-                                debugDraw.ClearFlags(b2Draw::e_pairBit);
+                                debugDraw->ClearFlags(b2Draw::e_pairBit);
                        break;
                    }; 
                 }
