@@ -26,7 +26,7 @@
 #include "Gui/IntroState/DevPanel.h"
 
 
-PlayState::PlayState(GU::Engin::Engin& newEngin, const stateId newId): StateBase(newEngin, newId)
+PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, const stateId newId): StateBase(newEngin, newWindow, newId)
 {
 
 
@@ -254,7 +254,7 @@ void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->buttonId)
                 {
                     case Button::id::INTRO_PANEL:
-                        engin.ChangeState<IntroState>(engin);
+                        engin.ChangeState<IntroState>(engin,window);
                         break;
                     case Button::id::GENERAL_TAB:
                     {

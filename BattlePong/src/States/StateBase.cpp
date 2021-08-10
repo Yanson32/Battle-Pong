@@ -20,7 +20,6 @@
 #include "Gui/IntroState/VideoPanel.h"
 #include <boost/filesystem.hpp>
 
-sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
 tgui::Gui StateBase::gui;
 std::shared_ptr<DebugDraw> StateBase::debugDraw = nullptr; 
@@ -55,13 +54,13 @@ sf::Clock StateBase::roundClock;
 sf::Texture StateBase::backgroundTexture;
 sf::RectangleShape StateBase::backgroundRect;
 
-StateBase::StateBase(GU::Engin::Engin& newEngin, const stateId newState):
+StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, const stateId newState):
 GU::Engin::GameState(),
 engin(newEngin),
 state(newState),
+window(newWindow),
 sysPause(false)
 {
-    StateBase::window.create(sf::VideoMode(Settings::window.dimensions.x, Settings::window.dimensions.y),Settings::window.title); 
     if(debugDraw == nullptr) 
         debugDraw.reset( new DebugDraw(*world));
     
@@ -426,7 +425,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->id)
                 {
                     case stateId::PLAY_STATE:
-                        engin.Push<PlayState>(engin);
+                        engin.Push<PlayState>(engin, window);
                     break;
                     case stateId::OPTIONS_STATE:
                         //engin.Push<OptionsState>(engin);
@@ -435,7 +434,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         //engin.Push<MultiplayerControlState>(engin);
                     break;
                     case stateId::CLIENT_PLAY_STATE:
-                        engin.Push<ClientPlayState>(engin);
+                        engin.Push<ClientPlayState>(engin, window);
                     break;
                     case stateId::CONNECT_STATE:
                         //engin.Push<ConnectState>(engin);
@@ -450,7 +449,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         //engin.Push<HostPlayState>(engin);
                     break;
                     case stateId::INTRO_STATE:
-                        engin.Push<IntroState>(engin);
+                        engin.Push<IntroState>(engin, window);
                     break;
                     case stateId::MUSIC_STATE:
                         //engin.Push<MusicState>(engin);
@@ -477,7 +476,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         //engin.ChangeState<HostPlayState>(engin);
                     break;
                     case stateId::CONNECT_STATE:
-                        engin.ChangeState<ClientPlayState>(engin);
+                        engin.ChangeState<ClientPlayState>(engin, window);
                     break;
                 }
             }

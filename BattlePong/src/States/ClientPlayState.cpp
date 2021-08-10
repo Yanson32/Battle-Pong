@@ -3,8 +3,8 @@
 #include "States/Id.h"
 #include "Settings.h"
 
-ClientPlayState::ClientPlayState(GU::Engin::Engin& newEngin):
-PlayState::PlayState(newEngin, stateId::CLIENT_PLAY_STATE)
+ClientPlayState::ClientPlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow):
+PlayState::PlayState(newEngin, newWindow, stateId::CLIENT_PLAY_STATE)
 {
     //ctor
 }

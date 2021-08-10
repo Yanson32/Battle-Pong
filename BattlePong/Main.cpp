@@ -29,6 +29,7 @@
 
 int main(int argc, char* argv[])
 {
+    sf::RenderWindow window(sf::VideoMode(Settings::window.dimensions.x, Settings::window.dimensions.y),Settings::window.title); 
 
     srand (time(NULL));
 
@@ -64,7 +65,7 @@ int main(int argc, char* argv[])
 
 	Game engin;
 
-	engin.Push<IntroState>(engin);
+	engin.Push<IntroState>(engin, window);
 	EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
 
     try

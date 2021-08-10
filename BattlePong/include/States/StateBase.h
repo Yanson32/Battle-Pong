@@ -48,7 +48,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        StateBase(GU::Engin::Engin& newEngin, const stateId newState);
+        StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, const stateId newState);
 
 
         virtual void Init() override;
@@ -112,7 +112,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         bool isBallOnScreen();
         GU::Engin::Engin &engin;                        ///The Main game engin
         stateId state;
-        static sf::RenderWindow window;                 ///The game's window
+        sf::RenderWindow &window;
         static tgui::Gui gui;                           ///The Main TGUI object
         static std::shared_ptr<b2World> world;          ///The Box2D physics engin world object
         static std::shared_ptr<DebugDraw> debugDraw;    ///The Box2D b2Draw subclass for debug drawing

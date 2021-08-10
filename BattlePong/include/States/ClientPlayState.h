@@ -4,11 +4,12 @@
 #include "States/PlayState.h"
 #include <iostream>
 #include <memory>
+#include <SFML/Graphics/RenderWindow.hpp>
 
 class ClientPlayState: public PlayState
 {
     public:
-        ClientPlayState(GU::Engin::Engin& newEngin);
+        ClientPlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow);
 
         virtual void Init() override;
         virtual void Clean() override;

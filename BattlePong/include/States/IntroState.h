@@ -24,7 +24,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        IntroState(GU::Engin::Engin& engin);
+        IntroState(GU::Engin::Engin& engin, sf::RenderWindow &newWindow);
 
 
         /****************************************************************//**
@@ -62,7 +62,6 @@ class IntroState: public StateBase
         ********************************************************************/
         virtual ~IntroState();
     private:
-
         sf::Text header;                            ///Text displayed at the top of the screen
         sf::Color background = sf::Color::Black;    ///Color used to clear the screen background
         //sf::Font headerFont;                      ///Font used for the screens header

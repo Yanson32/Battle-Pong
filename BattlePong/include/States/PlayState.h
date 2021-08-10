@@ -25,7 +25,7 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        PlayState(GU::Engin::Engin& newEngin, const stateId newId = stateId::PLAY_STATE);
+        PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, const stateId newId = stateId::PLAY_STATE);
 
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
         void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
@@ -64,6 +64,5 @@ class PlayState: public StateBase
         ********************************************************************/
         ~PlayState();
     private:
-
 };
 #endif
