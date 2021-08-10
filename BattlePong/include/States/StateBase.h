@@ -27,6 +27,9 @@
 #include "Gui/PaddleHud.h"
 #include "Logging.h"
 #include "States/Id.h"
+
+#include <memory>
+
 class Wall;
 class Paddle;
 class Ball;
@@ -112,7 +115,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         static sf::RenderWindow window;                 ///The game's window
         static tgui::Gui gui;                           ///The Main TGUI object
         static std::shared_ptr<b2World> world;          ///The Box2D physics engin world object
-        static DebugDraw *debugDraw;                    ///The Box2D b2Draw subclass for debug drawing
+        static std::shared_ptr<DebugDraw> debugDraw;    ///The Box2D b2Draw subclass for debug drawing
         static std::unique_ptr<Ball> ball;              ///Pointer to the ball object
         static std::unique_ptr<Wall> ground;            ///Pointer to the bottem box2D object representing the ground
         static std::unique_ptr<Wall> celing;            ///Pointer to the celing Box2D object

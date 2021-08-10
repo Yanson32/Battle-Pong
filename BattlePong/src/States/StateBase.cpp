@@ -23,7 +23,7 @@
 sf::RenderWindow StateBase::window;
 std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
 tgui::Gui StateBase::gui;
-DebugDraw* StateBase::debugDraw = nullptr; 
+std::shared_ptr<DebugDraw> StateBase::debugDraw = nullptr; 
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 
@@ -62,8 +62,8 @@ state(newState),
 sysPause(false)
 {
     StateBase::window.create(sf::VideoMode(Settings::window.dimensions.x, Settings::window.dimensions.y),Settings::window.title); 
-    if(!debugDraw) 
-        debugDraw = new DebugDraw(*world);
+    if(debugDraw == nullptr) 
+        debugDraw.reset( new DebugDraw(*world));
     
     const float &wWidth = window.getView().getSize().x;
     const float &wHeight = window.getView().getSize().y;
@@ -108,7 +108,7 @@ sysPause(false)
     topPaddleStop->setPosition({0, (wallTh)});
     ball.reset(new Ball(world));
 
-    world->SetDebugDraw(debugDraw);
+    world->SetDebugDraw(debugDraw.get());
 
     //debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
 
