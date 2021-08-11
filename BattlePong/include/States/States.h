@@ -7,7 +7,6 @@
 #include "States/Id.h"
 #include "States/IntroState.h"
 #include "States/PlayState.h"
-#include "States/SingleplayerState.h"
 #include "States/StateBase.h"
 
 #endif // STATES_H_INCLUDED
