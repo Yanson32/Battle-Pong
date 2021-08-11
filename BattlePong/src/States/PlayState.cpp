@@ -26,7 +26,7 @@
 #include "Gui/IntroState/DevPanel.h"
 
 
-PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, const stateId newId): StateBase(newEngin, newWindow, newFrame, newId)
+PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, const stateId newId): StateBase(newEngin, newWindow, newFrame, debugDraw, newId)
 {
 
 
@@ -87,7 +87,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime)
         {
             frame->world->Step( timeStep, velocityIterations, positionIterations);
         }
-        debugDraw->update();
+        debugDraw.update();
         frame->ball->update();
         frame->ground->update();
         frame->celing->update();
@@ -254,7 +254,7 @@ void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->buttonId)
                 {
                     case Button::id::INTRO_PANEL:
-                        engin.ChangeState<IntroState>(engin,window,frame);
+                        engin.ChangeState<IntroState>(engin,window,frame, debugDraw);
                         break;
                     case Button::id::GENERAL_TAB:
                     {
@@ -312,7 +312,7 @@ void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         StateBase::Init();
                         tgui::Panel::Ptr cust(new Gui::DevPanel());
                         std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
-                        p->init(debugDraw->GetFlags(), window.getSize().x, window.getSize().y);
+                        p->init(debugDraw.GetFlags(), window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;

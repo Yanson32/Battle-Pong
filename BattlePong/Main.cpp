@@ -29,6 +29,7 @@
 
 #include "Settings.h"
 #include "Objects/Frame.h"
+#include "Box2D/DebugDraw.h"
 
 int main(int argc, char* argv[])
 {
@@ -72,8 +73,10 @@ int main(int argc, char* argv[])
     sf::Time accumulator = sf::seconds(0);
 
 	Game engin;
-
-	engin.Push<IntroState>(engin, window, frame);
+    
+    DebugDraw debugDraw(*frame->world.get());
+    frame->world->SetDebugDraw(&debugDraw);
+	engin.Push<IntroState>(engin, window, frame, debugDraw);
 	EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
 
     try

@@ -19,9 +19,9 @@
 #include "Gui/IntroState/GeneralPanel.h"
 #include "Gui/IntroState/VideoPanel.h"
 #include <boost/filesystem.hpp>
+#include "Box2D/DebugDraw.h"
 
 tgui::Gui StateBase::gui;
-std::shared_ptr<DebugDraw> StateBase::debugDraw = nullptr; 
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 sf::Sound StateBase::sound;
@@ -36,17 +36,15 @@ sf::Clock StateBase::roundClock;
 sf::Texture StateBase::backgroundTexture;
 sf::RectangleShape StateBase::backgroundRect;
 
-StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, const stateId newState):
+StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &newDebugDraw, const stateId newState):
 GU::Engin::GameState(),
+debugDraw(newDebugDraw),
 frame(newFrame),
 engin(newEngin),
 state(newState),
 window(newWindow),
 sysPause(false)
 {
-    if(debugDraw == nullptr) 
-        debugDraw.reset( new DebugDraw(*frame->world));
-    
     const float &wWidth = window.getView().getSize().x;
     const float &wHeight = window.getView().getSize().y;
     const float &wallTh = Settings::wallThickness;
@@ -59,7 +57,6 @@ sysPause(false)
 
 
 
-    frame->world->SetDebugDraw(debugDraw.get());
 
     //debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
 
@@ -121,7 +118,7 @@ void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime)
     window.draw(*frame->ground);
 
     #ifdef DEBUG
-        window.draw(*debugDraw);
+        window.draw(debugDraw);
     #endif
 
     gui.draw();
@@ -377,10 +374,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->id)
                 {
                     case stateId::PLAY_STATE:
-                        engin.Push<PlayState>(engin, window, frame);
+                        engin.Push<PlayState>(engin, window, frame, debugDraw);
                     break;
                     case stateId::INTRO_STATE:
-                        engin.Push<IntroState>(engin, window, frame);
+                        engin.Push<IntroState>(engin, window, frame, debugDraw);
                     break;
                 }
             }
@@ -408,33 +405,33 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                    {
                        case checkBoxId::DEBUG_AABB:
                             if(temp->checked)
-                               debugDraw->AppendFlags(b2Draw::e_aabbBit); 
+                               debugDraw.AppendFlags(b2Draw::e_aabbBit); 
                             else
-                                debugDraw->ClearFlags(b2Draw::e_aabbBit);
+                                debugDraw.ClearFlags(b2Draw::e_aabbBit);
                        break;
                        case checkBoxId::DEBUG_SHAPE:
                             if(temp->checked)
-                               debugDraw->AppendFlags(b2Draw::e_shapeBit); 
+                               debugDraw.AppendFlags(b2Draw::e_shapeBit); 
                             else
-                                debugDraw->ClearFlags(b2Draw::e_shapeBit);
+                                debugDraw.ClearFlags(b2Draw::e_shapeBit);
                        break;
                        case checkBoxId::DEBUG_MASS:
                             if(temp->checked)
-                               debugDraw->AppendFlags(b2Draw::e_centerOfMassBit);
+                               debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
                             else
-                                debugDraw->ClearFlags(b2Draw::e_centerOfMassBit);
+                                debugDraw.ClearFlags(b2Draw::e_centerOfMassBit);
                        break;
                        case checkBoxId::DEBUG_JOINTS:
                             if(temp->checked)
-                                debugDraw->AppendFlags(b2Draw::e_jointBit);
+                                debugDraw.AppendFlags(b2Draw::e_jointBit);
                             else
-                                debugDraw->ClearFlags(b2Draw::e_jointBit);
+                                debugDraw.ClearFlags(b2Draw::e_jointBit);
                        break;
                        case checkBoxId::DEBUG_PAIRS:
                             if(temp->checked)
-                                debugDraw->AppendFlags(b2Draw::e_pairBit);
+                                debugDraw.AppendFlags(b2Draw::e_pairBit);
                             else
-                                debugDraw->ClearFlags(b2Draw::e_pairBit);
+                                debugDraw.ClearFlags(b2Draw::e_pairBit);
                        break;
                    }; 
                 }

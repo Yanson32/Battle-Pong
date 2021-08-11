@@ -43,7 +43,7 @@
 #include "Resources/MusicId.h"
 
 #include <memory>
-IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame): StateBase(newEngin, newWindow, newFrame, stateId::INTRO_STATE)
+IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw): StateBase(newEngin, newWindow, newFrame, debugDraw, stateId::INTRO_STATE)
 {
 
     //ctor
@@ -91,7 +91,7 @@ void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
     frame->world->Step( timeStep, velocityIterations, positionIterations);
-    debugDraw->update();
+    debugDraw.update();
     frame->ball->update();
     frame->ground->update();
     frame->celing->update();
@@ -157,7 +157,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->buttonId)
                 {
                     case Button::id::START:
-                        engin.Push<PlayState>(engin, window, frame);
+                        engin.Push<PlayState>(engin, window, frame, debugDraw);
                     break;
                     case Button::id::INTRO_PANEL:
                     {
@@ -226,7 +226,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         StateBase::Init();
                         tgui::Panel::Ptr cust(new Gui::DevPanel());
                         std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
-                        p->init(debugDraw->GetFlags(), window.getSize().x, window.getSize().y);
+                        p->init(debugDraw.GetFlags(), window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
