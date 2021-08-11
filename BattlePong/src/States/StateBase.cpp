@@ -379,30 +379,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     case stateId::PLAY_STATE:
                         engin.Push<PlayState>(engin, window, frame);
                     break;
-                    case stateId::OPTIONS_STATE:
-                        //engin.Push<OptionsState>(engin);
-                    break;
-                    case stateId::MULTIPLAYER_CONTROL_STATE:
-                        //engin.Push<MultiplayerControlState>(engin);
-                    break;
-                    case stateId::CONNECT_STATE:
-                        //engin.Push<ConnectState>(engin);
-                    break;
-                    case stateId::CONTROL_STATE:
-                        //engin.Push<ControlState>(engin);
-                    break;
-//                    case stateId::DEMO_STATE:
-//                        engin.Push<DemoState>(engin);
-//                    break;
                     case stateId::INTRO_STATE:
                         engin.Push<IntroState>(engin, window, frame);
                     break;
-                    case stateId::MUSIC_STATE:
-                        //engin.Push<MusicState>(engin);
-                    break;
-//                    case stateId::PADDLE_STATE:
-//                        engin.Push<PaddleState>(engin);
-//                    break;
                 }
             }
 
