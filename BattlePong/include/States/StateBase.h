@@ -30,6 +30,8 @@
 
 #include <memory>
 
+#include "Objects/Frame.h"
+
 class Wall;
 class Paddle;
 class Ball;
@@ -48,7 +50,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, const stateId newState);
+        StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, const stateId newState);
 
 
         virtual void Init() override;
@@ -110,23 +112,12 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
     protected:
         void centerText();
         bool isBallOnScreen();
+        std::shared_ptr<Frame> frame;
         GU::Engin::Engin &engin;                        ///The Main game engin
         stateId state;
         sf::RenderWindow &window;
         static tgui::Gui gui;                           ///The Main TGUI object
-        static std::shared_ptr<b2World> world;          ///The Box2D physics engin world object
         static std::shared_ptr<DebugDraw> debugDraw;    ///The Box2D b2Draw subclass for debug drawing
-        static std::unique_ptr<Ball> ball;              ///Pointer to the ball object
-        static std::unique_ptr<Wall> ground;            ///Pointer to the bottem box2D object representing the ground
-        static std::unique_ptr<Wall> celing;            ///Pointer to the celing Box2D object
-        static std::unique_ptr<Wall> leftWall;          ///Pointer to the left wall Box2D object
-        static std::unique_ptr<Wall> RightWall;         ///Pointer to the right wall Box2D object
-        static std::unique_ptr<Paddle> leftPaddle;      ///Pointer to the paddle on the left side of the screen
-        static std::unique_ptr<Paddle> rightPaddle;     ///Pointer to the paddle on the right side of the screen
-        static std::unique_ptr<Goal> leftGoal;          ///Pointer to the goal sensor which determines is a goal has been scored on the left player
-        static std::unique_ptr<Goal> rightGoal;         ///Pointer to the goal sensor which determines is a goal has been scored on the right player
-        static std::unique_ptr<PaddleStop> bottomPaddleStop;
-        static std::unique_ptr<PaddleStop> topPaddleStop;
         static sf::Sound sound;
         static sf::Music music;
         static std::shared_ptr<PaddleHud> paddle1Hud;

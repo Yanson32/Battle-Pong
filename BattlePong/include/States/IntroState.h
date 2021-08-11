@@ -16,6 +16,8 @@
 #include "States/StateBase.h"
 #include "Gui/GuiManager.h"
 
+#include "Objects/Frame.h"
+
 class IntroState: public StateBase
 {
     public:
@@ -24,7 +26,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        IntroState(GU::Engin::Engin& engin, sf::RenderWindow &newWindow);
+        IntroState(GU::Engin::Engin& engin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame);
 
 
         /****************************************************************//**

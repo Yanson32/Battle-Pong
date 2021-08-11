@@ -5,6 +5,8 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/ObjectBase.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Goal.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/PaddleStop.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/ObjectId.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/Frame.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/Objects.h"
 
 )
 set(SUB_DIRECTORIES ""

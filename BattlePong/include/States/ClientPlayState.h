@@ -5,11 +5,12 @@
 #include <iostream>
 #include <memory>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include "Objects/Frame.h"
 
 class ClientPlayState: public PlayState
 {
     public:
-        ClientPlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow);
+        ClientPlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame);
 
         virtual void Init() override;
         virtual void Clean() override;

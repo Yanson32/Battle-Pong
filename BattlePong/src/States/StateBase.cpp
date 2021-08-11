@@ -20,28 +20,10 @@
 #include "Gui/IntroState/VideoPanel.h"
 #include <boost/filesystem.hpp>
 
-std::shared_ptr<b2World> StateBase::world(new b2World(b2Vec2(0, 0)));
 tgui::Gui StateBase::gui;
 std::shared_ptr<DebugDraw> StateBase::debugDraw = nullptr; 
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
-
-std::unique_ptr<Wall> StateBase::ground = nullptr;
-std::unique_ptr<Wall> StateBase::celing = nullptr;
-std::unique_ptr<Wall> StateBase::leftWall = nullptr;
-std::unique_ptr<Wall> StateBase::RightWall = nullptr;
-
-
-std::unique_ptr<Paddle> StateBase::leftPaddle = nullptr;
-std::unique_ptr<Paddle> StateBase::rightPaddle = nullptr;
-
-std::unique_ptr<PaddleStop> StateBase::bottomPaddleStop = nullptr;
-std::unique_ptr<PaddleStop> StateBase::topPaddleStop = nullptr;
-
-std::unique_ptr<Goal> StateBase::leftGoal = nullptr;
-std::unique_ptr<Goal> StateBase::rightGoal = nullptr;
-std::unique_ptr<Ball> StateBase::ball = nullptr;
-
 sf::Sound StateBase::sound;
 sf::Music StateBase::music;
 
@@ -54,15 +36,16 @@ sf::Clock StateBase::roundClock;
 sf::Texture StateBase::backgroundTexture;
 sf::RectangleShape StateBase::backgroundRect;
 
-StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, const stateId newState):
+StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, const stateId newState):
 GU::Engin::GameState(),
+frame(newFrame),
 engin(newEngin),
 state(newState),
 window(newWindow),
 sysPause(false)
 {
     if(debugDraw == nullptr) 
-        debugDraw.reset( new DebugDraw(*world));
+        debugDraw.reset( new DebugDraw(*frame->world));
     
     const float &wWidth = window.getView().getSize().x;
     const float &wHeight = window.getView().getSize().y;
@@ -74,45 +57,14 @@ sysPause(false)
     std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, paddleHeight),sf::Vector2f(0, paddleHeight)};
     std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
 
-    ground.reset(new Wall(world, horizontalPoints));
-    ground->setPosition({0, wHeight - wallTh});
-    
-    celing.reset(new Wall(world, horizontalPoints));
-    celing->setPosition({0, 0});
-    
-    leftWall.reset(new Wall(world, verticalPoints));
-    leftWall->setPosition({0, 0});
-    
-    RightWall.reset(new Wall(world, verticalPoints));
-    RightWall->setPosition({wWidth - wallTh, 0});
-    
-    leftPaddle.reset(new Paddle(world, ObjectId::LEFT_PADDLE, paddlePoints));
-    leftPaddle->setInput(std::unique_ptr<AI>(new AI(*leftPaddle)));
-    leftPaddle->setColor(sf::Color(255, 100, 0));
-    
-    rightPaddle.reset(new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints));
-    rightPaddle->setInput(std::unique_ptr<AI>(new AI(*rightPaddle)));
-    rightPaddle->setColor(sf::Color::Blue);
 
-    leftGoal.reset(new Goal(world, ObjectId::RIGHT_GOAL, goalPoints));
-    leftGoal->setPosition(sf::Vector2f(wallTh, 0)); 
-    
-    rightGoal.reset(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
-    rightGoal->setPosition(sf::Vector2f(wWidth - (wallTh * 2), 0));
-   
-    bottomPaddleStop.reset(new PaddleStop(world, horizontalPoints)); 
-    bottomPaddleStop->setPosition({0, wHeight - (wallTh * 2)});
-    
-    topPaddleStop.reset(new PaddleStop(world, horizontalPoints)); 
-    topPaddleStop->setPosition({0, (wallTh)});
-    ball.reset(new Ball(world));
 
-    world->SetDebugDraw(debugDraw.get());
+    frame->world->SetDebugDraw(debugDraw.get());
 
     //debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
 
-    world->SetContactListener(&contactListener);
-
+    frame->world->SetContactListener(&contactListener);
+///
     paddle2Hud->setPosition({650, 0});
     gui.add(paddle1Hud);
     gui.add(paddle2Hud);
@@ -123,7 +75,7 @@ sysPause(false)
 
 bool StateBase::isBallOnScreen()
 {
-    sf::Vector2f pos = ball->getPosition();
+    sf::Vector2f pos = frame->ball->getPosition();
     sf::FloatRect windowBounds;
     windowBounds.top = 0;
     windowBounds.left = 0;
@@ -160,13 +112,13 @@ void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime)
     UNUSED(deltaTime);
     window.clear();
     window.draw(backgroundRect);
-    window.draw(*leftPaddle);
-    window.draw(*rightPaddle);
+    window.draw(*frame->leftPaddle);
+    window.draw(*frame->rightPaddle);
 
-    window.draw(*celing);
-    window.draw(*leftWall);
-    window.draw(*RightWall);
-    window.draw(*ground);
+    window.draw(*frame->celing);
+    window.draw(*frame->leftWall);
+    window.draw(*frame->rightWall);
+    window.draw(*frame->ground);
 
     #ifdef DEBUG
         window.draw(*debugDraw);
@@ -196,11 +148,11 @@ void StateBase::reset()
        y *= -1;
     
     float paddleOffset = Settings::wallThickness * 4;
-    ball->setPosition({Settings::window.dimensions.x / 2, Settings::window.dimensions.y / 2});
-    ball->setVelocity({x, y});
-    leftPaddle->setPosition(sf::Vector2f(paddleOffset - Settings::wallThickness, Settings::window.dimensions.y / 2));
-    rightPaddle->setPosition(sf::Vector2f(Settings::window.dimensions.x - paddleOffset, Settings::window.dimensions.y / 2));
-    rightPaddle->handleInput(*ball);
+    frame->ball->setPosition({Settings::window.dimensions.x / 2, Settings::window.dimensions.y / 2});
+    frame->ball->setVelocity({x, y});
+    frame->leftPaddle->setPosition(sf::Vector2f(paddleOffset - Settings::wallThickness, Settings::window.dimensions.y / 2));
+    frame->rightPaddle->setPosition(sf::Vector2f(Settings::window.dimensions.x - paddleOffset, Settings::window.dimensions.y / 2));
+    frame->rightPaddle->handleInput(*frame->ball);
     userMessage.setString("Ready!");
     centerText();
     messageClock.restart();
@@ -425,7 +377,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->id)
                 {
                     case stateId::PLAY_STATE:
-                        engin.Push<PlayState>(engin, window);
+                        engin.Push<PlayState>(engin, window, frame);
                     break;
                     case stateId::OPTIONS_STATE:
                         //engin.Push<OptionsState>(engin);
@@ -434,7 +386,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         //engin.Push<MultiplayerControlState>(engin);
                     break;
                     case stateId::CLIENT_PLAY_STATE:
-                        engin.Push<ClientPlayState>(engin, window);
+                        //engin.Push<ClientPlayState>(engin, window, frame);
                     break;
                     case stateId::CONNECT_STATE:
                         //engin.Push<ConnectState>(engin);
@@ -449,7 +401,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         //engin.Push<HostPlayState>(engin);
                     break;
                     case stateId::INTRO_STATE:
-                        engin.Push<IntroState>(engin, window);
+                        engin.Push<IntroState>(engin, window, frame);
                     break;
                     case stateId::MUSIC_STATE:
                         //engin.Push<MusicState>(engin);
@@ -476,7 +428,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                         //engin.ChangeState<HostPlayState>(engin);
                     break;
                     case stateId::CONNECT_STATE:
-                        engin.ChangeState<ClientPlayState>(engin, window);
+                        engin.ChangeState<ClientPlayState>(engin, window, frame);
                     break;
                 }
             }

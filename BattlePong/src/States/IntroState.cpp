@@ -43,14 +43,14 @@
 #include "Resources/MusicId.h"
 
 #include <memory>
-IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow): StateBase(newEngin, newWindow, stateId::INTRO_STATE)
+IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame): StateBase(newEngin, newWindow, newFrame, stateId::INTRO_STATE)
 {
 
     //ctor
-    ball->setPosition({400, 300});
-    ball->setVelocity({100, 100});
-    leftPaddle->setPosition(sf::Vector2f(100, 300));
-    rightPaddle->setPosition(sf::Vector2f(700, 300));
+    frame->ball->setPosition({400, 300});
+    frame->ball->setVelocity({100, 100});
+    frame->leftPaddle->setPosition(sf::Vector2f(100, 300));
+    frame->rightPaddle->setPosition(sf::Vector2f(700, 300));
 
     header.setString(Settings::window.title);
     header.setCharacterSize(54);
@@ -74,8 +74,8 @@ void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
             sfEvent(engin, event);
             gui.handleEvent(event);
         }
-        leftPaddle->handleInput(*ball);
-        rightPaddle->handleInput(*ball);
+        frame->leftPaddle->handleInput(*frame->ball);
+        frame->rightPaddle->handleInput(*frame->ball);
     }
 
     //GameUtilities event loop
@@ -90,21 +90,21 @@ void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime)
 {
     StateBase::Update(engin, deltaTime);
-    world->Step( timeStep, velocityIterations, positionIterations);
+    frame->world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw->update();
-    ball->update();
-    ground->update();
-    celing->update();
-    leftWall->update();
-    RightWall->update();
-    leftPaddle->update();
-    rightPaddle->update();
+    frame->ball->update();
+    frame->ground->update();
+    frame->celing->update();
+    frame->leftWall->update();
+    frame->rightWall->update();
+    frame->leftPaddle->update();
+    frame->rightPaddle->update();
 }
 
 void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
 	StateBase::Draw(engin, deltaTime);
-	window.draw(*ball);
+	window.draw(*frame->ball);
 	window.draw(header);
     window.display();
 }
@@ -157,7 +157,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->buttonId)
                 {
                     case Button::id::START:
-                        engin.Push<PlayState>(engin, window);
+                        engin.Push<PlayState>(engin, window, frame);
                     break;
                     case Button::id::INTRO_PANEL:
                     {

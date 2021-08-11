@@ -27,10 +27,18 @@
 #include "config.h"
 #include <GameUtilities/Core/String.h>
 
+#include "Settings.h"
+#include "Objects/Frame.h"
+
 int main(int argc, char* argv[])
 {
     sf::RenderWindow window(sf::VideoMode(Settings::window.dimensions.x, Settings::window.dimensions.y),Settings::window.title); 
 
+    tgui::Gui gui;
+    gui.setTarget(window);
+
+    std::shared_ptr<Frame> frame(new Frame(window.getView().getSize(), gui));
+    
     srand (time(NULL));
 
     std::stringstream ss;
@@ -65,7 +73,7 @@ int main(int argc, char* argv[])
 
 	Game engin;
 
-	engin.Push<IntroState>(engin, window);
+	engin.Push<IntroState>(engin, window, frame);
 	EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
 
     try

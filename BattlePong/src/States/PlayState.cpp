@@ -26,20 +26,20 @@
 #include "Gui/IntroState/DevPanel.h"
 
 
-PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, const stateId newId): StateBase(newEngin, newWindow, newId)
+PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, const stateId newId): StateBase(newEngin, newWindow, newFrame, newId)
 {
 
 
     if(Settings::paddle1.input == "None")
-        leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*leftPaddle)));
+        frame->leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*frame->leftPaddle)));
     else
-        leftPaddle->setInput(std::unique_ptr<Input>(new AI(*leftPaddle)));
+        frame->leftPaddle->setInput(std::unique_ptr<Input>(new AI(*frame->leftPaddle)));
 
 
     if(Settings::paddle2.input  == "None")
-        rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*rightPaddle)));
+        frame->rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*frame->rightPaddle)));
     else
-        rightPaddle->setInput(std::unique_ptr<Input>(new AI(*rightPaddle)));
+        frame->rightPaddle->setInput(std::unique_ptr<Input>(new AI(*frame->rightPaddle)));
 
     systemPause(true);
     userMessage.setCharacterSize(34);
@@ -63,8 +63,8 @@ void PlayState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
             sfEvent(engin, event);
             gui.handleEvent(event);
         }
-        leftPaddle->handleInput(*ball);
-        rightPaddle->handleInput(*ball);
+        frame->leftPaddle->handleInput(*frame->ball);
+        frame->rightPaddle->handleInput(*frame->ball);
     }
 
     //GameUtilities event loop
@@ -85,16 +85,16 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime)
     {
         if(!isSystemPaused())
         {
-            world->Step( timeStep, velocityIterations, positionIterations);
+            frame->world->Step( timeStep, velocityIterations, positionIterations);
         }
         debugDraw->update();
-        ball->update();
-        ground->update();
-        celing->update();
-        leftWall->update();
-        RightWall->update();
-        leftPaddle->update();
-        rightPaddle->update();
+        frame->ball->update();
+        frame->ground->update();
+        frame->celing->update();
+        frame->leftWall->update();
+        frame->rightWall->update();
+        frame->leftPaddle->update();
+        frame->rightPaddle->update();
 
     }
 
@@ -157,7 +157,7 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 
     StateBase::Draw(engin, deltaTime);
     if(userMessage.getString() == "")
-        window.draw(*ball);
+        window.draw(*frame->ball);
     window.draw(userMessage);
 
 
@@ -254,7 +254,7 @@ void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->buttonId)
                 {
                     case Button::id::INTRO_PANEL:
-                        engin.ChangeState<IntroState>(engin,window);
+                        engin.ChangeState<IntroState>(engin,window,frame);
                         break;
                     case Button::id::GENERAL_TAB:
                     {
