@@ -1,7 +1,6 @@
 #ifndef GAMEUTILITIES_STATES_H_INCLUDED
 #define GAMEUTILITIES_STATES_H_INCLUDED
 
-#include "States/ClientPlayState.h"
 #include "States/DemoState.h"
 #include "States/Id.h"
 #include "States/IntroState.h"

@@ -385,9 +385,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                     case stateId::MULTIPLAYER_CONTROL_STATE:
                         //engin.Push<MultiplayerControlState>(engin);
                     break;
-                    case stateId::CLIENT_PLAY_STATE:
-                        //engin.Push<ClientPlayState>(engin, window, frame);
-                    break;
                     case stateId::CONNECT_STATE:
                         //engin.Push<ConnectState>(engin);
                     break;
@@ -397,9 +394,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
 //                    case stateId::DEMO_STATE:
 //                        engin.Push<DemoState>(engin);
 //                    break;
-                    case stateId::HOST_PLAY_STATE:
-                        //engin.Push<HostPlayState>(engin);
-                    break;
                     case stateId::INTRO_STATE:
                         engin.Push<IntroState>(engin, window, frame);
                     break;
@@ -422,15 +416,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
             std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
             if(temp)
             {
-                switch(temp->stateId)
-                {
-                    case stateId::HOST_PLAY_STATE:
-                        //engin.ChangeState<HostPlayState>(engin);
-                    break;
-                    case stateId::CONNECT_STATE:
-                        engin.ChangeState<ClientPlayState>(engin, window, frame);
-                    break;
-                }
             }
         }
         break;
