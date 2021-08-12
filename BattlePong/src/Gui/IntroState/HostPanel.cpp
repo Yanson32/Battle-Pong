@@ -1,8 +1,13 @@
+
+
+
 #include "Gui/IntroState/HostPanel.h"
 #include "Gui/ButtonId.h"
 #include "Events/EventManager.h"
 #include <GameUtilities/Event/Click.h>
 #include <SFML/Network.hpp>
+#include "Settings.h"
+
 HostPanel::HostPanel():
 CustomPanel::CustomPanel()
 {
@@ -10,11 +15,9 @@ CustomPanel::CustomPanel()
     globalIpLabel = tgui::Label::create("Global Ip");
     layout1->add(globalIpLabel);
 
-    sf::IpAddress address = sf::IpAddress::getPublicAddress();
-    sf::String globalIp = address.toString();
-
+    
     //EditBox to enter ip address
-    globalIpAdress = tgui::Label::create(globalIp.toAnsiString());
+    globalIpAdress = tgui::Label::create(Settings::globalIp);
     layout1->add(globalIpAdress);
 
     //Local Ip address label
