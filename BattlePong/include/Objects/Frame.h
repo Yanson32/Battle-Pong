@@ -9,7 +9,7 @@
 class Frame
 {
     public:
-        Frame(const sf::Vector2f &windowSize, tgui::Gui &gui);
+        Frame(const sf::Vector2f &windowSize);
         std::shared_ptr<b2World> world;          ///The Box2D physics engin world object
         std::shared_ptr<DebugDraw> debugDraw;    ///The Box2D b2Draw subclass for debug drawing
         std::unique_ptr<Ball> ball;              ///Pointer to the ball object

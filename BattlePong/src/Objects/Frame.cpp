@@ -1,7 +1,7 @@
 #include "Objects/Frame.h"
 #include "Settings.h"
 
-Frame::Frame(const sf::Vector2f &windowSize, tgui::Gui &gui)
+Frame::Frame(const sf::Vector2f &windowSize)
 {
     world.reset(new b2World(b2Vec2(0, 0)));
     
