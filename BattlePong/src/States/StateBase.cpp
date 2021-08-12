@@ -38,11 +38,11 @@ sf::RectangleShape StateBase::backgroundRect;
 
 StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &newDebugDraw, const stateId newState):
 GU::Engin::GameState(),
-debugDraw(newDebugDraw),
-frame(newFrame),
 engin(newEngin),
-state(newState),
 window(newWindow),
+frame(newFrame),
+debugDraw(newDebugDraw),
+state(newState),
 sysPause(false)
 {
     const float &wWidth = window.getView().getSize().x;
