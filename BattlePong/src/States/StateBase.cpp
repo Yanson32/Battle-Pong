@@ -27,8 +27,8 @@ sf::Clock StateBase::messageClock;
 sf::Sound StateBase::sound;
 sf::Music StateBase::music;
 
-std::shared_ptr<PaddleHud> StateBase::paddle1Hud(new PaddleHud(Settings::paddle1));
-std::shared_ptr<PaddleHud> StateBase::paddle2Hud(new PaddleHud(Settings::paddle2));
+std::shared_ptr<PaddleHud> StateBase::paddle1Hud = nullptr;
+std::shared_ptr<PaddleHud> StateBase::paddle2Hud = nullptr;
 
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
@@ -56,6 +56,8 @@ sysPause(false)
     std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
 
 
+    paddle1Hud.reset(new PaddleHud(Settings::paddle1));
+    paddle2Hud.reset(new PaddleHud(Settings::paddle2));
 
 
     //debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
@@ -67,6 +69,7 @@ sysPause(false)
     gui.add(paddle2Hud);
 
     music.setLoop(true);
+    
     reset();
 }
 
