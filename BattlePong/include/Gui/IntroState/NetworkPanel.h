@@ -10,8 +10,8 @@ namespace Gui
             void init(const int &width, const int &height);
             virtual ~NetworkPanel();
         protected:
-            tgui::Label::Ptr globalIpLabel;
-            tgui::Label::Ptr globalIp;
+            tgui::Label::Ptr publicIpLabel;
+            tgui::Label::Ptr publicIp;
             
             tgui::Label::Ptr localIpLabel;
             tgui::Label::Ptr localIp;

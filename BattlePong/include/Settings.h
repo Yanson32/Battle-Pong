@@ -90,7 +90,7 @@ namespace Settings
 
 	extern const float wallThickness;
 
-    extern std::string globalIp;
+    extern std::string publicIp;
     extern std::string localIp;
     extern std::string port;
     extern std::string background;

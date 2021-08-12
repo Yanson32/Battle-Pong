@@ -12,13 +12,13 @@ HostPanel::HostPanel():
 CustomPanel::CustomPanel()
 {
     //Global Ip address label
-    globalIpLabel = tgui::Label::create("Global Ip");
-    layout1->add(globalIpLabel);
+    publicIpLabel = tgui::Label::create("Public Ip");
+    layout1->add(publicIpLabel);
 
     
     //EditBox to enter ip address
-    globalIpAdress = tgui::Label::create(Settings::globalIp);
-    layout1->add(globalIpAdress);
+    publicIpAdress = tgui::Label::create(Settings::publicIp);
+    layout1->add(publicIpAdress);
 
     //Local Ip address label
     localIpLabel = tgui::Label::create("Local Ip");

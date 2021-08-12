@@ -14,12 +14,12 @@ namespace Gui
     OptionsPanel::OptionsPanel(sf::String("Network"))
     {
         //Create global label
-        globalIpLabel = tgui::Label::create("Global Ip");
-        layout2->add(globalIpLabel);
+        publicIpLabel = tgui::Label::create("Public Ip");
+        layout2->add(publicIpLabel);
        
         
-        globalIp = tgui::Label::create(Settings::globalIp);
-        layout2->add(globalIp); 
+        publicIp = tgui::Label::create(Settings::publicIp);
+        layout2->add(publicIp); 
         
         //Create local ip label
         localIpLabel = tgui::Label::create("Local Ip");

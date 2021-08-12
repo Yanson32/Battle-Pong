@@ -11,8 +11,8 @@ class HostPanel: public Gui::CustomPanel
         ~HostPanel();
     private:
         tgui::Button::Ptr backBtn;
-        tgui::Label::Ptr globalIpLabel;
-        tgui::Label::Ptr globalIpAdress;
+        tgui::Label::Ptr publicIpLabel;
+        tgui::Label::Ptr publicIpAdress;
         tgui::Label::Ptr localIpLabel;
         tgui::Label::Ptr localIpBox;
         tgui::Label::Ptr portLabel;
