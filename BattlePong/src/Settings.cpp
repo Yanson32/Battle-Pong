@@ -34,9 +34,9 @@ namespace Settings
 	const float wallThickness = 25;
     std::string theme = "Black";
 
-    const std::string globalIp = sf::IpAddress::getPublicAddress().toString();
-    const std::string localIp = sf::IpAddress::getLocalAddress().toString();
-    const std::string port = "5000";
+    std::string globalIp = "0.0.0.0"; 
+    std::string localIp = sf::IpAddress::getLocalAddress().toString();
+    std::string port = "5000";
     std::string background = "Star";
 }
 

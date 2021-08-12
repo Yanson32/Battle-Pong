@@ -33,6 +33,9 @@
 
 int main(int argc, char* argv[])
 {
+    std::cout << "Retriving public ip address " << std::endl;
+    Settings::globalIp = sf::IpAddress::getPublicAddress().toString(); 
+    
     sf::RenderWindow window(sf::VideoMode(Settings::window.dimensions.x, Settings::window.dimensions.y),Settings::window.title); 
 
     tgui::Gui gui;
