@@ -30,11 +30,15 @@
 #include "Settings.h"
 #include "Objects/Frame.h"
 #include "Box2D/DebugDraw.h"
+#include <thread>
 
 int main(int argc, char* argv[])
 {
-    std::cout << "Retriving public ip address " << std::endl;
-    Settings::publicIp = sf::IpAddress::getPublicAddress().toString(); 
+    //Retrieving the public ip address can take a while, especially if there is no internet connection.
+    //So we do it in a thread.
+    std::thread ipThread([&](){Settings::publicIp = sf::IpAddress::getPublicAddress().toString();});
+    ipThread.detach();
+
     
     sf::RenderWindow window(sf::VideoMode(Settings::window.dimensions.x, Settings::window.dimensions.y),Settings::window.title); 
 
