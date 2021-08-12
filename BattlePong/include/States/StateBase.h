@@ -29,6 +29,7 @@
 #include "States/Id.h"
 
 #include <memory>
+#include <TGUI/TGUI.hpp>
 
 #include "Objects/Frame.h"
 
@@ -50,7 +51,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &newDebugDraw, const stateId newState);
+        StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &newDebugDraw, tgui::Gui &newGui, const stateId newState);
 
 
         virtual void Init() override;
@@ -116,8 +117,8 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         sf::RenderWindow &window;
         std::shared_ptr<Frame> frame;
         DebugDraw &debugDraw;
+        tgui::Gui &gui;                           ///The Main TGUI object
         stateId state;
-        static tgui::Gui gui;                           ///The Main TGUI object
         static sf::Sound sound;
         static sf::Music music;
         static std::shared_ptr<PaddleHud> paddle1Hud;

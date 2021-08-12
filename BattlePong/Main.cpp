@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
     
     DebugDraw debugDraw(*frame->world.get());
     frame->world->SetDebugDraw(&debugDraw);
-	engin.Push<IntroState>(engin, window, frame, debugDraw);
+	engin.Push<IntroState>(engin, window, frame, debugDraw, gui);
 	EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
 
     try

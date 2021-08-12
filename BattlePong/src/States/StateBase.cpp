@@ -21,7 +21,6 @@
 #include <boost/filesystem.hpp>
 #include "Box2D/DebugDraw.h"
 
-tgui::Gui StateBase::gui;
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 sf::Sound StateBase::sound;
@@ -36,12 +35,13 @@ sf::Clock StateBase::roundClock;
 sf::Texture StateBase::backgroundTexture;
 sf::RectangleShape StateBase::backgroundRect;
 
-StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &newDebugDraw, const stateId newState):
+StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &newDebugDraw, tgui::Gui &newGui, const stateId newState):
 GU::Engin::GameState(),
 engin(newEngin),
 window(newWindow),
 frame(newFrame),
 debugDraw(newDebugDraw),
+gui(newGui),
 state(newState),
 sysPause(false)
 {
@@ -377,10 +377,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->id)
                 {
                     case stateId::PLAY_STATE:
-                        engin.Push<PlayState>(engin, window, frame, debugDraw);
+                        engin.Push<PlayState>(engin, window, frame, debugDraw, gui);
                     break;
                     case stateId::INTRO_STATE:
-                        engin.Push<IntroState>(engin, window, frame, debugDraw);
+                        engin.Push<IntroState>(engin, window, frame, debugDraw, gui);
                     break;
                 }
             }

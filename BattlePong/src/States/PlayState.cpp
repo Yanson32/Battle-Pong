@@ -26,7 +26,7 @@
 #include "Gui/IntroState/DevPanel.h"
 
 
-PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, const stateId newId): StateBase(newEngin, newWindow, newFrame, debugDraw, newId)
+PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, tgui::Gui &newGui, const stateId newId): StateBase(newEngin, newWindow, newFrame, debugDraw, newGui, newId)
 {
 
 
@@ -254,7 +254,7 @@ void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->buttonId)
                 {
                     case Button::id::INTRO_PANEL:
-                        engin.ChangeState<IntroState>(engin,window,frame, debugDraw);
+                        engin.ChangeState<IntroState>(engin,window,frame, debugDraw, gui);
                         break;
                     case Button::id::GENERAL_TAB:
                     {

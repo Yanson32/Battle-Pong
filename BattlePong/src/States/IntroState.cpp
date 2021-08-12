@@ -43,7 +43,7 @@
 #include "Resources/MusicId.h"
 
 #include <memory>
-IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw): StateBase(newEngin, newWindow, newFrame, debugDraw, stateId::INTRO_STATE)
+IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, tgui::Gui &newGui): StateBase(newEngin, newWindow, newFrame, debugDraw, newGui, stateId::INTRO_STATE)
 {
 
     //ctor
@@ -157,7 +157,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->buttonId)
                 {
                     case Button::id::START:
-                        engin.Push<PlayState>(engin, window, frame, debugDraw);
+                        engin.Push<PlayState>(engin, window, frame, debugDraw, gui);
                     break;
                     case Button::id::INTRO_PANEL:
                     {
