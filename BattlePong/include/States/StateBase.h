@@ -112,11 +112,11 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
     protected:
         void centerText();
         bool isBallOnScreen();
-        DebugDraw &debugDraw;
-        std::shared_ptr<Frame> frame;
         GU::Engin::Engin &engin;                        ///The Main game engin
-        stateId state;
         sf::RenderWindow &window;
+        std::shared_ptr<Frame> frame;
+        DebugDraw &debugDraw;
+        stateId state;
         static tgui::Gui gui;                           ///The Main TGUI object
         static sf::Sound sound;
         static sf::Music music;

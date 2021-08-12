@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     tgui::Gui gui;
     gui.setTarget(window);
 
-    std::shared_ptr<Frame> frame(new Frame(window.getView().getSize(), gui));
+    std::shared_ptr<Frame> frame(new Frame(window.getView().getSize()));
     
     srand (time(NULL));
 
