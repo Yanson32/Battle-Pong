@@ -114,7 +114,10 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 void IntroState::Init()
 {
     StateBase::Init();
-    tgui::Panel::Ptr cust(new IntroGui());
+    
+    
+    std::shared_ptr<IntroGui> cust(new IntroGui());
+    cust->init(window.getView().getSize().x, window.getView().getSize().y); 
     gui.add(cust, "PanelPointer");
   
     //Load ball collision sound  
