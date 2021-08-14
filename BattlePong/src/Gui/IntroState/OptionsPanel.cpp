@@ -37,8 +37,6 @@ namespace Gui
             EventManager::inst().Post<GU::Evt::Click>(id);
         });
 
-        getContentPane()->appendSpace();
-
 
         backBtn = tgui::Button::create("Back");
         backBtn->onPress([](){

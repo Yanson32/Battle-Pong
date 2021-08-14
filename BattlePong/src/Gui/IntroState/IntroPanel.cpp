@@ -8,6 +8,8 @@ namespace Gui
     IntroPanel::IntroPanel()
     {
         //ctor
+        getContentPane()->appendSpace();
+
         const sf::Vector2f buttonPos1(300, 400);
         const sf::Vector2f buttonPos2(300, 475);
         //ctor

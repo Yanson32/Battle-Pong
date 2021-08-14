@@ -12,7 +12,8 @@ namespace Gui
     GeneralPanel::GeneralPanel(const bool isPlaying):
     OptionsPanel::OptionsPanel(sf::String("General"))
     {
-        
+        getContentPane()->appendSpace(); 
+
         //Create lable instead of combobox when the user is playing the game
         if(isPlaying)
         {

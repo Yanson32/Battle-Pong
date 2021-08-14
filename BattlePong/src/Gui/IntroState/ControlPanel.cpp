@@ -8,6 +8,8 @@ namespace Gui
     OptionsPanel::OptionsPanel("Controls")
     {
         UNUSED(debugDraw);
+        
+        getContentPane()->appendSpace();
 
         //Create up button editbox
         upEditBox = tgui::EditBox::create();

@@ -10,6 +10,8 @@ namespace Gui
     VideoPanel::VideoPanel():
     OptionsPanel::OptionsPanel(sf::String("Video"))
     {
+        getContentPane()->appendSpace();
+
         //Theme selection box        
         themeCombo = tgui::ComboBox::create();
         themeCombo->addItem("Default");

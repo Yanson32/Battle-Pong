@@ -11,6 +11,8 @@
 HostPanel::HostPanel():
 CustomPanel::CustomPanel()
 {
+    getContentPane()->appendSpace();
+
     //Public ip address
     publicIpAdress = tgui::Label::create(Settings::publicIp);
     getContentPane()->append("Public Ip", publicIpAdress);

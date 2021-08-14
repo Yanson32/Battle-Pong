@@ -13,6 +13,8 @@ namespace Gui
     NetworkPanel::NetworkPanel():
     OptionsPanel::OptionsPanel(sf::String("Network"))
     {
+        getContentPane()->appendSpace();
+
         publicIp = tgui::Label::create(Settings::publicIp);
         getContentPane()->append("Public Ip", publicIp); 
         

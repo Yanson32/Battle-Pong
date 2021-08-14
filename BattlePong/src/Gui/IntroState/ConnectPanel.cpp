@@ -7,6 +7,8 @@ ConnectPanel::ConnectPanel():
 CustomPanel::CustomPanel()
 {
 
+    getContentPane()->appendSpace();
+
     //EditBox to enter port number
     portBox = tgui::EditBox::create();
     portBox->onTextChange(&ConnectPanel::onTextChanged, this);

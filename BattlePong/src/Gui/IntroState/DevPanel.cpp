@@ -15,6 +15,7 @@ namespace Gui
         sf::Vector2f position2(225, 0);
 
         //Create header for the box2d section
+        getContentPane()->appendSpace();
         getContentPane()->appendHeader("Box2d");
 
         //Create AABB checkbox
@@ -71,6 +72,7 @@ namespace Gui
 
 		getContentPane()->append("Pairs", pair);
 
+        getContentPane()->appendSpace();
 	}
 
     void DevPanel::init(const int32 flags, const int &width, const int &height)

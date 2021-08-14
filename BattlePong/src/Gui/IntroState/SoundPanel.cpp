@@ -13,7 +13,9 @@ namespace Gui
     OptionsPanel::OptionsPanel(sf::String("Sound"))
     {
         UNUSED(debugDraw); 
-         
+        
+        getContentPane()->appendSpace();
+
         //Create effects slider
         effectsSlider = tgui::Slider::create(0, 100);
         effectsSlider->setValue(Settings::music.mVolume); 

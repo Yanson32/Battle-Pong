@@ -98,13 +98,14 @@ namespace Gui
         //Create layout 
         tgui::HorizontalLayout::Ptr layout = tgui::HorizontalLayout::create();
         append(layout);
-        
-        layout->addSpace(1);
 
-        //Create label
-        layout->add(tgui::Label::create(header)); 
-       
-        layout->addSpace(1); 
+        tgui::Label::Ptr label = tgui::Label::create(header);
+        //label->getRenderer()->setBackgroundColor(sf::Color(100,100,100, 100)); 
+        label->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Center);
+        label->setVerticalAlignment(tgui::Label::VerticalAlignment::Center);
+        label->setTextSize(20);
+        layout->add(label);
+        
     }
     
     void ContentPane::append(const tgui::String &label, std::shared_ptr<tgui::CheckBox> check)
@@ -127,7 +128,12 @@ namespace Gui
 
     void ContentPane::appendSpace()
     {
-       appendHeader(""); 
+        //Create layout 
+        tgui::HorizontalLayout::Ptr layout = tgui::HorizontalLayout::create();
+        append(layout);
+
+        tgui::Label::Ptr label = tgui::Label::create("");
+        layout->add(label);
     }
 
     ContentPane::~ContentPane()
