@@ -13,12 +13,7 @@ namespace Gui
     OptionsPanel::OptionsPanel(sf::String("Sound"))
     {
         UNUSED(debugDraw); 
-        
-        //Create effects label
-        effectsLabel = tgui::Label::create("Sound Effects");
-        effectsLabel->setPosition({sf::Vector2f(0, 100)});
-        layout2->add(effectsLabel);
-        
+         
         //Create effects slider
         effectsSlider = tgui::Slider::create(0, 100);
         effectsSlider->setValue(Settings::music.mVolume); 
@@ -26,21 +21,16 @@ namespace Gui
             Settings::music.sVolume = effectsSlider->getValue();
             EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::SOUND_EFFECTS, Settings::music.sVolume);
         });
-        layout2->add(effectsSlider);
+        getContentPane()->append("Sound Effects", effectsSlider);
 
-        musicLabel = tgui::Label::create("Musuc Volume");
-        layout3->add(musicLabel);
         musicSlider = tgui::Slider::create(0, 100);
         musicSlider->setValue(Settings::music.sVolume);
         musicSlider->onValueChange([&](){
             Settings::music.mVolume = musicSlider->getValue();
             EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::MUSIC, Settings::music.mVolume);
         });
-        layout3->add(musicSlider);
+        getContentPane()->append("Music Volume", musicSlider);
 
-        tgui::Label::Ptr musicLable = tgui::Label::create("Music");
-        layout4->add(musicLable);
-        
              
         musicBox = tgui::ComboBox::create();
         musicBox->addItem("Zombies");
@@ -65,7 +55,7 @@ namespace Gui
 
                 
         });
-        layout4->add(musicBox);
+        getContentPane()->append("Music Selection", musicBox);
     }
     void SoundPanel::init(const int &width, const int &height)
     {

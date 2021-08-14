@@ -29,8 +29,6 @@ namespace Gui
         contentPane.reset(new ContentPane()); 
         contentPane->setSize("100%", "80%"); 
         contentPane->setPosition(0, "10%"); 
-        contentPane->setHorizontalScrollbarPolicy(tgui::Scrollbar::Policy::Never);
-        contentPane->getRenderer()->setBackgroundColor(sf::Color::Transparent); 
         add(contentPane); 
 
         //Create button layout
@@ -83,10 +81,9 @@ namespace Gui
    
     bool ContentPane::append(tgui::HorizontalLayout::Ptr layout)
     {
-        //layouts.push_back(layout);
-        layout->setSize("100%", HEIGHT);
-        layout->setPosition(0, count * HEIGHT); 
-        ++count; 
+        layouts.push_back(layout);
+        layout->setSize("100%", "10%");
+        layout->setPosition(0, layouts.size() * 40); 
         add(layout); 
         return true;
     }
@@ -113,22 +110,15 @@ namespace Gui
         append(layout);
 
         tgui::Panel::Ptr panel1 = tgui::Panel::create();
-        panel1->getRenderer()->setBackgroundColor(sf::Color::Transparent); 
         panel1->add(tgui::Label::create(label));
 
         tgui::Panel::Ptr panel2 = tgui::Panel::create();
-        panel2->getRenderer()->setBackgroundColor(sf::Color::Transparent); 
         panel2->add(check);
 
         layout->add(panel1);
         layout->add(panel2);
     }
 
-
-    void ContentPane::appendSpace()
-    {
-       appendHeader(""); 
-    }
 
     ContentPane::~ContentPane()
     {

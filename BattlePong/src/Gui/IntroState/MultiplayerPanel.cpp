@@ -12,7 +12,7 @@ CustomPanel::CustomPanel()
     hostButton->onPress([](){
         EventManager::inst().Post<GU::Evt::Click>(Button::id::HOST);
     });
-    
+    tgui::HorizontalLayout::Ptr layout1 = tgui::HorizontalLayout::create();
     tgui::Panel::Ptr spacer2 = tgui::Panel::create();
     spacer2->getRenderer()->setBackgroundColor(sf::Color::Transparent);
     layout1->add(spacer2); 
@@ -20,20 +20,27 @@ CustomPanel::CustomPanel()
     tgui::Panel::Ptr spacer3 = tgui::Panel::create();
     spacer3->getRenderer()->setBackgroundColor(sf::Color::Transparent);
     layout1->add(spacer3);
+    getContentPane()->append(layout1);
 
     //Create connect button
     connectButton = tgui::Button::create("Connect");
     connectButton->onPress([](){
         EventManager::inst().Post<GU::Evt::Click>(Button::id::CONNECT);
     });
+    getContentPane()->append(tgui::HorizontalLayout::create()); 
+    
+    tgui::HorizontalLayout::Ptr layout2 = tgui::HorizontalLayout::create();
     
     tgui::Panel::Ptr spacer4 = tgui::Panel::create();
     spacer4->getRenderer()->setBackgroundColor(sf::Color::Transparent);
-    layout3->add(spacer4); 
-    layout3->add(connectButton);
+    layout2->add(spacer4); 
+    layout2->add(connectButton);
     tgui::Panel::Ptr spacer5 = tgui::Panel::create();
     spacer5->getRenderer()->setBackgroundColor(sf::Color::Transparent);
-    layout3->add(spacer5);
+    layout2->add(spacer5);
+    getContentPane()->append(layout2); 
+    
+    tgui::HorizontalLayout::Ptr layout3 = tgui::HorizontalLayout::create();
     
     //Create spacer  
     tgui::Panel::Ptr spacer6 = tgui::Panel::create();

@@ -10,15 +10,11 @@ namespace Gui
     VideoPanel::VideoPanel():
     OptionsPanel::OptionsPanel(sf::String("Video"))
     {
-        tgui::Label::Ptr themeLabel = tgui::Label::create("Theme");
-        layout2->add(themeLabel);
-        
+        //Theme selection box        
         themeCombo = tgui::ComboBox::create();
         themeCombo->addItem("Default");
         themeCombo->addItem("Black");
         themeCombo->addItem("Blue");
-        //themeCombo->setSelectedItem(Settings::game.ai.toAnsiString());
-        //themeCombo->setEnabled(!isPlaying); 
         themeCombo->setSelectedItem(Settings::theme); 
         themeCombo->onItemSelect([&](){
             std::string theme = themeCombo->getSelectedItem().toAnsiString();
@@ -36,11 +32,9 @@ namespace Gui
             }
              
         });
-        layout2->add(themeCombo);
+        getContentPane()->append("Theme", themeCombo);
         
-        tgui::Label::Ptr backgroundLabel = tgui::Label::create("Background");
-        layout3->add(backgroundLabel);
-        
+        //Background 
         backgroundCombo = tgui::ComboBox::create();
         backgroundCombo->addItem("Star");
         backgroundCombo->addItem("Nebula");
@@ -54,11 +48,9 @@ namespace Gui
                 EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::BACKGROUND, 1);
 
         });
-        layout3->add(backgroundCombo);
+        getContentPane()->append("Background", backgroundCombo);
         
-        tgui::Label::Ptr resolutionLabel = tgui::Label::create("Resolution");
-        layout4->add(resolutionLabel);
-        
+        //Resolution 
         resolutionCombo = tgui::ComboBox::create();
         resolutionCombo->addItem("Fulll Screen");
 
@@ -78,7 +70,7 @@ namespace Gui
         resolutionCombo->onItemSelect([&](){
             std::string theme = resolutionCombo->getSelectedItem().toAnsiString();
         });
-        layout4->add(resolutionCombo);
+        getContentPane()->append("Resolution", resolutionCombo);
     }
     void VideoPanel::init(const int &width, const int &height)
     {

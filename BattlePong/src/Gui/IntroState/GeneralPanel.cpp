@@ -12,15 +12,12 @@ namespace Gui
     GeneralPanel::GeneralPanel(const bool isPlaying):
     OptionsPanel::OptionsPanel(sf::String("General"))
     {
-        comboLable = tgui::Label::create("Time Limit");
-        layout2->add(comboLable);
         
         //Create lable instead of combobox when the user is playing the game
         if(isPlaying)
         {
             tgui::Label::Ptr tLimitLabel = tgui::Label::create(Settings::game.time.toAnsiString());
-            layout2->add(tLimitLabel);   
-             
+            getContentPane()->append("Time Limit", tLimitLabel);   
         }
         else
         {
@@ -35,15 +32,13 @@ namespace Gui
                 Settings::game.time = text; 
     //            Event::Manager::inst().push(event);
             });
-            layout2->add(comboBox);
+            getContentPane()->append("Time Limit", comboBox);
         }
-        aiLable = tgui::Label::create("Ai");
-        layout3->add(aiLable);
 
         if(isPlaying)
         {
             tgui::Label::Ptr aiSettingLabel = tgui::Label::create(Settings::game.ai.toAnsiString());
-            layout3->add(aiSettingLabel);   
+            getContentPane()->append("Ai", aiSettingLabel);   
         }
         else
         {
@@ -56,7 +51,7 @@ namespace Gui
             aiCombo->onItemSelect([&](){
                 Settings::game.ai = aiCombo->getSelectedItem().toAnsiString();
             });
-            layout3->add(aiCombo);
+            getContentPane()->append("Ai", aiCombo);
         }
     }
     void GeneralPanel::init(const int &width, const int &height)

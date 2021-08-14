@@ -15,9 +15,14 @@ IntroGui::IntroGui()
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::START);
     });
-    layout1->addSpace(1);
-    layout1->add(start);
-    layout1->addSpace(1);
+    
+    tgui::HorizontalLayout::Ptr startLayout = tgui::HorizontalLayout::create(); 
+    startLayout->addSpace(1);
+    startLayout->add(start);
+    startLayout->addSpace(1);
+    getContentPane()->append(startLayout);
+
+    getContentPane()->appendSpace();
 
     //Create MultiPlayer button
     multiPlayer = tgui::Button::create();
@@ -26,10 +31,15 @@ IntroGui::IntroGui()
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
     });
-    layout3->addSpace(1);
-    layout3->add(multiPlayer);
-    layout3->addSpace(1);
+    
+    tgui::HorizontalLayout::Ptr multiplayerLayout = tgui::HorizontalLayout::create(); 
+    multiplayerLayout->addSpace(1);
+    multiplayerLayout->add(multiPlayer);
+    multiplayerLayout->addSpace(1);
+    getContentPane()->append(multiplayerLayout);
 
+    getContentPane()->appendSpace();
+    
     //Create Options button
     options = tgui::Button::create();
     options->setText("Options");
@@ -37,9 +47,11 @@ IntroGui::IntroGui()
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::GENERAL_TAB);
     });
-    layout5->addSpace(1);
-    layout5->add(options);
-    layout5->addSpace(1);
+    tgui::HorizontalLayout::Ptr optionLayout = tgui::HorizontalLayout::create(); 
+    optionLayout->addSpace(1);
+    optionLayout->add(options);
+    optionLayout->addSpace(1);
+    getContentPane()->append(optionLayout);
 }
 
 void IntroGui::init(const int &width, const int &height)

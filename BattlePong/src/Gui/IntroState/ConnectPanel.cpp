@@ -7,38 +7,28 @@ ConnectPanel::ConnectPanel():
 CustomPanel::CustomPanel()
 {
 
-    //Port number lable
-    portLabel = tgui::Label::create("Port");
-    layout1->add(portLabel);
-
     //EditBox to enter port number
     portBox = tgui::EditBox::create();
     portBox->onTextChange(&ConnectPanel::onTextChanged, this);
-    layout1->add(portBox);
+    getContentPane()->append("Port", portBox);
 
+    //Create ip edit box
+    ipBox = tgui::EditBox::create();
+    ipBox->onTextChange(&ConnectPanel::onTextChanged, this);
+    getContentPane()->append("Ip", ipBox);
+    
     //Create back button
     backBtn = tgui::Button::create("Back");
     backBtn->onPress([](){
         EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
     });
-
-    //Create ip label
-    ipLabel = tgui::Label::create("Ip");;
-    layout2->add(ipLabel);
-
-    //Create ip edit box
-    ipBox = tgui::EditBox::create();
-    ipBox->onTextChange(&ConnectPanel::onTextChanged, this);
-    layout2->add(ipBox);
+    buttonLayout->add(backBtn);
     
     //Create connect button
     connectButton = tgui::Button::create("Connect");
     connectButton->setEnabled(false);
     buttonLayout->add(connectButton);
     
-    //Add back button 
-    buttonLayout->add(backBtn);
-
     //Add spacer
     buttonLayout->add(spacer);
 }

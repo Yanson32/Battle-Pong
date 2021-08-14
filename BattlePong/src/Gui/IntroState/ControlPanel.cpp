@@ -9,25 +9,16 @@ namespace Gui
     {
         UNUSED(debugDraw);
 
-        //Create up button lable
-        upLabel = tgui::Label::create("Up");
-        layout2->add(upLabel);
-
-
         //Create up button editbox
         upEditBox = tgui::EditBox::create();
-	upEditBox->setText(Settings::playerControlUp);
-        layout2->add(upEditBox);
+	    upEditBox->setText(Settings::playerControlUp);
+        getContentPane()->append("Up", upEditBox);
 
 
-        //Create down button lable
-        downLabel = tgui::Label::create("Down");
-        layout3->add(downLabel);
-	 
         //Create down button editbox
         downEditBox = tgui::EditBox::create();
         downEditBox->setText(Settings::playerControlDown); 
-	layout3->add(downEditBox);
+	    getContentPane()->append("Up", downEditBox);
 
     }
 

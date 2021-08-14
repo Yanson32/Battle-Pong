@@ -13,46 +13,33 @@ namespace Gui
 	{
         sf::Vector2f position1(75, 0);
         sf::Vector2f position2(225, 0);
-        //layout2->setSize("70%", "10%");
-        //layout3->setSize("70%", "10%");
-        //layout4->setSize("70%", "10%");
-		//const float WIDTH = 0;
-		//Create AABB checkbox
-		aabb = tgui::CheckBox::create("Show AABB");
-		//aabb->setPosition(sf::Vector2f(WIDTH, 100));
-		//aabb->setSize("10%", "100%");
+
+        //Create header for the box2d section
+        getContentPane()->appendHeader("Box2d");
+
+        //Create AABB checkbox
+        aabb = tgui::CheckBox::create("");
 		aabb->onCheck([&](){
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_AABB, true);	
         });
 		aabb->onUncheck([&](){
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_AABB, false);	
 		});
-
-		//layout2->add(aabb);
+        getContentPane()->append("AABB", aabb);
 
 
 		//Create shapes checkbox
-		shapes = tgui::CheckBox::create("Draw Shapes");
-		//shapes->setSize("10%", "100%");
-		//shapes->setPosition(sf::Vector2f(WIDTH, 150));
+		shapes = tgui::CheckBox::create("");
 		shapes->onCheck([&](){
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_SHAPE, true);	
 		});
 		shapes->onUncheck([&](){
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_SHAPE, false);	
 		});
-		tgui::Panel::Ptr panel = tgui::Panel::create();
-		aabb->setPosition({position1.x, position1.y});
-		panel->add(aabb);
-		panel->add(shapes);
-		shapes->setPosition({position2.x, position2.y});
-		layout2->add(panel);
-        //layout2->setSize("60%", "10%");
+		getContentPane()->append("Shapes", shapes);
 
 		//Create joints checkbox
-		joints = tgui::CheckBox::create("Draw Joints");
-		//joints->setSize("10%", "100%");
-		//joints->setPosition(sf::Vector2f(WIDTH, 200));
+		joints = tgui::CheckBox::create("");
 		joints->onCheck([&](){
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_JOINTS, true);	
 		});
@@ -60,12 +47,10 @@ namespace Gui
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_JOINTS, false);	
 		});
 
-		//layout3->add(joints);
+		getContentPane()->append("Joints", joints);
 
 		//Create center of mass checkbox
-		centerOfMass = tgui::CheckBox::create("Draw Mass");
-		//centerOfMass->setSize("10%", "100%");
-		//centerOfMass->setPosition(sf::Vector2f(WIDTH, 250));
+		centerOfMass = tgui::CheckBox::create("");
 		centerOfMass->onCheck([&](){
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_MASS, true);	
 		});
@@ -73,19 +58,10 @@ namespace Gui
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_MASS, false);	
 		});
 
-		//layout3->add(centerOfMass);
+		getContentPane()->append("Mass", centerOfMass);
 
-        tgui::Panel::Ptr panel2 = tgui::Panel::create();
-        joints->setPosition({position1.x, position1.y});
-        centerOfMass->setPosition({position2.x, position2.y});
-        panel2->add(joints);
-        panel2->add(centerOfMass);
-        layout3->add(panel2);
 		//Create pair checkbox
-		pair = tgui::CheckBox::create("Draw Pairs");
-		//pair->setSize("10%", "100%");
-		//pair->setPosition(sf::Vector2f(WIDTH, 300));
-
+		pair = tgui::CheckBox::create("");
 		pair->onCheck([&](){
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_PAIRS, true);	
 		});
@@ -93,13 +69,7 @@ namespace Gui
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_PAIRS, false);	
 		});
 
-        tgui::Panel::Ptr panel3 = tgui::Panel::create();
-        layout4->add(panel3);
-		panel3->add(pair);
-		pair->setPosition({position1.x, position1.y});
-		tgui::Label::Ptr label = tgui::Label::create();
-		label->setPosition({position2.x, position2.y});
-		panel3->add(label);
+		getContentPane()->append("Pairs", pair);
 
 	}
 

@@ -11,33 +11,20 @@
 HostPanel::HostPanel():
 CustomPanel::CustomPanel()
 {
-    //Global Ip address label
-    publicIpLabel = tgui::Label::create("Public Ip");
-    layout1->add(publicIpLabel);
-
-    
-    //EditBox to enter ip address
+    //Public ip address
     publicIpAdress = tgui::Label::create(Settings::publicIp);
-    layout1->add(publicIpAdress);
-
-    //Local Ip address label
-    localIpLabel = tgui::Label::create("Local Ip");
-    layout2->add(localIpLabel);
+    getContentPane()->append("Public Ip", publicIpAdress);
 
     sf::IpAddress address2 = sf::IpAddress::getLocalAddress();
     sf::String localIp = address2.toString();
 
     //EditBox to enter ip address
     localIpBox = tgui::Label::create(localIp.toAnsiString());
-    layout2->add(localIpBox);
-
-    //Port number lable
-    portLabel = tgui::Label::create("Port");
-    layout3->add(portLabel);
+    getContentPane()->append("Local Ip", localIpBox);
 
     //EditBox to enter port number
     portBox = tgui::EditBox::create();
-    layout3->add(portBox);
+    getContentPane()->append("Port", portBox);
     
     //Create back button
     backBtn = tgui::Button::create("Back");

@@ -13,29 +13,14 @@ namespace Gui
     NetworkPanel::NetworkPanel():
     OptionsPanel::OptionsPanel(sf::String("Network"))
     {
-        //Create global label
-        publicIpLabel = tgui::Label::create("Public Ip");
-        layout2->add(publicIpLabel);
-       
-        
         publicIp = tgui::Label::create(Settings::publicIp);
-        layout2->add(publicIp); 
-        
-        //Create local ip label
-        localIpLabel = tgui::Label::create("Local Ip");
-        layout3->add(localIpLabel);
-       
+        getContentPane()->append("Public Ip", publicIp); 
         
         localIp = tgui::Label::create(Settings::localIp);
-        layout3->add(localIp); 
-        
-        //Create port label
-        portBoxLabel = tgui::Label::create("Port");
-        layout4->add(portBoxLabel);
-       
+        getContentPane()->append("Local Ip", localIp); 
         
         portBox = tgui::Label::create(Settings::port);
-        layout4->add(portBox); 
+        getContentPane()->append("Port", portBox); 
     }
     void NetworkPanel::init(const int &width, const int &height)
     {
