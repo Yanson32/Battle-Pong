@@ -31,15 +31,13 @@ namespace Gui
             Event::Manager::inst().push(event);
         });
 
-
-        layout5->add(spacer);
-        layout5->add(startBtn);
-        layout5->add(spacer);
-
         buttonLayout->add(spacer);
         buttonLayout->add(optionsBtn);
         buttonLayout->add(spacer);
 
+        layout5->add(spacer);
+        layout5->add(startBtn);
+        layout5->add(spacer);
     }
 
     IntroPanel::~IntroPanel()

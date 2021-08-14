@@ -1,5 +1,5 @@
-#ifndef BUTTONID_H_INCLUDED
-#define BUTTONID_H_INCLUDED
+#ifndef BUTTONID_H_IN
+#define BUTTONID_H_IN
 
 namespace Button
 {

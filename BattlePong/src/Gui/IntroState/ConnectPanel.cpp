@@ -24,12 +24,14 @@ CustomPanel::CustomPanel()
     backBtn->onPress([](){
         EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
     });
-    buttonLayout->add(backBtn);
     
     //Create connect button
     connectButton = tgui::Button::create("Connect");
     connectButton->setEnabled(false);
     buttonLayout->add(connectButton);
+    
+    //Add back button 
+    buttonLayout->add(backBtn);
     
     //Add spacer
     buttonLayout->add(spacer);
