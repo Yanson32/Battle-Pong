@@ -9,13 +9,13 @@
 
 namespace Gui
 {
-    GeneralPanel::GeneralPanel(const bool isPlaying):
+    GeneralPanel::GeneralPanel(const StateId state):
     OptionsPanel::OptionsPanel(sf::String("General"))
     {
         getContentPane()->appendSpace(); 
 
         //Create lable instead of combobox when the user is playing the game
-        if(isPlaying)
+        if(state == StateId::PLAY_STATE)
         {
             tgui::Label::Ptr tLimitLabel = tgui::Label::create(Settings::game.time.toAnsiString());
             getContentPane()->append("Time Limit", tLimitLabel);   
@@ -27,7 +27,6 @@ namespace Gui
             comboBox->addItem("45");
             comboBox->addItem("60");
             comboBox->setSelectedItem(Settings::game.time.toAnsiString());
-            comboBox->setEnabled(!isPlaying); 
             comboBox->onItemSelect([&](){
                 sf::String text = comboBox->getSelectedItem().toAnsiString();
                 Settings::game.time = text; 
@@ -36,7 +35,7 @@ namespace Gui
             getContentPane()->append("Time Limit", comboBox);
         }
 
-        if(isPlaying)
+        if(state == StateId::PLAY_STATE)
         {
             tgui::Label::Ptr aiSettingLabel = tgui::Label::create(Settings::game.ai.toAnsiString());
             getContentPane()->append("Ai", aiSettingLabel);   
@@ -48,7 +47,6 @@ namespace Gui
             aiCombo->addItem("Medium");
             aiCombo->addItem("Hard");
             aiCombo->setSelectedItem(Settings::game.ai.toAnsiString());
-            aiCombo->setEnabled(!isPlaying); 
             aiCombo->onItemSelect([&](){
                 Settings::game.ai = aiCombo->getSelectedItem().toAnsiString();
             });

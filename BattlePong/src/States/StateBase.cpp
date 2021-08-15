@@ -45,7 +45,7 @@ sf::Clock StateBase::roundClock;
 sf::Texture StateBase::backgroundTexture;
 sf::RectangleShape StateBase::backgroundRect;
 
-StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &newDebugDraw, tgui::Gui &newGui, const stateId newState):
+StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &newDebugDraw, tgui::Gui &newGui, const StateId newState):
 GU::Engin::GameState(),
 engin(newEngin),
 window(newWindow),
@@ -353,17 +353,24 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
                 switch(temp->buttonId)
                 {
                     case Button::id::START:
-                        engin.Push<PlayState>(engin, window, frame, debugDraw, gui);
+                        engin.ChangeState<PlayState>(engin, window, frame, debugDraw, gui);
                     break;
                     case Button::id::INTRO_PANEL:
                     {
-                        gui.removeAllWidgets();
-                        StateBase::Init();
-                        tgui::Panel::Ptr cust(new IntroGui());
-                        std::shared_ptr<IntroGui> p = std::dynamic_pointer_cast<IntroGui>(cust);
-                        p->init(window.getSize().x, window.getSize().y);
-                        gui.add(cust, "PanelPointer");
-
+                    
+                        if(Settings::stateId == StateId::PLAY_STATE)
+                        {
+                            engin.ChangeState<IntroState>(engin, window, frame, debugDraw, gui);
+                        }
+                        else
+                        { 
+                            gui.removeAllWidgets();
+                            StateBase::Init();
+                            tgui::Panel::Ptr cust(new IntroGui());
+                            std::shared_ptr<IntroGui> p = std::dynamic_pointer_cast<IntroGui>(cust);
+                            p->init(window.getSize().x, window.getSize().y);
+                            gui.add(cust, "PanelPointer");
+                        }
                     }
                     break;
                     case Button::id::GENERAL_TAB:
@@ -506,10 +513,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
             {
                 switch(temp->id)
                 {
-                    case stateId::PLAY_STATE:
+                    case StateId::PLAY_STATE:
                         engin.Push<PlayState>(engin, window, frame, debugDraw, gui);
                     break;
-                    case stateId::INTRO_STATE:
+                    case StateId::INTRO_STATE:
                         engin.Push<IntroState>(engin, window, frame, debugDraw, gui);
                     break;
                 }

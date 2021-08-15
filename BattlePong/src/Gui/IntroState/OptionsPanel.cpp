@@ -40,9 +40,6 @@ namespace Gui
 
         backBtn = tgui::Button::create("Back");
         backBtn->onPress([](){
-    //            Event::Object event(Event::Object::Type::BUTTON_PRESSED);
-    //            event.buttonPressed.id = Event::ButtonPressed::BACK_BUTTON;
-    //            Event::Manager::inst().push(event);
             EventManager::inst().Post<GU::Evt::Click>(Button::id::INTRO_PANEL);
         });
 

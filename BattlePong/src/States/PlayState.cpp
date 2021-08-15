@@ -26,7 +26,7 @@
 #include "Gui/IntroState/DevPanel.h"
 
 
-PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, tgui::Gui &newGui, const stateId newId): StateBase(newEngin, newWindow, newFrame, debugDraw, newGui, newId)
+PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId): StateBase(newEngin, newWindow, newFrame, debugDraw, newGui, newId)
 {
 
 
@@ -167,6 +167,7 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 
 void PlayState::Init()
 {
+    Settings::stateId = StateId::PLAY_STATE; 
     StateBase::Init();
 
     if(!ResourceManager::sound.isLoaded(soundId::BALL))

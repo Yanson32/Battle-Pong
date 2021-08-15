@@ -2,7 +2,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/StateBase.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/PlayState.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/DemoState.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Id.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/StateId.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/States.h"
 
 )

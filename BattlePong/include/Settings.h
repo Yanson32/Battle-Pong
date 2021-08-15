@@ -12,6 +12,7 @@
 #include <TGUI/TGUI.hpp>
 #include <SFML/Network.hpp>
 #include "Events/EventId.h"
+#include "States/StateId.h"
 
 namespace Settings 
 {
@@ -94,6 +95,8 @@ namespace Settings
     extern std::string localIp;
     extern std::string port;
     extern std::string background;
+
+    extern StateId stateId;
 }
 
 

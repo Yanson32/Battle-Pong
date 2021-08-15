@@ -1,6 +1,6 @@
 #include "Settings.h"
 #include "Events/Events.h"
-#include "States/Id.h"
+#include "States/StateId.h"
 #include <iostream>
 
 namespace Settings
@@ -38,5 +38,6 @@ namespace Settings
     std::string localIp = sf::IpAddress::getLocalAddress().toString();
     std::string port = "5000";
     std::string background = "Star";
+    StateId stateId = StateId::INTRO_STATE;
 }
 

@@ -1,3 +1,6 @@
+        
+        
+        
 #include "States/IntroState.h"
 #include "GameUtilities/Engin/Engin.h"
 #include <GameUtilities/Event/Event.h>
@@ -17,7 +20,7 @@
 #include "Objects/Wall.h"
 #include "Objects/Ball.h"
 #include "Objects/Paddle.h"
-#include "States/Id.h"
+#include "States/StateId.h"
 #include "Events/EventManager.h"
 #include "GameUtilities/Event/PlaySound.h"
 
@@ -43,7 +46,7 @@
 #include "Resources/MusicId.h"
 
 #include <memory>
-IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, tgui::Gui &newGui): StateBase(newEngin, newWindow, newFrame, debugDraw, newGui, stateId::INTRO_STATE)
+IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, tgui::Gui &newGui): StateBase(newEngin, newWindow, newFrame, debugDraw, newGui, StateId::INTRO_STATE)
 {
 
     //ctor
@@ -113,8 +116,9 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
 
 void IntroState::Init()
 {
+    Settings::stateId = StateId::INTRO_STATE; 
     StateBase::Init();
-    
+        
     
     std::shared_ptr<IntroGui> cust(new IntroGui());
     cust->init(window.getView().getSize().x, window.getView().getSize().y); 

@@ -1,7 +1,7 @@
 #ifndef STATES_ID_H
 #define STATES_ID_H
 
-enum stateId
+enum StateId
 {
     INTRO_STATE,
     PLAY_STATE,
