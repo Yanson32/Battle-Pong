@@ -68,6 +68,11 @@ namespace Settings
     extern std::string theme;
 	extern std::string playerControlUp;
 	extern std::string playerControlDown;
+	extern std::string playerControlLeft;
+	extern std::string playerControlRight;
+	extern std::string playerControlMenu;
+	extern std::string playerControlNext;
+	extern std::string playerControlSelect;
 	
 
 	extern PaddleSettings paddle1;

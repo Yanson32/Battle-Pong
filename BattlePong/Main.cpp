@@ -32,8 +32,12 @@
 #include "Box2D/DebugDraw.h"
 #include <thread>
 
+#include "SFMLFunctions.h"
 int main(int argc, char* argv[])
 {
+
+    std::cout << toString(sf::Keyboard::Key::A).toAnsiString() << std::endl;
+
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
     //So we do it in a thread.
     std::thread ipThread([&](){Settings::publicIp = sf::IpAddress::getPublicAddress().toString();});

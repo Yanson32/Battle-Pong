@@ -7,7 +7,13 @@ namespace Settings
 {
 	std::string playerControlUp = "Up Arrow";
 	std::string playerControlDown = "Down Arrow";
-	sf::Vector2f wDimensions = sf::Vector2f(800, 600);
+	std::string playerControlLeft = "Left Arrow";
+	std::string playerControlRight = "Right Arrow";
+	std::string playerControlMenu = "Escape";
+	std::string playerControlNext = "Tab";
+	std::string playerControlSelect = "Enter";
+	
+    sf::Vector2f wDimensions = sf::Vector2f(800, 600);
 	
 	PaddleSettings paddle1;
 	PaddleSettings paddle2;

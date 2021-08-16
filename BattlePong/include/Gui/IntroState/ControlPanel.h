@@ -12,9 +12,14 @@ namespace Gui
             virtual ~ControlPanel();
         protected:
         tgui::Label::Ptr upLabel;
-        tgui::EditBox::Ptr upEditBox;
+        tgui::ComboBox::Ptr upComboBox;
         tgui::Label::Ptr downLabel;
-        tgui::EditBox::Ptr downEditBox;
+        tgui::ComboBox::Ptr downComboBox;
+        tgui::ComboBox::Ptr rightComboBox;
+        tgui::ComboBox::Ptr leftComboBox;
+        tgui::ComboBox::Ptr menuComboBox;
+        tgui::ComboBox::Ptr nextComboBox;
+        tgui::ComboBox::Ptr selectComboBox;
     };
 }
 
