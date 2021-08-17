@@ -166,31 +166,7 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
         case sf::Event::JoystickButtonReleased:
             std::cout << "Joystick Button Released" << std::endl;
             break;
-        case sf::Event::JoystickMoved:
-            switch(event.joystickMove.axis)
-            {
-                case sf::Joystick::X:
-                case sf::Joystick::Z:
-                case sf::Joystick::U:
-                case sf::Joystick::PovX:
-                if(event.joystickMove.position > 0)
-                   std::cout << "Right" << std::endl;
-                else if(event.joystickMove.position < 0)
-                   std::cout << "Left" << std::endl; 
-                break;
-
-                case sf::Joystick::Y:
-                case sf::Joystick::R:
-                case sf::Joystick::V:
-                case sf::Joystick::PovY:
-                if(event.joystickMove.position > 0)
-                    std::cout << "Down" << std::endl;
-                else if (event.joystickMove.position < 0)
-                    std::cout << "Up" << std::endl;
-                break;
-            };
-
-defualt:
+        defualt:
            break;   
     };
 }

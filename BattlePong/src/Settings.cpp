@@ -12,7 +12,10 @@ namespace Settings
 	std::string playerControlMenu = "Escape";
 	std::string playerControlNext = "Tab";
 	std::string playerControlSelect = "Enter";
-	
+
+    //Joystick buttons    
+	std::string playerJoystickControlNext;  
+	std::string playerJoystickControlSelect;  
     sf::Vector2f wDimensions = sf::Vector2f(800, 600);
 	
 	PaddleSettings paddle1;

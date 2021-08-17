@@ -20,6 +20,10 @@ namespace Gui
         tgui::ComboBox::Ptr menuComboBox;
         tgui::ComboBox::Ptr nextComboBox;
         tgui::ComboBox::Ptr selectComboBox;
+         
+        tgui::ComboBox::Ptr joystickMenuComboBox = nullptr;
+        tgui::ComboBox::Ptr joystickSelectComboBox = nullptr; 
+        tgui::ComboBox::Ptr joystickNextComboBox = nullptr; 
     };
 }
 

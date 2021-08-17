@@ -100,6 +100,50 @@ namespace Gui
         if(sf::Joystick::isConnected(0))
             getContentPane()->appendHeader("Joystick"); 
         
+        //Create x axis 
+        joystickXAxisComboBox = tgui::ComboBox::create();
+	    joystickXAxisComboBox->setChangeItemOnScroll(true); 
+        joystickXAxisComboBox->setSelectedItem(Settings::playerJoystickControlXAxis); 
+	   
+        if(sf::Joystick::hasAxis(0, sf::Joystick::X)) 
+            getContentPane()->append("X Axis", joystickXAxisComboBox);
+
+        //Create y axis 
+        joystickYAxisComboBox = tgui::ComboBox::create();
+	    joystickYAxisComboBox->setChangeItemOnScroll(true); 
+        joystickYAxisComboBox->setSelectedItem(Settings::playerJoystickControlYAxis); 
+	   
+        if(sf::Joystick::hasAxis(0, sf::Joystick::Y)) 
+            getContentPane()->append("Y Axis", joystickYAxisComboBox);
+        
+        //Create z axis 
+        joystickZAxisComboBox = tgui::ComboBox::create();
+	    joystickZAxisComboBox->setChangeItemOnScroll(true); 
+        joystickZAxisComboBox->setSelectedItem(Settings::playerJoystickControlZAxis); 
+        
+        //Create R axis 
+        joystickRAxisComboBox = tgui::ComboBox::create();
+	    joystickRAxisComboBox->setChangeItemOnScroll(true); 
+        joystickRAxisComboBox->setSelectedItem(Settings::playerJoystickControlRAxis); 
+	   
+        if(sf::Joystick::hasAxis(0, sf::Joystick::R)) 
+            getContentPane()->append("R Axis", joystickRAxisComboBox);
+
+        //Create u axis 
+        joystickUAxisComboBox = tgui::ComboBox::create();
+	    joystickUAxisComboBox->setChangeItemOnScroll(true); 
+        joystickUAxisComboBox->setSelectedItem(Settings::playerJoystickControlUAxis); 
+	   
+        if(sf::Joystick::hasAxis(0, sf::Joystick::U)) 
+            getContentPane()->append("U Axis", joystickUAxisComboBox);
+        
+        //Create v axis 
+        joystickVAxisComboBox = tgui::ComboBox::create();
+	    joystickVAxisComboBox->setChangeItemOnScroll(true); 
+        joystickVAxisComboBox->setSelectedItem(Settings::playerJoystickControlVAxis); 
+	   
+        if(sf::Joystick::hasAxis(0, sf::Joystick::Z)) 
+            getContentPane()->append("V Axis", joystickZAxisComboBox);
         
         //Create menu button editbox
         joystickMenuComboBox = tgui::ComboBox::create();

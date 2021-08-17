@@ -58,6 +58,7 @@ class IntroState: public StateBase
         virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime) override;
 
         void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
         virtual void Init() override;
         virtual void Clean() override;
 

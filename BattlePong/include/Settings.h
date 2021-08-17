@@ -73,7 +73,10 @@ namespace Settings
 	extern std::string playerControlMenu;
 	extern std::string playerControlNext;
 	extern std::string playerControlSelect;
-	
+
+    //Joystick buttons    
+	extern std::string playerJoystickControlNext;
+	extern std::string playerJoystickControlSelect;  
 
 	extern PaddleSettings paddle1;
 	extern PaddleSettings paddle2;
