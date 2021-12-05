@@ -1,6 +1,3 @@
-        
-        
-        
 #include "States/IntroState.h"
 #include "GameUtilities/Engin/Engin.h"
 #include <GameUtilities/Event/Event.h>

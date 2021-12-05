@@ -30,6 +30,7 @@
 #include "Gui/IntroState/HostPanel.h"
 #include "Gui/IntroState/ConnectPanel.h"
 #include "Gui/IntroState/NetworkPanel.h"
+#include "Objects/PongFrame.h"
 
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
@@ -99,6 +100,8 @@ void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
        return;
     }        
     
+    std::cout << "Width = " << pongFrame->rightPaddle->getPosition().x << std::endl;
+    std::cout << "Height = " << pongFrame->rightPaddle->getPosition().y << std::endl;
     backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
     if(!IsPaused())
     {
@@ -163,10 +166,10 @@ void StateBase::reset(std::shared_ptr<PongFrame> frame)
        y *= -1;
    
     float paddleOffset = Settings::wallThickness * 4;
-    frame->ball->setPosition({static_cast<float>(window.getView().getSize().x) / 2, static_cast<float>(window.getView().getSize().y) / 2});
+    frame->ball->setPosition({static_cast<float>(window.getSize().x) / 2, static_cast<float>(window.getSize().y) / 2});
     frame->ball->setVelocity({x, y});
-    frame->leftPaddle->setPosition(sf::Vector2f(paddleOffset - Settings::wallThickness, static_cast<float>(window.getView().getSize().y) / 2));
-    frame->rightPaddle->setPosition(sf::Vector2f(static_cast<float>(window.getView().getSize().x)  - paddleOffset, static_cast<float>(window.getView().getSize().y) / 2));
+    frame->leftPaddle->setPosition(sf::Vector2f(paddleOffset - Settings::wallThickness, static_cast<float>(window.getSize().y) / 2));
+    frame->rightPaddle->setPosition(sf::Vector2f(static_cast<float>(window.getSize().x)  - paddleOffset, static_cast<float>(window.getSize().y) / 2));
     frame->rightPaddle->handleInput(*frame->ball);
     userMessage.setString("Ready!");
     centerText();

@@ -109,8 +109,6 @@ void Paddle::update()
 void Paddle::setPosition(const sf::Vector2f &position)
 {
     body->SetTransform(toMeters(position), body->GetAngle());
-    sf::Vector2f tempPos = position;
-    tempPos.y -= toMeters(200);
     jointBody->SetTransform(toMeters(position), jointBody->GetAngle());
 }
 
