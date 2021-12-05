@@ -9,15 +9,15 @@ CustomPanel::CustomPanel()
 
     getContentPane()->appendSpace();
 
-    //EditBox to enter port number
-    portBox = tgui::EditBox::create();
-    portBox->onTextChange(&ConnectPanel::onTextChanged, this);
-    getContentPane()->append("Port", portBox);
-
     //Create ip edit box
     ipBox = tgui::EditBox::create();
     ipBox->onTextChange(&ConnectPanel::onTextChanged, this);
     getContentPane()->append("Ip", ipBox);
+    
+    //EditBox to enter port number
+    portBox = tgui::EditBox::create();
+    portBox->onTextChange(&ConnectPanel::onTextChanged, this);
+    getContentPane()->append("Port", portBox);
     
     //Create back button
     backBtn = tgui::Button::create("Back");
