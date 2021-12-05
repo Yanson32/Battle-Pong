@@ -26,9 +26,10 @@
 
 #include "config.h"
 #include <GameUtilities/Core/String.h>
+#include <GameUtilities/Engin/Frame/Frame.h>
 
 #include "Settings.h"
-#include "Objects/Frame.h"
+#include "Objects/PongFrame.h"
 #include "Box2D/DebugDraw.h"
 #include <thread>
 
@@ -48,8 +49,7 @@ int main(int argc, char* argv[])
 
     tgui::Gui gui;
     gui.setTarget(window);
-
-    std::shared_ptr<Frame> frame(new Frame(window.getView().getSize()));
+    std::shared_ptr<PongFrame> frame(new PongFrame(window.getView().getSize()));
     
     srand (time(NULL));
 
@@ -87,7 +87,7 @@ int main(int argc, char* argv[])
     
     DebugDraw debugDraw(*frame->world.get());
     frame->world->SetDebugDraw(&debugDraw);
-	engin.Push<IntroState>(engin, window, frame, debugDraw, gui);
+	engin.Push<IntroState>(frame, engin, window, debugDraw, gui);
 	EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
 
     try
@@ -95,13 +95,13 @@ int main(int argc, char* argv[])
         while (engin.IsRunning())
         {
             accumulator += timer.restart();
-            engin.HandleEvents(deltaTime.asSeconds());
+            engin.HandleEvents(deltaTime.asSeconds(), frame);
             while(accumulator.asSeconds() >= deltaTime.asSeconds())
             {
-                engin.Update(deltaTime.asSeconds());
+                engin.Update(deltaTime.asSeconds(), frame);
                 accumulator -= deltaTime;
             }
-            engin.Draw(deltaTime.asSeconds());
+            engin.Draw(deltaTime.asSeconds(), frame);
         }
     }
     catch(...)

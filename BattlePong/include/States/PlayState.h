@@ -17,9 +17,10 @@
 
 #include <memory>
 
-#include "Objects/Frame.h"
 #include "Box2D/DebugDraw.h"
 #include <TGUI/TGUI.hpp>
+
+#include <GameUtilities/Engin/Frame.h>
 
 class PlayState: public StateBase
 {
@@ -29,12 +30,12 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId = StateId::PLAY_STATE);
+        PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId = StateId::PLAY_STATE);
 
-        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
-        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
-        virtual void Init() override;
-        virtual void Clean() override;
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame);
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame);
+        virtual void Init(std::shared_ptr<GU::Engin::Frame> frame) override;
+        virtual void Clean(std::shared_ptr<GU::Engin::Frame> frame) override;
 
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
@@ -42,7 +43,7 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void HandleEvents(GU::Engin::Engin& newEngin, const float &deltaTime) override;
+        void HandleEvents(GU::Engin::Engin& newEngin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -51,7 +52,7 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Update(GU::Engin::Engin& engin, const float &deltaTime) override;
+        void Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -60,7 +61,7 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void Draw(GU::Engin::Engin& engin, const float &deltaTime) override;
+        void Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**

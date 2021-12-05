@@ -1,7 +1,7 @@
-#include "Objects/Frame.h"
+#include "Objects/PongFrame.h"
 #include "Settings.h"
 
-Frame::Frame(const sf::Vector2f &windowSize)
+PongFrame::PongFrame(const sf::Vector2f &windowSize)
 {
     world.reset(new b2World(b2Vec2(0, 0)));
     
@@ -47,9 +47,40 @@ Frame::Frame(const sf::Vector2f &windowSize)
     
     topPaddleStop.reset(new PaddleStop(world, horizontalPoints)); 
     topPaddleStop->setPosition({0, (wallTh)});
+    
+    world->SetContactListener(&contactListener);
+}
+void PongFrame::Init()
+{
+
 }
 
-Frame::~Frame()
+
+void PongFrame::Clean()
+{
+
+}
+
+
+void PongFrame::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
+{
+
+}
+
+
+void PongFrame::Update(GU::Engin::Engin& engin, const float &deltaTime)
+{
+
+}
+
+
+void PongFrame::Draw(GU::Engin::Engin& engin, const float &deltaTime)
+{
+
+}
+
+
+PongFrame::~PongFrame()
 {
 
 }

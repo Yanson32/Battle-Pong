@@ -3,7 +3,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Paddle.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Wall.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/Goal.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/PaddleStop.cpp"
-            "${CMAKE_CURRENT_SOURCE_DIR}/Frame.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/PongFrame.cpp"
 
 )
 set(SUB_DIRECTORIES ""

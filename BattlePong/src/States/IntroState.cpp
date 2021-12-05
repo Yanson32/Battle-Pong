@@ -7,6 +7,8 @@
 #include <GameUtilities/Event/EventQueue.h>
 #include <GameUtilities/Event/PushState.h>
 #include <GameUtilities/Event/Click.h>
+//#include <GameUtilities/Event/LogEvent.h>
+//#include <GameUtilities/Event/LogType.h>
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -20,6 +22,7 @@
 #include "Objects/Wall.h"
 #include "Objects/Ball.h"
 #include "Objects/Paddle.h"
+#include "Objects/PongFrame.h"
 #include "States/StateId.h"
 #include "Events/EventManager.h"
 #include "GameUtilities/Event/PlaySound.h"
@@ -46,78 +49,107 @@
 #include "Resources/MusicId.h"
 
 #include <memory>
-IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, tgui::Gui &newGui): StateBase(newEngin, newWindow, newFrame, debugDraw, newGui, StateId::INTRO_STATE)
+IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui): StateBase(newEngin, newWindow, debugDraw, newGui, StateId::INTRO_STATE)
 {
 
     //ctor
-    frame->ball->setPosition({400, 300});
-    frame->ball->setVelocity({100, 100});
-    frame->leftPaddle->setPosition(sf::Vector2f(100, 300));
-    frame->rightPaddle->setPosition(sf::Vector2f(700, 300));
-
-    header.setString(Settings::window.title);
-    header.setCharacterSize(54);
-    header.setFillColor(sf::Color::White);
-    header.setPosition(sf::Vector2f(335, 25));
-    header.setStyle(sf::Text::Bold);
-
 }
 
 
-void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
+void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     UNUSED(deltaTime);
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
+    if(!pongFrame)
+    {
+       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       return;
+    }        
+
+
     if(window.isOpen())
     {
         sf::Event event;
 
         while (window.pollEvent(event))
         {
-            StateBase::sfEvent(engin, event);
-            sfEvent(engin, event);
+            StateBase::sfEvent(engin, event, frame);
+            sfEvent(engin, event, frame);
             gui.handleEvent(event);
         }
-        frame->leftPaddle->handleInput(*frame->ball);
-        frame->rightPaddle->handleInput(*frame->ball);
+        pongFrame->leftPaddle->handleInput(*pongFrame->ball);
+        pongFrame->rightPaddle->handleInput(*pongFrame->ball);
     }
 
     //GameUtilities event loop
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))
     {
-        handleGUEvent(engin, evtPtr);
+        handleGUEvent(engin, evtPtr, pongFrame);
     }
 
 }
 
-void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime)
+void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
-    StateBase::Update(engin, deltaTime);
-    frame->world->Step( timeStep, velocityIterations, positionIterations);
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
+    if(!pongFrame)
+    {
+       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       return;
+    }        
+    
+    StateBase::Update(engin, deltaTime, frame);
+    pongFrame->world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
-    frame->ball->update();
-    frame->ground->update();
-    frame->celing->update();
-    frame->leftWall->update();
-    frame->rightWall->update();
-    frame->leftPaddle->update();
-    frame->rightPaddle->update();
+    pongFrame->ball->update();
+    pongFrame->ground->update();
+    pongFrame->celing->update();
+    pongFrame->leftWall->update();
+    pongFrame->rightWall->update();
+    pongFrame->leftPaddle->update();
+    pongFrame->rightPaddle->update();
 }
 
-void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime)
+void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
-	StateBase::Draw(engin, deltaTime);
-	window.draw(*frame->ball);
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
+    if(!pongFrame)
+    {
+       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       return;
+    }        
+	StateBase::Draw(engin, deltaTime, frame);
+	window.draw(*pongFrame->ball);
 	window.draw(header);
     window.display();
 }
 
 
 
-void IntroState::Init()
+void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
+
+    std::cout << "IntroState Init" << std::endl;
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
+    if(!pongFrame)
+    {
+       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       return;
+    }        
     Settings::stateId = StateId::INTRO_STATE; 
-    StateBase::Init();
+    StateBase::Init(frame);
+    
+    pongFrame->ball->setPosition({400, 300});
+    pongFrame->ball->setVelocity({100, 100});
+    pongFrame->leftPaddle->setPosition(sf::Vector2f(100, 300));
+    pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
+
+    header.setString(Settings::window.title);
+    header.setCharacterSize(54);
+    header.setFillColor(sf::Color::White);
+    header.setPosition(sf::Vector2f(335, 25));
+    header.setStyle(sf::Text::Bold);
         
     
     std::shared_ptr<IntroGui> cust(new IntroGui());
@@ -136,10 +168,10 @@ void IntroState::Init()
 //    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 //
 //    header.setFont(ResourceManager::font.get("Header Font"));
-    reset();
+    reset(pongFrame);
 }
 
-void IntroState::Clean()
+void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
     gui.removeAllWidgets();
     
@@ -149,9 +181,9 @@ void IntroState::Clean()
 
 }
 
-void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
+void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame)
 {
-    StateBase::sfEvent(engin, event);
+    StateBase::sfEvent(engin, event, frame);
     switch(event.type)
     {
         case sf::Event::JoystickConnected: 
@@ -190,14 +222,14 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event)
                 break;
             };
 
-defualt:
+        defualt:
            break;   
     };
 }
 
-void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event)
+void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame)
 {
-    StateBase::handleGUEvent(engin, event);
+    StateBase::handleGUEvent(engin, event, frame);
 }
 
 IntroState::~IntroState()

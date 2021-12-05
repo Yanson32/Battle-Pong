@@ -8,6 +8,7 @@
 ****************************************************************/
 
 #include <GameUtilities/Engin/Engin.h>
+#include <GameUtilities/Engin/Frame.h>
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Color.hpp>
@@ -16,7 +17,6 @@
 #include "States/StateBase.h"
 #include "Gui/GuiManager.h"
 
-#include "Objects/Frame.h"
 #include "Box2D/DebugDraw.h"
 #include <TGUI/TGUI.hpp>
 
@@ -28,7 +28,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        IntroState(GU::Engin::Engin& engin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &debugDraw, tgui::Gui &newGui);
+        IntroState(GU::Engin::Engin& engin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui);
 
 
         /****************************************************************//**
@@ -37,7 +37,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(GU::Engin::Engin& engin, const float &deltaTime) override;
+        virtual void HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -46,7 +46,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(GU::Engin::Engin& engin, const float &deltaTime) override;
+        virtual void Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -55,12 +55,12 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime) override;
+        virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
-        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
-        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
-        virtual void Init() override;
-        virtual void Clean() override;
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame);
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame);
+        virtual void Init(std::shared_ptr<GU::Engin::Frame> frame) override;
+        virtual void Clean(std::shared_ptr<GU::Engin::Frame> frame) override;
 
         /****************************************************************//**
         *   @brief  Destructor

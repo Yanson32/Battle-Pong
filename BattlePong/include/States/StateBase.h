@@ -8,6 +8,8 @@
 ****************************************************************/
 
 #include <GameUtilities/Engin/GameState.h>
+#include <GameUtilities/Engin/Frame.h>
+
 #include <GameUtilities/Event/EventHandler.h>
 
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -31,7 +33,7 @@
 #include <memory>
 #include <TGUI/TGUI.hpp>
 
-#include "Objects/Frame.h"
+#include "Objects/PongFrame.h"
 
 class Wall;
 class Paddle;
@@ -54,11 +56,11 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         
         
         
-        StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, std::shared_ptr<Frame> newFrame, DebugDraw &newDebugDraw, tgui::Gui &newGui, const StateId newState);
+        StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &newDebugDraw, tgui::Gui &newGui, const StateId newState);
 
 
-        virtual void Init() override;
-        virtual void Clean() override = 0;
+        virtual void Init(std::shared_ptr<GU::Engin::Frame> frame) override;
+        virtual void Clean(std::shared_ptr<GU::Engin::Frame> frame) override = 0;
 
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
@@ -66,7 +68,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(GU::Engin::Engin& engin, const float &deltaTime) = 0;
+        virtual void HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override = 0;
 
 
         /****************************************************************//**
@@ -75,7 +77,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(GU::Engin::Engin& engin, const float &deltaTime);
+        virtual void Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -84,12 +86,16 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime) override;
+        virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
 
-        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event);
-        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event);
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame);
+        
+
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame) override;
+        
+
         /****************************************************************//**
         *   @brief  This method allows the system to pause the game.
         *           When system pause is in effect regular pause won't
@@ -108,17 +114,16 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         bool isSystemPaused() const;
 
         void gameEvents();
-        void reset();
+        void reset(std::shared_ptr<PongFrame> frame);
         /****************************************************************//**
         *   @brief  Destructor
         ********************************************************************/
         virtual ~StateBase();
     protected:
         void centerText();
-        bool isBallOnScreen();
+        bool isBallOnScreen(std::shared_ptr<PongFrame> frame);
         GU::Engin::Engin &engin;                        ///The Main game engin
         sf::RenderWindow &window;
-        std::shared_ptr<Frame> frame;
         DebugDraw &debugDraw;
         tgui::Gui &gui;                           ///The Main TGUI object
         StateId state;
