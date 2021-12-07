@@ -26,7 +26,7 @@
 
 #include "config.h"
 #include <GameUtilities/Core/String.h>
-#include <GameUtilities/Engin/Frame/Frame.h>
+#include <GameUtilities/Engin/Frame.h>
 
 #include "Settings.h"
 #include "Objects/PongFrame.h"
