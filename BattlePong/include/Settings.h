@@ -62,7 +62,7 @@ namespace Settings
 	    
 	struct WindowSettings
 	{
-		sf::String title = "Test";
+		sf::String title = "Battle Pong";
 		sf::Vector2f dimensions = sf::Vector2f(1280, 720);
 	};
     extern std::string theme;

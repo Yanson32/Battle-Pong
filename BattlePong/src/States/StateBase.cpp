@@ -401,6 +401,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         }
                     }
                     break;
+		    case Button::id::OPTIONS:
                     case Button::id::GENERAL_TAB:
                     {
                         gui.removeAllWidgets();
@@ -491,7 +492,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                         
                     }
-                    break;
+
                 }
             }
 
