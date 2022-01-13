@@ -67,9 +67,9 @@ class IntroState: public StateBase
         ********************************************************************/
         virtual ~IntroState();
     private:
-        sf::Text header;                            ///Text displayed at the top of the screen
-        sf::Color background = sf::Color::Black;    ///Color used to clear the screen background
-        //sf::Font headerFont;                      ///Font used for the screens header
+        tgui::HorizontalLayout::Ptr headerLayout; 
+	tgui::Label::Ptr header;                        ///Text displayed at the top of the screen
+        sf::Color background = sf::Color::Black;    	///Color used to clear the screen background
 };
 
 #endif // INTROSTATE_H

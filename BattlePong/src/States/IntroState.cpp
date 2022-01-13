@@ -118,7 +118,7 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
     }        
 	StateBase::Draw(engin, deltaTime, frame);
 	window.draw(*pongFrame->ball);
-	window.draw(header);
+	//window.draw(header);
     window.display();
 }
 
@@ -141,13 +141,20 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     pongFrame->ball->setVelocity({100, 100});
     pongFrame->leftPaddle->setPosition(sf::Vector2f(100, 300));
     pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
-
-    header.setString(Settings::window.title);
-    header.setCharacterSize(54);
-    header.setFillColor(sf::Color::White);
-    header.setPosition(sf::Vector2f(335, 25));
-    header.setStyle(sf::Text::Bold);
+	
+    
+    header = tgui::Label::create(Settings::window.title.toAnsiString());	   
+    header->setText(Settings::window.title.toAnsiString());
+    header->setSize({50,50}); 
+    header->setTextSize(60); 
+    header->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Center);
         
+    
+    headerLayout = tgui::HorizontalLayout::create();
+    headerLayout->setPosition({0, 50}); 
+    headerLayout->setSize({window.getView().getSize().x, 100});
+    headerLayout->add(header, "headerLable"); 
+    gui.add(headerLayout); 
     
     std::shared_ptr<IntroGui> cust(new IntroGui());
     cust->init(window.getView().getSize().x, window.getView().getSize().y); 
@@ -218,7 +225,10 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::s
                     std::cout << "Up" << std::endl;
                 break;
             };
-
+	case sf::Event::Resized:
+	    headerLayout->setSize({window.getSize().x, 100});
+	    break; 
+	     
         defualt:
            break;   
     };
@@ -227,6 +237,50 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::s
 void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame)
 {
     StateBase::handleGUEvent(engin, event, frame);
+    switch(event->id)
+    {
+        case EventId::CLICK:
+            std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
+            if(temp)
+            {
+                switch(temp->buttonId)
+                {
+                    case Button::id::INTRO_PANEL:
+                        gui.add(headerLayout, "headerLayout");
+                    break;
+		    case Button::id::OPTIONS:
+                    case Button::id::GENERAL_TAB:
+                        gui.add(headerLayout, "headerLayout");
+                    break;
+                    case Button::id::CONTROLS_TAB:
+                        gui.add(headerLayout, "headerLayout");
+                    break;
+                    case Button::id::VIDEO_TAB:
+                        gui.add(headerLayout, "headerLayout");
+                    break;
+                    case Button::id::SOUND_TAB:
+                        gui.add(headerLayout, "headerLayout");
+                    break;
+                    case Button::id::NETWORK_TAB:
+                        gui.add(headerLayout, "headerLayout");
+                    break;
+                    case Button::id::DEV_TAB:
+                        gui.add(headerLayout, "headerLayout");
+                    break;
+                    case Button::id::MULTIPLAYER:
+                        gui.add(headerLayout, "headerLayout");
+                    break;
+                    case Button::id::HOST:
+                        gui.add(headerLayout, "headerLayout");
+                    break;
+                    case Button::id::CONNECT:
+                        gui.add(headerLayout, "headerLayout");
+	            break;	
+		}
+	    }
+    }
+        
+
 }
 
 IntroState::~IntroState()

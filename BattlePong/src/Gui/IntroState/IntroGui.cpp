@@ -45,7 +45,7 @@ IntroGui::IntroGui()
     options->setText("Options");
     options->onPress([](){
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::GENERAL_TAB);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::OPTIONS);
     });
     tgui::HorizontalLayout::Ptr optionLayout = tgui::HorizontalLayout::create(); 
     optionLayout->addSpace(1);
