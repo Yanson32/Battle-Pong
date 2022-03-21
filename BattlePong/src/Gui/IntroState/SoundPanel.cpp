@@ -18,18 +18,18 @@ namespace Gui
 
         //Create effects slider
         effectsSlider = tgui::Slider::create(0, 100);
-        effectsSlider->setValue(Settings::music.mVolume); 
+        effectsSlider->setValue(Settings::mVolume); 
         effectsSlider->onValueChange([&](){
-            Settings::music.sVolume = effectsSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::SOUND_EFFECTS, Settings::music.sVolume);
+            Settings::sVolume = effectsSlider->getValue();
+            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::SOUND_EFFECTS, Settings::sVolume);
         });
         getContentPane()->append("Sound Effects", effectsSlider);
 
         musicSlider = tgui::Slider::create(0, 100);
-        musicSlider->setValue(Settings::music.sVolume);
+        musicSlider->setValue(Settings::sVolume);
         musicSlider->onValueChange([&](){
-            Settings::music.mVolume = musicSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::MUSIC, Settings::music.mVolume);
+            Settings::mVolume = musicSlider->getValue();
+            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::MUSIC, Settings::mVolume);
         });
         getContentPane()->append("Music Volume", musicSlider);
 
@@ -37,22 +37,22 @@ namespace Gui
         musicBox = tgui::ComboBox::create();
         musicBox->addItem("Zombies");
         musicBox->addItem("Dreams"); 
-        musicBox->setSelectedItem(Settings::music.currentSong.toAnsiString());
+        musicBox->setSelectedItem(Settings::currentSong.toAnsiString());
         musicBox->onItemSelect([&](){
             if(musicBox->getSelectedItem() == "Zombies")
             {
                 EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
-                Settings::music.currentSong = "Zombies";
+                Settings::currentSong = "Zombies";
             }
             else if(musicBox->getSelectedItem() == "Dreams") 
             {    
                 EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/the_field_of_dreams.ogg");
-                Settings::music.currentSong = "Dreams";
+                Settings::currentSong = "Dreams";
             }
             else
             {     
                 EventManager::inst().Post<GU::Evt::PlayMusic>("");
-                Settings::music.currentSong = "";
+                Settings::currentSong = "";
             } 
 
                 

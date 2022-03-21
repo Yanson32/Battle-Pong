@@ -20,6 +20,8 @@ namespace Settings
     //Game settings
     extern sf::String time;
     extern sf::String ai;
+    extern const float wallThickness;
+    extern StateId stateId;
 
     //Paddle 1 settigns
     extern std::string p1Input;
@@ -31,75 +33,50 @@ namespace Settings
     extern std::string p2Name;
     extern int p2Score;
     
+    //music settings 
+    extern int mVolume;
+    extern int sVolume;
+    extern sf::String currentSong;
+   
+    //Button Settings	
+    extern sf::Vector2f bSize; 
+    extern sf::Vector2f bPosition; 
+
+    //Window settings    
+    extern sf::String title;
+    extern sf::Vector2f dimensions;
     
-    struct MusicSettings
-	{
-        int mVolume = 100;
-    	int sVolume = 100;
-        sf::String currentSong = "Zombies";
-    };
-	//Server	
-       extern sf::TcpSocket socket;
-       extern sf::TcpListener listener;
-       extern bool connected;
-       extern int port;
-       extern sf::IpAddress address;
-
-
-	struct ClientSettings 
-	{
-        	int port = 5000;
-        	sf::String ip = "127.0.0.0.1";
-        	sf::TcpSocket socket;
-        	sf::Time timeOut;
-	};
-	
-	struct ButtonSettings
-	{	
-		sf::Vector2f bSize = sf::Vector2f(200, 25);
-		sf::Vector2f bPosition = sf::Vector2f(300, 300);
-	};
-	    
-	struct WindowSettings
-	{
-		sf::String title = "Battle Pong";
-		sf::Vector2f dimensions = sf::Vector2f(1280, 720);
-	};
-    extern std::string theme;
-	extern std::string playerControlUp;
-	extern std::string playerControlDown;
-	extern std::string playerControlLeft;
-	extern std::string playerControlRight;
-	extern std::string playerControlMenu;
-	extern std::string playerControlNext;
-	extern std::string playerControlSelect;
+   
+    //Player controls 
+    extern std::string playerControlUp;
+    extern std::string playerControlDown;
+    extern std::string playerControlLeft;
+    extern std::string playerControlRight;
+    extern std::string playerControlMenu;
+    extern std::string playerControlNext;
+    extern std::string playerControlSelect;
 
     //Joystick buttons    
-	extern std::string playerJoystickControlNext;
-	extern std::string playerJoystickControlSelect;  
+    extern std::string playerJoystickControlNext;
+    extern std::string playerJoystickControlSelect;  
 
-	extern MusicSettings music;
-	
-	//Client
-	extern ClientSettings client;
-
-	//Ball
-	extern	ButtonSettings button;
-
-	//Window
-	extern WindowSettings window;
-
-
-	extern const float wallThickness;
-
+    
+    //Network
+    extern sf::TcpSocket socket;
+    extern sf::TcpListener listener;
+    extern bool connected;
+    extern sf::String targetIp;
+    extern sf::Time timeOut;
+    extern int port;
     extern std::string publicIp;
     extern std::string localIp;
+    
+    //Theme settings 
+    extern std::string theme;
     extern std::string background;
 
-    extern StateId stateId;
 
-
-
+    //Paths
     extern const std::string RESOURCE_DIR; 
     extern const std::string IMAGES_DIR;
     extern const std::string SOUNDS_DIR;

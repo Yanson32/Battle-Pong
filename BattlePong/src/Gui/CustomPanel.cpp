@@ -11,8 +11,8 @@ namespace Gui
 		spacer = tgui::Panel::create();
 		spacer->getRenderer()->setBackgroundColor(sf::Color::Transparent);
 
-        this->setSize({Settings::window.dimensions.x / 2, Settings::window.dimensions.y / 2});
-        this->setPosition({Settings::window.dimensions.x / 4, Settings::window.dimensions.y / 4});
+        this->setSize({Settings::dimensions.x / 2, Settings::dimensions.y / 2});
+        this->setPosition({Settings::dimensions.x / 4, Settings::dimensions.y / 4});
         this->getRenderer()->setBackgroundColor(sf::Color::Transparent);
 
         //Create the main layout

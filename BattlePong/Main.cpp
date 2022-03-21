@@ -43,7 +43,7 @@ int main(int argc, char* argv[])
     ipThread.detach();
 
     
-    sf::RenderWindow window(sf::VideoMode(Settings::window.dimensions.x, Settings::window.dimensions.y),Settings::window.title); 
+    sf::RenderWindow window(sf::VideoMode(Settings::dimensions.x, Settings::dimensions.y),Settings::title); 
 
     tgui::Gui gui;
     gui.setTarget(window);

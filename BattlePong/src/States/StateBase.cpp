@@ -81,8 +81,8 @@ bool StateBase::isBallOnScreen(std::shared_ptr<PongFrame> frame)
     sf::FloatRect windowBounds;
     windowBounds.top = 0;
     windowBounds.left = 0;
-    windowBounds.width = Settings::window.dimensions.x;
-    windowBounds.height = Settings::window.dimensions.y;
+    windowBounds.width = Settings::dimensions.x;
+    windowBounds.height = Settings::dimensions.y;
 
     return windowBounds.contains(pos);
 
@@ -334,8 +334,8 @@ void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
             }
         }
     }
-    music.setVolume(Settings::music.mVolume);
-    sound.setVolume(Settings::music.sVolume);
+    music.setVolume(Settings::mVolume);
+    sound.setVolume(Settings::sVolume);
 
     reset(pongFrame);
 }
@@ -614,10 +614,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     switch(temp->sliderId)
                     {
                         case sliderId::SOUND_EFFECTS:
-                            sound.setVolume(Settings::music.sVolume);
+                            sound.setVolume(Settings::sVolume);
                             break;
                         case sliderId::MUSIC:
-                            music.setVolume(Settings::music.mVolume); 
+                            music.setVolume(Settings::mVolume); 
                             break;
                     }; 
                 
