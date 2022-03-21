@@ -170,20 +170,28 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
 
 void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
+    StateBase::Init(frame);
+    Settings::stateId = StateId::PLAY_STATE; 
+    
+    //Crate pong frame 
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
        //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
        return;
     }        
-    Settings::stateId = StateId::PLAY_STATE; 
-    StateBase::Init(frame);
+    
+    //Setup paddle 1 
+    paddle1Hud->setScore(0);
+    Settings::paddle1.score = 0;
     if(Settings::paddle1.input == "None")
         pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->leftPaddle)));
     else
         pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->leftPaddle)));
 
-
+    //Setup paddle 2
+    paddle2Hud->setScore(0);
+    Settings::paddle2.score = 0;
     if(Settings::paddle2.input  == "None")
         pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->rightPaddle)));
     else
@@ -192,7 +200,8 @@ void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     systemPause(true);
     userMessage.setCharacterSize(34);
     userMessage.setPosition(sf::Vector2f(400, 300));
-
+    
+    //Load ball sound
     if(!ResourceManager::sound.isLoaded(soundId::BALL))
         ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
 
@@ -203,10 +212,6 @@ void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 //    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
 //
 //    userMessage.setFont(ResourceManager::font.get("Header Font"));
-    Settings::paddle1.score = 0;
-    Settings::paddle2.score = 0;
-    paddle1Hud->setScore(0);
-    paddle2Hud->setScore(0);
     centerText();
     reset(pongFrame);
 }
@@ -214,6 +219,10 @@ void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 void PlayState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
     gui.removeAllWidgets();
+    
+    //Remove ball sound
+    if(ResourceManager::sound.isLoaded(soundId::BALL))
+        ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
 //
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);

@@ -136,21 +136,23 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
 
     std::cout << "IntroState Init" << std::endl;
+    StateBase::Init(frame);
+    Settings::stateId = StateId::INTRO_STATE; 
+    
+    //Create pong frame 
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
        //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
        return;
     }        
-    Settings::stateId = StateId::INTRO_STATE; 
-    StateBase::Init(frame);
     
     pongFrame->ball->setPosition({400, 300});
     pongFrame->ball->setVelocity({100, 100});
     pongFrame->leftPaddle->setPosition(sf::Vector2f(100, 300));
     pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
 	
-    
+    //Create intro panel 
     std::shared_ptr<IntroGui> cust(new IntroGui());
     cust->init(window.getView().getSize().x, window.getView().getSize().y); 
     gui.add(cust, "PanelPointer");
@@ -162,10 +164,12 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     //Load title image
     if(!ResourceManager::texture.isLoaded(textureId::TITLE))
 	   ResourceManager::texture.load(textureId::TITLE, sf::String(Settings::IMAGES_DIR + "/Black/Battle Pong.png")); 
-    
+   
+    //Set title properties 
     header.setTexture(ResourceManager::texture.get(textureId::TITLE));
     header.setScale({0.25, 0.25});
     header.setOrigin({960, 540});
+
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
@@ -178,6 +182,14 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
     gui.removeAllWidgets();
+    
+    //Remove ball collision sound  
+    if(ResourceManager::sound.isLoaded(soundId::BALL))
+        ResourceManager::sound.remove(soundId::BALL);
+    
+    //Remove title image
+    if(ResourceManager::texture.isLoaded(textureId::TITLE))
+	   ResourceManager::texture.remove(textureId::TITLE); 
     
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);
