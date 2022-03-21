@@ -6,6 +6,7 @@
 #include <GameUtilities/Event/OnComboChanged.h>
 #include <GameUtilities/Event/OnCheck.h>
 #include "Gui/ComboId.h"
+#include "TGUIFunctions.h"
 
 namespace Gui
 {
@@ -17,7 +18,7 @@ namespace Gui
         //Create lable instead of combobox when the user is playing the game
         if(state == StateId::PLAY_STATE)
         {
-            tgui::Label::Ptr tLimitLabel = tgui::Label::create(Settings::game.time.toAnsiString());
+            tgui::Label::Ptr tLimitLabel = tgui::Label::create(toTguiString(Settings::time));
             getContentPane()->append("Time Limit", tLimitLabel);   
         }
         else
@@ -26,10 +27,10 @@ namespace Gui
             comboBox->addItem("30");
             comboBox->addItem("45");
             comboBox->addItem("60");
-            comboBox->setSelectedItem(Settings::game.time.toAnsiString());
+            comboBox->setSelectedItem(toTguiString(Settings::time));
             comboBox->onItemSelect([&](){
                 sf::String text = comboBox->getSelectedItem().toAnsiString();
-                Settings::game.time = text; 
+                Settings::time = text; 
     //            Event::Manager::inst().push(event);
             });
             getContentPane()->append("Time Limit", comboBox);
@@ -37,7 +38,7 @@ namespace Gui
 
         if(state == StateId::PLAY_STATE)
         {
-            tgui::Label::Ptr aiSettingLabel = tgui::Label::create(Settings::game.ai.toAnsiString());
+            tgui::Label::Ptr aiSettingLabel = tgui::Label::create(toTguiString(Settings::ai));
             getContentPane()->append("Ai", aiSettingLabel);   
         }
         else
@@ -46,9 +47,9 @@ namespace Gui
             aiCombo->addItem("Easy");
             aiCombo->addItem("Medium");
             aiCombo->addItem("Hard");
-            aiCombo->setSelectedItem(Settings::game.ai.toAnsiString());
+            aiCombo->setSelectedItem(toTguiString(Settings::ai));
             aiCombo->onItemSelect([&](){
-                Settings::game.ai = aiCombo->getSelectedItem().toAnsiString();
+                Settings::ai = aiCombo->getSelectedItem().toAnsiString();
             });
             getContentPane()->append("Ai", aiCombo);
         }

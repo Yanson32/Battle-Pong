@@ -7,7 +7,8 @@
 #include <GameUtilities/Event/PlayMusic.h>
 #include "Gui/SliderId.h"
 #include "Settings.h"
-
+#include <SFML/System/String.hpp>
+#include "TGUIFunctions.h"
 namespace Gui
 {
     NetworkPanel::NetworkPanel():
@@ -21,7 +22,7 @@ namespace Gui
         localIp = tgui::Label::create(Settings::localIp);
         getContentPane()->append("Local Ip", localIp); 
         
-        portBox = tgui::Label::create(Settings::port);
+        portBox = tgui::Label::create(toTguiString(Settings::port));
         getContentPane()->append("Port", portBox); 
     }
     void NetworkPanel::init(const int &width, const int &height)

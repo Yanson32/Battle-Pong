@@ -1,13 +1,14 @@
 #include "Gui/PaddleHud.h"
 #include <sstream>
-PaddleHud::PaddleHud(Settings::PaddleSettings &newPaddleSettings): paddleSettings(newPaddleSettings)
+PaddleHud::PaddleHud(const std::string &input, std::string &name, int &score): 
+m_input(input), m_name(name), m_score(score)
 {
     //ctor
-    panleLable = tgui::Label::create(paddleSettings.name);
-    panleLable->setText(paddleSettings.name);
+    panleLable = tgui::Label::create(name);
+    panleLable->setText(name);
     this->add(panleLable);
 
-    setScore(paddleSettings.score);
+    setScore(score);
 
     this->setSize({150, 25});
 
@@ -31,7 +32,7 @@ void PaddleHud::setScore(const int newScore)
     if(scoreLabel)
         scoreLabel->setText(temp.toAnsiString());
 
-    paddleSettings.score = newScore;
+    m_score = newScore;
 }
 
 void PaddleHud::setName(const sf::String &name)

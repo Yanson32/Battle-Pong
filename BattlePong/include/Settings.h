@@ -17,18 +17,20 @@
 
 namespace Settings 
 {
-    struct GameSettings
-    {
-        sf::String time = "30";
-        sf::String ai = "Medium"; 
-    };
+    //Game settings
+    extern sf::String time;
+    extern sf::String ai;
 
-	struct PaddleSettings
-	{
-		std::string input;
-		std::string name;
-		int score;
-	};
+    //Paddle 1 settigns
+    extern std::string p1Input;
+    extern std::string p1Name;
+    extern int p1Score;
+    
+    //Paddle 2 settigns
+    extern std::string p2Input;
+    extern std::string p2Name;
+    extern int p2Score;
+    
     
     struct MusicSettings
 	{
@@ -36,16 +38,13 @@ namespace Settings
     	int sVolume = 100;
         sf::String currentSong = "Zombies";
     };
-	
-    struct ServerSettings
-	{
-        	sf::TcpSocket socket;
-        	sf::TcpListener listener;
-        	bool connected = false;
-        	int port = 4000;
-        	sf::IpAddress address;
+	//Server	
+       extern sf::TcpSocket socket;
+       extern sf::TcpListener listener;
+       extern bool connected;
+       extern int port;
+       extern sf::IpAddress address;
 
-	};
 
 	struct ClientSettings 
 	{
@@ -79,13 +78,8 @@ namespace Settings
 	extern std::string playerJoystickControlNext;
 	extern std::string playerJoystickControlSelect;  
 
-	extern PaddleSettings paddle1;
-	extern PaddleSettings paddle2;
 	extern MusicSettings music;
 	
-	//Server
-	extern ServerSettings server;
-
 	//Client
 	extern ClientSettings client;
 
@@ -95,14 +89,11 @@ namespace Settings
 	//Window
 	extern WindowSettings window;
 
-    //Game settings
-    extern GameSettings game;
 
 	extern const float wallThickness;
 
     extern std::string publicIp;
     extern std::string localIp;
-    extern std::string port;
     extern std::string background;
 
     extern StateId stateId;

@@ -61,8 +61,8 @@ sysPause(false)
     gui.setTarget(window); 
 
 
-    paddle1Hud.reset(new PaddleHud(Settings::paddle1));
-    paddle2Hud.reset(new PaddleHud(Settings::paddle2));
+    paddle1Hud.reset(new PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
+    paddle2Hud.reset(new PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
 
 
     //debugDraw.SetFlags(b2Draw::e_aabbBit | b2Draw::e_jointBit | b2Draw::e_shapeBit | b2Draw::e_pairBit | b2Draw::e_centerOfMassBit);
@@ -503,16 +503,16 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
     {
         case EventId::LEFT_GOAL_COLLISION:
         {
-            int currentScore = Settings::paddle1.score;
-	        Settings::paddle1.score = currentScore + 1;
+            int currentScore = Settings::p1Score;
+	        Settings::p1Score = currentScore + 1;
             paddle1Hud->setScore(currentScore + 1);
             reset(pongFrame);
         }
         break;
         case EventId::RIGHT_GOAL_COLLISION:
         {
-            int currentScore = Settings::paddle2.score;
-	    Settings::paddle2.score = currentScore + 1;
+            int currentScore = Settings::p2Score;
+	    Settings::p2Score = currentScore + 1;
             paddle2Hud->setScore(currentScore + 1);
             reset(pongFrame);
         }
