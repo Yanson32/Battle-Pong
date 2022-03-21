@@ -48,5 +48,14 @@ namespace Settings
     std::string port = "5000";
     std::string background = "Star";
     StateId stateId = StateId::INTRO_STATE;
+
+    //Directories
+    const std::string RESOURCE_DIR = "../Resources";
+    const std::string IMAGES_DIR = RESOURCE_DIR + "/Images";
+    const std::string SOUNDS_DIR = RESOURCE_DIR + "/Sounds";
+    const std::string FONTS_DIR = RESOURCE_DIR + "/Fonts";
+    const std::string THEME_DIR = RESOURCE_DIR + "/TGUI/Theme";
+    const std::string MUSIC_DIR = RESOURCE_DIR + "/Music";
+    const std::string BACKGROUNDS_DIR = RESOURCE_DIR + "Backgrounds";
 }
 

@@ -13,6 +13,7 @@
 #include <SFML/Network.hpp>
 #include "Events/EventId.h"
 #include "States/StateId.h"
+#include <string>
 
 namespace Settings 
 {
@@ -105,6 +106,16 @@ namespace Settings
     extern std::string background;
 
     extern StateId stateId;
+
+
+
+    extern const std::string RESOURCE_DIR; 
+    extern const std::string IMAGES_DIR;
+    extern const std::string SOUNDS_DIR;
+    extern const std::string FONTS_DIR;
+    extern const std::string THEME_DIR;
+    extern const std::string MUSIC_DIR;
+    extern const std::string BACKGROUNDS_DIR; 
 }
 
 

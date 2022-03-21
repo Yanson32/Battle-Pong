@@ -16,6 +16,7 @@
 #include <SFML/Audio/Music.hpp>
 #include "Resources/SoundId.h"
 #include "Resources/MusicId.h"
+#include "Resources/TextureId.h"
 
 namespace ResourceManager
 {
@@ -34,10 +35,16 @@ namespace ResourceManager
 
 
     /**********************************************************//**
-    *   @brief  The sound ResourceManager object holds sf::Music
+    *   @brief  The music ResourceManager object holds sf::Music
     *           objects.
     **************************************************************/
     extern ResourceHolder<sf::Music, musicId> music;
 
+    
+    /**********************************************************//**
+    *   @brief  The texture ResourceManager object holds sf::Texture
+    *           objects.
+    **************************************************************/
+    extern ResourceHolder<sf::Texture, textureId> texture;
 }
 #endif // RESOURCEMANAGER_H

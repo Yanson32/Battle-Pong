@@ -12,6 +12,9 @@
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Color.hpp>
+#include <SFML/Graphics/Sprite.hpp>
+#include <SFML/Graphics/Texture.hpp>
+
 //#include <SFML/Graphics/Font.hpp>
 
 #include "States/StateBase.h"
@@ -67,9 +70,8 @@ class IntroState: public StateBase
         ********************************************************************/
         virtual ~IntroState();
     private:
-        tgui::HorizontalLayout::Ptr headerLayout; 
-	tgui::Label::Ptr header;                        ///Text displayed at the top of the screen
         sf::Color background = sf::Color::Black;    	///Color used to clear the screen background
+	sf::Sprite header;
 };
 
 #endif // INTROSTATE_H

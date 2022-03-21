@@ -4,6 +4,8 @@
 #include <GameUtilities/Event/EventQueue.h>
 #include <GameUtilities/Event/PushState.h>
 #include <GameUtilities/Event/Click.h>
+#include <GameUtilities/Event/OnComboChanged.h>
+
 //#include <GameUtilities/Event/LogEvent.h>
 //#include <GameUtilities/Event/LogType.h>
 
@@ -31,6 +33,7 @@
 #include "Gui/IntroState/IntroGui.h"
 #include "Gui/IntroState/OptionsPanel.h"
 #include "Gui/ButtonId.h"
+#include "Gui/ComboId.h"
 #include "Gui/IntroState/ControlPanel.h"
 #include "Gui/IntroState/DevPanel.h"
 #include "Gui/IntroState/SoundPanel.h"
@@ -40,7 +43,7 @@
 #include "Gui/IntroState/ConnectPanel.h"
 #include "Gui/IntroState/VideoPanel.h"
 #include "Gui/IntroState/NetworkPanel.h"
-
+#include <iostream>
 
 #include "Resources/SoundId.h"
 #include "Resources/MusicId.h"
@@ -50,6 +53,7 @@ IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, 
 {
 
     //ctor
+
 }
 
 
@@ -106,6 +110,9 @@ void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     pongFrame->rightWall->update();
     pongFrame->leftPaddle->update();
     pongFrame->rightPaddle->update();
+    header.setPosition({window.getView().getSize().x / 2, window.getView().getSize().y / 6});
+
+
 }
 
 void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
@@ -118,6 +125,7 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
     }        
 	StateBase::Draw(engin, deltaTime, frame);
 	window.draw(*pongFrame->ball);
+	window.draw(header);	
 	//window.draw(header);
     window.display();
 }
@@ -143,19 +151,6 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
 	
     
-    header = tgui::Label::create(Settings::window.title.toAnsiString());	   
-    header->setText(Settings::window.title.toAnsiString());
-    header->setSize({50,50}); 
-    header->setTextSize(60); 
-    header->setHorizontalAlignment(tgui::Label::HorizontalAlignment::Center);
-        
-    
-    headerLayout = tgui::HorizontalLayout::create();
-    headerLayout->setPosition({0, 50}); 
-    headerLayout->setSize({window.getView().getSize().x, 100});
-    headerLayout->add(header, "headerLable"); 
-    gui.add(headerLayout); 
-    
     std::shared_ptr<IntroGui> cust(new IntroGui());
     cust->init(window.getView().getSize().x, window.getView().getSize().y); 
     gui.add(cust, "PanelPointer");
@@ -164,8 +159,13 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     if(!ResourceManager::sound.isLoaded(soundId::BALL))
         ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
 
-   
-
+    //Load title image
+    if(!ResourceManager::texture.isLoaded(textureId::TITLE))
+	   ResourceManager::texture.load(textureId::TITLE, sf::String(Settings::IMAGES_DIR + "/Black/Battle Pong.png")); 
+    
+    header.setTexture(ResourceManager::texture.get(textureId::TITLE));
+    header.setScale({0.25, 0.25});
+    header.setOrigin({960, 540});
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
@@ -226,7 +226,6 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::s
                 break;
             };
 	case sf::Event::Resized:
-	    headerLayout->setSize({window.getSize().x, 100});
 	    break; 
 	     
         defualt:
@@ -240,45 +239,50 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
     switch(event->id)
     {
         case EventId::CLICK:
+	{
             std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
             if(temp)
             {
                 switch(temp->buttonId)
                 {
                     case Button::id::INTRO_PANEL:
-                        gui.add(headerLayout, "headerLayout");
                     break;
 		    case Button::id::OPTIONS:
                     case Button::id::GENERAL_TAB:
-                        gui.add(headerLayout, "headerLayout");
                     break;
                     case Button::id::CONTROLS_TAB:
-                        gui.add(headerLayout, "headerLayout");
                     break;
                     case Button::id::VIDEO_TAB:
-                        gui.add(headerLayout, "headerLayout");
                     break;
                     case Button::id::SOUND_TAB:
-                        gui.add(headerLayout, "headerLayout");
                     break;
                     case Button::id::NETWORK_TAB:
-                        gui.add(headerLayout, "headerLayout");
                     break;
                     case Button::id::DEV_TAB:
-                        gui.add(headerLayout, "headerLayout");
                     break;
                     case Button::id::MULTIPLAYER:
-                        gui.add(headerLayout, "headerLayout");
                     break;
                     case Button::id::HOST:
-                        gui.add(headerLayout, "headerLayout");
                     break;
                     case Button::id::CONNECT:
-                        gui.add(headerLayout, "headerLayout");
 	            break;	
 		}
 	    }
-    }
+	}	
+	    break;
+        case EventId::ON_COMBO_CHANGED:
+            {   
+    	    //Load title image
+    	    if(ResourceManager::texture.isLoaded(textureId::TITLE))
+	        ResourceManager::texture.remove(textureId::TITLE);
+   		    
+                ResourceManager::texture.load(textureId::TITLE, Settings::IMAGES_DIR  + "/" + Settings::theme + "/Battle Pong.png" );
+    	        header.setTexture(ResourceManager::texture.get(textureId::TITLE));
+			}
+		   
+		
+	    		
+	}
         
 
 }

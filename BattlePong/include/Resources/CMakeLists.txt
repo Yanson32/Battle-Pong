@@ -1,7 +1,8 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/SoundId.h"
-            "${CMAKE_CURRENT_SOURCE_DIR}/MusicId.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Resource Holder.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.h"
+            	"${CMAKE_CURRENT_SOURCE_DIR}/MusicId.h"
+	    	"${CMAKE_CURRENT_SOURCE_DIR}/TextureId.h"
+		"${CMAKE_CURRENT_SOURCE_DIR}/Resource Holder.h"
+		"${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.h"
 
 )
 set(SUB_DIRECTORIES ""
