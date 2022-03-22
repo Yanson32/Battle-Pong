@@ -1,8 +1,9 @@
 #for backwards compatibility
 cmake_minimum_required(VERSION 3.5.1)
 
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/")
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
 include ("defaults")
+
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "lib")
@@ -19,6 +20,11 @@ endif()
 
 #Give the project a name
 project("BattlePong" VERSION "1.0.0.0")
+
+#include operating system specific code
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/${CMAKE_SYSTEM_NAME}.cmake")
+	include("${CMAKE_SYSTEM_NAME}")
+endif()
 
 string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)
 
