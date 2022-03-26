@@ -41,13 +41,11 @@ namespace Gui
         musicBox->onItemSelect([&](){
             if(musicBox->getSelectedItem() == "Zombies")
             {
-                EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
-                Settings::currentSong = "Zombies";
+                EventManager::inst().Post<GU::Evt::PlayMusic>("Zombies");
             }
             else if(musicBox->getSelectedItem() == "Dreams") 
             {    
-                EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/the_field_of_dreams.ogg");
-                Settings::currentSong = "Dreams";
+                EventManager::inst().Post<GU::Evt::PlayMusic>("Dreams");
             }
             else
             {     

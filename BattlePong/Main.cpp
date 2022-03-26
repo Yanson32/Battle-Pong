@@ -11,6 +11,7 @@
 #include <SFML/Audio/Music.hpp>
 
 #include "Resources/ResourceManager.h"
+#include "Resources/ResourceFunctions.h"
 #include <boost/program_options.hpp>
 
 #include <sstream>
@@ -36,7 +37,6 @@
 #include "SFMLFunctions.h"
 int main(int argc, char* argv[])
 {
-
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
     //So we do it in a thread.
     std::thread ipThread([&](){Settings::publicIp = sf::IpAddress::getPublicAddress().toString();});
@@ -74,8 +74,7 @@ int main(int argc, char* argv[])
     //boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
     
     //Load tgui theme
-    tgui::Theme::setDefault("Resources/TGUI/Theme/Black.txt");
-    
+    ResourceManager::loadTheme("Black");
     
     sf::Clock timer;
     const sf::Time deltaTime = sf::seconds(1.0f / 60.0f);
@@ -86,8 +85,10 @@ int main(int argc, char* argv[])
     DebugDraw debugDraw(*frame->world.get());
     frame->world->SetDebugDraw(&debugDraw);
 	engin.Push<IntroState>(frame, engin, window, debugDraw, gui);
-	EventManager::inst().Post<GU::Evt::PlayMusic>("Resources/Music/Electro_Zombies.ogg");
-
+	
+	
+        //Need to call event manager play sound
+        EventManager::inst().Post<GU::Evt::PlayMusic>("Zombies");
     try
     {
         while (engin.IsRunning())

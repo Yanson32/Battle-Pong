@@ -17,34 +17,46 @@
 #include "Resources/SoundId.h"
 #include "Resources/MusicId.h"
 #include "Resources/TextureId.h"
+#include "Settings.h"
 
-namespace ResourceManager
+class ResourceManager
 {
-    /**********************************************************//**
-    *   @brief  The sound ResourceManager object holds sf::SoundBuffer
-    *           objects.
-    **************************************************************/
-    extern ResourceHolder<sf::SoundBuffer, soundId> sound;
-
-
-    /**********************************************************//**
-    *   @brief  The sound ResourceManager object holds sf::SoundBuffer
-    *           objects.
-    **************************************************************/
-    extern ResourceHolder<sf::Font, sf::String> font;
-
-
-    /**********************************************************//**
-    *   @brief  The music ResourceManager object holds sf::Music
-    *           objects.
-    **************************************************************/
-    extern ResourceHolder<sf::Music, musicId> music;
-
     
-    /**********************************************************//**
-    *   @brief  The texture ResourceManager object holds sf::Texture
-    *           objects.
-    **************************************************************/
-    extern ResourceHolder<sf::Texture, textureId> texture;
-}
+    public:
+    	ResourceManager();	    
+        static void remove(const textureId &texture);
+	static void loadSound(const soundId &sound, const std::string &name);
+	static bool isLoaded(const soundId &sound);
+        static sf::SoundBuffer& get(const soundId &sound);	
+        static void remove(const soundId &sound);
+	static bool isLoaded(const textureId &texture);
+	static void loadBackground(const std::string &name);
+	static void loadTexture(const textureId &texture, const std::string &name);
+       	static sf::Texture& get(const textureId  &texture); 
+	static bool loadMusic(const std::string &music);
+        static void loadTheme(const std::string &name);
+        static sf::Music& getMusic();
+	virtual ~ResourceManager(); 
+    private:
+        /**********************************************************//**
+        *   @brief  The sound ResourceManager object holds sf::SoundBuffer
+        *           objects.
+        **************************************************************/
+        static ResourceHolder<sf::SoundBuffer, soundId> m_sound;
+
+
+        /**********************************************************//**
+        *   @brief  The sound ResourceManager object holds sf::SoundBuffer
+        *           objects.
+        **************************************************************/
+        static ResourceHolder<sf::Font, sf::String> m_font;
+
+
+        /**********************************************************//**
+        *   @brief  The texture ResourceManager object holds sf::Texture
+        *           objects.
+        **************************************************************/
+        static ResourceHolder<sf::Texture, textureId> m_texture;
+        static sf::Music m_music;
+};
 #endif // RESOURCEMANAGER_H

@@ -13,6 +13,7 @@
 #include "Input/PlayerInput.h"
 #include "Settings.h"
 #include "Resources/ResourceManager.h"
+#include "Resources/ResourceFunctions.h"
 #include "Events/Events.h"
 #include "Macros.h"
 #include "Gui/PlayPanel.h" 
@@ -202,8 +203,7 @@ void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     userMessage.setPosition(sf::Vector2f(400, 300));
     
     //Load ball sound
-    if(!ResourceManager::sound.isLoaded(soundId::BALL))
-        ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
+    ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
 
     
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
@@ -221,9 +221,9 @@ void PlayState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
     gui.removeAllWidgets();
     
     //Remove ball sound
-    if(ResourceManager::sound.isLoaded(soundId::BALL))
-        ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
-//
+    if(ResourceManager::isLoaded(soundId::BALL))
+        ResourceManager::remove(soundId::BALL);
+
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);
 //    ResourceManager::sound.remove(Sound::Id::BALL);

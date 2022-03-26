@@ -30,11 +30,11 @@
 #include "Gui/IntroState/HostPanel.h"
 #include "Gui/IntroState/ConnectPanel.h"
 #include "Gui/IntroState/NetworkPanel.h"
+#include "Resources/ResourceFunctions.h"
 
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 sf::Sound StateBase::sound;
-sf::Music StateBase::music;
 
 std::shared_ptr<PaddleHud> StateBase::paddle1Hud = nullptr;
 std::shared_ptr<PaddleHud> StateBase::paddle2Hud = nullptr;
@@ -42,7 +42,6 @@ std::shared_ptr<PaddleHud> StateBase::paddle2Hud = nullptr;
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
 
-sf::Texture StateBase::backgroundTexture;
 sf::RectangleShape StateBase::backgroundRect;
 
 StateBase::StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &newDebugDraw, tgui::Gui &newGui, const StateId newState):
@@ -72,7 +71,7 @@ sysPause(false)
     gui.add(paddle1Hud);
     gui.add(paddle2Hud);
 
-    music.setLoop(true);
+    ResourceManager::getMusic().setLoop(true);
 }
 
 bool StateBase::isBallOnScreen(std::shared_ptr<PongFrame> frame)
@@ -314,27 +313,11 @@ void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
     }        
     systemPause(false);
     Pause(false);
-    boost::filesystem::path p ("Resources/Backgrounds/");
+    ResourceManager::loadBackground("Star.png");
 
-    boost::filesystem::directory_iterator end_itr;
-
-    for (boost::filesystem::directory_iterator itr(p); itr != end_itr; ++itr)
-    {
-        if(itr->path().stem().string() == Settings::background)
-        {    
-            if(backgroundTexture.loadFromFile(itr->path().string()))
-            {
-                std::cout << "Background loaded" << std::endl; 
-                backgroundRect.setTexture(&backgroundTexture);
-            }
-            else
-            {
-                std::cout << "Background could not be loaded" << std::endl;
-
-            }
-        }
-    }
-    music.setVolume(Settings::mVolume);
+    backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
+    Settings::background = "Star";
+    ResourceManager::getMusic().setVolume(Settings::mVolume);
     sound.setVolume(Settings::sVolume);
 
     reset(pongFrame);
@@ -522,9 +505,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             std::shared_ptr<GU::Evt::PlaySound> temp =  std::dynamic_pointer_cast<GU::Evt::PlaySound>(event);
             if(temp)
             {
-                if(ResourceManager::sound.isLoaded(static_cast<soundId>(temp->soundId)))
+                if(ResourceManager::isLoaded(static_cast<soundId>(temp->soundId)))
                 {
-                    sound.setBuffer(ResourceManager::sound.get(static_cast<soundId>(temp->soundId)));
+                    sound.setBuffer(ResourceManager::get(static_cast<soundId>(temp->soundId)));
                     sound.play();
                 }
             }
@@ -617,7 +600,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             sound.setVolume(Settings::sVolume);
                             break;
                         case sliderId::MUSIC:
-                            music.setVolume(Settings::mVolume); 
+			    ResourceManager::getMusic().setVolume(Settings::mVolume); 
                             break;
                     }; 
                 
@@ -630,10 +613,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 if(temp)
                 {
                     //Load music
-                    if(music.openFromFile(temp->musicFile))
-                        music.play();
-                    else
-                       music.stop();
+                    if(ResourceManager::loadMusic(temp->musicFile))
+                        ResourceManager::getMusic().play(); 
+		    else
+                        ResourceManager::getMusic().stop(); 
                     
                 }
             }
@@ -650,16 +633,13 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             switch(temp->index)
                             {
                                 case 0:
-                                    tgui::Theme::setDefault(nullptr);
-                                    Settings::theme = "Default"; 
+					ResourceManager::loadTheme("Default"); 
                                     break;
                                 case 1:
-                                    tgui::Theme::setDefault("Resources/TGUI/Theme/Black.txt");
-                                    Settings::theme = "Black"; 
+				    ResourceManager::loadTheme("Black");
                                     break;
                                 case 2:
-                                    tgui::Theme::setDefault("Resources/TGUI/Theme/BabyBlue.txt");
-                                    Settings::theme = "Blue"; 
+				    ResourceManager::loadTheme("BabyBlue"); 
                                     break;
                                     
                             } 
@@ -674,18 +654,14 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             switch(temp->index)
                             {
                                 case 0:
-                                    if(backgroundTexture.loadFromFile("Resources/Backgrounds/Star.png"))
-                                    {
-                                        backgroundRect.setTexture(&backgroundTexture);
-                                        Settings::background = "Star";
-                                    }
+				    ResourceManager::loadBackground("Star.png"); 
+                                    backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
+                                    Settings::background = "Star";
                                     break;
                                 case 1:
-                                    if(backgroundTexture.loadFromFile("Resources/Backgrounds/Nebula.png"))
-                                    {
-                                        backgroundRect.setTexture(&backgroundTexture);
-                                        Settings::background = "Nebula"; 
-                                    }
+				    ResourceManager::loadBackground("Nebula.png"); 
+                                    backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
+                                    Settings::background = "Nebula"; 
                                     break;
                                     
                             } 

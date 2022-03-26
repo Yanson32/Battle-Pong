@@ -76,14 +76,21 @@ namespace Settings
     extern std::string background;
 
 
-    //Paths
-    extern const std::string RESOURCE_DIR; 
-    extern const std::string IMAGES_DIR;
-    extern const std::string SOUNDS_DIR;
-    extern const std::string FONTS_DIR;
-    extern const std::string THEME_DIR;
-    extern const std::string MUSIC_DIR;
-    extern const std::string BACKGROUNDS_DIR; 
+    //Directories
+    extern const std::string RESOURCE_INSTALL_DIR; 
+    extern const std::string RESOURCE_BINARY_DIR;
+    extern const std::string IMAGES_INSTALL_DIR; 
+    extern const std::string IMAGES_BINARY_DIR; 
+    extern const std::string SOUNDS_INSTALL_DIR; 
+    extern const std::string SOUNDS_BINARY_DIR; 
+    extern const std::string FONTS_INSTALL_DIR;
+    extern const std::string FONTS_BINARY_DIR; 
+    extern const std::string THEME_INSTALL_DIR; 
+    extern const std::string THEME_BINARY_DIR; 
+    extern const std::string MUSIC_INSTALL_DIR; 
+    extern const std::string MUSIC_BINARY_DIR; 
+    extern const std::string BACKGROUNDS_INSTALL_DIR; 
+    extern const std::string BACKGROUNDS_BINARY_DIR; 
 }
 
 

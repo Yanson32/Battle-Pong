@@ -28,6 +28,7 @@
 
 
 #include "Resources/ResourceManager.h"
+#include "Resources/ResourceFunctions.h"
 #include "Logging.h"
 #include "Macros.h"
 #include "Gui/IntroState/IntroGui.h"
@@ -44,6 +45,7 @@
 #include "Gui/IntroState/VideoPanel.h"
 #include "Gui/IntroState/NetworkPanel.h"
 #include <iostream>
+#include <filesystem>
 
 #include "Resources/SoundId.h"
 #include "Resources/MusicId.h"
@@ -158,15 +160,13 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     gui.add(cust, "PanelPointer");
   
     //Load ball collision sound  
-    if(!ResourceManager::sound.isLoaded(soundId::BALL))
-        ResourceManager::sound.load(soundId::BALL, sf::String("Resources/Sounds/BallCollision.ogg"));
+    ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");     
 
     //Load title image
-    if(!ResourceManager::texture.isLoaded(textureId::TITLE))
-	   ResourceManager::texture.load(textureId::TITLE, sf::String(Settings::IMAGES_DIR + "/Black/Battle Pong.png")); 
-   
+    ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
+    
     //Set title properties 
-    header.setTexture(ResourceManager::texture.get(textureId::TITLE));
+    header.setTexture(ResourceManager::get(textureId::TITLE));
     header.setScale({0.25, 0.25});
     header.setOrigin({960, 540});
 
@@ -184,12 +184,12 @@ void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
     gui.removeAllWidgets();
     
     //Remove ball collision sound  
-    if(ResourceManager::sound.isLoaded(soundId::BALL))
-        ResourceManager::sound.remove(soundId::BALL);
+    if(ResourceManager::isLoaded(soundId::BALL))
+        ResourceManager::remove(soundId::BALL);
     
     //Remove title image
-    if(ResourceManager::texture.isLoaded(textureId::TITLE))
-	   ResourceManager::texture.remove(textureId::TITLE); 
+    if(ResourceManager::isLoaded(textureId::TITLE))
+	   ResourceManager::remove(textureId::TITLE); 
     
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);
@@ -284,13 +284,12 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
 	    break;
         case EventId::ON_COMBO_CHANGED:
             {   
-    	    //Load title image
-    	    if(ResourceManager::texture.isLoaded(textureId::TITLE))
-	        ResourceManager::texture.remove(textureId::TITLE);
-   		    
-                ResourceManager::texture.load(textureId::TITLE, Settings::IMAGES_DIR  + "/" + Settings::theme + "/Battle Pong.png" );
-    	        header.setTexture(ResourceManager::texture.get(textureId::TITLE));
-			}
+    	       //Load title image
+    	       if(ResourceManager::isLoaded(textureId::TITLE))
+	           ResourceManager::remove(textureId::TITLE);
+	       ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
+    	       header.setTexture(ResourceManager::get(textureId::TITLE));
+            }
 		   
 		
 	    		

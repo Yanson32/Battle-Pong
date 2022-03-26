@@ -75,11 +75,18 @@ namespace Settings
     
 
     //Directories
-    const std::string RESOURCE_DIR = "../Resources";
-    const std::string IMAGES_DIR = RESOURCE_DIR + "/Images";
-    const std::string SOUNDS_DIR = RESOURCE_DIR + "/Sounds";
-    const std::string FONTS_DIR = RESOURCE_DIR + "/Fonts";
-    const std::string THEME_DIR = RESOURCE_DIR + "/TGUI/Theme";
-    const std::string MUSIC_DIR = RESOURCE_DIR + "/Music";
-    const std::string BACKGROUNDS_DIR = RESOURCE_DIR + "Backgrounds";
+    const std::string RESOURCE_INSTALL_DIR = RESOURCE_INSTALL_PATH;
+    const std::string RESOURCE_BINARY_DIR = RESOURCE_BINARY_PATH;
+    const std::string IMAGES_INSTALL_DIR = RESOURCE_INSTALL_DIR + "/Images/";
+    const std::string IMAGES_BINARY_DIR = RESOURCE_BINARY_DIR + "/Images/";
+    const std::string SOUNDS_INSTALL_DIR = RESOURCE_INSTALL_DIR + "/Sounds/";
+    const std::string SOUNDS_BINARY_DIR = RESOURCE_BINARY_DIR + "/Sounds/";
+    const std::string FONTS_INSTALL_DIR = RESOURCE_INSTALL_DIR + "/Fonts/";
+    const std::string FONTS_BINARY_DIR = RESOURCE_BINARY_DIR + "/Fonts/";
+    const std::string THEME_INSTALL_DIR = RESOURCE_INSTALL_DIR + "/TGUI/Theme/";
+    const std::string THEME_BINARY_DIR = RESOURCE_BINARY_DIR + "/TGUI/Theme/";
+    const std::string MUSIC_INSTALL_DIR = RESOURCE_INSTALL_DIR + "/Music/";
+    const std::string MUSIC_BINARY_DIR = RESOURCE_BINARY_DIR + "/Music/";
+    const std::string BACKGROUNDS_INSTALL_DIR = RESOURCE_INSTALL_DIR + "/Backgrounds/";
+    const std::string BACKGROUNDS_BINARY_DIR = RESOURCE_BINARY_DIR + "/Backgrounds/";
 }

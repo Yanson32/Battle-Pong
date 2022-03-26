@@ -4,7 +4,8 @@
 
 enum class textureId
 {
-   TITLE 
+   TITLE,
+   BACKGROUND,
 };
 #endif
 

@@ -128,7 +128,6 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         tgui::Gui &gui;                           ///The Main TGUI object
         StateId state;
         static sf::Sound sound;
-        static sf::Music music;
         static std::shared_ptr<PaddleHud> paddle1Hud;
         static std::shared_ptr<PaddleHud> paddle2Hud;
         static ContactListener contactListener;         ///Subclass of Box2D b2ContactListener used to detect Box2D collisions
@@ -139,7 +138,6 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         int32 velocityIterations = 8;                   ///Box2D how strongly to correct velocity
         int32 positionIterations = 8;                   ///Box2D how strongly to correct position
         bool sysPause;                                  ///True when the system is paused and false otherwise
-        static sf::Texture backgroundTexture;
         static sf::RectangleShape backgroundRect;
         //boost::log::sources::severity_logger< logging::trivial::severity_level > log;
 

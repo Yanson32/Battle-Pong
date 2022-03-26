@@ -1,6 +1,9 @@
 #Create our target
 add_executable("${PROJECT_NAME}" "Main.cpp")
 
+target_compile_definitions(${PROJECT_NAME} PUBLIC RESOURCE_INSTALL_PATH="${CMAKE_INSTALL_PREFIX}/${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Resources")
+target_compile_definitions(${PROJECT_NAME} PUBLIC RESOURCE_BINARY_PATH="${${PROJECT_NAME}_BINARY_DIR}/${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Resources")
+
 install(TARGETS "${PROJECT_NAME}" DESTINATION bin)
 
 set_property(TARGET "${PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
