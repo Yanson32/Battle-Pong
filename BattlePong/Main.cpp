@@ -21,10 +21,6 @@
     #define MAJOR_VERSION 1
 #endif // MAJOR_VERSION
 
-#ifndef BOOST_LOG_DYN_LINK
-    #define BOOST_LOG_DYN_LINK
-#endif
-
 #include "config.h"
 #include <GameUtilities/Core/String.h>
 #include <GameUtilities/Engin/Frame.h>
@@ -37,20 +33,32 @@
 #include "SFMLFunctions.h"
 int main(int argc, char* argv[])
 {
+    //Enable random numbers
+    srand (time(NULL));
+    
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
     //So we do it in a thread.
     std::thread ipThread([&](){Settings::publicIp = sf::IpAddress::getPublicAddress().toString();});
     ipThread.detach();
 
-    
+    //Create the games window
     sf::RenderWindow window(sf::VideoMode(Settings::dimensions.x, Settings::dimensions.y),Settings::title); 
 
+    //Create tgui object
     tgui::Gui gui;
     gui.setTarget(window);
+    
+    //Load tgui theme
+    ResourceManager::loadTheme("Black");
+    
+    //Create the games frame
     std::shared_ptr<PongFrame> frame(new PongFrame(window.getView().getSize()));
     
-    srand (time(NULL));
+    //Set the debug draw class 
+    DebugDraw debugDraw(*frame->world.get());
+    frame->world->SetDebugDraw(&debugDraw);
 
+    //Handle program options
     std::stringstream ss;
     ss << MAJOR_VERSION << " " << ".0.0.0";
 
@@ -71,41 +79,47 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    //boost::log::sources::severity_logger< logging::trivial::severity_level > lg;
     
-    //Load tgui theme
-    ResourceManager::loadTheme("Black");
     
+
+    //Create game engin
+    Game engin;
+   
+    
+    //Create first GameState instance 
+    engin.Push<IntroState>(frame, engin, window, debugDraw, gui);
+
+    //Start the music
+    EventManager::inst().Post<GU::Evt::PlayMusic>("Zombies");
+   
+    //Create clock for game engin 
     sf::Clock timer;
     const sf::Time deltaTime = sf::seconds(1.0f / 60.0f);
     sf::Time accumulator = sf::seconds(0);
-
-	Game engin;
     
-    DebugDraw debugDraw(*frame->world.get());
-    frame->world->SetDebugDraw(&debugDraw);
-	engin.Push<IntroState>(frame, engin, window, debugDraw, gui);
-	
-	
-        //Need to call event manager play sound
-        EventManager::inst().Post<GU::Evt::PlayMusic>("Zombies");
     try
     {
         while (engin.IsRunning())
         {
             accumulator += timer.restart();
-            engin.HandleEvents(deltaTime.asSeconds(), frame);
-            while(accumulator.asSeconds() >= deltaTime.asSeconds())
+            
+	    //Handle any events  
+	    engin.HandleEvents(deltaTime.asSeconds(), frame);
+            
+	    //Update the game logic 
+	    while(accumulator.asSeconds() >= deltaTime.asSeconds())
             {
                 engin.Update(deltaTime.asSeconds(), frame);
                 accumulator -= deltaTime;
             }
-            engin.Draw(deltaTime.asSeconds(), frame);
+            
+	    //Draw a frame 
+	    engin.Draw(deltaTime.asSeconds(), frame);
         }
     }
     catch(...)
     {
-
+    
     }
 
 }
