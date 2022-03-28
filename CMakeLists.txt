@@ -21,10 +21,6 @@ endif()
 #Give the project a name
 project("BattlePong" VERSION "1.0.0.0")
 
-#include operating system specific code
-if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/${CMAKE_SYSTEM_NAME}.cmake")
-	include("${CMAKE_SYSTEM_NAME}")
-endif()
 
 string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)
 
@@ -47,6 +43,11 @@ endif()
 
 add_subdirectory("extlibs")
 add_subdirectory("BattlePong")
+
+#include operating system specific code
+if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/${CMAKE_SYSTEM_NAME}.cmake")
+	include("${CMAKE_SYSTEM_NAME}")
+endif()
 
 # uninstall target
 if(NOT TARGET uninstall)
@@ -73,6 +74,5 @@ if(NOT CMAKE_CONFIGURATION_TYPES)
 	file(COPY "Resources/" DESTINATION "${CMAKE_BINARY_DIR}/${PROJECT_NAME}/Resources/")
 endif()
 
-file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Resources/"  DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/bin/Resources/")
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Resources/" DESTINATION "${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Resources")
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Resources/"  DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${CMAKE_RUNTIME_OUTPU_DIRECTORY}/Resources/")
 
