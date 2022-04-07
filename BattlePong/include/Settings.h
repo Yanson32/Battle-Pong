@@ -15,7 +15,7 @@
 #include "States/StateId.h"
 #include <string>
 
-namespace Settings 
+namespace Settings
 {
     //Game settings
     extern sf::String time;
@@ -27,27 +27,27 @@ namespace Settings
     extern std::string p1Input;
     extern std::string p1Name;
     extern int p1Score;
-    
+
     //Paddle 2 settigns
     extern std::string p2Input;
     extern std::string p2Name;
     extern int p2Score;
-    
-    //music settings 
+
+    //music settings
     extern int mVolume;
     extern int sVolume;
     extern sf::String currentSong;
-   
-    //Button Settings	
-    extern sf::Vector2f bSize; 
-    extern sf::Vector2f bPosition; 
 
-    //Window settings    
+    //Button Settings
+    extern sf::Vector2f bSize;
+    extern sf::Vector2f bPosition;
+
+    //Window settings
     extern sf::String title;
     extern sf::Vector2f dimensions;
-    
-   
-    //Player controls 
+
+
+    //Player controls
     extern std::string playerControlUp;
     extern std::string playerControlDown;
     extern std::string playerControlLeft;
@@ -56,11 +56,11 @@ namespace Settings
     extern std::string playerControlNext;
     extern std::string playerControlSelect;
 
-    //Joystick buttons    
+    //Joystick buttons
     extern std::string playerJoystickControlNext;
-    extern std::string playerJoystickControlSelect;  
+    extern std::string playerJoystickControlSelect;
 
-    
+
     //Network
     extern sf::TcpSocket socket;
     extern sf::TcpListener listener;
@@ -70,27 +70,14 @@ namespace Settings
     extern int port;
     extern std::string publicIp;
     extern std::string localIp;
-    
-    //Theme settings 
+
+    //Theme settings
     extern std::string theme;
     extern std::string background;
 
 
     //Directories
-    extern const std::string RESOURCE_INSTALL_DIR; 
-    extern const std::string RESOURCE_BINARY_DIR;
-    extern const std::string IMAGES_INSTALL_DIR; 
-    extern const std::string IMAGES_BINARY_DIR; 
-    extern const std::string SOUNDS_INSTALL_DIR; 
-    extern const std::string SOUNDS_BINARY_DIR; 
-    extern const std::string FONTS_INSTALL_DIR;
-    extern const std::string FONTS_BINARY_DIR; 
-    extern const std::string THEME_INSTALL_DIR; 
-    extern const std::string THEME_BINARY_DIR; 
-    extern const std::string MUSIC_INSTALL_DIR; 
-    extern const std::string MUSIC_BINARY_DIR; 
-    extern const std::string BACKGROUNDS_INSTALL_DIR; 
-    extern const std::string BACKGROUNDS_BINARY_DIR; 
+    extern const std::string RESOURCE_INSTALL_DIR;
 }
 
 

@@ -13,7 +13,6 @@
 #include "Input/PlayerInput.h"
 #include "Settings.h"
 #include "Resources/ResourceManager.h"
-#include "Resources/ResourceFunctions.h"
 #include "Events/Events.h"
 #include "Macros.h"
 #include "Gui/PlayPanel.h" 

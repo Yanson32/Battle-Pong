@@ -11,7 +11,6 @@
 #include <SFML/Audio/Music.hpp>
 
 #include "Resources/ResourceManager.h"
-#include "Resources/ResourceFunctions.h"
 #include <boost/program_options.hpp>
 
 #include <sstream>
@@ -31,30 +30,45 @@
 #include <thread>
 
 #include "SFMLFunctions.h"
+#include <chrono>
+#include <ctime>
+#include <iostream>
+#include <string>
+#include <filesystem>
+#include "Resources/ResourceManager.h"
+
 int main(int argc, char* argv[])
 {
-    //Enable random numbers
-    srand (time(NULL));
-    
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
     //So we do it in a thread.
     std::thread ipThread([&](){Settings::publicIp = sf::IpAddress::getPublicAddress().toString();});
     ipThread.detach();
 
+    //Enable random numbers
+    srand (time(NULL));
+
     //Create the games window
-    sf::RenderWindow window(sf::VideoMode(Settings::dimensions.x, Settings::dimensions.y),Settings::title); 
+    sf::RenderWindow window(sf::VideoMode(Settings::dimensions.x, Settings::dimensions.y),Settings::title);
+    //Setup the path to resource folder for the resource management system
+    if(!std::filesystem::exists(ResourceManager::getPath()))
+        ResourceManager::setPath(Settings::RESOURCE_INSTALL_DIR);
+
+    //Load tgui theme
+    ResourceManager::loadTheme("Black");
+
+    //Set the application icon
+    sf::Image icon;
+    icon.loadFromFile(ResourceManager::getPath().string() + "/Icons/BattlePong.png");
+    window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     //Create tgui object
     tgui::Gui gui;
     gui.setTarget(window);
-    
-    //Load tgui theme
-    ResourceManager::loadTheme("Black");
-    
+
     //Create the games frame
     std::shared_ptr<PongFrame> frame(new PongFrame(window.getView().getSize()));
-    
-    //Set the debug draw class 
+
+    //Set the debug draw class
     DebugDraw debugDraw(*frame->world.get());
     frame->world->SetDebugDraw(&debugDraw);
 
@@ -79,47 +93,43 @@ int main(int argc, char* argv[])
         return 1;
     }
 
-    
-    
-
     //Create game engin
     Game engin;
-   
-    
-    //Create first GameState instance 
+
+    //Create first GameState instance
     engin.Push<IntroState>(frame, engin, window, debugDraw, gui);
 
     //Start the music
     EventManager::inst().Post<GU::Evt::PlayMusic>("Zombies");
-   
-    //Create clock for game engin 
+
+    //Create clock for game engin
     sf::Clock timer;
     const sf::Time deltaTime = sf::seconds(1.0f / 60.0f);
     sf::Time accumulator = sf::seconds(0);
-    
+
     try
     {
         while (engin.IsRunning())
         {
             accumulator += timer.restart();
-            
-	    //Handle any events  
+
+	    //Handle any events
 	    engin.HandleEvents(deltaTime.asSeconds(), frame);
-            
-	    //Update the game logic 
+
+	    //Update the game logic
 	    while(accumulator.asSeconds() >= deltaTime.asSeconds())
             {
                 engin.Update(deltaTime.asSeconds(), frame);
                 accumulator -= deltaTime;
             }
-            
-	    //Draw a frame 
+
+	    //Draw a frame
 	    engin.Draw(deltaTime.asSeconds(), frame);
         }
     }
     catch(...)
     {
-    
+
     }
 
 }

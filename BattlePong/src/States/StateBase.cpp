@@ -30,7 +30,6 @@
 #include "Gui/IntroState/HostPanel.h"
 #include "Gui/IntroState/ConnectPanel.h"
 #include "Gui/IntroState/NetworkPanel.h"
-#include "Resources/ResourceFunctions.h"
 
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;

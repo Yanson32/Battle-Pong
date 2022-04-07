@@ -28,7 +28,6 @@
 
 
 #include "Resources/ResourceManager.h"
-#include "Resources/ResourceFunctions.h"
 #include "Logging.h"
 #include "Macros.h"
 #include "Gui/IntroState/IntroGui.h"

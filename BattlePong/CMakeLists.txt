@@ -1,8 +1,6 @@
 #Create our target
 add_executable("${PROJECT_NAME}" "Main.cpp")
 
-target_compile_definitions(${PROJECT_NAME} PUBLIC RESOURCE_BINARY_PATH="${${PROJECT_NAME}_BINARY_DIR}/${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Resources")
-
 install(TARGETS "${PROJECT_NAME}" DESTINATION bin)
 
 set_property(TARGET "${PROJECT_NAME}" PROPERTY CXX_STANDARD 17)
@@ -51,4 +49,3 @@ target_link_libraries("${PROJECT_NAME}" PUBLIC Box2D)
 
 #Export targets to the build tree
 export(TARGETS "${PROJECT_NAME}" FILE "${CMAKE_CURRENT_BINARY_DIR}/cmake/${PROJECT_NAME}-Exports.cmake")
-
