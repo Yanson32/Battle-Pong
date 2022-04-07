@@ -28,7 +28,6 @@
 
 
 #include "Resources/ResourceManager.h"
-#include "Logging.h"
 #include "Macros.h"
 #include "Gui/IntroState/IntroGui.h"
 #include "Gui/IntroState/OptionsPanel.h"
@@ -64,9 +63,9 @@ void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, s
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR);
        return;
-    }        
+    }
 
 
     if(window.isOpen())
@@ -97,10 +96,10 @@ void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR);
        return;
-    }        
-    
+    }
+
     StateBase::Update(engin, deltaTime, frame);
     pongFrame->world->Step( timeStep, velocityIterations, positionIterations);
     debugDraw.update();
@@ -121,12 +120,12 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR);
        return;
-    }        
+    }
 	StateBase::Draw(engin, deltaTime, frame);
 	window.draw(*pongFrame->ball);
-	window.draw(header);	
+	window.draw(header);
 	//window.draw(header);
     window.display();
 }
@@ -138,33 +137,33 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 
     std::cout << "IntroState Init" << std::endl;
     StateBase::Init(frame);
-    Settings::stateId = StateId::INTRO_STATE; 
-    
-    //Create pong frame 
+    Settings::stateId = StateId::INTRO_STATE;
+
+    //Create pong frame
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR);
        return;
-    }        
-    
+    }
+
     pongFrame->ball->setPosition({400, 300});
     pongFrame->ball->setVelocity({100, 100});
     pongFrame->leftPaddle->setPosition(sf::Vector2f(100, 300));
     pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
-	
-    //Create intro panel 
+
+    //Create intro panel
     std::shared_ptr<IntroGui> cust(new IntroGui());
-    cust->init(window.getView().getSize().x, window.getView().getSize().y); 
+    cust->init(window.getView().getSize().x, window.getView().getSize().y);
     gui.add(cust, "PanelPointer");
-  
-    //Load ball collision sound  
-    ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");     
+
+    //Load ball collision sound
+    ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
 
     //Load title image
     ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
-    
-    //Set title properties 
+
+    //Set title properties
     header.setTexture(ResourceManager::get(textureId::TITLE));
     header.setScale({0.25, 0.25});
     header.setOrigin({960, 540});
@@ -181,15 +180,15 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
     gui.removeAllWidgets();
-    
-    //Remove ball collision sound  
+
+    //Remove ball collision sound
     if(ResourceManager::isLoaded(soundId::BALL))
         ResourceManager::remove(soundId::BALL);
-    
+
     //Remove title image
     if(ResourceManager::isLoaded(textureId::TITLE))
-	   ResourceManager::remove(textureId::TITLE); 
-    
+	   ResourceManager::remove(textureId::TITLE);
+
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);
 //    ResourceManager::font.remove("Header Font");
@@ -201,8 +200,8 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::s
     StateBase::sfEvent(engin, event, frame);
     switch(event.type)
     {
-        case sf::Event::JoystickConnected: 
-            std::cout  << "Joystick connected" << std::endl; 
+        case sf::Event::JoystickConnected:
+            std::cout  << "Joystick connected" << std::endl;
             break;
         case sf::Event::JoystickDisconnected:
             std::cout << "Joystick Disconnected" << std::endl;
@@ -223,7 +222,7 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::s
                 if(event.joystickMove.position > 0)
                    std::cout << "Right" << std::endl;
                 else if(event.joystickMove.position < 0)
-                   std::cout << "Left" << std::endl; 
+                   std::cout << "Left" << std::endl;
                 break;
 
                 case sf::Joystick::Y:
@@ -237,10 +236,10 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::s
                 break;
             };
 	case sf::Event::Resized:
-	    break; 
-	     
+	    break;
+
         defualt:
-           break;   
+           break;
     };
 }
 
@@ -276,24 +275,24 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
                     case Button::id::HOST:
                     break;
                     case Button::id::CONNECT:
-	            break;	
+	            break;
 		}
 	    }
-	}	
+	}
 	    break;
         case EventId::ON_COMBO_CHANGED:
-            {   
+            {
     	       //Load title image
     	       if(ResourceManager::isLoaded(textureId::TITLE))
 	           ResourceManager::remove(textureId::TITLE);
 	       ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
     	       header.setTexture(ResourceManager::get(textureId::TITLE));
             }
-		   
-		
-	    		
+
+
+
 	}
-        
+
 
 }
 

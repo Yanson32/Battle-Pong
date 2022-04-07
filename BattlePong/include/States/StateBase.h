@@ -27,7 +27,6 @@
 #include "Objects/PaddleStop.h"
 
 #include "Gui/PaddleHud.h"
-#include "Logging.h"
 #include "States/StateId.h"
 
 #include <memory>
@@ -53,9 +52,9 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        
-        
-        
+
+
+
         StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &newDebugDraw, tgui::Gui &newGui, const StateId newState);
 
 
@@ -91,10 +90,10 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
 
 
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame);
-        
+
 
         void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame) override;
-        
+
 
         /****************************************************************//**
         *   @brief  This method allows the system to pause the game.
@@ -139,7 +138,6 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         int32 positionIterations = 8;                   ///Box2D how strongly to correct position
         bool sysPause;                                  ///True when the system is paused and false otherwise
         static sf::RectangleShape backgroundRect;
-        //boost::log::sources::severity_logger< logging::trivial::severity_level > log;
 
 };
 
