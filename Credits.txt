@@ -1,0 +1,14 @@
+Developer
+Yanson Tech
+
+Box2D Developer
+Erin Catto
+https://box2d.org/
+
+SFML Developer
+Laurent Gomila
+https://www.sfml-dev.org/
+
+TGUI Developer
+Bruno Van de Velde
+https://tgui.eu/
