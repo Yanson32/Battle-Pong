@@ -292,7 +292,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         }
                     }
                     break;
-		    case Button::id::OPTIONS:
+		                case Button::id::OPTIONS:
                     case Button::id::GENERAL_TAB:
                     {
                         gui.removeAllWidgets();
@@ -541,13 +541,13 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             switch(temp->index)
                             {
                                 case 0:
-					ResourceManager::loadTheme("Default");
+					                          ResourceManager::loadTheme("Default");
                                     break;
                                 case 1:
-				    ResourceManager::loadTheme("Black");
+				                            ResourceManager::loadTheme("Black");
                                     break;
                                 case 2:
-				    ResourceManager::loadTheme("BabyBlue");
+				                            ResourceManager::loadTheme("BabyBlue");
                                     break;
 
                             }
@@ -558,16 +558,16 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             gui.add(cust, "PanelPointer");
                             }
                             break;
-                        case Gui::Combo::comboId::BACKGROUND:
+                            case Gui::Combo::comboId::BACKGROUND:
                             switch(temp->index)
                             {
                                 case 0:
-				    ResourceManager::loadBackground("Star.png");
+				                            ResourceManager::loadBackground("Star.png");
                                     backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
                                     Settings::background = "Star";
                                     break;
                                 case 1:
-				    ResourceManager::loadBackground("Nebula.png");
+				                            ResourceManager::loadBackground("Nebula.png");
                                     backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
                                     Settings::background = "Nebula";
                                     break;
