@@ -3,14 +3,14 @@
 
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Event/EventManager.h>
-
+#include <GameUtilities/Log/LogManager.h>
+#include <GameUtilities/Log/LogFormatter.h>
 
 class Game: public GU::Engin::Engin, public GU::Evt::EventManager
 {
     public:
         Game();
-    protected:
-
+        GU::Log::LogManager logManager;
     private:
 
 };

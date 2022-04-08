@@ -41,7 +41,7 @@ void PlayState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, st
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
+       EventManager::inst().Post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
     if(window.isOpen())
@@ -71,7 +71,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
+       EventManager::inst().Post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
     const int SECONDS = 1;
@@ -155,7 +155,7 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
+       EventManager::inst().Post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
     StateBase::Draw(engin, deltaTime, frame);
@@ -177,7 +177,7 @@ void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
+       EventManager::inst().Post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
 

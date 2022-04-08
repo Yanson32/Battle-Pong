@@ -6,8 +6,11 @@
 #include "Input/AI.h"
 #include <GameUtilities/Event/Events.h>
 #include <GameUtilities/Engin/Engin.h>
+#include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Event/LogEvent.h>
-#include <GameUtilities/Log/LogType.h>
+#include <GameUtilities/Log/LogEntry.h>
+#include <GameUtilities/Log/Component/MsgComponent.h>
+#include <GameUtilities/Log/Component/SeverityComponent.h>
 #include "Objects/Goal.h"
 #include <array>
 #include "Resources/ResourceManager.h"
@@ -32,6 +35,7 @@
 #include "Gui/IntroState/HostPanel.h"
 #include "Gui/IntroState/ConnectPanel.h"
 #include "Gui/IntroState/NetworkPanel.h"
+#include "Game.h"
 
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
@@ -54,6 +58,7 @@ gui(newGui),
 state(newState),
 sysPause(false)
 {
+    EventManager::inst().Post<GU::Evt::LogEvent>("StateBase::StateBase", static_cast<int>(GU::Log::LogType::GU_TRACE));
     const float &wWidth = window.getView().getSize().x;
     const float &wHeight = window.getView().getSize().y;
     const float &wallTh = Settings::wallThickness;
@@ -77,6 +82,7 @@ sysPause(false)
 
 bool StateBase::isBallOnScreen(std::shared_ptr<PongFrame> frame)
 {
+    EventManager::inst().Post<GU::Evt::LogEvent>("StateBase::isBallOnScreen", static_cast<int>(GU::Log::LogType::GU_TRACE));
     sf::Vector2f pos = frame->ball->getPosition();
     sf::FloatRect windowBounds;
     windowBounds.top = 0;
@@ -90,6 +96,7 @@ bool StateBase::isBallOnScreen(std::shared_ptr<PongFrame> frame)
 
 void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
+    EventManager::inst().Post<GU::Evt::LogEvent>("StateBase::Update", static_cast<int>(GU::Log::LogType::GU_TRACE));
     UNUSED(engin);
     UNUSED(deltaTime);
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
@@ -117,6 +124,7 @@ void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
 
 void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
+    EventManager::inst().Post<GU::Evt::LogEvent>("StateBase::Draw", static_cast<int>(GU::Log::LogType::GU_TRACE));
     UNUSED(engin);
     UNUSED(deltaTime);
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
@@ -144,17 +152,19 @@ void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
 
 void StateBase::systemPause(const bool newSysPause)
 {
+    EventManager::inst().Post<GU::Evt::LogEvent>("StateBase::systemPause", static_cast<int>(GU::Log::LogType::GU_TRACE));
     sysPause = newSysPause;
 }
 
 bool StateBase::isSystemPaused() const
 {
-
+    EventManager::inst().Post<GU::Evt::LogEvent>("StateBase::isSystemPaused", static_cast<int>(GU::Log::LogType::GU_TRACE));
     return sysPause;
 }
 
 void StateBase::reset(std::shared_ptr<PongFrame> frame)
 {
+    EventManager::inst().Post<GU::Evt::LogEvent>("StateBase::reset", static_cast<int>(GU::Log::LogType::GU_TRACE));
     int x = rand() % 100 + 50;
     if(rand() % 2 == 0)
         x *= -1;
@@ -293,6 +303,7 @@ void StateBase::gameEvents()
 
 void StateBase::centerText()
 {
+    EventManager::inst().Post<GU::Evt::LogEvent>("StateBase::centerText", static_cast<int>(GU::Log::LogType::GU_TRACE));
     sf::FloatRect bounds = userMessage.getGlobalBounds();
 
     float originX = bounds.width / 2;
@@ -304,12 +315,13 @@ void StateBase::centerText()
 
 void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
+    EventManager::inst().Post<GU::Evt::LogEvent>("StateBase::Init", static_cast<int>(GU::Log::LogType::GU_TRACE));
     std::cout << "Statebase init" << std::endl;
 
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
+       EventManager::inst().Post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
     systemPause(false);
@@ -352,12 +364,26 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
+       EventManager::inst().Post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
 
     switch(event->id)
     {
+        case EventId::LOG:
+        {
+          std::shared_ptr<GU::Evt::LogEvent> temp =  std::dynamic_pointer_cast<GU::Evt::LogEvent>(event);
+
+          //Create log entry
+          std::shared_ptr<GU::Log::LogEntry> entry(new GU::Log::LogEntry());
+          entry->add<GU::Log::MsgComponent>(temp->m_msg);
+          entry->add<GU::Log::SeverityComponent>(static_cast<GU::Log::LogType>(temp->getSeverity()));
+
+          //Write log
+          Game *game = static_cast<Game*>(&engin);
+          game->logManager.write(entry);
+        }
+        break;
         case EventId::CLICK:
             std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
             if(temp)
