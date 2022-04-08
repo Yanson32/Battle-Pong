@@ -6,8 +6,8 @@
 #include <GameUtilities/Event/Click.h>
 #include <GameUtilities/Event/OnComboChanged.h>
 
-//#include <GameUtilities/Event/LogEvent.h>
-//#include <GameUtilities/Event/LogType.h>
+#include <GameUtilities/Event/LogEvent.h>
+#include <GameUtilities/Log/LogType.h>
 
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
@@ -63,7 +63,7 @@ void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, s
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR);
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
 
@@ -96,7 +96,7 @@ void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR);
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
 
@@ -120,7 +120,7 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR);
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
 	StateBase::Draw(engin, deltaTime, frame);
@@ -143,7 +143,7 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR);
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
     }
 
@@ -179,15 +179,15 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 
 void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
-    gui.removeAllWidgets();
+    //gui.removeAllWidgets();
 
     //Remove ball collision sound
-    if(ResourceManager::isLoaded(soundId::BALL))
-        ResourceManager::remove(soundId::BALL);
+    //if(ResourceManager::isLoaded(soundId::BALL))
+        //ResourceManager::remove(soundId::BALL);
 
     //Remove title image
-    if(ResourceManager::isLoaded(textureId::TITLE))
-	   ResourceManager::remove(textureId::TITLE);
+    //if(ResourceManager::isLoaded(textureId::TITLE))
+	  // ResourceManager::remove(textureId::TITLE);
 
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);

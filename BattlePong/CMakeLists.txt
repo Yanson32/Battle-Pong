@@ -29,8 +29,8 @@ target_include_directories("${PROJECT_NAME}" PUBLIC
   $<INSTALL_INTERFACE:include>
 	)
 
-find_package(GameUtilities COMPONENTS Core Event Engin REQUIRED)
-target_link_libraries("${PROJECT_NAME}" PRIVATE GU::Core GU::Event GU::Engin)
+find_package(GameUtilities COMPONENTS Core Log Event Engin  REQUIRED)
+target_link_libraries("${PROJECT_NAME}" PRIVATE GU::Core GU::Event GU::Engin GU::Log)
 
 find_package(SFML 2 COMPONENTS system window graphics audio network REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${SFML_INCLUDE_DIR})

@@ -15,7 +15,7 @@
 #include "Resources/ResourceManager.h"
 #include "Events/Events.h"
 #include "Macros.h"
-#include "Gui/PlayPanel.h" 
+#include "Gui/PlayPanel.h"
 #include "Gui/ButtonId.h"
 #include "States/IntroState.h"
 #include "Gui/IntroState/GeneralPanel.h"
@@ -24,7 +24,7 @@
 #include "Gui/IntroState/SoundPanel.h"
 #include "Gui/IntroState/NetworkPanel.h"
 #include "Gui/IntroState/DevPanel.h"
-
+#include "GameUtilities/Event/LogEvent.h"
 
 PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId): StateBase(newEngin, newWindow, debugDraw, newGui, newId)
 {
@@ -37,13 +37,13 @@ PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, De
 void PlayState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     UNUSED(deltaTime);
-    
+
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
-    }        
+    }
     if(window.isOpen())
     {
         sf::Event event;
@@ -71,9 +71,9 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
-    }        
+    }
     const int SECONDS = 1;
 
     StateBase::Update(engin, deltaTime, frame);
@@ -146,7 +146,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
             systemPause(false);
         }
     }
-    
+
 }
 
 void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
@@ -155,9 +155,9 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
-    }        
+    }
     StateBase::Draw(engin, deltaTime, frame);
     if(userMessage.getString() == "")
         window.draw(*pongFrame->ball);
@@ -171,17 +171,17 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
 void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     StateBase::Init(frame);
-    Settings::stateId = StateId::PLAY_STATE; 
-    
-    //Crate pong frame 
+    Settings::stateId = StateId::PLAY_STATE;
+
+    //Crate pong frame
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
-    }        
-    
-    //Setup paddle 1 
+    }
+
+    //Setup paddle 1
     paddle1Hud->setScore(0);
     Settings::p1Score = 0;
     if(Settings::p1Input == "None")
@@ -200,11 +200,11 @@ void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     systemPause(true);
     userMessage.setCharacterSize(34);
     userMessage.setPosition(sf::Vector2f(400, 300));
-    
+
     //Load ball sound
     ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
 
-    
+
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
@@ -218,7 +218,7 @@ void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 void PlayState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
     gui.removeAllWidgets();
-    
+
     //Remove ball sound
     if(ResourceManager::isLoaded(soundId::BALL))
         ResourceManager::remove(soundId::BALL);
@@ -240,9 +240,9 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
             switch(event.key.code)
             {
                 case sf::Keyboard::Escape:
-                { 
+                {
                     if(gui.get("PanelPointer") == nullptr)
-                    { 
+                    {
                         gui.removeAllWidgets();
                         StateBase::Init(frame);
                         tgui::Panel::Ptr cust(new PlayPanel());
