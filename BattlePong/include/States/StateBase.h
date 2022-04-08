@@ -112,7 +112,6 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         ********************************************************************/
         bool isSystemPaused() const;
 
-        void gameEvents();
         void reset(std::shared_ptr<PongFrame> frame);
         /****************************************************************//**
         *   @brief  Destructor
