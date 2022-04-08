@@ -6,6 +6,8 @@
 #include "Input/AI.h"
 #include <GameUtilities/Event/Events.h>
 #include <GameUtilities/Engin/Engin.h>
+#include <GameUtilities/Event/LogEvent.h>
+#include <GameUtilities/Log/LogType.h>
 #include "Objects/Goal.h"
 #include <array>
 #include "Resources/ResourceManager.h"
@@ -56,7 +58,7 @@ sysPause(false)
     const float &wHeight = window.getView().getSize().y;
     const float &wallTh = Settings::wallThickness;
     float paddleHeight = 100;
-    gui.setTarget(window); 
+    gui.setTarget(window);
 
 
     paddle1Hud.reset(new PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
@@ -93,10 +95,10 @@ void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
-    }        
-    
+    }
+
     backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
     if(!IsPaused())
     {
@@ -120,9 +122,9 @@ void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
-    }        
+    }
     window.clear();
     window.draw(backgroundRect);
     window.draw(*pongFrame->leftPaddle);
@@ -159,7 +161,7 @@ void StateBase::reset(std::shared_ptr<PongFrame> frame)
     int y = rand() % 100 + 50;
     if(rand() % 2 == 0)
        y *= -1;
-   
+
     float paddleOffset = Settings::wallThickness * 4;
     frame->ball->setPosition({static_cast<float>(window.getView().getSize().x) / 2, static_cast<float>(window.getView().getSize().y) / 2});
     frame->ball->setVelocity({x, y});
@@ -307,9 +309,9 @@ void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
-    }        
+    }
     systemPause(false);
     Pause(false);
     ResourceManager::loadBackground("Star.png");
@@ -332,28 +334,28 @@ void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
             engin.Quit();
             break;
         case sf::Event::Resized:
-            {  
-                tgui::Widget::Ptr widget = gui.get("PanelPointer");             
+            {
+                tgui::Widget::Ptr widget = gui.get("PanelPointer");
                 std::shared_ptr<Gui::CustomPanel> temp =  std::dynamic_pointer_cast<Gui::CustomPanel>(widget);
-                if(temp) 
-                    temp->resize(event.size.width, event.size.height);      
+                if(temp)
+                    temp->resize(event.size.width, event.size.height);
             }
-            break; 
+            break;
         default:
             break;
-    }   
+    }
 }
 
 void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame)
 {
-    
+
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       //GU::Evt::LogEvent("Pointer should not be null", GU::Evt::LogType::ERROR); 
+       GU::Evt::LogEvent("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
        return;
-    }        
-    
+    }
+
     switch(event->id)
     {
         case EventId::CLICK:
@@ -367,13 +369,13 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     break;
                     case Button::id::INTRO_PANEL:
                     {
-                    
+
                         if(Settings::stateId == StateId::PLAY_STATE)
                         {
                             engin.ChangeState<IntroState>(frame, engin, window, debugDraw, gui);
                         }
                         else
-                        { 
+                        {
                             gui.removeAllWidgets();
                             StateBase::Init(pongFrame);
                             tgui::Panel::Ptr cust(new IntroGui());
@@ -470,9 +472,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new ConnectPanel());
                         std::shared_ptr<ConnectPanel> p = std::dynamic_pointer_cast<ConnectPanel>(cust);
-                        p->init(window.getSize().x, window.getSize().y); 
+                        p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
-                        
+
                     }
 
                 }
@@ -480,7 +482,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
         break;
     }
-    
+
     switch(event->id)
     {
         case EventId::LEFT_GOAL_COLLISION:
@@ -547,7 +549,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         }
         break;
         case EventId::ON_CHECK:
-            {     
+            {
                 std::shared_ptr<GU::Evt::OnCheck> temp =  std::dynamic_pointer_cast<GU::Evt::OnCheck>(event);
                 if(temp)
                 {
@@ -556,13 +558,13 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                    {
                        case checkBoxId::DEBUG_AABB:
                             if(temp->checked)
-                               debugDraw.AppendFlags(b2Draw::e_aabbBit); 
+                               debugDraw.AppendFlags(b2Draw::e_aabbBit);
                             else
                                 debugDraw.ClearFlags(b2Draw::e_aabbBit);
                        break;
                        case checkBoxId::DEBUG_SHAPE:
                             if(temp->checked)
-                               debugDraw.AppendFlags(b2Draw::e_shapeBit); 
+                               debugDraw.AppendFlags(b2Draw::e_shapeBit);
                             else
                                 debugDraw.ClearFlags(b2Draw::e_shapeBit);
                        break;
@@ -584,12 +586,12 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             else
                                 debugDraw.ClearFlags(b2Draw::e_pairBit);
                        break;
-                   }; 
+                   };
                 }
             }
         break;
         case EventId::SLIDER_CHANGED:
-            {     
+            {
                 std::shared_ptr<GU::Evt::OnSliderChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnSliderChanged>(event);
                 if(temp)
                 {
@@ -599,29 +601,29 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             sound.setVolume(Settings::sVolume);
                             break;
                         case sliderId::MUSIC:
-			    ResourceManager::getMusic().setVolume(Settings::mVolume); 
+			    ResourceManager::getMusic().setVolume(Settings::mVolume);
                             break;
-                    }; 
-                
+                    };
+
                 }
             }
         break;
         case EventId::PLAY_MUSIC:
-            {    
+            {
                 std::shared_ptr<GU::Evt::PlayMusic> temp = std::dynamic_pointer_cast<GU::Evt::PlayMusic>(event);
                 if(temp)
                 {
                     //Load music
                     if(ResourceManager::loadMusic(temp->musicFile))
-                        ResourceManager::getMusic().play(); 
+                        ResourceManager::getMusic().play();
 		    else
-                        ResourceManager::getMusic().stop(); 
-                    
+                        ResourceManager::getMusic().stop();
+
                 }
             }
         break;
         case EventId::ON_COMBO_CHANGED:
-            {   
+            {
                 std::shared_ptr<GU::Evt::OnComboChanged> temp = std::dynamic_pointer_cast<GU::Evt::OnComboChanged>(event);
                 if(temp)
                 {
@@ -632,45 +634,45 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             switch(temp->index)
                             {
                                 case 0:
-					ResourceManager::loadTheme("Default"); 
+					ResourceManager::loadTheme("Default");
                                     break;
                                 case 1:
 				    ResourceManager::loadTheme("Black");
                                     break;
                                 case 2:
-				    ResourceManager::loadTheme("BabyBlue"); 
+				    ResourceManager::loadTheme("BabyBlue");
                                     break;
-                                    
-                            } 
+
+                            }
                             gui.removeAllWidgets();
                             tgui::Panel::Ptr cust(new Gui::VideoPanel());
                             std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                             p->init(window.getSize().x, window.getSize().y);
                             gui.add(cust, "PanelPointer");
-                            } 
+                            }
                             break;
                         case Gui::Combo::comboId::BACKGROUND:
                             switch(temp->index)
                             {
                                 case 0:
-				    ResourceManager::loadBackground("Star.png"); 
+				    ResourceManager::loadBackground("Star.png");
                                     backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
                                     Settings::background = "Star";
                                     break;
                                 case 1:
-				    ResourceManager::loadBackground("Nebula.png"); 
+				    ResourceManager::loadBackground("Nebula.png");
                                     backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
-                                    Settings::background = "Nebula"; 
+                                    Settings::background = "Nebula";
                                     break;
-                                    
-                            } 
+
+                            }
                             gui.removeAllWidgets();
                             tgui::Panel::Ptr cust(new Gui::VideoPanel());
                             std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                             p->init(window.getSize().x, window.getSize().y);
                             gui.add(cust, "PanelPointer");
                             break;
-                   } 
+                   }
                 }
             }
         break;
