@@ -3,8 +3,7 @@
 #include "Events/Events.h"
 #include <GameUtilities/Log/Target/LogFileTarget.h>
 #include <GameUtilities/Log/LogFormatter.h>
-#include <GameUtilities/Log/Component/SeverityComponent.h>
-#include <GameUtilities/Log/Component/MsgComponent.h>
+#include <GameUtilities/Log/Component/Components.h>
 Game::Game(): GU::Engin::Engin(),
 GU::Evt::EventManager()
 {
@@ -15,6 +14,8 @@ GU::Evt::EventManager()
   //Set log formatter
   GU::Log::LogFormatter logFormatter;
   logFormatter.add<GU::Log::SeverityComponent>();
+  logFormatter.add<GU::Log::LineComponent>();
+  logFormatter.add<GU::Log::FileComponent>();
   logFormatter.add<GU::Log::MsgComponent>();
   logManager.set(logFormatter);
 
