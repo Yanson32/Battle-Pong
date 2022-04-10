@@ -47,11 +47,11 @@
 
 #include "Resources/SoundId.h"
 #include "Resources/MusicId.h"
-
+#include "Log.h"
 #include <memory>
 IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui): StateBase(newEngin, newWindow, debugDraw, newGui, StateId::INTRO_STATE)
 {
-    EventManager::inst().Post<GU::Evt::LogEvent>("IntroState::IntroState", static_cast<int>(GU::Log::LogType::GU_TRACE), int(__LINE__), GU::Core::String(__FILE__));
+    BP_LOG_TRACE(__FUNCTION__)
     //ctor
 
 }
@@ -59,7 +59,7 @@ IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, 
 
 void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
-    EventManager::inst().Post<GU::Evt::LogEvent>("IntroState::HandleEvents", static_cast<int>(GU::Log::LogType::GU_TRACE), int(__LINE__), GU::Core::String(__FILE__));
+    BP_LOG_TRACE(__FUNCTION__)
     UNUSED(deltaTime);
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
@@ -94,7 +94,7 @@ void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, s
 
 void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
-    EventManager::inst().Post<GU::Evt::LogEvent>("IntroState::Update", static_cast<int>(GU::Log::LogType::GU_TRACE), int(__LINE__), GU::Core::String(__FILE__));
+    BP_LOG_TRACE(__FUNCTION__)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
@@ -119,7 +119,7 @@ void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
 
 void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
-    EventManager::inst().Post<GU::Evt::LogEvent>("IntroState::Draw", static_cast<int>(GU::Log::LogType::GU_TRACE), int(__LINE__), GU::Core::String(__FILE__));
+    BP_LOG_TRACE(__FUNCTION__)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
@@ -137,7 +137,7 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
 
 void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
-    EventManager::inst().Post<GU::Evt::LogEvent>("IntroState::init", static_cast<int>(GU::Log::LogType::GU_TRACE), int(__LINE__), GU::Core::String(__FILE__));
+    BP_LOG_TRACE(__FUNCTION__)
     std::cout << "IntroState Init" << std::endl;
     StateBase::Init(frame);
     Settings::stateId = StateId::INTRO_STATE;
@@ -182,8 +182,8 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 
 void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
-  EventManager::inst().Post<GU::Evt::LogEvent>("IntroState::Clean", static_cast<int>(GU::Log::LogType::GU_TRACE), int(__LINE__), GU::Core::String(__FILE__));
-    //gui.removeAllWidgets();
+  BP_LOG_TRACE(__FUNCTION__)
+  //gui.removeAllWidgets();
 
     //Remove ball collision sound
     //if(ResourceManager::isLoaded(soundId::BALL))
@@ -302,7 +302,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
 
 IntroState::~IntroState()
 {
-  EventManager::inst().Post<GU::Evt::LogEvent>("IntroState::~IntroState", static_cast<int>(GU::Log::LogType::GU_TRACE), int(__LINE__), GU::Core::String(__FILE__));
+  BP_LOG_TRACE(__FUNCTION__)
     //dtor
 
 
