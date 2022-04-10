@@ -54,7 +54,7 @@ int main(int argc, char* argv[])
         ResourceManager::setPath(Settings::RESOURCE_INSTALL_DIR);
 
     //Load tgui theme
-    ResourceManager::loadTheme("Black");
+    ResourceManager::loadTheme(Settings::theme);
 
     //Set the application icon
     sf::Image icon;
@@ -113,18 +113,18 @@ int main(int argc, char* argv[])
         {
             accumulator += timer.restart();
 
-	    //Handle any events
-	    engin.HandleEvents(deltaTime.asSeconds(), frame);
+	          //Handle any events
+	          engin.HandleEvents(deltaTime.asSeconds(), frame);
 
-	    //Update the game logic
-	    while(accumulator.asSeconds() >= deltaTime.asSeconds())
+	          //Update the game logic
+	          while(accumulator.asSeconds() >= deltaTime.asSeconds())
             {
                 engin.Update(deltaTime.asSeconds(), frame);
                 accumulator -= deltaTime;
             }
 
-	    //Draw a frame
-	    engin.Draw(deltaTime.asSeconds(), frame);
+	          //Draw a frame
+	          engin.Draw(deltaTime.asSeconds(), frame);
         }
     }
     catch(...)
