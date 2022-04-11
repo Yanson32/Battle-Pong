@@ -10,7 +10,7 @@ namespace Gui
             ControlPanel(DebugDraw *debugDraw);
             void init(const int &width, const int &height);
             virtual ~ControlPanel();
-        protected:
+        public:
         tgui::Label::Ptr upLabel;
         tgui::ComboBox::Ptr upComboBox;
         tgui::Label::Ptr downLabel;
@@ -20,10 +20,10 @@ namespace Gui
         tgui::ComboBox::Ptr menuComboBox;
         tgui::ComboBox::Ptr nextComboBox;
         tgui::ComboBox::Ptr selectComboBox;
-         
+
         tgui::ComboBox::Ptr joystickMenuComboBox = nullptr;
-        tgui::ComboBox::Ptr joystickSelectComboBox = nullptr; 
-        tgui::ComboBox::Ptr joystickNextComboBox = nullptr; 
+        tgui::ComboBox::Ptr joystickSelectComboBox = nullptr;
+        tgui::ComboBox::Ptr joystickNextComboBox = nullptr;
     };
 }
 

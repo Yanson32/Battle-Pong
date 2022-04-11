@@ -72,7 +72,7 @@ namespace Settings
     std::string publicIp = "0.0.0.0";
     std::string localIp = sf::IpAddress::getLocalAddress().toString();
 
-
+    std::string preferencesFile = "";
 
     //Directories
     const std::string RESOURCE_INSTALL_DIR = RESOURCE_INSTALL_PATH;

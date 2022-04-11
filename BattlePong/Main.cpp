@@ -36,6 +36,8 @@
 #include <string>
 #include <filesystem>
 #include "Resources/ResourceManager.h"
+#include <GameUtilities/Core/PreferencesManager.h>
+#include <algorithm>
 
 int main(int argc, char* argv[])
 {
@@ -49,9 +51,25 @@ int main(int argc, char* argv[])
 
     //Create the games window
     sf::RenderWindow window(sf::VideoMode(Settings::dimensions.x, Settings::dimensions.y),Settings::title);
+
     //Setup the path to resource folder for the resource management system
     if(!std::filesystem::exists(ResourceManager::getPath()))
         ResourceManager::setPath(Settings::RESOURCE_INSTALL_DIR);
+
+    //Set the path to the preferences file
+    Settings::preferencesFile = ResourceManager::getPath().string();
+    if(Settings::preferencesFile.back() != '/')
+     Settings::preferencesFile  += "/preferences.txt";
+
+    //Load user preferences
+    GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+    Settings::playerControlUp = prefMan.read("PlayerControlUp", Settings::playerControlUp);
+    Settings::playerControlDown = prefMan.read("PlayerControlDown", Settings::playerControlDown);
+    Settings::playerControlLeft = prefMan.read("PlayerControlLeft", Settings::playerControlLeft);
+    Settings::playerControlRight = prefMan.read("PlayerControlRight", Settings::playerControlRight);
+    Settings::playerControlMenu = prefMan.read("PlayerControlMenu", Settings::playerControlMenu);
+    Settings::playerControlNext = prefMan.read("PlayerControlNext", Settings::playerControlNext);
+    Settings::playerControlSelect = prefMan.read("PlayerControlSelect", Settings::playerControlSelect);
 
     //Load tgui theme
     ResourceManager::loadTheme(Settings::theme);

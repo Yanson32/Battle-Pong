@@ -75,7 +75,8 @@ namespace Settings
     extern std::string theme;
     extern std::string background;
 
-
+    extern std::string preferencesFile;
+    
     //Directories
     extern const std::string RESOURCE_INSTALL_DIR;
 }
