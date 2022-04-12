@@ -183,8 +183,8 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 
 void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
-  UNUSED(frame);
   BP_LOG_TRACE(__FUNCTION__)
+  UNUSED(frame);
   //gui.removeAllWidgets();
 
     //Remove ball collision sound
@@ -303,10 +303,10 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::s
 void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame)
 {
     StateBase::handleGUEvent(engin, event, frame);
-    switch(event->id)
+    switch(event->getId())
     {
         case EventId::CLICK:
-	{
+	      {
             std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
             if(temp)
             {
@@ -314,7 +314,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
                 {
                     case Button::id::INTRO_PANEL:
                     break;
-		    case Button::id::OPTIONS:
+		                case Button::id::OPTIONS:
                     case Button::id::GENERAL_TAB:
                     break;
                     case Button::id::CONTROLS_TAB:
@@ -333,16 +333,16 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
                     break;
                     case Button::id::CONNECT:
 	            break;
-		}
+		          }
+	         }
 	    }
-	}
 	    break;
         case EventId::ON_COMBO_CHANGED:
             {
     	       //Load title image
     	       if(ResourceManager::isLoaded(textureId::TITLE))
-	           ResourceManager::remove(textureId::TITLE);
-	       ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
+	            ResourceManager::remove(textureId::TITLE);
+	           ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
     	       header.setTexture(ResourceManager::get(textureId::TITLE));
             }
 
@@ -357,6 +357,4 @@ IntroState::~IntroState()
 {
   BP_LOG_TRACE(__FUNCTION__)
     //dtor
-
-
 }

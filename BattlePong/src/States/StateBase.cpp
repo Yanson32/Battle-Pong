@@ -245,7 +245,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
        return;
     }
 
-    switch(event->id)
+    switch(event->getId())
     {
         case EventId::LOG:
         {
@@ -253,13 +253,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
           //Create log entry
           std::shared_ptr<GU::Log::LogEntry> entry(new GU::Log::LogEntry());
-          entry->add<GU::Log::MsgComponent>(temp->m_msg);
+          entry->add<GU::Log::MsgComponent>(temp->getMessage());
           entry->add<GU::Log::SeverityComponent>(static_cast<GU::Log::LogType>(temp->getSeverity()));
-          entry->add<GU::Log::LineComponent>(temp->line);
-          entry->add<GU::Log::FileComponent>(temp->file);
-          GU::Log::FileComponent g(temp->file);
-          GU::Core::String s(__FILE__);
-          std::cout << "File " <<  s.toStdString() << std::endl;
+          entry->add<GU::Log::LineComponent>(temp->getLine());
+          entry->add<GU::Log::FileComponent>(temp->getFile());
+
           //Write log
           Game *game = static_cast<Game*>(&engin);
           game->logManager.write(entry);
@@ -390,7 +388,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         break;
     }
 
-    switch(event->id)
+    switch(event->getId())
     {
         case EventId::LEFT_GOAL_COLLISION:
         {
