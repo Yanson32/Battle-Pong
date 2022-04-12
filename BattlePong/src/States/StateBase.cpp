@@ -257,7 +257,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
           entry->add<GU::Log::FileComponent>(temp->getFile());
 
           if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR))
+          {
             game->logManager.write(entry);
+            exit(1);
+          }
           else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_ERROR))
             game->logManager.write(entry);
           else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_WARNING))
