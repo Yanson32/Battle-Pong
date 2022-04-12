@@ -13,10 +13,10 @@ class PaddleHud: public tgui::Panel
         virtual ~PaddleHud();
     protected:
     private:
+        std::string m_input;
        	std::string m_name;
-	std::string m_input;
-	int m_score;	
-	tgui::Label::Ptr scoreLabel;
+      	int m_score;
+      	tgui::Label::Ptr scoreLabel;
         tgui::Label::Ptr panleLable;
 };
 
