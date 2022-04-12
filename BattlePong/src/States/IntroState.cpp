@@ -207,53 +207,70 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::s
     switch(event.type)
     {
         case sf::Event::LostFocus:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::Closed:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::GainedFocus:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::TextEntered:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::KeyPressed:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::KeyReleased:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::MouseWheelMoved:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::MouseWheelScrolled:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::MouseButtonPressed:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::MouseButtonReleased:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::MouseMoved:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::MouseEntered:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::MouseLeft:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::TouchBegan:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::TouchMoved:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::TouchEnded:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::SensorChanged:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
         case sf::Event::Count:
+            BP_LOG_WARNING("Unused case lable triggered");
         break;
-
         case sf::Event::JoystickConnected:
-            std::cout  << "Joystick connected" << std::endl;
+            BP_LOG_MESSAGE("Joystick connected");
             break;
         case sf::Event::JoystickDisconnected:
-            std::cout << "Joystick Disconnected" << std::endl;
+            BP_LOG_MESSAGE("Joystick Disconnected");
             break;
         case sf::Event::JoystickButtonPressed:
-            std::cout << "Joystick Button Pressed" << std::endl;
+            BP_LOG_MESSAGE("Joystick Button Pressed");
             break;
         case sf::Event::JoystickButtonReleased:
-            std::cout << "Joystick Button Released" << std::endl;
+            BP_LOG_MESSAGE("Joystick Button Released");
             break;
         case sf::Event::JoystickMoved:
             switch(event.joystickMove.axis)
