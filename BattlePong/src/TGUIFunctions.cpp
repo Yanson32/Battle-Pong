@@ -9,5 +9,5 @@ tgui::String toTguiString(const int &num)
 tgui::String toTguiString(const std::string &msg)
 {
 	tgui::String temp(msg);
-	return temp.toAnsiString();
+	return temp.toStdString();
 }
