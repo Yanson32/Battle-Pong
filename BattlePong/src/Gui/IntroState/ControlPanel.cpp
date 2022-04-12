@@ -158,7 +158,7 @@ namespace Gui
         //Create menu button editbox
         joystickMenuComboBox = tgui::ComboBox::create();
 	    joystickMenuComboBox->setChangeItemOnScroll(true);
-        for(int i = 0; i < sf::Joystick::getButtonCount(0); ++i)
+        for(unsigned int i = 0; i < sf::Joystick::getButtonCount(0); ++i)
         {
             std::stringstream ss;
             ss << "Button ";
@@ -174,7 +174,7 @@ namespace Gui
         //Create joystick next button editbox
         joystickNextComboBox = tgui::ComboBox::create();
         joystickNextComboBox->setChangeItemOnScroll(true);
-        for(int i = 0; i < sf::Joystick::getButtonCount(0); ++i)
+        for(unsigned int i = 0; i < sf::Joystick::getButtonCount(0); ++i)
         {
             std::stringstream ss;
             ss << "Button ";
@@ -190,7 +190,7 @@ namespace Gui
         //Create joystick select button editbox
         joystickSelectComboBox = tgui::ComboBox::create();
         joystickSelectComboBox->setChangeItemOnScroll(true);
-        for(int i = 0; i < sf::Joystick::getButtonCount(0); ++i)
+        for(unsigned int i = 0; i < sf::Joystick::getButtonCount(0); ++i)
         {
             std::stringstream ss;
             ss << "Button ";
