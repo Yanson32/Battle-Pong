@@ -280,9 +280,6 @@ void IntroState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::s
             };
 	case sf::Event::Resized:
 	    break;
-
-        defualt:
-           break;
     };
 }
 
