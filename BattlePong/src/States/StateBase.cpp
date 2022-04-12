@@ -59,12 +59,7 @@ state(newState),
 sysPause(false)
 {
     BP_LOG_TRACE(__FUNCTION__)
-    const float &wWidth = window.getView().getSize().x;
-    const float &wHeight = window.getView().getSize().y;
-    const float &wallTh = Settings::wallThickness;
-    float paddleHeight = 100;
     gui.setTarget(window);
-
 
     paddle1Hud.reset(new PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
     paddle2Hud.reset(new PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
@@ -220,6 +215,8 @@ void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
 
 void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame)
 {
+  UNUSED(frame);
+  
     switch (event.type)
     {
 

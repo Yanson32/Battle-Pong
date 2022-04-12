@@ -1,6 +1,7 @@
 #include "Objects/PaddleStop.h"
 #include "Settings.h"
 #include "Objects/ObjectId.h"
+#include <GameUtilities/Core/Macros.h>
 
 PaddleStop::PaddleStop(std::shared_ptr<b2World> newWorld, const std::array<sf::Vector2f, 4> &vert):
 ObjectBase<sf::ConvexShape>::ObjectBase(newWorld)
@@ -38,8 +39,8 @@ ObjectBase<sf::ConvexShape>::ObjectBase(newWorld)
     bodyFixture.friction = 1;
     bodyFixture.restitution = 0;
     bodyFixture.density = 100;
-    bodyFixture.filter.categoryBits = ObjectId::PADDLE_STOP; 
-    bodyFixture.filter.maskBits = ObjectId::RIGHT_PADDLE | ObjectId::LEFT_PADDLE; 
+    bodyFixture.filter.categoryBits = ObjectId::PADDLE_STOP;
+    bodyFixture.filter.maskBits = ObjectId::RIGHT_PADDLE | ObjectId::LEFT_PADDLE;
 
     body->CreateFixture(&bodyFixture);
 
@@ -51,7 +52,8 @@ ObjectBase<sf::ConvexShape>::ObjectBase(newWorld)
 
 void PaddleStop::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
-
+  UNUSED(target);
+  UNUSED(states);
 }
 
 

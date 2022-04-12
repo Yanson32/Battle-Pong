@@ -24,7 +24,8 @@
 #include "Gui/IntroState/SoundPanel.h"
 #include "Gui/IntroState/NetworkPanel.h"
 #include "Gui/IntroState/DevPanel.h"
-#include "GameUtilities/Event/LogEvent.h"
+#include <GameUtilities/Event/LogEvent.h>
+#include <GameUtilities/Core/Macros.h>
 #include "Log.h"
 
 PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId): StateBase(newEngin, newWindow, debugDraw, newGui, newId)
@@ -171,6 +172,8 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
 void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
+    UNUSED(frame);
+
     StateBase::Init(frame);
     Settings::stateId = StateId::PLAY_STATE;
 
@@ -219,6 +222,7 @@ void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 void PlayState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
+    UNUSED(frame);
     gui.removeAllWidgets();
 
     //Remove ball sound
