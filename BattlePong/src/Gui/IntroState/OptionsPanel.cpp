@@ -13,7 +13,7 @@ namespace Gui
         tabs->add("Controls");
         tabs->add("Video");
         tabs->add("Sound");
-        tabs->add("Network"); 
+        tabs->add("Network");
         #ifdef DEBUG
             tabs->add("Dev");
         #endif
@@ -46,8 +46,8 @@ namespace Gui
 
         buttonLayout->add(spacer);
         buttonLayout->add(backBtn);
-        
-        //Create spacer  
+
+        //Create spacer
         tgui::Panel::Ptr spacer2 = tgui::Panel::create();
         spacer2->getRenderer()->setBackgroundColor(sf::Color::Transparent);
         buttonLayout->add(spacer2);

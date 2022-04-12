@@ -12,18 +12,18 @@ namespace Gui
     {
         getContentPane()->appendSpace();
 
-        //Theme selection box        
+        //Theme selection box
         themeCombo = tgui::ComboBox::create();
         themeCombo->addItem("Default");
         themeCombo->addItem("Black");
         themeCombo->addItem("Blue");
-        themeCombo->setSelectedItem(Settings::theme); 
+        themeCombo->setSelectedItem(Settings::theme);
         themeCombo->onItemSelect([&](){
-            std::string theme = themeCombo->getSelectedItem().toAnsiString();
+            std::string theme = themeCombo->getSelectedItem().toStdString();
             if(theme == "Default")
             {
                 EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::THEME, 0);
-            } 
+            }
             else if(theme == "Black")
             {
                 EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::THEME, 1);
@@ -32,18 +32,18 @@ namespace Gui
             {
                 EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::THEME, 2);
             }
-             
+
         });
         getContentPane()->append("Theme", themeCombo);
-        
-        //Background 
+
+        //Background
         backgroundCombo = tgui::ComboBox::create();
         backgroundCombo->addItem("Star");
         backgroundCombo->addItem("Nebula");
         backgroundCombo->setSelectedItem(Settings::background);
         backgroundCombo->onItemSelect([&]()
         {
-            std::string background = backgroundCombo->getSelectedItem().toAnsiString();
+            std::string background = backgroundCombo->getSelectedItem().toStdString();
             if(background == "Star")
                 EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::Combo::comboId::BACKGROUND, 0);
             else if(background == "Nebula")
@@ -51,8 +51,8 @@ namespace Gui
 
         });
         getContentPane()->append("Background", backgroundCombo);
-        
-        //Resolution 
+
+        //Resolution
         resolutionCombo = tgui::ComboBox::create();
         resolutionCombo->addItem("Fulll Screen");
 
@@ -65,12 +65,12 @@ namespace Gui
             ss << "x";
             ss << mode.height;
 
-            resolutionCombo->addItem(ss.str()); 
+            resolutionCombo->addItem(ss.str());
         }
-        
-        resolutionCombo->setSelectedItem(Settings::theme); 
+
+        resolutionCombo->setSelectedItem(Settings::theme);
         resolutionCombo->onItemSelect([&](){
-            std::string theme = resolutionCombo->getSelectedItem().toAnsiString();
+            std::string theme = resolutionCombo->getSelectedItem().toStdString();
         });
         getContentPane()->append("Resolution", resolutionCombo);
     }

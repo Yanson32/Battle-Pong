@@ -27,24 +27,24 @@ CustomPanel::CustomPanel()
     //EditBox to enter port number
     portBox = tgui::EditBox::create();
     getContentPane()->append("Port", portBox);
-    
+
     //Create back button
     backBtn = tgui::Button::create("Back");
     backBtn->onPress([](){
         EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
     });
-   
-    //Create host button   
+
+    //Create host button
     hostButton = tgui::Button::create("Host");
     hostButton->setEnabled(false);
     buttonLayout->add(hostButton);
-   
-    //Create back button 
+
+    //Create back button
     buttonLayout->add(backBtn);
 
-    //Create spacer 
+    //Create spacer
     buttonLayout->add(spacer);
-    
+
 }
 
 

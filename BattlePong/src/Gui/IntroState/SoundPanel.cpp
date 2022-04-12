@@ -12,13 +12,13 @@ namespace Gui
     SoundPanel::SoundPanel(DebugDraw *debugDraw):
     OptionsPanel::OptionsPanel(sf::String("Sound"))
     {
-        UNUSED(debugDraw); 
-        
+        UNUSED(debugDraw);
+
         getContentPane()->appendSpace();
 
         //Create effects slider
         effectsSlider = tgui::Slider::create(0, 100);
-        effectsSlider->setValue(Settings::mVolume); 
+        effectsSlider->setValue(Settings::mVolume);
         effectsSlider->onValueChange([&](){
             Settings::sVolume = effectsSlider->getValue();
             EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::SOUND_EFFECTS, Settings::sVolume);
@@ -33,27 +33,27 @@ namespace Gui
         });
         getContentPane()->append("Music Volume", musicSlider);
 
-             
+
         musicBox = tgui::ComboBox::create();
         musicBox->addItem("Zombies");
-        musicBox->addItem("Dreams"); 
+        musicBox->addItem("Dreams");
         musicBox->setSelectedItem(Settings::currentSong.toAnsiString());
         musicBox->onItemSelect([&](){
             if(musicBox->getSelectedItem() == "Zombies")
             {
                 EventManager::inst().Post<GU::Evt::PlayMusic>("Zombies");
             }
-            else if(musicBox->getSelectedItem() == "Dreams") 
-            {    
+            else if(musicBox->getSelectedItem() == "Dreams")
+            {
                 EventManager::inst().Post<GU::Evt::PlayMusic>("Dreams");
             }
             else
-            {     
+            {
                 EventManager::inst().Post<GU::Evt::PlayMusic>("");
                 Settings::currentSong = "";
-            } 
+            }
 
-                
+
         });
         getContentPane()->append("Music Selection", musicBox);
     }

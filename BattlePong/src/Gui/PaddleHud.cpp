@@ -1,6 +1,6 @@
 #include "Gui/PaddleHud.h"
 #include <sstream>
-PaddleHud::PaddleHud(const std::string &input, std::string &name, int &score): 
+PaddleHud::PaddleHud(const std::string &input, std::string &name, int &score):
 m_input(input), m_name(name), m_score(score)
 {
     //ctor
