@@ -192,7 +192,6 @@ void StateBase::centerText()
 void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
-    std::cout << "Statebase init" << std::endl;
 
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)

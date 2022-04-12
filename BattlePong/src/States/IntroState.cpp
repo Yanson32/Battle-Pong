@@ -139,7 +139,6 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
 void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
-    std::cout << "IntroState Init" << std::endl;
     StateBase::Init(frame);
     Settings::stateId = StateId::INTRO_STATE;
 
