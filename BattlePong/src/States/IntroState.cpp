@@ -8,7 +8,8 @@
 
 #include <GameUtilities/Event/LogEvent.h>
 #include <GameUtilities/Log/LogType.h>
-
+#include "GameUtilities/Event/PlaySound.h"
+#include <GameUtilities/Core/Macros.h>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/VideoMode.hpp>
@@ -24,7 +25,7 @@
 #include "Objects/PongFrame.h"
 #include "States/StateId.h"
 #include "Events/EventManager.h"
-#include "GameUtilities/Event/PlaySound.h"
+
 
 
 #include "Resources/ResourceManager.h"
@@ -182,6 +183,7 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 
 void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
+  UNUSED(frame);
   BP_LOG_TRACE(__FUNCTION__)
   //gui.removeAllWidgets();
 
