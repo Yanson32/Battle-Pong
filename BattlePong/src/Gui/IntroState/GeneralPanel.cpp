@@ -5,6 +5,7 @@
 #include "Settings.h"
 #include <GameUtilities/Event/OnComboChanged.h>
 #include <GameUtilities/Event/OnCheck.h>
+#include <GameUtilities/Core/PreferencesManager.h>
 #include "Gui/ComboId.h"
 #include "TGUIFunctions.h"
 
@@ -29,9 +30,9 @@ namespace Gui
             comboBox->addItem("60");
             comboBox->setSelectedItem(toTguiString(Settings::time));
             comboBox->onItemSelect([&](){
-                sf::String text = comboBox->getSelectedItem().toStdString();
-                Settings::time = text;
-    //            Event::Manager::inst().push(event);
+                Settings::time  = comboBox->getSelectedItem().toStdString();
+                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                prefMan.write("ResetTime", Settings::time.toAnsiString());
             });
             getContentPane()->append("Time Limit", comboBox);
         }
@@ -50,6 +51,8 @@ namespace Gui
             aiCombo->setSelectedItem(toTguiString(Settings::ai));
             aiCombo->onItemSelect([&](){
                 Settings::ai = aiCombo->getSelectedItem().toStdString();
+                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                prefMan.write("Difficulty", Settings::ai.toAnsiString());
             });
             getContentPane()->append("Ai", aiCombo);
         }

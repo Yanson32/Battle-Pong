@@ -61,8 +61,13 @@ int main(int argc, char* argv[])
     if(Settings::preferencesFile.back() != '/')
      Settings::preferencesFile  += "/preferences.txt";
 
-    //Load keyboard preferences
     GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+
+    //Load game settings
+    Settings::time = prefMan.read("ResetTime", Settings::time.toAnsiString()).toStdString();
+    Settings::ai = prefMan.read("Difficulty", Settings::ai.toAnsiString()).toStdString();
+
+    //Load keyboard preferences
     Settings::playerControlUp = prefMan.read("PlayerControlUp", Settings::playerControlUp);
     Settings::playerControlDown = prefMan.read("PlayerControlDown", Settings::playerControlDown);
     Settings::playerControlLeft = prefMan.read("PlayerControlLeft", Settings::playerControlLeft);
