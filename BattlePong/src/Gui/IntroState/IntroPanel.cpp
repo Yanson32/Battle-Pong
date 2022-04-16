@@ -1,4 +1,4 @@
-#include "Gui/IntroPanel.h"
+/*#include "Gui/IntroPanel.h"
 #include "Settings.h"
 #include "Event/Object.h"
 #include "Event/Manager.h"
@@ -45,3 +45,4 @@ namespace Gui
         //dtor
     }
 }
+*/
