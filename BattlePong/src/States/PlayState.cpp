@@ -47,7 +47,7 @@ void PlayState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, st
     if(window.isOpen())
     {
         sf::Event event;
-
+        BP_LOG_MESSAGE("SFML Event Loop")
         while (window.pollEvent(event))
         {
             StateBase::sfEvent(engin, event, frame);
@@ -57,7 +57,7 @@ void PlayState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, st
         pongFrame->leftPaddle->handleInput(*pongFrame->ball);
         pongFrame->rightPaddle->handleInput(*pongFrame->ball);
     }
-
+    BP_LOG_MESSAGE("GameUtilities Game Loop")
     //GameUtilities event loop
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().Poll((evtPtr)))

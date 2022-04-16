@@ -277,7 +277,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             game->logManager.write(entry);
           else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_TRACE))
           {
-            //game->logManager.write(entry);
+            game->logManager.write(entry);
           }
 
         }
@@ -313,7 +313,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::GENERAL_TAB:
                     {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        //StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new Gui::GeneralPanel());
                         std::shared_ptr<Gui::GeneralPanel> p = std::dynamic_pointer_cast<Gui::GeneralPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
@@ -323,7 +323,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::CONTROLS_TAB:
                     {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        //StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new Gui::ControlPanel(nullptr));
                         std::shared_ptr<Gui::ControlPanel> p = std::dynamic_pointer_cast<Gui::ControlPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
@@ -333,7 +333,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::VIDEO_TAB:
                      {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        //StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new Gui::VideoPanel());
                         std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
@@ -343,7 +343,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::SOUND_TAB:
                      {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        //StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new Gui::SoundPanel(nullptr));
                         std::shared_ptr<Gui::SoundPanel> p = std::dynamic_pointer_cast<Gui::SoundPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
@@ -353,7 +353,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::NETWORK_TAB:
                      {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        //StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new Gui::NetworkPanel());
                         std::shared_ptr<Gui::NetworkPanel> p = std::dynamic_pointer_cast<Gui::NetworkPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
@@ -363,7 +363,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::DEV_TAB:
                      {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        //StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new Gui::DevPanel());
                         std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
                         p->init(debugDraw.GetFlags(), window.getSize().x, window.getSize().y);
@@ -373,7 +373,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::MULTIPLAYER:
                      {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        //StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new MultiplayerPanel());
                         std::shared_ptr<MultiplayerPanel> p = std::dynamic_pointer_cast<MultiplayerPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
@@ -383,7 +383,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::HOST:
                      {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        //StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new HostPanel());
                         std::shared_ptr<HostPanel> p = std::dynamic_pointer_cast<HostPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
@@ -393,7 +393,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::CONNECT:
                     {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        //StateBase::Init(pongFrame);
                         tgui::Panel::Ptr cust(new ConnectPanel());
                         std::shared_ptr<ConnectPanel> p = std::dynamic_pointer_cast<ConnectPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
