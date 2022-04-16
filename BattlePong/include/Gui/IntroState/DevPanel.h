@@ -17,6 +17,11 @@ namespace Gui
             tgui::CheckBox::Ptr joints;
             tgui::CheckBox::Ptr centerOfMass;
             tgui::CheckBox::Ptr pair;
+
+            tgui::EditBox::Ptr log;
+
+            tgui::ComboBox::Ptr logLevelComboBox;
+            void onLogLevel();
     };
 }
 #endif // GUI_DEVPANEL_H

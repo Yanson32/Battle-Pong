@@ -80,6 +80,8 @@ namespace Settings
 
     //Directories
     extern const std::string RESOURCE_INSTALL_DIR;
+
+    extern int logSeverity;
 }
 
 

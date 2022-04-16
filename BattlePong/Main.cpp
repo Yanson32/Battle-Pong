@@ -76,6 +76,8 @@ int main(int argc, char* argv[])
     Settings::playerJoystickControlNext = prefMan.read("PlayerJoystickControlNext", Settings::playerJoystickControlNext);
     Settings::playerJoystickControlSelect = prefMan.read("PlayerJoystickControlSelect", Settings::playerJoystickControlSelect);
 
+    //Load log settings
+    Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);
 
     //Load tgui theme
     ResourceManager::loadTheme(Settings::theme);

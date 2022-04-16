@@ -4,6 +4,7 @@
 #include "States/StateId.h"
 #include <iostream>
 #include <SFML/System/String.hpp>
+#include <GameUtilities/Log/LogType.h>
 
 namespace Settings
 {
@@ -77,4 +78,6 @@ namespace Settings
 
     //Directories
     const std::string RESOURCE_INSTALL_DIR = RESOURCE_INSTALL_PATH;
+
+    int logSeverity = static_cast<int>(GU::Log::LogType::GU_MESSAGE);
 }

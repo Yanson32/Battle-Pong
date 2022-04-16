@@ -255,6 +255,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
           entry->add<GU::Log::SeverityComponent>(static_cast<GU::Log::LogType>(temp->getSeverity()));
           entry->add<GU::Log::LineComponent>(temp->getLine());
           entry->add<GU::Log::FileComponent>(temp->getFile());
+  
+          if(temp->getSeverity() > Settings::logSeverity)
+            return;
 
           if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR))
           {
@@ -509,6 +512,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 debugDraw.AppendFlags(b2Draw::e_pairBit);
                             else
                                 debugDraw.ClearFlags(b2Draw::e_pairBit);
+                       break;
+                       case checkBoxId::DEBUG_LOG:
+                        BP_LOG_WARNING("Debug Log not implimented");
                        break;
                    };
                 }

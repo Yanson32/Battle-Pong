@@ -3,10 +3,11 @@
 
 enum checkBoxId
 {
-    DEBUG_AABB, 
+    DEBUG_AABB,
     DEBUG_SHAPE,
     DEBUG_MASS,
     DEBUG_JOINTS,
-    DEBUG_PAIRS
+    DEBUG_PAIRS,
+    DEBUG_LOG
 };
 #endif
