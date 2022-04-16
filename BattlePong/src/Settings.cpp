@@ -34,6 +34,7 @@ namespace Settings
     std::string playerControlSelect = "Enter";
 
     //Joystick buttons
+    std::string playerJoystickControlMenu;
     std::string playerJoystickControlNext;
     std::string playerJoystickControlSelect;
     sf::Vector2f wDimensions = sf::Vector2f(800, 600);

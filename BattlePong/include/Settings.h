@@ -57,6 +57,7 @@ namespace Settings
     extern std::string playerControlSelect;
 
     //Joystick buttons
+    extern std::string playerJoystickControlMenu;
     extern std::string playerJoystickControlNext;
     extern std::string playerJoystickControlSelect;
 
@@ -76,7 +77,7 @@ namespace Settings
     extern std::string background;
 
     extern std::string preferencesFile;
-    
+
     //Directories
     extern const std::string RESOURCE_INSTALL_DIR;
 }

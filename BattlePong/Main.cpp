@@ -61,7 +61,7 @@ int main(int argc, char* argv[])
     if(Settings::preferencesFile.back() != '/')
      Settings::preferencesFile  += "/preferences.txt";
 
-    //Load user preferences
+    //Load keyboard preferences
     GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
     Settings::playerControlUp = prefMan.read("PlayerControlUp", Settings::playerControlUp);
     Settings::playerControlDown = prefMan.read("PlayerControlDown", Settings::playerControlDown);
@@ -70,6 +70,12 @@ int main(int argc, char* argv[])
     Settings::playerControlMenu = prefMan.read("PlayerControlMenu", Settings::playerControlMenu);
     Settings::playerControlNext = prefMan.read("PlayerControlNext", Settings::playerControlNext);
     Settings::playerControlSelect = prefMan.read("PlayerControlSelect", Settings::playerControlSelect);
+
+    //Load joystick preferences
+    Settings::playerJoystickControlMenu = prefMan.read("PlayerJoystickControlMenu", Settings::playerJoystickControlMenu);
+    Settings::playerJoystickControlNext = prefMan.read("PlayerJoystickControlNext", Settings::playerJoystickControlNext);
+    Settings::playerJoystickControlSelect = prefMan.read("PlayerJoystickControlSelect", Settings::playerJoystickControlSelect);
+
 
     //Load tgui theme
     ResourceManager::loadTheme(Settings::theme);

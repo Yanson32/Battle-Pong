@@ -9,6 +9,10 @@
 
 namespace Gui
 {
+    /*******************************************************************
+    * @brief: Constructor
+    * @param: debugDraw a pointer to the debug draw class for Box2d
+    *******************************************************************/
     ControlPanel::ControlPanel(DebugDraw *debugDraw):
     OptionsPanel::OptionsPanel("Controls")
     {
@@ -21,7 +25,7 @@ namespace Gui
 
         //Create up button editbox
         upComboBox = tgui::ComboBox::create();
-	    upComboBox->setChangeItemOnScroll(true);
+	      upComboBox->setChangeItemOnScroll(true);
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
@@ -31,17 +35,11 @@ namespace Gui
         getContentPane()->append("Up", upComboBox);
 
 
-        upComboBox->onItemSelect([this](){
-          GU::Core::String data = this->upComboBox->getSelectedItem().toStdString();
-          //Load user preferences
-          GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-          prefMan.write("PlayerControlUp", data);
-
-        });
+        upComboBox->onItemSelect(&ControlPanel::onUpCombo, this);
 
         //Create down button editbox
         downComboBox = tgui::ComboBox::create();
-	    downComboBox->setChangeItemOnScroll(true);
+	      downComboBox->setChangeItemOnScroll(true);
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
@@ -49,35 +47,24 @@ namespace Gui
         }
         downComboBox->setSelectedItem(Settings::playerControlDown);
 	      getContentPane()->append("Down", downComboBox);
-        downComboBox->onItemSelect([this](){
-          GU::Core::String data = this->downComboBox->getSelectedItem().toStdString();
-          //Load user preferences
-          GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-          prefMan.write("PlayerControlDown", data);
-
-        });
+        downComboBox->onItemSelect(&ControlPanel::onDownCombo, this);
 
         //Create left button editbox
         leftComboBox = tgui::ComboBox::create();
-	    leftComboBox->setChangeItemOnScroll(true);
+	      leftComboBox->setChangeItemOnScroll(true);
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
             leftComboBox->addItem(tgui::String(temp));
         }
         leftComboBox->setSelectedItem(Settings::playerControlLeft);
-	    getContentPane()->append("Left", leftComboBox);
+	      getContentPane()->append("Left", leftComboBox);
 
-      leftComboBox->onItemSelect([this](){
-        GU::Core::String data = this->leftComboBox->getSelectedItem().toStdString();
-        //Load user preferences
-        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-        prefMan.write("PlayerControlLeft", data);
+        leftComboBox->onItemSelect(&ControlPanel::onLeftCombo, this);
 
-      });
         //Create right button editbox
         rightComboBox = tgui::ComboBox::create();
-	    rightComboBox->setChangeItemOnScroll(true);
+	      rightComboBox->setChangeItemOnScroll(true);
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
@@ -86,70 +73,47 @@ namespace Gui
         rightComboBox->setSelectedItem(Settings::playerControlRight);
 	      getContentPane()->append("Right", rightComboBox);
 
-        rightComboBox->onItemSelect([this](){
-        GU::Core::String data = this->rightComboBox->getSelectedItem().toStdString();
-        //Load user preferences
-        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-        prefMan.write("PlayerControlRight", data);
-
-      });
+        rightComboBox->onItemSelect(&ControlPanel::onRightCombo, this);
 
         //Create menu button editbox
         menuComboBox = tgui::ComboBox::create();
-	    menuComboBox->setChangeItemOnScroll(true);
+	      menuComboBox->setChangeItemOnScroll(true);
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
             menuComboBox->addItem(tgui::String(temp));
         }
         menuComboBox->setSelectedItem(Settings::playerControlMenu);
-	    getContentPane()->append("Menu", menuComboBox);
+	      getContentPane()->append("Menu", menuComboBox);
 
-      menuComboBox->onItemSelect([this](){
-      GU::Core::String data = this->menuComboBox->getSelectedItem().toStdString();
-      //Load user preferences
-      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-      prefMan.write("PlayerControlMenu", data);
-
-    });
+        menuComboBox->onItemSelect(&ControlPanel::onMenuCombo, this);
 
         //Create next button editbox
         nextComboBox = tgui::ComboBox::create();
-	    nextComboBox->setChangeItemOnScroll(true);
+	      nextComboBox->setChangeItemOnScroll(true);
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
             nextComboBox->addItem(tgui::String(temp));
         }
         nextComboBox->setSelectedItem(Settings::playerControlNext);
-	    getContentPane()->append("Next", nextComboBox);
+	      getContentPane()->append("Next", nextComboBox);
 
-      nextComboBox->onItemSelect([this](){
-      GU::Core::String data = this->nextComboBox->getSelectedItem().toStdString();
-      //Load user preferences
-      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-      prefMan.write("PlayerControlNext", data);
-
-    });
+        nextComboBox->onItemSelect(&ControlPanel::onNextCombo, this);
 
         //Create select button editbox
         selectComboBox = tgui::ComboBox::create();
-	    selectComboBox->setChangeItemOnScroll(true);
+	      selectComboBox->setChangeItemOnScroll(true);
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
             selectComboBox->addItem(tgui::String(temp));
         }
         selectComboBox->setSelectedItem(Settings::playerControlSelect);
-	    getContentPane()->append("Select", selectComboBox);
+	      getContentPane()->append("Select", selectComboBox);
 
-      selectComboBox->onItemSelect([this](){
-      GU::Core::String data = this->selectComboBox->getSelectedItem().toStdString();
-      //Load user preferences
-      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-      prefMan.write("PlayerControlSelect", data);
+        selectComboBox->onItemSelect(&ControlPanel::onSelectCombo, this);
 
-    });
         //Create joystick section
         if(sf::Joystick::isConnected(0))
             getContentPane()->appendHeader("Joystick");
@@ -157,7 +121,7 @@ namespace Gui
 
         //Create menu button editbox
         joystickMenuComboBox = tgui::ComboBox::create();
-	    joystickMenuComboBox->setChangeItemOnScroll(true);
+	      joystickMenuComboBox->setChangeItemOnScroll(true);
         for(unsigned int i = 0; i < sf::Joystick::getButtonCount(0); ++i)
         {
             std::stringstream ss;
@@ -165,11 +129,13 @@ namespace Gui
             ss << i;
             joystickMenuComboBox->addItem(ss.str());
         }
-        joystickMenuComboBox->setSelectedItem(Settings::playerControlMenu);
+        joystickMenuComboBox->setSelectedItem(Settings::playerJoystickControlMenu);
         if(sf::Joystick::isConnected(0))
         {
 	        getContentPane()->append("Menu", joystickMenuComboBox);
         }
+
+        joystickMenuComboBox->onItemSelect(&ControlPanel::onJoystickMenuCombo, this);
 
         //Create joystick next button editbox
         joystickNextComboBox = tgui::ComboBox::create();
@@ -187,6 +153,8 @@ namespace Gui
             getContentPane()->append("Next", joystickNextComboBox);
         }
 
+        joystickNextComboBox->onItemSelect(&ControlPanel::onJoystickNextCombo, this);
+
         //Create joystick select button editbox
         joystickSelectComboBox = tgui::ComboBox::create();
         joystickSelectComboBox->setChangeItemOnScroll(true);
@@ -203,8 +171,146 @@ namespace Gui
             getContentPane()->append("Select", joystickSelectComboBox);
 
         }
+
+        joystickSelectComboBox->onItemSelect(&ControlPanel::onJoystickSelectCombo, this);
     }
 
+    /*******************************************************************
+    * @brief: Event handler for up combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onUpCombo()
+    {
+      GU::Core::String data = this->upComboBox->getSelectedItem().toStdString();
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerControlUp", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: Event handler for down combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onDownCombo()
+    {
+      GU::Core::String data = this->downComboBox->getSelectedItem().toStdString();
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerControlDown", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: Event handler for left combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onLeftCombo()
+    {
+      GU::Core::String data = this->leftComboBox->getSelectedItem().toStdString();
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerControlLeft", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: Event handler for right combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onRightCombo()
+    {
+      GU::Core::String data = this->rightComboBox->getSelectedItem().toStdString();
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerControlRight", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: Event handler for menu combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onMenuCombo()
+    {
+      GU::Core::String data = this->menuComboBox->getSelectedItem().toStdString();
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerControlMenu", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: Event handler for next combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onNextCombo()
+    {
+      GU::Core::String data = this->nextComboBox->getSelectedItem().toStdString();
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerControlNext", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: Event handler for select combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onSelectCombo()
+    {
+      GU::Core::String data = this->selectComboBox->getSelectedItem().toStdString();
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerControlSelect", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: Event handler for joystick menu combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onJoystickMenuCombo()
+    {
+      GU::Core::String data = this->joystickMenuComboBox->getSelectedItem().toStdString();
+
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerJoystickControlMenu", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: Event handler for joystick next combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onJoystickNextCombo()
+    {
+      GU::Core::String data = this->joystickNextComboBox->getSelectedItem().toStdString();
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerJoystickControlNext", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: Event handler for joystick select combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onJoystickSelectCombo()
+    {
+      GU::Core::String data = this->joystickSelectComboBox->getSelectedItem().toStdString();
+      //Load user preferences
+      GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+      prefMan.write("PlayerJoystickControlSelect", data);
+    }
+
+
+    /*******************************************************************
+    * @brief: This method initialized the gui
+    * @param: width the horizontal size of the gui.
+    * @param: height the vertical size of the gui.
+    *******************************************************************/
     void ControlPanel::init(const int &width, const int &height)
     {
         tabs->select("Controls");
@@ -212,6 +318,11 @@ namespace Gui
         this->setPosition(width / 4, height / 4);
 
     }
+
+
+    /*******************************************************************
+    * @brief: Destructor
+    *******************************************************************/
     ControlPanel::~ControlPanel()
     {
 
