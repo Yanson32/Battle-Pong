@@ -81,6 +81,13 @@ int main(int argc, char* argv[])
     Settings::playerJoystickControlNext = prefMan.read("PlayerJoystickControlNext", Settings::playerJoystickControlNext);
     Settings::playerJoystickControlSelect = prefMan.read("PlayerJoystickControlSelect", Settings::playerJoystickControlSelect);
 
+    //Load Box2D Settings
+    Settings::b2aabb = prefMan.read("b2aabb", Settings::b2aabb);
+    Settings::b2shapes = prefMan.read("b2shapes", Settings::b2shapes);
+    Settings::b2centerOfMass = prefMan.read("b2centerOfMass", Settings::b2centerOfMass);
+    Settings::b2joints = prefMan.read("b2joints", Settings::b2joints);
+    Settings::b2pair = prefMan.read("b2pair", Settings::b2pair);
+
     //Load log settings
     Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);
 
@@ -102,7 +109,17 @@ int main(int argc, char* argv[])
     //Set the debug draw class
     DebugDraw debugDraw(*frame->world.get());
     frame->world->SetDebugDraw(&debugDraw);
-
+    if(Settings::b2aabb)
+      debugDraw.AppendFlags(b2Draw::e_aabbBit);
+    if(Settings::b2shapes)
+      debugDraw.AppendFlags(b2Draw::e_shapeBit);
+    if(Settings::b2centerOfMass)
+      debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
+    if(Settings::b2joints)
+      debugDraw.AppendFlags(b2Draw::e_jointBit);
+    if(Settings::b2pair)
+      debugDraw.AppendFlags(b2Draw::e_pairBit);
+      
     //Handle program options
     std::stringstream ss;
     ss << MAJOR_VERSION << " " << ".0.0.0";

@@ -24,6 +24,7 @@ namespace Gui
 
         //Create AABB checkbox
         aabb = tgui::CheckBox::create("");
+
 				aabb->onCheck([&](){
 	        EventManager::inst().Post<GU::Evt::OnCheck>(checkBoxId::DEBUG_AABB, true);
         });
@@ -134,11 +135,11 @@ namespace Gui
         UNUSED(flags);
         this->setSize(width / 2, height / 2);
         this->setPosition(width / 4, height / 4);
-        centerOfMass->setChecked(flags & b2Draw::e_centerOfMassBit);
-        pair->setChecked(flags & b2Draw::e_centerOfMassBit);
-        joints->setChecked(flags & b2Draw::e_jointBit);
-        shapes->setChecked(flags & b2Draw::e_shapeBit);
-        aabb->setChecked(flags & b2Draw::e_aabbBit);
+        centerOfMass->setChecked(Settings::b2centerOfMass);
+        pair->setChecked(Settings::b2pair);
+        joints->setChecked(Settings::b2joints);
+        shapes->setChecked(Settings::b2shapes);
+        aabb->setChecked(Settings::b2aabb);
     }
 
 	void DevPanel::onLogLevel()

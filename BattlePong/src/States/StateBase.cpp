@@ -10,6 +10,7 @@
 #include <GameUtilities/Event/LogEvent.h>
 #include <GameUtilities/Log/LogEntry.h>
 #include <GameUtilities/Log/Component/Components.h>
+#include <GameUtilities/Core/PreferencesManager.h>
 #include "Objects/Goal.h"
 #include <array>
 #include "Resources/ResourceManager.h"
@@ -255,7 +256,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
           entry->add<GU::Log::SeverityComponent>(static_cast<GU::Log::LogType>(temp->getSeverity()));
           entry->add<GU::Log::LineComponent>(temp->getLine());
           entry->add<GU::Log::FileComponent>(temp->getFile());
-  
+
           if(temp->getSeverity() > Settings::logSeverity)
             return;
 
@@ -485,33 +486,83 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                    {
                        case checkBoxId::DEBUG_AABB:
                             if(temp->checked)
+                            {
                                debugDraw.AppendFlags(b2Draw::e_aabbBit);
+                               Settings::b2aabb = true;
+                               GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                               prefMan.write("b2aabb", Settings::b2aabb);
+                            }
                             else
+                            {
                                 debugDraw.ClearFlags(b2Draw::e_aabbBit);
+                                Settings::b2aabb = false;
+                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                                prefMan.write("b2aabb", Settings::b2aabb);
+                            }
                        break;
                        case checkBoxId::DEBUG_SHAPE:
                             if(temp->checked)
+                            {
                                debugDraw.AppendFlags(b2Draw::e_shapeBit);
+                               Settings::b2shapes = true;
+                               GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                               prefMan.write("b2shapes", Settings::b2shapes);
+                            }
                             else
+                            {
                                 debugDraw.ClearFlags(b2Draw::e_shapeBit);
+                                Settings::b2shapes = false;
+                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                                prefMan.write("b2shapes", Settings::b2shapes);
+                            }
                        break;
                        case checkBoxId::DEBUG_MASS:
                             if(temp->checked)
+                            {
                                debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
+                               Settings::b2centerOfMass = true;
+                               GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                               prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
+                            }
                             else
+                            {
                                 debugDraw.ClearFlags(b2Draw::e_centerOfMassBit);
+                                Settings::b2centerOfMass = false;
+                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                                prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
+                            }
                        break;
                        case checkBoxId::DEBUG_JOINTS:
                             if(temp->checked)
+                            {
                                 debugDraw.AppendFlags(b2Draw::e_jointBit);
+                                Settings::b2joints = true;
+                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                                prefMan.write("b2joints", Settings::b2joints);
+                            }
                             else
+                            {
                                 debugDraw.ClearFlags(b2Draw::e_jointBit);
+                                Settings::b2joints = false;
+                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                                prefMan.write("b2joints", Settings::b2joints);
+                            }
                        break;
                        case checkBoxId::DEBUG_PAIRS:
                             if(temp->checked)
+                            {
                                 debugDraw.AppendFlags(b2Draw::e_pairBit);
+                                Settings::b2pair = true;
+                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                                prefMan.write("b2pair", Settings::b2pair);
+                            }
                             else
+                            {
                                 debugDraw.ClearFlags(b2Draw::e_pairBit);
+                                Settings::b2pair = false;
+                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                                prefMan.write("b2pair", Settings::b2pair);
+                            }
                        break;
                        case checkBoxId::DEBUG_LOG:
                         BP_LOG_WARNING("Debug Log not implimented");

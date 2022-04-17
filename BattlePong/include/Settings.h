@@ -82,6 +82,13 @@ namespace Settings
     extern const std::string RESOURCE_INSTALL_DIR;
 
     extern int logSeverity;
+
+    //Debug draw settings
+    extern bool b2aabb;
+    extern bool b2shapes;
+    extern bool b2centerOfMass;
+    extern bool b2joints;
+    extern bool b2pair;
 }
 
 

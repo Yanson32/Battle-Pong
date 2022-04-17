@@ -80,4 +80,12 @@ namespace Settings
     const std::string RESOURCE_INSTALL_DIR = RESOURCE_INSTALL_PATH;
 
     int logSeverity = static_cast<int>(GU::Log::LogType::GU_MESSAGE);
+
+
+    //Debug draw settings
+    bool b2aabb = false;
+    bool b2shapes = false;
+    bool b2centerOfMass = false;
+    bool b2joints = false;
+    bool b2pair = false;
 }
