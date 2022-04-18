@@ -15,8 +15,8 @@ IntroGui::IntroGui()
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::START);
     });
-    
-    tgui::HorizontalLayout::Ptr startLayout = tgui::HorizontalLayout::create(); 
+
+    tgui::HorizontalLayout::Ptr startLayout = tgui::HorizontalLayout::create();
     startLayout->addSpace(1);
     startLayout->add(start);
     startLayout->addSpace(1);
@@ -31,15 +31,15 @@ IntroGui::IntroGui()
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
     });
-    
-    tgui::HorizontalLayout::Ptr multiplayerLayout = tgui::HorizontalLayout::create(); 
+
+    tgui::HorizontalLayout::Ptr multiplayerLayout = tgui::HorizontalLayout::create();
     multiplayerLayout->addSpace(1);
     multiplayerLayout->add(multiPlayer);
     multiplayerLayout->addSpace(1);
     getContentPane()->append(multiplayerLayout);
 
     getContentPane()->appendSpace();
-    
+
     //Create Options button
     options = tgui::Button::create();
     options->setText("Options");
@@ -47,11 +47,27 @@ IntroGui::IntroGui()
         //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::OPTIONS);
     });
-    tgui::HorizontalLayout::Ptr optionLayout = tgui::HorizontalLayout::create(); 
+    tgui::HorizontalLayout::Ptr optionLayout = tgui::HorizontalLayout::create();
     optionLayout->addSpace(1);
     optionLayout->add(options);
     optionLayout->addSpace(1);
     getContentPane()->append(optionLayout);
+
+    getContentPane()->appendSpace();
+    
+    //Create credits button
+    credits = tgui::Button::create();
+    credits->setText("Credits");
+    credits->onPress([](){
+        //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::CREDITS);
+    });
+
+    tgui::HorizontalLayout::Ptr creditsLayout = tgui::HorizontalLayout::create();
+    creditsLayout->addSpace(1);
+    creditsLayout->add(credits);
+    creditsLayout->addSpace(1);
+    getContentPane()->append(creditsLayout);
 }
 
 void IntroGui::init(const int &width, const int &height)

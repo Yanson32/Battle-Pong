@@ -121,6 +121,7 @@ void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
 void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
+
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
@@ -140,6 +141,7 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     StateBase::Init(frame);
+
     Settings::stateId = StateId::INTRO_STATE;
 
     //Create pong frame
@@ -183,8 +185,7 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
 void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
   BP_LOG_TRACE(__FUNCTION__)
-  UNUSED(frame);
-  //gui.removeAllWidgets();
+  gui.removeAllWidgets();
 
     //Remove ball collision sound
     //if(ResourceManager::isLoaded(soundId::BALL))
@@ -192,7 +193,7 @@ void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
 
     //Remove title image
     //if(ResourceManager::isLoaded(textureId::TITLE))
-	  // ResourceManager::remove(textureId::TITLE);
+	    //ResourceManager::remove(textureId::TITLE);
 
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);

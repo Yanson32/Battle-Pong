@@ -13,6 +13,7 @@ class IntroGui: public Gui::CustomPanel
         tgui::Button::Ptr start;
         tgui::Button::Ptr multiPlayer;
         tgui::Button::Ptr options;
+        tgui::Button::Ptr credits;
 };
 
 #endif // INTROGUI_H

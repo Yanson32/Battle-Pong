@@ -119,7 +119,7 @@ int main(int argc, char* argv[])
       debugDraw.AppendFlags(b2Draw::e_jointBit);
     if(Settings::b2pair)
       debugDraw.AppendFlags(b2Draw::e_pairBit);
-      
+
     //Handle program options
     std::stringstream ss;
     ss << MAJOR_VERSION << " " << ".0.0.0";

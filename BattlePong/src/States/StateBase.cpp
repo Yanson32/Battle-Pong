@@ -404,6 +404,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
 
                     }
+                    break;
+                    case Button::id::CREDITS:
+                      engin.ChangeState<CreditsState>(frame, engin, window, debugDraw, gui);
+                    break;
 
                 }
             }
