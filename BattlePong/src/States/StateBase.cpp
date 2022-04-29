@@ -295,6 +295,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::START:
                         engin.Push<PlayState>(frame, engin, window, debugDraw, gui);
                     break;
+                    case Button::id::MULTIPLAYER_PANEL_BACK:
+                    case Button::id::OPTIONS_PANEL_BACK:
                     case Button::id::INTRO_PANEL:
                     {
                         gui.removeAllWidgets();
@@ -366,6 +368,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
+                    case Button::id::HOST_PANEL_BACK:
+                    case Button::id::CONNECT_PANEL_BACK:
                     case Button::id::MULTIPLAYER:
                      {
                         gui.removeAllWidgets();

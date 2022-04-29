@@ -52,7 +52,7 @@ CustomPanel::CustomPanel()
     backBtn = tgui::Button::create("Back");
     buttonLayout->add(backBtn);
     backBtn->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::INTRO_PANEL);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER_PANEL_BACK);
     });
     
 

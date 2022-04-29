@@ -22,7 +22,7 @@ CustomPanel::CustomPanel()
     //Create back button
     backBtn = tgui::Button::create("Back");
     backBtn->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::CONNECT_PANEL_BACK);
     });
     
     //Create connect button

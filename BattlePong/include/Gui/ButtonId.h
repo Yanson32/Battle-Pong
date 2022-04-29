@@ -18,7 +18,11 @@ namespace Button
         HOST,
         CONNECT,
         CREDITS,
-        BACK
+        BACK,
+        CONNECT_PANEL_BACK,
+        OPTIONS_PANEL_BACK,
+        MULTIPLAYER_PANEL_BACK,
+        HOST_PANEL_BACK
     };
 }
 #endif // BUTTONID_H_INCLUDED
