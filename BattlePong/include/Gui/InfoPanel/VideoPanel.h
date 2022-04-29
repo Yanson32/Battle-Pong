@@ -1,6 +1,6 @@
 #ifndef GUI_VIDEOPANEL_H
 #define GUI_VIDEOPANEL_H
-#include "Gui/IntroState/OptionsPanel.h"
+#include "Gui/InfoPanel/OptionsPanel.h"
 
 namespace Gui
 {

@@ -1,4 +1,4 @@
-#include "Gui/IntroState/IntroGui.h"
+#include "Gui/InfoPanel/InfoPanel.h"
 #include <iostream>
 #include "Events/EventManager.h"
 #include "GameUtilities/Event/PlaySound.h"
@@ -6,7 +6,7 @@
 #include <GameUtilities/Event/PushState.h>
 #include <GameUtilities/Event/Click.h>
 #include "Gui/ButtonId.h"
-IntroGui::IntroGui()
+InfoPanel::InfoPanel()
 {
     //Create start button
     start = tgui::Button::create();
@@ -70,13 +70,13 @@ IntroGui::IntroGui()
     getContentPane()->append(creditsLayout);
 }
 
-void IntroGui::init(const int &width, const int &height)
+void InfoPanel::init(const int &width, const int &height)
 {
     this->setSize(width / 2, height / 2);
     this->setPosition(width / 4, height / 4);
 }
 
-IntroGui::~IntroGui()
+InfoPanel::~InfoPanel()
 {
     //dtor
 }

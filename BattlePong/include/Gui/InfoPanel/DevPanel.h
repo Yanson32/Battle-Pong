@@ -1,6 +1,6 @@
 #ifndef GUI_DEVPANEL_H
 #define GUI_DEVPANEL_H
-#include "Gui/IntroState/OptionsPanel.h"
+#include "Gui/InfoPanel/OptionsPanel.h"
 #include <Box2D/Common/b2Math.h>
 class DebugDraw;
 namespace Gui

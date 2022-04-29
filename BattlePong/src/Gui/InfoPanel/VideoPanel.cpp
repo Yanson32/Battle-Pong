@@ -1,4 +1,4 @@
-#include "Gui/IntroState/VideoPanel.h"
+#include "Gui/InfoPanel/VideoPanel.h"
 #include "Events/EventManager.h"
 #include "Macros.h"
 #include "Settings.h"

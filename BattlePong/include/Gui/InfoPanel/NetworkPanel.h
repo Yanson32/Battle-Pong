@@ -1,6 +1,6 @@
 #ifndef GUI_NETWORKPANEL_H
 #define GUI_NETWORKPANEL_H
-#include "Gui/IntroState/OptionsPanel.h"
+#include "Gui/InfoPanel/OptionsPanel.h"
 namespace Gui
 {
     class NetworkPanel: public OptionsPanel

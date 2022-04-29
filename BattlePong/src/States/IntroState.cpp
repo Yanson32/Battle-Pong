@@ -30,19 +30,19 @@
 
 #include "Resources/ResourceManager.h"
 #include "Macros.h"
-#include "Gui/IntroState/IntroGui.h"
-#include "Gui/IntroState/OptionsPanel.h"
+#include "Gui/InfoPanel/InfoPanel.h"
+#include "Gui/InfoPanel/OptionsPanel.h"
+#include "Gui/InfoPanel/ControlPanel.h"
+#include "Gui/InfoPanel/DevPanel.h"
+#include "Gui/InfoPanel/SoundPanel.h"
+#include "Gui/InfoPanel/GeneralPanel.h"
+#include "Gui/InfoPanel/MultiplayerPanel.h"
+#include "Gui/InfoPanel/HostPanel.h"
+#include "Gui/InfoPanel/ConnectPanel.h"
+#include "Gui/InfoPanel/VideoPanel.h"
+#include "Gui/InfoPanel/NetworkPanel.h"
 #include "Gui/ButtonId.h"
 #include "Gui/ComboId.h"
-#include "Gui/IntroState/ControlPanel.h"
-#include "Gui/IntroState/DevPanel.h"
-#include "Gui/IntroState/SoundPanel.h"
-#include "Gui/IntroState/GeneralPanel.h"
-#include "Gui/IntroState/MultiplayerPanel.h"
-#include "Gui/IntroState/HostPanel.h"
-#include "Gui/IntroState/ConnectPanel.h"
-#include "Gui/IntroState/VideoPanel.h"
-#include "Gui/IntroState/NetworkPanel.h"
 #include <iostream>
 #include <filesystem>
 
@@ -158,7 +158,7 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
 
     //Create intro panel
-    std::shared_ptr<IntroGui> cust(new IntroGui());
+    std::shared_ptr<InfoPanel> cust(new InfoPanel());
     cust->init(window.getView().getSize().x, window.getView().getSize().y);
     gui.add(cust, "PanelPointer");
 

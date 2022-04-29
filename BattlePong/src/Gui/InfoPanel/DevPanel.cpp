@@ -1,4 +1,4 @@
-#include "Gui/IntroState/DevPanel.h"
+#include "Gui/InfoPanel/DevPanel.h"
 #include "Events/EventManager.h"
 //#include "DebugDraw.h"
 #include "Macros.h"

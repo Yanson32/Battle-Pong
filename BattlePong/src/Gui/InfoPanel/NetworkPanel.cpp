@@ -1,4 +1,4 @@
-#include "Gui/IntroState/NetworkPanel.h"
+#include "Gui/InfoPanel/NetworkPanel.h"
 //#include "Event/Object.h"
 #include "Events/EventManager.h"
 #include "Macros.h"

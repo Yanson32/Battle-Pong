@@ -24,17 +24,17 @@
 #include <boost/filesystem.hpp>
 #include "Box2D/DebugDraw.h"
 #include "Gui/ButtonId.h"
-#include "Gui/IntroState/GeneralPanel.h"
-#include "Gui/IntroState/VideoPanel.h"
-#include "Gui/IntroState/IntroGui.h"
-#include "Gui/IntroState/OptionsPanel.h"
-#include "Gui/IntroState/ControlPanel.h"
-#include "Gui/IntroState/DevPanel.h"
-#include "Gui/IntroState/SoundPanel.h"
-#include "Gui/IntroState/MultiplayerPanel.h"
-#include "Gui/IntroState/HostPanel.h"
-#include "Gui/IntroState/ConnectPanel.h"
-#include "Gui/IntroState/NetworkPanel.h"
+#include "Gui/InfoPanel/GeneralPanel.h"
+#include "Gui/InfoPanel/VideoPanel.h"
+#include "Gui/InfoPanel/InfoPanel.h"
+#include "Gui/InfoPanel/OptionsPanel.h"
+#include "Gui/InfoPanel/ControlPanel.h"
+#include "Gui/InfoPanel/DevPanel.h"
+#include "Gui/InfoPanel/SoundPanel.h"
+#include "Gui/InfoPanel/MultiplayerPanel.h"
+#include "Gui/InfoPanel/HostPanel.h"
+#include "Gui/InfoPanel/ConnectPanel.h"
+#include "Gui/InfoPanel/NetworkPanel.h"
 #include "Game.h"
 #include "Log.h"
 
@@ -304,8 +304,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     {
                         gui.removeAllWidgets();
                         StateBase::Init(pongFrame);
-                        tgui::Panel::Ptr cust(new IntroGui());
-                        std::shared_ptr<IntroGui> p = std::dynamic_pointer_cast<IntroGui>(cust);
+                        tgui::Panel::Ptr cust(new InfoPanel());
+                        std::shared_ptr<InfoPanel> p = std::dynamic_pointer_cast<InfoPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }

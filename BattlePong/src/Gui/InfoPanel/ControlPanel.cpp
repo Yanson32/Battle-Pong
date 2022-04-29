@@ -1,4 +1,4 @@
-#include "Gui/IntroState/ControlPanel.h"
+#include "Gui/InfoPanel/ControlPanel.h"
 #include "Settings.h"
 #include "Macros.h"
 #include "SFMLFunctions.h"

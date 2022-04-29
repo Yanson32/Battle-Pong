@@ -1,6 +1,6 @@
 #ifndef GUI_SOUNDPANEL_H
 #define GUI_SOUNDPANEL_H
-#include "Gui/IntroState/OptionsPanel.h"
+#include "Gui/InfoPanel/OptionsPanel.h"
 class DebugDraw;
 namespace Gui
 {
