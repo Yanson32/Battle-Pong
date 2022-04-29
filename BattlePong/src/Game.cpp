@@ -20,3 +20,14 @@ GU::Evt::EventManager()
   logManager.set(logFormatter);
 
 }
+
+void Game::setPop(const bool pop)
+{
+    m_pop = pop;
+}
+
+bool Game::getPop() const
+{
+    return m_pop;
+}
+

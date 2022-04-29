@@ -11,7 +11,9 @@ class Game: public GU::Engin::Engin, public GU::Evt::EventManager
     public:
         Game();
         GU::Log::LogManager logManager;
+        void setPop(const bool pop);
+        bool getPop() const; 
     private:
-
+        bool m_pop = false;
 };
 #endif

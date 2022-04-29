@@ -401,7 +401,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                       engin.Push<CreditsState>(frame, engin, window, debugDraw, gui);
                     break;
                     case Button::id::BACK:
-                        engin.Pop(frame);  
+                        Game *game = static_cast<Game*>(&engin);
+                        game->setPop(true);
                     return;
                 }
             }

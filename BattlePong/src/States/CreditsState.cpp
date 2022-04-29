@@ -56,7 +56,7 @@ void CreditsState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
 
 void CreditsState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame)
 {
-  BP_LOG_TRACE(__FUNCTION__)
+    BP_LOG_TRACE(__FUNCTION__)
 }
 
 

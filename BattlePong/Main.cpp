@@ -163,6 +163,14 @@ int main(int argc, char* argv[])
 
 	          //Handle any events
 	          engin.HandleEvents(deltaTime.asSeconds(), frame);
+              
+              //If we need to pop a state off the stack we need to do it
+              //When the state is not in use or we will destroy the stack.
+              if(engin.getPop())
+              {
+                engin.setPop(false);
+                engin.Pop(frame);
+              }
 
 	          //Update the game logic
 	          while(accumulator.asSeconds() >= deltaTime.asSeconds())
