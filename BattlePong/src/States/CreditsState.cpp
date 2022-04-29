@@ -10,35 +10,35 @@ CreditsState::CreditsState(GU::Engin::Engin& engin, sf::RenderWindow &newWindow,
 
 void CreditsState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
-  BP_LOG_TRACE(__FUNCTION__)
-  UNUSED(deltaTime);
-  std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
-  if(!pongFrame)
-  {
-     EventManager::inst().Post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
-     return;
-  }
+    BP_LOG_TRACE(__FUNCTION__)
+    UNUSED(deltaTime);
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
+    if(!pongFrame)
+    {
+        BP_LOG_FATAL_ERROR("The Pointer should not be null");     
+        return;
+    }
 
 
-  if(window.isOpen())
-  {
-      sf::Event event;
+    if(window.isOpen())
+    {
+        sf::Event event;
 
-      while (window.pollEvent(event))
-      {
-          StateBase::sfEvent(engin, event, frame);
-          sfEvent(engin, event, frame);
-          gui.handleEvent(event);
-      }
+        while (window.pollEvent(event))
+        {
+            StateBase::sfEvent(engin, event, frame);
+            sfEvent(engin, event, frame);
+            gui.handleEvent(event);
+        }
 
-  }
+    }
 
-  //GameUtilities event loop
-  GU::Evt::EventPtr evtPtr;
-  while(EventManager::inst().Poll((evtPtr)))
-  {
-      handleGUEvent(engin, evtPtr, pongFrame);
-  }
+    //GameUtilities event loop
+    GU::Evt::EventPtr evtPtr;
+    while(EventManager::inst().Poll((evtPtr)))
+    {
+        handleGUEvent(engin, evtPtr, pongFrame);
+    }
 }
 
 
@@ -50,7 +50,10 @@ void CreditsState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::
 
 void CreditsState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
-  BP_LOG_TRACE(__FUNCTION__)
+    BP_LOG_TRACE(__FUNCTION__)
+    window.clear();
+
+    window.display(); 
 }
 
 
