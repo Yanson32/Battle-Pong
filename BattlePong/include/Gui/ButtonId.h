@@ -17,7 +17,8 @@ namespace Button
         INTRO_PANEL,
         HOST,
         CONNECT,
-        CREDITS
+        CREDITS,
+        BACK
     };
 }
 #endif // BUTTONID_H_INCLUDED

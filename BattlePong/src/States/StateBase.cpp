@@ -293,24 +293,16 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 switch(temp->buttonId)
                 {
                     case Button::id::START:
-                        engin.ChangeState<PlayState>(frame, engin, window, debugDraw, gui);
+                        engin.Push<PlayState>(frame, engin, window, debugDraw, gui);
                     break;
                     case Button::id::INTRO_PANEL:
                     {
-
-                        if(Settings::stateId == StateId::PLAY_STATE)
-                        {
-                            engin.ChangeState<IntroState>(frame, engin, window, debugDraw, gui);
-                        }
-                        else
-                        {
-                            gui.removeAllWidgets();
-                            StateBase::Init(pongFrame);
-                            tgui::Panel::Ptr cust(new IntroGui());
-                            std::shared_ptr<IntroGui> p = std::dynamic_pointer_cast<IntroGui>(cust);
-                            p->init(window.getSize().x, window.getSize().y);
-                            gui.add(cust, "PanelPointer");
-                        }
+                        gui.removeAllWidgets();
+                        StateBase::Init(pongFrame);
+                        tgui::Panel::Ptr cust(new IntroGui());
+                        std::shared_ptr<IntroGui> p = std::dynamic_pointer_cast<IntroGui>(cust);
+                        p->init(window.getSize().x, window.getSize().y);
+                        gui.add(cust, "PanelPointer");
                     }
                     break;
 		                case Button::id::OPTIONS:
@@ -406,9 +398,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     }
                     break;
                     case Button::id::CREDITS:
-                      engin.ChangeState<CreditsState>(frame, engin, window, debugDraw, gui);
+                      engin.Push<CreditsState>(frame, engin, window, debugDraw, gui);
                     break;
-
+                    case Button::id::BACK:
+                        engin.Pop(frame);  
+                    return;
                 }
             }
 

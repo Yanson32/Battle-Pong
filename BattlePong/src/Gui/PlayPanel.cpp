@@ -2,6 +2,7 @@
 #include "Gui/ButtonId.h"
 #include "Events/EventManager.h"
 #include <GameUtilities/Event/Click.h>
+#include <GameUtilities/Event/Pop.h>
 #include <SFML/Network.hpp>
 PlayPanel::PlayPanel():
  Gui::CustomPanel()
@@ -38,7 +39,7 @@ PlayPanel::PlayPanel():
 
    tgui::Button::Ptr backButton = tgui::Button::create("Back");
     backButton->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::INTRO_PANEL);
+        EventManager::inst().Post<GU::Evt::Click>(Button::id::BACK);
         });
 
    buttonLayout->add(backButton);
