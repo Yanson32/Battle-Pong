@@ -12,7 +12,6 @@ InfoPanel::InfoPanel()
     start = tgui::Button::create();
     start->setText("Start");
     start->onPress([](){
-        //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::START);
     });
 
@@ -28,7 +27,6 @@ InfoPanel::InfoPanel()
     multiPlayer = tgui::Button::create();
     multiPlayer->setText("Multiplayer");
     multiPlayer->onPress([](){
-        //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
     });
 
@@ -44,7 +42,6 @@ InfoPanel::InfoPanel()
     options = tgui::Button::create();
     options->setText("Options");
     options->onPress([](){
-        //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::OPTIONS);
     });
     tgui::HorizontalLayout::Ptr optionLayout = tgui::HorizontalLayout::create();
@@ -59,7 +56,6 @@ InfoPanel::InfoPanel()
     credits = tgui::Button::create();
     credits->setText("Credits");
     credits->onPress([](){
-        //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::BUTTON);
         EventManager::inst().Post<GU::Evt::Click>(Button::id::CREDITS);
     });
 
