@@ -1,15 +1,16 @@
-set(FILES "${CMAKE_CURRENT_LIST_DIR}/BattlePong.xpm"	
-
+set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/BattlePong.xpm"
 )
+
 set(SUB_DIRECTORIES ""
 )
+
+set(RELATIVE_PATH "Resources/Images/Icons/")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})
     add_subdirectory("${LOOP_VAR}")
 endforeach()
 
-string(REGEX MATCH "(/|\\|\)(include|src|test)(/|\\|\).*" RELATIVE_PATH "${CMAKE_CURRENT_SOURCE_DIR}")
 if(FILES)
 	#Add source file to target
 	target_sources(	"${PROJECT_NAME}" PRIVATE ${FILES})
