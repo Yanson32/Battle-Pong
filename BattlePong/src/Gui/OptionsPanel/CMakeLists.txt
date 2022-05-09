@@ -1,5 +1,4 @@
-set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/OptionsPanel.cpp"
+set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/OptionsPanel.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/DevPanel.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/GeneralPanel.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/MultiplayerPanel.cpp"

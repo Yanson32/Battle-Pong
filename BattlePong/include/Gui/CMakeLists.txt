@@ -4,6 +4,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/ScorePanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/PaddleHud.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/PlayPanel.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/SliderId.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/ComboId.h"
 )

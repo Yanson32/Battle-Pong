@@ -1,5 +1,4 @@
-set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/OptionsPanel.h"
+set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/OptionsPanel.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/DevPanel.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/GeneralPanel.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/MultiplayerPanel.h"

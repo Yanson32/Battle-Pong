@@ -30,7 +30,7 @@
 
 #include "Resources/ResourceManager.h"
 #include "Macros.h"
-#include "Gui/OptionsPanel/IntroPanel.h"
+#include "Gui/IntroPanel.h"
 #include "Gui/OptionsPanel/OptionsPanel.h"
 #include "Gui/OptionsPanel/ControlPanel.h"
 #include "Gui/OptionsPanel/DevPanel.h"

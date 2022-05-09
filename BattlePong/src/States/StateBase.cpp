@@ -26,7 +26,7 @@
 #include "Gui/ButtonId.h"
 #include "Gui/OptionsPanel/GeneralPanel.h"
 #include "Gui/OptionsPanel/VideoPanel.h"
-#include "Gui/OptionsPanel/IntroPanel.h"
+#include "Gui/IntroPanel.h"
 #include "Gui/OptionsPanel/OptionsPanel.h"
 #include "Gui/OptionsPanel/ControlPanel.h"
 #include "Gui/OptionsPanel/DevPanel.h"

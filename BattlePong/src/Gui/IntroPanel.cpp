@@ -1,4 +1,4 @@
-#include "Gui/OptionsPanel/IntroPanel.h"
+#include "Gui/IntroPanel.h"
 #include <iostream>
 #include "Events/EventManager.h"
 #include "GameUtilities/Event/PlaySound.h"

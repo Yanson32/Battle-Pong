@@ -3,6 +3,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/ScorePanel.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/PaddleHud.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/PlayPanel.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.cpp"
 )
 
 set(RELATIVE_PATH "src")
