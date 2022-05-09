@@ -30,7 +30,7 @@
 
 #include "Resources/ResourceManager.h"
 #include "Macros.h"
-#include "Gui/OptionsPanel/InfoPanel.h"
+#include "Gui/OptionsPanel/IntroPanel.h"
 #include "Gui/OptionsPanel/OptionsPanel.h"
 #include "Gui/OptionsPanel/ControlPanel.h"
 #include "Gui/OptionsPanel/DevPanel.h"
@@ -158,7 +158,7 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
 
     //Create intro panel
-    std::shared_ptr<InfoPanel> cust(new InfoPanel());
+    std::shared_ptr<IntroPanel> cust(new IntroPanel());
     cust->init(window.getView().getSize().x, window.getView().getSize().y);
     gui.add(cust, "PanelPointer");
 

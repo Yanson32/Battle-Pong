@@ -26,7 +26,7 @@
 #include "Gui/ButtonId.h"
 #include "Gui/OptionsPanel/GeneralPanel.h"
 #include "Gui/OptionsPanel/VideoPanel.h"
-#include "Gui/OptionsPanel/InfoPanel.h"
+#include "Gui/OptionsPanel/IntroPanel.h"
 #include "Gui/OptionsPanel/OptionsPanel.h"
 #include "Gui/OptionsPanel/ControlPanel.h"
 #include "Gui/OptionsPanel/DevPanel.h"
@@ -304,8 +304,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     {
                         gui.removeAllWidgets();
                         StateBase::Init(pongFrame);
-                        tgui::Panel::Ptr cust(new InfoPanel());
-                        std::shared_ptr<InfoPanel> p = std::dynamic_pointer_cast<InfoPanel>(cust);
+                        tgui::Panel::Ptr cust(new IntroPanel());
+                        std::shared_ptr<IntroPanel> p = std::dynamic_pointer_cast<IntroPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }

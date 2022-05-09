@@ -2,12 +2,12 @@
 #define INTROGUI_H
 #include "Gui/CustomPanel.h"
 
-class InfoPanel: public Gui::CustomPanel
+class IntroPanel: public Gui::CustomPanel
 {
     public:
-        InfoPanel();
+        IntroPanel();
         void init(const int &width, const int &height);
-        virtual ~InfoPanel();
+        virtual ~IntroPanel();
     protected:
     private:
         tgui::Button::Ptr start;
