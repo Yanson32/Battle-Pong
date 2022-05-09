@@ -1,4 +1,4 @@
-#include "Gui/InfoPanel/SoundPanel.h"
+#include "Gui/OptionsPanel/SoundPanel.h"
 //#include "Event/Object.h"
 #include "Events/EventManager.h"
 #include "Macros.h"

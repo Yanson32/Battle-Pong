@@ -9,7 +9,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.h"
 )
 
 set(RELATIVE_PATH "include")
-set(SUB_DIRECTORIES "InfoPanel"
+set(SUB_DIRECTORIES "OptionsPanel"
 )
 
 foreach(VAR ${SUB_DIRECTORIES})

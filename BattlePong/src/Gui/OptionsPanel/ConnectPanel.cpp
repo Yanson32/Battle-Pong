@@ -1,4 +1,4 @@
-#include "Gui/InfoPanel/ConnectPanel.h"
+#include "Gui/OptionsPanel/ConnectPanel.h"
 #include "Events/EventManager.h"
 #include <GameUtilities/Event/Click.h>
 #include "Gui/ButtonId.h"

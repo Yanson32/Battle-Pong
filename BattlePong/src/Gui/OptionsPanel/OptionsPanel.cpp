@@ -1,4 +1,4 @@
-#include "Gui/InfoPanel/OptionsPanel.h"
+#include "Gui/OptionsPanel/OptionsPanel.h"
 #include "Events/EventManager.h"
 #include "Events/EventBase.h"
 #include <GameUtilities/Event/Click.h>

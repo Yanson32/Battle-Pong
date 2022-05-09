@@ -6,7 +6,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.cpp"
 )
 
 set(RELATIVE_PATH "src")
-set(SUB_DIRECTORIES "InfoPanel"
+set(SUB_DIRECTORIES "OptionsPanel"
 )
 
 foreach(VAR ${SUB_DIRECTORIES})

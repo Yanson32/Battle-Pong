@@ -1,6 +1,6 @@
 #ifndef GUI_GENERALPANEL_H
 #define GUI_GENERALPANEL_H
-#include "Gui/InfoPanel/OptionsPanel.h"
+#include "Gui/OptionsPanel/OptionsPanel.h"
 #include "Settings.h"
 #include "States/StateId.h"
 

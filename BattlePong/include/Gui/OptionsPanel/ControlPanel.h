@@ -1,6 +1,6 @@
 #ifndef GUI_CONTROLPANEL_H
 #define GUI_CONTROLPANEL_H
-#include "Gui/InfoPanel/OptionsPanel.h"
+#include "Gui/OptionsPanel/OptionsPanel.h"
 class DebugDraw;
 namespace Gui
 {
