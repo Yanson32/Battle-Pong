@@ -77,7 +77,7 @@ void CreditsState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::
     {
         if(!isSystemPaused())
         {
-            pongFrame->world->Step( timeStep, velocityIterations, positionIterations);
+            pongFrame->world->Step( Settings::timeStep, Settings::velocityIterations, Settings::positionIterations);
         }
         debugDraw.update();
         pongFrame->ball->update();
