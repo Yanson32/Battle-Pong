@@ -293,7 +293,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 
 
 
-                switch(temp->buttonId)
+                switch(temp->m_buttonId)
                 {
                     case Button::id::START:
                         engin.Push<PlayState>(frame, engin, window, debugDraw, gui);
@@ -431,9 +431,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             std::shared_ptr<GU::Evt::PlaySound> temp =  std::dynamic_pointer_cast<GU::Evt::PlaySound>(event);
             if(temp)
             {
-                if(ResourceManager::isLoaded(static_cast<soundId>(temp->soundId)))
+                if(ResourceManager::isLoaded(static_cast<soundId>(temp->m_soundId)))
                 {
-                    sound.setBuffer(ResourceManager::get(static_cast<soundId>(temp->soundId)));
+                    sound.setBuffer(ResourceManager::get(static_cast<soundId>(temp->m_soundId)));
                     sound.play();
                 }
             }
@@ -449,7 +449,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             std::shared_ptr<GU::Evt::PushState> temp =  std::dynamic_pointer_cast<GU::Evt::PushState>(event);
             if(temp)
             {
-                switch(temp->id)
+                switch(temp->m_id)
                 {
                     case StateId::PLAY_STATE:
                         engin.Push<PlayState>(frame, engin, window, debugDraw, gui);
@@ -479,10 +479,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 if(temp)
                 {
                     //debugDraw.CleaFlags();
-                   switch(temp->checkboxId)
+                   switch(temp->m_checkboxId)
                    {
                        case checkBoxId::DEBUG_AABB:
-                            if(temp->checked)
+                            if(temp->m_checked)
                             {
                                debugDraw.AppendFlags(b2Draw::e_aabbBit);
                                Settings::b2aabb = true;
@@ -498,7 +498,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             }
                        break;
                        case checkBoxId::DEBUG_SHAPE:
-                            if(temp->checked)
+                            if(temp->m_checked)
                             {
                                debugDraw.AppendFlags(b2Draw::e_shapeBit);
                                Settings::b2shapes = true;
@@ -514,7 +514,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             }
                        break;
                        case checkBoxId::DEBUG_MASS:
-                            if(temp->checked)
+                            if(temp->m_checked)
                             {
                                debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
                                Settings::b2centerOfMass = true;
@@ -530,7 +530,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             }
                        break;
                        case checkBoxId::DEBUG_JOINTS:
-                            if(temp->checked)
+                            if(temp->m_checked)
                             {
                                 debugDraw.AppendFlags(b2Draw::e_jointBit);
                                 Settings::b2joints = true;
@@ -546,7 +546,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             }
                        break;
                        case checkBoxId::DEBUG_PAIRS:
-                            if(temp->checked)
+                            if(temp->m_checked)
                             {
                                 debugDraw.AppendFlags(b2Draw::e_pairBit);
                                 Settings::b2pair = true;
@@ -573,7 +573,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 std::shared_ptr<GU::Evt::OnSliderChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnSliderChanged>(event);
                 if(temp)
                 {
-                    switch(temp->sliderId)
+                    switch(temp->m_sliderId)
                     {
                         case sliderId::SOUND_EFFECTS:
                             sound.setVolume(Settings::sVolume);
@@ -592,7 +592,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 if(temp)
                 {
                     //Load music
-                    if(ResourceManager::loadMusic(temp->musicFile))
+                    if(ResourceManager::loadMusic(temp->m_musicFile))
                         ResourceManager::getMusic().play();
 		    else
                         ResourceManager::getMusic().stop();
@@ -605,11 +605,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 std::shared_ptr<GU::Evt::OnComboChanged> temp = std::dynamic_pointer_cast<GU::Evt::OnComboChanged>(event);
                 if(temp)
                 {
-                   switch(temp->comboId)
+                   switch(temp->m_comboId)
                    {
                         case Gui::Combo::comboId::THEME:
                         {
-                            switch(temp->index)
+                            switch(temp->m_index)
                             {
                                 case 0:
 					                          ResourceManager::loadTheme("Default");
@@ -630,7 +630,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             }
                             break;
                             case Gui::Combo::comboId::BACKGROUND:
-                            switch(temp->index)
+                            switch(temp->m_index)
                             {
                                 case 0:
 				                            ResourceManager::loadBackground("Star.png");

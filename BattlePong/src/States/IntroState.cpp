@@ -310,7 +310,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
             std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
             if(temp)
             {
-                switch(temp->buttonId)
+                switch(temp->m_buttonId)
                 {
                     case Button::id::INTRO_PANEL:
                     break;
