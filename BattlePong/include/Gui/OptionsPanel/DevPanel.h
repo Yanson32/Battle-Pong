@@ -21,6 +21,7 @@ namespace Gui
             tgui::EditBox::Ptr log;
 
             tgui::ComboBox::Ptr logLevelComboBox;
+            tgui::EditBox::Ptr velocityIterationsBox;
             void onLogLevel();
     };
 }

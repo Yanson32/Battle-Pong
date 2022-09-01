@@ -8,6 +8,7 @@
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Event/LogEvent.h>
+#include <GameUtilities/Event/OnTextChanged.h>
 #include <GameUtilities/Log/LogEntry.h>
 #include <GameUtilities/Log/Component/Components.h>
 #include <GameUtilities/Core/PreferencesManager.h>
@@ -249,50 +250,49 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
     {
         case EventId::LOG:
         {
-          std::shared_ptr<GU::Evt::LogEvent> temp =  std::dynamic_pointer_cast<GU::Evt::LogEvent>(event);
-          Game *game = static_cast<Game*>(&engin);
-          std::shared_ptr<GU::Log::LogEntry> entry(new GU::Log::LogEntry());
-          entry->add<GU::Log::MsgComponent>(temp->getMessage());
-          entry->add<GU::Log::SeverityComponent>(static_cast<GU::Log::LogType>(temp->getSeverity()));
-          entry->add<GU::Log::LineComponent>(temp->getLine());
-          entry->add<GU::Log::FileComponent>(temp->getFile());
+              std::shared_ptr<GU::Evt::LogEvent> temp =  std::dynamic_pointer_cast<GU::Evt::LogEvent>(event);
+              Game *game = static_cast<Game*>(&engin);
+              std::shared_ptr<GU::Log::LogEntry> entry(new GU::Log::LogEntry());
+              entry->add<GU::Log::MsgComponent>(temp->getMessage());
+              entry->add<GU::Log::SeverityComponent>(static_cast<GU::Log::LogType>(temp->getSeverity()));
+              entry->add<GU::Log::LineComponent>(temp->getLine());
+              entry->add<GU::Log::FileComponent>(temp->getFile());
 
-          if(temp->getSeverity() > Settings::logSeverity)
-            return;
+              if(temp->getSeverity() > Settings::logSeverity)
+                return;
 
-          if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR))
-          {
-            game->logManager.write(entry);
-            exit(1);
-          }
-          else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_ERROR))
-            game->logManager.write(entry);
-          else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_WARNING))
-            std::cout << "Log Warning is broken" << std::endl; 
-            //game->logManager.write(entry);
-          else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_MESSAGE))
-            game->logManager.write(entry);
-          else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_VERBOSE))
-            game->logManager.write(entry);
-          else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_STATUS))
-            game->logManager.write(entry);
-          else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_SYSTEM_ERROR))
-            game->logManager.write(entry);
-          else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_DEBUG))
-            game->logManager.write(entry);
-          else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_TRACE))
-          {
-            game->logManager.write(entry);
-          }
+              if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR))
+              {
+                game->logManager.write(entry);
+                exit(1);
+              }
+              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_ERROR))
+                game->logManager.write(entry);
+              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_WARNING))
+                std::cout << "Log Warning is broken" << std::endl; 
+                //game->logManager.write(entry);
+              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_MESSAGE))
+                game->logManager.write(entry);
+              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_VERBOSE))
+                game->logManager.write(entry);
+              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_STATUS))
+                game->logManager.write(entry);
+              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_SYSTEM_ERROR))
+                game->logManager.write(entry);
+              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_DEBUG))
+                game->logManager.write(entry);
+              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_TRACE))
+              {
+                game->logManager.write(entry);
+              }
 
         }
         break;
         case EventId::CLICK:
+        {
             std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
             if(temp)
             {
-                
-
 
                 switch(temp->m_buttonId)
                 {
@@ -331,7 +331,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     }
                     break;
                     case Button::id::VIDEO_TAB:
-                     {
+                    {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::VideoPanel());
                         std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
@@ -340,7 +340,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     }
                     break;
                     case Button::id::SOUND_TAB:
-                     {
+                    {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::SoundPanel(nullptr));
                         std::shared_ptr<Gui::SoundPanel> p = std::dynamic_pointer_cast<Gui::SoundPanel>(cust);
@@ -349,7 +349,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     }
                     break;
                     case Button::id::NETWORK_TAB:
-                     {
+                    {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::NetworkPanel());
                         std::shared_ptr<Gui::NetworkPanel> p = std::dynamic_pointer_cast<Gui::NetworkPanel>(cust);
@@ -358,7 +358,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     }
                     break;
                     case Button::id::DEV_TAB:
-                     {
+                    {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::DevPanel());
                         std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
@@ -369,7 +369,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Button::id::HOST_PANEL_BACK:
                     case Button::id::CONNECT_PANEL_BACK:
                     case Button::id::MULTIPLAYER:
-                     {
+                    {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new MultiplayerPanel());
                         std::shared_ptr<MultiplayerPanel> p = std::dynamic_pointer_cast<MultiplayerPanel>(cust);
@@ -378,13 +378,13 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     }
                     break;
                     case Button::id::HOST:
-                     {
+                    {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new HostPanel());
                         std::shared_ptr<HostPanel> p = std::dynamic_pointer_cast<HostPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
-                     }
+                    }
                     break;
                     case Button::id::CONNECT:
                     {
@@ -400,15 +400,35 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                       engin.Push<CreditsState>(frame, engin, window, debugDraw, gui);
                     break;
                     case Button::id::BACK:
+                    {
                         Game *game = static_cast<Game*>(&engin);
                         game->setPop(true);
+                    } 
                     return;
                 }
             }
+        }
+        case EventId::ON_TEXT_CHANGED:
+        {
+            std::shared_ptr<GU::Evt::OnTextChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnTextChanged>(event);
+            if(temp)
+            {
 
+                switch(temp->m_id)
+                {
+
+                    case Button::id::VELOCITY_ITERATIONS:
+                    {
+                        Settings::velocityIterations = int(temp->m_text[0] - '0'); 
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("VelocityIterations", Settings::velocityIterations);
+                    } 
+                    break;
+                }
+            }
+        }
         break;
     }
-
     switch(event->getId())
     {
         case EventId::LEFT_GOAL_COLLISION:

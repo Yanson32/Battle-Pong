@@ -22,7 +22,8 @@ namespace Button
         CONNECT_PANEL_BACK,
         OPTIONS_PANEL_BACK,
         MULTIPLAYER_PANEL_BACK,
-        HOST_PANEL_BACK
+        HOST_PANEL_BACK,
+        VELOCITY_ITERATIONS
     };
 }
 #endif // BUTTONID_H_INCLUDED

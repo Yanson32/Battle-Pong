@@ -3,8 +3,10 @@
 //#include "DebugDraw.h"
 #include "Macros.h"
 #include "Box2D/Box2D.h"
+#include "Gui/ButtonId.h"
 #include "Gui/CheckboxId.h"
 #include <GameUtilities/Event/OnCheck.h>
+#include <GameUtilities/Event/OnTextChanged.h>
 #include <GameUtilities/Log/LogType.h>
 #include <GameUtilities/Core/PreferencesManager.h>
 #include "Settings.h"
@@ -78,7 +80,21 @@ namespace Gui
 		getContentPane()->append("Pairs", pair);
 
 
-		//Create header for the box2d section
+		//Create pair checkbox
+		velocityIterationsBox = tgui::EditBox::create();
+        velocityIterationsBox->setInputValidator("[0-9]+");
+        velocityIterationsBox->setMaximumCharacters(1);
+        velocityIterationsBox->limitTextWidth(true);
+        velocityIterationsBox->setText(char(Settings::velocityIterations + '0'));      
+		velocityIterationsBox->onTextChange([&](){
+            if(!velocityIterationsBox->getText().empty())
+	            EventManager::inst().Post<GU::Evt::OnTextChanged>(Button::id::VELOCITY_ITERATIONS, velocityIterationsBox->getText().toStdString());
+		});
+
+		getContentPane()->append("Velocity Iterations", velocityIterationsBox);
+		
+
+        //Create header for the log section
 		getContentPane()->appendHeader("Log");
 
 		//Create Log checkbox

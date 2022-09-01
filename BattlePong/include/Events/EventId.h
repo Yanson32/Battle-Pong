@@ -16,6 +16,7 @@ enum EventId
     ON_CHECK                = static_cast<int>(GU::Evt::EventId::ON_CHECK),
     ON_COMBO_CHANGED        = static_cast<int>(GU::Evt::EventId::ON_COMBO_CHANGED),
     LOG                     = static_cast<int>(GU::Evt::EventId::LOG),
+    ON_TEXT_CHANGED         = static_cast<int>(GU::Evt::EventId::ON_TEXT_CHANGED),
     GU_HIGHEST              = static_cast<int>(GU::Evt::EventId::HIGHEST),
     BALL_COLLISION,
     GOAL_COLLISION,
