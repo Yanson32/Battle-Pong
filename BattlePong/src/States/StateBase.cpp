@@ -19,12 +19,11 @@
 #include "Events/Events.h"
 #include "Macros.h"
 #include "Gui/CustomPanel.h"
-#include "Gui/CheckboxId.h"
-#include "Gui/SliderId.h"
+#include "Gui/GuiId.h"
 #include "Gui/ComboId.h"
 #include <boost/filesystem.hpp>
 #include "Box2D/DebugDraw.h"
-#include "Gui/ButtonId.h"
+#include "Gui/GuiId.h"
 #include "Gui/OptionsPanel/GeneralPanel.h"
 #include "Gui/OptionsPanel/VideoPanel.h"
 #include "Gui/IntroPanel.h"
@@ -296,12 +295,12 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
                 switch(temp->m_buttonId)
                 {
-                    case Button::id::START:
+                    case GUI::id::START:
                         engin.Push<PlayState>(frame, engin, window, debugDraw, gui);
                     break;
-                    case Button::id::MULTIPLAYER_PANEL_BACK:
-                    case Button::id::OPTIONS_PANEL_BACK:
-                    case Button::id::INTRO_PANEL:
+                    case GUI::id::MULTIPLAYER_PANEL_BACK:
+                    case GUI::id::OPTIONS_PANEL_BACK:
+                    case GUI::id::INTRO_PANEL:
                     {
                         gui.removeAllWidgets();
                         StateBase::Init(pongFrame);
@@ -311,8 +310,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-		            case Button::id::OPTIONS:
-                    case Button::id::GENERAL_TAB:
+		            case GUI::id::OPTIONS:
+                    case GUI::id::GENERAL_TAB:
                     {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::GeneralPanel());
@@ -321,7 +320,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case Button::id::CONTROLS_TAB:
+                    case GUI::id::CONTROLS_TAB:
                     {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::ControlPanel(nullptr));
@@ -330,7 +329,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case Button::id::VIDEO_TAB:
+                    case GUI::id::VIDEO_TAB:
                     {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::VideoPanel());
@@ -339,7 +338,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case Button::id::SOUND_TAB:
+                    case GUI::id::SOUND_TAB:
                     {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::SoundPanel(nullptr));
@@ -348,7 +347,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case Button::id::NETWORK_TAB:
+                    case GUI::id::NETWORK_TAB:
                     {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::NetworkPanel());
@@ -357,7 +356,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case Button::id::DEV_TAB:
+                    case GUI::id::DEV_TAB:
                     {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::DevPanel());
@@ -366,9 +365,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case Button::id::HOST_PANEL_BACK:
-                    case Button::id::CONNECT_PANEL_BACK:
-                    case Button::id::MULTIPLAYER:
+                    case GUI::id::HOST_PANEL_BACK:
+                    case GUI::id::CONNECT_PANEL_BACK:
+                    case GUI::id::MULTIPLAYER:
                     {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new MultiplayerPanel());
@@ -377,7 +376,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case Button::id::HOST:
+                    case GUI::id::HOST:
                     {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new HostPanel());
@@ -386,7 +385,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case Button::id::CONNECT:
+                    case GUI::id::CONNECT:
                     {
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new ConnectPanel());
@@ -396,10 +395,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
                     }
                     break;
-                    case Button::id::CREDITS:
+                    case GUI::id::CREDITS:
                       engin.Push<CreditsState>(frame, engin, window, debugDraw, gui);
                     break;
-                    case Button::id::BACK:
+                    case GUI::id::BACK:
                     {
                         Game *game = static_cast<Game*>(&engin);
                         game->setPop(true);
@@ -417,7 +416,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 switch(temp->m_id)
                 {
 
-                    case Button::id::VELOCITY_ITERATIONS:
+                    case GUI::id::VELOCITY_ITERATIONS:
                     {
                         Settings::velocityIterations = int(temp->m_text[0] - '0'); 
                         GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
@@ -502,7 +501,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     //debugDraw.CleaFlags();
                    switch(temp->m_checkboxId)
                    {
-                       case checkBoxId::DEBUG_AABB:
+                       case GUI::DEBUG_AABB:
                             if(temp->m_checked)
                             {
                                debugDraw.AppendFlags(b2Draw::e_aabbBit);
@@ -518,7 +517,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2aabb", Settings::b2aabb);
                             }
                        break;
-                       case checkBoxId::DEBUG_SHAPE:
+                       case GUI::DEBUG_SHAPE:
                             if(temp->m_checked)
                             {
                                debugDraw.AppendFlags(b2Draw::e_shapeBit);
@@ -534,7 +533,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2shapes", Settings::b2shapes);
                             }
                        break;
-                       case checkBoxId::DEBUG_MASS:
+                       case GUI::DEBUG_MASS:
                             if(temp->m_checked)
                             {
                                debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
@@ -550,7 +549,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
                             }
                        break;
-                       case checkBoxId::DEBUG_JOINTS:
+                       case GUI::DEBUG_JOINTS:
                             if(temp->m_checked)
                             {
                                 debugDraw.AppendFlags(b2Draw::e_jointBit);
@@ -566,7 +565,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2joints", Settings::b2joints);
                             }
                        break;
-                       case checkBoxId::DEBUG_PAIRS:
+                       case GUI::DEBUG_PAIRS:
                             if(temp->m_checked)
                             {
                                 debugDraw.AppendFlags(b2Draw::e_pairBit);
@@ -582,7 +581,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2pair", Settings::b2pair);
                             }
                        break;
-                       case checkBoxId::DEBUG_LOG:
+                       case GUI::DEBUG_LOG:
                         BP_LOG_WARNING("Debug Log not implimented");
                        break;
                    };
@@ -596,10 +595,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 {
                     switch(temp->m_sliderId)
                     {
-                        case sliderId::SOUND_EFFECTS:
+                        case GUI::id::SOUND_EFFECTS:
                             sound.setVolume(Settings::sVolume);
                             break;
-                        case sliderId::MUSIC:
+                        case GUI::id::MUSIC:
 			    ResourceManager::getMusic().setVolume(Settings::mVolume);
                             break;
                     };

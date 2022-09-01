@@ -5,14 +5,14 @@
 #include "States/StateId.h"
 #include <GameUtilities/Event/PushState.h>
 #include <GameUtilities/Event/Click.h>
-#include "Gui/ButtonId.h"
+#include "Gui/GuiId.h"
 IntroPanel::IntroPanel()
 {
     //Create start button
     start = tgui::Button::create();
     start->setText("Start");
     start->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::START);
+        EventManager::inst().Post<GU::Evt::Click>(GUI::id::START);
     });
 
     tgui::HorizontalLayout::Ptr startLayout = tgui::HorizontalLayout::create();
@@ -27,7 +27,7 @@ IntroPanel::IntroPanel()
     multiPlayer = tgui::Button::create();
     multiPlayer->setText("Multiplayer");
     multiPlayer->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER);
+        EventManager::inst().Post<GU::Evt::Click>(GUI::id::MULTIPLAYER);
     });
 
     tgui::HorizontalLayout::Ptr multiplayerLayout = tgui::HorizontalLayout::create();
@@ -42,7 +42,7 @@ IntroPanel::IntroPanel()
     options = tgui::Button::create();
     options->setText("Options");
     options->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::OPTIONS);
+        EventManager::inst().Post<GU::Evt::Click>(GUI::id::OPTIONS);
     });
     tgui::HorizontalLayout::Ptr optionLayout = tgui::HorizontalLayout::create();
     optionLayout->addSpace(1);
@@ -56,7 +56,7 @@ IntroPanel::IntroPanel()
     credits = tgui::Button::create();
     credits->setText("Credits");
     credits->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::CREDITS);
+        EventManager::inst().Post<GU::Evt::Click>(GUI::id::CREDITS);
     });
 
     tgui::HorizontalLayout::Ptr creditsLayout = tgui::HorizontalLayout::create();

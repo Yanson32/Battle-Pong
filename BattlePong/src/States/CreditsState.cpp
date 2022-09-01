@@ -16,7 +16,7 @@
 #include "Events/Events.h"
 #include "Macros.h"
 #include "Gui/PlayPanel.h"
-#include "Gui/ButtonId.h"
+#include "Gui/GuiId.h"
 #include "States/IntroState.h"
 #include <GameUtilities/Event/LogEvent.h>
 #include <GameUtilities/Core/Macros.h>

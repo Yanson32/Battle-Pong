@@ -16,7 +16,7 @@
 #include "Events/Events.h"
 #include "Macros.h"
 #include "Gui/PlayPanel.h"
-#include "Gui/ButtonId.h"
+#include "Gui/GuiId.h"
 #include "States/IntroState.h"
 #include "Gui/OptionsPanel/GeneralPanel.h"
 #include "Gui/OptionsPanel/ControlPanel.h"
@@ -255,7 +255,7 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
                         std::shared_ptr<PlayPanel> p = std::dynamic_pointer_cast<PlayPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
-                        EventManager::inst().Post<GU::Evt::Click>(Button::id::GENERAL_TAB);
+                        EventManager::inst().Post<GU::Evt::Click>(GUI::id::GENERAL_TAB);
                     }
                     else
                     {

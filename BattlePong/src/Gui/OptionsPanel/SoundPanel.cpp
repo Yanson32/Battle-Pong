@@ -5,7 +5,7 @@
 #include "Settings.h"
 #include <GameUtilities/Event/OnSliderChanged.h>
 #include <GameUtilities/Event/PlayMusic.h>
-#include "Gui/SliderId.h"
+#include "Gui/GuiId.h"
 
 namespace Gui
 {
@@ -21,7 +21,7 @@ namespace Gui
         effectsSlider->setValue(Settings::mVolume);
         effectsSlider->onValueChange([&](){
             Settings::sVolume = effectsSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::SOUND_EFFECTS, Settings::sVolume);
+            EventManager::inst().Post<GU::Evt::OnSliderChanged>(GUI::id::SOUND_EFFECTS, Settings::sVolume);
         });
         getContentPane()->append("Sound Effects", effectsSlider);
 
@@ -29,7 +29,7 @@ namespace Gui
         musicSlider->setValue(Settings::sVolume);
         musicSlider->onValueChange([&](){
             Settings::mVolume = musicSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(sliderId::MUSIC, Settings::mVolume);
+            EventManager::inst().Post<GU::Evt::OnSliderChanged>(GUI::id::MUSIC, Settings::mVolume);
         });
         getContentPane()->append("Music Volume", musicSlider);
 

@@ -1,7 +1,7 @@
 #include "Gui/OptionsPanel/MultiplayerPanel.h"
 #include "Events/EventManager.h"
 #include <GameUtilities/Event/Click.h>
-#include "Gui/ButtonId.h"
+#include "Gui/GuiId.h"
 #include <SFML/Network.hpp>
 MultiplayerPanel::MultiplayerPanel():
 CustomPanel::CustomPanel()
@@ -10,7 +10,7 @@ CustomPanel::CustomPanel()
     //Create host button
     hostButton = tgui::Button::create("Host");
     hostButton->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::HOST);
+        EventManager::inst().Post<GU::Evt::Click>(GUI::id::HOST);
     });
     tgui::HorizontalLayout::Ptr layout1 = tgui::HorizontalLayout::create();
     tgui::Panel::Ptr spacer2 = tgui::Panel::create();
@@ -25,7 +25,7 @@ CustomPanel::CustomPanel()
     //Create connect button
     connectButton = tgui::Button::create("Connect");
     connectButton->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::CONNECT);
+        EventManager::inst().Post<GU::Evt::Click>(GUI::id::CONNECT);
     });
     getContentPane()->append(tgui::HorizontalLayout::create()); 
     
@@ -52,7 +52,7 @@ CustomPanel::CustomPanel()
     backBtn = tgui::Button::create("Back");
     buttonLayout->add(backBtn);
     backBtn->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::MULTIPLAYER_PANEL_BACK);
+        EventManager::inst().Post<GU::Evt::Click>(GUI::id::MULTIPLAYER_PANEL_BACK);
     });
     
 

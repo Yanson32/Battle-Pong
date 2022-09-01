@@ -1,7 +1,7 @@
-#ifndef BUTTONID_H_IN
-#define BUTTONID_H_IN
+#ifndef GUI_ID_H 
+#define GUI_ID_H 
 
-namespace Button
+namespace GUI 
 {
     enum id
     {
@@ -23,7 +23,15 @@ namespace Button
         OPTIONS_PANEL_BACK,
         MULTIPLAYER_PANEL_BACK,
         HOST_PANEL_BACK,
-        VELOCITY_ITERATIONS
+        VELOCITY_ITERATIONS,
+        DEBUG_AABB,
+        DEBUG_SHAPE,
+        DEBUG_MASS,
+        DEBUG_JOINTS,
+        DEBUG_PAIRS,
+        DEBUG_LOG,
+        MUSIC,
+        SOUND_EFFECTS
     };
 }
-#endif // BUTTONID_H_INCLUDED
+#endif 

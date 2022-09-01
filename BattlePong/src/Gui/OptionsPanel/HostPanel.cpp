@@ -1,5 +1,5 @@
 #include "Gui/OptionsPanel/HostPanel.h"
-#include "Gui/ButtonId.h"
+#include "Gui/GuiId.h"
 #include "Events/EventManager.h"
 #include <GameUtilities/Event/Click.h>
 #include <SFML/Network.hpp>
@@ -28,7 +28,7 @@ CustomPanel::CustomPanel()
     //Create back button
     backBtn = tgui::Button::create("Back");
     backBtn->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::HOST_PANEL_BACK);
+        EventManager::inst().Post<GU::Evt::Click>(GUI::id::HOST_PANEL_BACK);
     });
 
     //Create host button

@@ -1,5 +1,5 @@
 #include "Gui/PlayPanel.h"
-#include "Gui/ButtonId.h"
+#include "Gui/GuiId.h"
 #include "Events/EventManager.h"
 #include <GameUtilities/Event/Click.h>
 #include <GameUtilities/Event/Pop.h>
@@ -20,15 +20,15 @@ PlayPanel::PlayPanel():
     tabs->setTabVisible(0, true);
     tabs->onTabSelect([&](){
         sf::String text = tabs->getSelected().toStdString();
-        Button::id id;
+        GUI::id id;
         if(text == "General")
-            id =  Button::id::GENERAL_TAB;
+            id =  GUI::id::GENERAL_TAB;
         else if(text == "Controls")
-            id = Button::id::CONTROLS_TAB;
+            id = GUI::id::CONTROLS_TAB;
         else if(text == "Sound")
-            id = Button::id::SOUND_TAB;
+            id = GUI::id::SOUND_TAB;
         else if(text == "Dev")
-            id = Button::id::DEV_TAB;
+            id = GUI::id::DEV_TAB;
 
         EventManager::inst().Post<GU::Evt::Click>(id);
     });
@@ -39,7 +39,7 @@ PlayPanel::PlayPanel():
 
    tgui::Button::Ptr backButton = tgui::Button::create("Back");
     backButton->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(Button::id::BACK);
+        EventManager::inst().Post<GU::Evt::Click>(GUI::id::BACK);
         });
 
    buttonLayout->add(backButton);

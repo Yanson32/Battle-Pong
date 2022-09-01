@@ -5,7 +5,7 @@
 #include "Settings.h"
 #include <GameUtilities/Event/OnSliderChanged.h>
 #include <GameUtilities/Event/PlayMusic.h>
-#include "Gui/SliderId.h"
+#include "Gui/GuiId.h"
 #include "Settings.h"
 #include <SFML/System/String.hpp>
 #include "TGUIFunctions.h"
