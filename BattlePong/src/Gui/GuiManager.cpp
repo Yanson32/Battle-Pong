@@ -2,36 +2,33 @@
 #include "Macros.h"
 
 
-namespace GU
+namespace Gui
 {
-    namespace Gui
+    GuiManager::GuiManager(tgui::Gui &newGui):
+    gui(newGui)
     {
-        GuiManager::GuiManager(tgui::Gui &newGui):
-        gui(newGui)
-        {
-            //ctor
-        }
+        //ctor
+    }
 
-        void GuiManager::push(std::shared_ptr<Gui::CustomPanel> newGui)
-        {
-            gui.removeAllWidgets();
-            gui.add(newGui);
-            guiStack.push(newGui);
-        }
+    void GuiManager::push(std::shared_ptr<Gui::CustomPanel> newGui)
+    {
+        gui.removeAllWidgets();
+        gui.add(newGui);
+        guiStack.push(newGui);
+    }
 
-        void GuiManager::pop(std::shared_ptr<Gui::CustomPanel> newGui)
-        {
-            UNUSED(newGui);
+    void GuiManager::pop(std::shared_ptr<Gui::CustomPanel> newGui)
+    {
+        UNUSED(newGui);
 
-            if(!guiStack.empty())
-            {
-                guiStack.pop();
-            }
-        }
-
-        GuiManager::~GuiManager()
+        if(!guiStack.empty())
         {
-            //dtor
+            guiStack.pop();
         }
+    }
+
+    GuiManager::~GuiManager()
+    {
+        //dtor
     }
 }

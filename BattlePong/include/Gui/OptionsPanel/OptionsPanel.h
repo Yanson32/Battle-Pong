@@ -2,21 +2,18 @@
 #define OPTIONSPANEL_H
 #include "Gui/CustomPanel.h"
 
-namespace GU
+namespace Gui
 {
-    namespace Gui
+    class OptionsPanel: public Gui::CustomPanel
     {
-        class OptionsPanel: public Gui::CustomPanel
-        {
-            public:
-                OptionsPanel(const sf::String &tab);
-                virtual ~OptionsPanel();
-            protected:
+        public:
+            OptionsPanel(const sf::String &tab);
+            virtual ~OptionsPanel();
+        protected:
 
-                tgui::Tabs::Ptr tabs;
-                tgui::Button::Ptr backBtn;
-        };
-    }
+            tgui::Tabs::Ptr tabs;
+            tgui::Button::Ptr backBtn;
+    };
 }
 #endif // OPTIONSPANEL_H
 

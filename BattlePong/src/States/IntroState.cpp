@@ -157,7 +157,7 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
 
     //Create intro panel
-    std::shared_ptr<GU::Gui::IntroPanel> cust(new GU::Gui::IntroPanel());
+    std::shared_ptr<Gui::IntroPanel> cust(new Gui::IntroPanel());
     cust->init(window.getView().getSize().x, window.getView().getSize().y);
     gui.add(cust, "PanelPointer");
 
@@ -311,26 +311,26 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
             {
                 switch(temp->m_buttonId)
                 {
-                    case GU::Gui::id::INTRO_PANEL:
+                    case Gui::id::INTRO_PANEL:
                     break;
-		            case GU::Gui::id::OPTIONS:
-                    case GU::Gui::id::GENERAL_TAB:
+		            case Gui::id::OPTIONS:
+                    case Gui::id::GENERAL_TAB:
                     break;
-                    case GU::Gui::id::CONTROLS_TAB:
+                    case Gui::id::CONTROLS_TAB:
                     break;
-                    case GU::Gui::id::VIDEO_TAB:
+                    case Gui::id::VIDEO_TAB:
                     break;
-                    case GU::Gui::id::SOUND_TAB:
+                    case Gui::id::SOUND_TAB:
                     break;
-                    case GU::Gui::id::NETWORK_TAB:
+                    case Gui::id::NETWORK_TAB:
                     break;
-                    case GU::Gui::id::DEV_TAB:
+                    case Gui::id::DEV_TAB:
                     break;
-                    case GU::Gui::id::MULTIPLAYER:
+                    case Gui::id::MULTIPLAYER:
                     break;
-                    case GU::Gui::id::HOST:
+                    case Gui::id::HOST:
                     break;
-                    case GU::Gui::id::CONNECT:
+                    case Gui::id::CONNECT:
 	            break;
 		          }
 	         }

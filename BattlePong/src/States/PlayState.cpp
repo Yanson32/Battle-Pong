@@ -251,11 +251,11 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
                     {
                         gui.removeAllWidgets();
                         StateBase::Init(frame);
-                        tgui::Panel::Ptr cust(new GU::Gui::PlayPanel());
-                        std::shared_ptr<GU::Gui::PlayPanel> p = std::dynamic_pointer_cast<GU::Gui::PlayPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::PlayPanel());
+                        std::shared_ptr<Gui::PlayPanel> p = std::dynamic_pointer_cast<Gui::PlayPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
-                        EventManager::inst().Post<GU::Evt::Click>(GU::Gui::id::GENERAL_TAB);
+                        EventManager::inst().Post<GU::Evt::Click>(Gui::id::GENERAL_TAB);
                     }
                     else
                     {

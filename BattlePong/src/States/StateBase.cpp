@@ -41,8 +41,8 @@ sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 sf::Sound StateBase::sound;
 
-std::shared_ptr<GU::Gui::PaddleHud> StateBase::paddle1Hud = nullptr;
-std::shared_ptr<GU::Gui::PaddleHud> StateBase::paddle2Hud = nullptr;
+std::shared_ptr<Gui::PaddleHud> StateBase::paddle1Hud = nullptr;
+std::shared_ptr<Gui::PaddleHud> StateBase::paddle2Hud = nullptr;
 
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
@@ -61,8 +61,8 @@ sysPause(false)
     BP_LOG_TRACE(__FUNCTION__)
     gui.setTarget(window);
 
-    paddle1Hud.reset(new GU::Gui::PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
-    paddle2Hud.reset(new GU::Gui::PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
+    paddle1Hud.reset(new Gui::PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
+    paddle2Hud.reset(new Gui::PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
 
     paddle2Hud->setPosition({650, 0});
     gui.add(paddle1Hud);
@@ -225,7 +225,7 @@ void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
         case sf::Event::Resized:
             {
                 tgui::Widget::Ptr widget = gui.get("PanelPointer");
-                std::shared_ptr<GU::Gui::CustomPanel> temp =  std::dynamic_pointer_cast<GU::Gui::CustomPanel>(widget);
+                std::shared_ptr<Gui::CustomPanel> temp =  std::dynamic_pointer_cast<Gui::CustomPanel>(widget);
                 if(temp)
                     temp->resize(event.size.width, event.size.height);
             }
@@ -294,110 +294,110 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
                 switch(temp->m_buttonId)
                 {
-                    case GU::Gui::id::START:
+                    case Gui::id::START:
                         engin.Push<PlayState>(frame, engin, window, debugDraw, gui);
                     break;
-                    case GU::Gui::id::MULTIPLAYER_PANEL_BACK:
-                    case GU::Gui::id::OPTIONS_PANEL_BACK:
-                    case GU::Gui::id::INTRO_PANEL:
+                    case Gui::id::MULTIPLAYER_PANEL_BACK:
+                    case Gui::id::OPTIONS_PANEL_BACK:
+                    case Gui::id::INTRO_PANEL:
                     {
                         gui.removeAllWidgets();
                         StateBase::Init(pongFrame);
-                        tgui::Panel::Ptr cust(new GU::Gui::IntroPanel());
-                        std::shared_ptr<GU::Gui::IntroPanel> p = std::dynamic_pointer_cast<GU::Gui::IntroPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::IntroPanel());
+                        std::shared_ptr<Gui::IntroPanel> p = std::dynamic_pointer_cast<Gui::IntroPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-		            case GU::Gui::id::OPTIONS:
-                    case GU::Gui::id::GENERAL_TAB:
+		            case Gui::id::OPTIONS:
+                    case Gui::id::GENERAL_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new GU::Gui::GeneralPanel());
-                        std::shared_ptr<GU::Gui::GeneralPanel> p = std::dynamic_pointer_cast<GU::Gui::GeneralPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::GeneralPanel());
+                        std::shared_ptr<Gui::GeneralPanel> p = std::dynamic_pointer_cast<Gui::GeneralPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case GU::Gui::id::CONTROLS_TAB:
+                    case Gui::id::CONTROLS_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new GU::Gui::ControlPanel(nullptr));
-                        std::shared_ptr<GU::Gui::ControlPanel> p = std::dynamic_pointer_cast<GU::Gui::ControlPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::ControlPanel(nullptr));
+                        std::shared_ptr<Gui::ControlPanel> p = std::dynamic_pointer_cast<Gui::ControlPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case GU::Gui::id::VIDEO_TAB:
+                    case Gui::id::VIDEO_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new GU::Gui::VideoPanel());
-                        std::shared_ptr<GU::Gui::VideoPanel> p = std::dynamic_pointer_cast<GU::Gui::VideoPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::VideoPanel());
+                        std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case GU::Gui::id::SOUND_TAB:
+                    case Gui::id::SOUND_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new GU::Gui::SoundPanel(nullptr));
-                        std::shared_ptr<GU::Gui::SoundPanel> p = std::dynamic_pointer_cast<GU::Gui::SoundPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::SoundPanel(nullptr));
+                        std::shared_ptr<Gui::SoundPanel> p = std::dynamic_pointer_cast<Gui::SoundPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case GU::Gui::id::NETWORK_TAB:
+                    case Gui::id::NETWORK_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new GU::Gui::NetworkPanel());
-                        std::shared_ptr<GU::Gui::NetworkPanel> p = std::dynamic_pointer_cast<GU::Gui::NetworkPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::NetworkPanel());
+                        std::shared_ptr<Gui::NetworkPanel> p = std::dynamic_pointer_cast<Gui::NetworkPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case GU::Gui::id::DEV_TAB:
+                    case Gui::id::DEV_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new GU::Gui::DevPanel());
-                        std::shared_ptr<GU::Gui::DevPanel> p = std::dynamic_pointer_cast<GU::Gui::DevPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::DevPanel());
+                        std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
                         p->init(debugDraw.GetFlags(), window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case GU::Gui::id::HOST_PANEL_BACK:
-                    case GU::Gui::id::CONNECT_PANEL_BACK:
-                    case GU::Gui::id::MULTIPLAYER:
+                    case Gui::id::HOST_PANEL_BACK:
+                    case Gui::id::CONNECT_PANEL_BACK:
+                    case Gui::id::MULTIPLAYER:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new GU::Gui::MultiplayerPanel());
-                        std::shared_ptr<GU::Gui::MultiplayerPanel> p = std::dynamic_pointer_cast<GU::Gui::MultiplayerPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::MultiplayerPanel());
+                        std::shared_ptr<Gui::MultiplayerPanel> p = std::dynamic_pointer_cast<Gui::MultiplayerPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case GU::Gui::id::HOST:
+                    case Gui::id::HOST:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new GU::Gui::HostPanel());
-                        std::shared_ptr<GU::Gui::HostPanel> p = std::dynamic_pointer_cast<GU::Gui::HostPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::HostPanel());
+                        std::shared_ptr<Gui::HostPanel> p = std::dynamic_pointer_cast<Gui::HostPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
                     break;
-                    case GU::Gui::id::CONNECT:
+                    case Gui::id::CONNECT:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new GU::Gui::ConnectPanel());
-                        std::shared_ptr<GU::Gui::ConnectPanel> p = std::dynamic_pointer_cast<GU::Gui::ConnectPanel>(cust);
+                        tgui::Panel::Ptr cust(new Gui::ConnectPanel());
+                        std::shared_ptr<Gui::ConnectPanel> p = std::dynamic_pointer_cast<Gui::ConnectPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
 
                     }
                     break;
-                    case GU::Gui::id::CREDITS:
+                    case Gui::id::CREDITS:
                       engin.Push<CreditsState>(frame, engin, window, debugDraw, gui);
                     break;
-                    case GU::Gui::id::BACK:
+                    case Gui::id::BACK:
                     {
                         Game *game = static_cast<Game*>(&engin);
                         game->setPop(true);
@@ -415,7 +415,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 switch(temp->m_id)
                 {
 
-                    case GU::Gui::id::VELOCITY_ITERATIONS:
+                    case Gui::id::VELOCITY_ITERATIONS:
                     {
                         Settings::velocityIterations = int(temp->m_text[0] - '0'); 
                         GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
@@ -500,7 +500,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     //debugDraw.CleaFlags();
                    switch(temp->m_checkboxId)
                    {
-                       case GU::Gui::DEBUG_AABB:
+                       case Gui::DEBUG_AABB:
                             if(temp->m_checked)
                             {
                                debugDraw.AppendFlags(b2Draw::e_aabbBit);
@@ -516,7 +516,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2aabb", Settings::b2aabb);
                             }
                        break;
-                       case GU::Gui::DEBUG_SHAPE:
+                       case Gui::DEBUG_SHAPE:
                             if(temp->m_checked)
                             {
                                debugDraw.AppendFlags(b2Draw::e_shapeBit);
@@ -532,7 +532,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2shapes", Settings::b2shapes);
                             }
                        break;
-                       case GU::Gui::DEBUG_MASS:
+                       case Gui::DEBUG_MASS:
                             if(temp->m_checked)
                             {
                                debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
@@ -548,7 +548,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
                             }
                        break;
-                       case GU::Gui::DEBUG_JOINTS:
+                       case Gui::DEBUG_JOINTS:
                             if(temp->m_checked)
                             {
                                 debugDraw.AppendFlags(b2Draw::e_jointBit);
@@ -564,7 +564,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2joints", Settings::b2joints);
                             }
                        break;
-                       case GU::Gui::DEBUG_PAIRS:
+                       case Gui::DEBUG_PAIRS:
                             if(temp->m_checked)
                             {
                                 debugDraw.AppendFlags(b2Draw::e_pairBit);
@@ -580,7 +580,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                                 prefMan.write("b2pair", Settings::b2pair);
                             }
                        break;
-                       case GU::Gui::DEBUG_LOG:
+                       case Gui::DEBUG_LOG:
                         BP_LOG_WARNING("Debug Log not implimented");
                        break;
                    };
@@ -594,10 +594,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 {
                     switch(temp->m_sliderId)
                     {
-                        case GU::Gui::id::SOUND_EFFECTS:
+                        case Gui::id::SOUND_EFFECTS:
                             sound.setVolume(Settings::sVolume);
                             break;
-                        case GU::Gui::id::MUSIC:
+                        case Gui::id::MUSIC:
 			    ResourceManager::getMusic().setVolume(Settings::mVolume);
                             break;
                     };
@@ -626,7 +626,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 {
                    switch(temp->m_comboId)
                    {
-                        case GU::Gui::id::THEME:
+                        case Gui::id::THEME:
                         {
                             switch(temp->m_index)
                             {
@@ -642,13 +642,13 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
                             }
                             gui.removeAllWidgets();
-                            tgui::Panel::Ptr cust(new GU::Gui::VideoPanel());
-                            std::shared_ptr<GU::Gui::VideoPanel> p = std::dynamic_pointer_cast<GU::Gui::VideoPanel>(cust);
+                            tgui::Panel::Ptr cust(new Gui::VideoPanel());
+                            std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                             p->init(window.getSize().x, window.getSize().y);
                             gui.add(cust, "PanelPointer");
                             }
                             break;
-                            case GU::Gui::id::BACKGROUND:
+                            case Gui::id::BACKGROUND:
                             switch(temp->m_index)
                             {
                                 case 0:
@@ -664,8 +664,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
                             }
                             gui.removeAllWidgets();
-                            tgui::Panel::Ptr cust(new GU::Gui::VideoPanel());
-                            std::shared_ptr<GU::Gui::VideoPanel> p = std::dynamic_pointer_cast<GU::Gui::VideoPanel>(cust);
+                            tgui::Panel::Ptr cust(new Gui::VideoPanel());
+                            std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                             p->init(window.getSize().x, window.getSize().y);
                             gui.add(cust, "PanelPointer");
                             break;
