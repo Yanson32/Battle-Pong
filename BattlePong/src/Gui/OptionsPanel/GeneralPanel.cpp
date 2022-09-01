@@ -6,7 +6,7 @@
 #include <GameUtilities/Event/OnComboChanged.h>
 #include <GameUtilities/Event/OnCheck.h>
 #include <GameUtilities/Core/PreferencesManager.h>
-#include "Gui/ComboId.h"
+#include "Gui/GuiId.h"
 #include "TGUIFunctions.h"
 
 namespace GU

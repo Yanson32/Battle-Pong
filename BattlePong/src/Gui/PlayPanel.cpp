@@ -27,15 +27,15 @@ namespace GU
             tabs->setTabVisible(0, true);
             tabs->onTabSelect([&](){
                 sf::String text = tabs->getSelected().toStdString();
-                GUI::id id;
+                GU::Gui::id id;
                 if(text == "General")
-                    id =  GUI::id::GENERAL_TAB;
+                    id =  GU::Gui::id::GENERAL_TAB;
                 else if(text == "Controls")
-                    id = GUI::id::CONTROLS_TAB;
+                    id = GU::Gui::id::CONTROLS_TAB;
                 else if(text == "Sound")
-                    id = GUI::id::SOUND_TAB;
+                    id = GU::Gui::id::SOUND_TAB;
                 else if(text == "Dev")
-                    id = GUI::id::DEV_TAB;
+                    id = GU::Gui::id::DEV_TAB;
 
                 EventManager::inst().Post<GU::Evt::Click>(id);
             });
@@ -46,7 +46,7 @@ namespace GU
 
            tgui::Button::Ptr backButton = tgui::Button::create("Back");
             backButton->onPress([](){
-                EventManager::inst().Post<GU::Evt::Click>(GUI::id::BACK);
+                EventManager::inst().Post<GU::Evt::Click>(GU::Gui::id::BACK);
                 });
 
            buttonLayout->add(backButton);

@@ -42,7 +42,6 @@
 #include "Gui/OptionsPanel/VideoPanel.h"
 #include "Gui/OptionsPanel/NetworkPanel.h"
 #include "Gui/GuiId.h"
-#include "Gui/ComboId.h"
 #include <iostream>
 #include <filesystem>
 
@@ -312,26 +311,26 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
             {
                 switch(temp->m_buttonId)
                 {
-                    case GUI::id::INTRO_PANEL:
+                    case GU::Gui::id::INTRO_PANEL:
                     break;
-		            case GUI::id::OPTIONS:
-                    case GUI::id::GENERAL_TAB:
+		            case GU::Gui::id::OPTIONS:
+                    case GU::Gui::id::GENERAL_TAB:
                     break;
-                    case GUI::id::CONTROLS_TAB:
+                    case GU::Gui::id::CONTROLS_TAB:
                     break;
-                    case GUI::id::VIDEO_TAB:
+                    case GU::Gui::id::VIDEO_TAB:
                     break;
-                    case GUI::id::SOUND_TAB:
+                    case GU::Gui::id::SOUND_TAB:
                     break;
-                    case GUI::id::NETWORK_TAB:
+                    case GU::Gui::id::NETWORK_TAB:
                     break;
-                    case GUI::id::DEV_TAB:
+                    case GU::Gui::id::DEV_TAB:
                     break;
-                    case GUI::id::MULTIPLAYER:
+                    case GU::Gui::id::MULTIPLAYER:
                     break;
-                    case GUI::id::HOST:
+                    case GU::Gui::id::HOST:
                     break;
-                    case GUI::id::CONNECT:
+                    case GU::Gui::id::CONNECT:
 	            break;
 		          }
 	         }

@@ -17,7 +17,7 @@ namespace GU
             //Create host button
             hostButton = tgui::Button::create("Host");
             hostButton->onPress([](){
-                EventManager::inst().Post<GU::Evt::Click>(GUI::id::HOST);
+                EventManager::inst().Post<GU::Evt::Click>(GU::Gui::id::HOST);
             });
             tgui::HorizontalLayout::Ptr layout1 = tgui::HorizontalLayout::create();
             tgui::Panel::Ptr spacer2 = tgui::Panel::create();
@@ -32,7 +32,7 @@ namespace GU
             //Create connect button
             connectButton = tgui::Button::create("Connect");
             connectButton->onPress([](){
-                EventManager::inst().Post<GU::Evt::Click>(GUI::id::CONNECT);
+                EventManager::inst().Post<GU::Evt::Click>(GU::Gui::id::CONNECT);
             });
             getContentPane()->append(tgui::HorizontalLayout::create()); 
             
@@ -59,7 +59,7 @@ namespace GU
             backBtn = tgui::Button::create("Back");
             buttonLayout->add(backBtn);
             backBtn->onPress([](){
-                EventManager::inst().Post<GU::Evt::Click>(GUI::id::MULTIPLAYER_PANEL_BACK);
+                EventManager::inst().Post<GU::Evt::Click>(GU::Gui::id::MULTIPLAYER_PANEL_BACK);
             });
             
 

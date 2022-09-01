@@ -23,7 +23,7 @@ namespace GU
             effectsSlider->setValue(Settings::mVolume);
             effectsSlider->onValueChange([&](){
                 Settings::sVolume = effectsSlider->getValue();
-                EventManager::inst().Post<GU::Evt::OnSliderChanged>(GUI::id::SOUND_EFFECTS, Settings::sVolume);
+                EventManager::inst().Post<GU::Evt::OnSliderChanged>(GU::Gui::id::SOUND_EFFECTS, Settings::sVolume);
             });
             getContentPane()->append("Sound Effects", effectsSlider);
 
@@ -31,7 +31,7 @@ namespace GU
             musicSlider->setValue(Settings::sVolume);
             musicSlider->onValueChange([&](){
                 Settings::mVolume = musicSlider->getValue();
-                EventManager::inst().Post<GU::Evt::OnSliderChanged>(GUI::id::MUSIC, Settings::mVolume);
+                EventManager::inst().Post<GU::Evt::OnSliderChanged>(GU::Gui::id::MUSIC, Settings::mVolume);
             });
             getContentPane()->append("Music Volume", musicSlider);
 

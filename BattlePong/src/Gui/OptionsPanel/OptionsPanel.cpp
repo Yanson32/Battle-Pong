@@ -24,26 +24,26 @@ namespace GU
             tabs->setTabVisible(0, true);
             tabs->onTabSelect([&](){
                 sf::String text = tabs->getSelected().toStdString();
-                GUI::id id;
+                GU::Gui::id id;
                 if(text == "General")
-                    id = GUI::id::GENERAL_TAB;
+                    id = GU::Gui::id::GENERAL_TAB;
                 else if(text == "Controls")
-                    id = GUI::id::CONTROLS_TAB;
+                    id = GU::Gui::id::CONTROLS_TAB;
                 else if(text == "Video")
-                    id = GUI::id::VIDEO_TAB;
+                    id = GU::Gui::id::VIDEO_TAB;
                 else if(text == "Sound")
-                    id = GUI::id::SOUND_TAB;
+                    id = GU::Gui::id::SOUND_TAB;
                 else if(text == "Network")
-                    id = GUI::id::NETWORK_TAB;
+                    id = GU::Gui::id::NETWORK_TAB;
                 else if(text == "Dev")
-                    id = GUI::id::DEV_TAB;
+                    id = GU::Gui::id::DEV_TAB;
                 EventManager::inst().Post<GU::Evt::Click>(id);
             });
 
 
             backBtn = tgui::Button::create("Back");
             backBtn->onPress([](){
-                EventManager::inst().Post<GU::Evt::Click>(GUI::id::OPTIONS_PANEL_BACK);
+                EventManager::inst().Post<GU::Evt::Click>(GU::Gui::id::OPTIONS_PANEL_BACK);
             });
 
 

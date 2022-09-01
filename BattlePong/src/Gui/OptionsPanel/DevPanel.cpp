@@ -29,10 +29,10 @@ namespace GU
             aabb = tgui::CheckBox::create("");
 
                     aabb->onCheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_AABB, true);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_AABB, true);
             });
                     aabb->onUncheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_AABB, false);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_AABB, false);
                     });
             getContentPane()->append("AABB", aabb);
 
@@ -40,20 +40,20 @@ namespace GU
             //Create shapes checkbox
             shapes = tgui::CheckBox::create("");
             shapes->onCheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_SHAPE, true);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_SHAPE, true);
             });
             shapes->onUncheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_SHAPE, false);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_SHAPE, false);
             });
             getContentPane()->append("Shapes", shapes);
 
             //Create joints checkbox
             joints = tgui::CheckBox::create("");
             joints->onCheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_JOINTS, true);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_JOINTS, true);
             });
             joints->onUncheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_JOINTS, false);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_JOINTS, false);
             });
 
             getContentPane()->append("Joints", joints);
@@ -61,10 +61,10 @@ namespace GU
             //Create center of mass checkbox
             centerOfMass = tgui::CheckBox::create("");
             centerOfMass->onCheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_MASS, true);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_MASS, true);
             });
             centerOfMass->onUncheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_MASS, false);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_MASS, false);
             });
 
             getContentPane()->append("Mass", centerOfMass);
@@ -72,10 +72,10 @@ namespace GU
             //Create pair checkbox
             pair = tgui::CheckBox::create("");
             pair->onCheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_PAIRS, true);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_PAIRS, true);
             });
             pair->onUncheck([&](){
-                EventManager::inst().Post<GU::Evt::OnCheck>(GUI::id::DEBUG_PAIRS, false);
+                EventManager::inst().Post<GU::Evt::OnCheck>(GU::Gui::id::DEBUG_PAIRS, false);
             });
 
             getContentPane()->append("Pairs", pair);
@@ -89,7 +89,7 @@ namespace GU
             velocityIterationsBox->setText(char(Settings::velocityIterations + '0'));      
             velocityIterationsBox->onTextChange([&](){
                 if(!velocityIterationsBox->getText().empty())
-                    EventManager::inst().Post<GU::Evt::OnTextChanged>(GUI::id::VELOCITY_ITERATIONS, velocityIterationsBox->getText().toStdString());
+                    EventManager::inst().Post<GU::Evt::OnTextChanged>(GU::Gui::id::VELOCITY_ITERATIONS, velocityIterationsBox->getText().toStdString());
             });
 
             getContentPane()->append("Velocity Iterations", velocityIterationsBox);
