@@ -3,23 +3,26 @@
 #include <TGUI/TGUI.hpp>
 #include <string>
 
-namespace Gui
+namespace GU
 {
-    class ScorePanel:
-    public tgui::Panel
+    namespace Gui
     {
-        public:
-            ScorePanel(const sf::String &text);
-            void setScore(const int newScore);
-            int getScore() const;
-            virtual ~ScorePanel();
-        protected:
-        private:
-            tgui::Label::Ptr paddleLable;
-            std::string text;
-            int score = 0;
-            //tgui::Label::Ptr scoreLable;
-            //int score = 0;
-    };
+        class ScorePanel:
+        public tgui::Panel
+        {
+            public:
+                ScorePanel(const sf::String &text);
+                void setScore(const int newScore);
+                int getScore() const;
+                virtual ~ScorePanel();
+            protected:
+            private:
+                tgui::Label::Ptr paddleLable;
+                std::string text;
+                int score = 0;
+                //tgui::Label::Ptr scoreLable;
+                //int score = 0;
+        };
+    }
 }
 #endif // SCOREPANEL_H

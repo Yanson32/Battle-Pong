@@ -5,54 +5,62 @@
 #include <SFML/Network.hpp>
 #include "Settings.h"
 
-HostPanel::HostPanel():
-CustomPanel::CustomPanel()
+
+namespace GU
 {
-    getContentPane()->appendSpace();
+    namespace Gui
+    {
 
-    //Public ip address
-    publicIpAdress = tgui::Label::create(Settings::publicIp);
-    getContentPane()->append("Public Ip", publicIpAdress);
+        HostPanel::HostPanel():
+        CustomPanel::CustomPanel()
+        {
+            getContentPane()->appendSpace();
 
-    sf::IpAddress address2 = sf::IpAddress::getLocalAddress();
-    sf::String localIp = address2.toString();
+            //Public ip address
+            publicIpAdress = tgui::Label::create(Settings::publicIp);
+            getContentPane()->append("Public Ip", publicIpAdress);
 
-    //EditBox to enter ip address
-    localIpBox = tgui::Label::create(localIp.toAnsiString());
-    getContentPane()->append("Local Ip", localIpBox);
+            sf::IpAddress address2 = sf::IpAddress::getLocalAddress();
+            sf::String localIp = address2.toString();
 
-    //EditBox to enter port number
-    portBox = tgui::EditBox::create();
-    getContentPane()->append("Port", portBox);
+            //EditBox to enter ip address
+            localIpBox = tgui::Label::create(localIp.toAnsiString());
+            getContentPane()->append("Local Ip", localIpBox);
 
-    //Create back button
-    backBtn = tgui::Button::create("Back");
-    backBtn->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(GUI::id::HOST_PANEL_BACK);
-    });
+            //EditBox to enter port number
+            portBox = tgui::EditBox::create();
+            getContentPane()->append("Port", portBox);
 
-    //Create host button
-    hostButton = tgui::Button::create("Host");
-    hostButton->setEnabled(false);
-    buttonLayout->add(hostButton);
+            //Create back button
+            backBtn = tgui::Button::create("Back");
+            backBtn->onPress([](){
+                EventManager::inst().Post<GU::Evt::Click>(GUI::id::HOST_PANEL_BACK);
+            });
 
-    //Create back button
-    buttonLayout->add(backBtn);
+            //Create host button
+            hostButton = tgui::Button::create("Host");
+            hostButton->setEnabled(false);
+            buttonLayout->add(hostButton);
 
-    //Create spacer
-    buttonLayout->add(spacer);
+            //Create back button
+            buttonLayout->add(backBtn);
 
-}
+            //Create spacer
+            buttonLayout->add(spacer);
 
-
-void HostPanel::init(const int &width, const int &height)
-{
-    this->setSize(width / 2, height / 2);
-    this->setPosition(width / 4, height / 4);
-}
+        }
 
 
-HostPanel::~HostPanel()
-{
+        void HostPanel::init(const int &width, const int &height)
+        {
+            this->setSize(width / 2, height / 2);
+            this->setPosition(width / 4, height / 4);
+        }
 
+
+        HostPanel::~HostPanel()
+        {
+
+        }
+    }
 }

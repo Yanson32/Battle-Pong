@@ -158,7 +158,7 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
 
     //Create intro panel
-    std::shared_ptr<IntroPanel> cust(new IntroPanel());
+    std::shared_ptr<GU::Gui::IntroPanel> cust(new GU::Gui::IntroPanel());
     cust->init(window.getView().getSize().x, window.getView().getSize().y);
     gui.add(cust, "PanelPointer");
 

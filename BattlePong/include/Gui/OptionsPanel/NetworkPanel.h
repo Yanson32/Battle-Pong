@@ -1,24 +1,27 @@
 #ifndef GUI_NETWORKPANEL_H
 #define GUI_NETWORKPANEL_H
 #include "Gui/OptionsPanel/OptionsPanel.h"
-namespace Gui
+
+namespace GU
 {
-    class NetworkPanel: public OptionsPanel
+    namespace Gui
     {
-        public:
-            NetworkPanel();
-            void init(const int &width, const int &height);
-            virtual ~NetworkPanel();
-        protected:
-            tgui::Label::Ptr publicIpLabel;
-            tgui::Label::Ptr publicIp;
-            
-            tgui::Label::Ptr localIpLabel;
-            tgui::Label::Ptr localIp;
+        class NetworkPanel: public OptionsPanel
+        {
+            public:
+                NetworkPanel();
+                void init(const int &width, const int &height);
+                virtual ~NetworkPanel();
+            protected:
+                tgui::Label::Ptr publicIpLabel;
+                tgui::Label::Ptr publicIp;
+                
+                tgui::Label::Ptr localIpLabel;
+                tgui::Label::Ptr localIp;
 
-            tgui::Label::Ptr portBoxLabel;
-            tgui::Label::Ptr portBox;
-    };
+                tgui::Label::Ptr portBoxLabel;
+                tgui::Label::Ptr portBox;
+        };
+    }
 }
-
 #endif // GUI_SOUNDPANEL_H

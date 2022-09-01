@@ -5,21 +5,24 @@
 #include "States/StateId.h"
 
 class DebugDraw;
-namespace Gui
+
+namespace GU
 {
-    class GeneralPanel: public OptionsPanel
+    namespace Gui
     {
-        public:
-            GeneralPanel(const StateId state = Settings::stateId);
-            void init(const int &width, const int &height);
-            virtual ~GeneralPanel();
-        protected:
-            tgui::ComboBox::Ptr comboBox;
-            tgui::Label::Ptr comboLable;
+        class GeneralPanel: public OptionsPanel
+        {
+            public:
+                GeneralPanel(const StateId state = Settings::stateId);
+                void init(const int &width, const int &height);
+                virtual ~GeneralPanel();
+            protected:
+                tgui::ComboBox::Ptr comboBox;
+                tgui::Label::Ptr comboLable;
 
-            tgui::ComboBox::Ptr aiCombo;
-            tgui::Label::Ptr aiLable;
-    };
+                tgui::ComboBox::Ptr aiCombo;
+                tgui::Label::Ptr aiLable;
+        };
+    }
 }
-
 #endif // GUI_GENERALPANEL_H

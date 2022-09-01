@@ -4,62 +4,71 @@
 #include <GameUtilities/Event/Click.h>
 #include <GameUtilities/Event/Pop.h>
 #include <SFML/Network.hpp>
-PlayPanel::PlayPanel():
- Gui::CustomPanel()
+
+
+namespace GU
 {
-    tabs = tgui::Tabs::create();
-    tabLayout->add(tabs);
+    namespace Gui
+    {
 
-    tabs->add("General");
-    tabs->add("Controls");
-    tabs->add("Sound");
-    #ifdef DEBUG
-       tabs->add("Dev");
-    #endif
-    //tabs->select(tab.toStdString());
-    tabs->setTabVisible(0, true);
-    tabs->onTabSelect([&](){
-        sf::String text = tabs->getSelected().toStdString();
-        GUI::id id;
-        if(text == "General")
-            id =  GUI::id::GENERAL_TAB;
-        else if(text == "Controls")
-            id = GUI::id::CONTROLS_TAB;
-        else if(text == "Sound")
-            id = GUI::id::SOUND_TAB;
-        else if(text == "Dev")
-            id = GUI::id::DEV_TAB;
+        PlayPanel::PlayPanel():
+         Gui::CustomPanel()
+        {
+            tabs = tgui::Tabs::create();
+            tabLayout->add(tabs);
 
-        EventManager::inst().Post<GU::Evt::Click>(id);
-    });
+            tabs->add("General");
+            tabs->add("Controls");
+            tabs->add("Sound");
+            #ifdef DEBUG
+               tabs->add("Dev");
+            #endif
+            //tabs->select(tab.toStdString());
+            tabs->setTabVisible(0, true);
+            tabs->onTabSelect([&](){
+                sf::String text = tabs->getSelected().toStdString();
+                GUI::id id;
+                if(text == "General")
+                    id =  GUI::id::GENERAL_TAB;
+                else if(text == "Controls")
+                    id = GUI::id::CONTROLS_TAB;
+                else if(text == "Sound")
+                    id = GUI::id::SOUND_TAB;
+                else if(text == "Dev")
+                    id = GUI::id::DEV_TAB;
 
-   tgui::Panel::Ptr spacer = tgui::Panel::create("");
-   spacer->getRenderer()->setBackgroundColor(sf::Color::Transparent);
-   buttonLayout->add(spacer);
+                EventManager::inst().Post<GU::Evt::Click>(id);
+            });
 
-   tgui::Button::Ptr backButton = tgui::Button::create("Back");
-    backButton->onPress([](){
-        EventManager::inst().Post<GU::Evt::Click>(GUI::id::BACK);
-        });
+           tgui::Panel::Ptr spacer = tgui::Panel::create("");
+           spacer->getRenderer()->setBackgroundColor(sf::Color::Transparent);
+           buttonLayout->add(spacer);
 
-   buttonLayout->add(backButton);
+           tgui::Button::Ptr backButton = tgui::Button::create("Back");
+            backButton->onPress([](){
+                EventManager::inst().Post<GU::Evt::Click>(GUI::id::BACK);
+                });
 
-
-
-   tgui::Panel::Ptr spacer2 = tgui::Panel::create("");
-   spacer2->getRenderer()->setBackgroundColor(sf::Color::Transparent);
-   buttonLayout->add(spacer2);
-}
-
-
-void PlayPanel::init(const int &width, const int &height)
-{
-    this->setSize(width / 2, height / 2);
-    this->setPosition(width / 4, height / 4);
-}
+           buttonLayout->add(backButton);
 
 
-PlayPanel::~PlayPanel()
-{
 
+           tgui::Panel::Ptr spacer2 = tgui::Panel::create("");
+           spacer2->getRenderer()->setBackgroundColor(sf::Color::Transparent);
+           buttonLayout->add(spacer2);
+        }
+
+
+        void PlayPanel::init(const int &width, const int &height)
+        {
+            this->setSize(width / 2, height / 2);
+            this->setPosition(width / 4, height / 4);
+        }
+
+
+        PlayPanel::~PlayPanel()
+        {
+
+        }
+    }
 }

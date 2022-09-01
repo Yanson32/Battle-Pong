@@ -2,25 +2,27 @@
 #define GUI_VIDEOPANEL_H
 #include "Gui/OptionsPanel/OptionsPanel.h"
 
-namespace Gui
+namespace GU
 {
-    class VideoPanel: public OptionsPanel
+    namespace Gui
     {
-        public:
-            VideoPanel();
-            void init(const int &width, const int &height);
-            
-            tgui::Label::Ptr themeLabel; 
-            tgui::ComboBox::Ptr themeCombo;
-            
-            tgui::Label::Ptr backgroundLable;
-            tgui::ComboBox::Ptr backgroundCombo;
-            
-            tgui::Label::Ptr resolutionLable;
-            tgui::ComboBox::Ptr resolutionCombo;
-            
-            virtual ~VideoPanel();
-    };
+        class VideoPanel: public OptionsPanel
+        {
+            public:
+                VideoPanel();
+                void init(const int &width, const int &height);
+                
+                tgui::Label::Ptr themeLabel; 
+                tgui::ComboBox::Ptr themeCombo;
+                
+                tgui::Label::Ptr backgroundLable;
+                tgui::ComboBox::Ptr backgroundCombo;
+                
+                tgui::Label::Ptr resolutionLable;
+                tgui::ComboBox::Ptr resolutionCombo;
+                
+                virtual ~VideoPanel();
+        };
+    }
 }
-
 #endif 

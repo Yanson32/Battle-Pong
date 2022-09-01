@@ -42,8 +42,8 @@ sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 sf::Sound StateBase::sound;
 
-std::shared_ptr<PaddleHud> StateBase::paddle1Hud = nullptr;
-std::shared_ptr<PaddleHud> StateBase::paddle2Hud = nullptr;
+std::shared_ptr<GU::Gui::PaddleHud> StateBase::paddle1Hud = nullptr;
+std::shared_ptr<GU::Gui::PaddleHud> StateBase::paddle2Hud = nullptr;
 
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
@@ -62,8 +62,8 @@ sysPause(false)
     BP_LOG_TRACE(__FUNCTION__)
     gui.setTarget(window);
 
-    paddle1Hud.reset(new PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
-    paddle2Hud.reset(new PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
+    paddle1Hud.reset(new GU::Gui::PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
+    paddle2Hud.reset(new GU::Gui::PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
 
     paddle2Hud->setPosition({650, 0});
     gui.add(paddle1Hud);
@@ -226,7 +226,7 @@ void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
         case sf::Event::Resized:
             {
                 tgui::Widget::Ptr widget = gui.get("PanelPointer");
-                std::shared_ptr<Gui::CustomPanel> temp =  std::dynamic_pointer_cast<Gui::CustomPanel>(widget);
+                std::shared_ptr<GU::Gui::CustomPanel> temp =  std::dynamic_pointer_cast<GU::Gui::CustomPanel>(widget);
                 if(temp)
                     temp->resize(event.size.width, event.size.height);
             }
@@ -304,8 +304,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     {
                         gui.removeAllWidgets();
                         StateBase::Init(pongFrame);
-                        tgui::Panel::Ptr cust(new IntroPanel());
-                        std::shared_ptr<IntroPanel> p = std::dynamic_pointer_cast<IntroPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::IntroPanel());
+                        std::shared_ptr<GU::Gui::IntroPanel> p = std::dynamic_pointer_cast<GU::Gui::IntroPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
@@ -314,8 +314,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case GUI::id::GENERAL_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new Gui::GeneralPanel());
-                        std::shared_ptr<Gui::GeneralPanel> p = std::dynamic_pointer_cast<Gui::GeneralPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::GeneralPanel());
+                        std::shared_ptr<GU::Gui::GeneralPanel> p = std::dynamic_pointer_cast<GU::Gui::GeneralPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
@@ -323,8 +323,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case GUI::id::CONTROLS_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new Gui::ControlPanel(nullptr));
-                        std::shared_ptr<Gui::ControlPanel> p = std::dynamic_pointer_cast<Gui::ControlPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::ControlPanel(nullptr));
+                        std::shared_ptr<GU::Gui::ControlPanel> p = std::dynamic_pointer_cast<GU::Gui::ControlPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
@@ -332,8 +332,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case GUI::id::VIDEO_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new Gui::VideoPanel());
-                        std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::VideoPanel());
+                        std::shared_ptr<GU::Gui::VideoPanel> p = std::dynamic_pointer_cast<GU::Gui::VideoPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
@@ -341,8 +341,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case GUI::id::SOUND_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new Gui::SoundPanel(nullptr));
-                        std::shared_ptr<Gui::SoundPanel> p = std::dynamic_pointer_cast<Gui::SoundPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::SoundPanel(nullptr));
+                        std::shared_ptr<GU::Gui::SoundPanel> p = std::dynamic_pointer_cast<GU::Gui::SoundPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
@@ -350,8 +350,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case GUI::id::NETWORK_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new Gui::NetworkPanel());
-                        std::shared_ptr<Gui::NetworkPanel> p = std::dynamic_pointer_cast<Gui::NetworkPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::NetworkPanel());
+                        std::shared_ptr<GU::Gui::NetworkPanel> p = std::dynamic_pointer_cast<GU::Gui::NetworkPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
@@ -359,8 +359,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case GUI::id::DEV_TAB:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new Gui::DevPanel());
-                        std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::DevPanel());
+                        std::shared_ptr<GU::Gui::DevPanel> p = std::dynamic_pointer_cast<GU::Gui::DevPanel>(cust);
                         p->init(debugDraw.GetFlags(), window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
@@ -370,8 +370,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case GUI::id::MULTIPLAYER:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new MultiplayerPanel());
-                        std::shared_ptr<MultiplayerPanel> p = std::dynamic_pointer_cast<MultiplayerPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::MultiplayerPanel());
+                        std::shared_ptr<GU::Gui::MultiplayerPanel> p = std::dynamic_pointer_cast<GU::Gui::MultiplayerPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
@@ -379,8 +379,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case GUI::id::HOST:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new HostPanel());
-                        std::shared_ptr<HostPanel> p = std::dynamic_pointer_cast<HostPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::HostPanel());
+                        std::shared_ptr<GU::Gui::HostPanel> p = std::dynamic_pointer_cast<GU::Gui::HostPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
                     }
@@ -388,8 +388,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case GUI::id::CONNECT:
                     {
                         gui.removeAllWidgets();
-                        tgui::Panel::Ptr cust(new ConnectPanel());
-                        std::shared_ptr<ConnectPanel> p = std::dynamic_pointer_cast<ConnectPanel>(cust);
+                        tgui::Panel::Ptr cust(new GU::Gui::ConnectPanel());
+                        std::shared_ptr<GU::Gui::ConnectPanel> p = std::dynamic_pointer_cast<GU::Gui::ConnectPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
 
@@ -643,8 +643,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
                             }
                             gui.removeAllWidgets();
-                            tgui::Panel::Ptr cust(new Gui::VideoPanel());
-                            std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
+                            tgui::Panel::Ptr cust(new GU::Gui::VideoPanel());
+                            std::shared_ptr<GU::Gui::VideoPanel> p = std::dynamic_pointer_cast<GU::Gui::VideoPanel>(cust);
                             p->init(window.getSize().x, window.getSize().y);
                             gui.add(cust, "PanelPointer");
                             }
@@ -653,7 +653,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                             switch(temp->m_index)
                             {
                                 case 0:
-				                            ResourceManager::loadBackground("Star.png");
+				                    ResourceManager::loadBackground("Star.png");
                                     backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
                                     Settings::background = "Star";
                                     break;
@@ -665,8 +665,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
                             }
                             gui.removeAllWidgets();
-                            tgui::Panel::Ptr cust(new Gui::VideoPanel());
-                            std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
+                            tgui::Panel::Ptr cust(new GU::Gui::VideoPanel());
+                            std::shared_ptr<GU::Gui::VideoPanel> p = std::dynamic_pointer_cast<GU::Gui::VideoPanel>(cust);
                             p->init(window.getSize().x, window.getSize().y);
                             gui.add(cust, "PanelPointer");
                             break;

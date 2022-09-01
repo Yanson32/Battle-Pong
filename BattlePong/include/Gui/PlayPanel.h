@@ -3,14 +3,21 @@
 
 #include "Gui/CustomPanel.h"
 #include <TGUI/TGUI.hpp>
-class PlayPanel: public Gui::CustomPanel
+
+namespace GU
 {
-    public:
-        PlayPanel();
-        void init(const int &width, const int &height);
-        ~PlayPanel();
-    private:
-        tgui::Button::Ptr backBtn;
-        tgui::Tabs::Ptr tabs;
-};
+    namespace Gui
+    {
+        class PlayPanel: public Gui::CustomPanel
+        {
+            public:
+                PlayPanel();
+                void init(const int &width, const int &height);
+                ~PlayPanel();
+            private:
+                tgui::Button::Ptr backBtn;
+                tgui::Tabs::Ptr tabs;
+        };
+    }
+}
 #endif

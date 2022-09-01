@@ -126,8 +126,8 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         tgui::Gui &gui;                           ///The Main TGUI object
         StateId state;
         static sf::Sound sound;
-        static std::shared_ptr<PaddleHud> paddle1Hud;
-        static std::shared_ptr<PaddleHud> paddle2Hud;
+        static std::shared_ptr<GU::Gui::PaddleHud> paddle1Hud;
+        static std::shared_ptr<GU::Gui::PaddleHud> paddle2Hud;
         static ContactListener contactListener;         ///Subclass of Box2D b2ContactListener used to detect Box2D collisions
         static sf::Text userMessage;                    ///Text displayed in the center of the screen
         static sf::Clock messageClock;                  ///This clock object is used to time the beginning message "Ready!, 3, 2, 1, Go!
