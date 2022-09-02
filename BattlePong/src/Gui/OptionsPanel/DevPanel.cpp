@@ -10,14 +10,30 @@
 #include <GameUtilities/Core/PreferencesManager.h>
 #include "Settings.h"
 #include <iostream>
+#include <string>
 
 namespace Gui
 {
     DevPanel::DevPanel():
     OptionsPanel::OptionsPanel(sf::String("Dev"))
     {
-        sf::Vector2f position1(75, 0);
-        sf::Vector2f position2(225, 0);
+        //Create header for the game section
+        getContentPane()->appendSpace();
+        getContentPane()->appendHeader("Game");
+        
+
+        //Create frame rate editbox 
+        frameRateBox = tgui::EditBox::create();
+        frameRateBox->setInputValidator("[0-9]+");
+        frameRateBox->setMaximumCharacters(2);
+        frameRateBox->limitTextWidth(true);
+        frameRateBox->setText(std::to_string(Settings::frameRate));      
+        frameRateBox->onTextChange([&](){
+            if(!frameRateBox->getText().empty())
+                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::FRAME_RATE, frameRateBox->getText().toStdString());
+        });
+        getContentPane()->append("Frame Rate", frameRateBox);
+        
 
         //Create header for the box2d section
         getContentPane()->appendSpace();

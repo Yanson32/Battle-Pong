@@ -93,6 +93,8 @@ namespace Settings
     extern float timeStep;
     extern int velocityIterations;
     extern int positionIterations;
+    extern int frameRate;
+    
 }
 
 

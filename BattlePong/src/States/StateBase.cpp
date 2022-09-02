@@ -36,6 +36,7 @@
 #include "Gui/OptionsPanel/NetworkPanel.h"
 #include "Game.h"
 #include "Log.h"
+#include <string>
 
 sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
@@ -426,11 +427,17 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     break;
                     case Gui::id::POSITION_ITERATIONS:
                     {
-                        std::cout << "position iterations" << Settings::positionIterations << std::endl; 
                         Settings::positionIterations = int(temp->m_text[0] - '0'); 
                         GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
                         prefMan.write("PositionIterations", Settings::positionIterations);
-                        std::cout << "position iterations" << Settings::positionIterations << std::endl; 
+                    } 
+                    break;
+                    case Gui::id::FRAME_RATE:
+                    {
+                        Settings::frameRate = std::stoi(temp->m_text.c_str());
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("FrameRate", Settings::frameRate);
+                        std::cout << "Frame Rate " << Settings::frameRate << std::endl;
                     } 
                     break;
                 }

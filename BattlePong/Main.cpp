@@ -89,6 +89,7 @@ int main(int argc, char* argv[])
     Settings::b2pair = prefMan.read("b2pair", Settings::b2pair);
     Settings::velocityIterations = prefMan.read("VelocityIterations", Settings::velocityIterations);
     Settings::positionIterations = prefMan.read("PositionIterations", Settings::positionIterations);
+    Settings::frameRate = prefMan.read("FrameRate", Settings::frameRate);
 
     //Load log settings
     Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);
@@ -154,7 +155,7 @@ int main(int argc, char* argv[])
 
     //Create clock for game engin
     sf::Clock timer;
-    const sf::Time deltaTime = sf::seconds(1.0f / 60.0f);
+    const sf::Time deltaTime = sf::seconds(1.0f / Settings::frameRate);
     sf::Time accumulator = sf::seconds(0);
 
     try
