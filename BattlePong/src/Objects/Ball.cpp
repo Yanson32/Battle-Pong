@@ -3,6 +3,7 @@
 #include "Box2D/Box2DFunctions.h"
 #include "Events/EventId.h"
 #include "Objects/ObjectId.h"
+#include "Settings.h"
 
 Ball::Ball(std::shared_ptr<b2World> world, const unsigned radius): ObjectBase(world)
 {
@@ -51,7 +52,7 @@ void Ball::setVelocity(const sf::Vector2f &newVelocity)
 {
     b2Vec2 velocity(toMeters(newVelocity.x), toMeters(newVelocity.y));
     velocity.Normalize(); 
-    velocity *= 3.0;
+    velocity *= static_cast<float>(Settings::ballSpeed);
     body->SetLinearVelocity(velocity);
 }
 

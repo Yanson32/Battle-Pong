@@ -25,6 +25,7 @@ namespace Gui
             tgui::EditBox::Ptr velocityIterationsBox;
             tgui::EditBox::Ptr positionIterationsBox;
             tgui::EditBox::Ptr frameRateBox;
+            tgui::EditBox::Ptr ballSpeedBox;
             void onLogLevel();
     };
 }

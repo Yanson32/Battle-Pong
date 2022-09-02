@@ -90,6 +90,7 @@ int main(int argc, char* argv[])
     Settings::velocityIterations = prefMan.read("VelocityIterations", Settings::velocityIterations);
     Settings::positionIterations = prefMan.read("PositionIterations", Settings::positionIterations);
     Settings::frameRate = prefMan.read("FrameRate", Settings::frameRate);
+    Settings::ballSpeed = prefMan.read("BallSpeed", Settings::ballSpeed);
 
     //Load log settings
     Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);

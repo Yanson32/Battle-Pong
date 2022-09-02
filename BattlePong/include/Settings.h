@@ -22,6 +22,7 @@ namespace Settings
     extern sf::String ai;
     extern const float wallThickness;
     extern StateId stateId;
+    extern int ballSpeed;
 
     //Paddle 1 settigns
     extern std::string p1Input;

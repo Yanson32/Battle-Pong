@@ -437,7 +437,13 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         Settings::frameRate = std::stoi(temp->m_text.c_str());
                         GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
                         prefMan.write("FrameRate", Settings::frameRate);
-                        std::cout << "Frame Rate " << Settings::frameRate << std::endl;
+                    } 
+                    break;
+                    case Gui::id::BALL_SPEED:
+                    {
+                        Settings::ballSpeed = std::stoi(temp->m_text.c_str());
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("BallSpeed", Settings::ballSpeed);
                     } 
                     break;
                 }
