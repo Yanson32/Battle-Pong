@@ -214,24 +214,27 @@ void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
 
 void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame)
 {
-  UNUSED(frame);
+    UNUSED(frame);
 
     switch (event.type)
     {
-
         case sf::Event::Closed:
             engin.Quit();
-            break;
+        break;
         case sf::Event::Resized:
-            {
-                tgui::Widget::Ptr widget = gui.get("PanelPointer");
-                std::shared_ptr<Gui::CustomPanel> temp =  std::dynamic_pointer_cast<Gui::CustomPanel>(widget);
-                if(temp)
-                    temp->resize(event.size.width, event.size.height);
-            }
-            break;
+        {
+            tgui::Widget::Ptr widget = gui.get("PanelPointer");
+            std::shared_ptr<Gui::CustomPanel> temp =  std::dynamic_pointer_cast<Gui::CustomPanel>(widget);
+            if(temp)
+                temp->resize(event.size.width, event.size.height);
+        }
+        break;
         default:
-            break;
+        {
+            //Default case
+            BP_LOG_WARNING("Default case triggered");
+        }
+        break;
     }
 }
 
@@ -240,49 +243,49 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       BP_LOG_FATAL_ERROR("Pointer should not be null")
-       return;
+        BP_LOG_FATAL_ERROR("Pointer should not be null")
+        return;
     }
 
     switch(event->getId())
     {
         case EventId::LOG:
         {
-              std::shared_ptr<GU::Evt::LogEvent> temp =  std::dynamic_pointer_cast<GU::Evt::LogEvent>(event);
-              Game *game = static_cast<Game*>(&engin);
-              std::shared_ptr<GU::Log::LogEntry> entry(new GU::Log::LogEntry());
-              entry->add<GU::Log::MsgComponent>(temp->getMessage());
-              entry->add<GU::Log::SeverityComponent>(static_cast<GU::Log::LogType>(temp->getSeverity()));
-              entry->add<GU::Log::LineComponent>(temp->getLine());
-              entry->add<GU::Log::FileComponent>(temp->getFile());
+            std::shared_ptr<GU::Evt::LogEvent> temp =  std::dynamic_pointer_cast<GU::Evt::LogEvent>(event);
+            Game *game = static_cast<Game*>(&engin);
+            std::shared_ptr<GU::Log::LogEntry> entry(new GU::Log::LogEntry());
+            entry->add<GU::Log::MsgComponent>(temp->getMessage());
+            entry->add<GU::Log::SeverityComponent>(static_cast<GU::Log::LogType>(temp->getSeverity()));
+            entry->add<GU::Log::LineComponent>(temp->getLine());
+            entry->add<GU::Log::FileComponent>(temp->getFile());
 
-              if(temp->getSeverity() > Settings::logSeverity)
+            if(temp->getSeverity() > Settings::logSeverity)
                 return;
 
-              if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR))
-              {
+            if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR))
+            {
                 game->logManager.write(entry);
                 exit(1);
-              }
-              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_ERROR))
+            }
+            else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_ERROR))
                 game->logManager.write(entry);
-              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_WARNING))
+            else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_WARNING))
                 std::cout << "Log Warning is broken" << std::endl; 
                 //game->logManager.write(entry);
-              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_MESSAGE))
+            else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_MESSAGE))
                 game->logManager.write(entry);
-              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_VERBOSE))
+            else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_VERBOSE))
                 game->logManager.write(entry);
-              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_STATUS))
+            else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_STATUS))
                 game->logManager.write(entry);
-              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_SYSTEM_ERROR))
+            else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_SYSTEM_ERROR))
                 game->logManager.write(entry);
-              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_DEBUG))
+            else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_DEBUG))
                 game->logManager.write(entry);
-              else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_TRACE))
-              {
+            else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_TRACE))
+            {
                 game->logManager.write(entry);
-              }
+            }
 
         }
         break;
@@ -291,7 +294,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
             if(temp)
             {
-
                 switch(temp->m_buttonId)
                 {
                     case Gui::id::START:
@@ -411,7 +413,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             std::shared_ptr<GU::Evt::OnTextChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnTextChanged>(event);
             if(temp)
             {
-
+                
                 switch(temp->m_id)
                 {
 
@@ -426,9 +428,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             }
         }
         break;
-    }
-    switch(event->getId())
-    {
         case EventId::LEFT_GOAL_COLLISION:
         {
             int currentScore = Settings::p1Score;
@@ -440,7 +439,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         case EventId::RIGHT_GOAL_COLLISION:
         {
             int currentScore = Settings::p2Score;
-	    Settings::p2Score = currentScore + 1;
+	        Settings::p2Score = currentScore + 1;
             paddle2Hud->setScore(currentScore + 1);
             reset(pongFrame);
         }
@@ -459,10 +458,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         }
         break;
         case EventId::BALL_COLLISION:
-            {
-                EventManager::inst().Post<GU::Evt::PlaySound>(static_cast<int>(soundId::BALL));
-            }
-            break;
+        {
+            EventManager::inst().Post<GU::Evt::PlaySound>(static_cast<int>(soundId::BALL));
+        }
+        break;
         case EventId::PUSH_STATE:
         {
             std::shared_ptr<GU::Evt::PushState> temp =  std::dynamic_pointer_cast<GU::Evt::PushState>(event);
@@ -478,11 +477,12 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     break;
                 }
             }
-
-        break;
         }
+        break;
         case EventId::POP_STATE:
+        {
             engin.Pop(frame);
+        } 
         break;
         case EventId::CHANGE_STATE:
         {
@@ -493,185 +493,197 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         }
         break;
         case EventId::ON_CHECK:
+        {
+            std::shared_ptr<GU::Evt::OnCheck> temp =  std::dynamic_pointer_cast<GU::Evt::OnCheck>(event);
+            if(temp)
             {
-                std::shared_ptr<GU::Evt::OnCheck> temp =  std::dynamic_pointer_cast<GU::Evt::OnCheck>(event);
-                if(temp)
+                //debugDraw.CleaFlags();
+                switch(temp->m_checkboxId)
                 {
-                    //debugDraw.CleaFlags();
-                   switch(temp->m_checkboxId)
-                   {
-                       case Gui::DEBUG_AABB:
-                            if(temp->m_checked)
-                            {
-                               debugDraw.AppendFlags(b2Draw::e_aabbBit);
-                               Settings::b2aabb = true;
-                               GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                               prefMan.write("b2aabb", Settings::b2aabb);
-                            }
-                            else
-                            {
-                                debugDraw.ClearFlags(b2Draw::e_aabbBit);
-                                Settings::b2aabb = false;
-                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                                prefMan.write("b2aabb", Settings::b2aabb);
-                            }
-                       break;
-                       case Gui::DEBUG_SHAPE:
-                            if(temp->m_checked)
-                            {
-                               debugDraw.AppendFlags(b2Draw::e_shapeBit);
-                               Settings::b2shapes = true;
-                               GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                               prefMan.write("b2shapes", Settings::b2shapes);
-                            }
-                            else
-                            {
-                                debugDraw.ClearFlags(b2Draw::e_shapeBit);
-                                Settings::b2shapes = false;
-                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                                prefMan.write("b2shapes", Settings::b2shapes);
-                            }
-                       break;
-                       case Gui::DEBUG_MASS:
-                            if(temp->m_checked)
-                            {
-                               debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
-                               Settings::b2centerOfMass = true;
-                               GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                               prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
-                            }
-                            else
-                            {
-                                debugDraw.ClearFlags(b2Draw::e_centerOfMassBit);
-                                Settings::b2centerOfMass = false;
-                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                                prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
-                            }
-                       break;
-                       case Gui::DEBUG_JOINTS:
-                            if(temp->m_checked)
-                            {
-                                debugDraw.AppendFlags(b2Draw::e_jointBit);
-                                Settings::b2joints = true;
-                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                                prefMan.write("b2joints", Settings::b2joints);
-                            }
-                            else
-                            {
-                                debugDraw.ClearFlags(b2Draw::e_jointBit);
-                                Settings::b2joints = false;
-                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                                prefMan.write("b2joints", Settings::b2joints);
-                            }
-                       break;
-                       case Gui::DEBUG_PAIRS:
-                            if(temp->m_checked)
-                            {
-                                debugDraw.AppendFlags(b2Draw::e_pairBit);
-                                Settings::b2pair = true;
-                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                                prefMan.write("b2pair", Settings::b2pair);
-                            }
-                            else
-                            {
-                                debugDraw.ClearFlags(b2Draw::e_pairBit);
-                                Settings::b2pair = false;
-                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                                prefMan.write("b2pair", Settings::b2pair);
-                            }
-                       break;
-                       case Gui::DEBUG_LOG:
+                    case Gui::DEBUG_AABB:
+                    {
+                        if(temp->m_checked)
+                        {
+                            debugDraw.AppendFlags(b2Draw::e_aabbBit);
+                            Settings::b2aabb = true;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2aabb", Settings::b2aabb);
+                        }
+                        else
+                        {
+                            debugDraw.ClearFlags(b2Draw::e_aabbBit);
+                            Settings::b2aabb = false;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2aabb", Settings::b2aabb);
+                        }
+                    }
+                    break;
+                    case Gui::DEBUG_SHAPE:
+                    { 
+                        if(temp->m_checked)
+                        {
+                            debugDraw.AppendFlags(b2Draw::e_shapeBit);
+                            Settings::b2shapes = true;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2shapes", Settings::b2shapes);
+                        }
+                        else
+                        {
+                            debugDraw.ClearFlags(b2Draw::e_shapeBit);
+                            Settings::b2shapes = false;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2shapes", Settings::b2shapes);
+                        }
+                    } 
+                    break;
+                    case Gui::DEBUG_MASS:
+                    { 
+                        if(temp->m_checked)
+                        {
+                            debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
+                            Settings::b2centerOfMass = true;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
+                        }
+                        else
+                        {
+                            debugDraw.ClearFlags(b2Draw::e_centerOfMassBit);
+                            Settings::b2centerOfMass = false;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
+                        }
+                    } 
+                    break;
+                    case Gui::DEBUG_JOINTS:
+                    { 
+                        if(temp->m_checked)
+                        {
+                            debugDraw.AppendFlags(b2Draw::e_jointBit);
+                            Settings::b2joints = true;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2joints", Settings::b2joints);
+                        }
+                        else
+                        {
+                            debugDraw.ClearFlags(b2Draw::e_jointBit);
+                            Settings::b2joints = false;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2joints", Settings::b2joints);
+                        }
+                    } 
+                    break;
+                    case Gui::DEBUG_PAIRS:
+                    { 
+                        if(temp->m_checked)
+                        {
+                            debugDraw.AppendFlags(b2Draw::e_pairBit);
+                            Settings::b2pair = true;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2pair", Settings::b2pair);
+                        }
+                        else
+                        {
+                            debugDraw.ClearFlags(b2Draw::e_pairBit);
+                            Settings::b2pair = false;
+                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                            prefMan.write("b2pair", Settings::b2pair);
+                        }
+                    } 
+                    break;
+                    case Gui::DEBUG_LOG:
                         BP_LOG_WARNING("Debug Log not implimented");
-                       break;
-                   };
-                }
+                    break;
+                };
             }
+        }
         break;
         case EventId::SLIDER_CHANGED:
+        {
+            std::shared_ptr<GU::Evt::OnSliderChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnSliderChanged>(event);
+            if(temp)
             {
-                std::shared_ptr<GU::Evt::OnSliderChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnSliderChanged>(event);
-                if(temp)
+                switch(temp->m_sliderId)
                 {
-                    switch(temp->m_sliderId)
-                    {
-                        case Gui::id::SOUND_EFFECTS:
-                            sound.setVolume(Settings::sVolume);
-                            break;
-                        case Gui::id::MUSIC:
-			    ResourceManager::getMusic().setVolume(Settings::mVolume);
-                            break;
-                    };
+                    case Gui::id::SOUND_EFFECTS:
+                        sound.setVolume(Settings::sVolume);
+                    break;
+                    case Gui::id::MUSIC:
+			             ResourceManager::getMusic().setVolume(Settings::mVolume);
+                    break;
+                };
 
-                }
             }
+        }
         break;
         case EventId::PLAY_MUSIC:
+        {
+            std::shared_ptr<GU::Evt::PlayMusic> temp = std::dynamic_pointer_cast<GU::Evt::PlayMusic>(event);
+            if(temp)
             {
-                std::shared_ptr<GU::Evt::PlayMusic> temp = std::dynamic_pointer_cast<GU::Evt::PlayMusic>(event);
-                if(temp)
-                {
-                    //Load music
-                    if(ResourceManager::loadMusic(temp->m_musicFile))
-                        ResourceManager::getMusic().play();
-		    else
-                        ResourceManager::getMusic().stop();
+                //Load music
+                if(ResourceManager::loadMusic(temp->m_musicFile))
+                    ResourceManager::getMusic().play();
+		        else
+                    ResourceManager::getMusic().stop();
 
-                }
             }
+        }
         break;
         case EventId::ON_COMBO_CHANGED:
+        {
+            std::shared_ptr<GU::Evt::OnComboChanged> temp = std::dynamic_pointer_cast<GU::Evt::OnComboChanged>(event);
+            if(temp)
             {
-                std::shared_ptr<GU::Evt::OnComboChanged> temp = std::dynamic_pointer_cast<GU::Evt::OnComboChanged>(event);
-                if(temp)
+                switch(temp->m_comboId)
                 {
-                   switch(temp->m_comboId)
-                   {
-                        case Gui::id::THEME:
+                    case Gui::id::THEME:
+                    {
+                        switch(temp->m_index)
                         {
-                            switch(temp->m_index)
-                            {
-                                case 0:
-					                          ResourceManager::loadTheme("Default");
-                                    break;
-                                case 1:
-				                            ResourceManager::loadTheme("Black");
-                                    break;
-                                case 2:
-				                            ResourceManager::loadTheme("BabyBlue");
-                                    break;
-
-                            }
-                            gui.removeAllWidgets();
-                            tgui::Panel::Ptr cust(new Gui::VideoPanel());
-                            std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
-                            p->init(window.getSize().x, window.getSize().y);
-                            gui.add(cust, "PanelPointer");
-                            }
+                            case 0:
+					            ResourceManager::loadTheme("Default");
                             break;
-                            case Gui::id::BACKGROUND:
-                            switch(temp->m_index)
-                            {
-                                case 0:
-				                    ResourceManager::loadBackground("Star.png");
-                                    backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
-                                    Settings::background = "Star";
-                                    break;
-                                case 1:
-				                            ResourceManager::loadBackground("Nebula.png");
-                                    backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
-                                    Settings::background = "Nebula";
-                                    break;
-
-                            }
-                            gui.removeAllWidgets();
-                            tgui::Panel::Ptr cust(new Gui::VideoPanel());
-                            std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
-                            p->init(window.getSize().x, window.getSize().y);
-                            gui.add(cust, "PanelPointer");
+                            case 1:
+				                ResourceManager::loadTheme("Black");
                             break;
-                   }
+                            case 2:
+				                ResourceManager::loadTheme("BabyBlue");
+                            break;
+
+                        }
+                        gui.removeAllWidgets();
+                        tgui::Panel::Ptr cust(new Gui::VideoPanel());
+                        std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
+                        p->init(window.getSize().x, window.getSize().y);
+                        gui.add(cust, "PanelPointer");
+                    }
+                    break;
+                    case Gui::id::BACKGROUND:
+                    {
+                        switch(temp->m_index)
+                        {
+                            case 0:
+				                ResourceManager::loadBackground("Star.png");
+                                backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
+                                Settings::background = "Star";
+                            break;
+                            case 1:
+				                ResourceManager::loadBackground("Nebula.png");
+                                backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
+                                Settings::background = "Nebula";
+                            break;
+
+                        }
+                        gui.removeAllWidgets();
+                        tgui::Panel::Ptr cust(new Gui::VideoPanel());
+                        std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
+                        p->init(window.getSize().x, window.getSize().y);
+                        gui.add(cust, "PanelPointer");
+                    } 
+                    break;
                 }
             }
+        }
         break;
     }
 }
@@ -679,5 +691,5 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
 
 StateBase::~StateBase()
 {
-  BP_LOG_TRACE(__FUNCTION__)
+    BP_LOG_TRACE(__FUNCTION__)
 }
