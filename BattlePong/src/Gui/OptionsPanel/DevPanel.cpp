@@ -79,10 +79,10 @@ namespace Gui
         getContentPane()->append("Pairs", pair);
 
 
-        //Create pair checkbox
+        //Create velocity iterations editbox 
         velocityIterationsBox = tgui::EditBox::create();
         velocityIterationsBox->setInputValidator("[0-9]+");
-        velocityIterationsBox->setMaximumCharacters(1);
+        velocityIterationsBox->setMaximumCharacters(2);
         velocityIterationsBox->limitTextWidth(true);
         velocityIterationsBox->setText(char(Settings::velocityIterations + '0'));      
         velocityIterationsBox->onTextChange([&](){
@@ -93,6 +93,20 @@ namespace Gui
         getContentPane()->append("Velocity Iterations", velocityIterationsBox);
         
 
+        //Create position iterations editbox 
+        positionIterationsBox= tgui::EditBox::create();
+        positionIterationsBox->setInputValidator("[0-9]+");
+        positionIterationsBox->setMaximumCharacters(2);
+        positionIterationsBox->limitTextWidth(true);
+        positionIterationsBox->setText(char(Settings::positionIterations + '0'));      
+        positionIterationsBox->onTextChange([&]()
+        {
+            if(!positionIterationsBox->getText().empty())
+                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::POSITION_ITERATIONS, positionIterationsBox->getText().toStdString());
+        });
+
+        getContentPane()->append("Position Iterations", positionIterationsBox);
+        
         //Create header for the log section
         getContentPane()->appendHeader("Log");
 

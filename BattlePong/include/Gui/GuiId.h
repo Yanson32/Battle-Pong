@@ -23,6 +23,7 @@ namespace Gui
         MULTIPLAYER_PANEL_BACK,
         HOST_PANEL_BACK,
         VELOCITY_ITERATIONS,
+        POSITION_ITERATIONS,
         DEBUG_AABB,
         DEBUG_SHAPE,
         DEBUG_MASS,

@@ -88,6 +88,7 @@ int main(int argc, char* argv[])
     Settings::b2joints = prefMan.read("b2joints", Settings::b2joints);
     Settings::b2pair = prefMan.read("b2pair", Settings::b2pair);
     Settings::velocityIterations = prefMan.read("VelocityIterations", Settings::velocityIterations);
+    Settings::positionIterations = prefMan.read("PositionIterations", Settings::positionIterations);
 
     //Load log settings
     Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);

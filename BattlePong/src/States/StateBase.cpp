@@ -424,6 +424,15 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         prefMan.write("VelocityIterations", Settings::velocityIterations);
                     } 
                     break;
+                    case Gui::id::POSITION_ITERATIONS:
+                    {
+                        std::cout << "position iterations" << Settings::positionIterations << std::endl; 
+                        Settings::positionIterations = int(temp->m_text[0] - '0'); 
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("PositionIterations", Settings::positionIterations);
+                        std::cout << "position iterations" << Settings::positionIterations << std::endl; 
+                    } 
+                    break;
                 }
             }
         }
