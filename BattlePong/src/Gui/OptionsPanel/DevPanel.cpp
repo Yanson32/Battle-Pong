@@ -35,7 +35,7 @@ namespace Gui
         getContentPane()->append("Frame Rate", frameRateBox);
         
 
-        //Create frame rate editbox 
+        //Create ball speed editbox 
         ballSpeedBox = tgui::EditBox::create();
         ballSpeedBox->setInputValidator("[0-9]+");
         ballSpeedBox->setMaximumCharacters(2);
@@ -46,6 +46,19 @@ namespace Gui
                 EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::BALL_SPEED, ballSpeedBox->getText().toStdString());
         });
         getContentPane()->append("Ball Speed", ballSpeedBox);
+        
+
+        //Create paddle speed editbox 
+        paddleSpeedBox = tgui::EditBox::create();
+        paddleSpeedBox->setInputValidator("[0-9]+");
+        paddleSpeedBox->setMaximumCharacters(3);
+        paddleSpeedBox->limitTextWidth(true);
+        paddleSpeedBox->setText(std::to_string(Settings::paddleSpeed));      
+        paddleSpeedBox->onTextChange([&](){
+            if(!paddleSpeedBox->getText().empty())
+                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::PADDLE_SPEED, paddleSpeedBox->getText().toStdString());
+        });
+        getContentPane()->append("Paddle Speed", paddleSpeedBox);
         
 
         //Create header for the box2d section

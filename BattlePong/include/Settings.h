@@ -23,6 +23,7 @@ namespace Settings
     extern const float wallThickness;
     extern StateId stateId;
     extern int ballSpeed;
+    extern int paddleSpeed;
 
     //Paddle 1 settigns
     extern std::string p1Input;

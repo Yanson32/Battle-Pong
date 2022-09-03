@@ -3,6 +3,7 @@
 #include <SFML/System/Vector2.hpp>
 #include "Objects/Paddle.h"
 #include "Macros.h"
+#include "Settings.h"
 
 PlayerInput::PlayerInput(Paddle &newPaddle): Input(newPaddle)
 {
@@ -12,7 +13,7 @@ PlayerInput::PlayerInput(Paddle &newPaddle): Input(newPaddle)
 void PlayerInput::handleInput(const Ball &ball)
 {
     UNUSED(ball);
-    const  int MOVE_SPEED = 200;
+    int MOVE_SPEED = Settings::paddleSpeed;
     sf::Vector2f up(0, -MOVE_SPEED);
     sf::Vector2f down(0, MOVE_SPEED);
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))

@@ -3,6 +3,8 @@
 #include "Objects/Paddle.h"
 #include <cmath>
 #include <iostream>
+#include "Settings.h"
+
 AI::AI(Paddle &newPaddle): Input(newPaddle)
 {
     //ctor
@@ -11,7 +13,7 @@ AI::AI(Paddle &newPaddle): Input(newPaddle)
 
 void AI::handleInput(const Ball &ball)
 {
-    const int MOVE_SPEED = 200;
+    int MOVE_SPEED = Settings::paddleSpeed;
 
     sf::Vector2f ballPos = ball.getPosition();
     sf::Vector2f paddlePos = paddle.getPosition();

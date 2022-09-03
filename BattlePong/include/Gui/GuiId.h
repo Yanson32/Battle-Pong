@@ -35,7 +35,8 @@ namespace Gui
         SOUND_EFFECTS,
         THEME,
         BACKGROUND,
-        BALL_SPEED 
+        BALL_SPEED,
+        PADDLE_SPEED
     };
 }
 #endif 

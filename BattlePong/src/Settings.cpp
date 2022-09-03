@@ -14,6 +14,7 @@ namespace Settings
     const float wallThickness = 25;
     StateId stateId = StateId::INTRO_STATE;
     int ballSpeed = 3;
+    int paddleSpeed = 200;
 
     //Paddle 1 settings
     std::string p1Input = "";

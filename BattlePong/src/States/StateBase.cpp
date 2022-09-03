@@ -271,8 +271,15 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_ERROR))
                 game->logManager.write(entry);
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_WARNING))
-                std::cout << "Log Warning is broken" << std::endl; 
+            {
+                static int count = 0;
+                if(count == 0)
+                {
+                    std::cout << "Log Warning is broken" << std::endl; 
+                    ++count;
+                }
                 //game->logManager.write(entry);
+            }
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_MESSAGE))
                 game->logManager.write(entry);
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_VERBOSE))
@@ -444,6 +451,13 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         Settings::ballSpeed = std::stoi(temp->m_text.c_str());
                         GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
                         prefMan.write("BallSpeed", Settings::ballSpeed);
+                    } 
+                    break;
+                    case Gui::id::PADDLE_SPEED:
+                    {
+                        Settings::paddleSpeed = std::stoi(temp->m_text.c_str());
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("PaddleSpeed", Settings::paddleSpeed);
                     } 
                     break;
                 }

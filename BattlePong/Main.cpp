@@ -66,6 +66,9 @@ int main(int argc, char* argv[])
     //Load game settings
     Settings::time = prefMan.read("ResetTime", Settings::time.toAnsiString()).toStdString();
     Settings::ai = prefMan.read("Difficulty", Settings::ai.toAnsiString()).toStdString();
+    Settings::frameRate = prefMan.read("FrameRate", Settings::frameRate);
+    Settings::ballSpeed = prefMan.read("BallSpeed", Settings::ballSpeed);
+    Settings::paddleSpeed = prefMan.read("PaddleSpeed", Settings::paddleSpeed);
 
     //Load keyboard preferences
     Settings::playerControlUp = prefMan.read("PlayerControlUp", Settings::playerControlUp);
@@ -89,8 +92,6 @@ int main(int argc, char* argv[])
     Settings::b2pair = prefMan.read("b2pair", Settings::b2pair);
     Settings::velocityIterations = prefMan.read("VelocityIterations", Settings::velocityIterations);
     Settings::positionIterations = prefMan.read("PositionIterations", Settings::positionIterations);
-    Settings::frameRate = prefMan.read("FrameRate", Settings::frameRate);
-    Settings::ballSpeed = prefMan.read("BallSpeed", Settings::ballSpeed);
 
     //Load log settings
     Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);
