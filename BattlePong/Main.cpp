@@ -69,6 +69,8 @@ int main(int argc, char* argv[])
     Settings::frameRate = prefMan.read("FrameRate", Settings::frameRate);
     Settings::ballSpeed = prefMan.read("BallSpeed", Settings::ballSpeed);
     Settings::paddleSpeed = prefMan.read("PaddleSpeed", Settings::paddleSpeed);
+    Settings::wallThickness = prefMan.read("WallThickness", Settings::wallThickness);
+    Settings::ballRadius = prefMan.read("BallRadius", Settings::ballRadius);
 
     //Load keyboard preferences
     Settings::playerControlUp = prefMan.read("PlayerControlUp", Settings::playerControlUp);

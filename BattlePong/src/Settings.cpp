@@ -11,8 +11,9 @@ namespace Settings
     //Game settings
     sf::String time = "30";
     sf::String ai = "Medium";
-    const float wallThickness = 25;
+    int wallThickness = 25;
     StateId stateId = StateId::INTRO_STATE;
+    int ballRadius = 5;  
     int ballSpeed = 3;
     int paddleSpeed = 200;
 

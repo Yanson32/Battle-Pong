@@ -460,6 +460,21 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         prefMan.write("PaddleSpeed", Settings::paddleSpeed);
                     } 
                     break;
+                    case Gui::id::WALL_THICKNESS:
+                    {
+                        Settings::wallThickness = std::stoi(temp->m_text.c_str());
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("WallThickness", Settings::wallThickness);
+                    } 
+                    break;
+                    case Gui::id::BALL_RADIUS:
+                    {
+                        Settings::ballRadius = std::stoi(temp->m_text.c_str());
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("BallRadius", Settings::ballRadius);
+                        std::cout << "Ball Radius " << Settings::ballRadius<< std::endl;
+                    } 
+                    break;
                 }
             }
         }

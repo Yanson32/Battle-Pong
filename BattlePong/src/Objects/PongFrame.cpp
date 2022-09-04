@@ -15,7 +15,7 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, paddleHeight),sf::Vector2f(0, paddleHeight)};
     std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
 
-    ball.reset(new Ball(world, 10));
+    ball.reset(new Ball(world, Settings::ballRadius));
 
     ground.reset(new Wall(world, horizontalPoints));
     ground->setPosition({0, wHeight - wallTh});

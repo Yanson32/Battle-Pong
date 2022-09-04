@@ -27,6 +27,8 @@ namespace Gui
             tgui::EditBox::Ptr frameRateBox;
             tgui::EditBox::Ptr ballSpeedBox;
             tgui::EditBox::Ptr paddleSpeedBox;
+            tgui::EditBox::Ptr wallThicknessBox;
+            tgui::EditBox::Ptr ballRadiusBox;
             void onLogLevel();
     };
 }

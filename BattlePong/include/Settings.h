@@ -20,8 +20,9 @@ namespace Settings
     //Game settings
     extern sf::String time;
     extern sf::String ai;
-    extern const float wallThickness;
+    extern int wallThickness;
     extern StateId stateId;
+    extern int ballRadius;  
     extern int ballSpeed;
     extern int paddleSpeed;
 

@@ -36,7 +36,9 @@ namespace Gui
         THEME,
         BACKGROUND,
         BALL_SPEED,
-        PADDLE_SPEED
+        PADDLE_SPEED,
+        WALL_THICKNESS,
+        BALL_RADIUS 
     };
 }
 #endif 

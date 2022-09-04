@@ -61,7 +61,31 @@ namespace Gui
         getContentPane()->append("Paddle Speed", paddleSpeedBox);
         
 
-        //Create header for the box2d section
+        //Create wall thickness editbox 
+        wallThicknessBox = tgui::EditBox::create(); wallThicknessBox->setInputValidator("[0-9]+");
+        wallThicknessBox->setMaximumCharacters(3);
+        wallThicknessBox->limitTextWidth(true);
+        wallThicknessBox->setText(std::to_string(Settings::wallThickness));      
+        wallThicknessBox->onTextChange([&](){
+            if(!wallThicknessBox->getText().empty())
+                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::WALL_THICKNESS, wallThicknessBox->getText().toStdString());
+        });
+        getContentPane()->append("Wall Thickness", wallThicknessBox);
+        
+
+        //Create wall thickness editbox 
+        ballRadiusBox = tgui::EditBox::create();
+        ballRadiusBox->setInputValidator("[0-9]+");
+        ballRadiusBox->setMaximumCharacters(3);
+        ballRadiusBox->limitTextWidth(true);
+        ballRadiusBox->setText(std::to_string(Settings::ballRadius));      
+        ballRadiusBox->onTextChange([&](){
+            if(!ballRadiusBox->getText().empty())
+                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::BALL_RADIUS, ballRadiusBox->getText().toStdString());
+        });
+        getContentPane()->append("Ball Radius", ballRadiusBox);
+        
+
         getContentPane()->appendSpace();
         getContentPane()->appendHeader("Box2d");
 
