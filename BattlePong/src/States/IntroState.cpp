@@ -103,7 +103,7 @@ void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     }
 
     StateBase::Update(engin, deltaTime, frame);
-    pongFrame->world->Step( Settings::timeStep, Settings::velocityIterations, Settings::positionIterations);
+    pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
     debugDraw.update();
     pongFrame->ball->update();
     pongFrame->ground->update();

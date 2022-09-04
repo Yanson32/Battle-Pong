@@ -92,7 +92,6 @@ namespace Settings
     bool b2joints = false;
     bool b2pair = false;
     
-    float timeStep = 1 / 20.0;                    ///Box2D the length of time passed to simulate (seconds)
     int velocityIterations = 8;                   ///Box2D how strongly to correct velocity
     int positionIterations = 8;                   ///Box2D how strongly to correct position
     int frameRate = 60;

@@ -93,7 +93,6 @@ namespace Settings
     extern bool b2joints;
     extern bool b2pair;
     
-    extern float timeStep;
     extern int velocityIterations;
     extern int positionIterations;
     extern int frameRate;

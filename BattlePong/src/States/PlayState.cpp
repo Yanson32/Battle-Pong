@@ -83,7 +83,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     {
         if(!isSystemPaused())
         {
-            pongFrame->world->Step( Settings::timeStep, Settings::velocityIterations, Settings::positionIterations);
+            pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
         }
         debugDraw.update();
         pongFrame->ball->update();
