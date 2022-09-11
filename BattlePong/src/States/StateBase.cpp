@@ -206,8 +206,8 @@ void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
 
     backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
     Settings::background = "Star";
-    ResourceManager::getMusic().setVolume(Settings::mVolume);
-    sound.setVolume(Settings::sVolume);
+    ResourceManager::getMusic().setVolume(Settings::musicVolume);
+    sound.setVolume(Settings::soundVolume);
 
     reset(pongFrame);
 }
@@ -656,10 +656,18 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 switch(temp->m_sliderId)
                 {
                     case Gui::id::SOUND_EFFECTS:
-                        sound.setVolume(Settings::sVolume);
+                    {
+                        sound.setVolume(Settings::soundVolume);
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("SoundVolume", Settings::soundVolume);
+                    } 
                     break;
                     case Gui::id::MUSIC:
-			             ResourceManager::getMusic().setVolume(Settings::mVolume);
+			        { 
+                        ResourceManager::getMusic().setVolume(Settings::musicVolume);
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("MusicVolume", Settings::musicVolume);
+                    } 
                     break;
                 };
 
@@ -730,6 +738,30 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                    } 
+                    break;
+                    case Gui::id::MUSIC_COMBO:
+                    {
+                        if(temp->m_index == 0)
+                        {
+                            if(ResourceManager::loadMusic("Zombies"))
+                            {
+                                ResourceManager::getMusic().play();
+                                Settings::currentSong = "Zombies";
+                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                                //prefMan.write("Music", Settings::currentSong);
+                            }
+                        }
+                        else if(temp->m_index == 1)
+                        {
+                            if(ResourceManager::loadMusic("Dreams"))
+                            {
+                                ResourceManager::getMusic().play();
+                                Settings::currentSong = "Dreams";
+                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                                //prefMan.write("Music", Settings::currentSong);
+                            }
+                        } 
                     } 
                     break;
                 }

@@ -94,7 +94,12 @@ int main(int argc, char* argv[])
     Settings::b2pair = prefMan.read("b2pair", Settings::b2pair);
     Settings::velocityIterations = prefMan.read("VelocityIterations", Settings::velocityIterations);
     Settings::positionIterations = prefMan.read("PositionIterations", Settings::positionIterations);
-
+    
+    //Sound settings
+    Settings::musicVolume = prefMan.read("MusicVolume", Settings::musicVolume);
+    Settings::soundVolume = prefMan.read("SoundVolume", Settings::soundVolume);
+    //Settings::currentSong = prefMan.read("Music", Settings::currentSong.toAnsiString());
+    
     //Load log settings
     Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);
 

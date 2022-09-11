@@ -4,6 +4,7 @@
 #include "Macros.h"
 #include "Settings.h"
 #include <GameUtilities/Event/OnSliderChanged.h>
+#include <GameUtilities/Event/OnComboChanged.h>
 #include <GameUtilities/Event/PlayMusic.h>
 #include "Gui/GuiId.h"
 
@@ -18,18 +19,18 @@ namespace Gui
 
         //Create effects slider
         effectsSlider = tgui::Slider::create(0, 100);
-        effectsSlider->setValue(Settings::mVolume);
+        effectsSlider->setValue(Settings::soundVolume);
         effectsSlider->onValueChange([&](){
-            Settings::sVolume = effectsSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(Gui::id::SOUND_EFFECTS, Settings::sVolume);
+            Settings::soundVolume = effectsSlider->getValue();
+            EventManager::inst().Post<GU::Evt::OnSliderChanged>(Gui::id::SOUND_EFFECTS, Settings::soundVolume);
         });
         getContentPane()->append("Sound Effects", effectsSlider);
 
         musicSlider = tgui::Slider::create(0, 100);
-        musicSlider->setValue(Settings::sVolume);
+        musicSlider->setValue(Settings::musicVolume);
         musicSlider->onValueChange([&](){
-            Settings::mVolume = musicSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(Gui::id::MUSIC, Settings::mVolume);
+            Settings::musicVolume = musicSlider->getValue();
+            EventManager::inst().Post<GU::Evt::OnSliderChanged>(Gui::id::MUSIC, Settings::musicVolume);
         });
         getContentPane()->append("Music Volume", musicSlider);
 
@@ -39,21 +40,7 @@ namespace Gui
         musicBox->addItem("Dreams");
         musicBox->setSelectedItem(Settings::currentSong.toAnsiString());
         musicBox->onItemSelect([&](){
-            if(musicBox->getSelectedItem() == "Zombies")
-            {
-                EventManager::inst().Post<GU::Evt::PlayMusic>("Zombies");
-            }
-            else if(musicBox->getSelectedItem() == "Dreams")
-            {
-                EventManager::inst().Post<GU::Evt::PlayMusic>("Dreams");
-            }
-            else
-            {
-                EventManager::inst().Post<GU::Evt::PlayMusic>("");
-                Settings::currentSong = "";
-            }
-
-
+                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::id::MUSIC_COMBO, musicBox->getSelectedItemIndex());
         });
         getContentPane()->append("Music Selection", musicBox);
     }

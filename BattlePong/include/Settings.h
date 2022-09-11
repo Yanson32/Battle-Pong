@@ -37,8 +37,8 @@ namespace Settings
     extern int p2Score;
 
     //music settings
-    extern int mVolume;
-    extern int sVolume;
+    extern int musicVolume;
+    extern int soundVolume;
     extern sf::String currentSong;
 
     //Button Settings

@@ -44,8 +44,8 @@ namespace Settings
     sf::Vector2f wDimensions = sf::Vector2f(800, 600);
 
     //music settings
-    int mVolume = 100;
-    int sVolume = 100;
+    int musicVolume = 100;
+    int soundVolume = 100;
     sf::String currentSong = "zombies";
 
 
