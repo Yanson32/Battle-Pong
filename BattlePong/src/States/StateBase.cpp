@@ -510,7 +510,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         break;
         case EventId::BALL_COLLISION:
         {
-            EventManager::inst().Post<GU::Evt::PlaySound>(static_cast<int>(soundId::BALL));
+            EventManager::inst().post<GU::Evt::PlaySound>(static_cast<int>(soundId::BALL));
         }
         break;
         case EventId::PUSH_STATE:

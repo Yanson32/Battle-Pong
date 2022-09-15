@@ -26,7 +26,7 @@ namespace Gui
         //Create back button
         backBtn = tgui::Button::create("Back");
         backBtn->onPress([](){
-            EventManager::inst().Post<GU::Evt::Click>(Gui::id::CONNECT_PANEL_BACK);
+            EventManager::inst().post<GU::Evt::Click>(Gui::id::CONNECT_PANEL_BACK);
         });
         
         //Create connect button

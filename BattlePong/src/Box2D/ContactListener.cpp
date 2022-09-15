@@ -53,32 +53,32 @@ void ContactListener::BeginContact(b2Contact* contact)
 
     if(IsBall(contact->GetFixtureA()))
     {
-        EventManager::inst().Post<BallCollision>();
+        EventManager::inst().post<BallCollision>();
     }
 
     if(IsBall(contact->GetFixtureB()))
     {
-        EventManager::inst().Post<BallCollision>();
+        EventManager::inst().post<BallCollision>();
     }
 
     if(IsGoal(contact->GetFixtureA()))
     {
-        EventManager::inst().Post<GoalCollision>();
+        EventManager::inst().post<GoalCollision>();
     }
 
     if(IsGoal(contact->GetFixtureB()))
     {
-        EventManager::inst().Post<GoalCollision>();
+        EventManager::inst().post<GoalCollision>();
     }
 
     if(IsPaddle(fixtureA) && IsBall(fixtureB))
     {
-        EventManager::inst().Post<PaddleCollision>(*static_cast<ObjectId*>(fixtureA->GetBody()->GetUserData()));
+        EventManager::inst().post<PaddleCollision>(*static_cast<ObjectId*>(fixtureA->GetBody()->GetUserData()));
     }
 
     if(IsPaddle(fixtureB) && IsBall(fixtureA))
     {
-        EventManager::inst().Post<PaddleCollision>(*static_cast<ObjectId*>(fixtureB->GetBody()->GetUserData()));
+        EventManager::inst().post<PaddleCollision>(*static_cast<ObjectId*>(fixtureB->GetBody()->GetUserData()));
     }
 }
 
@@ -146,13 +146,13 @@ void ContactListener::dispatchEvent(const int &id, const bool sensor) const
     {
         case ObjectId::BALL:
             if(!sensor)
-                EventManager::inst().Post<BallCollision>();
+                EventManager::inst().post<BallCollision>();
         break;
         case ObjectId::LEFT_GOAL:
-            EventManager::inst().Post<LeftPaddleGoal>();
+            EventManager::inst().post<LeftPaddleGoal>();
         break;
         case ObjectId::RIGHT_GOAL:
-            EventManager::inst().Post<RightPaddleGoal>();
+            EventManager::inst().post<RightPaddleGoal>();
         break;
         case ObjectId::RIGHT_PADDLE:
         break;

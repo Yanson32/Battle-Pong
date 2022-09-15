@@ -35,7 +35,7 @@ namespace Gui
             else if(text == "Dev")
                 id = Gui::id::DEV_TAB;
 
-            EventManager::inst().Post<GU::Evt::Click>(id);
+            EventManager::inst().post<GU::Evt::Click>(id);
         });
 
        tgui::Panel::Ptr spacer = tgui::Panel::create("");
@@ -44,7 +44,7 @@ namespace Gui
 
        tgui::Button::Ptr backButton = tgui::Button::create("Back");
         backButton->onPress([](){
-            EventManager::inst().Post<GU::Evt::Click>(Gui::id::BACK);
+            EventManager::inst().post<GU::Evt::Click>(Gui::id::BACK);
             });
 
        buttonLayout->add(backButton);

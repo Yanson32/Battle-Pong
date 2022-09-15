@@ -60,7 +60,7 @@ void PlayState::handleEvents(GU::Engin::Engin& engin, const float &deltaTime, st
     BP_LOG_MESSAGE("GameUtilities Game Loop")
     //GameUtilities event loop
     GU::Evt::EventPtr evtPtr;
-    while(EventManager::inst().Poll((evtPtr)))
+    while(EventManager::inst().poll((evtPtr)))
     {
         handleGUEvent(engin, evtPtr, frame);
     }
@@ -104,7 +104,7 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
             userMessage.setString("3");
             centerText();
             messageClock.restart();
-            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "3")
@@ -114,7 +114,7 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
             userMessage.setString("2");
             centerText();
             messageClock.restart();
-            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "2")
@@ -124,7 +124,7 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
             userMessage.setString("1");
             centerText();
             messageClock.restart();
-            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "1")
@@ -134,7 +134,7 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
             userMessage.setString("Go!");
             centerText();
             messageClock.restart();
-            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "Go!")
@@ -143,7 +143,7 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         {
             userMessage.setString("");
             messageClock.restart();
-            //EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
+            //EventManager::inst().post<PlaySound>(sf::String("Message Sound"));
             systemPause(false);
         }
     }
@@ -255,7 +255,7 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
                         std::shared_ptr<Gui::PlayPanel> p = std::dynamic_pointer_cast<Gui::PlayPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
-                        EventManager::inst().Post<GU::Evt::Click>(Gui::id::GENERAL_TAB);
+                        EventManager::inst().post<GU::Evt::Click>(Gui::id::GENERAL_TAB);
                     }
                     else
                     {

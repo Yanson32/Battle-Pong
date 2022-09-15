@@ -54,7 +54,7 @@ void CreditsState::handleEvents(GU::Engin::Engin& engin, const float &deltaTime,
     
     //GameUtilities event loop
     GU::Evt::EventPtr evtPtr;
-    while(EventManager::inst().Poll((evtPtr)))
+    while(EventManager::inst().poll((evtPtr)))
     {
         handleGUEvent(engin, evtPtr, frame);
     }
@@ -98,7 +98,7 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
             userMessage.setString("3");
             centerText();
             messageClock.restart();
-            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "3")
@@ -108,7 +108,7 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
             userMessage.setString("2");
             centerText();
             messageClock.restart();
-            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "2")
@@ -118,7 +118,7 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
             userMessage.setString("1");
             centerText();
             messageClock.restart();
-            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "1")
@@ -128,7 +128,7 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
             userMessage.setString("Go!");
             centerText();
             messageClock.restart();
-            //EventManager::inst().Post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
+            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
         }
     }
     else if(userMessage.getString() == "Go!")
@@ -137,7 +137,7 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
         {
             userMessage.setString("");
             messageClock.restart();
-            //EventManager::inst().Post<PlaySound>(sf::String("Message Sound"));
+            //EventManager::inst().post<PlaySound>(sf::String("Message Sound"));
             systemPause(false);
         }
     }

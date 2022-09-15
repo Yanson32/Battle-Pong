@@ -35,13 +35,13 @@ namespace Gui
                 id = Gui::id::NETWORK_TAB;
             else if(text == "Dev")
                 id = Gui::id::DEV_TAB;
-            EventManager::inst().Post<GU::Evt::Click>(id);
+            EventManager::inst().post<GU::Evt::Click>(id);
         });
 
 
         backBtn = tgui::Button::create("Back");
         backBtn->onPress([](){
-            EventManager::inst().Post<GU::Evt::Click>(Gui::id::OPTIONS_PANEL_BACK);
+            EventManager::inst().post<GU::Evt::Click>(Gui::id::OPTIONS_PANEL_BACK);
         });
 
 

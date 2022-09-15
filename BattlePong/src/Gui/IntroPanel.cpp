@@ -17,7 +17,7 @@ namespace Gui
         start = tgui::Button::create();
         start->setText("Start");
         start->onPress([](){
-            EventManager::inst().Post<GU::Evt::Click>(Gui::id::START);
+            EventManager::inst().post<GU::Evt::Click>(Gui::id::START);
         });
 
         tgui::HorizontalLayout::Ptr startLayout = tgui::HorizontalLayout::create();
@@ -32,7 +32,7 @@ namespace Gui
         multiPlayer = tgui::Button::create();
         multiPlayer->setText("Multiplayer");
         multiPlayer->onPress([](){
-            EventManager::inst().Post<GU::Evt::Click>(Gui::id::MULTIPLAYER);
+            EventManager::inst().post<GU::Evt::Click>(Gui::id::MULTIPLAYER);
         });
 
         tgui::HorizontalLayout::Ptr multiplayerLayout = tgui::HorizontalLayout::create();
@@ -47,7 +47,7 @@ namespace Gui
         options = tgui::Button::create();
         options->setText("Options");
         options->onPress([](){
-            EventManager::inst().Post<GU::Evt::Click>(Gui::id::OPTIONS);
+            EventManager::inst().post<GU::Evt::Click>(Gui::id::OPTIONS);
         });
         tgui::HorizontalLayout::Ptr optionLayout = tgui::HorizontalLayout::create();
         optionLayout->addSpace(1);
@@ -61,7 +61,7 @@ namespace Gui
         credits = tgui::Button::create();
         credits->setText("Credits");
         credits->onPress([](){
-            EventManager::inst().Post<GU::Evt::Click>(Gui::id::CREDITS);
+            EventManager::inst().post<GU::Evt::Click>(Gui::id::CREDITS);
         });
 
         tgui::HorizontalLayout::Ptr creditsLayout = tgui::HorizontalLayout::create();

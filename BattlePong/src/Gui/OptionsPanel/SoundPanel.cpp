@@ -22,7 +22,7 @@ namespace Gui
         effectsSlider->setValue(Settings::soundVolume);
         effectsSlider->onValueChange([&](){
             Settings::soundVolume = effectsSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(Gui::id::SOUND_EFFECTS, Settings::soundVolume);
+            EventManager::inst().post<GU::Evt::OnSliderChanged>(Gui::id::SOUND_EFFECTS, Settings::soundVolume);
         });
         getContentPane()->append("Sound Effects", effectsSlider);
 
@@ -30,7 +30,7 @@ namespace Gui
         musicSlider->setValue(Settings::musicVolume);
         musicSlider->onValueChange([&](){
             Settings::musicVolume = musicSlider->getValue();
-            EventManager::inst().Post<GU::Evt::OnSliderChanged>(Gui::id::MUSIC, Settings::musicVolume);
+            EventManager::inst().post<GU::Evt::OnSliderChanged>(Gui::id::MUSIC, Settings::musicVolume);
         });
         getContentPane()->append("Music Volume", musicSlider);
 
@@ -40,7 +40,7 @@ namespace Gui
         musicBox->addItem("Dreams");
         musicBox->setSelectedItem(Settings::currentSong.toAnsiString());
         musicBox->onItemSelect([&](){
-                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::id::MUSIC_COMBO, musicBox->getSelectedItemIndex());
+                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::MUSIC_COMBO, musicBox->getSelectedItemIndex());
         });
         getContentPane()->append("Music Selection", musicBox);
     }

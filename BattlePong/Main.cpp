@@ -178,7 +178,7 @@ int main(int argc, char* argv[])
     engin.push<IntroState>(frame, engin, window, debugDraw, gui);
 
     //Start the music
-    EventManager::inst().Post<GU::Evt::PlayMusic>("Zombies");
+    EventManager::inst().post<GU::Evt::PlayMusic>("Zombies");
 
     //Create clock for game engin
     sf::Clock timer;

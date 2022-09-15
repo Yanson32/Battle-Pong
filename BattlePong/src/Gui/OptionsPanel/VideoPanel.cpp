@@ -24,15 +24,15 @@ namespace Gui
             std::string theme = themeCombo->getSelectedItem().toStdString();
             if(theme == "Default")
             {
-                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::id::THEME, 0);
+                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::THEME, 0);
             }
             else if(theme == "Black")
             {
-                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::id::THEME, 1);
+                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::THEME, 1);
             }
             else if(theme == "Blue")
             {
-                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::id::THEME, 2);
+                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::THEME, 2);
             }
 
         });
@@ -48,11 +48,11 @@ namespace Gui
             std::string background = backgroundCombo->getSelectedItem().toStdString();
             if(background == "Star")
             {
-                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::id::BACKGROUND, 0);
+                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::BACKGROUND, 0);
             }
             else if(background == "Nebula")
             {
-                EventManager::inst().Post<GU::Evt::OnComboChanged>(Gui::id::BACKGROUND, 1);
+                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::BACKGROUND, 1);
             }
 
         });

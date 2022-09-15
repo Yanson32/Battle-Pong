@@ -30,7 +30,7 @@ namespace Gui
         frameRateBox->setText(std::to_string(Settings::frameRate));      
         frameRateBox->onTextChange([&](){
             if(!frameRateBox->getText().empty())
-                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::FRAME_RATE, frameRateBox->getText().toStdString());
+                EventManager::inst().post<GU::Evt::OnTextChanged>(Gui::id::FRAME_RATE, frameRateBox->getText().toStdString());
         });
         getContentPane()->append("Frame Rate", frameRateBox);
         
@@ -43,7 +43,7 @@ namespace Gui
         ballSpeedBox->setText(std::to_string(Settings::ballSpeed));      
         ballSpeedBox->onTextChange([&](){
             if(!ballSpeedBox->getText().empty())
-                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::BALL_SPEED, ballSpeedBox->getText().toStdString());
+                EventManager::inst().post<GU::Evt::OnTextChanged>(Gui::id::BALL_SPEED, ballSpeedBox->getText().toStdString());
         });
         getContentPane()->append("Ball Speed", ballSpeedBox);
         
@@ -56,7 +56,7 @@ namespace Gui
         paddleSpeedBox->setText(std::to_string(Settings::paddleSpeed));      
         paddleSpeedBox->onTextChange([&](){
             if(!paddleSpeedBox->getText().empty())
-                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::PADDLE_SPEED, paddleSpeedBox->getText().toStdString());
+                EventManager::inst().post<GU::Evt::OnTextChanged>(Gui::id::PADDLE_SPEED, paddleSpeedBox->getText().toStdString());
         });
         getContentPane()->append("Paddle Speed", paddleSpeedBox);
         
@@ -68,7 +68,7 @@ namespace Gui
         wallThicknessBox->setText(std::to_string(Settings::wallThickness));      
         wallThicknessBox->onTextChange([&](){
             if(!wallThicknessBox->getText().empty())
-                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::WALL_THICKNESS, wallThicknessBox->getText().toStdString());
+                EventManager::inst().post<GU::Evt::OnTextChanged>(Gui::id::WALL_THICKNESS, wallThicknessBox->getText().toStdString());
         });
         getContentPane()->append("Wall Thickness", wallThicknessBox);
         
@@ -81,7 +81,7 @@ namespace Gui
         ballRadiusBox->setText(std::to_string(Settings::ballRadius));      
         ballRadiusBox->onTextChange([&](){
             if(!ballRadiusBox->getText().empty())
-                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::BALL_RADIUS, ballRadiusBox->getText().toStdString());
+                EventManager::inst().post<GU::Evt::OnTextChanged>(Gui::id::BALL_RADIUS, ballRadiusBox->getText().toStdString());
         });
         getContentPane()->append("Ball Radius", ballRadiusBox);
         
@@ -93,10 +93,10 @@ namespace Gui
         aabb = tgui::CheckBox::create("");
 
                 aabb->onCheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_AABB, true);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_AABB, true);
         });
                 aabb->onUncheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_AABB, false);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_AABB, false);
                 });
         getContentPane()->append("AABB", aabb);
 
@@ -104,20 +104,20 @@ namespace Gui
         //Create shapes checkbox
         shapes = tgui::CheckBox::create("");
         shapes->onCheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_SHAPE, true);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_SHAPE, true);
         });
         shapes->onUncheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_SHAPE, false);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_SHAPE, false);
         });
         getContentPane()->append("Shapes", shapes);
 
         //Create joints checkbox
         joints = tgui::CheckBox::create("");
         joints->onCheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_JOINTS, true);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_JOINTS, true);
         });
         joints->onUncheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_JOINTS, false);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_JOINTS, false);
         });
 
         getContentPane()->append("Joints", joints);
@@ -125,10 +125,10 @@ namespace Gui
         //Create center of mass checkbox
         centerOfMass = tgui::CheckBox::create("");
         centerOfMass->onCheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_MASS, true);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_MASS, true);
         });
         centerOfMass->onUncheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_MASS, false);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_MASS, false);
         });
 
         getContentPane()->append("Mass", centerOfMass);
@@ -136,10 +136,10 @@ namespace Gui
         //Create pair checkbox
         pair = tgui::CheckBox::create("");
         pair->onCheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_PAIRS, true);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_PAIRS, true);
         });
         pair->onUncheck([&](){
-            EventManager::inst().Post<GU::Evt::OnCheck>(Gui::id::DEBUG_PAIRS, false);
+            EventManager::inst().post<GU::Evt::OnCheck>(Gui::id::DEBUG_PAIRS, false);
         });
 
         getContentPane()->append("Pairs", pair);
@@ -153,7 +153,7 @@ namespace Gui
         velocityIterationsBox->setText(char(Settings::velocityIterations + '0'));      
         velocityIterationsBox->onTextChange([&](){
             if(!velocityIterationsBox->getText().empty())
-                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::VELOCITY_ITERATIONS, velocityIterationsBox->getText().toStdString());
+                EventManager::inst().post<GU::Evt::OnTextChanged>(Gui::id::VELOCITY_ITERATIONS, velocityIterationsBox->getText().toStdString());
         });
 
         getContentPane()->append("Velocity Iterations", velocityIterationsBox);
@@ -168,7 +168,7 @@ namespace Gui
         positionIterationsBox->onTextChange([&]()
         {
             if(!positionIterationsBox->getText().empty())
-                EventManager::inst().Post<GU::Evt::OnTextChanged>(Gui::id::POSITION_ITERATIONS, positionIterationsBox->getText().toStdString());
+                EventManager::inst().post<GU::Evt::OnTextChanged>(Gui::id::POSITION_ITERATIONS, positionIterationsBox->getText().toStdString());
         });
 
         getContentPane()->append("Position Iterations", positionIterationsBox);
