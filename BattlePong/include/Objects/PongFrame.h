@@ -44,11 +44,11 @@ class PongFrame: public GU::Engin::Frame
         std::unique_ptr<Goal> rightGoal;         ///Pointer to the goal sensor which determines is a goal has been scored on the right player
         std::unique_ptr<PaddleStop> bottomPaddleStop;
         std::unique_ptr<PaddleStop> topPaddleStop;
-        virtual void Init();
-        virtual void Clean();
-        virtual void HandleEvents(GU::Engin::Engin& engin, const float &deltaTime);
-        virtual void Update(GU::Engin::Engin& engin, const float &deltaTime);
-        virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime);
+        virtual void init();
+        virtual void clean();
+        virtual void handleEvents(GU::Engin::Engin& engin, const float &deltaTime);
+        virtual void update(GU::Engin::Engin& engin, const float &deltaTime);
+        virtual void draw(GU::Engin::Engin& engin, const float &deltaTime);
         virtual ~PongFrame();
     private:
         ContactListener contactListener;

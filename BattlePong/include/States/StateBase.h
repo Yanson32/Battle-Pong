@@ -75,8 +75,8 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &newDebugDraw, tgui::Gui &newGui, const StateId newState);
 
 
-        virtual void Init(std::shared_ptr<GU::Engin::Frame> frame) override;
-        virtual void Clean(std::shared_ptr<GU::Engin::Frame> frame) override = 0;
+        virtual void init(std::shared_ptr<GU::Engin::Frame> frame) override;
+        virtual void clean(std::shared_ptr<GU::Engin::Frame> frame) override = 0;
 
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
@@ -84,7 +84,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override = 0;
+        virtual void handleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override = 0;
 
 
         /****************************************************************//**
@@ -93,7 +93,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
+        virtual void update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -102,7 +102,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
+        virtual void draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
 

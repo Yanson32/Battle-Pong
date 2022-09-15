@@ -27,7 +27,7 @@ CreditsState::CreditsState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWind
   BP_LOG_TRACE(__FUNCTION__)
 }
 
-void CreditsState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void CreditsState::handleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(deltaTime);
@@ -60,7 +60,7 @@ void CreditsState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime,
     }
 }
 
-void CreditsState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
@@ -71,9 +71,9 @@ void CreditsState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::
     }
     const int SECONDS = 1;
 
-    StateBase::Update(engin, deltaTime, frame);
+    StateBase::update(engin, deltaTime, frame);
 
-    if(!IsPaused())
+    if(!isPaused())
     {
         if(!isSystemPaused())
         {
@@ -144,7 +144,7 @@ void CreditsState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::
 
 }
 
-void CreditsState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void CreditsState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
@@ -153,7 +153,7 @@ void CreditsState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
        BP_LOG_FATAL_ERROR("Pointer should not be null")
        return;
     }
-    StateBase::Draw(engin, deltaTime, frame);
+    StateBase::draw(engin, deltaTime, frame);
     if(userMessage.getString() == "")
         window.draw(*pongFrame->ball);
     window.draw(userMessage);
@@ -163,12 +163,12 @@ void CreditsState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
 
 }
 
-void CreditsState::Init(std::shared_ptr<GU::Engin::Frame> frame)
+void CreditsState::init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(frame);
 
-    StateBase::Init(frame);
+    StateBase::init(frame);
     Settings::stateId = StateId::CREDITS_STATE;
 
     //Crate pong frame
@@ -190,7 +190,7 @@ void CreditsState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     centerText();
 }
 
-void CreditsState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
+void CreditsState::clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(frame);

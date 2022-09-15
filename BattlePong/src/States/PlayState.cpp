@@ -33,7 +33,7 @@ PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, De
   BP_LOG_TRACE(__FUNCTION__)
 }
 
-void PlayState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void PlayState::handleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(deltaTime);
@@ -66,7 +66,7 @@ void PlayState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, st
     }
 }
 
-void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
@@ -77,9 +77,9 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     }
     const int SECONDS = 1;
 
-    StateBase::Update(engin, deltaTime, frame);
+    StateBase::update(engin, deltaTime, frame);
 
-    if(!IsPaused())
+    if(!isPaused())
     {
         if(!isSystemPaused())
         {
@@ -150,7 +150,7 @@ void PlayState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
 
 }
 
-void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void PlayState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
@@ -159,7 +159,7 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
        BP_LOG_FATAL_ERROR("Pointer should not be null")
        return;
     }
-    StateBase::Draw(engin, deltaTime, frame);
+    StateBase::draw(engin, deltaTime, frame);
     if(userMessage.getString() == "")
         window.draw(*pongFrame->ball);
     window.draw(userMessage);
@@ -169,12 +169,12 @@ void PlayState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
 
 }
 
-void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
+void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(frame);
 
-    StateBase::Init(frame);
+    StateBase::init(frame);
     Settings::stateId = StateId::PLAY_STATE;
 
     //Crate pong frame
@@ -219,7 +219,7 @@ void PlayState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     reset(pongFrame);
 }
 
-void PlayState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
+void PlayState::clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(frame);
@@ -250,7 +250,7 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
                     if(gui.get("PanelPointer") == nullptr)
                     {
                         gui.removeAllWidgets();
-                        StateBase::Init(frame);
+                        StateBase::init(frame);
                         tgui::Panel::Ptr cust(new Gui::PlayPanel());
                         std::shared_ptr<Gui::PlayPanel> p = std::dynamic_pointer_cast<Gui::PlayPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);

@@ -51,33 +51,33 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
 
     world->SetContactListener(&contactListener);
 }
-void PongFrame::Init()
+void PongFrame::init()
 {
 
 }
 
 
-void PongFrame::Clean()
+void PongFrame::clean()
 {
 
 }
 
 
-void PongFrame::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime)
-{
-  UNUSED(engin);
-  UNUSED(deltaTime);
-}
-
-
-void PongFrame::Update(GU::Engin::Engin& engin, const float &deltaTime)
+void PongFrame::handleEvents(GU::Engin::Engin& engin, const float &deltaTime)
 {
   UNUSED(engin);
   UNUSED(deltaTime);
 }
 
 
-void PongFrame::Draw(GU::Engin::Engin& engin, const float &deltaTime)
+void PongFrame::update(GU::Engin::Engin& engin, const float &deltaTime)
+{
+  UNUSED(engin);
+  UNUSED(deltaTime);
+}
+
+
+void PongFrame::draw(GU::Engin::Engin& engin, const float &deltaTime)
 {
   UNUSED(engin);
   UNUSED(deltaTime);

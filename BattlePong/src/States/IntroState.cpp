@@ -57,7 +57,7 @@ IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, 
 }
 
 
-void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void IntroState::handleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(deltaTime);
@@ -92,7 +92,7 @@ void IntroState::HandleEvents(GU::Engin::Engin& engin, const float &deltaTime, s
 
 }
 
-void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void IntroState::update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
@@ -102,7 +102,7 @@ void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
        return;
     }
 
-    StateBase::Update(engin, deltaTime, frame);
+    StateBase::update(engin, deltaTime, frame);
     pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
     debugDraw.update();
     pongFrame->ball->update();
@@ -117,7 +117,7 @@ void IntroState::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
 
 }
 
-void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void IntroState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
 
@@ -127,7 +127,7 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
        EventManager::inst().Post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
        return;
     }
-	StateBase::Draw(engin, deltaTime, frame);
+	StateBase::draw(engin, deltaTime, frame);
 	window.draw(*pongFrame->ball);
 	window.draw(header);
 	//window.draw(header);
@@ -136,10 +136,10 @@ void IntroState::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
 
 
 
-void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
+void IntroState::init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
-    StateBase::Init(frame);
+    StateBase::init(frame);
 
     Settings::stateId = StateId::INTRO_STATE;
 
@@ -181,7 +181,7 @@ void IntroState::Init(std::shared_ptr<GU::Engin::Frame> frame)
     reset(pongFrame);
 }
 
-void IntroState::Clean(std::shared_ptr<GU::Engin::Frame> frame)
+void IntroState::clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
   BP_LOG_TRACE(__FUNCTION__)
   gui.removeAllWidgets();

@@ -175,7 +175,7 @@ int main(int argc, char* argv[])
     Game engin;
 
     //Create first GameState instance
-    engin.Push<IntroState>(frame, engin, window, debugDraw, gui);
+    engin.push<IntroState>(frame, engin, window, debugDraw, gui);
 
     //Start the music
     EventManager::inst().Post<GU::Evt::PlayMusic>("Zombies");
@@ -187,30 +187,30 @@ int main(int argc, char* argv[])
 
     try
     {
-        while (engin.IsRunning())
+        while (engin.isRunning())
         {
             accumulator += timer.restart();
 
 	          //Handle any events
-	          engin.HandleEvents(deltaTime.asSeconds(), frame);
+	          engin.handleEvents(deltaTime.asSeconds(), frame);
               
               //If we need to pop a state off the stack we need to do it
               //When the state is not in use or we will destroy the stack.
               if(engin.getPop())
               {
                 engin.setPop(false);
-                engin.Pop(frame);
+                engin.pop(frame);
               }
 
 	          //Update the game logic
 	          while(accumulator.asSeconds() >= deltaTime.asSeconds())
             {
-                engin.Update(deltaTime.asSeconds(), frame);
+                engin.update(deltaTime.asSeconds(), frame);
                 accumulator -= deltaTime;
             }
 
 	          //Draw a frame
-	          engin.Draw(deltaTime.asSeconds(), frame);
+	          engin.draw(deltaTime.asSeconds(), frame);
         }
     }
     catch(...)

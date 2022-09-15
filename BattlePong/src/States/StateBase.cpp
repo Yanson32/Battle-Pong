@@ -86,7 +86,7 @@ bool StateBase::isBallOnScreen(std::shared_ptr<PongFrame> frame)
 
 }
 
-void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(engin);
@@ -99,7 +99,7 @@ void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     }
 
     backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
-    if(!IsPaused())
+    if(!isPaused())
     {
 
         if(!isBallOnScreen(pongFrame))
@@ -114,7 +114,7 @@ void StateBase::Update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
 }
 
 
-void StateBase::Draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
+void StateBase::draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(engin);
@@ -190,7 +190,7 @@ void StateBase::centerText()
 
 }
 
-void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
+void StateBase::init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
 
@@ -201,7 +201,7 @@ void StateBase::Init(std::shared_ptr<GU::Engin::Frame> frame)
        return;
     }
     systemPause(false);
-    Pause(false);
+    pause(false);
     ResourceManager::loadBackground("Star.png");
 
     backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
@@ -220,7 +220,7 @@ void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
     switch (event.type)
     {
         case sf::Event::Closed:
-            engin.Quit();
+            engin.quit();
         break;
         case sf::Event::Resized:
         {
@@ -305,14 +305,14 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 switch(temp->m_buttonId)
                 {
                     case Gui::id::START:
-                        engin.Push<PlayState>(frame, engin, window, debugDraw, gui);
+                        engin.push<PlayState>(frame, engin, window, debugDraw, gui);
                     break;
                     case Gui::id::MULTIPLAYER_PANEL_BACK:
                     case Gui::id::OPTIONS_PANEL_BACK:
                     case Gui::id::INTRO_PANEL:
                     {
                         gui.removeAllWidgets();
-                        StateBase::Init(pongFrame);
+                        StateBase::init(pongFrame);
                         tgui::Panel::Ptr cust(new Gui::IntroPanel());
                         std::shared_ptr<Gui::IntroPanel> p = std::dynamic_pointer_cast<Gui::IntroPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
@@ -405,7 +405,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     }
                     break;
                     case Gui::id::CREDITS:
-                      engin.Push<CreditsState>(frame, engin, window, debugDraw, gui);
+                      engin.push<CreditsState>(frame, engin, window, debugDraw, gui);
                     break;
                     case Gui::id::BACK:
                     {
@@ -521,10 +521,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 switch(temp->m_id)
                 {
                     case StateId::PLAY_STATE:
-                        engin.Push<PlayState>(frame, engin, window, debugDraw, gui);
+                        engin.push<PlayState>(frame, engin, window, debugDraw, gui);
                     break;
                     case StateId::INTRO_STATE:
-                        engin.Push<IntroState>(frame, engin, window, debugDraw, gui);
+                        engin.push<IntroState>(frame, engin, window, debugDraw, gui);
                     break;
                 }
             }
@@ -532,7 +532,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         break;
         case EventId::POP_STATE:
         {
-            engin.Pop(frame);
+            engin.pop(frame);
         } 
         break;
         case EventId::CHANGE_STATE:
