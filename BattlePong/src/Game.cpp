@@ -31,3 +31,8 @@ bool Game::getPop() const
     return m_pop;
 }
 
+Game::~Game()
+{
+
+}
+

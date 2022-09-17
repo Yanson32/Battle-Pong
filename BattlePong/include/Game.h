@@ -30,6 +30,7 @@ class Game: public GU::Engin::Engin, public GU::Evt::EventManager
         GU::Log::LogManager logManager;
         void setPop(const bool pop);
         bool getPop() const; 
+        virtual ~Game();
     private:
         bool m_pop = false;
 };
