@@ -89,11 +89,14 @@ int main(int argc, char* argv[])
     //Load game settings
     Settings::time = prefMan.read("ResetTime", Settings::time.toAnsiString()).toStdString();
     Settings::ai = prefMan.read("Difficulty", Settings::ai.toAnsiString()).toStdString();
-    Settings::frameRate = prefMan.read("FrameRate", Settings::frameRate);
-    Settings::ballSpeed = prefMan.read("BallSpeed", Settings::ballSpeed);
-    Settings::paddleSpeed = prefMan.read("PaddleSpeed", Settings::paddleSpeed);
-    Settings::wallThickness = prefMan.read("WallThickness", Settings::wallThickness);
-    Settings::ballRadius = prefMan.read("BallRadius", Settings::ballRadius);
+
+    #ifdef DEBUG
+        Settings::frameRate = prefMan.read("FrameRate", Settings::frameRate);
+        Settings::ballSpeed = prefMan.read("BallSpeed", Settings::ballSpeed);
+        Settings::paddleSpeed = prefMan.read("PaddleSpeed", Settings::paddleSpeed);
+        Settings::wallThickness = prefMan.read("WallThickness", Settings::wallThickness);
+        Settings::ballRadius = prefMan.read("BallRadius", Settings::ballRadius);
+    #endif
 
     //Load keyboard preferences
     Settings::playerControlUp = prefMan.read("PlayerControlUp", Settings::playerControlUp);
@@ -110,14 +113,16 @@ int main(int argc, char* argv[])
     Settings::playerJoystickControlSelect = prefMan.read("PlayerJoystickControlSelect", Settings::playerJoystickControlSelect);
 
     //Load Box2D Settings
-    Settings::b2aabb = prefMan.read("b2aabb", Settings::b2aabb);
-    Settings::b2shapes = prefMan.read("b2shapes", Settings::b2shapes);
-    Settings::b2centerOfMass = prefMan.read("b2centerOfMass", Settings::b2centerOfMass);
-    Settings::b2joints = prefMan.read("b2joints", Settings::b2joints);
-    Settings::b2pair = prefMan.read("b2pair", Settings::b2pair);
-    Settings::velocityIterations = prefMan.read("VelocityIterations", Settings::velocityIterations);
-    Settings::positionIterations = prefMan.read("PositionIterations", Settings::positionIterations);
-    
+    #ifdef  DEBUG
+        Settings::b2aabb = prefMan.read("b2aabb", Settings::b2aabb);
+        Settings::b2shapes = prefMan.read("b2shapes", Settings::b2shapes);
+        Settings::b2centerOfMass = prefMan.read("b2centerOfMass", Settings::b2centerOfMass);
+        Settings::b2joints = prefMan.read("b2joints", Settings::b2joints);
+        Settings::b2pair = prefMan.read("b2pair", Settings::b2pair);
+        Settings::velocityIterations = prefMan.read("VelocityIterations", Settings::velocityIterations);
+        Settings::positionIterations = prefMan.read("PositionIterations", Settings::positionIterations);
+    #endif
+ 
     //Sound settings
     Settings::musicVolume = prefMan.read("MusicVolume", Settings::musicVolume);
     Settings::soundVolume = prefMan.read("SoundVolume", Settings::soundVolume);
