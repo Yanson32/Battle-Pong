@@ -4,11 +4,13 @@
 #include <GameUtilities/Log/Target/LogFileTarget.h>
 #include <GameUtilities/Log/LogFormatter.h>
 #include <GameUtilities/Log/Component/Components.h>
+#include "Settings.h"
+
 Game::Game(): GU::Engin::Engin(),
 GU::Evt::EventManager()
 {
   //Set log target
-  std::shared_ptr<GU::Log::LogTarget> target(new GU::Log::LogFileTarget("log.txt"));
+  std::shared_ptr<GU::Log::LogTarget> target(new GU::Log::LogFileTarget(Settings::logFile));
   logManager.add(target);
 
   //Set log formatter

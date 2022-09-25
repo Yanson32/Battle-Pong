@@ -16,6 +16,7 @@ namespace Settings
     int ballRadius = 5;  
     int ballSpeed = 3;
     int paddleSpeed = 200;
+    std::string logFile = "log.txt";
 
     //Paddle 1 settings
     std::string p1Input = "";

@@ -43,6 +43,7 @@ namespace Settings
     extern int ballRadius;  
     extern int ballSpeed;
     extern int paddleSpeed;
+    extern std::string logFile;
 
     //Paddle 1 settigns
     extern std::string p1Input;

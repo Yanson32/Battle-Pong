@@ -73,6 +73,11 @@ int main(int argc, char* argv[])
     //Setup the path to resource folder for the resource management system
     if(!std::filesystem::exists(ResourceManager::getPath()))
         ResourceManager::setPath(Settings::RESOURCE_INSTALL_DIR);
+   
+    //Set the log file path 
+    Settings::logFile = ResourceManager::getPath().string();
+    if(Settings::logFile.back() != '/')
+        Settings::logFile += "/Log.txt";
 
     //Set the path to the preferences file
     Settings::preferencesFile = ResourceManager::getPath().string();
