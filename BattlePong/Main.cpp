@@ -41,6 +41,7 @@
 #include "config.h"
 #include <GameUtilities/Core/String.h>
 #include <GameUtilities/Engin/Frame.h>
+#include <GameUtilities/Core/Paths.h>
 
 #include "Settings.h"
 #include "Objects/PongFrame.h"
@@ -56,9 +57,13 @@
 #include "Resources/ResourceManager.h"
 #include <GameUtilities/Core/PreferencesManager.h>
 #include <algorithm>
+#include <filesystem>
 
 int main(int argc, char* argv[])
 {
+    std::string configDir = GU::Core::getConfigDir("BattlePong").c_str();
+    std::filesystem::create_directory(configDir);
+    
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
     //So we do it in a thread.
     std::thread ipThread([&](){Settings::publicIp = sf::IpAddress::getPublicAddress().toString();});
@@ -75,12 +80,12 @@ int main(int argc, char* argv[])
         ResourceManager::setPath(Settings::RESOURCE_INSTALL_DIR);
    
     //Set the log file path 
-    Settings::logFile = ResourceManager::getPath().string();
+    Settings::logFile = configDir;
     if(Settings::logFile.back() != '/')
         Settings::logFile += "/Log.txt";
 
     //Set the path to the preferences file
-    Settings::preferencesFile = ResourceManager::getPath().string();
+    Settings::preferencesFile = configDir;
     if(Settings::preferencesFile.back() != '/')
      Settings::preferencesFile  += "/preferences.txt";
 
