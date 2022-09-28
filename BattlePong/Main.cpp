@@ -132,6 +132,9 @@ int main(int argc, char* argv[])
     Settings::musicVolume = prefMan.read("MusicVolume", Settings::musicVolume);
     Settings::soundVolume = prefMan.read("SoundVolume", Settings::soundVolume);
     //Settings::currentSong = prefMan.read("Music", Settings::currentSong.toAnsiString());
+
+    //Network settings
+    Settings::port = prefMan.read("Port", Settings::port);
     
     //Load log settings
     Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);

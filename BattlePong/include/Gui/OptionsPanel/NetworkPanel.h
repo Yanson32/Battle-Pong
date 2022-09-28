@@ -35,7 +35,7 @@ namespace Gui
             tgui::Label::Ptr localIp;
 
             tgui::Label::Ptr portBoxLabel;
-            tgui::Label::Ptr portBox;
+            tgui::EditBox::Ptr portBox;
     };
 }
 #endif // GUI_SOUNDPANEL_H

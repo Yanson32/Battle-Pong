@@ -472,7 +472,14 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         Settings::ballRadius = std::stoi(temp->m_text.c_str());
                         GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
                         prefMan.write("BallRadius", Settings::ballRadius);
-                        std::cout << "Ball Radius " << Settings::ballRadius<< std::endl;
+                    } 
+                    break;
+                    case Gui::id::PORT:
+                    {
+                        
+                        Settings::port = std::stoi(temp->m_text.c_str());
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("Port", Settings::port);
                     } 
                     break;
                 }

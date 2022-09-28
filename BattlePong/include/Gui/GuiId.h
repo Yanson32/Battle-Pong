@@ -56,7 +56,8 @@ namespace Gui
         PADDLE_SPEED,
         WALL_THICKNESS,
         BALL_RADIUS,
-        MUSIC_COMBO
+        MUSIC_COMBO,
+        PORT
     };
 }
 #endif 
