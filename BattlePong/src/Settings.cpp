@@ -47,7 +47,8 @@ namespace Settings
     //music settings
     int musicVolume = 100;
     int soundVolume = 100;
-    sf::String currentSong = "zombies";
+    int currentSong = 0;
+    std::vector<std::string> songList = {"Zombies", "Dreams"};
 
 
     std::string input  = "Medium";

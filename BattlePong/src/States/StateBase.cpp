@@ -749,26 +749,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     break;
                     case Gui::id::MUSIC_COMBO:
                     {
-                        if(temp->m_index == 0)
-                        {
-                            if(ResourceManager::loadMusic("Zombies"))
-                            {
-                                ResourceManager::getMusic().play();
-                                Settings::currentSong = "Zombies";
-                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                                //prefMan.write("Music", Settings::currentSong);
-                            }
-                        }
-                        else if(temp->m_index == 1)
-                        {
-                            if(ResourceManager::loadMusic("Dreams"))
-                            {
-                                ResourceManager::getMusic().play();
-                                Settings::currentSong = "Dreams";
-                                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                                //prefMan.write("Music", Settings::currentSong);
-                            }
-                        } 
+                        ResourceManager::loadMusic(Settings::songList[temp->m_index]);
+                        ResourceManager::getMusic().play();
+                        Settings::currentSong = temp->m_index;
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("Music", Settings::currentSong);
                     } 
                     break;
                 }

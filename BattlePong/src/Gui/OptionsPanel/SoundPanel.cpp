@@ -36,9 +36,10 @@ namespace Gui
 
 
         musicBox = tgui::ComboBox::create();
-        musicBox->addItem("Zombies");
-        musicBox->addItem("Dreams");
-        musicBox->setSelectedItem(Settings::currentSong.toAnsiString());
+        for(auto &element : Settings::songList)
+            musicBox->addItem(element);
+        
+        musicBox->setSelectedItemByIndex(Settings::currentSong);
         musicBox->onItemSelect([&](){
                 EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::MUSIC_COMBO, musicBox->getSelectedItemIndex());
         });

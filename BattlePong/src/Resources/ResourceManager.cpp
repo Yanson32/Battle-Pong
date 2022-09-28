@@ -52,7 +52,6 @@ bool ResourceManager::loadMusic(const std::string &music)
   if(std::filesystem::exists(path))
 	{
       m_music.openFromFile(path.string() + music + ".ogg");
-	    Settings::currentSong = music;
 	}
 
     return true;

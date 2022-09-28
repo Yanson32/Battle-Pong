@@ -25,6 +25,8 @@
 
 #include "Game.h"
 #include "Events/Events.h"
+#include "Events/EventManager.h"
+#include "Gui/GuiId.h"
 
 #include <SFML/Audio/Music.hpp>
 
@@ -42,6 +44,7 @@
 #include <GameUtilities/Core/String.h>
 #include <GameUtilities/Engin/Frame.h>
 #include <GameUtilities/Core/Paths.h>
+#include <GameUtilities/Event/OnComboChanged.h>
 
 #include "Settings.h"
 #include "Objects/PongFrame.h"
@@ -131,7 +134,7 @@ int main(int argc, char* argv[])
     //Sound settings
     Settings::musicVolume = prefMan.read("MusicVolume", Settings::musicVolume);
     Settings::soundVolume = prefMan.read("SoundVolume", Settings::soundVolume);
-    //Settings::currentSong = prefMan.read("Music", Settings::currentSong.toAnsiString());
+    Settings::currentSong = prefMan.read("Music", Settings::currentSong);
 
     //Network settings
     Settings::port = prefMan.read("Port", Settings::port);
@@ -195,14 +198,14 @@ int main(int argc, char* argv[])
     //Create first GameState instance
     engin.push<IntroState>(frame, engin, window, debugDraw, gui);
 
-    //Start the music
-    EventManager::inst().post<GU::Evt::PlayMusic>("Zombies");
+    //Set the song 
+    EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::MUSIC_COMBO, Settings::currentSong);
 
     //Create clock for game engin
     sf::Clock timer;
     const sf::Time deltaTime = sf::seconds(1.0f / Settings::frameRate);
     sf::Time accumulator = sf::seconds(0);
-
+    std::cout << "Songlist size " << Settings::songList.size() << std::endl;
     try
     {
         while (engin.isRunning())

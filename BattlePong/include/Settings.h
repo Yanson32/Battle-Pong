@@ -32,6 +32,7 @@
 #include "Events/EventId.h"
 #include "States/StateId.h"
 #include <string>
+#include <vector>
 
 namespace Settings
 {
@@ -58,7 +59,8 @@ namespace Settings
     //music settings
     extern int musicVolume;
     extern int soundVolume;
-    extern sf::String currentSong;
+    extern int currentSong;
+    extern std::vector<std::string> songList;
 
     //Button Settings
     extern sf::Vector2f bSize;
