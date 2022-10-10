@@ -2,7 +2,7 @@
 #include "Events/EventManager.h"
 #include "Macros.h"
 #include "Settings.h"
-#include <GameUtilities/Event/OnComboChanged.h>
+#include <GameUtilities/Event/Events/Widget/OnItemSelected.h>
 #include "Gui/GuiId.h"
 #include <sstream>
 
@@ -24,15 +24,15 @@ namespace Gui
             std::string theme = themeCombo->getSelectedItem().toStdString();
             if(theme == "Default")
             {
-                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::THEME, 0);
+                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::THEME, 0);
             }
             else if(theme == "Black")
             {
-                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::THEME, 1);
+                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::THEME, 1);
             }
             else if(theme == "Blue")
             {
-                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::THEME, 2);
+                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::THEME, 2);
             }
 
         });
@@ -48,11 +48,11 @@ namespace Gui
             std::string background = backgroundCombo->getSelectedItem().toStdString();
             if(background == "Star")
             {
-                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::BACKGROUND, 0);
+                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::BACKGROUND, 0);
             }
             else if(background == "Nebula")
             {
-                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::BACKGROUND, 1);
+                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::BACKGROUND, 1);
             }
 
         });

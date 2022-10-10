@@ -1,6 +1,6 @@
 #include "Gui/OptionsPanel/ConnectPanel.h"
 #include "Events/EventManager.h"
-#include <GameUtilities/Event/Click.h>
+#include <GameUtilities/Event/Events/Mouse/OnClick.h>
 #include "Gui/GuiId.h"
 #include <SFML/Network.hpp>
 
@@ -26,7 +26,7 @@ namespace Gui
         //Create back button
         backBtn = tgui::Button::create("Back");
         backBtn->onPress([](){
-            EventManager::inst().post<GU::Evt::Click>(Gui::id::CONNECT_PANEL_BACK);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::CONNECT_PANEL_BACK);
         });
         
         //Create connect button

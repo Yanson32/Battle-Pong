@@ -255,7 +255,7 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
                         std::shared_ptr<Gui::PlayPanel> p = std::dynamic_pointer_cast<Gui::PlayPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
-                        EventManager::inst().post<GU::Evt::Click>(Gui::id::GENERAL_TAB);
+                        EventManager::inst().post<GU::Evt::OnClick>(Gui::id::GENERAL_TAB);
                     }
                     else
                     {

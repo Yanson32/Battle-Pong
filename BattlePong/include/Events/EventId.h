@@ -31,7 +31,7 @@ enum EventId
     CLICK                   = static_cast<int>(GU::Evt::EventId::CLICK),
     SLIDER_CHANGED          = static_cast<int>(GU::Evt::EventId::SLIDER_CHANGED),
     ON_CHECK                = static_cast<int>(GU::Evt::EventId::ON_CHECK),
-    ON_COMBO_CHANGED        = static_cast<int>(GU::Evt::EventId::ON_COMBO_CHANGED),
+    ON_ITEM_SELECTED        = static_cast<int>(GU::Evt::EventId::ON_ITEM_SELECTED),
     LOG                     = static_cast<int>(GU::Evt::EventId::LOG),
     ON_TEXT_CHANGED         = static_cast<int>(GU::Evt::EventId::ON_TEXT_CHANGED),
     GU_HIGHEST              = static_cast<int>(GU::Evt::EventId::HIGHEST),

@@ -1,7 +1,7 @@
 #include "Gui/OptionsPanel/HostPanel.h"
 #include "Gui/GuiId.h"
 #include "Events/EventManager.h"
-#include <GameUtilities/Event/Click.h>
+#include <GameUtilities/Event/Events/Mouse/OnClick.h>
 #include <SFML/Network.hpp>
 #include "Settings.h"
 
@@ -32,7 +32,7 @@ namespace Gui
         //Create back button
         backBtn = tgui::Button::create("Back");
         backBtn->onPress([](){
-            EventManager::inst().post<GU::Evt::Click>(Gui::id::HOST_PANEL_BACK);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::HOST_PANEL_BACK);
         });
 
         //Create host button

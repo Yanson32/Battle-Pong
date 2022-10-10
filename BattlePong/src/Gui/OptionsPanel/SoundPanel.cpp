@@ -3,9 +3,9 @@
 #include "Events/EventManager.h"
 #include "Macros.h"
 #include "Settings.h"
-#include <GameUtilities/Event/OnSliderChanged.h>
-#include <GameUtilities/Event/OnComboChanged.h>
-#include <GameUtilities/Event/PlayMusic.h>
+#include <GameUtilities/Event/Events/Widget/OnSliderChanged.h>
+#include <GameUtilities/Event/Events/Widget/OnItemSelected.h>
+#include <GameUtilities/Event/Events/OnPlayMusic.h>
 #include "Gui/GuiId.h"
 
 namespace Gui
@@ -22,7 +22,7 @@ namespace Gui
         effectsSlider->setValue(Settings::soundVolume);
         effectsSlider->onValueChange([&](){
             Settings::soundVolume = effectsSlider->getValue();
-            EventManager::inst().post<GU::Evt::OnSliderChanged>(Gui::id::SOUND_EFFECTS, Settings::soundVolume);
+            EventManager::inst().post<GU::Evt::OnSliderChanged>(nullptr, Gui::id::SOUND_EFFECTS, Settings::soundVolume);
         });
         getContentPane()->append("Sound Effects", effectsSlider);
 
@@ -30,7 +30,7 @@ namespace Gui
         musicSlider->setValue(Settings::musicVolume);
         musicSlider->onValueChange([&](){
             Settings::musicVolume = musicSlider->getValue();
-            EventManager::inst().post<GU::Evt::OnSliderChanged>(Gui::id::MUSIC, Settings::musicVolume);
+            EventManager::inst().post<GU::Evt::OnSliderChanged>(nullptr, Gui::id::MUSIC, Settings::musicVolume);
         });
         getContentPane()->append("Music Volume", musicSlider);
 
@@ -41,7 +41,7 @@ namespace Gui
         
         musicBox->setSelectedItemByIndex(Settings::currentSong);
         musicBox->onItemSelect([&](){
-                EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::MUSIC_COMBO, musicBox->getSelectedItemIndex());
+                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::MUSIC_COMBO, musicBox->getSelectedItemIndex());
         });
         getContentPane()->append("Music Selection", musicBox);
     }

@@ -7,7 +7,7 @@
 #include <GameUtilities/Event/Events.h>
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Engin/Engin.h>
-#include <GameUtilities/Event/LogEvent.h>
+#include <GameUtilities/Event/Events/OnLog.h>
 #include <GameUtilities/Event/OnTextChanged.h>
 #include <GameUtilities/Log/LogEntry.h>
 #include <GameUtilities/Log/Component/Components.h>
@@ -252,7 +252,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
     {
         case EventId::LOG:
         {
-            std::shared_ptr<GU::Evt::LogEvent> temp =  std::dynamic_pointer_cast<GU::Evt::LogEvent>(event);
+            std::shared_ptr<GU::Evt::OnLog> temp =  std::dynamic_pointer_cast<GU::Evt::OnLog>(event);
             Game *game = static_cast<Game*>(&engin);
             std::shared_ptr<GU::Log::LogEntry> entry(new GU::Log::LogEntry());
             entry->add<GU::Log::MsgComponent>(temp->getMessage());
@@ -299,7 +299,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         break;
         case EventId::CLICK:
         {
-            std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
+            std::shared_ptr<GU::Evt::OnClick> temp =  std::dynamic_pointer_cast<GU::Evt::OnClick>(event);
             if(temp)
             {
                 switch(temp->m_buttonId)
@@ -422,7 +422,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             if(temp)
             {
                 
-                switch(temp->m_id)
+                switch(temp->getId())
                 {
 
                     case Gui::id::VELOCITY_ITERATIONS:
@@ -504,7 +504,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         break;
         case EventId::PLAY_SOUND:
         {
-            std::shared_ptr<GU::Evt::PlaySound> temp =  std::dynamic_pointer_cast<GU::Evt::PlaySound>(event);
+            std::shared_ptr<GU::Evt::OnPlaySound> temp =  std::dynamic_pointer_cast<GU::Evt::OnPlaySound>(event);
             if(temp)
             {
                 if(ResourceManager::isLoaded(static_cast<soundId>(temp->m_soundId)))
@@ -517,15 +517,15 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         break;
         case EventId::BALL_COLLISION:
         {
-            EventManager::inst().post<GU::Evt::PlaySound>(static_cast<int>(soundId::BALL));
+            EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL));
         }
         break;
         case EventId::PUSH_STATE:
         {
-            std::shared_ptr<GU::Evt::PushState> temp =  std::dynamic_pointer_cast<GU::Evt::PushState>(event);
+            std::shared_ptr<GU::Evt::OnPushState> temp =  std::dynamic_pointer_cast<GU::Evt::OnPushState>(event);
             if(temp)
             {
-                switch(temp->m_id)
+                switch(temp->getId())
                 {
                     case StateId::PLAY_STATE:
                         engin.push<PlayState>(frame, engin, window, debugDraw, gui);
@@ -544,7 +544,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         break;
         case EventId::CHANGE_STATE:
         {
-            std::shared_ptr<GU::Evt::ChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::ChangeState>(event);
+            std::shared_ptr<GU::Evt::OnChangeState> temp =  std::dynamic_pointer_cast<GU::Evt::OnChangeState>(event);
             if(temp)
             {
             }
@@ -556,7 +556,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             if(temp)
             {
                 //debugDraw.CleaFlags();
-                switch(temp->m_checkboxId)
+                switch(temp->m_widgetId)
                 {
                     case Gui::DEBUG_AABB:
                     {
@@ -660,7 +660,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             std::shared_ptr<GU::Evt::OnSliderChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnSliderChanged>(event);
             if(temp)
             {
-                switch(temp->m_sliderId)
+                switch(temp->m_widgetId)
                 {
                     case Gui::id::SOUND_EFFECTS:
                     {
@@ -683,7 +683,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         break;
         case EventId::PLAY_MUSIC:
         {
-            std::shared_ptr<GU::Evt::PlayMusic> temp = std::dynamic_pointer_cast<GU::Evt::PlayMusic>(event);
+            std::shared_ptr<GU::Evt::OnPlayMusic> temp = std::dynamic_pointer_cast<GU::Evt::OnPlayMusic>(event);
             if(temp)
             {
                 //Load music
@@ -695,12 +695,12 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             }
         }
         break;
-        case EventId::ON_COMBO_CHANGED:
+        case EventId::ON_ITEM_SELECTED:
         {
-            std::shared_ptr<GU::Evt::OnComboChanged> temp = std::dynamic_pointer_cast<GU::Evt::OnComboChanged>(event);
+            std::shared_ptr<GU::Evt::OnItemSelected> temp = std::dynamic_pointer_cast<GU::Evt::OnItemSelected>(event);
             if(temp)
             {
-                switch(temp->m_comboId)
+                switch(temp->m_widgetId)
                 {
                     case Gui::id::THEME:
                     {

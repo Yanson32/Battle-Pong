@@ -18,15 +18,13 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
 
-#include "GameUtilities/Event/Pop.h"
-#include "GameUtilities/Event/ChangeState.h"
-#include "GameUtilities/Event/PushState.h"
-#include "GameUtilities/Event/PlayMusic.h"
-#include "GameUtilities/Event/PlaySound.h"
-#include "GameUtilities/Event/MusicVolumeChanged.h"
-#include "GameUtilities/Event/SoundVolumeChanged.h"
-#include "GameUtilities/Event/OnSliderChanged.h"
-#include "GameUtilities/Event/Click.h"
+#include "GameUtilities/Event/Events/OnPop.h"
+#include "GameUtilities/Event/Events/OnChangeState.h"
+#include "GameUtilities/Event/Events/OnPushState.h"
+#include "GameUtilities/Event/Events/OnPlayMusic.h"
+#include "GameUtilities/Event/Events/OnPlaySound.h"
+#include "GameUtilities/Event/Events/Widget/OnSliderChanged.h"
+#include "GameUtilities/Event/Events/Mouse/OnClick.h"
 
 #include "Events/BallCollision.h"
 #include "Events/EventManager.h"

@@ -3,9 +3,9 @@
 #include "Events/EventManager.h"
 #include "Macros.h"
 #include "Settings.h"
-#include <GameUtilities/Event/OnSliderChanged.h>
-#include <GameUtilities/Event/OnTextChanged.h>
-#include <GameUtilities/Event/PlayMusic.h>
+#include <GameUtilities/Event/Events/Widget/OnSliderChanged.h>
+#include <GameUtilities/Event/Events/Widget/OnTextChanged.h>
+#include <GameUtilities/Event/Events/OnPlayMusic.h>
 #include "Gui/GuiId.h"
 #include "Settings.h"
 #include <SFML/System/String.hpp>
@@ -32,7 +32,7 @@ namespace Gui
         portBox->setText(toTguiString(Settings::port));      
         portBox->onTextChange([&](){
             if(!portBox->getText().empty())
-                EventManager::inst().post<GU::Evt::OnTextChanged>(Gui::id::PORT, portBox->getText().toStdString());
+                EventManager::inst().post<GU::Evt::OnTextChanged>(nullptr, Gui::id::PORT, portBox->getText().toStdString());
         });
         getContentPane()->append("Port", portBox); 
         

@@ -44,7 +44,7 @@
 #include <GameUtilities/Core/String.h>
 #include <GameUtilities/Engin/Frame.h>
 #include <GameUtilities/Core/Paths.h>
-#include <GameUtilities/Event/OnComboChanged.h>
+#include <GameUtilities/Event/Events/Widget/OnItemSelected.h>
 
 #include "Settings.h"
 #include "Objects/PongFrame.h"
@@ -199,7 +199,7 @@ int main(int argc, char* argv[])
     engin.push<IntroState>(frame, engin, window, debugDraw, gui);
 
     //Set the song 
-    EventManager::inst().post<GU::Evt::OnComboChanged>(Gui::id::MUSIC_COMBO, Settings::currentSong);
+    EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::MUSIC_COMBO, Settings::currentSong);
 
     //Create clock for game engin
     sf::Clock timer;

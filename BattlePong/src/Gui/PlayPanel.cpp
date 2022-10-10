@@ -1,8 +1,8 @@
 #include "Gui/PlayPanel.h"
 #include "Gui/GuiId.h"
 #include "Events/EventManager.h"
-#include <GameUtilities/Event/Click.h>
-#include <GameUtilities/Event/Pop.h>
+#include <GameUtilities/Event/Events/Mouse/OnClick.h>
+#include <GameUtilities/Event/Events/OnPop.h>
 #include <SFML/Network.hpp>
 
 
@@ -35,7 +35,7 @@ namespace Gui
             else if(text == "Dev")
                 id = Gui::id::DEV_TAB;
 
-            EventManager::inst().post<GU::Evt::Click>(id);
+            EventManager::inst().post<GU::Evt::OnClick>(id);
         });
 
        tgui::Panel::Ptr spacer = tgui::Panel::create("");
@@ -44,7 +44,7 @@ namespace Gui
 
        tgui::Button::Ptr backButton = tgui::Button::create("Back");
         backButton->onPress([](){
-            EventManager::inst().post<GU::Evt::Click>(Gui::id::BACK);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::BACK);
             });
 
        buttonLayout->add(backButton);

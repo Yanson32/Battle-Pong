@@ -1,6 +1,6 @@
 #include "Gui/OptionsPanel/MultiplayerPanel.h"
 #include "Events/EventManager.h"
-#include <GameUtilities/Event/Click.h>
+#include <GameUtilities/Event/Events/Mouse/OnClick.h>
 #include "Gui/GuiId.h"
 #include <SFML/Network.hpp>
 
@@ -15,7 +15,7 @@ namespace Gui
         //Create host button
         hostButton = tgui::Button::create("Host");
         hostButton->onPress([](){
-            EventManager::inst().post<GU::Evt::Click>(Gui::id::HOST);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::HOST);
         });
         tgui::HorizontalLayout::Ptr layout1 = tgui::HorizontalLayout::create();
         tgui::Panel::Ptr spacer2 = tgui::Panel::create();
@@ -30,7 +30,7 @@ namespace Gui
         //Create connect button
         connectButton = tgui::Button::create("Connect");
         connectButton->onPress([](){
-            EventManager::inst().post<GU::Evt::Click>(Gui::id::CONNECT);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::CONNECT);
         });
         getContentPane()->append(tgui::HorizontalLayout::create()); 
         
@@ -57,7 +57,7 @@ namespace Gui
         backBtn = tgui::Button::create("Back");
         buttonLayout->add(backBtn);
         backBtn->onPress([](){
-            EventManager::inst().post<GU::Evt::Click>(Gui::id::MULTIPLAYER_PANEL_BACK);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::MULTIPLAYER_PANEL_BACK);
         });
         
 

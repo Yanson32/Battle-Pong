@@ -1,7 +1,7 @@
 #include "Gui/OptionsPanel/OptionsPanel.h"
 #include "Events/EventManager.h"
 #include "Events/EventBase.h"
-#include <GameUtilities/Event/Click.h>
+#include <GameUtilities/Event/Events/Mouse/OnClick.h>
 #include "Gui/GuiId.h"
 
 namespace Gui
@@ -35,13 +35,13 @@ namespace Gui
                 id = Gui::id::NETWORK_TAB;
             else if(text == "Dev")
                 id = Gui::id::DEV_TAB;
-            EventManager::inst().post<GU::Evt::Click>(id);
+            EventManager::inst().post<GU::Evt::OnClick>(id);
         });
 
 
         backBtn = tgui::Button::create("Back");
         backBtn->onPress([](){
-            EventManager::inst().post<GU::Evt::Click>(Gui::id::OPTIONS_PANEL_BACK);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::OPTIONS_PANEL_BACK);
         });
 
 

@@ -3,10 +3,10 @@
 #include <GameUtilities/Event/Event.h>
 #include <GameUtilities/Event/EventQueue.h>
 #include <GameUtilities/Event/PushState.h>
-#include <GameUtilities/Event/Click.h>
+#include <GameUtilities/Event/Events/Mouse/OnClick.h>
 #include <GameUtilities/Event/OnComboChanged.h>
 
-#include <GameUtilities/Event/LogEvent.h>
+#include <GameUtilities/Event/Events/OnLog.h>
 #include <GameUtilities/Log/LogType.h>
 #include "GameUtilities/Event/PlaySound.h"
 #include <GameUtilities/Core/Macros.h>
@@ -64,7 +64,7 @@ void IntroState::handleEvents(GU::Engin::Engin& engin, const float &deltaTime, s
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       EventManager::inst().post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
+       EventManager::inst().post<GU::Evt::OnLog>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
        return;
     }
 
@@ -98,7 +98,7 @@ void IntroState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       EventManager::inst().post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
+       EventManager::inst().post<GU::Evt::OnLog>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
        return;
     }
 
@@ -124,7 +124,7 @@ void IntroState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       EventManager::inst().post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
+       EventManager::inst().post<GU::Evt::OnLog>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
        return;
     }
 	StateBase::draw(engin, deltaTime, frame);
@@ -147,7 +147,7 @@ void IntroState::init(std::shared_ptr<GU::Engin::Frame> frame)
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
-       EventManager::inst().post<GU::Evt::LogEvent>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
+       EventManager::inst().post<GU::Evt::OnLog>("Pointer should not be null", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__));
 
        return;
     }
@@ -307,7 +307,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
     {
         case EventId::CLICK:
 	      {
-            std::shared_ptr<GU::Evt::Click> temp =  std::dynamic_pointer_cast<GU::Evt::Click>(event);
+            std::shared_ptr<GU::Evt::OnClick> temp =  std::dynamic_pointer_cast<GU::Evt::OnClick>(event);
             if(temp)
             {
                 switch(temp->m_buttonId)
@@ -337,7 +337,7 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
 	         }
 	    }
 	    break;
-        case EventId::ON_COMBO_CHANGED:
+        case EventId::ON_ITEM_SELECTED:
             {
     	       //Load title image
     	       if(ResourceManager::isLoaded(textureId::TITLE))
