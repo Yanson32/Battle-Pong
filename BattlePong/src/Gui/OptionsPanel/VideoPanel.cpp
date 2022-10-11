@@ -16,25 +16,12 @@ namespace Gui
 
         //Theme selection box
         themeCombo = tgui::ComboBox::create();
-        themeCombo->addItem("Default");
-        themeCombo->addItem("Black");
-        themeCombo->addItem("Blue");
-        themeCombo->setSelectedItem(Settings::theme);
+        for(auto &element: Settings::themes)
+            themeCombo->addItem(element);
+        
+        themeCombo->setSelectedItem(Settings::currentTheme);
         themeCombo->onItemSelect([&](){
-            std::string theme = themeCombo->getSelectedItem().toStdString();
-            if(theme == "Default")
-            {
-                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::THEME, 0);
-            }
-            else if(theme == "Black")
-            {
-                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::THEME, 1);
-            }
-            else if(theme == "Blue")
-            {
-                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::THEME, 2);
-            }
-
+            EventManager::inst().post<GU::Evt::OnItemSelected>(themeCombo.get(), Gui::id::THEME, themeCombo->getSelectedItemIndex());
         });
         getContentPane()->append("Theme", themeCombo);
 
@@ -48,11 +35,11 @@ namespace Gui
             std::string background = backgroundCombo->getSelectedItem().toStdString();
             if(background == "Star")
             {
-                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::BACKGROUND, 0);
+                EventManager::inst().post<GU::Evt::OnItemSelected>(backgroundCombo.get(), Gui::id::BACKGROUND, 0);
             }
             else if(background == "Nebula")
             {
-                EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::BACKGROUND, 1);
+                EventManager::inst().post<GU::Evt::OnItemSelected>(backgroundCombo.get(), Gui::id::BACKGROUND, 1);
             }
 
         });
@@ -74,7 +61,7 @@ namespace Gui
             resolutionCombo->addItem(ss.str());
         }
 
-        resolutionCombo->setSelectedItem(Settings::theme);
+        //resolutionCombo->setSelectedItem(Settings::dimension);
         resolutionCombo->onItemSelect([&](){
             std::string theme = resolutionCombo->getSelectedItem().toStdString();
         });

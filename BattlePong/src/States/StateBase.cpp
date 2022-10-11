@@ -422,7 +422,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             if(temp)
             {
                 
-                switch(temp->getId())
+                switch(temp->m_widgetId)
                 {
 
                     case Gui::id::VELOCITY_ITERATIONS:
@@ -704,19 +704,10 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 {
                     case Gui::id::THEME:
                     {
-                        switch(temp->m_index)
-                        {
-                            case 0:
-					            ResourceManager::loadTheme("Default");
-                            break;
-                            case 1:
-				                ResourceManager::loadTheme("Black");
-                            break;
-                            case 2:
-				                ResourceManager::loadTheme("BabyBlue");
-                            break;
-
-                        }
+                        ResourceManager::loadTheme(Settings::themes[temp->m_index]);
+                        Settings::currentTheme = Settings::themes[temp->m_index];
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("Theme", Settings::currentTheme);
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::VideoPanel());
                         std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);

@@ -66,8 +66,9 @@ namespace Settings
 
 
     //Theme
-    std::string theme = "Black";
+    std::string currentTheme = "Black";
     std::string background = "Star";
+    std::vector<std::string> themes = {"Default", "Black", "BabyBlue"};
 
     //Network
     sf::TcpSocket socket;

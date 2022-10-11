@@ -97,6 +97,7 @@ int main(int argc, char* argv[])
     //Load game settings
     Settings::time = prefMan.read("ResetTime", Settings::time.toAnsiString()).toStdString();
     Settings::ai = prefMan.read("Difficulty", Settings::ai.toAnsiString()).toStdString();
+    Settings::currentTheme = prefMan.read("Theme", Settings::currentTheme);
 
     #ifdef DEBUG
         Settings::frameRate = prefMan.read("FrameRate", Settings::frameRate);
@@ -143,7 +144,7 @@ int main(int argc, char* argv[])
     Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);
 
     //Load tgui theme
-    ResourceManager::loadTheme(Settings::theme);
+    ResourceManager::loadTheme(Settings::currentTheme);
 
     //Set the application icon
     sf::Image icon;

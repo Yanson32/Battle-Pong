@@ -97,8 +97,9 @@ namespace Settings
     extern std::string localIp;
 
     //Theme settings
-    extern std::string theme;
+    extern std::string currentTheme;
     extern std::string background;
+    extern std::vector<std::string> themes;
 
     extern std::string preferencesFile;
 

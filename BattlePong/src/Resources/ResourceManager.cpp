@@ -84,7 +84,7 @@ void ResourceManager::loadTexture(const textureId &texture, const std::string &n
         std::filesystem::path path = m_path;
         path += std::filesystem::path("/Textures/");
         if(std::filesystem::exists(path))
-            m_texture.load(texture, sf::String(path.string() + Settings::theme + "/" + name));
+            m_texture.load(texture, sf::String(path.string() + Settings::currentTheme + "/" + name));
 
     }
 
@@ -115,16 +115,14 @@ void ResourceManager::loadTheme(const std::string &name)
    if(name == "Default")
    {
         tgui::Theme::setDefault(nullptr);
-        Settings::theme = name;
+        Settings::currentTheme = name;
    }
    else if(std::filesystem::exists(path))
    {
         tgui::Theme::setDefault(path.string() + name + ".txt");
-        Settings::theme = name;
+        Settings::currentTheme = name;
    }
 
-   if(name == "BabyBlue")
-           Settings::theme = "Blue";
 }
 
 
