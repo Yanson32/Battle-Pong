@@ -27,21 +27,12 @@ namespace Gui
 
         //Background
         backgroundCombo = tgui::ComboBox::create();
-        backgroundCombo->addItem("Star");
-        backgroundCombo->addItem("Nebula");
-        backgroundCombo->setSelectedItem(Settings::background);
+        for(auto &element : Settings::backgrounds)
+            backgroundCombo->addItem(element);
+        backgroundCombo->setSelectedItem(Settings::currentBackground);
         backgroundCombo->onItemSelect([&]()
         {
-            std::string background = backgroundCombo->getSelectedItem().toStdString();
-            if(background == "Star")
-            {
-                EventManager::inst().post<GU::Evt::OnItemSelected>(backgroundCombo.get(), Gui::id::BACKGROUND, 0);
-            }
-            else if(background == "Nebula")
-            {
-                EventManager::inst().post<GU::Evt::OnItemSelected>(backgroundCombo.get(), Gui::id::BACKGROUND, 1);
-            }
-
+            EventManager::inst().post<GU::Evt::OnItemSelected>(backgroundCombo.get(), Gui::id::BACKGROUND, backgroundCombo->getSelectedItemIndex());
         });
         getContentPane()->append("Background", backgroundCombo);
 

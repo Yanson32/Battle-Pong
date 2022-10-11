@@ -103,6 +103,7 @@ void ResourceManager::loadBackground(const std::string &name)
         path += std::filesystem::path("/Textures/Backgrounds/");
         if(std::filesystem::exists(path))
             m_texture.load(textureId::BACKGROUND, path.string()  + name);
+        std::cout << "Background " << path.string() + name << std::endl;
     }
 
 }

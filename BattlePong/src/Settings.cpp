@@ -66,8 +66,9 @@ namespace Settings
 
 
     //Theme
+    std::string currentBackground = "Star";
+    std::vector<std::string> backgrounds = {"Star", "Nebula"};
     std::string currentTheme = "Black";
-    std::string background = "Star";
     std::vector<std::string> themes = {"Default", "Black", "BabyBlue"};
 
     //Network

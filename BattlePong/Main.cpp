@@ -98,6 +98,7 @@ int main(int argc, char* argv[])
     Settings::time = prefMan.read("ResetTime", Settings::time.toAnsiString()).toStdString();
     Settings::ai = prefMan.read("Difficulty", Settings::ai.toAnsiString()).toStdString();
     Settings::currentTheme = prefMan.read("Theme", Settings::currentTheme);
+    Settings::currentBackground = prefMan.read("Background", Settings::currentBackground);
 
     #ifdef DEBUG
         Settings::frameRate = prefMan.read("FrameRate", Settings::frameRate);

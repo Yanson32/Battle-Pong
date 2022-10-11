@@ -202,10 +202,10 @@ void StateBase::init(std::shared_ptr<GU::Engin::Frame> frame)
     }
     systemPause(false);
     pause(false);
-    ResourceManager::loadBackground("Star.png");
-
+    ResourceManager::loadBackground(Settings::currentBackground + ".png");
     backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
-    Settings::background = "Star";
+    backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
+
     ResourceManager::getMusic().setVolume(Settings::musicVolume);
     sound.setVolume(Settings::soundVolume);
 
@@ -717,20 +717,14 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     break;
                     case Gui::id::BACKGROUND:
                     {
-                        switch(temp->m_index)
-                        {
-                            case 0:
-				                ResourceManager::loadBackground("Star.png");
-                                backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
-                                Settings::background = "Star";
-                            break;
-                            case 1:
-				                ResourceManager::loadBackground("Nebula.png");
-                                backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
-                                Settings::background = "Nebula";
-                            break;
+                        ResourceManager::loadBackground(Settings::backgrounds[temp->m_index] + ".png");
+                        Settings::currentBackground = Settings::backgrounds[temp->m_index];
+                        backgroundRect.setTexture(nullptr);
+                        backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
+                        backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
+                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+                        prefMan.write("Background", Settings::currentBackground);
 
-                        }
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::VideoPanel());
                         std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
