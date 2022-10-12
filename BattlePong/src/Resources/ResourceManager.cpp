@@ -25,6 +25,13 @@ void ResourceManager::loadSound(const soundId &sound, const std::string &name)
 
 }
 
+void ResourceManager::loadSound(const soundId &sound, const void* data, const std::size_t &bytes)
+{
+    if(!m_sound.isLoaded(sound))
+    {
+        m_sound.load(sound,data, bytes);
+    }
+}
 
 bool ResourceManager::isLoaded(const soundId &sound)
 {

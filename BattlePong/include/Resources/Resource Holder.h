@@ -25,6 +25,7 @@ class ResourceHolder//: NonCopyable
 
         template <typename Parameter>
         void                load (Identifier id, const std::string& filename, const Parameter& secondParam);
+        void load(const Identifier &id, const void* data, const std::size_t &bytes);
 
         Resource&           get(Identifier id);
         const Resource&     get(Identifier id) const;
@@ -55,6 +56,18 @@ void ResourceHolder<Resource, Identifier>::load(Identifier id, const std::string
     assert(inserted.second);
 }
 
+
+template <typename Resource, typename Identifier>
+void ResourceHolder<Resource, Identifier>::load(const Identifier &id, const void* data, const std::size_t &bytes)
+{
+    std::unique_ptr<Resource> resource(new Resource());
+    if (!resource->loadFromMemory(data, bytes))
+        throw std::runtime_error("ResourceHolder::load - Failed to load ");
+
+    auto inserted = resourceMap.insert(std::make_pair(id, std::move(resource)));
+    assert(inserted.second);
+    
+}
 
 /************************************************************//**
 *   @brief  Load a resource into the ResourceHolder

@@ -47,6 +47,7 @@
 
 #include "Resources/SoundId.h"
 #include "Resources/MusicId.h"
+#include "Resources/Sounds/BallCollision.h"
 #include "Log.h"
 #include <memory>
 IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui): StateBase(newEngin, newWindow, debugDraw, newGui, StateId::INTRO_STATE)
@@ -163,8 +164,8 @@ void IntroState::init(std::shared_ptr<GU::Engin::Frame> frame)
     gui.add(cust, "PanelPointer");
 
     //Load ball collision sound
-    ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
-
+    ResourceManager::loadSound(soundId::BALL, __BallCollision_ogg, sizeof(__BallCollision_ogg));
+    
     //Load title image
     ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
 
