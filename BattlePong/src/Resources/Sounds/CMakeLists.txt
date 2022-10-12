@@ -1,6 +1,6 @@
-set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.cpp"
+set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/BallCollision.cpp"
 )
-set(SUB_DIRECTORIES "Sounds"
+set(SUB_DIRECTORIES ""
 )
 
 #Add subdirectories

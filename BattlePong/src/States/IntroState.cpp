@@ -164,7 +164,7 @@ void IntroState::init(std::shared_ptr<GU::Engin::Frame> frame)
     gui.add(cust, "PanelPointer");
 
     //Load ball collision sound
-    ResourceManager::loadSound(soundId::BALL, __BallCollision_ogg, sizeof(__BallCollision_ogg));
+    ResourceManager::loadSound(soundId::BALL, BallCollision_ogg, BallCollision_ogg_len);
     
     //Load title image
     ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
