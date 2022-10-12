@@ -1,4 +1,5 @@
-set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/BallCollision.cpp"
+set(FILES   "${CMAKE_CURRENT_SOURCE_DIR}/BallCollision.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tone1.cpp"
 )
 set(SUB_DIRECTORIES ""
 )

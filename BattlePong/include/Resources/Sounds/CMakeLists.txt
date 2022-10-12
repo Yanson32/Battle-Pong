@@ -1,5 +1,5 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/BallCollision.h"
-            	"${CMAKE_CURRENT_SOURCE_DIR}/tone1.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/tone1.h"
 
 )
 set(SUB_DIRECTORIES ""
