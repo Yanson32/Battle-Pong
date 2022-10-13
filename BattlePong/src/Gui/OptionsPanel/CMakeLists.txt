@@ -10,7 +10,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/OptionsPanel.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/NetworkPanel.cpp"
 )
 
-set(RELATIVE_PATH "src")
+set(RELATIVE_PATH "src/Gui/OptionsPanel")
 set(SUB_DIRECTORIES ""
 )
 

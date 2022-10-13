@@ -8,7 +8,7 @@ set(SUB_DIRECTORIES "Icons"
                     "Backgrounds"
 )
 
-set(RELATIVE_PATH "Resources/Images/")
+set(RELATIVE_PATH "include/Resources/Images/")
  
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

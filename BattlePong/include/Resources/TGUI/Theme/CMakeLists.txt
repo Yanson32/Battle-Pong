@@ -8,7 +8,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/BabyBluePng.h"
 set(SUB_DIRECTORIES ""
 )
 
-set(RELATIVE_PATH "Resources/TGUI/Theme")
+set(RELATIVE_PATH "include/Resources/TGUI/Theme")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

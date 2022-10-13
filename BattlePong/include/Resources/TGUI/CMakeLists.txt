@@ -4,7 +4,7 @@ set(FILES 	""
 set(SUB_DIRECTORIES "Theme"
 )
 
-set(RELATIVE_PATH "Resources/TGUI")
+set(RELATIVE_PATH "include/Resources/TGUI")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

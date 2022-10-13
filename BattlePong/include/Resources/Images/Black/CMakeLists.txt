@@ -4,7 +4,7 @@ set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/Battle Pong.h"
 set(SUB_DIRECTORIES ""
 )
 
-set(RELATIVE_PATH "Resources/Images/Black/")
+set(RELATIVE_PATH "include/Resources/Images/Black/")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

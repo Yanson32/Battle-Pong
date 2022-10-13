@@ -5,7 +5,7 @@ set(FILES   "${CMAKE_CURRENT_SOURCE_DIR}/Star.h"
 
 set(SUB_DIRECTORIES "")
 
-set(RELATIVE_PATH "Resources/Images/Backgrounds")
+set(RELATIVE_PATH "include/Resources/Images/Backgrounds")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

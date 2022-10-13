@@ -9,7 +9,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/OptionsPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/VideoPanel.h"
 )
 
-set(RELATIVE_PATH "include")
+set(RELATIVE_PATH "include/Gui/OptionsPanel")
 set(SUB_DIRECTORIES ""
 )
 

@@ -4,7 +4,7 @@ set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/BattlePong.xpm"
 set(SUB_DIRECTORIES ""
 )
 
-set(RELATIVE_PATH "Resources/Images/Icons/")
+set(RELATIVE_PATH "include/Resources/Images/Icons/")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

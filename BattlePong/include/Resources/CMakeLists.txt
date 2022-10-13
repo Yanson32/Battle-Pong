@@ -12,7 +12,7 @@ set(SUB_DIRECTORIES "Images"
                     "TGUI"
 )
 
-set(RELATIVE_PATH "Resources")
+set(RELATIVE_PATH "include/Resources")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

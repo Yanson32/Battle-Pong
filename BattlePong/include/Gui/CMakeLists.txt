@@ -7,7 +7,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.h"
 )
 
-set(RELATIVE_PATH "include")
+set(RELATIVE_PATH "include/Gui")
 set(SUB_DIRECTORIES "OptionsPanel"
 )
 

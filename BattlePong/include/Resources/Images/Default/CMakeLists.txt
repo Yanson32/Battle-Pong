@@ -5,7 +5,7 @@ set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/Battle Pong.h"
 set(SUB_DIRECTORIES ""
 )
 
-set(RELATIVE_PATH "Resources/Images/Default/")
+set(RELATIVE_PATH "include/Resources/Images/Default/")
 
 
 #Add subdirectories
