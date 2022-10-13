@@ -1,7 +1,6 @@
-set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.cpp"
+set(FILES ""
 )
-set(SUB_DIRECTORIES "Sounds"
-                    "Images"
+set(SUB_DIRECTORIES "Black"
 )
 
 #Add subdirectories
