@@ -2,6 +2,6 @@
 #define BATTLE_PONG_PNG_H
 
 extern const unsigned int Battle_Pong_png_len;
-extern unsigned char Battle_Pong_png[Battle_Pong_png];
+extern unsigned char Battle_Pong_png[Battle_Pong_png_len];
 
 #endif
