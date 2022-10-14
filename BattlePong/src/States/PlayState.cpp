@@ -212,9 +212,6 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
-//    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
-//
-//    userMessage.setFont(ResourceManager::font.get("Header Font"));
     centerText();
     reset(pongFrame);
 }
@@ -232,7 +229,6 @@ void PlayState::clean(std::shared_ptr<GU::Engin::Frame> frame)
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);
 //    ResourceManager::sound.remove(Sound::Id::BALL);
-//    ResourceManager::font.remove("Header Font");
 
 }
 

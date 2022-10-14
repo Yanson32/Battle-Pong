@@ -14,8 +14,6 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/VideoMode.hpp>
 
-#include <SFML/Graphics/Font.hpp>
-
 #include "States/PlayState.h"
 #include "Settings.h"
 
@@ -190,9 +188,6 @@ void IntroState::init(std::shared_ptr<GU::Engin::Frame> frame)
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
-//    ResourceManager::font.load("Header Font", "../Resources/Fonts/caviar-dreams/CaviarDreams.ttf");
-//
-//    header.setFont(ResourceManager::font.get("Header Font"));
     reset(pongFrame);
 }
 
@@ -211,7 +206,6 @@ void IntroState::clean(std::shared_ptr<GU::Engin::Frame> frame)
 
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);
-//    ResourceManager::font.remove("Header Font");
 
 }
 
