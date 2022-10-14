@@ -5,7 +5,7 @@ set(SUB_DIRECTORIES ""
 )
 
 
-set(RELATIVE_PATH "include/Resources/Images/Blue")
+set(RELATIVE_PATH "include/Resources/Images/BabyBlue")
 
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

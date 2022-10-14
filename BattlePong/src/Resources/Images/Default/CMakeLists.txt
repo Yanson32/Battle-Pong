@@ -1,7 +1,6 @@
-set(FILES ""
+set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/Battle Pong.cpp"
 )
-set(SUB_DIRECTORIES "Black"
-                    "BabyBlue"
+set(SUB_DIRECTORIES ""
 )
 
 #Add subdirectories

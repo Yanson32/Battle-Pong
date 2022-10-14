@@ -48,6 +48,9 @@
 #include "Resources/SoundId.h"
 #include "Resources/MusicId.h"
 #include "Resources/Sounds/BallCollision.h"
+#include "Resources/Images/Black/Battle Pong.h"
+#include "Resources/Images/Default/Battle Pong.h"
+#include "Resources/Images/BabyBlue/Battle Pong.h"
 #include "Log.h"
 #include <memory>
 IntroState::IntroState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui): StateBase(newEngin, newWindow, debugDraw, newGui, StateId::INTRO_STATE)
@@ -165,9 +168,19 @@ void IntroState::init(std::shared_ptr<GU::Engin::Frame> frame)
 
     //Load ball collision sound
     ResourceManager::loadSound(soundId::BALL, BallCollision_ogg, BallCollision_ogg_len);
-    
-    //Load title image
-    ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
+   
+    if(Settings::currentTheme == "Black") 
+    {
+        ResourceManager::loadTexture(textureId::TITLE, Battle_Pong_Black_png, Battle_Pong_Black_png_len);
+    }
+    else if (Settings::currentTheme == "Default")
+    {
+        ResourceManager::loadTexture(textureId::TITLE, Battle_Pong_Default_png, Battle_Pong_Default_png_len);
+    }
+    else if (Settings::currentTheme == "BabyBlue")
+    {
+        ResourceManager::loadTexture(textureId::TITLE, Battle_Pong_BabyBlue_png, Battle_Pong_BabyBlue_png_len);
+    }
 
     //Set title properties
     header.setTexture(ResourceManager::get(textureId::TITLE));

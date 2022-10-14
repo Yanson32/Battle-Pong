@@ -42,22 +42,23 @@ class ResourceManager
 {
 
     public:
-      ResourceManager();
-      static void remove(const textureId &texture);
+        ResourceManager();
+        static void remove(const textureId &texture);
 	    static void loadSound(const soundId &sound, const std::string &name);
         static void loadSound(const soundId &sound, const void* data, const std::size_t &bytes);
 	    static bool isLoaded(const soundId &sound);
-      static sf::SoundBuffer& get(const soundId &sound);
-      static void remove(const soundId &sound);
+        static sf::SoundBuffer& get(const soundId &sound);
+        static void remove(const soundId &sound);
 	    static bool isLoaded(const textureId &texture);
 	    static void loadBackground(const std::string &name);
 	    static void loadTexture(const textureId &texture, const std::string &name);
-      static sf::Texture& get(const textureId  &texture);
+        static void loadTexture(const textureId &texture, const void* data, const std::size_t &bytes);
+        static sf::Texture& get(const textureId  &texture);
 	    static bool loadMusic(const std::string &music);
-      static void loadTheme(const std::string &name);
-      static sf::Music& getMusic();
-      static void setPath(const std::filesystem::path &path);
-      static std::filesystem::path getPath();
+        static void loadTheme(const std::string &name);
+        static sf::Music& getMusic();
+        static void setPath(const std::filesystem::path &path);
+        static std::filesystem::path getPath();
 	    virtual ~ResourceManager();
     private:
         static std::filesystem::path m_path;

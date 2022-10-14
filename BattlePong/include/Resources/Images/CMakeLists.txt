@@ -3,7 +3,7 @@ set(FILES ""
 )
 set(SUB_DIRECTORIES "Icons"
                     "Default"
-                    "Blue"
+                    "BabyBlue"
                     "Black"
                     "Backgrounds"
 )

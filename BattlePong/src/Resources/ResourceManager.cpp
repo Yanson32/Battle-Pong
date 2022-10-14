@@ -98,6 +98,15 @@ void ResourceManager::loadTexture(const textureId &texture, const std::string &n
 }
 
 
+void ResourceManager::loadTexture(const textureId &texture, const void* data, const std::size_t &bytes)
+{
+    if(!m_texture.isLoaded(texture))
+    {
+        m_texture.load(texture, data, bytes);
+    }
+}
+
+
 void ResourceManager::loadBackground(const std::string &name)
 {
     if(m_texture.isLoaded(textureId::BACKGROUND))
