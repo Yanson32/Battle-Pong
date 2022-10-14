@@ -2,6 +2,7 @@ set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.cpp"
 )
 set(SUB_DIRECTORIES "Sounds"
                     "Images"
+                    "Music"
 )
 
 #Add subdirectories
