@@ -13,10 +13,6 @@ TGUI Developer
 Bruno Van de Velde
 https://tgui.eu/
 
-Font Designer
-Lauren Thompson
-http://www.dafont.com/lauren-thompson.d1997 
-
 Theme Artist
 Mike Donovan
 http://dribbble.com/shots/635698-UI-Kit-Baby-Blue
