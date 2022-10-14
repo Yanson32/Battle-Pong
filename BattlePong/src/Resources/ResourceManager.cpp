@@ -1,4 +1,6 @@
 #include "Resources/ResourceManager.h"
+#include "Resources/Music/Dreams.h"
+#include "Resources/Music/Zombies.h"
 
 ResourceHolder<sf::SoundBuffer, soundId> ResourceManager::m_sound;
 ResourceHolder<sf::Font, sf::String> ResourceManager::m_font;
@@ -53,13 +55,14 @@ void ResourceManager::remove(const soundId &sound)
 
 bool ResourceManager::loadMusic(const std::string &music)
 {
-  std::filesystem::path path = m_path;
-  path += std::filesystem::path("/Music/");
-
-  if(std::filesystem::exists(path))
-	{
-      m_music.openFromFile(path.string() + music + ".ogg");
-	}
+    if(music == "Dreams")
+    {
+        m_music.openFromMemory(Dreams_ogg, Dreams_ogg_len);
+    }
+    else if(music == "Zombies")
+    {
+        m_music.openFromMemory(Zombies_ogg, Zombies_ogg_len);
+    }
 
     return true;
 }
