@@ -110,6 +110,19 @@ void ResourceManager::loadTexture(const textureId &texture, const void* data, co
 }
 
 
+void ResourceManager::loadBackground(const void* data, const std::size_t &bytes)
+{
+    if(m_texture.isLoaded(textureId::BACKGROUND))
+        m_texture.remove(textureId::BACKGROUND);
+
+    //Load title image
+    if(!m_texture.isLoaded(textureId::BACKGROUND))
+    {
+        m_texture.load(textureId::BACKGROUND, data, bytes); 
+    }
+
+}
+
 void ResourceManager::loadBackground(const std::string &name)
 {
     if(m_texture.isLoaded(textureId::BACKGROUND))
@@ -122,7 +135,6 @@ void ResourceManager::loadBackground(const std::string &name)
         path += std::filesystem::path("/Textures/Backgrounds/");
         if(std::filesystem::exists(path))
             m_texture.load(textureId::BACKGROUND, path.string()  + name);
-        std::cout << "Background " << path.string() + name << std::endl;
     }
 
 }
@@ -143,6 +155,7 @@ void ResourceManager::loadTheme(const std::string &name)
         Settings::currentTheme = name;
    }
 
+   loadBackground(name);
 }
 
 

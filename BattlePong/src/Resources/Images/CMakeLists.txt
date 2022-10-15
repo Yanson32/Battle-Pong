@@ -2,6 +2,7 @@ set(FILES ""
 )
 set(SUB_DIRECTORIES "Black"
                     "BabyBlue"
+                    "Default"
 )
 
 #Add subdirectories

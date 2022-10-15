@@ -51,6 +51,7 @@ class ResourceManager
         static void remove(const soundId &sound);
 	    static bool isLoaded(const textureId &texture);
 	    static void loadBackground(const std::string &name);
+        static void loadBackground(const void* data, const std::size_t &bytes);
 	    static void loadTexture(const textureId &texture, const std::string &name);
         static void loadTexture(const textureId &texture, const void* data, const std::size_t &bytes);
         static sf::Texture& get(const textureId  &texture);
