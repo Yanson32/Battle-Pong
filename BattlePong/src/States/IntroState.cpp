@@ -350,7 +350,20 @@ void IntroState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event,
     	       //Load title image
     	       if(ResourceManager::isLoaded(textureId::TITLE))
 	            ResourceManager::remove(textureId::TITLE);
-	           ResourceManager::loadTexture(textureId::TITLE, "Battle Pong.png");
+                
+                if(Settings::currentTheme == "Black") 
+                {
+                    ResourceManager::loadTexture(textureId::TITLE, Battle_Pong_Black_png, Battle_Pong_Black_png_len);
+                }
+                else if (Settings::currentTheme == "Default")
+                {
+                    ResourceManager::loadTexture(textureId::TITLE, Battle_Pong_Default_png, Battle_Pong_Default_png_len);
+                }
+                else if (Settings::currentTheme == "BabyBlue")
+                {
+                    ResourceManager::loadTexture(textureId::TITLE, Battle_Pong_BabyBlue_png, Battle_Pong_BabyBlue_png_len);
+                }
+
     	       header.setTexture(ResourceManager::get(textureId::TITLE));
             }
 
