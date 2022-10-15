@@ -3,6 +3,7 @@ set(FILES ""
 set(SUB_DIRECTORIES "Black"
                     "BabyBlue"
                     "Default"
+                    "Backgrounds"
 )
 
 #Add subdirectories
