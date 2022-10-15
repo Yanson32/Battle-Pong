@@ -208,7 +208,6 @@ void StateBase::init(std::shared_ptr<GU::Engin::Frame> frame)
     systemPause(false);
     pause(false);
     
-    std::cout << "Current Background " << Settings::currentBackground << std::endl;
     if(Settings::currentBackground == "Star")
         ResourceManager::loadBackground(Star_png, Star_png_len);
     else if(Settings::currentBackground == "Nebula")
@@ -729,9 +728,16 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     break;
                     case Gui::id::BACKGROUND:
                     {
-                        ResourceManager::loadBackground(Settings::backgrounds[temp->m_index] + ".png");
-                        Settings::currentBackground = Settings::backgrounds[temp->m_index];
-                        backgroundRect.setTexture(nullptr);
+                      std::cout << "Background Selected" << std::endl; 
+                         Settings::currentBackground = Settings::backgrounds[temp->m_index];
+                        if(Settings::currentBackground == "Star")
+                            ResourceManager::loadBackground(Star_png, Star_png_len);
+                        else if(Settings::currentBackground == "Nebula")
+                            ResourceManager::loadBackground(Nebula_png, Nebula_png_len);
+                                
+                        backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
+                        backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
+                        
                         backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
                         backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
                         GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
