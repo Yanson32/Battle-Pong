@@ -155,7 +155,6 @@ void ResourceManager::loadTheme(const std::string &name)
         Settings::currentTheme = name;
    }
 
-   loadBackground(name);
 }
 
 

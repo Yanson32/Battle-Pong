@@ -728,7 +728,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     break;
                     case Gui::id::BACKGROUND:
                     {
-                      std::cout << "Background Selected" << std::endl; 
                          Settings::currentBackground = Settings::backgrounds[temp->m_index];
                         if(Settings::currentBackground == "Star")
                             ResourceManager::loadBackground(Star_png, Star_png_len);
