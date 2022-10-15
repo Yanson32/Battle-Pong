@@ -1,4 +1,5 @@
-set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/Nebula.cpp"
+set(FILES   "${CMAKE_CURRENT_SOURCE_DIR}/Nebula.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/Star.cpp"
 )
 
 set(SUB_DIRECTORIES ""

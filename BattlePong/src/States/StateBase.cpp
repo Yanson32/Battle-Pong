@@ -18,6 +18,8 @@
 #include "Resources/Images/Black/Battle Pong.h"
 #include "Resources/Images/Default/Battle Pong.h"
 #include "Resources/Images/BabyBlue/Battle Pong.h"
+#include "Resources/Images/Backgrounds/Star.h"
+#include "Resources/Images/Backgrounds/Nebula.h"
 #include "States/States.h"
 #include "Events/Events.h"
 #include "Macros.h"
@@ -208,9 +210,9 @@ void StateBase::init(std::shared_ptr<GU::Engin::Frame> frame)
     
     std::cout << "Current Background " << Settings::currentBackground << std::endl;
     if(Settings::currentBackground == "Star")
-        ResourceManager::loadBackground(Battle_Pong_Black_png, Battle_Pong_Black_png_len);
+        ResourceManager::loadBackground(Star_png, Star_png_len);
     else if(Settings::currentBackground == "Nebula")
-        ResourceManager::loadBackground(Battle_Pong_Default_png, Battle_Pong_Default_png_len);
+        ResourceManager::loadBackground(Nebula_png, Nebula_png_len);
             
     backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
     backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
