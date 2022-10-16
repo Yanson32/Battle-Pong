@@ -1,4 +1,4 @@
-set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/BattlePong.xpm"
+set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/BattlePongPng.h"
 )
 
 set(SUB_DIRECTORIES ""
