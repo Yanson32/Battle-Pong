@@ -426,6 +426,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                 }
             }
         }
+        break;
         case EventId::ON_TEXT_CHANGED:
         {
             std::shared_ptr<GU::Evt::OnTextChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnTextChanged>(event);
