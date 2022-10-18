@@ -58,6 +58,7 @@
 #include <string>
 #include <filesystem>
 #include "Resources/ResourceManager.h"
+#include "Resources/Images/Icons/BattlePongPng.h"
 #include <GameUtilities/Core/PreferencesManager.h>
 #include <algorithm>
 #include <filesystem>
@@ -147,9 +148,11 @@ int main(int argc, char* argv[])
     //Load tgui theme
     ResourceManager::loadTheme(Settings::currentTheme);
 
+
+    ResourceManager::loadTexture(textureId::ICON, BattlePong_png, BattlePong_png_len);
+
     //Set the application icon
-    sf::Image icon;
-    icon.loadFromFile(ResourceManager::getPath().string() + "/Icons/BattlePong.png");
+    sf::Image icon = ResourceManager::get(textureId::ICON).copyToImage();
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
 
     //Create tgui object
@@ -207,7 +210,7 @@ int main(int argc, char* argv[])
     sf::Clock timer;
     const sf::Time deltaTime = sf::seconds(1.0f / Settings::frameRate);
     sf::Time accumulator = sf::seconds(0);
-    std::cout << "Songlist size " << Settings::songList.size() << std::endl;
+    
     try
     {
         while (engin.isRunning())

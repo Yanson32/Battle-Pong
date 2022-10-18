@@ -14,11 +14,11 @@ GU::Evt::EventManager()
   logManager.add(target);
 
   //Set log formatter
-  GU::Log::LogFormatter logFormatter;
-  logFormatter.add<GU::Log::SeverityComponent>();
-  logFormatter.add<GU::Log::LineComponent>();
-  logFormatter.add<GU::Log::FileComponent>();
-  logFormatter.add<GU::Log::MsgComponent>();
+  std::shared_ptr<GU::Log::LogFormatter> logFormatter(new GU::Log::LogFormatter());
+  logFormatter->add<GU::Log::SeverityComponent>();
+  logFormatter->add<GU::Log::LineComponent>();
+  logFormatter->add<GU::Log::FileComponent>();
+  logFormatter->add<GU::Log::MsgComponent>();
   logManager.set(logFormatter);
 
 }

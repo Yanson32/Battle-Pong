@@ -21,8 +21,9 @@
 
 enum class textureId
 {
-   TITLE,
-   BACKGROUND,
+    TITLE,
+    BACKGROUND,
+    ICON,
 };
 #endif
 
