@@ -281,15 +281,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_ERROR))
                 game->logManager.write(entry);
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_WARNING))
-            {
-                static int count = 0;
-                if(count == 0)
-                {
-                    std::cout << "Log Warning is broken" << std::endl; 
-                    ++count;
-                }
-                //game->logManager.write(entry);
-            }
+                game->logManager.write(entry);
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_MESSAGE))
                 game->logManager.write(entry);
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_VERBOSE))
@@ -301,9 +293,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_DEBUG))
                 game->logManager.write(entry);
             else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_TRACE))
-            {
                 game->logManager.write(entry);
-            }
 
         }
         break;
