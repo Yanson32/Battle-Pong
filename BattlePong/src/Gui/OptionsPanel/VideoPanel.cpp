@@ -21,7 +21,7 @@ namespace Gui
         
         themeCombo->setSelectedItem(Settings::currentTheme);
         themeCombo->onItemSelect([&](){
-            EventManager::inst().post<GU::Evt::OnItemSelected>(themeCombo.get(), Gui::id::THEME, themeCombo->getSelectedItemIndex());
+            EventManager::inst().post<GU::Evt::OnItemSelected>(themeCombo, Gui::id::THEME, themeCombo->getSelectedItemIndex());
         });
         getContentPane()->append("Theme", themeCombo);
 
@@ -32,7 +32,7 @@ namespace Gui
         backgroundCombo->setSelectedItem(Settings::currentBackground);
         backgroundCombo->onItemSelect([&]()
         {
-            EventManager::inst().post<GU::Evt::OnItemSelected>(backgroundCombo.get(), Gui::id::BACKGROUND, backgroundCombo->getSelectedItemIndex());
+            EventManager::inst().post<GU::Evt::OnItemSelected>(backgroundCombo, Gui::id::BACKGROUND, backgroundCombo->getSelectedItemIndex());
         });
         getContentPane()->append("Background", backgroundCombo);
 
