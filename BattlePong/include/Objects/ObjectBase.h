@@ -38,8 +38,11 @@
 
 //User defined includes
 #include "Box2D/Box2DFunctions.h"
-
 #include "Macros.h"
+
+
+#include <cassert>
+#include <memory>
 
 template <class SFShape>
 class ObjectBase: public sf::Drawable
@@ -77,12 +80,14 @@ void ObjectBase<SFShape>::setColor(const sf::Color &newColor)
 template <class SFShape>
 sf::Vector2f ObjectBase<SFShape>::getPosition() const
 {
+    assert(body != nullptr);
     return toPixles(body->GetPosition());
 }
 
 template <class SFShape>
 void ObjectBase<SFShape>::setPosition(const sf::Vector2f &newPosition)
 {
+    assert(body != nullptr);
     body->SetTransform(toMeters(newPosition), body->GetAngle());
 }
 
@@ -102,11 +107,18 @@ void ObjectBase<SFShape>::draw(sf::RenderTarget &target, sf::RenderStates states
 template <class SFShape>
 ObjectBase<SFShape>::~ObjectBase()
 {
+    assert(body != nullptr);
+    assert(world != nullptr);
+
     //dtor
     if(body->GetUserData())
     {
         int * temp = static_cast<int*>(body->GetUserData());
-        delete temp;
+        if(temp  == nullptr)
+        {
+            delete temp;
+            temp = nullptr;
+        }
     }
 
     world->DestroyBody(body);
