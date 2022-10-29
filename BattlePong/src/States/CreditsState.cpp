@@ -158,7 +158,7 @@ void CreditsState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
         window.draw(*pongFrame->ball);
     window.draw(userMessage);
 
-
+    window.draw(m_panel);
     window.display();
 
 }
@@ -179,7 +179,12 @@ void CreditsState::init(std::shared_ptr<GU::Engin::Frame> frame)
        return;
     }
 
-
+    ResourceManager::loadTexture(textureId::CREDIT, Credit_Laurent_Gomila_png, Credit_Laurent_Gomila_png_len);
+    m_panel.setSize({window.getView().getSize().x / 2, window.getView().getSize().y / 2});
+    m_panel.setOrigin(m_panel.getSize().x / 2, m_panel.getSize().y / 2);
+    m_panel.setPosition({window.getView().getSize().x / 2, window.getView().getSize().y / 2});
+    m_panel.setFillColor(sf::Color::Black);
+    m_panel.setTexture(&ResourceManager::get(textureId::CREDIT));
     userMessage.setCharacterSize(34);
     userMessage.setPosition(sf::Vector2f(400, 300));
 

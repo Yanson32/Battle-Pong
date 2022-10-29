@@ -24,6 +24,7 @@ enum class textureId
     TITLE,
     BACKGROUND,
     ICON,
+    CREDIT, 
 };
 #endif
 

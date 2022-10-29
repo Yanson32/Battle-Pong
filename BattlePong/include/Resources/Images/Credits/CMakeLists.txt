@@ -1,15 +1,10 @@
-set(FILES ""	
-
-)
-set(SUB_DIRECTORIES "Icons"
-                    "Default"
-                    "BabyBlue"
-                    "Black"
-                    "Backgrounds"
-                    "Credits"
+set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/Credit_Laurent_Gomila.h"
 )
 
-set(RELATIVE_PATH "include/Resources/Images/")
+set(SUB_DIRECTORIES ""
+)
+
+set(RELATIVE_PATH "include/Resources/Images/Credits/")
  
 #Add subdirectories
 foreach(LOOP_VAR ${SUB_DIRECTORIES})

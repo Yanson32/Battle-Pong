@@ -29,12 +29,14 @@
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Clock.hpp>
 
 #include <memory>
 
 #include "Box2D/DebugDraw.h"
 #include <TGUI/TGUI.hpp>
+#include "Resources/Images/Credits/Credit_Laurent_Gomila.h"
 
 #include <GameUtilities/Engin/Frame.h>
 
@@ -85,5 +87,7 @@ class CreditsState: public StateBase
         ********************************************************************/
         ~CreditsState();
     private:
+        sf::RectangleShape m_panel;
+        sf::Texture m_panelTexture;
 };
 #endif
