@@ -36,6 +36,7 @@
 #include <Box2D/Box2D.h>
 #include <memory>
 #include <TGUI/TGUI.hpp>
+#include <TGUI/Backend/SFML-Graphics.hpp>
 
 #include "Box2D/DebugDraw.h"
 #include "Box2D/ContactListener.h"

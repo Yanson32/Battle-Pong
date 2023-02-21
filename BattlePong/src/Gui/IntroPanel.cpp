@@ -18,7 +18,7 @@ namespace Gui
         start->setText("Start");
         start->onPress([](){
             EventManager::inst().post<GU::Evt::OnClick>(Gui::id::START);
-        });
+       });
 
         tgui::HorizontalLayout::Ptr startLayout = tgui::HorizontalLayout::create();
         startLayout->addSpace(1);
@@ -49,6 +49,7 @@ namespace Gui
         options->onPress([](){
             EventManager::inst().post<GU::Evt::OnClick>(Gui::id::OPTIONS);
         });
+  
         tgui::HorizontalLayout::Ptr optionLayout = tgui::HorizontalLayout::create();
         optionLayout->addSpace(1);
         optionLayout->add(options);
@@ -71,6 +72,7 @@ namespace Gui
         getContentPane()->append(creditsLayout);
     }
 
+    
     void IntroPanel::init(const int &width, const int &height)
     {
         this->setSize(width / 2, height / 2);
