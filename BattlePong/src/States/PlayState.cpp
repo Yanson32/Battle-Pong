@@ -186,7 +186,7 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
     }
 
     //Setup paddle 1
-    paddle1Hud->setScore(0);
+    pongFrame->paddle1Hud->setScore(0);
     Settings::p1Score = 0;
     if(Settings::p1Input == "None")
         pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->leftPaddle)));
@@ -194,7 +194,7 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
         pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->leftPaddle)));
 
     //Setup paddle 2
-    paddle2Hud->setScore(0);
+    pongFrame->paddle2Hud->setScore(0);
     Settings::p2Score = 0;
     if(Settings::p2Input  == "None")
         pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->rightPaddle)));

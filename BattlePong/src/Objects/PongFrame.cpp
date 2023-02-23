@@ -50,6 +50,11 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     topPaddleStop->setPosition({0, (wallTh)});
 
     world->SetContactListener(&contactListener);
+    
+    paddle1Hud.reset(new Gui::PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
+    paddle2Hud.reset(new Gui::PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
+
+    paddle2Hud->setPosition({650, 0});
 }
 void PongFrame::init()
 {

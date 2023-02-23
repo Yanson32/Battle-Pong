@@ -47,8 +47,6 @@ sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 sf::Sound StateBase::sound;
 
-std::shared_ptr<Gui::PaddleHud> StateBase::paddle1Hud = nullptr;
-std::shared_ptr<Gui::PaddleHud> StateBase::paddle2Hud = nullptr;
 
 ContactListener StateBase::contactListener;
 sf::Clock StateBase::roundClock;
@@ -67,12 +65,6 @@ sysPause(false)
     BP_LOG_TRACE(__FUNCTION__)
     gui.setTarget(window);
 
-    paddle1Hud.reset(new Gui::PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
-    paddle2Hud.reset(new Gui::PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
-
-    paddle2Hud->setPosition({650, 0});
-    gui.add(paddle1Hud);
-    gui.add(paddle2Hud);
 
     ResourceManager::getMusic().setLoop(true);
 }
@@ -218,6 +210,9 @@ void StateBase::init(std::shared_ptr<GU::Engin::Frame> frame)
 
     ResourceManager::getMusic().setVolume(Settings::musicVolume);
     sound.setVolume(Settings::soundVolume);
+    
+    gui.add(pongFrame->paddle1Hud);
+    gui.add(pongFrame->paddle2Hud);
 
     reset(pongFrame);
 }
@@ -497,7 +492,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         {
             int currentScore = Settings::p1Score;
 	        Settings::p1Score = currentScore + 1;
-            paddle1Hud->setScore(currentScore + 1);
+            pongFrame->paddle1Hud->setScore(currentScore + 1);
             reset(pongFrame);
         }
         break;
@@ -505,7 +500,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         {
             int currentScore = Settings::p2Score;
 	        Settings::p2Score = currentScore + 1;
-            paddle2Hud->setScore(currentScore + 1);
+            pongFrame->paddle2Hud->setScore(currentScore + 1);
             reset(pongFrame);
         }
         break;

@@ -26,7 +26,7 @@
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Engin/Frame.h>
 #include "Box2D/ContactListener.h"
-
+#include "Gui/PaddleHud.h"
 class PongFrame: public GU::Engin::Frame
 {
     public:
@@ -44,6 +44,8 @@ class PongFrame: public GU::Engin::Frame
         std::unique_ptr<Goal> rightGoal;         ///Pointer to the goal sensor which determines is a goal has been scored on the right player
         std::unique_ptr<PaddleStop> bottomPaddleStop;
         std::unique_ptr<PaddleStop> topPaddleStop;
+        std::shared_ptr<Gui::PaddleHud> paddle1Hud;
+        std::shared_ptr<Gui::PaddleHud> paddle2Hud;
         virtual void init();
         virtual void clean();
         virtual void handleEvents(GU::Engin::Engin& engin, const float &deltaTime);
