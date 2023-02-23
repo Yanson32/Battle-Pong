@@ -413,6 +413,12 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         game->setPop(true);
                     } 
                     return;
+                    case Gui::id::EXIT:
+                    {
+                        Game *game = static_cast<Game*>(&engin);
+                        game->quit();
+                    } 
+                    break;
                 }
             }
         }

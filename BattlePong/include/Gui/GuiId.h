@@ -34,6 +34,7 @@ namespace Gui
         HOST,
         CONNECT,
         CREDITS,
+        EXIT,
         BACK,
         CONNECT_PANEL_BACK,
         OPTIONS_PANEL_BACK,

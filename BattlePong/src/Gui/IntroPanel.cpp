@@ -70,6 +70,21 @@ namespace Gui
         creditsLayout->add(credits);
         creditsLayout->addSpace(1);
         getContentPane()->append(creditsLayout);
+        getContentPane()->appendSpace();
+        
+
+        //Create exit button
+        exit = tgui::Button::create();
+        exit->setText("Exit");
+        exit->onPress([](){
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::EXIT);
+        });
+
+        tgui::HorizontalLayout::Ptr exitLayout = tgui::HorizontalLayout::create();
+        exitLayout->addSpace(1);
+        exitLayout->add(exit);
+        exitLayout->addSpace(1);
+        getContentPane()->append(exitLayout);
     }
 
     
