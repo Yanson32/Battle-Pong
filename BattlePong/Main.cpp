@@ -65,7 +65,7 @@
 
 int main(int argc, char* argv[])
 {
-    std::string configDir = GU::Core::getConfigDir("BattlePong").c_str();
+   std::string configDir = GU::Core::getConfigDir("BattlePong").c_str();
     std::filesystem::create_directory(configDir);
     
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
@@ -244,4 +244,6 @@ int main(int argc, char* argv[])
 
     }
 
+    window.close();
+    return 0;
 }
