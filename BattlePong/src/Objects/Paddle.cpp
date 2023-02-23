@@ -101,4 +101,14 @@ void Paddle::setInput(std::unique_ptr<Input> newInput)
 }
 Paddle::~Paddle()
 {
+    if(body != nullptr)
+    {
+        if(body->GetUserData() != nullptr)
+        {
+            int * data = static_cast<int*>(body->GetUserData());
+            delete data;
+            data = nullptr;
+            body->SetUserData(nullptr);
+        }
+    }
 }

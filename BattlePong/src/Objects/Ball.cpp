@@ -61,5 +61,15 @@ void Ball::setVelocity(const sf::Vector2f &newVelocity)
 
 Ball::~Ball()
 {
+    if(body != nullptr)
+    {
+        if(body->GetUserData() != nullptr)
+        {
+            int * data = static_cast<int*>(body->GetUserData());
+            delete data;
+            data = nullptr;
+            body->SetUserData(nullptr);
+        }
+    }
     //dtor
 }
