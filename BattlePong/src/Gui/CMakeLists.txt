@@ -4,6 +4,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/CustomPanel.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/PaddleHud.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/PlayPanel.cpp"
             "${CMAKE_CURRENT_SOURCE_DIR}/IntroPanel.cpp"
+            "${CMAKE_CURRENT_SOURCE_DIR}/CreditsPanel.cpp"
 )
 
 set(RELATIVE_PATH "src/Gui")

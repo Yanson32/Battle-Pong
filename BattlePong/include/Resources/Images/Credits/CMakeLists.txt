@@ -1,4 +1,5 @@
 set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/Credit_Laurent_Gomila.h"
+	  "${CMAKE_CURRENT_SOURCE_DIR}/Credit_Bruno_Van_De_Velde.h"
 )
 
 set(SUB_DIRECTORIES ""

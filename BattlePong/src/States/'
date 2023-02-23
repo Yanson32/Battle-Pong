@@ -1,5 +1,5 @@
-#ifndef TEXTURE_ID_H
-#define TEXTURE_ID_H
+#ifndef BP_CREDITS_PANEL
+#define BP_CREDITS_PANEL
 /*************************************************************************
 *                           COPYRIGHT NOTICE
 * Battle Pong is a clone of the classic pong game.
@@ -17,15 +17,26 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
+#include "Gui/CustomPanel.h"
+#include <TGUI/TGUI.hpp>
+#include <SFML/Graphics/Sprite.hpp>
 
-
-enum class textureId
+namespace Gui
 {
-    TITLE,
-    BACKGROUND,
-    ICON,
-    CREDIT_LAURENT, 
-    CREDIT_BRUNO
-};
+    class CreditsPanel 
+    {
+        public:
+            CreditsPanel();
+            void setPosition(const float &width, const float &height);
+            void setSize(const float &width, const float &height);
+            void setTexture(const sf::Texture &texture);
+            void setBackgroundColor(const sf::Color &color);
+            virtual ~CreditsPanel();        
+        private:
+            sf::RectangleShape m_background;
+            sf::RectangleShape m_texture;
+    };
+}
+
 #endif
 

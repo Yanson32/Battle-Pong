@@ -37,8 +37,10 @@
 #include "Box2D/DebugDraw.h"
 #include <TGUI/TGUI.hpp>
 #include "Resources/Images/Credits/Credit_Laurent_Gomila.h"
+#include "Resources/Images/Credits/Credit_Bruno_Van_De_Velde.h"
 
 #include <GameUtilities/Engin/Frame.h>
+#include "Gui/CreditsPanel.h"
 
 class CreditsState: public StateBase
 {
@@ -87,7 +89,6 @@ class CreditsState: public StateBase
         ********************************************************************/
         ~CreditsState();
     private:
-        sf::RectangleShape m_panel;
-        sf::Texture m_panelTexture;
+        Gui::CreditsPanel m_creditsPanel;
 };
 #endif

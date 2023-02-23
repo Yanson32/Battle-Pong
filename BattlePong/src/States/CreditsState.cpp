@@ -21,6 +21,8 @@
 #include <GameUtilities/Event/LogEvent.h>
 #include <GameUtilities/Core/Macros.h>
 #include "Log.h"
+#include "Gui/CreditsPanel.h"
+#include "SFMLFunctions.h"
 
 CreditsState::CreditsState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId): StateBase(newEngin, newWindow, debugDraw, newGui, newId)
 {
@@ -157,8 +159,7 @@ void CreditsState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     if(userMessage.getString() == "")
         window.draw(*pongFrame->ball);
     window.draw(userMessage);
-
-    window.draw(m_panel);
+    window.draw(m_creditsPanel);    
     window.display();
 
 }
@@ -178,13 +179,19 @@ void CreditsState::init(std::shared_ptr<GU::Engin::Frame> frame)
        BP_LOG_FATAL_ERROR("Pointer should not be null")
        return;
     }
+    
+    
+    ResourceManager::loadTexture(textureId::CREDIT_LAURENT, Credit_Laurent_Gomila_png, Credit_Laurent_Gomila_png_len);
+    ResourceManager::loadTexture(textureId::CREDIT_BRUNO, Credit_Bruno_Van_de_Velde_png, Credit_Bruno_Van_de_Velde_png_len);
+    float width  = window.getView().getSize().x / 2;
+    float height = window.getView().getSize().y / 2;
+    m_creditsPanel.setSize(width, height);
+    m_creditsPanel.setOrigin(width / 2, height / 2);
+    m_creditsPanel.setPosition(window.getView().getCenter().x, window.getView().getCenter().y);
+    m_creditsPanel.setBackgroundColor(sf::Color(0, 0, 0, 150));
+    m_creditsPanel.add(ResourceManager::get(textureId::CREDIT_LAURENT));
+    m_creditsPanel.add(ResourceManager::get(textureId::CREDIT_BRUNO));
 
-    ResourceManager::loadTexture(textureId::CREDIT, Credit_Laurent_Gomila_png, Credit_Laurent_Gomila_png_len);
-    m_panel.setSize({window.getView().getSize().x / 2, window.getView().getSize().y / 2});
-    m_panel.setOrigin(m_panel.getSize().x / 2, m_panel.getSize().y / 2);
-    m_panel.setPosition({window.getView().getSize().x / 2, window.getView().getSize().y / 2});
-    m_panel.setFillColor(sf::Color::Black);
-    m_panel.setTexture(&ResourceManager::get(textureId::CREDIT));
     userMessage.setCharacterSize(34);
     userMessage.setPosition(sf::Vector2f(400, 300));
 
@@ -193,6 +200,7 @@ void CreditsState::init(std::shared_ptr<GU::Engin::Frame> frame)
 
 
     centerText();
+
 }
 
 void CreditsState::clean(std::shared_ptr<GU::Engin::Frame> frame)
@@ -213,16 +221,18 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
     switch(event.type)
     {
         case sf::Event::KeyPressed:
-            switch(event.key.code)
+            if(event.key.code == toKey(Settings::playerControlRight))
             {
-                case sf::Keyboard::Escape:
-                {
-                    Game *game = static_cast<Game*>(&engin);
-                    game->setPop(true);
-                }
-                    break;
-                default:
-                    break;
+                m_creditsPanel.next();
+            }
+            if(event.key.code == toKey(Settings::playerControlLeft))
+            {
+                m_creditsPanel.prev();
+            }
+            else if(event.key.code == sf::Keyboard::Escape)
+            {
+                Game *game = static_cast<Game*>(&engin);
+                game->setPop(true);
             }
             break;
         default:
