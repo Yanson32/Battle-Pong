@@ -1,5 +1,6 @@
 #Create our target
 add_executable("${PROJECT_NAME}" "Main.cpp")
+add_definitions("-DBP_VERSION=\"${PROJECT_VERSION}\"")
 
 install(TARGETS "${PROJECT_NAME}" DESTINATION bin)
 
@@ -12,6 +13,7 @@ string(TOUPPER "${CMAKE_BUILD_TYPE}" BP_BUILD_TYPE_UPPER)
 if("${BP_BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
 	add_definitions("-DDEBUG")
 endif()
+
 
 #Define compiler features
 target_compile_features("${PROJECT_NAME}"
@@ -29,6 +31,10 @@ target_include_directories("${PROJECT_NAME}" PUBLIC
   $<INSTALL_INTERFACE:include>
 	)
 
+#Find the Math library
+find_package("Math" REQUIRED)
+target_link_libraries("${PROJECT_NAME}" PUBLIC Math::Math)
+
 find_package(GameUtilities COMPONENTS Core Log Event Engin  REQUIRED)
 target_link_libraries("${PROJECT_NAME}" PRIVATE GU::Core GU::Event GU::Engin GU::Log)
 
@@ -39,10 +45,6 @@ target_link_libraries("${PROJECT_NAME}" PUBLIC ${SFML_LIBRARIES})
 find_package(TGUI REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${TGUI_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC tgui)
-
-find_package(Boost COMPONENTS thread date_time filesystem system program_options regex system log log_setup REQUIRED)
-target_link_libraries("${PROJECT_NAME}" PUBLIC ${Boost_LIBRARIES})
-target_include_directories("${PROJECT_NAME}" PUBLIC ${Boost_INCLUDE_DIRS})
 
 target_include_directories("${PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/extlibs/Box2D")
 target_link_libraries("${PROJECT_NAME}" PUBLIC Box2D)

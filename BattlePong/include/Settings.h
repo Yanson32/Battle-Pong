@@ -37,6 +37,7 @@
 namespace Settings
 {
     //Game settings
+    const sf::String VERSION = "0.0.0.1";
     extern sf::String time;
     extern sf::String ai;
     extern int wallThickness;

@@ -19,7 +19,7 @@ else()
 endif()
 
 #Give the project a name
-project("BattlePong" VERSION "1.0.0.0")
+project("BattlePong" VERSION "0.0.0.1")
 
 
 string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)

@@ -31,7 +31,6 @@
 #include <SFML/Audio/Music.hpp>
 
 #include "Resources/ResourceManager.h"
-#include <boost/program_options.hpp>
 
 #include <sstream>
 #include <time.h>
@@ -62,10 +61,13 @@
 #include <GameUtilities/Core/PreferencesManager.h>
 #include <algorithm>
 #include <filesystem>
+#include "Arguments.h"
 
 int main(int argc, char* argv[])
 {
-   std::string configDir = GU::Core::getConfigDir("BattlePong").c_str();
+    programArguments(argc, argv);
+    
+    std::string configDir = GU::Core::getConfigDir("BattlePong").c_str();
     std::filesystem::create_directory(configDir);
     
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
@@ -176,26 +178,6 @@ int main(int argc, char* argv[])
     if(Settings::b2pair)
       debugDraw.AppendFlags(b2Draw::e_pairBit);
 
-    //Handle program options
-    std::stringstream ss;
-    ss << MAJOR_VERSION << " " << ".0.0.0";
-
-    boost::program_options::options_description desc("Allowed options");
-    desc.add_options()
-        ("version", MAJOR_VERSION + ".0.0.0")
-        ("help", "produce help message");
-
-
-    boost::program_options::variables_map vm;
-    boost::program_options::store(boost::program_options::command_line_parser(argc, argv).options(desc).run(), vm);
-    boost::program_options::notify(vm);
-
-
-    if (vm.count("help"))
-    {
-        std::cout << desc << "\n";
-        return 1;
-    }
 
     //Create game engin
     Game engin;

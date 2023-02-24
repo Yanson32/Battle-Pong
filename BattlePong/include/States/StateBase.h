@@ -70,9 +70,6 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-
-
-
         StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &newDebugDraw, tgui::Gui &newGui, const StateId newState);
 
 
