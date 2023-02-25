@@ -55,7 +55,20 @@ namespace Gui
         optionLayout->add(options);
         optionLayout->addSpace(1);
         getContentPane()->append(optionLayout);
+        getContentPane()->appendSpace();
+        
+        //Create license button
+        license = tgui::Button::create();
+        license->setText("License");
+        license->onPress([](){
+            //EventManager::inst().post<GU::Evt::OnClick>(Gui::id::CREDITS);
+        });
 
+        tgui::HorizontalLayout::Ptr licenseLayout = tgui::HorizontalLayout::create();
+        licenseLayout->addSpace(1);
+        licenseLayout->add(license);
+        licenseLayout->addSpace(1);
+        getContentPane()->append(licenseLayout);
         getContentPane()->appendSpace();
         
         //Create credits button

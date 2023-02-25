@@ -33,6 +33,7 @@ namespace Gui
             tgui::Button::Ptr start;
             tgui::Button::Ptr multiPlayer;
             tgui::Button::Ptr options;
+            tgui::Button::Ptr license;
             tgui::Button::Ptr credits;
             tgui::Button::Ptr exit;
     };
