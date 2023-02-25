@@ -161,7 +161,7 @@ void IntroState::init(std::shared_ptr<GU::Engin::Frame> frame)
 
     //Create intro panel
     std::shared_ptr<Gui::IntroPanel> cust(new Gui::IntroPanel());
-    cust->init(window.getView().getSize().x, window.getView().getSize().y);
+    cust->init(window.getSize().x, window.getSize().y);
     gui.add(cust, "PanelPointer");
 
     //Load ball collision sound
