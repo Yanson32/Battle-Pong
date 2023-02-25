@@ -219,7 +219,12 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
 void PlayState::clean(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
-    UNUSED(frame);
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
+    if(!pongFrame)
+    {
+       BP_LOG_FATAL_ERROR("Pointer should not be null")
+       return;
+    }
     gui.removeAllWidgets();
 
     //Remove ball sound
@@ -229,7 +234,7 @@ void PlayState::clean(std::shared_ptr<GU::Engin::Frame> frame)
 //    ResourceManager::sound.remove(Sound::Id::MESSAGE);
 //    ResourceManager::sound.remove(Sound::Id::BUTTON);
 //    ResourceManager::sound.remove(Sound::Id::BALL);
-
+    reset(pongFrame);
 }
 
 void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame)
@@ -274,6 +279,32 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
 void PlayState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame)
 {
     StateBase::handleGUEvent(engin, event, frame);
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
+    if(!pongFrame)
+    {
+        BP_LOG_FATAL_ERROR("Pointer should not be null")
+        return;
+    }
+
+    switch(event->getId())
+    {
+        case EventId::CLICK:
+        {
+            std::shared_ptr<GU::Evt::OnClick> temp =  std::dynamic_pointer_cast<GU::Evt::OnClick>(event);
+            if(temp)
+            {
+                switch(temp->m_buttonId)
+                {
+                    case Gui::id::OPTIONS_PANEL_BACK:
+                    {
+                        Game *game = static_cast<Game*>(&engin);
+                        game->setPop(true);
+                    }
+                    break;
+                }
+            }
+        }
+    }
 }
 
 PlayState::~PlayState()

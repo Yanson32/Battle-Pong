@@ -214,7 +214,6 @@ void StateBase::init(std::shared_ptr<GU::Engin::Frame> frame)
     gui.add(pongFrame->paddle1Hud);
     gui.add(pongFrame->paddle2Hud);
 
-    reset(pongFrame);
 }
 
 
