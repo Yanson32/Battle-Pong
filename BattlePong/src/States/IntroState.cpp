@@ -1,14 +1,14 @@
 #include "States/IntroState.h"
 #include "GameUtilities/Engin/Engin.h"
-#include <GameUtilities/Event/Event.h>
+#include <GameUtilities/Event/Events/Event.h>
 #include <GameUtilities/Event/EventQueue.h>
-#include <GameUtilities/Event/PushState.h>
+//#include <GameUtilities/Event/Events/PushState.h>
 #include <GameUtilities/Event/Events/Mouse/OnClick.h>
-#include <GameUtilities/Event/OnComboChanged.h>
+//#include <GameUtilities/Event/Events/Widget/OnComboChanged.h>
 
 #include <GameUtilities/Event/Events/OnLog.h>
 #include <GameUtilities/Log/LogType.h>
-#include "GameUtilities/Event/PlaySound.h"
+//#include "GameUtilities/Event/Events/PlaySound.h"
 #include <GameUtilities/Core/Macros.h>
 #include <SFML/Window/Event.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>

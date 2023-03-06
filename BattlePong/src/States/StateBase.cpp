@@ -8,7 +8,7 @@
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Event/Events/OnLog.h>
-#include <GameUtilities/Event/OnTextChanged.h>
+#include <GameUtilities/Event/Events/Widget/OnTextChanged.h>
 #include <GameUtilities/Log/LogEntry.h>
 #include <GameUtilities/Log/Component/Components.h>
 #include <GameUtilities/Core/PreferencesManager.h>

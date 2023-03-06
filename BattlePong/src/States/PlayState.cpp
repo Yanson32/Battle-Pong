@@ -24,7 +24,7 @@
 #include "Gui/OptionsPanel/SoundPanel.h"
 #include "Gui/OptionsPanel/NetworkPanel.h"
 #include "Gui/OptionsPanel/DevPanel.h"
-#include <GameUtilities/Event/LogEvent.h>
+#include <GameUtilities/Event/Events/OnLog.h>
 #include <GameUtilities/Core/Macros.h>
 #include "Log.h"
 

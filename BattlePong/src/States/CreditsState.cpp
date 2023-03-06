@@ -18,7 +18,7 @@
 #include "Gui/PlayPanel.h"
 #include "Gui/GuiId.h"
 #include "States/IntroState.h"
-#include <GameUtilities/Event/LogEvent.h>
+#include <GameUtilities/Event/Events/OnLog.h>
 #include <GameUtilities/Core/Macros.h>
 #include "Log.h"
 #include "Gui/CreditsPanel.h"

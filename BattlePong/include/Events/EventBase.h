@@ -17,7 +17,7 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-#include <GameUtilities/Event/Event.h>
+#include <GameUtilities/Event/Events/Event.h>
 
 class EventBase: public GU::Evt::Event
 {

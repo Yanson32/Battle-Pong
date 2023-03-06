@@ -3,8 +3,8 @@
 #include "Events/EventManager.h"
 #include "Macros.h"
 #include "Settings.h"
-#include <GameUtilities/Event/OnComboChanged.h>
-#include <GameUtilities/Event/OnCheck.h>
+#include <GameUtilities/Event/Events/Widget/OnItemSelected.h>
+#include <GameUtilities/Event/Events/Widget/OnCheck.h>
 #include <GameUtilities/Core/PreferencesManager.h>
 #include "Gui/GuiId.h"
 #include "TGUIFunctions.h"
