@@ -61,6 +61,7 @@
 #include <GameUtilities/Core/PreferencesManager.h>
 #include <algorithm>
 #include <filesystem>
+#include "ErrorCodes.h"
 #include "Arguments.h"
 
 int main(int argc, char* argv[])
@@ -227,5 +228,5 @@ int main(int argc, char* argv[])
     }
 
     window.close();
-    return 0;
+    return ErrorCode::SUCESS;
 }
