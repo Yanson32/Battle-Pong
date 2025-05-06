@@ -58,7 +58,8 @@ namespace Gui
         WALL_THICKNESS,
         BALL_RADIUS,
         MUSIC_COMBO,
-        PORT
+        PORT,
+        LICENSE
     };
 }
 #endif 

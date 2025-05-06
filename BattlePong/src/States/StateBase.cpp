@@ -401,6 +401,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Gui::id::CREDITS:
                       engin.push<CreditsState>(frame, engin, window, debugDraw, gui);
                     break;
+                    case Gui::id::LICENSE:
+                      engin.push<LicenseState>(frame, engin, window, debugDraw, gui);
+                    break;
                     case Gui::id::BACK:
                     {
                         Game *game = static_cast<Game*>(&engin);

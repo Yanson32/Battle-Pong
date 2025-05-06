@@ -7,7 +7,6 @@
 #include <GameUtilities/Event/Events/Mouse/OnClick.h>
 #include "Gui/GuiId.h"
 
-
 namespace Gui
 {
 
@@ -61,7 +60,7 @@ namespace Gui
         license = tgui::Button::create();
         license->setText("License");
         license->onPress([](){
-            //EventManager::inst().post<GU::Evt::OnClick>(Gui::id::CREDITS);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::LICENSE);
         });
 
         tgui::HorizontalLayout::Ptr licenseLayout = tgui::HorizontalLayout::create();

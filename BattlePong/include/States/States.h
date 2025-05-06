@@ -24,5 +24,6 @@
 #include "States/PlayState.h"
 #include "States/StateBase.h"
 #include "States/CreditsState.h"
+#include "States/LicenseState.h"
 
 #endif // STATES_H_INCLUDED

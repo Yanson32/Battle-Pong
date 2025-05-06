@@ -5,6 +5,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/IntroState.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/StateId.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/States.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/CreditsState.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/LicenseState.h"
 
 )
 set(SUB_DIRECTORIES "")
