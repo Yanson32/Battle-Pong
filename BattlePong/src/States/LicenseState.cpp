@@ -20,6 +20,7 @@
 #include <GameUtilities/Core/Macros.h>
 #include "Log.h"
 #include "SFMLFunctions.h"
+#include "Resources/License.h"
 
 LicenseState::LicenseState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId): StateBase(newEngin, newWindow, debugDraw, newGui, newId)
 {
@@ -184,7 +185,19 @@ void LicenseState::init(std::shared_ptr<GU::Engin::Frame> frame)
     //Load ball sound
     ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
 
-
+    textArea = tgui::TextArea::create();
+    textArea->setText(license);
+    sf::Vector2f winSize;
+    winSize.y = window.getSize().y;
+    winSize.x = window.getSize().x;
+    textArea->setSize(winSize.x / 2, winSize.y / 2);
+    textArea->setPosition(winSize.x / 4, winSize.y / 4);
+    textArea->setReadOnly(true);
+    textArea->onCaretPositionChange([](){});
+    tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
+    renderer->setBackgroundColor(sf::Color::Black);
+    renderer->setTextColor(Settings::textColor);
+    gui.add(textArea);
     centerText();
 
 }

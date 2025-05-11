@@ -1,4 +1,5 @@
 set(FILES "${CMAKE_CURRENT_SOURCE_DIR}/ResourceManager.cpp"
+          "${CMAKE_CURRENT_SOURCE_DIR}/License.cpp"
 )
 set(SUB_DIRECTORIES "Sounds"
                     "Images"

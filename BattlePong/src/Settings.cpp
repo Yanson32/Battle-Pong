@@ -17,6 +17,7 @@ namespace Settings
     int ballSpeed = 3;
     int paddleSpeed = 200;
     std::string logFile = "log.txt";
+    sf::Color textColor = sf::Color::Red;
 
     //Paddle 1 settings
     std::string p1Input = "";

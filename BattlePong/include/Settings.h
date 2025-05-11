@@ -27,6 +27,7 @@
 #include <SFML/System/String.hpp>
 #include <SFML/System/Vector2.hpp>
 #include <SFML/Window/VideoMode.hpp>
+#include "SFML/Graphics/Color.hpp"
 #include <TGUI/TGUI.hpp>
 #include <SFML/Network.hpp>
 #include "Events/EventId.h"
@@ -46,6 +47,7 @@ namespace Settings
     extern int ballSpeed;
     extern int paddleSpeed;
     extern std::string logFile;
+    extern sf::Color textColor;
 
     //Paddle 1 settigns
     extern std::string p1Input;

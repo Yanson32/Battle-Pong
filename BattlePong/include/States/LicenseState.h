@@ -84,5 +84,6 @@ class LicenseState: public StateBase
         ********************************************************************/
         ~LicenseState();
     private:
+        tgui::TextArea::Ptr textArea;
 };
 #endif
