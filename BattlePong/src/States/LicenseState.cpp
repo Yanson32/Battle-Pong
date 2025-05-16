@@ -195,8 +195,9 @@ void LicenseState::init(std::shared_ptr<GU::Engin::Frame> frame)
     textArea->setReadOnly(true);
     textArea->onCaretPositionChange([](){});
     tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
-    renderer->setBackgroundColor(sf::Color::Black);
+    renderer->setBackgroundColor(sf::Color(0, 0, 0, 150));
     renderer->setTextColor(Settings::textColor);
+    renderer->setTextSize(15);
     gui.add(textArea);
     centerText();
 

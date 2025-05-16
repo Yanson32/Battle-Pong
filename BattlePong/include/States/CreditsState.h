@@ -89,6 +89,9 @@ class CreditsState: public StateBase
         ********************************************************************/
         ~CreditsState();
     private:
-        Gui::CreditsPanel m_creditsPanel;
+        //Gui::CreditsPanel m_creditsPanel;
+        tgui::TextArea::Ptr textArea;
+        sf::Clock creditsTimer;
+        int creditsCounter = 0;
 };
 #endif

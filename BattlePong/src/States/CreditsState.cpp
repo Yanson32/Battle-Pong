@@ -81,6 +81,27 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
         {
             pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
         }
+        if(creditsTimer.getElapsedTime().asSeconds() >= 5)
+        {
+            if(creditsCounter == 0)
+            {
+                textArea->setText("Developer: Bruno Van de Velde\nProject: TGUI\nWeb: https://tgui.eu/");
+                ++creditsCounter;
+                creditsTimer.restart();
+            }
+            else if(creditsCounter == 1)
+            {
+                textArea->setText("Developer: Erin Catto\nProject: BOX2D\nWeb: https://box2d.org/");
+                ++creditsCounter;
+                creditsTimer.restart();
+            }
+            else if(creditsCounter == 2)
+            {
+                textArea->setText("Developer: Laurent Gomila\nProject: SFML\nWeb: https://www.sfml-dev.org/");
+                creditsCounter = 0;
+                creditsTimer.restart();
+            }
+        }
         debugDraw.update();
         pongFrame->ball->update();
         pongFrame->ground->update();
@@ -159,7 +180,7 @@ void CreditsState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     if(userMessage.getString() == "")
         window.draw(*pongFrame->ball);
     window.draw(userMessage);
-    window.draw(m_creditsPanel);    
+    //window.draw(m_creditsPanel);    
     window.display();
 
 }
@@ -180,7 +201,7 @@ void CreditsState::init(std::shared_ptr<GU::Engin::Frame> frame)
        return;
     }
     
-    
+/*    
     ResourceManager::loadTexture(textureId::CREDIT_LAURENT, Credit_Laurent_Gomila_png, Credit_Laurent_Gomila_png_len);
     ResourceManager::loadTexture(textureId::CREDIT_BRUNO, Credit_Bruno_Van_de_Velde_png, Credit_Bruno_Van_de_Velde_png_len);
     float width  = window.getView().getSize().x / 2;
@@ -191,7 +212,7 @@ void CreditsState::init(std::shared_ptr<GU::Engin::Frame> frame)
     m_creditsPanel.setBackgroundColor(sf::Color(0, 0, 0, 150));
     m_creditsPanel.add(ResourceManager::get(textureId::CREDIT_LAURENT));
     m_creditsPanel.add(ResourceManager::get(textureId::CREDIT_BRUNO));
-
+*/
     userMessage.setCharacterSize(34);
     userMessage.setPosition(sf::Vector2f(400, 300));
 
@@ -199,6 +220,22 @@ void CreditsState::init(std::shared_ptr<GU::Engin::Frame> frame)
     ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
 
 
+    centerText();
+    
+    textArea = tgui::TextArea::create();
+    sf::Vector2f winSize;
+    winSize.y = window.getSize().y;
+    winSize.x = window.getSize().x;
+    textArea->setSize(winSize.x / 2, winSize.y / 4);
+    textArea->setPosition(winSize.x / 4, winSize.y / 3);
+    textArea->setReadOnly(true);
+    textArea->onCaretPositionChange([](){});
+    tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
+    renderer->setBackgroundColor(sf::Color(0, 0, 0, 150));
+    renderer->setTextColor(Settings::textColor);
+    textArea->setText("Developer: Laurent Gomila\nProject: SFML\nWeb: https://www.sfml-dev.org/");
+    renderer->setTextSize(40);
+    gui.add(textArea);
     centerText();
 
 }
@@ -221,7 +258,7 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
     switch(event.type)
     {
         case sf::Event::KeyPressed:
-            if(event.key.code == toKey(Settings::playerControlRight))
+            /*/if(event.key.code == toKey(Settings::playerControlRight))
             {
                 m_creditsPanel.next();
             }
@@ -229,7 +266,7 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
             {
                 m_creditsPanel.prev();
             }
-            else if(event.key.code == sf::Keyboard::Escape)
+            else */if(event.key.code == sf::Keyboard::Escape)
             {
                 Game *game = static_cast<Game*>(&engin);
                 game->setPop(true);
