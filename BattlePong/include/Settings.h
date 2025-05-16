@@ -122,6 +122,9 @@ namespace Settings
     extern int velocityIterations;
     extern int positionIterations;
     extern int frameRate;
+
+    //Credits
+    extern int creditsTime;
     
 }
 

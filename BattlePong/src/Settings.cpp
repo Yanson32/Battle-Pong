@@ -100,4 +100,8 @@ namespace Settings
     int velocityIterations = 8;                   ///Box2D how strongly to correct velocity
     int positionIterations = 8;                   ///Box2D how strongly to correct position
     int frameRate = 60;
+
+
+    //Credits
+    int creditsTime = 5;
 }

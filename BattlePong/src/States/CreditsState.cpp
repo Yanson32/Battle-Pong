@@ -24,6 +24,8 @@
 #include "Gui/CreditsPanel.h"
 #include "SFMLFunctions.h"
 
+
+
 CreditsState::CreditsState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId): StateBase(newEngin, newWindow, debugDraw, newGui, newId)
 {
   BP_LOG_TRACE(__FUNCTION__)
@@ -81,26 +83,9 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
         {
             pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
         }
-        if(creditsTimer.getElapsedTime().asSeconds() >= 5)
+        if(creditsTimer.getElapsedTime().asSeconds() >= Settings::creditsTime)
         {
-            if(creditsCounter == 0)
-            {
-                textArea->setText("Developer: Bruno Van de Velde\nProject: TGUI\nWeb: https://tgui.eu/");
-                ++creditsCounter;
-                creditsTimer.restart();
-            }
-            else if(creditsCounter == 1)
-            {
-                textArea->setText("Developer: Erin Catto\nProject: BOX2D\nWeb: https://box2d.org/");
-                ++creditsCounter;
-                creditsTimer.restart();
-            }
-            else if(creditsCounter == 2)
-            {
-                textArea->setText("Developer: Laurent Gomila\nProject: SFML\nWeb: https://www.sfml-dev.org/");
-                creditsCounter = 0;
-                creditsTimer.restart();
-            }
+            credits();
         }
         debugDraw.update();
         pongFrame->ball->update();
@@ -258,6 +243,23 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
     switch(event.type)
     {
         case sf::Event::KeyPressed:
+            if(event.key.code == toKey(Settings::playerControlRight))
+            {
+                credits();
+                
+            }
+            else if(event.key.code == toKey(Settings::playerControlLeft))
+            {
+                --creditsCounter;
+                if(creditsCounter < 0)
+                    creditsCounter = MAX_CREDITS;
+                --creditsCounter;
+                if(creditsCounter < 0)
+                    creditsCounter = MAX_CREDITS;
+                
+                credits();
+           
+            }
             /*/if(event.key.code == toKey(Settings::playerControlRight))
             {
                 m_creditsPanel.next();
@@ -278,7 +280,28 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
 
 
 }
+void CreditsState::credits()
+{
+    if(creditsCounter == 0)
+    {
+        textArea->setText("Developer: Bruno Van de Velde\nProject: TGUI\nWeb: https://tgui.eu/");
+        ++creditsCounter;
+        creditsTimer.restart();
+    }
+    else if(creditsCounter == 1)
+    {
+        textArea->setText("Developer: Erin Catto\nProject: BOX2D\nWeb: https://box2d.org/");
+        ++creditsCounter;
+        creditsTimer.restart();
+    }
+    else if(creditsCounter == 2)
+    {
+        textArea->setText("Developer: Laurent Gomila\nProject: SFML\nWeb: https://www.sfml-dev.org/");
+        creditsCounter = 0;
+        creditsTimer.restart();
+    }
 
+} 
 void CreditsState::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame)
 {
     StateBase::handleGUEvent(engin, event, frame);

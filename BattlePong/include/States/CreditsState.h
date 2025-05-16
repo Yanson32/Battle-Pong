@@ -83,6 +83,7 @@ class CreditsState: public StateBase
         ********************************************************************/
         void draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
+        void credits();
 
         /****************************************************************//**
         *   @brief  Destructor
@@ -93,5 +94,6 @@ class CreditsState: public StateBase
         tgui::TextArea::Ptr textArea;
         sf::Clock creditsTimer;
         int creditsCounter = 0;
+        const int MAX_CREDITS = 2;
 };
 #endif
