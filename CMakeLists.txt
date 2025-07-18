@@ -46,8 +46,8 @@ endif()
 #include operating system specific code
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/${CMAKE_SYSTEM_NAME}.cmake")
 	include("${CMAKE_SYSTEM_NAME}")
-    
 endif()
+debug_report("CMAKE_SYSTEM_NAME = ${CMAKE_SYSTEM_NAME}")
 
 add_subdirectory("extlibs")
 add_subdirectory("BattlePong")
