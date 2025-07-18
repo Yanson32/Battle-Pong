@@ -1,5 +1,5 @@
 set(BP_ICON_LOCAL_DIRECTORY "$ENV{HOME}/.local/share/icons" CACHE STRING "This variable contains potential locations to store icons for a local install")
-set(BP_ICON_GLOBAL_DIRECTORY "/usr/share/icons;/usr/share/app-install/desktop/" CACHE STRING "This varialble contains potential locations to store icons for a global install")
+set(BP_ICON_GLOBAL_DIRECTORY "/usr/share/icons" CACHE STRING "This varialble contains potential locations to store icons for a global install")
 set(ICON_DIRECTORY "")
 
 #Find the correct local icon directory
@@ -29,13 +29,13 @@ if(EXISTS "${ICON_DIRECTORY}")
 endif()
 
 
-set(DESKTOP_LOCAL_DIRECTORY "$ENV{HOME}/.local/share/applications")
-set(DESKTOP_GLOBAL_DIRECTORY "/usr/share/applications")
+set(BP_DESKTOP_LOCAL_DIRECTORY "$ENV{HOME}/.local/share/applications" CACHE STRING "Potential directories for .desktop files location for local install")
+set(BP_DESKTOP_GLOBAL_DIRECTORY "/usr/share/applications;/usr/share/app-install/desktop/" CACHE STRING "Potential directories for .desktop files location for global install")
 set(DESKTOP_DIRECTORY "")
 
 
 #Find the local desktop directory
-foreach(DESKTOP_DIR ${DESKTOP_LOCAL_DIRECTORY})
+foreach(DESKTOP_DIR ${BP_DESKTOP_LOCAL_DIRECTORY})
 	if(EXISTS "${DESKTOP_DIR}")
 		set(DESKTOP_DIRECTORY "${DESKTOP_DIR}")	
 	else()
@@ -45,7 +45,7 @@ endforeach()
 
 #Find the correct global desktop directory
 if(BP_GLOBAL_INSTALL)
-	foreach(DESKTOP_DIR ${DESKTOP_GLOBAL_DIRECTORY})	
+	foreach(DESKTOP_DIR ${BP_DESKTOP_GLOBAL_DIRECTORY})	
 		if(EXISTS "${DESKTOP_DIR}")
 			set(DESKTOP_DIRECTORY ${DESKTOP_DIR})
 		endif()
