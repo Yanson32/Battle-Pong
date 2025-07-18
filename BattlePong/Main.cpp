@@ -82,6 +82,14 @@ int main(int argc, char* argv[])
     //Create the games window
     sf::RenderWindow window(sf::VideoMode(Settings::dimensions.x, Settings::dimensions.y),Settings::title);
 
+    //Set game icon
+    sf::Image gameIcon;
+    if(!gameIcon.loadFromFile(Settings::GAME_CONFIG_DIR + "/Icons/BattlePong.png"))
+    {
+        BP_LOG_ERROR("Unable to load game icon");
+    }
+    window.setIcon(gameIcon.getSize().x, gameIcon.getSize().y, gameIcon.getPixelsPtr());
+
     //Setup the path to resource folder for the resource management system
     if(!std::filesystem::exists(ResourceManager::getPath()))
         ResourceManager::setPath(Settings::GAME_CONFIG_DIR);
