@@ -41,9 +41,6 @@ if(NOT CMAKE_CONFIGUREATION_TYPES)
 	set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${${PROJECT_NAME}_VALID_BUILD_TYPES})
 endif()
 
-set(BP_TEMP_RESOURCE_FOLDER "NULL" CACHE PATH "CMake created temporary folder for game files" FORCE)
-
-
 #include operating system specific code
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/${CMAKE_SYSTEM_NAME}.cmake")
 	include("${CMAKE_SYSTEM_NAME}")
