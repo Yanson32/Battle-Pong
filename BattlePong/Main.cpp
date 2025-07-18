@@ -63,14 +63,14 @@
 #include <filesystem>
 #include "ErrorCodes.h"
 #include "Arguments.h"
+#include "Log.h"
 
 int main(int argc, char* argv[])
 {
     programArguments(argc, argv);
     
-    std::string configDir = GU::Core::getConfigDir("BattlePong").c_str();
-    std::filesystem::create_directory(configDir);
-    
+    BP_LOG_MESSAGE("GAME_CONFIG_DIR = " + Settings::GAME_CONFIG_DIR);   
+ 
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
     //So we do it in a thread.
     std::thread ipThread([&](){Settings::publicIp = sf::IpAddress::getPublicAddress().toString();});
@@ -84,15 +84,15 @@ int main(int argc, char* argv[])
 
     //Setup the path to resource folder for the resource management system
     if(!std::filesystem::exists(ResourceManager::getPath()))
-        ResourceManager::setPath(Settings::RESOURCE_INSTALL_DIR);
-   
+        ResourceManager::setPath(Settings::GAME_CONFIG_DIR);
+
     //Set the log file path 
-    Settings::logFile = configDir;
+    Settings::logFile = Settings::GAME_CONFIG_DIR;
     if(Settings::logFile.back() != '/')
         Settings::logFile += "/Log.txt";
 
     //Set the path to the preferences file
-    Settings::preferencesFile = configDir;
+    Settings::preferencesFile = Settings::GAME_CONFIG_DIR;
     if(Settings::preferencesFile.back() != '/')
      Settings::preferencesFile  += "/preferences.txt";
 
@@ -150,7 +150,6 @@ int main(int argc, char* argv[])
 
     //Load tgui theme
     ResourceManager::loadTheme(Settings::currentTheme);
-
 
     ResourceManager::loadTexture(textureId::ICON, BattlePong_png, BattlePong_png_len);
 

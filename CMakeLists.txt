@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.5.1)
 
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
 include ("defaults")
-
+include ("Debug")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "lib")
@@ -20,7 +20,7 @@ endif()
 
 #Give the project a name
 project("BattlePong" VERSION "0.0.0.1")
-
+debug_init()
 
 string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)
 
@@ -41,13 +41,17 @@ if(NOT CMAKE_CONFIGUREATION_TYPES)
 	set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${${PROJECT_NAME}_VALID_BUILD_TYPES})
 endif()
 
-add_subdirectory("extlibs")
-add_subdirectory("BattlePong")
+set(BP_TEMP_RESOURCE_FOLDER "NULL" CACHE PATH "CMake created temporary folder for game files" FORCE)
+
 
 #include operating system specific code
 if(EXISTS "${CMAKE_CURRENT_SOURCE_DIR}/cmake/modules/${CMAKE_SYSTEM_NAME}.cmake")
 	include("${CMAKE_SYSTEM_NAME}")
+    
 endif()
+
+add_subdirectory("extlibs")
+add_subdirectory("BattlePong")
 
 # uninstall target
 if(NOT TARGET uninstall)
@@ -60,6 +64,7 @@ if(NOT TARGET uninstall)
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
 endif()
 
+#If the build type is equal to DEBUG we add a definition to the project
 string(TOUPPER "${CMAKE_BUILD_TYPE}" BP_BUILD_TYPE_UPPER)
 if("${BP_BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
 	add_definitions("-DDEBUG")
@@ -70,8 +75,5 @@ configure_file("${${PROJECT_NAME}_SOURCE_DIR}/cmake/config.h.in" "${${PROJECT_NA
 #Make the BUILD_TESTING variable show up in the cmake gui
 option(BUILD_TESTING "Set to TRUE if you want to build unit tests" FALSE)
 
-if(NOT CMAKE_CONFIGURATION_TYPES)
-	file(COPY "Resources/" DESTINATION "${CMAKE_BINARY_DIR}/${PROJECT_NAME}/Resources/")
-endif()
 
-file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Resources/"  DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}/${CMAKE_RUNTIME_OUTPUT_DIRECTORY}/Resources/")
+file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Resources/"  DESTINATION "${BP_GAME_CONFIG_DIR}")

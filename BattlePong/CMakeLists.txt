@@ -1,5 +1,7 @@
 #Create our target
 add_executable("${PROJECT_NAME}" "Main.cpp")
+
+target_compile_definitions("${PROJECT_NAME}" PUBLIC "BP_GAME_CONFIG_DIR=${BP_GAME_CONFIG_DIR}")
 add_definitions("-DBP_VERSION=\"${PROJECT_VERSION}\"")
 
 install(TARGETS "${PROJECT_NAME}" DESTINATION bin)

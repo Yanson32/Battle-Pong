@@ -108,7 +108,7 @@ namespace Settings
     extern std::string preferencesFile;
 
     //Directories
-    extern const std::string RESOURCE_INSTALL_DIR;
+    extern const std::string GAME_CONFIG_DIR;
 
     extern int logSeverity;
 

@@ -5,6 +5,8 @@
 #include <iostream>
 #include <SFML/System/String.hpp>
 #include <GameUtilities/Log/LogType.h>
+#define TO_STR2(x) #x
+#define TO_STR(x) TO_STR2(x)
 
 namespace Settings
 {
@@ -85,8 +87,7 @@ namespace Settings
     std::string preferencesFile = "";
 
     //Directories
-    const std::string RESOURCE_INSTALL_DIR = RESOURCE_INSTALL_PATH;
-
+    const std::string GAME_CONFIG_DIR = TO_STR(BP_GAME_CONFIG_DIR);
     int logSeverity = static_cast<int>(GU::Log::LogType::GU_MESSAGE);
 
 

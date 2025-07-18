@@ -1,5 +1,5 @@
 set(ICON_LOCAL_DIRECTORY "$ENV{HOME}/.local/share/icons")
-set(ICON_GLOBAL_DIRECTORY "/usr/share/icons")
+set(ICON_GLOBAL_DIRECTORY "/usr/share/icons;/usr/share/app-install/desktop/")
 set(ICON_DIRECTORY "")
 
 #Find the correct local icon directory
@@ -9,8 +9,12 @@ foreach(ICON_DIR ${ICON_LOCAL_DIRECTORY})
 	endif()
 endforeach()
 
+#Create variable for global install
+set(BP_GLOBAL_INSTALL TRUE CACHE BOOL "Set to true if doing a global install")
+debug_report("Global Install = ${BP_GLOBAL_INSTALL}")
+
 #Find the correct global icon directory
-if(${PROJECT_NAME}_GLOBAL_INSTALL)
+if(BP_GLOBAL_INSTALL)
 	foreach(ICON_DIR ${ICON_GLOBAL_DIRECTORY})	
 		if(EXISTS "${ICON_DIR}")
 			set(ICON_DIRECTORY ${ICON_DIR})
@@ -58,6 +62,8 @@ if(EXISTS ${ICON_DIRECTORY})
 	Icon=${ICON_DIRECTORY}/${PROJECT_NAME}.png
 	Type=Application"
 	)
+else()
+    debug_report("Linux.cmake: Icon directory does not exist. Icon Directory = ${ICON_DIRECTORY}")
 endif()
 
 #Install desktop file
@@ -72,8 +78,11 @@ unset(ICON_LOCAL_DIRECTORY)
 unset(ICON_GLOBAL_DIRECTORY)
 unset(ICON_DIRECTORY)
 
-set(CONFIG_DIR "$ENV{HOME}/.config/${PROJECT_NAME}")
-install(DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}/Resources/" DESTINATION "${CONFIG_DIR}")
-target_compile_definitions(${PROJECT_NAME} PUBLIC RESOURCE_INSTALL_PATH="${CONFIG_DIR}")
+
+#Create the games config directory
+set(BP_GAME_CONFIG_DIR "$ENV{HOME}/.config/${PROJECT_NAME}" CACHE PATH "This varialbe contains the path to the games config directory")
+debug_report("BP_GAME_CONFIG_DIR = ${BP_GAME_CONFIG_DIR}")
+
+
 unset(CONFIG_DIR)
 
