@@ -1,0 +1,8 @@
+macro(help_text)
+    message("BP_ICON_LOCAL_DIRECTORY        This variable contains potential locations to store icons for a local install")
+    message("BP_ICON_GLOBAL_DIRECTORY       This varialble contains potential locations to store icons for a global install")
+    message("BP_GLOBAL_INSTALL              Set this variable to true for gloal builds and false otherwise")
+    message("BP_DESKTOP_LOCAL_DIRECTORY     Potential directories for .desktop files location for local install")
+    message("BP_DESKTOP_GLOBAL_DIRECTORY    Potential directories for .desktop files location for global install")
+    message("BP_GAME_CONFIG_DIR             This varialbe contains the path to the games config directory")
+endmacro()

@@ -4,6 +4,7 @@ cmake_minimum_required(VERSION 3.5.1)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
 include ("defaults")
 include ("Debug")
+include ("Help")
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "lib")
@@ -20,6 +21,7 @@ endif()
 
 #Give the project a name
 project("BattlePong" VERSION "0.0.0.1")
+help_text()
 debug_init()
 
 string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)
