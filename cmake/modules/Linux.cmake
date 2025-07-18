@@ -1,3 +1,7 @@
+#Create the games config directory
+set(BP_GAME_CONFIG_DIR "$ENV{HOME}/.config/${PROJECT_NAME}" CACHE PATH "This varialbe contains the path to the games config directory")
+debug_report("BP_GAME_CONFIG_DIR = ${BP_GAME_CONFIG_DIR}")
+
 set(BP_ICON_LOCAL_DIRECTORY "$ENV{HOME}/.local/share/icons" CACHE STRING "This variable contains potential locations to store icons for a local install")
 set(BP_ICON_GLOBAL_DIRECTORY "/usr/share/icons" CACHE STRING "This varialble contains potential locations to store icons for a global install")
 set(ICON_DIRECTORY "")
@@ -23,11 +27,12 @@ if(BP_GLOBAL_INSTALL)
 endif()
 
 
+debug_report("ICON_DIRECTORY = ${ICON_DIRECTORY} Application icon directory")
+
 #Install application icon
 if(EXISTS "${ICON_DIRECTORY}")
-	install(FILES "${CMAKE_BINARY_DIR}/${PROJECT_NAME}/Resources/Icons/${PROJECT_NAME}.png" DESTINATION "${ICON_DIRECTORY}")
+	install(FILES "${BP_GAME_CONFIG_DIR}/Icons/${PROJECT_NAME}.png" DESTINATION "${ICON_DIRECTORY}")
 endif()
-
 
 set(BP_DESKTOP_LOCAL_DIRECTORY "$ENV{HOME}/.local/share/applications" CACHE STRING "Potential directories for .desktop files location for local install")
 set(BP_DESKTOP_GLOBAL_DIRECTORY "/usr/share/applications;/usr/share/app-install/desktop/" CACHE STRING "Potential directories for .desktop files location for global install")
@@ -71,18 +76,6 @@ if(EXISTS "${DESKTOP_DIRECTORY}")
 	install(FILES "${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}.desktop" DESTINATION "${DESKTOP_DIRECTORY}")
 endif()
 
-unset(DESKTOP_LOCAL_DIRECTORY)
-unset(DESKTOP_GLOBAL_DIRECTORY)
 unset(DESKTOP_DIRECTORY)
-unset(ICON_LOCAL_DIRECTORY)
-unset(ICON_GLOBAL_DIRECTORY)
 unset(ICON_DIRECTORY)
-
-
-#Create the games config directory
-set(BP_GAME_CONFIG_DIR "$ENV{HOME}/.config/${PROJECT_NAME}" CACHE PATH "This varialbe contains the path to the games config directory")
-debug_report("BP_GAME_CONFIG_DIR = ${BP_GAME_CONFIG_DIR}")
-
-
-unset(CONFIG_DIR)
 
