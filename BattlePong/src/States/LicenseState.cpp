@@ -155,8 +155,7 @@ void LicenseState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
        return;
     }
     StateBase::draw(engin, deltaTime, frame);
-    if(userMessage.getString() == "")
-        window.draw(*pongFrame->ball);
+    window.draw(*pongFrame->ball);
     window.draw(userMessage);
     window.display();
 

@@ -108,6 +108,58 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
             reset(pongFrame);
         }
     }
+    
+    const int SECONDS = 1;
+    if(userMessage.getString() == "Ready!")
+    {
+        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        {
+            userMessage.setString("3");
+            centerText();
+            messageClock.restart();
+            EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+        }
+    }
+    else if(userMessage.getString() == "3")
+    {
+        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        {
+            userMessage.setString("2");
+            centerText();
+            messageClock.restart();
+            EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+        }
+    }
+    else if(userMessage.getString() == "2")
+    {
+        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        {
+            userMessage.setString("1");
+            centerText();
+            messageClock.restart();
+            EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+        }
+    }
+    else if(userMessage.getString() == "1")
+    {
+        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        {
+            userMessage.setString("Go!");
+            centerText();
+            messageClock.restart();
+            EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+        }
+    }
+    else if(userMessage.getString() == "Go!")
+    {
+        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        {
+            userMessage.setString("");
+            messageClock.restart();
+            //EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+            systemPause(false);
+        }
+    }
 }
 
 
@@ -131,7 +183,7 @@ void StateBase::draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
     window.draw(*pongFrame->leftWall);
     window.draw(*pongFrame->rightWall);
     window.draw(*pongFrame->ground);
-
+    window.draw(userMessage);
     #ifdef DEBUG
         window.draw(debugDraw);
     #endif
@@ -184,12 +236,21 @@ void StateBase::centerText()
     float originY = bounds.height / 2;
 
     userMessage.setOrigin({originX, originY});
+    userMessage.setPosition({window.getView().getCenter().x, window.getView().getCenter().y});
 
 }
 
 void StateBase::init(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
+    
+    StateBase::userMessage.setString("");
+    StateBase::userMessage.setColor(sf::Color::Red);
+    StateBase::userMessage.setPosition({100, 100});
+   
+    ResourceManager resourceManager;
+    resourceManager.loadFont(fontId::MONOSPACE, "Monospace"); 
+    userMessage.setFont(resourceManager.get(fontId::MONOSPACE));
 
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)

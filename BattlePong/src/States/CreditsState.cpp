@@ -99,57 +99,6 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
     }
 
 
-    if(userMessage.getString() == "Ready!")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("3");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "3")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("2");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "2")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("1");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "1")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("Go!");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "Go!")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("");
-            messageClock.restart();
-            //EventManager::inst().post<PlaySound>(sf::String("Message Sound"));
-            systemPause(false);
-        }
-    }
-
 }
 
 void CreditsState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
@@ -162,10 +111,8 @@ void CreditsState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
        return;
     }
     StateBase::draw(engin, deltaTime, frame);
-    if(userMessage.getString() == "")
-        window.draw(*pongFrame->ball);
+    window.draw(*pongFrame->ball);
     window.draw(userMessage);
-    //window.draw(m_creditsPanel);    
     window.display();
 
 }

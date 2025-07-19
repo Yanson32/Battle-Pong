@@ -37,7 +37,7 @@ void PlayState::handleEvents(GU::Engin::Engin& engin, const float &deltaTime, st
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(deltaTime);
-
+    
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
@@ -75,7 +75,6 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
        BP_LOG_FATAL_ERROR("Pointer should not be null")
        return;
     }
-    const int SECONDS = 1;
 
     StateBase::update(engin, deltaTime, frame);
 
@@ -96,57 +95,7 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
 
     }
 
-
-    if(userMessage.getString() == "Ready!")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("3");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "3")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("2");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "2")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("1");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "1")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("Go!");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "Go!")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("");
-            messageClock.restart();
-            //EventManager::inst().post<PlaySound>(sf::String("Message Sound"));
-            systemPause(false);
-        }
-    }
+    
 
 }
 
@@ -160,8 +109,7 @@ void PlayState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
        return;
     }
     StateBase::draw(engin, deltaTime, frame);
-    if(userMessage.getString() == "")
-        window.draw(*pongFrame->ball);
+    window.draw(*pongFrame->ball);
     window.draw(userMessage);
 
 
@@ -176,7 +124,14 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
 
     StateBase::init(frame);
     Settings::stateId = StateId::PLAY_STATE;
-
+    StateBase::userMessage.setString("Ready");
+    StateBase::userMessage.setColor(sf::Color::Red);
+    //StateBase::userMessage.setPosition({100, 100});
+   
+    ResourceManager resourceManager;
+    resourceManager.loadFont(fontId::MONOSPACE, "Monospace"); 
+   userMessage.setFont(resourceManager.get(fontId::MONOSPACE));
+    
     //Crate pong frame
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
@@ -204,6 +159,7 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
     systemPause(true);
     userMessage.setCharacterSize(34);
     userMessage.setPosition(sf::Vector2f(400, 300));
+    messageClock.restart();
 
     //Load ball sound
     ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");

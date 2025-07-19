@@ -3,7 +3,7 @@
 #include "Resources/Music/Zombies.h"
 
 ResourceHolder<sf::SoundBuffer, soundId> ResourceManager::m_sound;
-ResourceHolder<sf::Font, sf::String> ResourceManager::m_font;
+ResourceHolder<sf::Font, fontId> ResourceManager::m_font;
 ResourceHolder<sf::Texture, textureId> ResourceManager::m_texture;
 sf::Music ResourceManager::m_music;
 std::filesystem::path ResourceManager::m_path =  std::filesystem::current_path() += "/Resources";
@@ -161,6 +161,32 @@ void ResourceManager::loadTheme(const std::string &name)
 sf::Music& ResourceManager::getMusic()
 {
     return m_music;
+}
+
+
+bool ResourceManager::loadFont(const fontId &font, const std::string &name)
+{
+    if(!m_font.isLoaded(font))
+    {
+        std::filesystem::path path = m_path;
+        path += std::filesystem::path("/Fonts/" + name + "/" + name + ".ttf");
+        if(std::filesystem::exists(path))
+            m_font.load(font, path.string());
+
+    }
+    return false;
+}
+
+
+bool ResourceManager::isLoaded(const fontId &font)
+{
+    return m_font.isLoaded(font);
+}
+
+
+sf::Font& ResourceManager::get(const fontId  &font)
+{
+   return m_font.get(font); 
 }
 
 void ResourceManager::setPath(const std::filesystem::path &path)

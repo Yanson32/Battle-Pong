@@ -86,5 +86,6 @@ class PlayState: public StateBase
         ********************************************************************/
         ~PlayState();
     private:
+        sf::Font font;
 };
 #endif

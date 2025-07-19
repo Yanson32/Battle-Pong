@@ -37,6 +37,7 @@
 #include "Settings.h"
 #include "GameUtilities/Core/String.h"
 #include <filesystem>
+#include "FontId.h"
 
 class ResourceManager
 {
@@ -58,6 +59,9 @@ class ResourceManager
 	    static bool loadMusic(const std::string &music);
         static void loadTheme(const std::string &name);
         static sf::Music& getMusic();
+        static bool loadFont(const fontId &font, const std::string &name);
+	    static bool isLoaded(const fontId &font);
+        static sf::Font& get(const fontId  &font);
         static void setPath(const std::filesystem::path &path);
         static std::filesystem::path getPath();
 	    virtual ~ResourceManager();
@@ -75,7 +79,7 @@ class ResourceManager
         *   @brief  The sound ResourceManager object holds sf::SoundBuffer
         *           objects.
         **************************************************************/
-        static ResourceHolder<sf::Font, sf::String> m_font;
+        static ResourceHolder<sf::Font, fontId> m_font;
 
 
         /**********************************************************//**

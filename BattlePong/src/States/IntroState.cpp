@@ -105,15 +105,18 @@ void IntroState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     }
 
     StateBase::update(engin, deltaTime, frame);
-    pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
+    if(!isSystemPaused())
+    {
+        pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
+    }
     debugDraw.update();
+    pongFrame->leftPaddle->update();
+    pongFrame->rightPaddle->update();
     pongFrame->ball->update();
     pongFrame->ground->update();
     pongFrame->celing->update();
     pongFrame->leftWall->update();
     pongFrame->rightWall->update();
-    pongFrame->leftPaddle->update();
-    pongFrame->rightPaddle->update();
     header.setPosition({window.getView().getSize().x / 2, window.getView().getSize().y / 6});
 
 
@@ -132,7 +135,6 @@ void IntroState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::shar
 	StateBase::draw(engin, deltaTime, frame);
 	window.draw(*pongFrame->ball);
 	window.draw(header);
-	//window.draw(header);
     window.display();
 }
 
