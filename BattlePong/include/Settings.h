@@ -90,14 +90,15 @@ namespace Settings
 
 
     //Network
-    extern sf::TcpSocket socket;
-    extern sf::TcpListener listener;
-    extern bool connected;
+    //extern sf::TcpSocket socket;
+    //extern sf::TcpListener listener;
+    //extern bool connected;
     extern sf::String targetIp;
     extern sf::Time timeOut;
     extern int port;
     extern std::string publicIp;
     extern std::string localIp;
+    extern std::string clientIp;
 
     //Theme settings
     extern std::string currentBackground;
@@ -126,6 +127,8 @@ namespace Settings
     //Credits
     extern int creditsTime;
     
+    extern bool isHost;
+    extern bool multiplayer;
 }
 
 

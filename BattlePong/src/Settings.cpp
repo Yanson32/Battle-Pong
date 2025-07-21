@@ -1,4 +1,3 @@
-
 #include "Settings.h"
 #include "Events/Events.h"
 #include "States/StateId.h"
@@ -22,7 +21,7 @@ namespace Settings
     sf::Color textColor = sf::Color::Red;
 
     //Paddle 1 settings
-    std::string p1Input = "";
+    std::string p1Input = "None";
     std::string p1Name = "";
     int p1Score = 0;
 
@@ -75,14 +74,15 @@ namespace Settings
     std::vector<std::string> themes = {"Default", "Black", "BabyBlue"};
 
     //Network
-    sf::TcpSocket socket;
-    sf::TcpListener listener;
-    bool connected = false;
+    //sf::TcpSocket socket;
+    //sf::TcpListener listener;
+    //bool connected = false;
     int port = 4000;
     sf::String targetIp = "127.0.0.0";
     sf::Time timeOut;
     std::string publicIp = "0.0.0.0";
     std::string localIp = sf::IpAddress::getLocalAddress().toString();
+    std::string clientIp = "";
 
     std::string preferencesFile = "";
 
@@ -105,4 +105,7 @@ namespace Settings
 
     //Credits
     int creditsTime = 5;
+
+    bool isHost = true;
+    bool multiplayer = false;
 }

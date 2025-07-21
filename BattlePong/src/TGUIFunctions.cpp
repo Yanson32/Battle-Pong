@@ -11,3 +11,4 @@ tgui::String toTguiString(const std::string &msg)
 	tgui::String temp(msg);
 	return temp.toStdString();
 }
+

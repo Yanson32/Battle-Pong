@@ -3,7 +3,9 @@
 #include <GameUtilities/Event/Events/Mouse/OnClick.h>
 #include "Gui/GuiId.h"
 #include <SFML/Network.hpp>
-
+#include "Settings.h"
+#include "Log.h"
+#include "TGUIFunctions.h"
 
 namespace Gui
 {
@@ -15,14 +17,21 @@ namespace Gui
 
         //Create ip edit box
         ipBox = tgui::EditBox::create();
-        ipBox->onTextChange(&ConnectPanel::onTextChanged, this);
+        ipBox->setText("192.168.88.243");
+        Settings::clientIp = ipBox->getText().toStdString(); 
         getContentPane()->append("Ip", ipBox);
         
         //EditBox to enter port number
         portBox = tgui::EditBox::create();
-        portBox->onTextChange(&ConnectPanel::onTextChanged, this);
+        portBox->setText(std::to_string(Settings::port));
+        portBox->onTextChange([this](){
+            if(!portBox->getText().attemptToInt(Settings::port))
+            {
+                BP_LOG_ERROR("Unable to change port");
+            }
+        });
         getContentPane()->append("Port", portBox);
-        
+       
         //Create back button
         backBtn = tgui::Button::create("Back");
         backBtn->onPress([](){
@@ -31,7 +40,13 @@ namespace Gui
         
         //Create connect button
         connectButton = tgui::Button::create("Connect");
-        connectButton->setEnabled(false);
+        connectButton->onPress([this]()
+        {
+            Settings::isHost = false;
+            Settings::multiplayer = true;
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::START);
+                 
+        });
         buttonLayout->add(connectButton);
         
         //Add back button 
@@ -42,19 +57,6 @@ namespace Gui
     }
 
 
-    void ConnectPanel::onTextChanged()
-    {
-        connectButton->setEnabled(false);
-
-        if(ipBox->getText() !=  "")
-        {
-            if(portBox->getText() != "")
-            {
-                connectButton->setEnabled(true);
-            } 
-        }
-
-    }
 
 
     void ConnectPanel::init(const int &width, const int &height)

@@ -58,6 +58,7 @@ void PlayState::handleEvents(GU::Engin::Engin& engin, const float &deltaTime, st
         pongFrame->rightPaddle->handleInput(*pongFrame->ball);
     }
     BP_LOG_MESSAGE("GameUtilities Game Loop")
+    
     //GameUtilities event loop
     GU::Evt::EventPtr evtPtr;
     while(EventManager::inst().poll((evtPtr)))
@@ -94,8 +95,22 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         pongFrame->rightPaddle->update();
 
     }
-
     
+    if(Settings::multiplayer)
+    {
+        if(Settings::isHost)
+        {
+            if(!server.isConnected())
+                server.connect();
+            server.update();
+        }   
+        else
+        {
+            client.update();
+        }
+    }
+    
+    reset(pongFrame);
 
 }
 
@@ -124,13 +139,6 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
 
     StateBase::init(frame);
     Settings::stateId = StateId::PLAY_STATE;
-    StateBase::userMessage.setString("Ready");
-    StateBase::userMessage.setColor(sf::Color::Red);
-    //StateBase::userMessage.setPosition({100, 100});
-   
-    ResourceManager resourceManager;
-    resourceManager.loadFont(fontId::MONOSPACE, "Monospace"); 
-   userMessage.setFont(resourceManager.get(fontId::MONOSPACE));
     
     //Crate pong frame
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
@@ -157,8 +165,8 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
         pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->rightPaddle)));
 
     systemPause(true);
-    userMessage.setCharacterSize(34);
-    userMessage.setPosition(sf::Vector2f(400, 300));
+    //userMessage.setCharacterSize(34);
+    //userMessage.setPosition(sf::Vector2f(400, 300));
     messageClock.restart();
 
     //Load ball sound
@@ -168,8 +176,35 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
-    centerText();
+    if(Settings::multiplayer)
+    {
+        if(Settings::isHost)
+        {
+            userMessage.setString("Waiting for player 2 connection");
+            server.init();
+            
+        }   
+        else
+        {
+            client.init();
+        }
+    }
+
     reset(pongFrame);
+/*
+    if(Settings::multiplayer)
+    {
+        if(Settings::isHost)
+        {
+            connectThread.reset(new std::thread([this]{
+            })); 
+            connectThread->detach();
+        }   
+        else
+        {
+        
+        }
+    }*/
 }
 
 void PlayState::clean(std::shared_ptr<GU::Engin::Frame> frame)

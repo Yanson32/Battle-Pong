@@ -1,5 +1,6 @@
 #ifndef PONG_PLAYSTATE_H
 #define PONG_PLAYSTATE_H
+#include <thread>
 
 /************************************************************//**
 *   @author Wayne J Larson Jr
@@ -38,6 +39,8 @@
 #include <TGUI/TGUI.hpp>
 
 #include <GameUtilities/Engin/Frame.h>
+#include "Network/Server.h"
+#include "Network/Client.h"
 
 class PlayState: public StateBase
 {
@@ -87,5 +90,7 @@ class PlayState: public StateBase
         ~PlayState();
     private:
         sf::Font font;
+        Server server;
+        Client client;
 };
 #endif

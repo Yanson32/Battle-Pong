@@ -44,10 +44,10 @@ namespace Gui
     {
         public:
             ContentPane();
-            bool append(const tgui::String &label, std::shared_ptr<tgui::Widget> widget); 
+            std::shared_ptr<tgui::Widget> append(const tgui::String &label, std::shared_ptr<tgui::Widget> widget); 
             bool append(tgui::HorizontalLayout::Ptr layout);
             void appendHeader(const tgui::String &header);
-            void append(const tgui::String &label, std::shared_ptr<tgui::CheckBox> check);
+            std::shared_ptr<tgui::CheckBox> append(const tgui::String &label, std::shared_ptr<tgui::CheckBox> check);
             void appendSpace(); 
             tgui::VerticalLayout::Ptr mainLayout;
             virtual ~ContentPane();

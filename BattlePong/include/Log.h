@@ -18,6 +18,7 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
 #include <GameUtilities/Event/Events/OnLog.h>
+#include "Events/EventManager.h"
 #define BP_LOG_FATAL_ERROR(x)(EventManager::inst().post<GU::Evt::OnLog>(x, static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR), int(__LINE__), GU::Core::String(__FILE__)));
 #define BP_LOG_ERROR(x)(EventManager::inst().post<GU::Evt::OnLog>(x, static_cast<int>(GU::Log::LogType::GU_ERROR), int(__LINE__), GU::Core::String(__FILE__)));
 #define BP_LOG_WARNING(x)(EventManager::inst().post<GU::Evt::OnLog>(x, static_cast<int>(GU::Log::LogType::GU_WARNING), int(__LINE__), GU::Core::String(__FILE__)));

@@ -22,8 +22,9 @@
 class Server
 {
     public:
-        Server(const int newPort);
+        Server();
         bool isConnected();
+        void connect();
         void init();
         void clean();
         void handleEvents();
@@ -32,10 +33,9 @@ class Server
         virtual ~Server();
     protected:
     private:
-        sf::TcpSocket socket;
         sf::TcpListener listener;
+        sf::TcpSocket socket;
         bool connected = false;
-        int port = 4000;
         sf::IpAddress address;
 };
 

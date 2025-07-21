@@ -24,5 +24,4 @@
 tgui::String toTguiString(const int &num);
 tgui::String toTguiString(const std::string &msg);
 
-
 #endif 

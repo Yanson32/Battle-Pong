@@ -4,7 +4,7 @@
 #include <GameUtilities/Event/Events/Mouse/OnClick.h>
 #include <SFML/Network.hpp>
 #include "Settings.h"
-
+#include "Log.h"
 
 namespace Gui
 {
@@ -27,6 +27,14 @@ namespace Gui
 
         //EditBox to enter port number
         portBox = tgui::EditBox::create();
+        portBox->setText(std::to_string(Settings::port));
+        std::cout << "port = " << Settings::port << std::endl;
+        portBox->onTextChange([this](){
+            if(!portBox->getText().attemptToInt(Settings::port))
+            {
+                BP_LOG_ERROR("Unable to change port");
+            }
+        });
         getContentPane()->append("Port", portBox);
 
         //Create back button
@@ -37,7 +45,11 @@ namespace Gui
 
         //Create host button
         hostButton = tgui::Button::create("Host");
-        hostButton->setEnabled(false);
+        hostButton->onPress([](){
+            Settings::isHost = true;
+            Settings::multiplayer = true;
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::START);
+        });
         buttonLayout->add(hostButton);
 
         //Create back button

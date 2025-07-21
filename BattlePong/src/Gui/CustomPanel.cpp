@@ -65,7 +65,7 @@ namespace Gui
 
 
 
-    bool ContentPane::append(const tgui::String &label, std::shared_ptr<tgui::Widget> widget)
+    std::shared_ptr<tgui::Widget> ContentPane::append(const tgui::String &label, std::shared_ptr<tgui::Widget> widget)
     {
 
         //Create layout
@@ -78,7 +78,7 @@ namespace Gui
         //Add widget to layout
         layout->add(widget, label);
 
-        return true;
+        return widget;
     }
 
     bool ContentPane::append(tgui::HorizontalLayout::Ptr layout)
@@ -108,7 +108,7 @@ namespace Gui
 
     }
 
-    void ContentPane::append(const tgui::String &label, std::shared_ptr<tgui::CheckBox> check)
+    std::shared_ptr<tgui::CheckBox> ContentPane::append(const tgui::String &label, std::shared_ptr<tgui::CheckBox> check)
     {
         tgui::HorizontalLayout::Ptr layout = tgui::HorizontalLayout::create();
         append(layout);
@@ -123,6 +123,8 @@ namespace Gui
 
         layout->add(panel1);
         layout->add(panel2);
+
+        return check;
     }
 
 
