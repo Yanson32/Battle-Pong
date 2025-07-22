@@ -117,12 +117,12 @@ void CreditsState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
 
 }
 
-void CreditsState::init(std::shared_ptr<GU::Engin::Frame> frame)
+void CreditsState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(frame);
 
-    StateBase::init(frame);
+    StateBase::init(engin, frame);
     Settings::stateId = StateId::CREDITS_STATE;
 
     //Crate pong frame

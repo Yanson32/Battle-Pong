@@ -54,7 +54,7 @@ class PlayState: public StateBase
 
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame);
         void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame);
-        virtual void init(std::shared_ptr<GU::Engin::Frame> frame) override;
+        virtual void init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> frame) override;
         virtual void clean(std::shared_ptr<GU::Engin::Frame> frame) override;
 
         /****************************************************************//**
@@ -89,9 +89,6 @@ class PlayState: public StateBase
         ********************************************************************/
         ~PlayState();
     private:
-        sf::Font font;
-        Server server;
-        Client client;
         std::shared_ptr<std::thread> connectThread;
 };
 #endif

@@ -22,7 +22,10 @@
 #include <GameUtilities/Event/EventManager.h>
 #include <GameUtilities/Log/LogManager.h>
 #include <GameUtilities/Log/LogFormatter.h>
-
+#include <memory>
+#include "Engin/PongFrame.h"
+#include "Network/Server.h"
+#include "Network/Client.h"
 class Game: public GU::Engin::Engin, public GU::Evt::EventManager
 {
     public:
@@ -30,7 +33,10 @@ class Game: public GU::Engin::Engin, public GU::Evt::EventManager
         GU::Log::LogManager logManager;
         void setPop(const bool pop);
         bool getPop() const; 
+        void sync(std::shared_ptr<PongFrame> frame);
         virtual ~Game();
+        Server server;
+        Client client;
     private:
         bool m_pop = false;
 };

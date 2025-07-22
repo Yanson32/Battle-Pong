@@ -1,7 +1,7 @@
 #include "States/PlayState.h"
 #include "Objects/Ball.h"
 #include <SFML/Window/Event.hpp>
-#include "Game.h"
+#include "Engin/Game.h"
 #include <Box2D/Box2D.h>
 #include <iostream>
 #include "Box2D/Box2DFunctions.h"
@@ -70,6 +70,7 @@ void PlayState::handleEvents(GU::Engin::Engin& engin, const float &deltaTime, st
 void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
+    Game *game = static_cast<Game*>(&engin);
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
@@ -100,11 +101,11 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     {
         if(Settings::isHost)
         {
-            server.update();
+            game->server.update();
         }   
         else
         {
-            client.update();
+            game->client.update();
         }
     }
     
@@ -128,12 +129,14 @@ void PlayState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
 
 }
 
-void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
+void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(frame);
+    
+    Game *game = static_cast<Game*>(&engin);
 
-    StateBase::init(frame);
+    StateBase::init(engin, frame);
     Settings::stateId = StateId::PLAY_STATE;
     
     //Crate pong frame
@@ -173,21 +176,23 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
         {
             userMessage.setString("Waiting for player 2");
             centerText();
-            server.init();
+            game->server.init();
             systemPause(true);
-            connectThread.reset(new std::thread([this]{
-                if(!server.isConnected())
-                {
-                    server.connect();
-                    userMessage.setString("Ready!");
-                    messageClock.restart();
-                }
-            })); 
+            connectThread.reset(new std::thread([this, &engin](){
+            Game *game = static_cast<Game*>(&engin);
+            if(!game->server.isConnected())
+            {
+                game->server.connect();
+                userMessage.setString("Ready!");
+                messageClock.restart();
+            }
+
+        })); 
             connectThread->detach();
         }   
         else
         {
-            client.init(); 
+            game->client.init(); 
         }
     }
 }
@@ -227,7 +232,7 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
                     if(gui.get("PanelPointer") == nullptr)
                     {
                         gui.removeAllWidgets();
-                        StateBase::init(frame);
+                        StateBase::init(engin, frame);
                         tgui::Panel::Ptr cust(new Gui::PlayPanel());
                         std::shared_ptr<Gui::PlayPanel> p = std::dynamic_pointer_cast<Gui::PlayPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);

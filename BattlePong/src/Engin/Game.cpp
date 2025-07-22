@@ -1,4 +1,4 @@
-#include "Game.h"
+#include "Engin/Game.h"
 #include <memory>
 #include "Events/Events.h"
 #include <GameUtilities/Log/Target/LogFileTarget.h>
@@ -20,6 +20,11 @@ GU::Evt::EventManager()
   logFormatter->add<GU::Log::FileComponent>();
   logFormatter->add<GU::Log::MsgComponent>();
   logManager.set(logFormatter);
+
+}
+
+void Game::sync(std::shared_ptr<PongFrame> frame)
+{
 
 }
 

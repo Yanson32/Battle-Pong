@@ -73,7 +73,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         StateBase(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &newDebugDraw, tgui::Gui &newGui, const StateId newState);
 
 
-        virtual void init(std::shared_ptr<GU::Engin::Frame> frame) override;
+        virtual void init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> frame) override;
         virtual void clean(std::shared_ptr<GU::Engin::Frame> frame) override = 0;
 
         /****************************************************************//**

@@ -23,7 +23,7 @@
 #include <SFML/System/Clock.hpp>
 #include <SFML/System/Time.hpp>
 
-#include "Game.h"
+#include "Engin/Game.h"
 #include "Events/Events.h"
 #include "Events/EventManager.h"
 #include "Gui/GuiId.h"
@@ -222,6 +222,7 @@ int main(int argc, char* argv[])
 	          while(accumulator.asSeconds() >= deltaTime.asSeconds())
             {
                 engin.update(deltaTime.asSeconds(), frame);
+                engin.sync(frame);
                 accumulator -= deltaTime;
             }
 

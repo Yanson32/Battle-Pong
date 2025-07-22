@@ -1,5 +1,4 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.h"
-			"${CMAKE_CURRENT_SOURCE_DIR}/Game.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/SFMLFunctions.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/TGUIFunctions.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/Macros.h"
@@ -15,6 +14,7 @@ set(SUB_DIRECTORIES "States"
 					"Gui"
                     "Resources"
                     "Network"
+                    "Engin"
 )
 
 #Add subdirectories

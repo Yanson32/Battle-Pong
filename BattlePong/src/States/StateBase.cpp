@@ -240,7 +240,7 @@ void StateBase::centerText()
 
 }
 
-void StateBase::init(std::shared_ptr<GU::Engin::Frame> frame)
+void StateBase::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
     
@@ -367,7 +367,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Gui::id::INTRO_PANEL:
                     {
                         gui.removeAllWidgets();
-                        StateBase::init(pongFrame);
+                        StateBase::init(engin, pongFrame);
                         tgui::Panel::Ptr cust(new Gui::IntroPanel());
                         std::shared_ptr<Gui::IntroPanel> p = std::dynamic_pointer_cast<Gui::IntroPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
