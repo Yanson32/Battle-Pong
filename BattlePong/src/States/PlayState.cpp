@@ -160,17 +160,11 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
     else
         pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->rightPaddle)));
 
-    //userMessage.setCharacterSize(34);
-    //userMessage.setPosition(sf::Vector2f(400, 300));
     messageClock.restart();
 
     //Load ball sound
     ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
 
-
-//    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
-//    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
-//    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
 
     reset(pongFrame);
     if(Settings::multiplayer)
