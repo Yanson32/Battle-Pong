@@ -22,11 +22,13 @@
 #include "Box2D/DebugDraw.h"
 #include <TGUI/TGUI.hpp>
 #include <SFML/Graphics/RenderWindow.hpp>
+#include <SFML/Graphics/Text.hpp>
 #include "Input/AI.h"
 #include <GameUtilities/Engin/Engin.h>
 #include <GameUtilities/Engin/Frame.h>
 #include "Box2D/ContactListener.h"
 #include "Gui/PaddleHud.h"
+#include <string>
 class PongFrame: public GU::Engin::Frame
 {
     public:
@@ -52,6 +54,21 @@ class PongFrame: public GU::Engin::Frame
         virtual void update(GU::Engin::Engin& engin, const float &deltaTime);
         virtual void draw(GU::Engin::Engin& engin, const float &deltaTime);
         virtual ~PongFrame();
+        sf::Uint32 ballPos_x;
+        sf::Uint32 ballPos_y;
+        sf::Uint32 ballVel_x;
+        sf::Uint32 ballVel_y;
+        float leftPaddlePos_x;
+        float leftPaddlePos_y;
+        float rightPaddlePos_x;
+        float rightPaddlePos_y;
+        std::string userMessage;
+        sf::Uint32 player1score;
+        sf::Uint32 player2score;
+        bool systemPaused;
+        bool playerPaused;
+        sf::Uint32 resolution_x;
+        sf::Uint32 resolution_y;
     private:
         ContactListener contactListener;
 };
