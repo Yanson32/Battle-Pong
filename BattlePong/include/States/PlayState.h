@@ -92,5 +92,6 @@ class PlayState: public StateBase
         sf::Font font;
         Server server;
         Client client;
+        std::shared_ptr<std::thread> connectThread;
 };
 #endif

@@ -95,13 +95,11 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         pongFrame->rightPaddle->update();
 
     }
-    
+
     if(Settings::multiplayer)
     {
         if(Settings::isHost)
         {
-            if(!server.isConnected())
-                server.connect();
             server.update();
         }   
         else
@@ -110,8 +108,6 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         }
     }
     
-    reset(pongFrame);
-
 }
 
 void PlayState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
@@ -164,7 +160,6 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
     else
         pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->rightPaddle)));
 
-    systemPause(true);
     //userMessage.setCharacterSize(34);
     //userMessage.setPosition(sf::Vector2f(400, 300));
     messageClock.restart();
@@ -176,35 +171,31 @@ void PlayState::init(std::shared_ptr<GU::Engin::Frame> frame)
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
-    if(Settings::multiplayer)
-    {
-        if(Settings::isHost)
-        {
-            userMessage.setString("Waiting for player 2 connection");
-            server.init();
-            
-        }   
-        else
-        {
-            client.init();
-        }
-    }
 
     reset(pongFrame);
-/*
     if(Settings::multiplayer)
     {
         if(Settings::isHost)
         {
+            userMessage.setString("Waiting for player 2");
+            centerText();
+            server.init();
+            systemPause(true);
             connectThread.reset(new std::thread([this]{
+                if(!server.isConnected())
+                {
+                    server.connect();
+                    userMessage.setString("Ready!");
+                    messageClock.restart();
+                }
             })); 
             connectThread->detach();
         }   
         else
         {
-        
+            client.init(); 
         }
-    }*/
+    }
 }
 
 void PlayState::clean(std::shared_ptr<GU::Engin::Frame> frame)

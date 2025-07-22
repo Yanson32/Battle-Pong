@@ -10,14 +10,10 @@ Client::Client()
 
 void Client::init()
 {
-    std::cout << "Client Init " << std::endl;
-    std::cout << "Client Port = " << Settings::port << std::endl;
-
     sf::Socket::Status status = socket.connect(Settings::clientIp, Settings::port);
     if(status != sf::Socket::Done)
     {
         BP_LOG_ERROR("Unable to connect to socket");
-        std::cout << "Unable to connect to socket" << std::endl;
     } 
     
 }
@@ -41,7 +37,6 @@ bool Client::update()
     if(status != sf::Socket::Done)
     {
         BP_LOG_ERROR("Unable to connect to socket");
-        std::cout << "Unable to connect to socket" << std::endl;
     } 
 
 
