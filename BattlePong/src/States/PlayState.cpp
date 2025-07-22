@@ -133,6 +133,7 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(frame);
+    std::cout << "Playstate::init" << std::endl;
     
     Game *game = static_cast<Game*>(&engin);
 
@@ -187,7 +188,7 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
                 messageClock.restart();
             }
 
-        })); 
+            })); 
             connectThread->detach();
         }   
         else

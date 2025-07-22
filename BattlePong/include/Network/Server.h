@@ -29,6 +29,8 @@ class Server
         void clean();
         void handleEvents();
         bool update();
+        void send(const sf::Uint32 &num);
+        void send(std::shared_ptr<PongFrame> frame);
         sf::Packet recieve();
         virtual ~Server();
     protected:

@@ -219,7 +219,7 @@ int main(int argc, char* argv[])
               }
 
 	          //Update the game logic
-	          while(accumulator.asSeconds() >= deltaTime.asSeconds())
+	        while(accumulator.asSeconds() >= deltaTime.asSeconds())
             {
                 engin.update(deltaTime.asSeconds(), frame);
                 engin.sync(frame);

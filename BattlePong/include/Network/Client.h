@@ -28,6 +28,7 @@ class Client
         void clean();
         void handleEvents();
         bool update();
+        sf::Uint32 recieve(sf::Uint32 &num);
         sf::Packet recieve();
         virtual ~Client();
     protected:

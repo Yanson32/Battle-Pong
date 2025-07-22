@@ -25,7 +25,20 @@ GU::Evt::EventManager()
 
 void Game::sync(std::shared_ptr<PongFrame> frame)
 {
-
+    if(Settings::multiplayer)
+    {
+        if(Settings::isHost)
+        {
+            sf::Uint32 data = 100;
+            server.send(data);            
+        }
+        else
+        {
+            sf::Uint32 data = 0;
+            client.recieve(data);
+            std::cout << "Data = " << data << std::endl;
+        }
+    }
 }
 
 void Game::setPop(const bool pop)
