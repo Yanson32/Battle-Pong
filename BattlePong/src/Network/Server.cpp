@@ -49,7 +49,16 @@ void Server::send(const sf::Uint32 &num)
 
 void Server::send(std::shared_ptr<PongFrame> frame)
 {
-
+    sf::Packet packet;
+    packet << frame->ball->getPosition().x;
+    packet << frame->ball->getPosition().y;
+    packet << frame->leftPaddle->getPosition().x;
+    packet << frame->leftPaddle->getPosition().y;
+    if(socket.send(packet) != sf::Socket::Done)
+    {
+        BP_LOG_ERROR("Failed to send message");
+    }
+    
 }
 
 bool Server::isConnected()

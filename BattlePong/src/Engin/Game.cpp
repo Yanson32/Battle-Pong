@@ -29,14 +29,11 @@ void Game::sync(std::shared_ptr<PongFrame> frame)
     {
         if(Settings::isHost)
         {
-            sf::Uint32 data = 100;
-            server.send(data);            
+            server.send(frame);            
         }
         else
         {
-            sf::Uint32 data = 0;
-            client.recieve(data);
-            std::cout << "Data = " << data << std::endl;
+            client.recieve(frame);
         }
     }
 }

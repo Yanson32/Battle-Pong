@@ -57,8 +57,6 @@ void Ball::setVelocity(const sf::Vector2f &newVelocity)
 }
 
 
-
-
 Ball::~Ball()
 {
     if(body != nullptr)

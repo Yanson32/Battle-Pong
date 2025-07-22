@@ -38,6 +38,24 @@ sf::Uint32 Client::recieve(sf::Uint32 &num)
     return num;
 }
 
+std::shared_ptr<PongFrame> Client::recieve(std::shared_ptr<PongFrame> frame)
+{
+    sf::Packet packet;
+
+    socket.receive(packet);
+    float x;
+    float y;
+    float leftPaddlex;
+    float leftPaddley;
+    packet >> x;
+    packet >> y;
+    packet >> leftPaddlex;
+    packet >> leftPaddley;
+    frame->ball->setPosition({x, y});
+    frame->leftPaddle->setPosition({leftPaddlex, leftPaddley});
+    return frame;
+}
+
 bool Client::update()
 {
     

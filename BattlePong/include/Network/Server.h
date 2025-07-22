@@ -18,6 +18,8 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
 #include <SFML/Network.hpp>
+#include <memory>
+#include "Engin/PongFrame.h"
 
 class Server
 {

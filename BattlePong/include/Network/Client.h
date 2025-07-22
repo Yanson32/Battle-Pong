@@ -18,7 +18,8 @@
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
 #include <SFML/Network.hpp>
-
+#include "Engin/PongFrame.h"
+#include <memory>
 class Client 
 {
     public:
@@ -29,6 +30,7 @@ class Client
         void handleEvents();
         bool update();
         sf::Uint32 recieve(sf::Uint32 &num);
+        std::shared_ptr<PongFrame> recieve(std::shared_ptr<PongFrame> frame);
         sf::Packet recieve();
         virtual ~Client();
     protected:
