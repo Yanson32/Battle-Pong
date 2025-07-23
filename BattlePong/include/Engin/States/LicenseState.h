@@ -1,5 +1,5 @@
-#ifndef PONG_CREDITS_STATE_H
-#define PONG_CREDITS_STATE_H 
+#ifndef PONG_LICENSE_STATE_H
+#define PONG_LICENSE_STATE_H 
 
 /************************************************************//**
 *   @author Wayne J Larson Jr
@@ -24,25 +24,20 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-#include "States/StateBase.h"
+#include "Engin/States/StateBase.h"
 #include "Objects/Ball.h"
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Font.hpp>
-#include <SFML/Graphics/RectangleShape.hpp>
-#include <SFML/System/Clock.hpp>
 
 #include <memory>
 
 #include "Box2D/DebugDraw.h"
 #include <TGUI/TGUI.hpp>
-#include "Resources/Images/Credits/Credit_Laurent_Gomila.h"
-#include "Resources/Images/Credits/Credit_Bruno_Van_De_Velde.h"
 
 #include <GameUtilities/Engin/Frame.h>
-#include "Gui/CreditsPanel.h"
 
-class CreditsState: public StateBase
+class LicenseState: public StateBase
 {
     public:
         /****************************************************************//**
@@ -50,7 +45,7 @@ class CreditsState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        CreditsState(GU::Engin::Engin& engin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId = StateId::CREDITS_STATE);
+        LicenseState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId = StateId::CREDITS_STATE);
 
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame);
         void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame);
@@ -63,7 +58,7 @@ class CreditsState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void handleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
+        void handleEvents(GU::Engin::Engin& newEngin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -83,17 +78,12 @@ class CreditsState: public StateBase
         ********************************************************************/
         void draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
-        void credits();
 
         /****************************************************************//**
         *   @brief  Destructor
         ********************************************************************/
-        ~CreditsState();
+        ~LicenseState();
     private:
-        //Gui::CreditsPanel m_creditsPanel;
         tgui::TextArea::Ptr textArea;
-        sf::Clock creditsTimer;
-        int creditsCounter = 0;
-        const int MAX_CREDITS = 2;
 };
 #endif

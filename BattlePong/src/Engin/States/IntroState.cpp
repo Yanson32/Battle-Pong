@@ -1,4 +1,6 @@
-#include "States/IntroState.h"
+#include "Engin/States/IntroState.h"
+#include "Engin/States/PlayState.h"
+#include "Engin/States/StateId.h"
 #include "GameUtilities/Engin/Engin.h"
 #include <GameUtilities/Event/Events/Event.h>
 #include <GameUtilities/Event/EventQueue.h>
@@ -14,14 +16,12 @@
 #include <SFML/Graphics/RenderWindow.hpp>
 #include <SFML/Window/VideoMode.hpp>
 
-#include "States/PlayState.h"
 #include "Settings.h"
 
 #include "Objects/Wall.h"
 #include "Objects/Ball.h"
 #include "Objects/Paddle.h"
 #include "Engin/PongFrame.h"
-#include "States/StateId.h"
 #include "Events/EventManager.h"
 
 

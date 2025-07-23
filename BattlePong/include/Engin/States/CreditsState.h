@@ -1,12 +1,10 @@
-#ifndef PONG_PLAYSTATE_H
-#define PONG_PLAYSTATE_H
-#include <thread>
+#ifndef PONG_CREDITS_STATE_H
+#define PONG_CREDITS_STATE_H 
 
 /************************************************************//**
 *   @author Wayne J Larson Jr
-*   @date   12/24/17
-*   @brief  PlayState This state is where the game logic is
-*           executed.
+*   @date   05/08/22
+*   @brief  
 ****************************************************************/
 
 /*************************************************************************
@@ -26,23 +24,25 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-#include "States/StateBase.h"
+#include "Engin/States/StateBase.h"
 #include "Objects/Ball.h"
 
 #include <SFML/Graphics/Text.hpp>
 #include <SFML/Graphics/Font.hpp>
+#include <SFML/Graphics/RectangleShape.hpp>
 #include <SFML/System/Clock.hpp>
 
 #include <memory>
 
 #include "Box2D/DebugDraw.h"
 #include <TGUI/TGUI.hpp>
+#include "Resources/Images/Credits/Credit_Laurent_Gomila.h"
+#include "Resources/Images/Credits/Credit_Bruno_Van_De_Velde.h"
 
 #include <GameUtilities/Engin/Frame.h>
-#include "Network/Server.h"
-#include "Network/Client.h"
+#include "Gui/CreditsPanel.h"
 
-class PlayState: public StateBase
+class CreditsState: public StateBase
 {
     public:
         /****************************************************************//**
@@ -50,7 +50,7 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId = StateId::PLAY_STATE);
+        CreditsState(GU::Engin::Engin& engin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId = StateId::CREDITS_STATE);
 
         void sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame);
         void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame);
@@ -63,7 +63,7 @@ class PlayState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        void handleEvents(GU::Engin::Engin& newEngin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
+        void handleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -83,12 +83,17 @@ class PlayState: public StateBase
         ********************************************************************/
         void draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
+        void credits();
 
         /****************************************************************//**
         *   @brief  Destructor
         ********************************************************************/
-        ~PlayState();
+        ~CreditsState();
     private:
-        std::shared_ptr<std::thread> connectThread;
+        //Gui::CreditsPanel m_creditsPanel;
+        tgui::TextArea::Ptr textArea;
+        sf::Clock creditsTimer;
+        int creditsCounter = 0;
+        const int MAX_CREDITS = 2;
 };
 #endif

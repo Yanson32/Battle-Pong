@@ -2,7 +2,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/PongFrame.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/Game.h"
 
 )
-set(SUB_DIRECTORIES ""
+set(SUB_DIRECTORIES "States"
 )
 
 #Add subdirectories

@@ -1,4 +1,5 @@
-#include "States/CreditsState.h"
+#include "Engin/States/CreditsState.h"
+#include "Engin/States/IntroState.h"
 #include "Objects/Ball.h"
 #include <SFML/Window/Event.hpp>
 #include "Engin/Game.h"
@@ -17,7 +18,6 @@
 #include "Macros.h"
 #include "Gui/PlayPanel.h"
 #include "Gui/GuiId.h"
-#include "States/IntroState.h"
 #include <GameUtilities/Event/Events/OnLog.h>
 #include <GameUtilities/Core/Macros.h>
 #include "Log.h"

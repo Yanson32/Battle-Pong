@@ -1,4 +1,5 @@
-#include "States/PlayState.h"
+#include "Engin/States/PlayState.h"
+#include "Engin/States/IntroState.h"
 #include "Objects/Ball.h"
 #include <SFML/Window/Event.hpp>
 #include "Engin/Game.h"
@@ -17,7 +18,6 @@
 #include "Macros.h"
 #include "Gui/PlayPanel.h"
 #include "Gui/GuiId.h"
-#include "States/IntroState.h"
 #include "Gui/OptionsPanel/GeneralPanel.h"
 #include "Gui/OptionsPanel/ControlPanel.h"
 #include "Gui/OptionsPanel/VideoPanel.h"
@@ -110,6 +110,7 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
                 messageClock.restart();
                 
             }
+            
         }   
         else
         {

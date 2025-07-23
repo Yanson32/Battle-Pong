@@ -1,10 +1,12 @@
-#ifndef INTROSTATE_H
-#define INTROSTATE_H
+#ifndef PONG_PLAYSTATE_H
+#define PONG_PLAYSTATE_H
+#include <thread>
 
 /************************************************************//**
 *   @author Wayne J Larson Jr
 *   @date   12/24/17
-*   @brief  IntroState is the first state seen by the user.
+*   @brief  PlayState This state is where the game logic is
+*           executed.
 ****************************************************************/
 
 /*************************************************************************
@@ -24,23 +26,23 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-#include <GameUtilities/Engin/Engin.h>
-#include <GameUtilities/Engin/Frame.h>
+#include "Engin/States/StateBase.h"
+#include "Objects/Ball.h"
 
 #include <SFML/Graphics/Text.hpp>
-#include <SFML/Graphics/Color.hpp>
-#include <SFML/Graphics/Sprite.hpp>
-#include <SFML/Graphics/Texture.hpp>
+#include <SFML/Graphics/Font.hpp>
+#include <SFML/System/Clock.hpp>
 
-//#include <SFML/Graphics/Font.hpp>
-
-#include "States/StateBase.h"
-#include "Gui/GuiManager.h"
+#include <memory>
 
 #include "Box2D/DebugDraw.h"
 #include <TGUI/TGUI.hpp>
 
-class IntroState: public StateBase
+#include <GameUtilities/Engin/Frame.h>
+#include "Network/Server.h"
+#include "Network/Client.h"
+
+class PlayState: public StateBase
 {
     public:
         /****************************************************************//**
@@ -48,8 +50,12 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        IntroState(GU::Engin::Engin& engin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui);
+        PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId = StateId::PLAY_STATE);
 
+        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame);
+        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame);
+        virtual void init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> frame) override;
+        virtual void clean(std::shared_ptr<GU::Engin::Frame> frame) override;
 
         /****************************************************************//**
         *   @brief  This method handles input such as user input and events.
@@ -57,7 +63,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void handleEvents(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
+        void handleEvents(GU::Engin::Engin& newEngin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -66,7 +72,7 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
+        void update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
 
         /****************************************************************//**
@@ -75,20 +81,14 @@ class IntroState: public StateBase
         *   @param  engin A reference to an Engin::Engin object.
         *           This is the main game object.
         ********************************************************************/
-        virtual void draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
+        void draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame) override;
 
-        void handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, std::shared_ptr<GU::Engin::Frame> frame);
-        void sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame);
-        virtual void init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> frame) override;
-        virtual void clean(std::shared_ptr<GU::Engin::Frame> frame) override;
 
         /****************************************************************//**
         *   @brief  Destructor
         ********************************************************************/
-        virtual ~IntroState();
+        ~PlayState();
     private:
-        sf::Color background = sf::Color::Black;    	///Color used to clear the screen background
-	sf::Sprite header;
+        std::shared_ptr<std::thread> connectThread;
 };
-
-#endif // INTROSTATE_H
+#endif

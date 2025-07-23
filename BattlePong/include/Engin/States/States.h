@@ -1,5 +1,5 @@
-#ifndef DEMOSTATE_H
-#define DEMOSTATE_H
+#ifndef GAMEUTILITIES_STATES_H_INCLUDED
+#define GAMEUTILITIES_STATES_H_INCLUDED
 /*************************************************************************
 *                           COPYRIGHT NOTICE
 * Battle Pong is a clone of the classic pong game.
@@ -17,19 +17,13 @@
 * You should have received a copy of the GNU General Public License
 * along with this program.  If not, see <https://www.gnu.org/licenses/>.
 ***************************************************************************/
-#include <GameUtilities/Engin/Frame.h>
-#include "States/StateBase.h"
-#include <SFML/Graphics/RenderWindow.hpp>
-#include "Box2D/DebugDraw.h"
-#include <TGUI/TGUI.hpp>
 
-class DemoState: public StateBase
-{
-    public:
-        DemoState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui);
-        virtual ~DemoState();
-    protected:
-    private:
-};
+#include "Engin/States/DemoState.h"
+#include "Engin/States/StateId.h"
+#include "Engin/States/IntroState.h"
+#include "Engin/States/PlayState.h"
+#include "Engin/States/StateBase.h"
+#include "Engin/States/CreditsState.h"
+#include "Engin/States/LicenseState.h"
 
-#endif // DEMOSTATE_H
+#endif // STATES_H_INCLUDED
