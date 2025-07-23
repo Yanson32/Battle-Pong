@@ -28,7 +28,6 @@ namespace Gui
         //EditBox to enter port number
         portBox = tgui::EditBox::create();
         portBox->setText(std::to_string(Settings::port));
-        std::cout << "port = " << Settings::port << std::endl;
         portBox->onTextChange([this](){
             if(!portBox->getText().attemptToInt(Settings::port))
             {
