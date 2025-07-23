@@ -7,7 +7,6 @@
 #include <iostream>
 #include "Box2D/Box2DFunctions.h"
 #include <SFML/Graphics/CircleShape.hpp>
-
 #include "Objects/Wall.h"
 #include "Objects/Paddle.h"
 #include "Input/AI.h"
@@ -110,7 +109,6 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
                 messageClock.restart();
                 
             }
-            
         }   
         else
         {
@@ -221,9 +219,6 @@ void PlayState::clean(std::shared_ptr<GU::Engin::Frame> frame)
     if(ResourceManager::isLoaded(soundId::BALL))
         ResourceManager::remove(soundId::BALL);
 
-//    ResourceManager::sound.remove(Sound::Id::MESSAGE);
-//    ResourceManager::sound.remove(Sound::Id::BUTTON);
-//    ResourceManager::sound.remove(Sound::Id::BALL);
     reset(pongFrame);
 }
 
