@@ -20,7 +20,7 @@
 #include "Objects/Wall.h"
 #include "Objects/Ball.h"
 #include "Objects/Paddle.h"
-#include "Objects/PongFrame.h"
+#include "Engin/PongFrame.h"
 #include "States/StateId.h"
 #include "Events/EventManager.h"
 
@@ -105,7 +105,7 @@ void IntroState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     }
 
     StateBase::update(engin, deltaTime, frame);
-    if(!isSystemPaused())
+    if(!pongFrame->isSystemPaused())
     {
         pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
     }

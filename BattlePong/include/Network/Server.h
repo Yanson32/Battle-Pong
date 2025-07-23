@@ -34,13 +34,14 @@ class Server
         void send(const sf::Uint32 &num);
         void send(std::shared_ptr<PongFrame> frame);
         sf::Packet recieve();
+        unsigned numberConnections() const;
         virtual ~Server();
     protected:
     private:
         sf::TcpListener listener;
         sf::TcpSocket socket;
-        bool connected = false;
         sf::IpAddress address;
+        unsigned connectionCount = 0;
 };
 
 #endif // CLIENTSERVER_H

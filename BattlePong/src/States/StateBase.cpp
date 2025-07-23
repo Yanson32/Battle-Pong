@@ -39,11 +39,10 @@
 #include "Gui/OptionsPanel/HostPanel.h"
 #include "Gui/OptionsPanel/ConnectPanel.h"
 #include "Gui/OptionsPanel/NetworkPanel.h"
-#include "Game.h"
+#include "Engin/Game.h"
 #include "Log.h"
 #include <string>
 
-sf::Text StateBase::userMessage;
 sf::Clock StateBase::messageClock;
 sf::Sound StateBase::sound;
 
@@ -59,8 +58,7 @@ engin(newEngin),
 window(newWindow),
 debugDraw(newDebugDraw),
 gui(newGui),
-state(newState),
-sysPause(false)
+state(newState)
 {
     BP_LOG_TRACE(__FUNCTION__)
     gui.setTarget(window);
@@ -96,7 +94,7 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     }
 
     backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
-    if(!isPaused())
+    if(!pongFrame->isPaused())
     {
 
         if(!isBallOnScreen(pongFrame))
@@ -110,54 +108,54 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     }
     
     const int SECONDS = 1;
-    if(userMessage.getString() == "Ready!")
+    if(pongFrame->userMessage.getString() == "Ready!")
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            userMessage.setString("3");
-            centerText();
+            pongFrame->userMessage.setString("3");
+            centerText(frame);
             messageClock.restart();
             EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
         }
     }
-    else if(userMessage.getString() == "3")
+    else if(pongFrame->userMessage.getString() == "3")
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            userMessage.setString("2");
-            centerText();
+            pongFrame->userMessage.setString("2");
+            centerText(frame);
             messageClock.restart();
             EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
         }
     }
-    else if(userMessage.getString() == "2")
+    else if(pongFrame->userMessage.getString() == "2")
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            userMessage.setString("1");
-            centerText();
+            pongFrame->userMessage.setString("1");
+            centerText(frame);
             messageClock.restart();
             EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
         }
     }
-    else if(userMessage.getString() == "1")
+    else if(pongFrame->userMessage.getString() == "1")
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            userMessage.setString("Go!");
-            centerText();
+            pongFrame->userMessage.setString("Go!");
+            centerText(frame);
             messageClock.restart();
             EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
         }
     }
-    else if(userMessage.getString() == "Go!")
+    else if(pongFrame->userMessage.getString() == "Go!")
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            userMessage.setString("");
+            pongFrame->userMessage.setString("");
             messageClock.restart();
             //EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
-            systemPause(false);
+            pongFrame->systemPause(false);
         }
     }
 }
@@ -183,7 +181,7 @@ void StateBase::draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
     window.draw(*pongFrame->leftWall);
     window.draw(*pongFrame->rightWall);
     window.draw(*pongFrame->ground);
-    window.draw(userMessage);
+    window.draw(pongFrame->userMessage);
     #ifdef DEBUG
         window.draw(debugDraw);
     #endif
@@ -191,21 +189,11 @@ void StateBase::draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
     gui.draw();
 }
 
-void StateBase::systemPause(const bool newSysPause)
-{
-    BP_LOG_TRACE(__FUNCTION__)
-    sysPause = newSysPause;
-}
-
-bool StateBase::isSystemPaused() const
-{
-    BP_LOG_TRACE(__FUNCTION__)
-    return sysPause;
-}
 
 void StateBase::reset(std::shared_ptr<PongFrame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     int x = rand() % 100 + 50;
     if(rand() % 2 == 0)
         x *= -1;
@@ -219,48 +207,49 @@ void StateBase::reset(std::shared_ptr<PongFrame> frame)
     frame->leftPaddle->setPosition(sf::Vector2f(paddleOffset - Settings::wallThickness, static_cast<float>(window.getView().getSize().y) / 2));
     frame->rightPaddle->setPosition(sf::Vector2f(static_cast<float>(window.getView().getSize().x)  - paddleOffset, static_cast<float>(window.getView().getSize().y) / 2));
     frame->rightPaddle->handleInput(*frame->ball);
-    userMessage.setString("Ready!");
-    centerText();
+    pongFrame->userMessage.setString("Ready!");
+    centerText(frame);
     messageClock.restart();
     roundClock.restart();
-    systemPause(true);
+    pongFrame->systemPause(true);
 }
 
 
-void StateBase::centerText()
+void StateBase::centerText(std::shared_ptr<GU::Engin::Frame> frame)
 {
     BP_LOG_TRACE(__FUNCTION__)
-    sf::FloatRect bounds = userMessage.getGlobalBounds();
-
-    float originX = bounds.width / 2;
-    float originY = bounds.height / 2;
-
-    userMessage.setOrigin({originX, originY});
-    userMessage.setPosition({window.getView().getCenter().x, window.getView().getCenter().y});
-
-}
-
-void StateBase::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> frame)
-{
-    BP_LOG_TRACE(__FUNCTION__)
-    
-    StateBase::userMessage.setString("");
-    StateBase::userMessage.setColor(sf::Color::Red);
-    StateBase::userMessage.setPosition({100, 100});
-   
-    ResourceManager resourceManager;
-    resourceManager.loadFont(fontId::MONOSPACE, "Monospace"); 
-    userMessage.setFont(resourceManager.get(fontId::MONOSPACE));
-
     std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
     if(!pongFrame)
     {
        BP_LOG_FATAL_ERROR("Pointer should not be null")
        return;
     }
-    systemPause(false);
-    pause(false);
-    
+    sf::FloatRect bounds = pongFrame->userMessage.getGlobalBounds();
+
+    float originX = bounds.width / 2;
+    float originY = bounds.height / 2;
+
+    pongFrame->userMessage.setOrigin({originX, originY});
+    pongFrame->userMessage.setPosition({window.getView().getCenter().x, window.getView().getCenter().y});
+
+}
+
+void StateBase::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> frame)
+{
+    BP_LOG_TRACE(__FUNCTION__)
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
+    if(!pongFrame)
+    {
+       BP_LOG_FATAL_ERROR("Pointer should not be null")
+       return;
+    }
+   
+    pongFrame->userMessage.setString(""); 
+   
+    ResourceManager resourceManager;
+    resourceManager.loadFont(fontId::MONOSPACE, "Monospace"); 
+    pongFrame->userMessage.setFont(resourceManager.get(fontId::MONOSPACE));
+
     if(Settings::currentBackground == "Star")
         ResourceManager::loadBackground(Star_png, Star_png_len);
     else if(Settings::currentBackground == "Nebula")

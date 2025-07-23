@@ -129,6 +129,8 @@ namespace Settings
     
     extern bool isHost;
     extern bool multiplayer;
+
+    extern bool serverConnected;
 }
 
 

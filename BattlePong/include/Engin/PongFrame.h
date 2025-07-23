@@ -48,29 +48,26 @@ class PongFrame: public GU::Engin::Frame
         std::unique_ptr<PaddleStop> topPaddleStop;
         std::shared_ptr<Gui::PaddleHud> paddle1Hud;
         std::shared_ptr<Gui::PaddleHud> paddle2Hud;
+        sf::Text userMessage;
+        sf::Uint32 player1score;
+        sf::Uint32 player2score;
+        bool m_playerPaused;
+        sf::Uint32 resolution_x;
+        sf::Uint32 resolution_y;
         virtual void init();
         virtual void clean();
         virtual void handleEvents(GU::Engin::Engin& engin, const float &deltaTime);
         virtual void update(GU::Engin::Engin& engin, const float &deltaTime);
         virtual void draw(GU::Engin::Engin& engin, const float &deltaTime);
+        void systemPause(const bool sysPause);
+        bool isSystemPaused() const;
+        void pause(const bool pause);
+        bool isPaused() const;
+        
         virtual ~PongFrame();
-        sf::Uint32 ballPos_x;
-        sf::Uint32 ballPos_y;
-        sf::Uint32 ballVel_x;
-        sf::Uint32 ballVel_y;
-        float leftPaddlePos_x;
-        float leftPaddlePos_y;
-        float rightPaddlePos_x;
-        float rightPaddlePos_y;
-        std::string userMessage;
-        sf::Uint32 player1score;
-        sf::Uint32 player2score;
-        bool systemPaused;
-        bool playerPaused;
-        sf::Uint32 resolution_x;
-        sf::Uint32 resolution_y;
     private:
         ContactListener contactListener;
+        bool m_systemPaused;
 };
 
 #endif  

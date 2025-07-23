@@ -55,7 +55,34 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     paddle2Hud.reset(new Gui::PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
 
     paddle2Hud->setPosition({650, 0});
+
+    
+    userMessage.setCharacterSize(34);
+    userMessage.setPosition(sf::Vector2f(400, 300));
+    userMessage.setColor(sf::Color::Red);
 }
+void PongFrame::systemPause(const bool sysPause)
+{
+    m_systemPaused = sysPause;
+}
+
+bool PongFrame::isSystemPaused() const
+{
+    return m_systemPaused;
+}
+
+
+void PongFrame::pause(const bool pause)
+{
+    m_playerPaused = pause;
+}
+
+
+bool PongFrame::isPaused() const
+{
+    return m_playerPaused;
+}
+
 void PongFrame::init()
 {
 

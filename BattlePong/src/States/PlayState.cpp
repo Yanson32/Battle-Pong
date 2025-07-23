@@ -80,9 +80,9 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
 
     StateBase::update(engin, deltaTime, frame);
 
-    if(!isPaused())
+    if(!pongFrame->isPaused())
     {
-        if(!isSystemPaused())
+        if(!pongFrame->isSystemPaused())
         {
             pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
         }
@@ -102,6 +102,14 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         if(Settings::isHost)
         {
             game->server.update();
+            static unsigned count = 0;
+            if(game->server.isConnected() && count == 0)
+            {
+                count = 1;
+                pongFrame->userMessage.setString("Ready!");
+                messageClock.restart();
+                
+            }
         }   
         else
         {
@@ -122,7 +130,7 @@ void PlayState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
     }
     StateBase::draw(engin, deltaTime, frame);
     window.draw(*pongFrame->ball);
-    window.draw(userMessage);
+    window.draw(pongFrame->userMessage);
 
 
     window.display();
@@ -175,17 +183,16 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
     {
         if(Settings::isHost)
         {
-            userMessage.setString("Waiting for player 2");
-            centerText();
+            pongFrame->userMessage.setString("Waiting for player 2");
+            centerText(frame);
             game->server.init();
-            systemPause(true);
-            connectThread.reset(new std::thread([this, &engin](){
+            pongFrame->systemPause(true);
+            connectThread.reset(new std::thread([&engin](){
+            
             Game *game = static_cast<Game*>(&engin);
             if(!game->server.isConnected())
             {
                 game->server.connect();
-                userMessage.setString("Ready!");
-                messageClock.restart();
             }
 
             })); 

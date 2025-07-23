@@ -1,7 +1,7 @@
 #include "States/LicenseState.h"
 #include "Objects/Ball.h"
 #include <SFML/Window/Event.hpp>
-#include "Game.h"
+#include "Engin/Game.h"
 #include <Box2D/Box2D.h>
 #include <iostream>
 #include "Box2D/Box2DFunctions.h"
@@ -73,9 +73,9 @@ void LicenseState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
 
     StateBase::update(engin, deltaTime, frame);
 
-    if(!isPaused())
+    if(!pongFrame->isPaused())
     {
-        if(!isSystemPaused())
+        if(!pongFrame->isSystemPaused())
         {
             pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
         }
@@ -91,58 +91,6 @@ void LicenseState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
 
     }
 
-
-    if(userMessage.getString() == "Ready!")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("3");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "3")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("2");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "2")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("1");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "1")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("Go!");
-            centerText();
-            messageClock.restart();
-            //EventManager::inst().post<GU::Evt::PlaySound>(Sound::Id::MESSAGE);
-        }
-    }
-    else if(userMessage.getString() == "Go!")
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
-        {
-            userMessage.setString("");
-            messageClock.restart();
-            //EventManager::inst().post<PlaySound>(sf::String("Message Sound"));
-            systemPause(false);
-        }
-    }
-
 }
 
 void LicenseState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
@@ -156,7 +104,7 @@ void LicenseState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     }
     StateBase::draw(engin, deltaTime, frame);
     window.draw(*pongFrame->ball);
-    window.draw(userMessage);
+    window.draw(pongFrame->userMessage);
     window.display();
 
 }
@@ -178,9 +126,6 @@ void LicenseState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Fram
     }
     
     
-    userMessage.setCharacterSize(34);
-    userMessage.setPosition(sf::Vector2f(400, 300));
-
     //Load ball sound
     ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
 
@@ -198,7 +143,7 @@ void LicenseState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Fram
     renderer->setTextColor(Settings::textColor);
     renderer->setTextSize(15);
     gui.add(textArea);
-    centerText();
+    centerText(frame);
 
 }
 

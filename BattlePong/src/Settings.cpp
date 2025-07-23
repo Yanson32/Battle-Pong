@@ -108,4 +108,5 @@ namespace Settings
 
     bool isHost = true;
     bool multiplayer = false;
+    bool serverConnected = false;
 }

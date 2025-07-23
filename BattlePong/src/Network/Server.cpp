@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Settings.h"
 #include "Log.h"
+#include <cassert>
 
 Server::Server()
 {
@@ -54,6 +55,16 @@ void Server::send(std::shared_ptr<PongFrame> frame)
     packet << frame->ball->getPosition().y;
     packet << frame->leftPaddle->getPosition().x;
     packet << frame->leftPaddle->getPosition().y;
+    packet << frame->rightPaddle->getPosition().x;
+    packet << frame->rightPaddle->getPosition().y;
+    packet << frame->userMessage.getString().toAnsiString();
+//    packet << frame->player1score;
+//    packet << frame->player2score;
+    packet << frame->isSystemPaused();
+    packet << frame->isPaused();
+//    packet << frame->resolution_x;
+//    packet << frame->resolution_y;
+
     if(socket.send(packet) != sf::Socket::Done)
     {
         BP_LOG_ERROR("Failed to send message");
@@ -61,19 +72,25 @@ void Server::send(std::shared_ptr<PongFrame> frame)
     
 }
 
+
+unsigned Server::numberConnections() const
+{
+    return connectionCount;
+}
+
 bool Server::isConnected()
 {
-    return connected;
+    return connectionCount;
 }
 
 void Server::connect()
 {
-    if(!connected)
+    if(!isConnected())
     {
         
         if(listener.accept(socket) == sf::Socket::Done)
         {
-            connected = true;
+            connectionCount = connectionCount + 1;
         }
     }
     

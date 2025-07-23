@@ -1,7 +1,7 @@
 #include "States/CreditsState.h"
 #include "Objects/Ball.h"
 #include <SFML/Window/Event.hpp>
-#include "Game.h"
+#include "Engin/Game.h"
 #include <Box2D/Box2D.h>
 #include <iostream>
 #include "Box2D/Box2DFunctions.h"
@@ -77,9 +77,9 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
 
     StateBase::update(engin, deltaTime, frame);
 
-    if(!isPaused())
+    if(!pongFrame->isPaused())
     {
-        if(!isSystemPaused())
+        if(!pongFrame->isSystemPaused())
         {
             pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
         }
@@ -112,7 +112,7 @@ void CreditsState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     }
     StateBase::draw(engin, deltaTime, frame);
     window.draw(*pongFrame->ball);
-    window.draw(userMessage);
+    window.draw(pongFrame->userMessage);
     window.display();
 
 }
@@ -145,14 +145,12 @@ void CreditsState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Fram
     m_creditsPanel.add(ResourceManager::get(textureId::CREDIT_LAURENT));
     m_creditsPanel.add(ResourceManager::get(textureId::CREDIT_BRUNO));
 */
-    userMessage.setCharacterSize(34);
-    userMessage.setPosition(sf::Vector2f(400, 300));
 
     //Load ball sound
     ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
 
 
-    centerText();
+    centerText(frame);
     
     textArea = tgui::TextArea::create();
     sf::Vector2f winSize;
@@ -168,7 +166,7 @@ void CreditsState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Fram
     textArea->setText("Developer: Laurent Gomila\nProject: SFML\nWeb: https://www.sfml-dev.org/");
     renderer->setTextSize(40);
     gui.add(textArea);
-    centerText();
+    centerText(frame);
 
 }
 
