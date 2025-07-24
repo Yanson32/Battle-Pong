@@ -26,6 +26,7 @@ class Server
     public:
         Server();
         bool isConnected();
+        void listen(const unsigned &port);
         void connect();
         void init();
         void clean();

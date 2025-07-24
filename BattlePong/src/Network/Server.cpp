@@ -12,10 +12,16 @@ Server::Server()
 
 void Server::init()
 {
-    if(listener.listen(Settings::port) != sf::Socket::Done)
+    listen(Settings::port);
+}
+
+void Server::listen(const unsigned &port)
+{
+    if(listener.listen(port) != sf::Socket::Done)
     {
         BP_LOG_FATAL_ERROR("Unable to listen on port " + std::to_string(Settings::port));
     }
+
 }
 
 void Server::clean()

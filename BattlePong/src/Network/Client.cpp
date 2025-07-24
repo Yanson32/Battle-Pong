@@ -11,13 +11,19 @@ Client::Client()
 
 void Client::init()
 {
-
-    sf::Socket::Status status = socket.connect(Settings::clientIp, Settings::port);
-    if(status != sf::Socket::Done)
-    {
-        BP_LOG_ERROR("Unable to connect to socket");
-    } 
+    connect(Settings::clientIp, Settings::port);
 }
+
+void Client::connect(const std::string &ip, const unsigned &port)
+{
+    connected = false;
+    if(socket.connect(ip, port) == sf::Socket::Done)
+    {
+        connected = true;
+    } 
+
+}
+
 
 void Client::clean()
 {

@@ -25,6 +25,7 @@ class Client
     public:
         Client();
         bool isConnected();
+        void connect(const std::string &ip, const unsigned &port);
         void init();
         void clean();
         void handleEvents();
