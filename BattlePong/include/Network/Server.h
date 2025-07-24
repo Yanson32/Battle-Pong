@@ -35,6 +35,7 @@ class Server
         void send(std::shared_ptr<PongFrame> frame);
         sf::Packet recieve();
         unsigned numberConnections() const;
+        void disconnect();
         virtual ~Server();
     protected:
     private:

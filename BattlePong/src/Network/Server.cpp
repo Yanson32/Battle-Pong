@@ -96,6 +96,12 @@ void Server::connect()
     
 }
 
+void Server::disconnect()
+{
+    assert(isConnected());
+    socket.disconnect();
+}
+
 sf::Packet Server::recieve()
 {
 
@@ -104,4 +110,6 @@ sf::Packet Server::recieve()
 Server::~Server()
 {
     //dtor
+    if(isConnected())
+        socket.disconnect();
 }

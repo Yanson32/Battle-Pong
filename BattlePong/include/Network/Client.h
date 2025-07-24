@@ -31,7 +31,7 @@ class Client
         bool update();
         sf::Uint32 recieve(sf::Uint32 &num);
         std::shared_ptr<PongFrame> recieve(std::shared_ptr<PongFrame> frame);
-        sf::Packet recieve();
+        void disconnect();
         virtual ~Client();
     protected:
     private:

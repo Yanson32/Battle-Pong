@@ -2,6 +2,7 @@
 #include <iostream>
 #include "Settings.h"
 #include "Log.h"
+#include <cassert>
 
 Client::Client()
 {
@@ -110,13 +111,15 @@ bool Client::isConnected()
     return connected;
 }
 
-
-sf::Packet Client::recieve()
+void Client::disconnect()
 {
-
+    assert(isConnected());
+    socket.disconnect();
 }
 
 Client::~Client()
 {
     //dtor
+    if(isConnected()) 
+        socket.disconnect();
 }
