@@ -109,6 +109,10 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
                 messageClock.restart();
                 
             }
+            else if(count == 0)
+            {
+                pongFrame->userMessage.setString("Waiting for player");
+            }
         }   
         else
         {
