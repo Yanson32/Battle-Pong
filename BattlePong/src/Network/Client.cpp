@@ -29,74 +29,66 @@ void Client::handleEvents()
 
 }
 
-sf::Uint32 Client::recieve(sf::Uint32 &num)
-{
-    sf::Packet packet;
-
-    socket.receive(packet);
-
-    packet >> num;
-    return num;
-}
 
 std::shared_ptr<PongFrame> Client::recieve(std::shared_ptr<PongFrame> frame)
 {
     sf::Packet packet;
-    socket.receive(packet);
+    if(socket.receive(packet) == sf::Socket::Done)
+    {
     
-    //Set Ball Position
-    float ballPosition_x;
-    float ballPosition_y;
-    packet >> ballPosition_x; 
-    packet >> ballPosition_y; 
-    frame->ball->setPosition({ballPosition_x, ballPosition_y});
+        //Set Ball Position
+        float ballPosition_x;
+        float ballPosition_y;
+        packet >> ballPosition_x; 
+        packet >> ballPosition_y; 
+        frame->ball->setPosition({ballPosition_x, ballPosition_y});
 
 
-    //Set left Paddle position
-    float leftPaddlePosition_x;
-    float leftPaddlePosition_y;
-    packet >> leftPaddlePosition_x;
-    packet >> leftPaddlePosition_y;
-    frame->leftPaddle->setPosition({leftPaddlePosition_x, leftPaddlePosition_y});
+        //Set left Paddle position
+        float leftPaddlePosition_x;
+        float leftPaddlePosition_y;
+        packet >> leftPaddlePosition_x;
+        packet >> leftPaddlePosition_y;
+        frame->leftPaddle->setPosition({leftPaddlePosition_x, leftPaddlePosition_y});
 
 
-    //Set right paddle position
-    float rightPaddlePosition_x;
-    float rightPaddlePosition_y;
-    packet >> rightPaddlePosition_x; 
-    packet >> rightPaddlePosition_y;
-    frame->rightPaddle->setPosition({rightPaddlePosition_x, rightPaddlePosition_y}); 
+        //Set right paddle position
+        float rightPaddlePosition_x;
+        float rightPaddlePosition_y;
+        packet >> rightPaddlePosition_x; 
+        packet >> rightPaddlePosition_y;
+        frame->rightPaddle->setPosition({rightPaddlePosition_x, rightPaddlePosition_y}); 
 
-    //Set user message 
-    std::string userMessage;
-    packet >> userMessage;
-    frame->userMessage.setString(userMessage);
+        //Set user message 
+        std::string userMessage;
+        packet >> userMessage;
+        frame->userMessage.setString(userMessage);
 
-    //Set Player Score    
-    sf::Uint32 player1score;
-    sf::Uint32 player2score;
-    packet >> player1score; 
-    packet >> player2score; 
-    frame->paddle1Hud->setScore(player1score);   
-    frame->paddle2Hud->setScore(player2score);   
-
-
-    //Set the system pause status 
-    bool systemPause;
-    packet >> systemPause;
-    frame->systemPause(systemPause);
+        //Set Player Score    
+        sf::Uint32 player1score;
+        sf::Uint32 player2score;
+        packet >> player1score; 
+        packet >> player2score; 
+        frame->paddle1Hud->setScore(player1score);   
+        frame->paddle2Hud->setScore(player2score);   
 
 
-    //Set the player pause status
-    bool playerPaused;
-    packet >> frame->m_playerPaused;
-    frame->pause(playerPaused);
+        //Set the system pause status 
+        bool systemPause;
+        packet >> systemPause;
+        frame->systemPause(systemPause);
 
 
-    //Set the resolution of the game
-    packet >> Settings::dimensions.x; 
-    packet >> Settings::dimensions.y; 
-        
+        //Set the player pause status
+        bool playerPaused;
+        packet >> frame->m_playerPaused;
+        frame->pause(playerPaused);
+
+
+        //Set the resolution of the game
+        packet >> Settings::dimensions.x; 
+        packet >> Settings::dimensions.y; 
+    } 
     return frame;
 }
 

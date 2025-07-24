@@ -29,7 +29,6 @@ class Client
         void clean();
         void handleEvents();
         bool update();
-        sf::Uint32 recieve(sf::Uint32 &num);
         std::shared_ptr<PongFrame> recieve(std::shared_ptr<PongFrame> frame);
         void disconnect();
         virtual ~Client();
