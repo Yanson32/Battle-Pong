@@ -37,17 +37,6 @@ bool Server::update()
     return true;
 }
 
-void Server::send(const sf::Uint32 &num)
-{
-    sf::Packet packet;
-    packet << num;
-    if(socket.send(packet) != sf::Socket::Done)
-    {
-        BP_LOG_ERROR("Failed to send message");
-    }
-
-}
-
 void Server::send(std::shared_ptr<PongFrame> frame)
 {
     sf::Packet packet;
