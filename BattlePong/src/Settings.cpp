@@ -44,7 +44,7 @@ namespace Settings
     std::string playerJoystickControlMenu;
     std::string playerJoystickControlNext;
     std::string playerJoystickControlSelect;
-    sf::Vector2f wDimensions = sf::Vector2f(800, 600);
+    //sf::Vector2f wDimensions = sf::Vector2f(800, 600);
 
     //music settings
     int musicVolume = 100;

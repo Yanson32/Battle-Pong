@@ -70,20 +70,32 @@ std::shared_ptr<PongFrame> Client::recieve(std::shared_ptr<PongFrame> frame)
     std::string userMessage;
     packet >> userMessage;
     frame->userMessage.setString(userMessage);
-    
-//    packet >> frame->player1score;
-//    packet >> frame->player2score;
+
+    //Set Player Score    
+    sf::Uint32 player1score;
+    sf::Uint32 player2score;
+    packet >> player1score; 
+    packet >> player2score; 
+    frame->paddle1Hud->setScore(player1score);   
+    frame->paddle2Hud->setScore(player2score);   
+
+
+    //Set the system pause status 
     bool systemPause;
     packet >> systemPause;
     frame->systemPause(systemPause);
 
+
+    //Set the player pause status
     bool playerPaused;
     packet >> frame->m_playerPaused;
     frame->pause(playerPaused);
 
-//    packet >> frame->resolution_x;
-//    packet >> frame->resolution_y;*/
 
+    //Set the resolution of the game
+    packet >> Settings::dimensions.x; 
+    packet >> Settings::dimensions.y; 
+        
     return frame;
 }
 

@@ -90,6 +90,8 @@ int main(int argc, char* argv[])
     }
     window.setIcon(gameIcon.getSize().x, gameIcon.getSize().y, gameIcon.getPixelsPtr());
 
+
+    
     //Setup the path to resource folder for the resource management system
     if(!std::filesystem::exists(ResourceManager::getPath()))
         ResourceManager::setPath(Settings::GAME_CONFIG_DIR);
@@ -102,7 +104,7 @@ int main(int argc, char* argv[])
     //Set the path to the preferences file
     Settings::preferencesFile = Settings::GAME_CONFIG_DIR;
     if(Settings::preferencesFile.back() != '/')
-     Settings::preferencesFile  += "/preferences.txt";
+        Settings::preferencesFile  += "/preferences.txt";
 
     GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
 
@@ -176,16 +178,15 @@ int main(int argc, char* argv[])
     DebugDraw debugDraw(*frame->world.get());
     frame->world->SetDebugDraw(&debugDraw);
     if(Settings::b2aabb)
-      debugDraw.AppendFlags(b2Draw::e_aabbBit);
+        debugDraw.AppendFlags(b2Draw::e_aabbBit);
     if(Settings::b2shapes)
-      debugDraw.AppendFlags(b2Draw::e_shapeBit);
+        debugDraw.AppendFlags(b2Draw::e_shapeBit);
     if(Settings::b2centerOfMass)
-      debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
+        debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
     if(Settings::b2joints)
-      debugDraw.AppendFlags(b2Draw::e_jointBit);
+        debugDraw.AppendFlags(b2Draw::e_jointBit);
     if(Settings::b2pair)
-      debugDraw.AppendFlags(b2Draw::e_pairBit);
-
+        debugDraw.AppendFlags(b2Draw::e_pairBit);
 
     //Create game engin
     Game engin;
@@ -218,7 +219,7 @@ int main(int argc, char* argv[])
                 engin.pop(frame);
               }
 
-	          //Update the game logic
+	        //Update the game logic
 	        while(accumulator.asSeconds() >= deltaTime.asSeconds())
             {
                 engin.update(deltaTime.asSeconds(), frame);

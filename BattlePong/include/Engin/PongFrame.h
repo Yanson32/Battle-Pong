@@ -49,11 +49,7 @@ class PongFrame: public GU::Engin::Frame
         std::shared_ptr<Gui::PaddleHud> paddle1Hud;
         std::shared_ptr<Gui::PaddleHud> paddle2Hud;
         sf::Text userMessage;
-        sf::Uint32 player1score;
-        sf::Uint32 player2score;
         bool m_playerPaused;
-        sf::Uint32 resolution_x;
-        sf::Uint32 resolution_y;
         virtual void init();
         virtual void clean();
         virtual void handleEvents(GU::Engin::Engin& engin, const float &deltaTime);

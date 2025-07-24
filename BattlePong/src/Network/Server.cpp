@@ -58,12 +58,12 @@ void Server::send(std::shared_ptr<PongFrame> frame)
     packet << frame->rightPaddle->getPosition().x;
     packet << frame->rightPaddle->getPosition().y;
     packet << frame->userMessage.getString().toAnsiString();
-//    packet << frame->player1score;
-//    packet << frame->player2score;
+    packet << frame->paddle1Hud->getScore();
+    packet << frame->paddle2Hud->getScore();
     packet << frame->isSystemPaused();
     packet << frame->isPaused();
-//    packet << frame->resolution_x;
-//    packet << frame->resolution_y;
+    packet << Settings::dimensions.x;
+    packet << Settings::dimensions.y;
 
     if(socket.send(packet) != sf::Socket::Done)
     {

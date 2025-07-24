@@ -1,6 +1,6 @@
 #include "Gui/PaddleHud.h"
 #include <sstream>
-
+#include <SFML/Network.hpp>
 
 namespace Gui
 {
@@ -38,6 +38,11 @@ namespace Gui
             scoreLabel->setText(temp.toAnsiString());
 
         m_score = newScore;
+    }
+
+    sf::Uint32 PaddleHud::getScore() const
+    {
+        return m_score;
     }
 
     void PaddleHud::setName(const sf::String &name)
