@@ -27,6 +27,8 @@
 #include <GameUtilities/Core/Macros.h>
 #include "Log.h"
 
+
+void connect(Server *server);
 PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId): StateBase(newEngin, newWindow, debugDraw, newGui, newId)
 {
   BP_LOG_TRACE(__FUNCTION__)
@@ -190,15 +192,7 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
             centerText(frame);
             game->server.init();
             pongFrame->systemPause(true);
-            connectThread.reset(new std::thread([&engin](){
-            
-            Game *game = static_cast<Game*>(&engin);
-            if(!game->server.isConnected())
-            {
-                game->server.connect();
-            }
-
-            })); 
+            connectThread.reset(new std::thread(connect, &game->server));
             connectThread->detach();
         }   
         else
@@ -300,3 +294,9 @@ PlayState::~PlayState()
 {
   BP_LOG_TRACE(__FUNCTION__)
 }
+
+void connect(Server *server)
+{
+    server->connect();
+}
+
