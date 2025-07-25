@@ -21,6 +21,7 @@ sf::Socket::Status TS_TcpSocket::receive(sf::Packet &packet)
 
 sf::Socket::Status TS_TcpSocket::connect(const sf::IpAddress &remoteAddress, unsigned short remotePort, sf::Time timeout)
 {
+    std::lock_guard<std::mutex> lock(mutex);
     return socket.connect(remoteAddress, remotePort, timeout);
 }
 
