@@ -20,6 +20,8 @@
 #include <SFML/Network.hpp>
 #include <memory>
 #include "Engin/PongFrame.h"
+#include "TS_TcpSocket.h"
+#include "TS_TcpListener.h"
 
 class Server
 {
@@ -39,9 +41,8 @@ class Server
         virtual ~Server();
     protected:
     private:
-        sf::TcpListener listener;
-        sf::TcpSocket socket;
-        sf::IpAddress address;
+        TS_TcpListener listener;
+        TS_TcpSocket socket;
         unsigned connectionCount = 0;
 };
 

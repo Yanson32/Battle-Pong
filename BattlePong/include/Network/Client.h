@@ -20,6 +20,7 @@
 #include <SFML/Network.hpp>
 #include "Engin/PongFrame.h"
 #include <memory>
+#include "TS_TcpSocket.h"
 class Client 
 {
     public:
@@ -35,7 +36,7 @@ class Client
         virtual ~Client();
     protected:
     private:
-        sf::TcpSocket socket;
+        TS_TcpSocket socket;
         bool connected = false;
 };
 
