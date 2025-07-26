@@ -22,6 +22,7 @@
 #include "Engin/PongFrame.h"
 #include "TS_TcpSocket.h"
 #include "TS_TcpListener.h"
+#include "TS_Number.h"
 
 class Server
 {
@@ -43,7 +44,7 @@ class Server
     private:
         TS_TcpListener listener;
         TS_TcpSocket socket;
-        unsigned connectionCount = 0;
+        TS_Number<unsigned> connectionCount = 0;;
 };
 
 #endif // CLIENTSERVER_H

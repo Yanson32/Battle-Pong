@@ -70,12 +70,12 @@ void Server::send(std::shared_ptr<PongFrame> frame)
 
 unsigned Server::numberConnections() const
 {
-    return connectionCount;
+    return connectionCount.getNumber();
 }
 
 bool Server::isConnected()
 {
-    return connectionCount;
+    return connectionCount.getNumber();
 }
 
 void Server::connect()
