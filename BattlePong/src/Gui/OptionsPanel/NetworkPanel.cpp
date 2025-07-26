@@ -19,7 +19,7 @@ namespace Gui
     {
         getContentPane()->appendSpace();
 
-        publicIp = tgui::Label::create(Settings::publicIp);
+        publicIp = tgui::Label::create(Settings::publicIp.getString());
         getContentPane()->append("Public Ip", publicIp); 
         
         localIp = tgui::Label::create(Settings::localIp);

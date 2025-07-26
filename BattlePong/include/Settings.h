@@ -34,6 +34,7 @@
 #include "Engin/States/StateId.h"
 #include <string>
 #include <vector>
+#include "TS_String.h"
 
 namespace Settings
 {
@@ -96,7 +97,7 @@ namespace Settings
     extern sf::String targetIp;
     extern sf::Time timeOut;
     extern int port;
-    extern std::string publicIp;
+    extern TS_String publicIp;
     extern std::string localIp;
     extern std::string clientIp;
 

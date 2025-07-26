@@ -15,7 +15,7 @@ namespace Gui
         getContentPane()->appendSpace();
 
         //Public ip address
-        publicIpAdress = tgui::Label::create(Settings::publicIp);
+        publicIpAdress = tgui::Label::create(Settings::publicIp.getString());
         getContentPane()->append("Public Ip", publicIpAdress);
 
         sf::IpAddress address2 = sf::IpAddress::getLocalAddress();

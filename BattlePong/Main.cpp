@@ -70,10 +70,11 @@ int main(int argc, char* argv[])
     programArguments(argc, argv);
     
     BP_LOG_MESSAGE("GAME_CONFIG_DIR = " + Settings::GAME_CONFIG_DIR);   
+    Settings::publicIp.setString("0.0.0.0");
  
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
     //So we do it in a thread.
-    std::thread ipThread([&](){Settings::publicIp = sf::IpAddress::getPublicAddress().toString();});
+    std::thread ipThread([&](){Settings::publicIp.setString(sf::IpAddress::getPublicAddress().toString());});
     ipThread.detach();
 
     //Enable random numbers

@@ -6,6 +6,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/ErrorCodes.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/TS_TcpSocket.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/TS_TcpListener.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/TS_String.h"
 
 )
 set(SUB_DIRECTORIES "Events"

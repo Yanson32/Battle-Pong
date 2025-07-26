@@ -80,7 +80,7 @@ namespace Settings
     int port = 4000;
     sf::String targetIp = "127.0.0.0";
     sf::Time timeOut;
-    std::string publicIp = "0.0.0.0";
+    TS_String publicIp;
     std::string localIp = sf::IpAddress::getLocalAddress().toString();
     std::string clientIp = "";
 
