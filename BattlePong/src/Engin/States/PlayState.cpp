@@ -87,6 +87,7 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         {
             pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
         }
+    }
         debugDraw.update();
         pongFrame->ball->update();
         pongFrame->ground->update();
@@ -96,15 +97,14 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         pongFrame->leftPaddle->update();
         pongFrame->rightPaddle->update();
 
-    }
 
     if(Settings::multiplayer)
     {
         if(Settings::isHost)
         {
-            game->server.update();
+            game->hostSend.server.update();
             static unsigned count = 0;
-            if(game->server.isConnected() && count == 0)
+            if(game->hostSend.server.isConnected() && count == 0)
             {
                 count = 1;
                 pongFrame->userMessage.setString("Ready!");
@@ -120,7 +120,7 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         }   
         else
         {
-            game->client.update();
+            game->hostSend.client.update();
         }
     }
     
@@ -192,14 +192,14 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
         {
             pongFrame->userMessage.setString("Waiting for player 2");
             centerText(frame);
-            game->server.init();
+            game->hostSend.server.init();
             pongFrame->systemPause(true);
-            connectThread.reset(new std::thread(connect, &game->server));
+            connectThread.reset(new std::thread(connect, &game->hostSend.server));
             connectThread->detach();
         }   
         else
         {
-            game->client.init(); 
+            game->hostSend.client.init(); 
         }
     }
 }

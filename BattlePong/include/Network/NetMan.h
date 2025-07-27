@@ -8,13 +8,9 @@
 class NetMan
 {
     public:
-        NetMan();
-
-        bool send(const std::string &msg);
-        virtual ~NetMan();
-    private:
         Server server;
         Client client;
+        int count = 0;
 };
 
 #endif

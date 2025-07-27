@@ -277,10 +277,10 @@ void StateBase::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
         {
             Game *game = static_cast<Game*>(&engin);
 
-            if(game->server.isConnected())
-                game->server.disconnect();
-            if(game->client.isConnected())
-                game->client.disconnect();
+            if(game->hostSend.server.isConnected())
+                game->hostSend.server.disconnect();
+            if(game->hostSend.client.isConnected())
+                game->hostSend.client.disconnect();
             engin.quit();
         }
         break;

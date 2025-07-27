@@ -26,6 +26,7 @@
 #include "Engin/PongFrame.h"
 #include "Network/Server.h"
 #include "Network/Client.h"
+#include "Network/NetMan.h"
 class Game: public GU::Engin::Engin, public GU::Evt::EventManager
 {
     public:
@@ -35,8 +36,9 @@ class Game: public GU::Engin::Engin, public GU::Evt::EventManager
         bool getPop() const; 
         void sync(std::shared_ptr<PongFrame> frame);
         virtual ~Game();
-        Server server;
-        Client client;
+
+        NetMan hostSend;
+        NetMan hostReceive;
     private:
         bool m_pop = false;
 };
