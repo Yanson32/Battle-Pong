@@ -30,12 +30,36 @@ void Game::sync(std::shared_ptr<PongFrame> frame)
         if(Settings::isHost)
         {
             if(server.isConnected())
-                server.send(frame);
+            {
+                static int count = 0;
+                if(count == 0)
+                {
+                    server.send(frame);
+                    count++;
+                }
+                else
+                {
+                    server.recieve(frame);
+                    count--;
+                }
+            }
         }
         else
         {
             if(client.isConnected())
-                client.recieve(frame);
+            {
+                static int count = 0;
+                if(count == 0)
+                {
+                    client.recieve(frame);
+                    count++;
+                }
+                else
+                {
+                    client.send(frame);
+                    count--;
+                }
+            }
         }
     }
 }

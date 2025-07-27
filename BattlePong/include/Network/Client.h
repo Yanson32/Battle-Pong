@@ -31,7 +31,8 @@ class Client
         void clean();
         void handleEvents();
         bool update();
-        std::shared_ptr<PongFrame> recieve(std::shared_ptr<PongFrame> frame);
+        bool recieve(std::shared_ptr<PongFrame> frame);
+        bool send(std::shared_ptr<PongFrame> frame);
         void disconnect();
         virtual ~Client();
     protected:

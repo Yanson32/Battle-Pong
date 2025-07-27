@@ -35,8 +35,32 @@ void Client::handleEvents()
 
 }
 
+bool Client::send(std::shared_ptr<PongFrame> frame)
+{
+    sf::Packet packet;
+    packet << frame->ball->getPosition().x;
+    packet << frame->ball->getPosition().y;
+    packet << frame->leftPaddle->getPosition().x;
+    packet << frame->leftPaddle->getPosition().y;
+    packet << frame->rightPaddle->getPosition().x;
+    packet << frame->rightPaddle->getPosition().y;
+    packet << frame->userMessage.getString().toAnsiString();
+    packet << frame->paddle1Hud->getScore();
+    packet << frame->paddle2Hud->getScore();
+    packet << frame->isSystemPaused();
+    packet << frame->isPaused();
+    packet << Settings::dimensions.x;
+    packet << Settings::dimensions.y;
 
-std::shared_ptr<PongFrame> Client::recieve(std::shared_ptr<PongFrame> frame)
+    if(socket.send(packet) != sf::Socket::Done)
+    {
+        BP_LOG_ERROR("Failed to send message"); 
+        return false;
+    }
+    return true;
+}
+
+bool Client::recieve(std::shared_ptr<PongFrame> frame)
 {
     sf::Packet packet;
     if(socket.receive(packet) == sf::Socket::Done)
@@ -94,8 +118,13 @@ std::shared_ptr<PongFrame> Client::recieve(std::shared_ptr<PongFrame> frame)
         //Set the resolution of the game
         packet >> Settings::dimensions.x; 
         packet >> Settings::dimensions.y; 
+        return true;
+    }
+    else
+    {
+        BP_LOG_ERROR("Client::recieve message failed");
+        return false;
     } 
-    return frame;
 }
 
 bool Client::update()

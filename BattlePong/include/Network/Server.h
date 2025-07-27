@@ -35,8 +35,8 @@ class Server
         void clean();
         void handleEvents();
         bool update();
-        void send(std::shared_ptr<PongFrame> frame);
-        sf::Packet recieve();
+        bool send(std::shared_ptr<PongFrame> frame);
+        bool recieve(std::shared_ptr<PongFrame> frame);
         unsigned numberConnections() const;
         void disconnect();
         virtual ~Server();
