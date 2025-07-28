@@ -21,12 +21,10 @@ namespace Settings
     sf::Color textColor = sf::Color::Red;
 
     //Paddle 1 settings
-    std::string p1Input = "None";
     std::string p1Name = "";
     int p1Score = 0;
 
     //Paddle 2 settings
-    std::string p2Input = "";
     std::string p2Name = "";
     int p2Score = 0;
 
@@ -109,4 +107,8 @@ namespace Settings
     bool isHost = true;
     bool multiplayer = false;
     bool serverConnected = false;
+
+    sf::Color leftPaddleColor = sf::Color::Red;
+    sf::Color rightPaddleColor = sf::Color::Blue;
+    
 }

@@ -27,7 +27,7 @@ namespace Gui
     class PaddleHud: public tgui::Panel
     {
         public:
-            PaddleHud(const std::string &input, std::string &name, int &score);
+            PaddleHud(std::string &name, int &score);
             void setScore(const int newScore);
             sf::Uint32 getScore() const;
             void setName(const sf::String &name);

@@ -51,12 +51,10 @@ namespace Settings
     extern sf::Color textColor;
 
     //Paddle 1 settigns
-    extern std::string p1Input;
     extern std::string p1Name;
     extern int p1Score;
 
     //Paddle 2 settigns
-    extern std::string p2Input;
     extern std::string p2Name;
     extern int p2Score;
 
@@ -132,6 +130,8 @@ namespace Settings
     extern bool multiplayer;
 
     extern bool serverConnected;
+    extern sf::Color leftPaddleColor;
+    extern sf::Color rightPaddleColor;
 }
 
 

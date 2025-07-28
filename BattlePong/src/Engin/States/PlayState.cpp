@@ -166,19 +166,19 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
     //Setup paddle 1
     pongFrame->paddle1Hud->setScore(0);
     Settings::p1Score = 0;
-    if(Settings::p1Input == "None")
+ /*   if(Settings::p1Input == "None")
         pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->leftPaddle)));
     else
         pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->leftPaddle)));
-
+*/
     //Setup paddle 2
     pongFrame->paddle2Hud->setScore(0);
     Settings::p2Score = 0;
-    if(Settings::p2Input  == "None")
+/*    if(Settings::p2Input  == "None")
         pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->rightPaddle)));
     else
         pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->rightPaddle)));
-
+*/
     messageClock.restart();
 
     //Load ball sound
@@ -196,10 +196,12 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
             pongFrame->systemPause(true);
             connectThread.reset(new std::thread(connect, &game->hostSend.server));
             connectThread->detach();
+            pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->rightPaddle)));
         }   
         else
         {
             game->hostSend.client.init(); 
+            pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->rightPaddle)));
         }
     }
 }

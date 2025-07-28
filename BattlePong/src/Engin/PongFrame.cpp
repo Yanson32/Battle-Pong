@@ -1,6 +1,7 @@
 #include "Engin/PongFrame.h"
 #include "Settings.h"
 #include <GameUtilities/Core/Macros.h>
+#include "Input/PlayerInput.h"
 
 PongFrame::PongFrame(const sf::Vector2f &windowSize)
 {
@@ -30,12 +31,12 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     rightWall->setPosition({wWidth - (wallTh), 0});
 
     leftPaddle.reset(new Paddle(world, ObjectId::LEFT_PADDLE, paddlePoints));
-    leftPaddle->setInput(std::unique_ptr<AI>(new AI(*leftPaddle)));
-    leftPaddle->setColor(sf::Color(255, 100, 0));
+    leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*leftPaddle)));
+    leftPaddle->setColor(Settings::leftPaddleColor);
 
     rightPaddle.reset(new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints));
     rightPaddle->setInput(std::unique_ptr<AI>(new AI(*rightPaddle)));
-    rightPaddle->setColor(sf::Color::Blue);
+    rightPaddle->setColor(Settings::rightPaddleColor);
 
     leftGoal.reset(new Goal(world, ObjectId::RIGHT_GOAL, goalPoints));
     leftGoal->setPosition(sf::Vector2f(wallTh, 0));
@@ -51,8 +52,11 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
 
     world->SetContactListener(&contactListener);
     
-    paddle1Hud.reset(new Gui::PaddleHud(Settings::p1Input, Settings::p1Name, Settings::p1Score));
-    paddle2Hud.reset(new Gui::PaddleHud(Settings::p2Input, Settings::p2Name, Settings::p2Score));
+    paddle1Hud.reset(new Gui::PaddleHud(Settings::p1Name, Settings::p1Score));
+    pongFrame->paddle1Hud->setScore(0);
+    
+    paddle2Hud.reset(new Gui::PaddleHud(Settings::p2Name, Settings::p2Score));
+    pongFrame->paddle2Hud->setScore(0);
 
     paddle2Hud->setPosition({650, 0});
 

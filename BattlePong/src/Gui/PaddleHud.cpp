@@ -5,8 +5,8 @@
 namespace Gui
 {
 
-    PaddleHud::PaddleHud(const std::string &input, std::string &name, int &score):
-    m_input(input), m_name(name), m_score(score)
+    PaddleHud::PaddleHud(std::string &name, int &score):
+    m_name(name), m_score(score)
     {
         //ctor
         panleLable = tgui::Label::create(name);
