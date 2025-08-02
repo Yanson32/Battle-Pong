@@ -6,6 +6,7 @@ class WriteLog
 {
     public:
         WriteLog(Game &game);
+        static void write(Game &game);
         virtual ~WriteLog();
     private:
         Game &m_game;

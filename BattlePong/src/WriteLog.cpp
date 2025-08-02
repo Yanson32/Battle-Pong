@@ -7,12 +7,10 @@ WriteLog::WriteLog(Game &game):m_game(game)
     BP_LOG_TRACE(__FUNCTION__);
 }
 
-
-
-WriteLog::~WriteLog()
+void WriteLog::write(Game &game)
 {
     BP_LOG_TRACE(__FUNCTION__);
-    
+
     //GameUtilities event loop
     GU::Evt::EventPtr event;
     while(EventManager::inst().poll((event)))
@@ -34,29 +32,35 @@ WriteLog::~WriteLog()
 
                 if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR))
                 {
-                    m_game.logManager.write(entry);
+                    game.logManager.write(entry);
                     exit(1);
                 }
                 else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_ERROR))
-                    m_game.logManager.write(entry);
+                    game.logManager.write(entry);
                 else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_WARNING))
-                    m_game.logManager.write(entry);
+                    game.logManager.write(entry);
                 else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_MESSAGE))
-                    m_game.logManager.write(entry);
+                    game.logManager.write(entry);
                 else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_VERBOSE))
-                    m_game.logManager.write(entry);
+                    game.logManager.write(entry);
                 else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_STATUS))
-                    m_game.logManager.write(entry);
+                    game.logManager.write(entry);
                 else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_SYSTEM_ERROR))
-                    m_game.logManager.write(entry);
+                    game.logManager.write(entry);
                 else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_DEBUG))
-                    m_game.logManager.write(entry);
+                    game.logManager.write(entry);
                 else if(temp->getSeverity() == static_cast<int>(GU::Log::LogType::GU_TRACE))
-                    m_game.logManager.write(entry);
+                    game.logManager.write(entry);
 
             }
             break;
         }
     }
+}
+
+WriteLog::~WriteLog()
+{
+    BP_LOG_TRACE(__FUNCTION__);
+    write(m_game); 
 }
 
