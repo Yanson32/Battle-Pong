@@ -186,7 +186,7 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
             pongFrame->systemPause(true);
             connectThread.reset(new std::thread(connect, &game->hostSend.server));
             connectThread->detach();
-            pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->rightPaddle)));
+            pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->leftPaddle)));
         }   
         else
         {
