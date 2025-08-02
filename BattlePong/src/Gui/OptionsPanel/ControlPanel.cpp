@@ -29,7 +29,8 @@ namespace Gui
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
-            upComboBox->addItem(tgui::String(temp));
+            if(temp != "Error")
+                upComboBox->addItem(tgui::String(temp));
         }
         upComboBox->setSelectedItem(Settings::keyboardControlUp);
         upComboBox->onItemSelect(&ControlPanel::onUpCombo, this);
@@ -43,7 +44,8 @@ namespace Gui
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
-            downComboBox->addItem(tgui::String(temp));
+            if(temp != "Error")
+                downComboBox->addItem(tgui::String(temp));
         }
         downComboBox->setSelectedItem(Settings::keyboardControlDown);
         downComboBox->onItemSelect(&ControlPanel::onDownCombo, this);
@@ -55,7 +57,8 @@ namespace Gui
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
-            leftComboBox->addItem(tgui::String(temp));
+            if(temp != "Error")
+                leftComboBox->addItem(tgui::String(temp));
         }
         leftComboBox->setSelectedItem(Settings::keyboardControlLeft);
         leftComboBox->onItemSelect(&ControlPanel::onLeftCombo, this);
@@ -67,7 +70,8 @@ namespace Gui
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
-            rightComboBox->addItem(tgui::String(temp));
+            if(temp != "Error")
+                rightComboBox->addItem(tgui::String(temp));
         }
         rightComboBox->setSelectedItem(Settings::keyboardControlRight);
         rightComboBox->onItemSelect(&ControlPanel::onRightCombo, this);
@@ -80,7 +84,8 @@ namespace Gui
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
-            menuComboBox->addItem(tgui::String(temp));
+            if(temp != "Error")
+                menuComboBox->addItem(tgui::String(temp));
         }
         menuComboBox->setSelectedItem(Settings::keyboardControlMenu);
         menuComboBox->onItemSelect(&ControlPanel::onMenuCombo, this);
@@ -93,7 +98,8 @@ namespace Gui
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
-            nextComboBox->addItem(tgui::String(temp));
+            if(temp != "Error")
+                nextComboBox->addItem(tgui::String(temp));
         }
         nextComboBox->setSelectedItem(Settings::keyboardControlNext);
         nextComboBox->onItemSelect(&ControlPanel::onNextCombo, this);
@@ -106,7 +112,8 @@ namespace Gui
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
-            selectComboBox->addItem(tgui::String(temp));
+            if(temp != "Error")
+                selectComboBox->addItem(tgui::String(temp));
         }
         selectComboBox->setSelectedItem(Settings::keyboardControlSelect);
         selectComboBox->onItemSelect(&ControlPanel::onSelectCombo, this);
