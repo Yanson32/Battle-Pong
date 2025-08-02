@@ -1,6 +1,7 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Input.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/AI.h"
 			"${CMAKE_CURRENT_SOURCE_DIR}/KeyboardInput.h"
+			"${CMAKE_CURRENT_SOURCE_DIR}/NetworkInput.h"
 
 
 )
