@@ -51,10 +51,6 @@ namespace Settings
     std::vector<std::string> songList = {"Zombies", "Dreams"};
 
 
-    std::string input  = "Medium";
-    std::string playerName = "Player 1";
-    int score = 0;
-
     //Button settings
     sf::Vector2f bSize = sf::Vector2f(200, 25);
     sf::Vector2f bPosition = sf::Vector2f(300, 300);
