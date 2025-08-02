@@ -8,6 +8,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/TS_TcpListener.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/TS_String.h"
             "${CMAKE_CURRENT_SOURCE_DIR}/WriteSettings.h"
+            "${CMAKE_CURRENT_SOURCE_DIR}/WriteLog.h"
 
 )
 set(SUB_DIRECTORIES "Events"

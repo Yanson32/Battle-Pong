@@ -63,6 +63,7 @@
 #include "ErrorCodes.h"
 #include "Arguments.h"
 #include "WriteSettings.h"
+#include "WriteLog.h"
 #include "Log.h"
 
 int main(int argc, char* argv[])
@@ -108,8 +109,6 @@ int main(int argc, char* argv[])
     if(Settings::preferencesFile.back() != '/')
         Settings::preferencesFile  += "/preferences.txt";
 
-    //Write settings on game close
-    WriteSettings write;
 
     //Load tgui theme
     ResourceManager::loadTheme(Settings::currentTheme);
@@ -143,6 +142,12 @@ int main(int argc, char* argv[])
 
     //Create game engin
     Game engin;
+    
+    //WriteLog will write all logs to the log file when exiting the program
+    WriteLog writeLog(engin);
+    
+    //Write settings on game close
+    WriteSettings write;
 
     //Create first GameState instance
     engin.push<IntroState>(frame, engin, window, debugDraw, gui);
