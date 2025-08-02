@@ -10,7 +10,7 @@
 #include "Objects/Wall.h"
 #include "Objects/Paddle.h"
 #include "Input/AI.h"
-#include "Input/PlayerInput.h"
+#include "Input/KeyboardInput.h"
 #include "Settings.h"
 #include "Resources/ResourceManager.h"
 #include "Events/Events.h"
@@ -167,7 +167,7 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
     pongFrame->paddle1Hud->setScore(0);
     Settings::p1Score = 0;
  /*   if(Settings::p1Input == "None")
-        pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->leftPaddle)));
+        pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->leftPaddle)));
     else
         pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->leftPaddle)));
 */
@@ -175,7 +175,7 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
     pongFrame->paddle2Hud->setScore(0);
     Settings::p2Score = 0;
 /*    if(Settings::p2Input  == "None")
-        pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->rightPaddle)));
+        pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->rightPaddle)));
     else
         pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->rightPaddle)));
 */
@@ -196,12 +196,12 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
             pongFrame->systemPause(true);
             connectThread.reset(new std::thread(connect, &game->hostSend.server));
             connectThread->detach();
-            pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->rightPaddle)));
+            pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->rightPaddle)));
         }   
         else
         {
             game->hostSend.client.init(); 
-            pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*pongFrame->rightPaddle)));
+            pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->rightPaddle)));
         }
     }
 }

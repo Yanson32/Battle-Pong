@@ -1,5 +1,5 @@
-#ifndef PLAYERINPUT_H
-#define PLAYERINPUT_H
+#ifndef KEYBOARD_INPUT_H
+#define KEYBOARD_INPUT_H
 /*************************************************************************
 *                           COPYRIGHT NOTICE
 * Battle Pong is a clone of the classic pong game.
@@ -19,12 +19,12 @@
 ***************************************************************************/
 #include "Input.h"
 
-class PlayerInput: public Input
+class KeyboardInput: public Input
 {
     public:
-        PlayerInput(Paddle &newPaddle);
+        KeyboardInput(Paddle &newPaddle);
         virtual void handleInput(const Ball &ball) override;
-        virtual ~PlayerInput();
+        virtual ~KeyboardInput();
     protected:
     private:
 };

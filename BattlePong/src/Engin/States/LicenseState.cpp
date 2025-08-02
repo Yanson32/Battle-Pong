@@ -10,7 +10,6 @@
 #include "Objects/Wall.h"
 #include "Objects/Paddle.h"
 #include "Input/AI.h"
-#include "Input/PlayerInput.h"
 #include "Settings.h"
 #include "Resources/ResourceManager.h"
 #include "Events/Events.h"

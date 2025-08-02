@@ -1,16 +1,16 @@
-#include "Input/PlayerInput.h"
+#include "Input/KeyboardInput.h"
 #include <SFML/Window/Keyboard.hpp>
 #include <SFML/System/Vector2.hpp>
 #include "Objects/Paddle.h"
 #include "Macros.h"
 #include "Settings.h"
 
-PlayerInput::PlayerInput(Paddle &newPaddle): Input(newPaddle)
+KeyboardInput::KeyboardInput(Paddle &newPaddle): Input(newPaddle)
 {
     //ctor
 }
 
-void PlayerInput::handleInput(const Ball &ball)
+void KeyboardInput::handleInput(const Ball &ball)
 {
     UNUSED(ball);
     int MOVE_SPEED = Settings::paddleSpeed;
@@ -30,7 +30,7 @@ void PlayerInput::handleInput(const Ball &ball)
     }
 }
 
-PlayerInput::~PlayerInput()
+KeyboardInput::~KeyboardInput()
 {
     //dtor
 }

@@ -1,7 +1,7 @@
 #include "Engin/PongFrame.h"
 #include "Settings.h"
 #include <GameUtilities/Core/Macros.h>
-#include "Input/PlayerInput.h"
+#include "Input/KeyboardInput.h"
 
 PongFrame::PongFrame(const sf::Vector2f &windowSize)
 {
@@ -31,7 +31,7 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     rightWall->setPosition({wWidth - (wallTh), 0});
 
     leftPaddle.reset(new Paddle(world, ObjectId::LEFT_PADDLE, paddlePoints));
-    leftPaddle->setInput(std::unique_ptr<Input>(new PlayerInput(*leftPaddle)));
+    leftPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*leftPaddle)));
     leftPaddle->setColor(Settings::leftPaddleColor);
 
     rightPaddle.reset(new Paddle(world, ObjectId::RIGHT_PADDLE, paddlePoints));

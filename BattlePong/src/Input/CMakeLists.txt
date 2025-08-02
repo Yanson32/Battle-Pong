@@ -1,6 +1,6 @@
 set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Input.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/AI.cpp"
-			"${CMAKE_CURRENT_SOURCE_DIR}/PlayerInput.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/KeyboardInput.cpp"
 
 )
 set(SUB_DIRECTORIES ""
