@@ -6,7 +6,7 @@ class WriteLog
 {
     public:
         WriteLog(Game &game);
-        static void write(Game &game);
+        static void write(Game &game, GU::Evt::EventPtr event);
         virtual ~WriteLog();
     private:
         Game &m_game;
