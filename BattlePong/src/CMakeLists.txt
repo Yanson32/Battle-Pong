@@ -5,6 +5,7 @@ set(FILES 	"${CMAKE_CURRENT_SOURCE_DIR}/Settings.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/TS_TcpSocket.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/TS_TcpListener.cpp"
 			"${CMAKE_CURRENT_SOURCE_DIR}/TS_String.cpp"
+			"${CMAKE_CURRENT_SOURCE_DIR}/WriteSettings.cpp"
 )
 set(SUB_DIRECTORIES "Events"
 					"Objects"

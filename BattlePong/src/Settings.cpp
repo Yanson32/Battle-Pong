@@ -30,13 +30,13 @@ namespace Settings
 
 
     //Player controls
-    std::string playerControlUp = "Up Arrow";
-    std::string playerControlDown = "Down Arrow";
-    std::string playerControlLeft = "Left Arrow";
-    std::string playerControlRight = "Right Arrow";
-    std::string playerControlMenu = "Escape";
-    std::string playerControlNext = "Tab";
-    std::string playerControlSelect = "Enter";
+    std::string keyboardControlUp = "Up Arrow";
+    std::string keyboardControlDown = "Down Arrow";
+    std::string keyboardControlLeft = "Left Arrow";
+    std::string keyboardControlRight = "Right Arrow";
+    std::string keyboardControlMenu = "Escape";
+    std::string keyboardControlNext = "Tab";
+    std::string keyboardControlSelect = "Enter";
 
     //Joystick buttons
     std::string playerJoystickControlMenu;

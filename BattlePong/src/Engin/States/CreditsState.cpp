@@ -188,12 +188,12 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
     switch(event.type)
     {
         case sf::Event::KeyPressed:
-            if(event.key.code == toKey(Settings::playerControlRight))
+            if(event.key.code == toKey(Settings::keyboardControlRight))
             {
                 credits();
                 
             }
-            else if(event.key.code == toKey(Settings::playerControlLeft))
+            else if(event.key.code == toKey(Settings::keyboardControlLeft))
             {
                 --creditsCounter;
                 if(creditsCounter < 0)

@@ -74,13 +74,13 @@ namespace Settings
 
 
     //Player controls
-    extern std::string playerControlUp;
-    extern std::string playerControlDown;
-    extern std::string playerControlLeft;
-    extern std::string playerControlRight;
-    extern std::string playerControlMenu;
-    extern std::string playerControlNext;
-    extern std::string playerControlSelect;
+    extern std::string keyboardControlUp;
+    extern std::string keyboardControlDown;
+    extern std::string keyboardControlLeft;
+    extern std::string keyboardControlRight;
+    extern std::string keyboardControlMenu;
+    extern std::string keyboardControlNext;
+    extern std::string keyboardControlSelect;
 
     //Joystick buttons
     extern std::string playerJoystickControlMenu;
@@ -132,6 +132,9 @@ namespace Settings
     extern bool serverConnected;
     extern sf::Color leftPaddleColor;
     extern sf::Color rightPaddleColor;
+
+    void read();
+    void write();
 }
 
 
