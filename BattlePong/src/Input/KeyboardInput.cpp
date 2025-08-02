@@ -4,6 +4,7 @@
 #include "Objects/Paddle.h"
 #include "Macros.h"
 #include "Settings.h"
+#include "SFMLFunctions.h"
 
 KeyboardInput::KeyboardInput(Paddle &newPaddle): Input(newPaddle)
 {
@@ -16,11 +17,11 @@ void KeyboardInput::handleInput(const Ball &ball)
     int MOVE_SPEED = Settings::paddleSpeed;
     sf::Vector2f up(0, -MOVE_SPEED);
     sf::Vector2f down(0, MOVE_SPEED);
-    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Down))
+    if(sf::Keyboard::isKeyPressed(toKey(Settings::keyboardControlDown)))
     {
         paddle.move(down);
     }
-    else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Up))
+    else if(sf::Keyboard::isKeyPressed(toKey(Settings::keyboardControlUp)))
     {
         paddle.move(up);
     }
