@@ -148,7 +148,6 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
 {
     BP_LOG_TRACE(__FUNCTION__)
     UNUSED(frame);
-    std::cout << "Playstate::init" << std::endl;
     
     Game *game = static_cast<Game*>(&engin);
 
@@ -203,6 +202,12 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
             game->hostSend.client.init(); 
             pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->rightPaddle)));
         }
+    }
+    else
+    {
+        pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->leftPaddle)));
+        pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->rightPaddle)));
+
     }
 }
 

@@ -156,10 +156,6 @@ void IntroState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame>
        return;
     }
 
-    pongFrame->ball->setPosition({400, 300});
-    pongFrame->ball->setVelocity({100, 100});
-    pongFrame->leftPaddle->setPosition(sf::Vector2f(100, 300));
-    pongFrame->rightPaddle->setPosition(sf::Vector2f(700, 300));
 
     //Create intro panel
     std::shared_ptr<Gui::IntroPanel> cust(new Gui::IntroPanel());
@@ -190,6 +186,9 @@ void IntroState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame>
 //    ResourceManager::sound.load(Sound::Id::MESSAGE, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BUTTON, "../Resources/Sounds/tone1.ogg");
 //    ResourceManager::sound.load(Sound::Id::BALL, "../Resources/Sounds/tone1.ogg");
+    pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->leftPaddle)));
+    pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->rightPaddle)));
+
     reset(pongFrame);
 }
 
