@@ -244,7 +244,7 @@ void StateBase::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
        return;
     }
    
-    pongFrame->userMessage.setString(""); 
+//    pongFrame->userMessage.setString(""); 
    
     ResourceManager resourceManager;
     resourceManager.loadFont(fontId::MONOSPACE, "Monospace"); 

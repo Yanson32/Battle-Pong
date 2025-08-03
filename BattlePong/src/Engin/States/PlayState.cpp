@@ -234,6 +234,7 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
             {
                 case sf::Keyboard::Escape:
                 {
+                
                     if(gui.get("PanelPointer") == nullptr)
                     {
                         gui.removeAllWidgets();
