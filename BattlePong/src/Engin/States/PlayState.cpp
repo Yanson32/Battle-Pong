@@ -11,6 +11,7 @@
 #include "Objects/Paddle.h"
 #include "Input/AI.h"
 #include "Input/KeyboardInput.h"
+#include "Input/NetworkInput.h"
 #include "Settings.h"
 #include "Resources/ResourceManager.h"
 #include "Events/Events.h"
@@ -187,10 +188,12 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
             connectThread.reset(new std::thread(connect, &game->hostSend.server));
             connectThread->detach();
             pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->leftPaddle)));
+            pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new NetworkInput(*pongFrame->rightPaddle)));
         }   
         else
         {
             game->hostSend.client.init(); 
+            pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new NetworkInput(*pongFrame->leftPaddle)));
             pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->rightPaddle)));
         }
     }

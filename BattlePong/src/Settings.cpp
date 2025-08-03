@@ -68,12 +68,7 @@ namespace Settings
     std::vector<std::string> themes = {"Default", "Black", "BabyBlue"};
 
     //Network
-    //sf::TcpSocket socket;
-    //sf::TcpListener listener;
-    //bool connected = false;
     int port = 4000;
-    sf::String targetIp = "127.0.0.0";
-    sf::Time timeOut;
     TS_String publicIp;
     std::string localIp = sf::IpAddress::getLocalAddress().toString();
     std::string clientIp = "";
@@ -102,7 +97,6 @@ namespace Settings
 
     bool isHost = true;
     bool multiplayer = false;
-    bool serverConnected = false;
 
     sf::Color leftPaddleColor = sf::Color::Red;
     sf::Color rightPaddleColor = sf::Color::Blue;
