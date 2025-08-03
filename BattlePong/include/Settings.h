@@ -83,9 +83,9 @@ namespace Settings
     extern std::string keyboardControlSelect;
 
     //Joystick buttons
-    extern std::string playerJoystickControlMenu;
-    extern std::string playerJoystickControlNext;
-    extern std::string playerJoystickControlSelect;
+    extern std::string joystickControlMenu;
+    extern std::string joystickControlNext;
+    extern std::string joystickControlSelect;
 
 
     //Network

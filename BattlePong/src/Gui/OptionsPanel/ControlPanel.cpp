@@ -135,7 +135,7 @@ namespace Gui
             ss << i;
             joystickMenuComboBox->addItem(ss.str());
         }
-        joystickMenuComboBox->setSelectedItem(Settings::playerJoystickControlMenu);
+        joystickMenuComboBox->setSelectedItem(Settings::joystickControlMenu);
         joystickMenuComboBox->onItemSelect(&ControlPanel::onJoystickMenuCombo, this);
         if(sf::Joystick::isConnected(0))
         {
@@ -153,7 +153,7 @@ namespace Gui
             ss << i;
             joystickNextComboBox->addItem(ss.str());
         }
-        joystickNextComboBox->setSelectedItem(Settings::playerJoystickControlNext);
+        joystickNextComboBox->setSelectedItem(Settings::joystickControlNext);
         joystickNextComboBox->onItemSelect(&ControlPanel::onJoystickNextCombo, this);
         if(sf::Joystick::isConnected(0))
         {
@@ -171,7 +171,7 @@ namespace Gui
             ss << i;
             joystickSelectComboBox->addItem(ss.str());
         }
-        joystickSelectComboBox->setSelectedItem(Settings::playerJoystickControlSelect);
+        joystickSelectComboBox->setSelectedItem(Settings::joystickControlSelect);
         joystickSelectComboBox->onItemSelect(&ControlPanel::onJoystickSelectCombo, this);
         if(sf::Joystick::isConnected(0))
         {
@@ -257,7 +257,7 @@ namespace Gui
     *******************************************************************/
     void ControlPanel::onJoystickMenuCombo()
     {
-      Settings::playerJoystickControlMenu = this->joystickMenuComboBox->getSelectedItem().toStdString();
+      Settings::joystickControlMenu = this->joystickMenuComboBox->getSelectedItem().toStdString();
     }
 
 
@@ -267,7 +267,7 @@ namespace Gui
     *******************************************************************/
     void ControlPanel::onJoystickNextCombo()
     {
-      Settings::playerJoystickControlNext = this->joystickNextComboBox->getSelectedItem().toStdString();
+      Settings::joystickControlNext = this->joystickNextComboBox->getSelectedItem().toStdString();
     }
 
 
@@ -277,7 +277,7 @@ namespace Gui
     *******************************************************************/
     void ControlPanel::onJoystickSelectCombo()
     {
-      Settings::playerJoystickControlSelect = this->joystickSelectComboBox->getSelectedItem().toStdString();
+      Settings::joystickControlSelect = this->joystickSelectComboBox->getSelectedItem().toStdString();
     }
 
 

@@ -40,9 +40,9 @@ void WriteSettings::read()
     Settings::keyboardControlSelect = toString(static_cast<sf::Keyboard::Key>(prefMan.read("KeyboardControlSelect", toKey(Settings::keyboardControlSelect)))).toAnsiString();
 
     //Load joystick preferences
-    Settings::playerJoystickControlMenu = prefMan.read("PlayerJoystickControlMenu", Settings::playerJoystickControlMenu);
-    Settings::playerJoystickControlNext = prefMan.read("PlayerJoystickControlNext", Settings::playerJoystickControlNext);
-    Settings::playerJoystickControlSelect = prefMan.read("PlayerJoystickControlSelect", Settings::playerJoystickControlSelect);
+    Settings::joystickControlMenu = prefMan.read("PlayerJoystickControlMenu", Settings::joystickControlMenu);
+    Settings::joystickControlNext = prefMan.read("PlayerJoystickControlNext", Settings::joystickControlNext);
+    Settings::joystickControlSelect = prefMan.read("PlayerJoystickControlSelect", Settings::joystickControlSelect);
 
     //Load Box2D Settings
     #ifdef  DEBUG
