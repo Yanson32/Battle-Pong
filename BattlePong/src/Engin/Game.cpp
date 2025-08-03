@@ -25,17 +25,21 @@ GU::Evt::EventManager()
 
 void Game::sync(std::shared_ptr<PongFrame> frame)
 {
+    //If Multiplayer
     if(Settings::multiplayer)
     {
+        //If host 
         if(Settings::isHost)
         {
             if(hostSend.server.isConnected())
             {
+                //Send data every other frame
                 if(hostSend.count == 0)
                 {
                     hostSend.server.send(frame);
                     hostSend.count++;
                 }
+                //Recieve data every other frame
                 else
                 {
                     hostSend.server.recieve(frame);
@@ -43,15 +47,18 @@ void Game::sync(std::shared_ptr<PongFrame> frame)
                 }
             }
         }
+        //If not host 
         else
         {
             if(hostSend.client.isConnected())
             {
+                //Recieve data every other frame
                 if(hostSend.count == 0)
                 {
                     hostSend.client.recieve(frame);
                     hostSend.count++;
                 }
+                //Send data every other frame
                 else
                 {
                     hostSend.client.send(frame);
