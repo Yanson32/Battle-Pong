@@ -682,8 +682,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Gui::DEBUG_LOG:
                         BP_LOG_WARNING("Debug Log not implimented");
                     break;
+                    case Gui::DEBUG_PAUSE:
+                        Settings::playerPaused = temp->m_checked;
+                    break;
                     case Gui::DEBUG_SYSTEM_PAUSE:
-                        Settings::systemPaused = true;
+                        Settings::systemPaused = temp->m_checked;
                     break;
                 };
             }

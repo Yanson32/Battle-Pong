@@ -49,6 +49,7 @@ namespace Gui
         DEBUG_JOINTS,
         DEBUG_PAIRS,
         DEBUG_LOG,
+        DEBUG_PAUSE,
         DEBUG_SYSTEM_PAUSE,
         MUSIC,
         SOUND_EFFECTS,

@@ -85,9 +85,16 @@ namespace Gui
         });
         getContentPane()->append("Ball Radius", ballRadiusBox);
         
-
-        getContentPane()->appendSpace();
-        getContentPane()->appendHeader("Box2d");
+        //Create pause checkbox
+        pause = tgui::CheckBox::create("");
+        pause->setChecked(Settings::playerPaused);
+        pause->onCheck([&](){
+            EventManager::inst().post<GU::Evt::OnCheck>(nullptr, Gui::id::DEBUG_PAUSE, true);
+        });
+        pause->onUncheck([&](){
+            EventManager::inst().post<GU::Evt::OnCheck>(nullptr, Gui::id::DEBUG_PAUSE, false);
+        });
+        getContentPane()->append("Pause", pause);
         
         //Create system pause checkbox
         systemPause = tgui::CheckBox::create("");
@@ -99,6 +106,10 @@ namespace Gui
             EventManager::inst().post<GU::Evt::OnCheck>(nullptr, Gui::id::DEBUG_SYSTEM_PAUSE, false);
         });
         getContentPane()->append("System Pause", systemPause);
+
+        getContentPane()->appendSpace();
+        getContentPane()->appendHeader("Box2d");
+        
 
         //Create AABB checkbox
         aabb = tgui::CheckBox::create("");
