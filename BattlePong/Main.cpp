@@ -76,7 +76,7 @@ int main(int argc, char* argv[])
  
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
     //So we do it in a thread.
-    std::thread ipThread([&](){Settings::publicIp.setString(sf::IpAddress::getPublicAddress().toString());});
+    std::thread ipThread([](){Settings::publicIp.setString(sf::IpAddress::getPublicAddress().toString());});
     ipThread.detach();
 
     //Enable random numbers
