@@ -68,8 +68,20 @@
 
 int main(int argc, char* argv[])
 {
-    programArguments(argc, argv);
 
+    //Set the log file path 
+    Settings::logFile = Settings::GAME_CONFIG_DIR;
+    if(Settings::logFile.back() != '/')
+        Settings::logFile += "/Log.txt";
+    else
+        Settings::logFile += "Log.txt";
+        
+
+    //Delete log file
+    if(std::filesystem::exists(Settings::logFile))
+        std::filesystem::remove(Settings::logFile);
+    
+    programArguments(argc, argv);
  
     BP_LOG_MESSAGE("GAME_CONFIG_DIR = " + Settings::GAME_CONFIG_DIR);   
     Settings::publicIp.setString("0.0.0.0");
@@ -99,10 +111,6 @@ int main(int argc, char* argv[])
     if(!std::filesystem::exists(ResourceManager::getPath()))
         ResourceManager::setPath(Settings::GAME_CONFIG_DIR);
 
-    //Set the log file path 
-    Settings::logFile = Settings::GAME_CONFIG_DIR;
-    if(Settings::logFile.back() != '/')
-        Settings::logFile += "/Log.txt";
 
     //Set the path to the preferences file
     Settings::preferencesFile = Settings::GAME_CONFIG_DIR;
