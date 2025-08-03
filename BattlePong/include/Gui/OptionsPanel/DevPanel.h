@@ -46,6 +46,7 @@ namespace Gui
             tgui::EditBox::Ptr paddleSpeedBox;
             tgui::EditBox::Ptr wallThicknessBox;
             tgui::EditBox::Ptr ballRadiusBox;
+            tgui::CheckBox::Ptr systemPause;
             void onLogLevel();
     };
 }

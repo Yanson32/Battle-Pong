@@ -95,7 +95,7 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     }
 
     backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
-    if(!pongFrame->isPaused())
+    if(!Settings::playerPaused)
     {
 
         if(!isBallOnScreen(pongFrame))
@@ -155,8 +155,7 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         {
             pongFrame->userMessage.setString("");
             messageClock.restart();
-            //EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
-            pongFrame->systemPause(false);
+            Settings::systemPaused = false;
         }
     }
 }
@@ -212,7 +211,7 @@ void StateBase::reset(std::shared_ptr<PongFrame> frame)
     centerText(frame);
     messageClock.restart();
     roundClock.restart();
-    pongFrame->systemPause(true);
+    Settings::systemPaused = true;
 }
 
 
@@ -682,6 +681,9 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     break;
                     case Gui::DEBUG_LOG:
                         BP_LOG_WARNING("Debug Log not implimented");
+                    break;
+                    case Gui::DEBUG_SYSTEM_PAUSE:
+                        Settings::systemPaused = true;
                     break;
                 };
             }

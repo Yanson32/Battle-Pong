@@ -55,8 +55,8 @@ bool Server::send(std::shared_ptr<PongFrame> frame)
     packet << frame->userMessage.getString().toAnsiString();
     packet << frame->paddle1Hud->getScore();
     packet << frame->paddle2Hud->getScore();
-    packet << frame->isSystemPaused();
-    packet << frame->isPaused();
+    packet << Settings::systemPaused; 
+    packet << Settings::playerPaused; 
     packet << Settings::dimensions.x;
     packet << Settings::dimensions.y;
 
@@ -138,13 +138,11 @@ bool Server::recieve(std::shared_ptr<PongFrame> frame)
 
 
         //Set the system pause status 
-        bool systemPause;
-        packet >> systemPause;
-        //frame->systemPause(systemPause);
+        packet >> Settings::systemPaused;
 
 
         //Set the player pause status
-        //packet >> frame->m_playerPaused;
+        packet >> Settings::playerPaused;
 
 
         //Set the resolution of the game

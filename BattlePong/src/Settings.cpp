@@ -101,4 +101,6 @@ namespace Settings
     sf::Color leftPaddleColor = sf::Color::Red;
     sf::Color rightPaddleColor = sf::Color::Blue;
     
+    bool systemPaused = false;
+    bool playerPaused = false;
 }

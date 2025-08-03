@@ -65,27 +65,7 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     userMessage.setPosition(sf::Vector2f(400, 300));
     userMessage.setColor(sf::Color::Red);
 }
-void PongFrame::systemPause(const bool sysPause)
-{
-    m_systemPaused = sysPause;
-}
 
-bool PongFrame::isSystemPaused() const
-{
-    return m_systemPaused;
-}
-
-
-void PongFrame::pause(const bool pause)
-{
-    m_playerPaused = pause;
-}
-
-
-bool PongFrame::isPaused() const
-{
-    return m_playerPaused;
-}
 
 void PongFrame::init()
 {

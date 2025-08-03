@@ -72,9 +72,9 @@ void LicenseState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
 
     StateBase::update(engin, deltaTime, frame);
 
-    if(!pongFrame->isPaused())
+    if(!Settings::playerPaused)
     {
-        if(!pongFrame->isSystemPaused())
+        if(!Settings::systemPaused)
         {
             pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
         }

@@ -127,6 +127,8 @@ namespace Settings
     extern sf::Color leftPaddleColor;
     extern sf::Color rightPaddleColor;
 
+    extern bool systemPaused;
+    extern bool playerPaused;
 }
 
 

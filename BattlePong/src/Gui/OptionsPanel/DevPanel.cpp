@@ -88,6 +88,17 @@ namespace Gui
 
         getContentPane()->appendSpace();
         getContentPane()->appendHeader("Box2d");
+        
+        //Create system pause checkbox
+        systemPause = tgui::CheckBox::create("");
+        systemPause->setChecked(Settings::systemPaused);
+        systemPause->onCheck([&](){
+            EventManager::inst().post<GU::Evt::OnCheck>(nullptr, Gui::id::DEBUG_SYSTEM_PAUSE, true);
+        });
+        systemPause->onUncheck([&](){
+            EventManager::inst().post<GU::Evt::OnCheck>(nullptr, Gui::id::DEBUG_SYSTEM_PAUSE, false);
+        });
+        getContentPane()->append("System Pause", systemPause);
 
         //Create AABB checkbox
         aabb = tgui::CheckBox::create("");

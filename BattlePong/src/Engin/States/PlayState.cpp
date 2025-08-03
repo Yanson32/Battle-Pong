@@ -82,9 +82,9 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
 
     StateBase::update(engin, deltaTime, frame);
 
-    if(!pongFrame->isPaused())
+    if(!Settings::playerPaused)
     {
-        if(!pongFrame->isSystemPaused())
+        if(!Settings::systemPaused)
         {
             pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
         }
@@ -184,7 +184,7 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
             pongFrame->userMessage.setString("Waiting for player 2");
             centerText(frame);
             game->hostSend.server.init();
-            pongFrame->systemPause(true);
+            Settings::systemPaused = true;
             connectThread.reset(new std::thread(connect, &game->hostSend.server));
             connectThread->detach();
             pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new KeyboardInput(*pongFrame->leftPaddle)));

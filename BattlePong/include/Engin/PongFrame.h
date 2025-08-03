@@ -49,21 +49,15 @@ class PongFrame: public GU::Engin::Frame
         std::shared_ptr<Gui::PaddleHud> paddle1Hud;
         std::shared_ptr<Gui::PaddleHud> paddle2Hud;
         sf::Text userMessage;
-        bool m_playerPaused;
         virtual void init();
         virtual void clean();
         virtual void handleEvents(GU::Engin::Engin& engin, const float &deltaTime);
         virtual void update(GU::Engin::Engin& engin, const float &deltaTime);
         virtual void draw(GU::Engin::Engin& engin, const float &deltaTime);
-        void systemPause(const bool sysPause);
-        bool isSystemPaused() const;
-        void pause(const bool pause);
-        bool isPaused() const;
         
         virtual ~PongFrame();
     private:
         ContactListener contactListener;
-        bool m_systemPaused;
 };
 
 #endif  
