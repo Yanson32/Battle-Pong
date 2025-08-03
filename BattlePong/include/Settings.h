@@ -127,8 +127,6 @@ namespace Settings
     extern sf::Color leftPaddleColor;
     extern sf::Color rightPaddleColor;
 
-    void read();
-    void write();
 }
 
 
