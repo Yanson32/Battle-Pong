@@ -34,17 +34,26 @@ target_include_directories("${PROJECT_NAME}" PUBLIC
 	)
 
 #Find the Math library
-find_package("Math" REQUIRED)
+set(BP_MATH_VERSION "" CACHE STRING "This variable sets the TGUI version")
+mark_as_advanced(BP_MATH_VERSION)
+find_package("Math" ${BP_MATH_VERSION} REQUIRED)
 target_link_libraries("${PROJECT_NAME}" PUBLIC Math::Math)
 
-find_package(GameUtilities COMPONENTS Core Log Event Engin  REQUIRED)
+set(BP_GAMEUTILITIES_VERSION "" CACHE STRING "This variable sets the TGUI version")
+mark_as_advanced(BP_GAMEUTILITIES_VERSION)
+find_package(GameUtilities ${BP_GAMEUTILITIES_VERSION} COMPONENTS Core Log Event Engin  REQUIRED)
 target_link_libraries("${PROJECT_NAME}" PRIVATE GU::Core GU::Event GU::Engin GU::Log)
 
-find_package(SFML 2 COMPONENTS system window graphics audio network REQUIRED)
+
+set(BP_SFML_VERSION 2 CACHE STRING "This variable sets the SFML version")
+mark_as_advanced(BP_SFML_VERSION)
+find_package(SFML ${BP_SFML_VERSION} COMPONENTS system window graphics audio network REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${SFML_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${SFML_LIBRARIES})
 
-find_package(TGUI REQUIRED)
+set(BP_TGUI_VERSION "" CACHE STRING "This variable sets the TGUI version")
+mark_as_advanced(BP_TGU_VERSION)
+find_package(TGUI ${BP_TGUI_VERSION} REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${TGUI_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC tgui)
 
