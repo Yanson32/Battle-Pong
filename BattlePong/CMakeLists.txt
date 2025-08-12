@@ -57,7 +57,7 @@ find_package(SFML ${BP_SFML_VERSION} COMPONENTS system window graphics audio net
 target_include_directories("${PROJECT_NAME}" PUBLIC ${SFML_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC ${SFML_LIBRARIES})
 debug_report("SFML Found = ${SFML_FOUND}")
-debug_report("SFML Found version = ${SFML_VERSION}")
+debug_report("SFML Found version = ${SFML_VERSION_MAJOR}.${SFML_VERSION_MINOR}.${SFML_VERSION_PATCH}.${SFML_VERSION_TWEAK}")
 
 
 #Find TGUI library
@@ -67,7 +67,7 @@ find_package(TGUI ${BP_TGUI_VERSION} REQUIRED)
 target_include_directories("${PROJECT_NAME}" PUBLIC ${TGUI_INCLUDE_DIR})
 target_link_libraries("${PROJECT_NAME}" PUBLIC tgui)
 debug_report("TGUI Found = ${TGUI_FOUND}")
-debug_report("TGUI Found version = ${TGUI_VERSION}")
+debug_report("TGUI Found version = ${TGUI_VERSION_MAJOR}.${TGUI_VERSION_MINOR}.${TGUI_VERSION_PATCH}.${TGUI_VERSION_TWEAK}")
 
 #Link against Box2D
 target_include_directories("${PROJECT_NAME}" PUBLIC "${CMAKE_CURRENT_SOURCE_DIR}/extlibs/Box2D")
