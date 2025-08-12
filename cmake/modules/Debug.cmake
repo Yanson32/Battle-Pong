@@ -1,6 +1,7 @@
+
 macro(debug_report MSG)
     file(APPEND "${CMAKE_BINARY_DIR}/DebugReport.txt" "${MSG}\n")
-    message(VERBOSE "${MSG}")
+    message(VERBOSE "DEBUG REPORT---> ${MSG}")
 endmacro()
 
 macro(debug_report_fatal MSG)
@@ -16,3 +17,15 @@ macro(debug_init)
     debug_report("Source file = ${CMAKE_CURRENT_LIST_FILE}")
 endmacro()
 
+
+macro (debug_system_info)
+
+    set(RELEASE_FILE_PATH "/etc/os-release")
+    if(EXISTS "${RELEASE_FILE_PATH}")
+        file(STRINGS "${RELEASE_FILE_PATH}" LINES)
+
+        foreach(LINE IN LISTS LINES)
+            debug_report("${LINE}")
+        endforeach()
+    endif()
+endmacro()

@@ -23,6 +23,12 @@ endif()
 project("BattlePong" VERSION "0.0.0.1")
 help_text()
 debug_init()
+debug_system_info()
+debug_report("CMake Version ${CMAKE_VERSION}")
+debug_report("CMake c compiler ${CMAKE_C_COMPILER_ID}")
+debug_report("CMake c compiler version ${CMAKE_C_COMPILER_VERSION}")
+debug_report("CMake c++ compiler ${CMAKE_CXX_COMPILER_ID}")
+debug_report("CMake c++ compiler version ${CMAKE_CXX_COMPILER_VERSION}")
 
 string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)
 
@@ -37,6 +43,8 @@ if(NOT CMAKE_CONFIGUREATION_TYPES)
 		set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Select build type [${${PROJECT_NAME}_VALID_BUILD_TYPES}]" FORCE)
 	endif()
 endif()
+
+debug_report("CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}")
 
 #set dropdown list in cmake gui
 if(NOT CMAKE_CONFIGUREATION_TYPES)
