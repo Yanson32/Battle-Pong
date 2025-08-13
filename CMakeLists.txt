@@ -1,7 +1,6 @@
 #for backwards compatibility 
 cmake_minimum_required(VERSION 3.5.1)
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
-include ("defaults")
 include ("Debug")
 include ("Help")
 
