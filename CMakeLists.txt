@@ -1,6 +1,5 @@
-#for backwards compatibility
+#for backwards compatibility 
 cmake_minimum_required(VERSION 3.5.1)
-
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/modules/")
 include ("defaults")
 include ("Debug")
@@ -10,15 +9,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "bin")
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "lib")
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "lib")
 
-#make sure we are using a single configuration generator
-if(CMAKE_BUILD_TYPE)
-    #set CMAKE_BUILD_TYPE as a dropdown list in cmake gui
-    set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS "Release" "Debug" "RelWithDebInfo" "MinRizeRel")
-else()
-    #set default value for CMAKE_BUILD_TYPE in multi-configuration generators.
-    set(CMAKE_BUILD_TYPE CACHE STRING "Build configuration" "Release")
-endif()
-
 #Give the project a name
 project("BattlePong" VERSION "0.0.0.1")
 help_text()
@@ -27,20 +17,19 @@ debug_init()
 string(TOUPPER ${PROJECT_NAME} BP_PROJECT_NAME_UPPER)
 
 #Build shared library by default
-option(BUILD_SHARED_LIBS "True for shared libraries" TRUE)
+#option(BUILD_SHARED_LIBS "True for shared libraries" TRUE)
 
 set(${PROJECT_NAME}_VALID_BUILD_TYPES "Release" "Debug" "MinSizeRel" "RelWithDebInfo")
 
-#set default build type
+#Throw error on invalid build type
 if(NOT CMAKE_CONFIGUREATION_TYPES)
-	if(CMAKE_BUILD_TYPE STREQUAL "")
-		set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Select build type [${${PROJECT_NAME}_VALID_BUILD_TYPES}]" FORCE)
-	endif()
-endif()
-
-
-#set dropdown list in cmake gui
-if(NOT CMAKE_CONFIGUREATION_TYPES)
+    #Throw error on invalid build type
+    string(FIND "${${PROJECT_NAME}_VALID_BUILD_TYPES}" "${CMAKE_BUILD_TYPE}" BUILD_TYPE_RESULT) 
+    if(${BUILD_TYPE_RESULT} EQUAL -1 OR "${CMAKE_BUILD_TYPE}" STREQUAL "")
+        message(FATAL_ERROR "Invalid build type [${CMAKE_BUILD_TYPE}] valid types are ${${PROJECT_NAME}_VALID_BUILD_TYPES}]")
+    endif()
+    
+    #set dropdown list in cmake gui
 	set_property(CACHE CMAKE_BUILD_TYPE PROPERTY STRINGS ${${PROJECT_NAME}_VALID_BUILD_TYPES})
 endif()
 
@@ -61,12 +50,6 @@ if(NOT TARGET uninstall)
 
   add_custom_target(uninstall
     COMMAND ${CMAKE_COMMAND} -P ${CMAKE_CURRENT_BINARY_DIR}/cmake_uninstall.cmake)
-endif()
-
-#If the build type is equal to DEBUG we add a definition to the project
-string(TOUPPER "${CMAKE_BUILD_TYPE}" BP_BUILD_TYPE_UPPER)
-if("${BP_BUILD_TYPE_UPPER}" STREQUAL "DEBUG")
-	add_definitions("-DDEBUG")
 endif()
 
 configure_file("${${PROJECT_NAME}_SOURCE_DIR}/cmake/config.h.in" "${${PROJECT_NAME}_BINARY_DIR}/${PROJECT_NAME}/config.h")
