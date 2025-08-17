@@ -38,17 +38,7 @@ void Client::handleEvents()
 bool Client::send(std::shared_ptr<PongFrame> frame)
 {
     sf::Packet packet;
-    packet << frame->ball->getPosition().x;
-    packet << frame->ball->getPosition().y;
-    packet << frame->ball->getVelocity().x;
-    packet << frame->ball->getVelocity().y;
-    packet << frame->leftPaddle->getPosition().x;
-    packet << frame->leftPaddle->getPosition().y;
-    packet << frame->rightPaddle->getPosition().x;
-    packet << frame->rightPaddle->getPosition().y;
-    packet << frame->userMessage.getString().toAnsiString();
-    packet << frame->paddle1Hud->getScore();
-    packet << frame->paddle2Hud->getScore();
+    packet << frame->rightPaddle;
     packet << Settings::systemPaused;
     packet << Settings::playerPaused; 
     packet << Settings::dimensions.x;
@@ -67,41 +57,22 @@ bool Client::recieve(std::shared_ptr<PongFrame> frame)
     sf::Packet packet;
     if(socket.receive(packet) == sf::Socket::Done)
     {
-    
-        //Set Ball Position
-        float ballPosition_x;
-        float ballPosition_y;
-        packet >> ballPosition_x; 
-        packet >> ballPosition_y; 
-        frame->ball->setPosition({ballPosition_x, ballPosition_y});
+        
+        packet >> frame->ball;
+        packet >> frame->leftPaddle;
+        packet << frame->paddle1Hud->getScore();
+        packet << frame->paddle2Hud->getScore();
+        packet << Settings::systemPaused; 
+        packet << Settings::playerPaused; 
+        packet << Settings::dimensions.x;
+        packet << Settings::dimensions.y;
 
-        //Set Ball velocity
-        float ballVelocity_x;
-        float ballVelocity_y;
-        packet >> ballVelocity_x;
-        packet >> ballVelocity_y;
-        frame->ball->setVelocity({ballVelocity_x, ballVelocity_y});
-
-        //Set left Paddle position
-        float leftPaddlePosition_x;
-        float leftPaddlePosition_y;
-        packet >> leftPaddlePosition_x;
-        packet >> leftPaddlePosition_y;
-        frame->leftPaddle->setPosition({leftPaddlePosition_x, leftPaddlePosition_y});
-
-
-        //Set right paddle position
-        float rightPaddlePosition_x;
-        float rightPaddlePosition_y;
-        packet >> rightPaddlePosition_x; 
-        packet >> rightPaddlePosition_y;
-        frame->rightPaddle->setPosition({rightPaddlePosition_x, rightPaddlePosition_y}); 
-
+/*
         //Set user message 
         std::string userMessage;
         packet >> userMessage;
         frame->userMessage.setString(userMessage);
-
+*/
         //Set Player Score    
         sf::Uint32 player1score;
         sf::Uint32 player2score;

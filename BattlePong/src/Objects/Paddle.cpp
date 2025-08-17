@@ -99,6 +99,35 @@ void Paddle::setInput(std::unique_ptr<Input> newInput)
 {
     input = std::move(newInput);
 }
+
+
+sf::Packet& operator <<(sf::Packet& packet, const std::shared_ptr<Paddle> m)
+{
+    assert(m->body != nullptr);
+    packet << float32(m->body->GetLinearVelocity().x) << float32(m->body->GetLinearVelocity().y); 
+    packet << float32(m->body->GetPosition().x) << float32(m->body->GetPosition().y);
+    packet << float32(m->body->GetAngle()) << float32(m->body->GetAngularVelocity());
+    return packet;
+}
+
+ 
+sf::Packet& operator >>(sf::Packet& packet, std::shared_ptr<Paddle> m)
+{
+    assert(m->body != nullptr);
+    float32 velocity_x;
+    float32 velocity_y;
+    float32 position_x;
+    float32 position_y;
+    float32 angle; 
+    float32 angularVelocity;
+    packet >> velocity_x >> velocity_y >> position_x >> position_y >> angle >> angularVelocity;
+    m->body->SetLinearVelocity(b2Vec2(velocity_x, velocity_y));
+    m->body->SetTransform(b2Vec2(position_x, position_y), angle);
+    m->body->SetAngularVelocity(angularVelocity);
+    return packet;
+}
+
+
 Paddle::~Paddle()
 {
     if(body != nullptr)

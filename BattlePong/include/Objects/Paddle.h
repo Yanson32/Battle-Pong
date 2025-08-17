@@ -39,6 +39,8 @@ class Paddle: public ObjectBase<sf::ConvexShape>
         void setInput(std::unique_ptr<Input> newInput);
         void move(const sf::Vector2f &direction);
         virtual void update();
+        friend sf::Packet& operator <<(sf::Packet& packet, const std::shared_ptr<Paddle> m);
+        friend sf::Packet& operator >>(sf::Packet& packet, std::shared_ptr<Paddle> m);
         ~Paddle();
     private:
         std::unique_ptr<Input> input;

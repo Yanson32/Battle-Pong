@@ -35,17 +35,17 @@ class PongFrame: public GU::Engin::Frame
         PongFrame(const sf::Vector2f &windowSize);
         std::shared_ptr<b2World> world;          ///The Box2D physics engin world object
         std::shared_ptr<DebugDraw> debugDraw;    ///The Box2D b2Draw subclass for debug drawing
-        std::unique_ptr<Ball> ball;              ///Pointer to the ball object
-        std::unique_ptr<Wall> ground;            ///Pointer to the bottem box2D object representing the ground
-        std::unique_ptr<Wall> celing;            ///Pointer to the celing Box2D object
-        std::unique_ptr<Wall> leftWall;          ///Pointer to the left wall Box2D object
-        std::unique_ptr<Wall> rightWall;         ///Pointer to the right wall Box2D object
-        std::unique_ptr<Paddle> leftPaddle;      ///Pointer to the paddle on the left side of the screen
-        std::unique_ptr<Paddle> rightPaddle;     ///Pointer to the paddle on the right side of the screen
-        std::unique_ptr<Goal> leftGoal;          ///Pointer to the goal sensor which determines is a goal has been scored on the left player
-        std::unique_ptr<Goal> rightGoal;         ///Pointer to the goal sensor which determines is a goal has been scored on the right player
-        std::unique_ptr<PaddleStop> bottomPaddleStop;
-        std::unique_ptr<PaddleStop> topPaddleStop;
+        std::shared_ptr<Ball> ball;              ///Pointer to the ball object
+        std::shared_ptr<Wall> ground;            ///Pointer to the bottem box2D object representing the ground
+        std::shared_ptr<Wall> celing;            ///Pointer to the celing Box2D object
+        std::shared_ptr<Wall> leftWall;          ///Pointer to the left wall Box2D object
+        std::shared_ptr<Wall> rightWall;         ///Pointer to the right wall Box2D object
+        std::shared_ptr<Paddle> leftPaddle;      ///Pointer to the paddle on the left side of the screen
+        std::shared_ptr<Paddle> rightPaddle;     ///Pointer to the paddle on the right side of the screen
+        std::shared_ptr<Goal> leftGoal;          ///Pointer to the goal sensor which determines is a goal has been scored on the left player
+        std::shared_ptr<Goal> rightGoal;         ///Pointer to the goal sensor which determines is a goal has been scored on the right player
+        std::shared_ptr<PaddleStop> bottomPaddleStop;
+        std::shared_ptr<PaddleStop> topPaddleStop;
         std::shared_ptr<Gui::PaddleHud> paddle1Hud;
         std::shared_ptr<Gui::PaddleHud> paddle2Hud;
         sf::Text userMessage;

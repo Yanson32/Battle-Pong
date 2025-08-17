@@ -67,6 +67,10 @@ class ObjectBase: public sf::Drawable
         void setColor(const sf::Color &newColor);
         void setVelocity(const sf::Vector2f &velocity);
         sf::Vector2f getVelocity() const;
+        template <class param>
+        friend sf::Packet& operator <<(sf::Packet& packet, const ObjectBase<param>& m);
+        template <class param>
+        friend sf::Packet& operator >>(sf::Packet& packet, ObjectBase<param>& m);
         virtual ~ObjectBase();
     protected:
         b2Body *body = nullptr;
@@ -121,6 +125,31 @@ template <class SFShape>
 sf::Vector2f ObjectBase<SFShape>::getVelocity() const
 {
     return toPixles(body->GetLinearVelocity());
+}
+
+template <class param>
+sf::Packet& operator <<(sf::Packet& packet, const ObjectBase<param>& m)
+{
+    assert(m.body != nullptr);
+    return packet << float32(m.body->getVelocity().x) << float32(m.body->getVelocity().y) << float32(m.body->getPosition().x) << float32(m.body->getPosition().y) << float32(m.body->getRotation()) << float32(m.body->getAngularVelocity());
+}
+ 
+template <class param>
+sf::Packet& operator >>(sf::Packet& packet, ObjectBase<param>& m)
+{
+    assert(m.body != nullptr);
+    float32 velocity_x;
+    float32 velocity_y;
+    float32 position_x;
+    float32 position_y;
+    float32 angle; 
+    float32 angularVelocity;
+    packet >> velocity_x >> velocity_y << position_x << position_y << angle << angularVelocity;
+    m.body->setVelocity(velocity_x, velocity_y);
+    m.body->setPosition(position_x, position_y);
+    m.body->setRotation(angle);
+    m.body->setAngularVelocity(angularVelocity);
+    return packet;
 }
 
 template <class SFShape>

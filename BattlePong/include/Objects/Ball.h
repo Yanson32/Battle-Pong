@@ -28,9 +28,10 @@
 #include <SFML/Graphics/RenderTarget.hpp>
 #include <SFML/Graphics/RenderStates.hpp>
 #include <SFML/Graphics/CircleShape.hpp>
+#include <SFML/Network/Packet.hpp>
 
 #include "ObjectBase.h"
-
+#include <memory>
 
 class b2Body;
 class b2World;
@@ -67,6 +68,8 @@ class Ball: public ObjectBase<sf::CircleShape>
         *   @brief  Destructor
         **************************************************************/
         virtual ~Ball();
+        friend sf::Packet& operator <<(sf::Packet& packet, const std::shared_ptr<Ball> m);
+        friend sf::Packet& operator >>(sf::Packet& packet, std::shared_ptr<Ball> m);
     private:
 };
 
