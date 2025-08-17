@@ -48,6 +48,8 @@ bool Server::send(std::shared_ptr<PongFrame> frame)
     sf::Packet packet;
     packet << frame->ball->getPosition().x;
     packet << frame->ball->getPosition().y;
+    packet << frame->ball->getVelocity().x;
+    packet << frame->ball->getVelocity().y;
     packet << frame->leftPaddle->getPosition().x;
     packet << frame->leftPaddle->getPosition().y;
     packet << frame->rightPaddle->getPosition().x;
@@ -59,7 +61,7 @@ bool Server::send(std::shared_ptr<PongFrame> frame)
     packet << Settings::playerPaused; 
     packet << Settings::dimensions.x;
     packet << Settings::dimensions.y;
-
+    
     if(socket.send(packet) != sf::Socket::Done)
     {
         BP_LOG_ERROR("Failed to send message");
@@ -109,6 +111,14 @@ bool Server::recieve(std::shared_ptr<PongFrame> frame)
         float ballPosition_y;
         packet >> ballPosition_x; 
         packet >> ballPosition_y; 
+
+
+        //Set Ball Velocity
+        float ballVelocity_y;
+        float ballVelocity_x;
+        packet >> ballVelocity_x;
+        packet >> ballVelocity_y;
+        //frame->ball->setVelocity({ballVelocity_x, ballVelocity_y});
 
 
         //Set left Paddle position

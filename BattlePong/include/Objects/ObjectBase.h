@@ -43,6 +43,7 @@
 
 #include <cassert>
 #include <memory>
+#include "Settings.h"
 
 template <class SFShape>
 class ObjectBase: public sf::Drawable
@@ -64,6 +65,8 @@ class ObjectBase: public sf::Drawable
         sf::Vector2f getPosition() const;
         void setPosition(const sf::Vector2f &newPosition);
         void setColor(const sf::Color &newColor);
+        void setVelocity(const sf::Vector2f &velocity);
+        sf::Vector2f getVelocity() const;
         virtual ~ObjectBase();
     protected:
         b2Body *body = nullptr;
@@ -105,12 +108,28 @@ void ObjectBase<SFShape>::draw(sf::RenderTarget &target, sf::RenderStates states
 }
 
 template <class SFShape>
+void ObjectBase<SFShape>::setVelocity(const sf::Vector2f &velocity)
+{
+    b2Vec2 b2Velocity(toMeters(velocity.x), toMeters(velocity.y));
+    b2Velocity.Normalize(); 
+    b2Velocity *= static_cast<float>(Settings::ballSpeed);
+    body->SetLinearVelocity(b2Velocity);
+
+}
+
+template <class SFShape>
+sf::Vector2f ObjectBase<SFShape>::getVelocity() const
+{
+    return toPixles(body->GetLinearVelocity());
+}
+
+template <class SFShape>
 ObjectBase<SFShape>::~ObjectBase()
 {
     assert(body != nullptr);
     assert(world != nullptr);
 
-    //dtor
+    //dto
     if(body->GetUserData())
     {
         int * temp = static_cast<int*>(body->GetUserData());

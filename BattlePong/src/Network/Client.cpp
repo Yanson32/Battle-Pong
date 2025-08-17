@@ -40,6 +40,8 @@ bool Client::send(std::shared_ptr<PongFrame> frame)
     sf::Packet packet;
     packet << frame->ball->getPosition().x;
     packet << frame->ball->getPosition().y;
+    packet << frame->ball->getVelocity().x;
+    packet << frame->ball->getVelocity().y;
     packet << frame->leftPaddle->getPosition().x;
     packet << frame->leftPaddle->getPosition().y;
     packet << frame->rightPaddle->getPosition().x;
@@ -73,6 +75,12 @@ bool Client::recieve(std::shared_ptr<PongFrame> frame)
         packet >> ballPosition_y; 
         frame->ball->setPosition({ballPosition_x, ballPosition_y});
 
+        //Set Ball velocity
+        float ballVelocity_x;
+        float ballVelocity_y;
+        packet >> ballVelocity_x;
+        packet >> ballVelocity_y;
+        frame->ball->setVelocity({ballVelocity_x, ballVelocity_y});
 
         //Set left Paddle position
         float leftPaddlePosition_x;
