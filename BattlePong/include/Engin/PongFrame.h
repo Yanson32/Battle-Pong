@@ -29,6 +29,7 @@
 #include "Box2D/ContactListener.h"
 #include "Gui/PaddleHud.h"
 #include <string>
+#include <vector>
 class PongFrame: public GU::Engin::Frame
 {
     public:
@@ -48,13 +49,13 @@ class PongFrame: public GU::Engin::Frame
         std::shared_ptr<PaddleStop> topPaddleStop;
         std::shared_ptr<Gui::PaddleHud> paddle1Hud;
         std::shared_ptr<Gui::PaddleHud> paddle2Hud;
-        sf::Text userMessage;
+        std::vector<sf::Text> userMessage;
         virtual void init();
         virtual void clean();
         virtual void handleEvents(GU::Engin::Engin& engin, const float &deltaTime);
         virtual void update(GU::Engin::Engin& engin, const float &deltaTime);
         virtual void draw(GU::Engin::Engin& engin, const float &deltaTime);
-        
+        std::uint32_t userMessageIndex = 0;
         virtual ~PongFrame();
     private:
         ContactListener contactListener;

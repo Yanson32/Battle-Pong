@@ -108,14 +108,14 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
             if(game->hostSend.server.isConnected() && count == 0)
             {
                 count = 1;
-                pongFrame->userMessage.setString("Ready!");
+                pongFrame->userMessageIndex = 4;
                 centerText(frame);
                 messageClock.restart();
                 
             }
             else if(count == 0)
             {
-                pongFrame->userMessage.setString("Waiting for player");
+                pongFrame->userMessageIndex = 6;
                 centerText(frame);
             }
         }   
@@ -138,7 +138,7 @@ void PlayState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
     }
     StateBase::draw(engin, deltaTime, frame);
     window.draw(*pongFrame->ball);
-    window.draw(pongFrame->userMessage);
+    window.draw(pongFrame->userMessage[pongFrame->userMessageIndex]);
 
 
     window.display();
@@ -181,7 +181,7 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
     {
         if(Settings::isHost)
         {
-            pongFrame->userMessage.setString("Waiting for player 2");
+            pongFrame->userMessageIndex = 7;
             centerText(frame);
             game->hostSend.server.init();
             Settings::systemPaused = true;

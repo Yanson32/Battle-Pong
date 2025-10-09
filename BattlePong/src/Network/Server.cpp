@@ -48,7 +48,7 @@ bool Server::send(std::shared_ptr<PongFrame> frame)
     sf::Packet packet;
     packet << frame->ball;
     packet << frame->leftPaddle;
-    //packet << frame->userMessage.getString().toAnsiString();
+    packet << frame->userMessageIndex;
     packet << frame->paddle1Hud->getScore();
     packet << frame->paddle2Hud->getScore();
     packet << Settings::systemPaused; 
@@ -100,8 +100,6 @@ bool Server::recieve(std::shared_ptr<PongFrame> frame)
     if(socket.receive(packet) == sf::Socket::Done)
     {
         packet >> frame->rightPaddle;
-        packet >> frame->rightPaddle;
-
 
         //Set the system pause status 
         packet >> Settings::systemPaused;

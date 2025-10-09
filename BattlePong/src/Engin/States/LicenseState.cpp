@@ -103,7 +103,7 @@ void LicenseState::draw(GU::Engin::Engin& engin, const float &deltaTime, std::sh
     }
     StateBase::draw(engin, deltaTime, frame);
     window.draw(*pongFrame->ball);
-    window.draw(pongFrame->userMessage);
+    window.draw(pongFrame->userMessage[pongFrame->userMessageIndex]);
     window.display();
 
 }

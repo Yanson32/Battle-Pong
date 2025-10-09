@@ -60,6 +60,7 @@ bool Client::recieve(std::shared_ptr<PongFrame> frame)
         
         packet >> frame->ball;
         packet >> frame->leftPaddle;
+        packet >> frame->userMessageIndex;
         packet << frame->paddle1Hud->getScore();
         packet << frame->paddle2Hud->getScore();
         packet << Settings::systemPaused; 

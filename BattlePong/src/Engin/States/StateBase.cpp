@@ -109,51 +109,57 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     }
     
     const int SECONDS = 1;
-    if(pongFrame->userMessage.getString() == "Ready!")
+
+    //Text is Ready!
+    if(pongFrame->userMessageIndex == 4)
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            pongFrame->userMessage.setString("3");
+            pongFrame->userMessageIndex = 3;
             centerText(frame);
             messageClock.restart();
+            Settings::systemPaused = true; 
             EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
         }
     }
-    else if(pongFrame->userMessage.getString() == "3")
+    else if(pongFrame->userMessageIndex == 3)
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            pongFrame->userMessage.setString("2");
+            pongFrame->userMessageIndex = 2;
             centerText(frame);
             messageClock.restart();
+            Settings::systemPaused = true; 
             EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
         }
     }
-    else if(pongFrame->userMessage.getString() == "2")
+    else if(pongFrame->userMessageIndex == 2)
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            pongFrame->userMessage.setString("1");
+            pongFrame->userMessageIndex = 1;
             centerText(frame);
             messageClock.restart();
+            Settings::systemPaused = true; 
             EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
         }
     }
-    else if(pongFrame->userMessage.getString() == "1")
+    else if(pongFrame->userMessageIndex == 1)
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            pongFrame->userMessage.setString("Go!");
+            pongFrame->userMessageIndex = 5;
             centerText(frame);
             messageClock.restart();
+            Settings::systemPaused = true; 
             EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
         }
     }
-    else if(pongFrame->userMessage.getString() == "Go!")
+    else if(pongFrame->userMessageIndex == 5)
     {
         if(messageClock.getElapsedTime().asSeconds() > SECONDS)
         {
-            pongFrame->userMessage.setString("");
+            pongFrame->userMessageIndex = 0;
             messageClock.restart();
             Settings::systemPaused = false;
         }
@@ -181,7 +187,7 @@ void StateBase::draw(GU::Engin::Engin& engin, const float &deltaTime, std::share
     window.draw(*pongFrame->leftWall);
     window.draw(*pongFrame->rightWall);
     window.draw(*pongFrame->ground);
-    window.draw(pongFrame->userMessage);
+    window.draw(pongFrame->userMessage[pongFrame->userMessageIndex]);
     #ifdef DEBUG
         window.draw(debugDraw);
     #endif
@@ -207,7 +213,7 @@ void StateBase::reset(std::shared_ptr<PongFrame> frame)
     frame->leftPaddle->setPosition(sf::Vector2f(paddleOffset - Settings::wallThickness, static_cast<float>(window.getView().getSize().y) / 2));
     frame->rightPaddle->setPosition(sf::Vector2f(static_cast<float>(window.getView().getSize().x)  - paddleOffset, static_cast<float>(window.getView().getSize().y) / 2));
     frame->rightPaddle->handleInput(*frame->ball);
-    pongFrame->userMessage.setString("Ready!");
+    pongFrame->userMessageIndex = 4;
     centerText(frame);
     messageClock.restart();
     roundClock.restart();
@@ -224,13 +230,17 @@ void StateBase::centerText(std::shared_ptr<GU::Engin::Frame> frame)
        BP_LOG_FATAL_ERROR("Pointer should not be null")
        return;
     }
-    sf::FloatRect bounds = pongFrame->userMessage.getGlobalBounds();
 
-    float originX = bounds.width / 2;
-    float originY = bounds.height / 2;
+    for(std::size_t i = 0; i < pongFrame->userMessage.size(); ++i)
+    {
+        sf::FloatRect bounds = pongFrame->userMessage[i].getGlobalBounds();
 
-    pongFrame->userMessage.setOrigin({originX, originY});
-    pongFrame->userMessage.setPosition({window.getView().getCenter().x, window.getView().getCenter().y});
+        float originX = bounds.width / 2;
+        float originY = bounds.height / 2;
+
+        pongFrame->userMessage[i].setOrigin({originX, originY});
+        pongFrame->userMessage[i].setPosition({window.getView().getCenter().x, window.getView().getCenter().y});
+    }
 
 }
 
@@ -248,8 +258,11 @@ void StateBase::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
    
     ResourceManager resourceManager;
     resourceManager.loadFont(fontId::MONOSPACE, "Monospace"); 
-    pongFrame->userMessage.setFont(resourceManager.get(fontId::MONOSPACE));
 
+    for(std::size_t i = 0; i < pongFrame->userMessage.size(); ++i)
+    {
+        pongFrame->userMessage[i].setFont(resourceManager.get(fontId::MONOSPACE));
+    }
     if(Settings::currentBackground == "Star")
         ResourceManager::loadBackground(Star_png, Star_png_len);
     else if(Settings::currentBackground == "Nebula")

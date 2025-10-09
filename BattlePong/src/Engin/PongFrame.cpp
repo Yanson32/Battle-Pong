@@ -59,11 +59,32 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     paddle2Hud->setScore(0);
 
     paddle2Hud->setPosition({650, 0});
+   
 
-    
-    userMessage.setCharacterSize(34);
-    userMessage.setPosition(sf::Vector2f(400, 300));
-    userMessage.setColor(sf::Color::Red);
+    sf::Text tempText; 
+    tempText.setCharacterSize(34);
+    tempText.setPosition(sf::Vector2f(400, 300));
+    tempText.setColor(sf::Color::Red);
+    tempText.setString("");
+    userMessage.emplace_back(tempText);
+    tempText.setString("1");
+    userMessage.emplace_back(tempText);
+    tempText.setString("2");
+    userMessage.emplace_back(tempText);
+    tempText.setString("3");
+    userMessage.emplace_back(tempText);
+    tempText.setString("Ready!");
+    userMessage.emplace_back(tempText);
+    tempText.setString("Go!");
+    userMessage.emplace_back(tempText);
+    tempText.setString("Waiting for player");
+    userMessage.emplace_back(tempText);
+    tempText.setString("Waiting for player 2");
+    userMessage.emplace_back(tempText);
+
+    for(std::size_t i = 0; i < userMessage.size(); ++i)
+    { 
+    }
 }
 
 
