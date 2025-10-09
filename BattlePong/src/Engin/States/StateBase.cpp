@@ -68,19 +68,6 @@ state(newState)
     ResourceManager::getMusic().setLoop(true);
 }
 
-bool StateBase::isBallOnScreen(std::shared_ptr<PongFrame> frame)
-{
-    BP_LOG_TRACE(__FUNCTION__)
-    sf::Vector2f pos = frame->ball->getPosition();
-    sf::FloatRect windowBounds;
-    windowBounds.top = 0;
-    windowBounds.left = 0;
-    windowBounds.width = Settings::dimensions.x;
-    windowBounds.height = Settings::dimensions.y;
-
-    return windowBounds.contains(pos);
-
-}
 
 void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::shared_ptr<GU::Engin::Frame> frame)
 {
@@ -98,10 +85,6 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     if(!Settings::playerPaused)
     {
 
-        if(!isBallOnScreen(pongFrame))
-        {
-            //reset(pongFrame);
-        }
         if(collisionClock.getElapsedTime().asSeconds() >= Settings::collisionTime)
         {
             reset(pongFrame);
