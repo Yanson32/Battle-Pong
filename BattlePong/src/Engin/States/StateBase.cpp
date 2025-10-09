@@ -85,66 +85,72 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     if(!Settings::playerPaused)
     {
 
-        if(collisionClock.getElapsedTime().asSeconds() >= Settings::collisionTime)
+        if(!Settings::multiplayer || Settings::isHost)
         {
-            reset(pongFrame);
+            if(collisionClock.getElapsedTime().asSeconds() >= Settings::collisionTime)
+            {
+                reset(pongFrame);
+            }
         }
     }
     
-    const int SECONDS = 1;
-    
-    //Text is Ready!
-    if(pongFrame->userMessageIndex == 4)
+    if(!Settings::multiplayer || Settings::isHost)
     {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        const int SECONDS = 1;
+        
+        //Text is Ready!
+        if(pongFrame->userMessageIndex == 4)
         {
-            pongFrame->userMessageIndex = 3;
-            centerText(frame);
-            messageClock.restart();
-            Settings::systemPaused = true; 
-            EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+            if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+            {
+                pongFrame->userMessageIndex = 3;
+                centerText(frame);
+                messageClock.restart();
+                Settings::systemPaused = true; 
+                EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+            }
         }
-    }
-    else if(pongFrame->userMessageIndex == 3)
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        else if(pongFrame->userMessageIndex == 3)
         {
-            pongFrame->userMessageIndex = 2;
-            centerText(frame);
-            messageClock.restart();
-            Settings::systemPaused = true; 
-            EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+            if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+            {
+                pongFrame->userMessageIndex = 2;
+                centerText(frame);
+                messageClock.restart();
+                Settings::systemPaused = true; 
+                EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+            }
         }
-    }
-    else if(pongFrame->userMessageIndex == 2)
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        else if(pongFrame->userMessageIndex == 2)
         {
-            pongFrame->userMessageIndex = 1;
-            centerText(frame);
-            messageClock.restart();
-            Settings::systemPaused = true; 
-            EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+            if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+            {
+                pongFrame->userMessageIndex = 1;
+                centerText(frame);
+                messageClock.restart();
+                Settings::systemPaused = true; 
+                EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+            }
         }
-    }
-    else if(pongFrame->userMessageIndex == 1)
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        else if(pongFrame->userMessageIndex == 1)
         {
-            pongFrame->userMessageIndex = 5;
-            centerText(frame);
-            messageClock.restart();
-            Settings::systemPaused = true; 
-            EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+            if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+            {
+                pongFrame->userMessageIndex = 5;
+                centerText(frame);
+                messageClock.restart();
+                Settings::systemPaused = true; 
+                EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL), __LINE__, __FILE__);
+            }
         }
-    }
-    else if(pongFrame->userMessageIndex == 5)
-    {
-        if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+        else if(pongFrame->userMessageIndex == 5)
         {
-            pongFrame->userMessageIndex = 0;
-            messageClock.restart();
-            Settings::systemPaused = false;
+            if(messageClock.getElapsedTime().asSeconds() > SECONDS)
+            {
+                pongFrame->userMessageIndex = 0;
+                messageClock.restart();
+                Settings::systemPaused = false;
+            }
         }
     }
 }

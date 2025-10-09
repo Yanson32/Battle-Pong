@@ -102,7 +102,7 @@ bool Server::recieve(std::shared_ptr<PongFrame> frame)
         packet >> frame->rightPaddle;
 
         //Set the system pause status 
-        packet >> Settings::systemPaused;
+        //packet >> Settings::systemPaused;
 
 
         //Set the player pause status
