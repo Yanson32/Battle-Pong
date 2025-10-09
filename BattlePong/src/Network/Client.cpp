@@ -61,39 +61,17 @@ bool Client::recieve(std::shared_ptr<PongFrame> frame)
         packet >> frame->ball;
         packet >> frame->leftPaddle;
         packet >> frame->userMessageIndex;
-        packet << frame->paddle1Hud->getScore();
-        packet << frame->paddle2Hud->getScore();
-        packet << Settings::systemPaused; 
-        packet << Settings::playerPaused; 
-        packet << Settings::dimensions.x;
-        packet << Settings::dimensions.y;
+        sf::Uint32 paddle1HudScore;
+        packet >>  paddle1HudScore;
+        frame->paddle1Hud->setScore(paddle1HudScore);
+        sf::Uint32 paddle2HudScore;
+        packet >>  paddle2HudScore;
+        frame->paddle2Hud->setScore(paddle2HudScore);
+        packet >> Settings::systemPaused; 
+        packet >> Settings::playerPaused; 
+        packet >> Settings::dimensions.x;
+        packet >> Settings::dimensions.y;
 
-/*
-        //Set user message 
-        std::string userMessage;
-        packet >> userMessage;
-        frame->userMessage.setString(userMessage);
-*/
-        //Set Player Score    
-        sf::Uint32 player1score;
-        sf::Uint32 player2score;
-        packet >> player1score; 
-        packet >> player2score; 
-        frame->paddle1Hud->setScore(player1score);   
-        frame->paddle2Hud->setScore(player2score);   
-
-
-        //Set the system pause status 
-        packet >> Settings::systemPaused;
-
-
-        //Set the player pause status
-        packet >> Settings::playerPaused;
-
-
-        //Set the resolution of the game
-        packet >> Settings::dimensions.x; 
-        packet >> Settings::dimensions.y; 
         return true;
     }
     else
