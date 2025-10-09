@@ -14,7 +14,8 @@ namespace Gui
     GeneralPanel::GeneralPanel(const StateId state):
     OptionsPanel::OptionsPanel(sf::String("General"))
     {
-
+        getContentPane()->appendSpace();
+        
         if(state == StateId::PLAY_STATE)
         {
             tgui::Label::Ptr aiSettingLabel = tgui::Label::create(toTguiString(Settings::ai));
