@@ -92,7 +92,7 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     }
     
     const int SECONDS = 1;
-
+    
     //Text is Ready!
     if(pongFrame->userMessageIndex == 4)
     {
@@ -198,8 +198,8 @@ void StateBase::reset(std::shared_ptr<PongFrame> frame)
     frame->rightPaddle->handleInput(*frame->ball);
     pongFrame->userMessageIndex = 4;
     centerText(frame);
-    //messageClock.restart();
-    //collisionClock.restart();
+    messageClock.restart();
+    collisionClock.restart();
     Settings::systemPaused = true;
 }
 
