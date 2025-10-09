@@ -49,6 +49,19 @@ namespace Gui
     {
         panleLable->setText(name.toAnsiString());
     }
+    sf::Packet& operator <<(sf::Packet& packet, const std::shared_ptr<Gui::PaddleHud> m)
+    {
+        packet << m->getScore();
+        return packet;
+    }
+     
+    sf::Packet& operator >>(sf::Packet& packet, std::shared_ptr<Gui::PaddleHud> m)
+    {
+        sf::Uint32 score;
+        packet >> score;
+        m->setScore(score);
+        return packet;
+    }
 
     PaddleHud::~PaddleHud()
     {

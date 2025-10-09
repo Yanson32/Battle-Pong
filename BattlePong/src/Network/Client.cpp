@@ -61,12 +61,8 @@ bool Client::recieve(std::shared_ptr<PongFrame> frame)
         packet >> frame->ball;
         packet >> frame->leftPaddle;
         packet >> frame->userMessageIndex;
-        sf::Uint32 paddle1HudScore;
-        packet >>  paddle1HudScore;
-        frame->paddle1Hud->setScore(paddle1HudScore);
-        sf::Uint32 paddle2HudScore;
-        packet >>  paddle2HudScore;
-        frame->paddle2Hud->setScore(paddle2HudScore);
+        packet >> frame->paddle1Hud; 
+        packet >> frame->paddle2Hud; 
         packet >> Settings::systemPaused; 
         packet >> Settings::playerPaused; 
         packet >> Settings::dimensions.x;

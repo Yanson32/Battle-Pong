@@ -39,6 +39,8 @@ namespace Gui
             sf::Uint32 m_score;
             tgui::Label::Ptr scoreLabel;
             tgui::Label::Ptr panleLable;
+            friend sf::Packet& operator <<(sf::Packet& packet, const std::shared_ptr<Gui::PaddleHud> m);
+            friend sf::Packet& operator >>(sf::Packet& packet, std::shared_ptr<Gui::PaddleHud> m);
     };
 }
 #endif // PADDLEHUD_H
