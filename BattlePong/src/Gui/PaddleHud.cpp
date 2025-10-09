@@ -27,17 +27,17 @@ namespace Gui
 
     }
 
-    void PaddleHud::setScore(const int newScore)
+    void PaddleHud::setScore(const sf::Uint32 &score)
     {
         std::stringstream ss;
-        ss << newScore;
+        ss << score;
 
         sf::String temp(ss.str());
 
         if(scoreLabel)
             scoreLabel->setText(temp.toAnsiString());
 
-        m_score = newScore;
+        m_score = score;
     }
 
     sf::Uint32 PaddleHud::getScore() const
