@@ -49,7 +49,7 @@ sf::Sound StateBase::sound;
 
 
 ContactListener StateBase::contactListener;
-sf::Clock StateBase::roundClock;
+sf::Clock StateBase::collisionClock;
 
 sf::RectangleShape StateBase::backgroundRect;
 
@@ -102,7 +102,7 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         {
             //reset(pongFrame);
         }
-        if(roundClock.getElapsedTime().asSeconds() >= 30)
+        if(collisionClock.getElapsedTime().asSeconds() >= Settings::collisionTime)
         {
             reset(pongFrame);
         }
@@ -215,8 +215,8 @@ void StateBase::reset(std::shared_ptr<PongFrame> frame)
     frame->rightPaddle->handleInput(*frame->ball);
     pongFrame->userMessageIndex = 4;
     centerText(frame);
-    messageClock.restart();
-    roundClock.restart();
+    //messageClock.restart();
+    //collisionClock.restart();
     Settings::systemPaused = true;
 }
 
@@ -562,6 +562,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         case EventId::BALL_COLLISION:
         {
             EventManager::inst().post<GU::Evt::OnPlaySound>(static_cast<int>(soundId::BALL));
+            collisionClock.restart();
         }
         break;
         case EventId::PUSH_STATE:

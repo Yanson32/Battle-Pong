@@ -126,7 +126,7 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         static sf::Sound sound;
         static ContactListener contactListener;         ///Subclass of Box2D b2ContactListener used to detect Box2D collisions
         static sf::Clock messageClock;                  ///This clock object is used to time the beginning message "Ready!, 3, 2, 1, Go!
-        static sf::Clock roundClock;                    ///This clock tracks the time for each round and resets the game when the time has expired
+        static sf::Clock collisionClock;                ///This clock resets every time the ball collides with something and will reset the game if the time elapses 
         static sf::RectangleShape backgroundRect;
 
 };

@@ -10,7 +10,6 @@
 namespace Settings
 {
     //Game settings
-    sf::String time = "30";
     sf::String ai = "Medium";
     int wallThickness = 25;
     StateId stateId = StateId::INTRO_STATE;
@@ -19,6 +18,7 @@ namespace Settings
     int paddleSpeed = 200;
     std::string logFile = "log.txt";
     sf::Color textColor = sf::Color::Red;
+    int collisionTime = 15;
 
     //Paddle 1 settings
     std::string p1Name = "";

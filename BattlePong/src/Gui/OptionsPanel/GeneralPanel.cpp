@@ -14,28 +14,6 @@ namespace Gui
     GeneralPanel::GeneralPanel(const StateId state):
     OptionsPanel::OptionsPanel(sf::String("General"))
     {
-        getContentPane()->appendSpace();
-
-        //Create lable instead of combobox when the user is playing the game
-        if(state == StateId::PLAY_STATE)
-        {
-            tgui::Label::Ptr tLimitLabel = tgui::Label::create(toTguiString(Settings::time));
-            getContentPane()->append("Time Limit", tLimitLabel);
-        }
-        else
-        {
-            comboBox = tgui::ComboBox::create();
-            comboBox->addItem("30");
-            comboBox->addItem("45");
-            comboBox->addItem("60");
-            comboBox->setSelectedItem(toTguiString(Settings::time));
-            comboBox->onItemSelect([&](){
-                Settings::time  = comboBox->getSelectedItem().toStdString();
-                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                prefMan.write("ResetTime", Settings::time.toAnsiString());
-            });
-            getContentPane()->append("Time Limit", comboBox);
-        }
 
         if(state == StateId::PLAY_STATE)
         {

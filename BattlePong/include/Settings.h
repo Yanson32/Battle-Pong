@@ -40,7 +40,6 @@ namespace Settings
 {
     //Game settings
     const sf::String VERSION = "0.0.0.1";
-    extern sf::String time;
     extern sf::String ai;
     extern int wallThickness;
     extern StateId stateId;
@@ -49,7 +48,7 @@ namespace Settings
     extern int paddleSpeed;
     extern std::string logFile;
     extern sf::Color textColor;
-
+    extern int collisionTime;
     //Paddle 1 settigns
     extern std::string p1Name;
     extern int p1Score;

@@ -17,7 +17,6 @@ void WriteSettings::read()
     GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
 
     //Load game settings
-    Settings::time = prefMan.read("ResetTime", Settings::time.toAnsiString()).toStdString();
     Settings::ai = prefMan.read("Difficulty", Settings::ai.toAnsiString()).toStdString();
     Settings::currentTheme = prefMan.read("Theme", Settings::currentTheme);
     Settings::currentBackground = prefMan.read("Background", Settings::currentBackground);
