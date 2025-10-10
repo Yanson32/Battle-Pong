@@ -5,7 +5,7 @@
 #include <GameUtilities/Event/Events/Widget/OnItemSelected.h>
 #include "Gui/GuiId.h"
 #include <sstream>
-
+#include "Log.h"
 
 namespace Gui
 {
@@ -64,6 +64,7 @@ namespace Gui
             ss >> Settings::dimensions.x;
             ss >> trash;
             ss >> Settings::dimensions.y;
+            BP_LOG_WARNING("Resolution changed the system may need to be restarted");
             
         });
         getContentPane()->append("Resolution", resolutionCombo);
