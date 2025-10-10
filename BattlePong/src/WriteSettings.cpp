@@ -17,6 +17,8 @@ void WriteSettings::read()
     GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
 
     //Load game settings
+    Settings::dimensions.x = prefMan.read("Dimension_x", Settings::dimensions.x);
+    Settings::dimensions.y = prefMan.read("Dimension_y", Settings::dimensions.y);
     Settings::ai = prefMan.read("Difficulty", Settings::ai.toAnsiString()).toStdString();
     Settings::currentTheme = prefMan.read("Theme", Settings::currentTheme);
     Settings::currentBackground = prefMan.read("Background", Settings::currentBackground);
@@ -71,6 +73,9 @@ void WriteSettings::write()
 {
     BP_LOG_TRACE(__FUNCTION__);
     GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
+    
+    prefMan.write("Dimension_x", Settings::dimensions.x);
+    prefMan.write("Dimension_y", Settings::dimensions.y);
 
     //Write keyboard preferences
     prefMan.write("KeyboardControlUp", toKey(Settings::keyboardControlUp));

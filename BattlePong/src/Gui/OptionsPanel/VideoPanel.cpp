@@ -38,7 +38,6 @@ namespace Gui
 
         //Resolution
         resolutionCombo = tgui::ComboBox::create();
-        resolutionCombo->addItem("Fulll Screen");
 
         std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
         for (std::size_t i = 0; i < modes.size(); ++i)
@@ -46,15 +45,26 @@ namespace Gui
             sf::VideoMode mode = modes[i];
             std::stringstream ss;
             ss << mode.width;
-            ss << "x";
+            ss << " x ";
             ss << mode.height;
 
             resolutionCombo->addItem(ss.str());
         }
 
-        //resolutionCombo->setSelectedItem(Settings::dimension);
+        std::stringstream dss;
+        dss << Settings::dimensions.x;
+        dss << " x ";
+        dss << Settings::dimensions.y;
+
+        resolutionCombo->setSelectedItem(dss.str());
+    
         resolutionCombo->onItemSelect([&](){
-            std::string theme = resolutionCombo->getSelectedItem().toStdString();
+            std::stringstream ss(resolutionCombo->getSelectedItem().toStdString());
+            std::string trash;
+            ss >> Settings::dimensions.x;
+            ss >> trash;
+            ss >> Settings::dimensions.y;
+            
         });
         getContentPane()->append("Resolution", resolutionCombo);
     }

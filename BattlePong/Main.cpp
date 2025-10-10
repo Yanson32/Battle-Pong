@@ -93,6 +93,14 @@ int main(int argc, char* argv[])
 
     //Enable random numbers
     srand (time(NULL));
+    
+    //Set the path to the preferences file
+    Settings::preferencesFile = Settings::GAME_CONFIG_DIR;
+    if(Settings::preferencesFile.back() != '/')
+        Settings::preferencesFile  += "/preferences.txt";
+
+    //Write settings on game close
+    WriteSettings write;
 
     //Create the games window
     sf::RenderWindow window(sf::VideoMode(Settings::dimensions.x, Settings::dimensions.y),Settings::title);
@@ -104,19 +112,10 @@ int main(int argc, char* argv[])
         BP_LOG_ERROR("Unable to load game icon");
     }
     window.setIcon(gameIcon.getSize().x, gameIcon.getSize().y, gameIcon.getPixelsPtr());
-
-
     
     //Setup the path to resource folder for the resource management system
     if(!std::filesystem::exists(ResourceManager::getPath()))
         ResourceManager::setPath(Settings::GAME_CONFIG_DIR);
-
-
-    //Set the path to the preferences file
-    Settings::preferencesFile = Settings::GAME_CONFIG_DIR;
-    if(Settings::preferencesFile.back() != '/')
-        Settings::preferencesFile  += "/preferences.txt";
-
 
     //Load tgui theme
     ResourceManager::loadTheme(Settings::currentTheme);
@@ -126,6 +125,7 @@ int main(int argc, char* argv[])
     //Set the application icon
     sf::Image icon = ResourceManager::get(textureId::ICON).copyToImage();
     window.setIcon(icon.getSize().x, icon.getSize().y, icon.getPixelsPtr());
+    
 
     //Create tgui object
     tgui::Gui gui;
@@ -154,9 +154,6 @@ int main(int argc, char* argv[])
     //WriteLog will write all logs to the log file when exiting the program
     WriteLog writeLog(engin);
     
-    //Write settings on game close
-    WriteSettings write;
-
     //Create first GameState instance
     engin.push<IntroState>(frame, engin, window, debugDraw, gui);
 
