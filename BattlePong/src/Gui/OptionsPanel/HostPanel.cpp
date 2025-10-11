@@ -45,6 +45,7 @@ namespace Gui
         //Create host button
         hostButton = tgui::Button::create("Host");
         hostButton->onPress([](){
+            Settings::isClient = false;
             Settings::isHost = true;
             Settings::multiplayer = true;
             EventManager::inst().post<GU::Evt::OnClick>(Gui::id::START);

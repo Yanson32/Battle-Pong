@@ -96,7 +96,8 @@ namespace Settings
     //Credits
     int creditsTime = 5;
 
-    bool isHost = true;
+    bool isHost = false;
+    bool isClient = false;
     bool multiplayer = false;
 
     sf::Color leftPaddleColor = sf::Color::Red;

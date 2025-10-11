@@ -122,6 +122,7 @@ namespace Settings
     extern int creditsTime;
     
     extern bool isHost;
+    extern bool isClient;
     extern bool multiplayer;
 
     extern sf::Color leftPaddleColor;

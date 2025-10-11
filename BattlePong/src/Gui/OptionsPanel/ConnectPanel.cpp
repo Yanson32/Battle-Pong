@@ -42,6 +42,7 @@ namespace Gui
         connectButton = tgui::Button::create("Connect");
         connectButton->onPress([this]()
         {
+            Settings::isClient = true;
             Settings::isHost = false;
             Settings::multiplayer = true;
             EventManager::inst().post<GU::Evt::OnClick>(Gui::id::START);
