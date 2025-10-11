@@ -30,8 +30,6 @@ namespace Gui
             aiCombo->setSelectedItem(toTguiString(Settings::ai));
             aiCombo->onItemSelect([&](){
                 Settings::ai = aiCombo->getSelectedItem().toStdString();
-                GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                prefMan.write("Difficulty", Settings::ai.toAnsiString());
             });
             getContentPane()->append("Ai", aiCombo);
         }

@@ -12,7 +12,6 @@
 #include <GameUtilities/Event/Events/Widget/OnTextChanged.h>
 #include <GameUtilities/Log/LogEntry.h>
 #include <GameUtilities/Log/Component/Components.h>
-#include <GameUtilities/Core/PreferencesManager.h>
 #include "Objects/Goal.h"
 #include <array>
 #include "Resources/ResourceManager.h"
@@ -454,65 +453,47 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             std::shared_ptr<GU::Evt::OnTextChanged> temp =  std::dynamic_pointer_cast<GU::Evt::OnTextChanged>(event);
             if(temp)
             {
-                
                 switch(temp->m_widgetId)
                 {
 
                     case Gui::id::VELOCITY_ITERATIONS:
                     {
                         Settings::velocityIterations = int(temp->m_text[0] - '0'); 
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("VelocityIterations", Settings::velocityIterations);
                     } 
                     break;
                     case Gui::id::POSITION_ITERATIONS:
                     {
                         Settings::positionIterations = int(temp->m_text[0] - '0'); 
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("PositionIterations", Settings::positionIterations);
                     } 
                     break;
                     case Gui::id::FRAME_RATE:
                     {
                         Settings::frameRate = std::stoi(temp->m_text.c_str());
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("FrameRate", Settings::frameRate);
                     } 
                     break;
                     case Gui::id::BALL_SPEED:
                     {
                         Settings::ballSpeed = std::stoi(temp->m_text.c_str());
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("BallSpeed", Settings::ballSpeed);
                     } 
                     break;
                     case Gui::id::PADDLE_SPEED:
                     {
                         Settings::paddleSpeed = std::stoi(temp->m_text.c_str());
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("PaddleSpeed", Settings::paddleSpeed);
                     } 
                     break;
                     case Gui::id::WALL_THICKNESS:
                     {
                         Settings::wallThickness = std::stoi(temp->m_text.c_str());
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("WallThickness", Settings::wallThickness);
                     } 
                     break;
                     case Gui::id::BALL_RADIUS:
                     {
                         Settings::ballRadius = std::stoi(temp->m_text.c_str());
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("BallRadius", Settings::ballRadius);
                     } 
                     break;
                     case Gui::id::PORT:
                     {
-                        
                         Settings::port = std::stoi(temp->m_text.c_str());
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("Port", Settings::port);
                     } 
                     break;
                 }
@@ -598,15 +579,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         {
                             debugDraw.AppendFlags(b2Draw::e_aabbBit);
                             Settings::b2aabb = true;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2aabb", Settings::b2aabb);
                         }
                         else
                         {
                             debugDraw.ClearFlags(b2Draw::e_aabbBit);
                             Settings::b2aabb = false;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2aabb", Settings::b2aabb);
                         }
                     }
                     break;
@@ -616,15 +593,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         {
                             debugDraw.AppendFlags(b2Draw::e_shapeBit);
                             Settings::b2shapes = true;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2shapes", Settings::b2shapes);
                         }
                         else
                         {
                             debugDraw.ClearFlags(b2Draw::e_shapeBit);
                             Settings::b2shapes = false;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2shapes", Settings::b2shapes);
                         }
                     } 
                     break;
@@ -634,15 +607,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         {
                             debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
                             Settings::b2centerOfMass = true;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
                         }
                         else
                         {
                             debugDraw.ClearFlags(b2Draw::e_centerOfMassBit);
                             Settings::b2centerOfMass = false;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
                         }
                     } 
                     break;
@@ -652,15 +621,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         {
                             debugDraw.AppendFlags(b2Draw::e_jointBit);
                             Settings::b2joints = true;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2joints", Settings::b2joints);
                         }
                         else
                         {
                             debugDraw.ClearFlags(b2Draw::e_jointBit);
                             Settings::b2joints = false;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2joints", Settings::b2joints);
                         }
                     } 
                     break;
@@ -670,15 +635,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         {
                             debugDraw.AppendFlags(b2Draw::e_pairBit);
                             Settings::b2pair = true;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2pair", Settings::b2pair);
                         }
                         else
                         {
                             debugDraw.ClearFlags(b2Draw::e_pairBit);
                             Settings::b2pair = false;
-                            GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                            prefMan.write("b2pair", Settings::b2pair);
                         }
                     } 
                     break;
@@ -705,15 +666,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Gui::id::SOUND_EFFECTS:
                     {
                         sound.setVolume(Settings::soundVolume);
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("SoundVolume", Settings::soundVolume);
                     } 
                     break;
                     case Gui::id::MUSIC:
 			        { 
                         ResourceManager::getMusic().setVolume(Settings::musicVolume);
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("MusicVolume", Settings::musicVolume);
                     } 
                     break;
                 };
@@ -747,8 +704,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     {
                         ResourceManager::loadTheme(Settings::themes[temp->m_index]);
                         Settings::currentTheme = Settings::themes[temp->m_index];
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("Theme", Settings::currentTheme);
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::VideoPanel());
                         std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
@@ -769,8 +724,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         
                         backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
                         backgroundRect.setTexture(&ResourceManager::get(textureId::BACKGROUND));
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("Background", Settings::currentBackground);
 
                         gui.removeAllWidgets();
                         tgui::Panel::Ptr cust(new Gui::VideoPanel());
@@ -784,8 +737,6 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         ResourceManager::loadMusic(Settings::songList[temp->m_index]);
                         ResourceManager::getMusic().play();
                         Settings::currentSong = temp->m_index;
-                        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
-                        prefMan.write("Music", Settings::currentSong);
                     } 
                     break;
                 }

@@ -74,8 +74,20 @@ void WriteSettings::write()
     BP_LOG_TRACE(__FUNCTION__);
     GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
     
+    //Write game settings
     prefMan.write("Dimension_x", Settings::dimensions.x);
     prefMan.write("Dimension_y", Settings::dimensions.y);
+    prefMan.write("Difficulty", Settings::ai.toAnsiString());
+    prefMan.write("Theme", Settings::currentTheme);
+    prefMan.write("Background", Settings::currentBackground);
+    
+    #ifdef  DEBUG
+        prefMan.write("FrameRate", Settings::frameRate);
+        prefMan.write("BallSpeed", Settings::ballSpeed);
+        prefMan.write("PaddleSpeed", Settings::paddleSpeed);
+        prefMan.write("WallThickness", Settings::wallThickness);
+        prefMan.write("BallRadius", Settings::ballRadius);
+    #endif
 
     //Write keyboard preferences
     prefMan.write("KeyboardControlUp", toKey(Settings::keyboardControlUp));
@@ -85,6 +97,33 @@ void WriteSettings::write()
     prefMan.write("KeyboardControlMenu", toKey(Settings::keyboardControlMenu));
     prefMan.write("KeyboardControlNext", toKey(Settings::keyboardControlNext));
     prefMan.write("KeyboardControlSelect", toKey(Settings::keyboardControlSelect));
+                        
+    //Write joystick preferences
+    prefMan.write("PlayerJoystickControlMenu", Settings::joystickControlMenu);
+    prefMan.write("PlayerJoystickControlNext", Settings::joystickControlNext);
+    prefMan.write("PlayerJoystickControlSelect", Settings::joystickControlSelect);
+
+    //Write Box2D Settings
+    #ifdef  DEBUG
+        prefMan.write("b2aabb", Settings::b2aabb);
+        prefMan.write("b2shapes", Settings::b2shapes);
+        prefMan.write("b2centerOfMass", Settings::b2centerOfMass);
+        prefMan.write("b2joints", Settings::b2joints);
+        prefMan.write("b2pair", Settings::b2pair);
+        prefMan.write("VelocityIterations", Settings::velocityIterations);
+        prefMan.write("PositionIterations", Settings::positionIterations);
+    #endif
+    
+    //Sound settings
+    prefMan.write("MusicVolume", Settings::musicVolume);
+    prefMan.write("SoundVolume", Settings::soundVolume);
+    prefMan.write("Music", Settings::currentSong);
+            
+    //Network settings
+    prefMan.write("Port", Settings::port);
+    
+    //Load log settings
+    prefMan.write("LogSeverity", Settings::logSeverity);
 }
 
 WriteSettings::~WriteSettings()

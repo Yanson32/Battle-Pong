@@ -7,7 +7,6 @@
 #include <GameUtilities/Event/Events/Widget/OnCheck.h>
 #include <GameUtilities/Event/Events/Widget/OnTextChanged.h>
 #include <GameUtilities/Log/LogType.h>
-#include <GameUtilities/Core/PreferencesManager.h>
 #include "Settings.h"
 #include <iostream>
 #include <string>
@@ -263,46 +262,37 @@ namespace Gui
     {
         GU::Core::String data = this->logLevelComboBox->getSelectedItem().toStdString();
         //Load user preferences
-        GU::Core::PreferencesManager prefMan(Settings::preferencesFile);
 
         if(data == GU::Core::String("Fatal Error"))
         {
-            prefMan.write("LogSeverity", static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR));
             Settings::logSeverity = static_cast<int>(GU::Log::LogType::GU_FATAL_ERROR);
         }
         else if(data == GU::Core::String("Error"))
         {
-            prefMan.write("LogSeverity", static_cast<int>(GU::Log::LogType::GU_ERROR));
             Settings::logSeverity = static_cast<int>(GU::Log::LogType::GU_ERROR);
         }
         else if(data == GU::Core::String("Warning"))
         {
-            prefMan.write("LogSeverity", static_cast<int>(GU::Log::LogType::GU_WARNING));
             Settings::logSeverity = static_cast<int>(GU::Log::LogType::GU_WARNING);
         }
         else if(data == GU::Core::String("Message"))
         {
-            prefMan.write("LogSeverity", static_cast<int>(GU::Log::LogType::GU_MESSAGE));
             Settings::logSeverity = static_cast<int>(GU::Log::LogType::GU_MESSAGE);
         }
         else if(data == GU::Core::String("Verbose"))
         {
-            prefMan.write("LogSeverity", static_cast<int>(GU::Log::LogType::GU_VERBOSE));
             Settings::logSeverity = static_cast<int>(GU::Log::LogType::GU_VERBOSE);
         }
         else if(data == GU::Core::String("Status"))
         {
-            prefMan.write("LogSeverity", static_cast<int>(GU::Log::LogType::GU_STATUS));
             Settings::logSeverity = static_cast<int>(GU::Log::LogType::GU_STATUS);
         }
         else if(data == GU::Core::String("Debug"))
         {
-            prefMan.write("LogSeverity", static_cast<int>(GU::Log::LogType::GU_DEBUG));
             Settings::logSeverity = static_cast<int>(GU::Log::LogType::GU_DEBUG);
         }
         else if(data == GU::Core::String("Trace"))
         {
-            prefMan.write("LogSeverity", static_cast<int>(GU::Log::LogType::GU_TRACE));
             Settings::logSeverity = static_cast<int>(GU::Log::LogType::GU_TRACE);
         }
     }
