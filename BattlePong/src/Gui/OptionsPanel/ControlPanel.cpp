@@ -108,7 +108,7 @@ namespace Gui
 
         //Create select button editbox
         selectComboBox = tgui::ComboBox::create();
-          selectComboBox->setChangeItemOnScroll(true);
+        selectComboBox->setChangeItemOnScroll(true);
         for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
         {
             sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
@@ -118,6 +118,19 @@ namespace Gui
         selectComboBox->setSelectedItem(Settings::keyboardControlSelect);
         selectComboBox->onItemSelect(&ControlPanel::onSelectCombo, this);
         getContentPane()->append("Select", selectComboBox);
+
+        //Create pause button editbox
+        pauseComboBox = tgui::ComboBox::create();
+        pauseComboBox->setChangeItemOnScroll(true);
+        for(int i = 0; i < sf::Keyboard::Key::KeyCount; ++i)
+        {
+            sf::String temp = toString(static_cast<sf::Keyboard::Key>(i));
+            if(temp != "Error")
+                pauseComboBox->addItem(tgui::String(temp));
+        }
+        pauseComboBox->setSelectedItem(Settings::keyboardControlPause);
+        pauseComboBox->onItemSelect(&ControlPanel::onPauseCombo, this);
+        getContentPane()->append("Pause", pauseComboBox);
 
 
         //Create joystick section
@@ -250,6 +263,15 @@ namespace Gui
       Settings::keyboardControlSelect = this->selectComboBox->getSelectedItem().toStdString();
     }
 
+    
+    /*******************************************************************
+    * @brief: Event handler for pause combo box. This event handler will
+    *         set the appropriate setting
+    *******************************************************************/
+    void ControlPanel::onPauseCombo()
+    {
+      Settings::keyboardControlPause = this->pauseComboBox->getSelectedItem().toStdString();
+    }
 
     /*******************************************************************
     * @brief: Event handler for joystick menu combo box. This event handler will
@@ -257,7 +279,7 @@ namespace Gui
     *******************************************************************/
     void ControlPanel::onJoystickMenuCombo()
     {
-      Settings::joystickControlMenu = this->joystickMenuComboBox->getSelectedItem().toStdString();
+        Settings::joystickControlMenu = this->joystickMenuComboBox->getSelectedItem().toStdString();
     }
 
 

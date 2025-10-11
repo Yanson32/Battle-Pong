@@ -252,7 +252,12 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
                         gui.remove(widget);
                     }
                 }
-                    break;
+                break;
+                case sf::Keyboard::P:
+                {
+                    Settings::playerPaused = !Settings::playerPaused;
+                }
+                break;
                 default:
                     break;
             }

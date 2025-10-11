@@ -93,6 +93,13 @@ namespace Gui
             *******************************************************************/
             void onSelectCombo();
 
+            
+            /*******************************************************************
+            * @brief: Event handler for pause combo box. This event handler will
+            *         set the appropriate setting
+            *******************************************************************/
+            void onPauseCombo();
+
 
             /*******************************************************************
             * @brief: Event handler for joystick menu combo box. This event handler will
@@ -125,6 +132,7 @@ namespace Gui
             tgui::ComboBox::Ptr menuComboBox;
             tgui::ComboBox::Ptr nextComboBox;
             tgui::ComboBox::Ptr selectComboBox;
+            tgui::ComboBox::Ptr pauseComboBox;
 
             //Joystick
             tgui::ComboBox::Ptr joystickMenuComboBox = nullptr;

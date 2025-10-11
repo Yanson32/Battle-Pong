@@ -80,6 +80,7 @@ namespace Settings
     extern std::string keyboardControlMenu;
     extern std::string keyboardControlNext;
     extern std::string keyboardControlSelect;
+    extern std::string keyboardControlPause;
 
     //Joystick buttons
     extern std::string joystickControlMenu;

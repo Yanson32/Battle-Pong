@@ -37,6 +37,7 @@ namespace Settings
     std::string keyboardControlMenu = "Escape";
     std::string keyboardControlNext = "Tab";
     std::string keyboardControlSelect = "Enter";
+    std::string keyboardControlPause = "P";
 
     //Joystick buttons
     std::string joystickControlMenu;
