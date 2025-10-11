@@ -61,7 +61,8 @@ namespace Gui
         BALL_RADIUS,
         MUSIC_COMBO,
         PORT,
-        LICENSE
+        LICENSE,
+        RESET
     };
 }
 #endif 

@@ -176,7 +176,8 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
     ResourceManager::loadSound(soundId::BALL, "BallCollision.ogg");
 
 
-    reset(pongFrame);
+    EventManager::inst().post<GU::Evt::OnClick>(Gui::id::RESET);
+    //reset(pongFrame);
     if(Settings::multiplayer)
     {
         if(Settings::isHost)
@@ -220,7 +221,7 @@ void PlayState::clean(std::shared_ptr<GU::Engin::Frame> frame)
     if(ResourceManager::isLoaded(soundId::BALL))
         ResourceManager::remove(soundId::BALL);
 
-    reset(pongFrame);
+    EventManager::inst().post<GU::Evt::OnClick>(Gui::id::RESET);
 }
 
 void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame)

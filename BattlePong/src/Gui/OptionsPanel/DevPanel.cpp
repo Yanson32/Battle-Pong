@@ -6,6 +6,7 @@
 #include "Gui/GuiId.h"
 #include <GameUtilities/Event/Events/Widget/OnCheck.h>
 #include <GameUtilities/Event/Events/Widget/OnTextChanged.h>
+#include <GameUtilities/Event/Events/Mouse/OnClick.h>
 #include <GameUtilities/Log/LogType.h>
 #include "Settings.h"
 #include <iostream>
@@ -19,7 +20,15 @@ namespace Gui
         //Create header for the game section
         getContentPane()->appendSpace();
         getContentPane()->appendHeader("Game");
-        
+       
+        //Create reset button 
+        resetButton = tgui::Button::create();
+        resetButton->setText("Reset");
+        resetButton->onPress([&]()
+        {
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::RESET);
+        });
+        getContentPane()->append("Reset", resetButton);
 
         //Create frame rate editbox 
         frameRateBox = tgui::EditBox::create();
@@ -244,6 +253,7 @@ namespace Gui
 
         getContentPane()->append("Severity", logLevelComboBox);
         logLevelComboBox->onItemSelect(&DevPanel::onLogLevel, this);
+
     }
 
     void DevPanel::init(const int32 flags, const int &width, const int &height)

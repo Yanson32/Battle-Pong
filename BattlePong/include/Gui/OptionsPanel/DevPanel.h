@@ -48,6 +48,7 @@ namespace Gui
             tgui::EditBox::Ptr ballRadiusBox;
             tgui::CheckBox::Ptr pause;
             tgui::CheckBox::Ptr systemPause;
+            tgui::Button::Ptr resetButton;
             void onLogLevel();
     };
 }

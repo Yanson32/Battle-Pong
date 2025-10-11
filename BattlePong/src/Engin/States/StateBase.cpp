@@ -88,7 +88,7 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
         {
             if(collisionClock.getElapsedTime().asSeconds() >= Settings::collisionTime)
             {
-                reset(pongFrame);
+                EventManager::inst().post<GU::Evt::OnClick>(Gui::id::RESET);
             }
         }
     }
@@ -444,6 +444,11 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         game->quit();
                     } 
                     break;
+                    case Gui::id::RESET:
+                    {
+                        reset(pongFrame);
+                    }
+                    break;
                 }
             }
         }
@@ -505,7 +510,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             int currentScore = Settings::p1Score;
 	        Settings::p1Score = currentScore + 1;
             pongFrame->paddle1Hud->setScore(currentScore + 1);
-            reset(pongFrame);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::RESET);
         }
         break;
         case EventId::RIGHT_GOAL_COLLISION:
@@ -513,7 +518,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
             int currentScore = Settings::p2Score;
 	        Settings::p2Score = currentScore + 1;
             pongFrame->paddle2Hud->setScore(currentScore + 1);
-            reset(pongFrame);
+            EventManager::inst().post<GU::Evt::OnClick>(Gui::id::RESET);
         }
         break;
         case EventId::PLAY_SOUND:

@@ -189,7 +189,8 @@ void IntroState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame>
     pongFrame->leftPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->leftPaddle)));
     pongFrame->rightPaddle->setInput(std::unique_ptr<Input>(new AI(*pongFrame->rightPaddle)));
 
-    reset(pongFrame);
+    EventManager::inst().post<GU::Evt::OnClick>(Gui::id::RESET);
+    //reset(pongFrame);
 }
 
 void IntroState::clean(std::shared_ptr<GU::Engin::Frame> frame)
