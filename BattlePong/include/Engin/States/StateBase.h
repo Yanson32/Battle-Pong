@@ -128,7 +128,6 @@ class StateBase: public GU::Engin::GameState, public GU::Evt::EventHandler
         static sf::Clock messageClock;                  ///This clock object is used to time the beginning message "Ready!, 3, 2, 1, Go!
         static sf::Clock collisionClock;                ///This clock resets every time the ball collides with something and will reset the game if the time elapses 
         static sf::RectangleShape backgroundRect;
-
 };
 
 #endif // STATEBASE_H

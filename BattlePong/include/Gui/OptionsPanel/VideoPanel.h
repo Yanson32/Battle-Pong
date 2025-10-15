@@ -28,13 +28,13 @@ namespace Gui
             void init(const int &width, const int &height);
             
             tgui::Label::Ptr themeLabel; 
-            tgui::ComboBox::Ptr themeCombo;
+            tgui::ComboBox::Ptr themeComboBox;
             
             tgui::Label::Ptr backgroundLable;
-            tgui::ComboBox::Ptr backgroundCombo;
+            tgui::ComboBox::Ptr backgroundComboBox;
             
             tgui::Label::Ptr resolutionLable;
-            tgui::ComboBox::Ptr resolutionCombo;
+            tgui::ComboBox::Ptr resolutionComboBox;
             
             virtual ~VideoPanel();
     };

@@ -62,7 +62,8 @@ namespace Gui
         MUSIC_COMBO,
         PORT,
         LICENSE,
-        RESET
+        RESET,
+        RESOLUTION
     };
 }
 #endif 

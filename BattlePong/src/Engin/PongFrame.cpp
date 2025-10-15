@@ -87,12 +87,10 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     }
 }
 
-
 void PongFrame::init()
 {
 
 }
-
 
 void PongFrame::clean()
 {

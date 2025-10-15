@@ -39,6 +39,7 @@ class Game: public GU::Engin::Engin, public GU::Evt::EventManager
 
         NetMan hostSend;
         NetMan hostReceive;
+        bool m_resolution = false;
     private:
         bool m_pop = false;
 };

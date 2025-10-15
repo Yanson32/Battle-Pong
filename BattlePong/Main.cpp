@@ -135,18 +135,18 @@ int main(int argc, char* argv[])
     std::shared_ptr<PongFrame> frame(new PongFrame(window.getView().getSize()));
 
     //Set the debug draw class
-    DebugDraw debugDraw(*frame->world.get());
-    frame->world->SetDebugDraw(&debugDraw);
+    DebugDraw* debugDraw = new DebugDraw(*frame->world.get());
+    frame->world->SetDebugDraw(debugDraw);
     if(Settings::b2aabb)
-        debugDraw.AppendFlags(b2Draw::e_aabbBit);
+        debugDraw->AppendFlags(b2Draw::e_aabbBit);
     if(Settings::b2shapes)
-        debugDraw.AppendFlags(b2Draw::e_shapeBit);
+        debugDraw->AppendFlags(b2Draw::e_shapeBit);
     if(Settings::b2centerOfMass)
-        debugDraw.AppendFlags(b2Draw::e_centerOfMassBit);
+        debugDraw->AppendFlags(b2Draw::e_centerOfMassBit);
     if(Settings::b2joints)
-        debugDraw.AppendFlags(b2Draw::e_jointBit);
+        debugDraw->AppendFlags(b2Draw::e_jointBit);
     if(Settings::b2pair)
-        debugDraw.AppendFlags(b2Draw::e_pairBit);
+        debugDraw->AppendFlags(b2Draw::e_pairBit);
 
     //Create game engin
     Game engin;
@@ -155,7 +155,7 @@ int main(int argc, char* argv[])
     WriteLog writeLog(engin);
     
     //Create first GameState instance
-    engin.push<IntroState>(frame, engin, window, debugDraw, gui);
+    engin.push<IntroState>(frame, engin, window, *debugDraw, gui);
 
     //Set the song 
     EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::MUSIC_COMBO, Settings::currentSong);
@@ -173,7 +173,8 @@ int main(int argc, char* argv[])
 
 	          //Handle any events
 	          engin.handleEvents(deltaTime.asSeconds(), frame);
-              
+    
+                          
               //If we need to pop a state off the stack we need to do it
               //When the state is not in use or we will destroy the stack.
               if(engin.getPop())
@@ -181,6 +182,27 @@ int main(int argc, char* argv[])
                 engin.setPop(false);
                 engin.pop(frame);
               }
+
+            if(engin.m_resolution)
+            {
+                engin.m_resolution = false;
+                window.create({Settings::dimensions.x, Settings::dimensions.y}, Settings::title);
+                frame.reset(new PongFrame(window.getView().getSize()));
+                debugDraw  = new DebugDraw(*frame->world.get());
+                frame->world->SetDebugDraw(debugDraw);
+                if(Settings::b2aabb)
+                    debugDraw->AppendFlags(b2Draw::e_aabbBit);
+                if(Settings::b2shapes)
+                    debugDraw->AppendFlags(b2Draw::e_shapeBit);
+                if(Settings::b2centerOfMass)
+                    debugDraw->AppendFlags(b2Draw::e_centerOfMassBit);
+                if(Settings::b2joints)
+                    debugDraw->AppendFlags(b2Draw::e_jointBit);
+                if(Settings::b2pair)
+                debugDraw->AppendFlags(b2Draw::e_pairBit);
+                engin.changeState<IntroState>(frame, engin, window, *debugDraw, gui);
+            }
+
 
 	        //Update the game logic
 	        while(accumulator.asSeconds() >= deltaTime.asSeconds())

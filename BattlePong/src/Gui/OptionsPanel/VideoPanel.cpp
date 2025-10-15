@@ -15,29 +15,31 @@ namespace Gui
         getContentPane()->appendSpace();
 
         //Theme selection box
-        themeCombo = tgui::ComboBox::create();
+        themeComboBox= tgui::ComboBox::create();
         for(auto &element: Settings::themes)
-            themeCombo->addItem(element);
+            themeComboBox->addItem(element);
         
-        themeCombo->setSelectedItem(Settings::currentTheme);
-        themeCombo->onItemSelect([&](){
-            EventManager::inst().post<GU::Evt::OnItemSelected>(themeCombo, Gui::id::THEME, themeCombo->getSelectedItemIndex());
+        themeComboBox->setSelectedItem(Settings::currentTheme);
+        themeComboBox->setChangeItemOnScroll(true);
+        themeComboBox->onItemSelect([&](){
+            EventManager::inst().post<GU::Evt::OnItemSelected>(themeComboBox, Gui::id::THEME, themeComboBox->getSelectedItemIndex());
         });
-        getContentPane()->append("Theme", themeCombo);
+        getContentPane()->append("Theme", themeComboBox);
 
         //Background
-        backgroundCombo = tgui::ComboBox::create();
+        backgroundComboBox = tgui::ComboBox::create();
         for(auto &element : Settings::backgrounds)
-            backgroundCombo->addItem(element);
-        backgroundCombo->setSelectedItem(Settings::currentBackground);
-        backgroundCombo->onItemSelect([&]()
+            backgroundComboBox->addItem(element);
+        backgroundComboBox->setSelectedItem(Settings::currentBackground);
+        backgroundComboBox->setChangeItemOnScroll(true);
+        backgroundComboBox->onItemSelect([&]()
         {
-            EventManager::inst().post<GU::Evt::OnItemSelected>(backgroundCombo, Gui::id::BACKGROUND, backgroundCombo->getSelectedItemIndex());
+            EventManager::inst().post<GU::Evt::OnItemSelected>(backgroundComboBox, Gui::id::BACKGROUND, backgroundComboBox->getSelectedItemIndex());
         });
-        getContentPane()->append("Background", backgroundCombo);
+        getContentPane()->append("Background", backgroundComboBox);
 
         //Resolution
-        resolutionCombo = tgui::ComboBox::create();
+        resolutionComboBox = tgui::ComboBox::create();
 
         std::vector<sf::VideoMode> modes = sf::VideoMode::getFullscreenModes();
         for (std::size_t i = 0; i < modes.size(); ++i)
@@ -48,7 +50,7 @@ namespace Gui
             ss << " x ";
             ss << mode.height;
 
-            resolutionCombo->addItem(ss.str());
+            resolutionComboBox->addItem(ss.str());
         }
 
         std::stringstream dss;
@@ -56,18 +58,18 @@ namespace Gui
         dss << " x ";
         dss << Settings::dimensions.y;
 
-        resolutionCombo->setSelectedItem(dss.str());
-    
-        resolutionCombo->onItemSelect([&](){
-            std::stringstream ss(resolutionCombo->getSelectedItem().toStdString());
+        resolutionComboBox->setSelectedItem(dss.str());
+        resolutionComboBox->setChangeItemOnScroll(true);
+        resolutionComboBox->onItemSelect([&](){
+            std::stringstream ss(resolutionComboBox->getSelectedItem().toStdString());
             std::string trash;
             ss >> Settings::dimensions.x;
             ss >> trash;
             ss >> Settings::dimensions.y;
             BP_LOG_WARNING("Resolution changed the system may need to be restarted");
-            
+            EventManager::inst().post<GU::Evt::OnItemSelected>(resolutionComboBox, Gui::id::RESOLUTION, resolutionComboBox->getSelectedItemIndex());
         });
-        getContentPane()->append("Resolution", resolutionCombo);
+        getContentPane()->append("Resolution", resolutionComboBox);
     }
     void VideoPanel::init(const int &width, const int &height)
     {

@@ -744,6 +744,12 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         Settings::currentSong = temp->m_index;
                     } 
                     break;
+                    case Gui::id::RESOLUTION:
+                    {
+                        Game *game = static_cast<Game*>(&engin);
+                        game->m_resolution = true;
+                    } 
+                    break;
                 }
             }
         }
