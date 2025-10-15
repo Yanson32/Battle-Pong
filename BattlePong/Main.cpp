@@ -65,6 +65,7 @@
 #include "WriteSettings.h"
 #include "WriteLog.h"
 #include "Log.h"
+#include "Gui/OptionsPanel/VideoPanel.h"
 
 int main(int argc, char* argv[])
 {
@@ -201,6 +202,12 @@ int main(int argc, char* argv[])
                 if(Settings::b2pair)
                 debugDraw->AppendFlags(b2Draw::e_pairBit);
                 engin.changeState<IntroState>(frame, engin, window, *debugDraw, gui);
+
+                gui.removeAllWidgets();
+                tgui::Panel::Ptr cust(new Gui::VideoPanel());
+                std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
+                p->init(window.getSize().x, window.getSize().y);
+                gui.add(cust, "PanelPointer");
             }
 
 
