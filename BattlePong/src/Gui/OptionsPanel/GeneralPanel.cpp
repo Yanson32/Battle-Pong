@@ -27,6 +27,7 @@ namespace Gui
             aiCombo->addItem("Easy");
             aiCombo->addItem("Medium");
             aiCombo->addItem("Hard");
+            aiCombo->setChangeItemOnScroll(true);
             aiCombo->setSelectedItem(toTguiString(Settings::ai));
             aiCombo->onItemSelect([&](){
                 Settings::ai = aiCombo->getSelectedItem().toStdString();

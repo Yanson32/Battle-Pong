@@ -40,6 +40,7 @@ namespace Gui
             musicBox->addItem(element);
         
         musicBox->setSelectedItemByIndex(Settings::currentSong);
+        musicBox->setChangeItemOnScroll(true);
         musicBox->onItemSelect([&](){
                 EventManager::inst().post<GU::Evt::OnItemSelected>(nullptr, Gui::id::MUSIC_COMBO, musicBox->getSelectedItemIndex());
         });
