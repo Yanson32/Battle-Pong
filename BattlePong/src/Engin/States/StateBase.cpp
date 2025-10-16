@@ -685,17 +685,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         break;
         case EventId::PLAY_MUSIC:
         {
-            /*std::shared_ptr<GU::Evt::OnPlayMusic> temp = std::dynamic_pointer_cast<GU::Evt::OnPlayMusic>(event);
-            if(temp)
-            {
-                //Load music
-                if(ResourceManager::loadMusic(temp->m_musicFile))
-                    ResourceManager::getMusic().play();
-		        else
-                    ResourceManager::getMusic().stop();
-
-            }
-            */
+            BP_LOG_WARNING("PLAY_MUSIC not implimented");
         }
         break;
         case EventId::ON_ITEM_SELECTED:
