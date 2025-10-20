@@ -11,7 +11,9 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     const float &wHeight = windowSize.y;
     const float &wallTh = Settings::wallThickness;
     float paddleHeight = 100;
+    int padding = 10;
     std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wWidth, 0), sf::Vector2f(wWidth, wallTh), sf::Vector2f(-wWidth, wallTh)};
+    std::array<sf::Vector2f, 4> paddleStopPoints = {sf::Vector2f(0, 0), sf::Vector2f(wWidth, 0), sf::Vector2f(wWidth, (Settings::ballRadius * 2) + padding), sf::Vector2f(-wWidth, (Settings::ballRadius * 2) + padding)};
     std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
     std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, paddleHeight),sf::Vector2f(0, paddleHeight)};
     std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
@@ -44,10 +46,10 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     rightGoal.reset(new Goal(world, ObjectId::LEFT_GOAL, goalPoints));
     rightGoal->setPosition(sf::Vector2f(wWidth - (wallTh * 2), 0));
 
-    bottomPaddleStop.reset(new PaddleStop(world, horizontalPoints));
-    bottomPaddleStop->setPosition({0, wHeight - (wallTh * 2)});
+    bottomPaddleStop.reset(new PaddleStop(world, paddleStopPoints));
+    bottomPaddleStop->setPosition({0, wHeight - wallTh - ((Settings::ballRadius * 2) + padding)});
 
-    topPaddleStop.reset(new PaddleStop(world, horizontalPoints));
+    topPaddleStop.reset(new PaddleStop(world, paddleStopPoints));
     topPaddleStop->setPosition({0, (wallTh)});
 
     world->SetContactListener(&contactListener);
