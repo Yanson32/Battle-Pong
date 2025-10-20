@@ -195,11 +195,10 @@ void StateBase::reset(std::shared_ptr<PongFrame> frame)
     if(rand() % 2 == 0)
        y *= -1;
 
-    float paddleOffset = Settings::wallThickness * 4;
-    frame->ball->setPosition({static_cast<float>(window.getView().getSize().x) / 2, static_cast<float>(window.getView().getSize().y) / 2});
+    frame->ball->setPosition({Settings::dimensions.x / 2, Settings::dimensions.y / 2});
     frame->ball->setVelocity({static_cast<float>(x), static_cast<float>(y)});
-    frame->leftPaddle->setPosition(sf::Vector2f(paddleOffset - Settings::wallThickness, static_cast<float>(window.getView().getSize().y) / 2));
-    frame->rightPaddle->setPosition(sf::Vector2f(static_cast<float>(window.getView().getSize().x)  - paddleOffset, static_cast<float>(window.getView().getSize().y) / 2));
+    frame->leftPaddle->setPosition(sf::Vector2f(Settings::paddleOffset + Settings::wallThickness, Settings::dimensions.y / 2));
+    frame->rightPaddle->setPosition({Settings::dimensions.x  - Settings::paddleOffset - Settings::wallThickness - Settings::paddleThickness, Settings::dimensions.y / 2});
     frame->rightPaddle->handleInput(*frame->ball);
     pongFrame->userMessageIndex = 4;
     centerText(frame);

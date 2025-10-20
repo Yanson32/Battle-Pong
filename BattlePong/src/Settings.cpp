@@ -13,6 +13,7 @@ namespace Settings
     sf::String ai = "Medium";
     int wallThickness = 25;
     int paddleThickness = 25;
+    int paddleOffset= 25;
     StateId stateId = StateId::INTRO_STATE;
     int ballRadius = 5;  
     int ballSpeed = 3;

@@ -43,6 +43,7 @@ namespace Settings
     extern sf::String ai;
     extern int wallThickness;
     extern int paddleThickness;
+    extern int paddleOffset;
     extern StateId stateId;
     extern int ballRadius;  
     extern int ballSpeed;
