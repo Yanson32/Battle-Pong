@@ -42,6 +42,7 @@ namespace Settings
     const sf::String VERSION = "0.0.0.1";
     extern sf::String ai;
     extern int wallThickness;
+    extern int paddleThickness;
     extern StateId stateId;
     extern int ballRadius;  
     extern int ballSpeed;

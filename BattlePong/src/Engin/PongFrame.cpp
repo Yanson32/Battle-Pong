@@ -15,7 +15,7 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     std::array<sf::Vector2f, 4> horizontalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wWidth, 0), sf::Vector2f(wWidth, wallTh), sf::Vector2f(-wWidth, wallTh)};
     std::array<sf::Vector2f, 4> paddleStopPoints = {sf::Vector2f(0, 0), sf::Vector2f(wWidth, 0), sf::Vector2f(wWidth, (Settings::ballRadius * 2) + padding), sf::Vector2f(-wWidth, (Settings::ballRadius * 2) + padding)};
     std::array<sf::Vector2f, 4> verticalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
-    std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, paddleHeight),sf::Vector2f(0, paddleHeight)};
+    std::array<sf::Vector2f, 4> paddlePoints = {sf::Vector2f(0, 0), sf::Vector2f(Settings::paddleThickness, 0), sf::Vector2f(Settings::paddleThickness, paddleHeight),sf::Vector2f(0, paddleHeight)};
     std::array<sf::Vector2f, 4> goalPoints = {sf::Vector2f(0, 0), sf::Vector2f(wallTh, 0), sf::Vector2f(wallTh, wHeight), sf::Vector2f(0, wHeight)};
 
     ball.reset(new Ball(world, Settings::ballRadius));
