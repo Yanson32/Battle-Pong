@@ -1,6 +1,7 @@
 #include "Objects/Paddle.h"
 #include "Box2D/Box2DFunctions.h"
 #include "Objects/ObjectId.h"
+#include "Settings.h"
 
 Paddle::Paddle(std::shared_ptr<b2World> world, const ObjectId &newId, const std::array<sf::Vector2f, 4> vert):
 ObjectBase<sf::ConvexShape>::ObjectBase(world)
@@ -51,9 +52,6 @@ ObjectBase<sf::ConvexShape>::ObjectBase(world)
     jointDef.bodyB = body;
     jointDef.collideConnected = false;
     jointDef.localAxisA = b2Vec2(0.0f, 1.0f);
-    jointDef.enableLimit = true;
-    jointDef.upperTranslation = toMeters(225);
-    jointDef.lowerTranslation = toMeters(-225);
 
     prisJoint = static_cast<b2PrismaticJoint*>(world->CreateJoint(&jointDef));
 
