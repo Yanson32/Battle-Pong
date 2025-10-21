@@ -84,6 +84,10 @@ void CreditsState::update(GU::Engin::Engin& engin, const float &deltaTime, std::
         }
         if(creditsTimer.getElapsedTime().asSeconds() >= Settings::creditsTime)
         {
+            ++creditsCounter;
+            if(creditsCounter >= MAX_CREDITS)
+                creditsCounter = 0; 
+            creditsTimer.restart();
             credits();
         }
         debugDraw.update();
@@ -163,7 +167,7 @@ void CreditsState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Fram
     renderer->setBackgroundColor(sf::Color(0, 0, 0, 150));
     renderer->setTextColor(Settings::textColor);
     textArea->setText("Developer: Wayne J Larson Jr\nProject: " + Settings::title.toAnsiString() + "\nWeb: https://github.com/Yanson32/Battle-Pong");
-    renderer->setTextSize(35);
+    renderer->setTextSize(winSize.x / 50);
     gui.add(textArea);
     centerText(frame);
 
@@ -218,6 +222,18 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
             {
                 Game *game = static_cast<Game*>(&engin);
                 game->setPop(true);
+            }
+            break;
+            case sf::Event::Resized:
+            {
+                sf::Vector2f winSize;
+                winSize.y = window.getSize().y;
+                winSize.x = window.getSize().x;
+                textArea->setSize(winSize.x / 2, winSize.y / 4);
+                textArea->setPosition(winSize.x / 4, winSize.y / 3);
+                tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
+                renderer->setTextSize(winSize.x / 50);
+                
             }
             break;
         default:
