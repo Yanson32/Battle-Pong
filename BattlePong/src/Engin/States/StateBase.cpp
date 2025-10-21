@@ -508,7 +508,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         {
             int currentScore = Settings::p1Score;
 	        Settings::p1Score = currentScore + 1;
-            pongFrame->paddle1Hud->setScore(currentScore + 1);
+            pongFrame->paddle1Hud->setScore(currentScore + 1, Settings::leftPaddleTitle);
             EventManager::inst().post<GU::Evt::OnClick>(Gui::id::RESET);
         }
         break;
@@ -516,7 +516,7 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
         {
             int currentScore = Settings::p2Score;
 	        Settings::p2Score = currentScore + 1;
-            pongFrame->paddle2Hud->setScore(currentScore + 1);
+            pongFrame->paddle2Hud->setScore(currentScore + 1, Settings::rightPaddleTitle);
             EventManager::inst().post<GU::Evt::OnClick>(Gui::id::RESET);
         }
         break;

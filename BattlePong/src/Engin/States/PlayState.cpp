@@ -164,11 +164,11 @@ void PlayState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Frame> 
     }
 
     //Setup paddle 1
-    pongFrame->paddle1Hud->setScore(0);
+    pongFrame->paddle1Hud->setScore(0, Settings::leftPaddleTitle);
     Settings::p1Score = 0;
     
     //Setup paddle 2
-    pongFrame->paddle2Hud->setScore(0);
+    pongFrame->paddle2Hud->setScore(0, Settings::rightPaddleTitle);
     Settings::p2Score = 0;
     messageClock.restart();
 

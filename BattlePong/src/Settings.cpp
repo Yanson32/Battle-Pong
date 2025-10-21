@@ -21,6 +21,8 @@ namespace Settings
     std::string logFile = "log.txt";
     sf::Color textColor = sf::Color::Red;
     int collisionTime = 15;
+    std::string leftPaddleTitle = "Left";
+    std::string rightPaddleTitle = "Right";
 
     //Paddle 1 settings
     std::string p1Name = "";

@@ -51,6 +51,9 @@ namespace Settings
     extern std::string logFile;
     extern sf::Color textColor;
     extern int collisionTime;
+    extern std::string leftPaddleTitle;
+    extern std::string rightPaddleTitle;
+
     //Paddle 1 settigns
     extern std::string p1Name;
     extern int p1Score;

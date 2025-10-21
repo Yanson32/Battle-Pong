@@ -1,6 +1,7 @@
 #include "Gui/PaddleHud.h"
 #include <sstream>
 #include <SFML/Network.hpp>
+#include "Settings.h"
 
 namespace Gui
 {
@@ -15,21 +16,24 @@ namespace Gui
 
         setScore(score);
 
-        this->setSize({150, 25});
+        this->setSize({150, Settings::wallThickness});
 
 
         scoreLabel = tgui::Label::create();
         scoreLabel->setPosition({100, 0});
         scoreLabel->setText("0");
+        scoreLabel->getRenderer()->setTextColor(sf::Color::Black);
         this->add(scoreLabel);
 
         this->getRenderer()->setBackgroundColor(sf::Color::Transparent);
 
     }
 
-    void PaddleHud::setScore(const sf::Uint32 &score)
+    void PaddleHud::setScore(const sf::Uint32 &score, const std::string &name)
     {
         std::stringstream ss;
+        ss << name;
+        ss << " ";
         ss << score;
 
         sf::String temp(ss.str());

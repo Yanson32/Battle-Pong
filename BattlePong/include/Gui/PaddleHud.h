@@ -28,7 +28,7 @@ namespace Gui
     {
         public:
             PaddleHud(std::string &name, int &score);
-            void setScore(const sf::Uint32 &score);
+            void setScore(const sf::Uint32 &score, const std::string &name = "");
             sf::Uint32 getScore() const;
             void setName(const sf::String &name);
             virtual ~PaddleHud();
