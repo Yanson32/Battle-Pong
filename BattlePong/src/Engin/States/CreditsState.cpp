@@ -162,8 +162,8 @@ void CreditsState::init(GU::Engin::Engin& engin, std::shared_ptr<GU::Engin::Fram
     tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
     renderer->setBackgroundColor(sf::Color(0, 0, 0, 150));
     renderer->setTextColor(Settings::textColor);
-    textArea->setText("Developer: Laurent Gomila\nProject: SFML\nWeb: https://www.sfml-dev.org/");
-    renderer->setTextSize(40);
+    textArea->setText("Developer: Wayne J Larson Jr\nProject: " + Settings::title.toAnsiString() + "\nWeb: https://github.com/Yanson32/Battle-Pong");
+    renderer->setTextSize(35);
     gui.add(textArea);
     centerText(frame);
 
@@ -189,6 +189,10 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
         case sf::Event::KeyPressed:
             if(event.key.code == toKey(Settings::keyboardControlRight))
             {
+                ++creditsCounter;
+                if(creditsCounter >= MAX_CREDITS)
+                    creditsCounter = 0; 
+                creditsTimer.restart();
                 credits();
                 
             }
@@ -196,11 +200,9 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
             {
                 --creditsCounter;
                 if(creditsCounter < 0)
-                    creditsCounter = MAX_CREDITS;
-                --creditsCounter;
-                if(creditsCounter < 0)
-                    creditsCounter = MAX_CREDITS;
+                    creditsCounter = MAX_CREDITS - 1;
                 
+                creditsTimer.restart();
                 credits();
            
             }
@@ -224,25 +226,24 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
 
 
 }
+
 void CreditsState::credits()
 {
     if(creditsCounter == 0)
     {
-        textArea->setText("Developer: Bruno Van de Velde\nProject: TGUI\nWeb: https://tgui.eu/");
-        ++creditsCounter;
-        creditsTimer.restart();
+        textArea->setText("Developer: Wayne J Larson Jr\nProject: " + Settings::title.toAnsiString() + "\nWeb: https://github.com/Yanson32/Battle-Pong");
     }
     else if(creditsCounter == 1)
     {
-        textArea->setText("Developer: Erin Catto\nProject: BOX2D\nWeb: https://box2d.org/");
-        ++creditsCounter;
-        creditsTimer.restart();
+        textArea->setText("Developer: Bruno Van de Velde\nProject: TGUI\nWeb: https://tgui.eu/");
     }
     else if(creditsCounter == 2)
     {
+        textArea->setText("Developer: Erin Catto\nProject: BOX2D\nWeb: https://box2d.org/");
+    }
+    else if(creditsCounter == 3)
+    {
         textArea->setText("Developer: Laurent Gomila\nProject: SFML\nWeb: https://www.sfml-dev.org/");
-        creditsCounter = 0;
-        creditsTimer.restart();
     }
 
 } 

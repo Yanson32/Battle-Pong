@@ -94,6 +94,6 @@ class CreditsState: public StateBase
         tgui::TextArea::Ptr textArea;
         sf::Clock creditsTimer;
         int creditsCounter = 0;
-        const int MAX_CREDITS = 2;
+        const int MAX_CREDITS = 4;
 };
 #endif
