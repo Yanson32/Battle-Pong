@@ -170,6 +170,18 @@ void LicenseState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
                 game->setPop(true);
             }
             break;
+            case sf::Event::Resized:
+            {
+                sf::Vector2f winSize;
+                winSize.y = window.getSize().y;
+                winSize.x = window.getSize().x;
+                textArea->setSize(winSize.x / 1.5, winSize.y / 2);
+                textArea->setPosition(winSize.x / 4, winSize.y / 3);
+                tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
+                renderer->setTextSize(winSize.x / 50);
+                
+            }
+            break;
         default:
             break;
     }

@@ -83,6 +83,8 @@ PongFrame::PongFrame(const sf::Vector2f &windowSize)
     userMessage.emplace_back(tempText);
     tempText.setString("Waiting for player 2");
     userMessage.emplace_back(tempText);
+    tempText.setString("Paused");
+    userMessage.emplace_back(tempText);
 
     for(std::size_t i = 0; i < userMessage.size(); ++i)
     { 

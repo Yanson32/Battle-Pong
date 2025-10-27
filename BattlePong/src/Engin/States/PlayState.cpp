@@ -227,6 +227,7 @@ void PlayState::clean(std::shared_ptr<GU::Engin::Frame> frame)
 void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::shared_ptr<GU::Engin::Frame> frame)
 {
     UNUSED(engin);
+    std::shared_ptr<PongFrame> pongFrame = std::dynamic_pointer_cast<PongFrame>(frame);
 
     switch(event.type)
     {
@@ -255,7 +256,15 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
                 break;
                 case sf::Keyboard::P:
                 {
-                    Settings::playerPaused = !Settings::playerPaused;
+                    if(!Settings::systemPaused)
+                    {
+                        Settings::playerPaused = !Settings::playerPaused;
+                        if(Settings::playerPaused)
+                            pongFrame->userMessageIndex = 8;
+                        else
+                            pongFrame->userMessageIndex = 0;
+                    }
+        
                 }
                 break;
                 default:
