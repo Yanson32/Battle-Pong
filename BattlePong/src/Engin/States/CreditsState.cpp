@@ -191,6 +191,7 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
     switch(event.type)
     {
         case sf::Event::KeyPressed:
+        {
             if(event.key.code == toKey(Settings::keyboardControlRight))
             {
                 ++creditsCounter;
@@ -210,32 +211,26 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
                 credits();
            
             }
-            /*/if(event.key.code == toKey(Settings::playerControlRight))
-            {
-                m_creditsPanel.next();
-            }
-            if(event.key.code == toKey(Settings::playerControlLeft))
-            {
-                m_creditsPanel.prev();
-            }
-            else */if(event.key.code == toKey(Settings::keyboardControlMenu))
+            
+            else if(event.key.code == toKey(Settings::keyboardControlMenu))
             {
                 Game *game = static_cast<Game*>(&engin);
                 game->setPop(true);
             }
-            break;
-            case sf::Event::Resized:
-            {
-                sf::Vector2f winSize;
-                winSize.y = window.getSize().y;
-                winSize.x = window.getSize().x;
-                textArea->setSize(winSize.x / 2, winSize.y / 4);
-                textArea->setPosition(winSize.x / 4, winSize.y / 3);
-                tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
-                renderer->setTextSize(winSize.x / 50);
-                
-            }
-            break;
+        }
+        break;
+        case sf::Event::Resized:
+        {
+            sf::Vector2f winSize;
+            winSize.y = window.getSize().y;
+            winSize.x = window.getSize().x;
+            textArea->setSize(winSize.x / 2, winSize.y / 4);
+            textArea->setPosition(winSize.x / 4, winSize.y / 3);
+            tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
+            renderer->setTextSize(winSize.x / 50);
+            
+        }
+        break;
         default:
             break;
     }
