@@ -23,6 +23,7 @@ namespace Settings
     int collisionTime = 15;
     std::string leftPaddleTitle = "Left";
     std::string rightPaddleTitle = "Right";
+    std::string connectIp = "";
 
     //Paddle 1 settings
     std::string p1Name = "";

@@ -64,6 +64,7 @@ void WriteSettings::read()
 
     //Network settings
     Settings::port = prefMan.read("Port", Settings::port);
+    Settings::connectIp = prefMan.read("ConnectIp", Settings::connectIp);
     
     //Load log settings
     Settings::logSeverity = prefMan.read("LogSeverity", Settings::logSeverity);
@@ -123,6 +124,7 @@ void WriteSettings::write()
             
     //Network settings
     prefMan.write("Port", Settings::port);
+    prefMan.write("ConnectIp", Settings::connectIp);
     
     //Load log settings
     prefMan.write("LogSeverity", Settings::logSeverity);

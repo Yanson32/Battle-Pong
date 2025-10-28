@@ -53,6 +53,7 @@ namespace Settings
     extern int collisionTime;
     extern std::string leftPaddleTitle;
     extern std::string rightPaddleTitle;
+    extern std::string connectIp;
 
     //Paddle 1 settigns
     extern std::string p1Name;

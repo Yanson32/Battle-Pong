@@ -17,14 +17,19 @@ namespace Gui
 
         //Create ip edit box
         ipBox = tgui::EditBox::create();
-        ipBox->setText("192.168.88.243");
+        ipBox->setText(Settings::connectIp);
         Settings::clientIp = ipBox->getText().toStdString(); 
+        ipBox->onTextChange([this]()
+        {
+            Settings::connectIp = ipBox->getText().toStdString();
+        });
         getContentPane()->append("Ip", ipBox);
         
         //EditBox to enter port number
         portBox = tgui::EditBox::create();
         portBox->setText(std::to_string(Settings::port));
-        portBox->onTextChange([this](){
+        portBox->onTextChange([this]()
+        {
             if(!portBox->getText().attemptToInt(Settings::port))
             {
                 BP_LOG_ERROR("Unable to change port");
