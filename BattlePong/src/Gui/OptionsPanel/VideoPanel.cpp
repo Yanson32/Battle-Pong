@@ -69,6 +69,13 @@ namespace Gui
             BP_LOG_WARNING("Resolution changed the system may need to be restarted");
             EventManager::inst().post<GU::Evt::OnItemSelected>(resolutionComboBox, Gui::id::RESOLUTION, resolutionComboBox->getSelectedItemIndex());
         });
+
+
+        if(Settings::stateId == StateId::PLAY_STATE)
+        {
+            resolutionComboBox->setEnabled(false);
+        }
+
         getContentPane()->append("Resolution", resolutionComboBox);
     }
     void VideoPanel::init(const int &width, const int &height)

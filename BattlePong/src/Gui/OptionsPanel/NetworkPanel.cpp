@@ -34,6 +34,14 @@ namespace Gui
             if(!portBox->getText().empty())
                 EventManager::inst().post<GU::Evt::OnTextChanged>(nullptr, Gui::id::PORT, portBox->getText().toStdString());
         });
+
+
+        //Dissable when in play state        
+        if(Settings::stateId == StateId::PLAY_STATE)
+        {
+            portBox->setEnabled(false);
+        }
+
         getContentPane()->append("Port", portBox); 
         
     }
