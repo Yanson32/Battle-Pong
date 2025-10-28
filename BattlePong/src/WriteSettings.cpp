@@ -39,6 +39,7 @@ void WriteSettings::read()
     Settings::keyboardControlMenu = toString(static_cast<sf::Keyboard::Key>(prefMan.read("KeyboardControlMenu", toKey(Settings::keyboardControlMenu)))).toAnsiString();
     Settings::keyboardControlNext = toString(static_cast<sf::Keyboard::Key>(prefMan.read("KeyboardControlNext", toKey(Settings::keyboardControlNext)))).toAnsiString();
     Settings::keyboardControlSelect = toString(static_cast<sf::Keyboard::Key>(prefMan.read("KeyboardControlSelect", toKey(Settings::keyboardControlSelect)))).toAnsiString();
+    Settings::keyboardControlPause = toString(static_cast<sf::Keyboard::Key>(prefMan.read("KeyboardControlPause", toKey(Settings::keyboardControlPause)))).toAnsiString();
 
     //Load joystick preferences
     Settings::joystickControlMenu = prefMan.read("PlayerJoystickControlMenu", Settings::joystickControlMenu);
@@ -97,6 +98,7 @@ void WriteSettings::write()
     prefMan.write("KeyboardControlMenu", toKey(Settings::keyboardControlMenu));
     prefMan.write("KeyboardControlNext", toKey(Settings::keyboardControlNext));
     prefMan.write("KeyboardControlSelect", toKey(Settings::keyboardControlSelect));
+    prefMan.write("KeyboardControlPause", toKey(Settings::keyboardControlPause));
                         
     //Write joystick preferences
     prefMan.write("PlayerJoystickControlMenu", Settings::joystickControlMenu);
