@@ -338,6 +338,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::IntroPanel> p = std::dynamic_pointer_cast<Gui::IntroPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
                     }
                     break;
 		            case Gui::id::OPTIONS:
@@ -348,6 +350,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::GeneralPanel> p = std::dynamic_pointer_cast<Gui::GeneralPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
                     }
                     break;
                     case Gui::id::CONTROLS_TAB:
@@ -357,6 +361,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::ControlPanel> p = std::dynamic_pointer_cast<Gui::ControlPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
                     }
                     break;
                     case Gui::id::VIDEO_TAB:
@@ -366,6 +372,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::VideoPanel> p = std::dynamic_pointer_cast<Gui::VideoPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
                     }
                     break;
                     case Gui::id::SOUND_TAB:
@@ -375,6 +383,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::SoundPanel> p = std::dynamic_pointer_cast<Gui::SoundPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
                     }
                     break;
                     case Gui::id::NETWORK_TAB:
@@ -384,6 +394,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::NetworkPanel> p = std::dynamic_pointer_cast<Gui::NetworkPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
                     }
                     break;
                     case Gui::id::DEV_TAB:
@@ -393,6 +405,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::DevPanel> p = std::dynamic_pointer_cast<Gui::DevPanel>(cust);
                         p->init(debugDraw.GetFlags(), window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
                     }
                     break;
                     case Gui::id::HOST_PANEL_BACK:
@@ -404,6 +418,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::MultiplayerPanel> p = std::dynamic_pointer_cast<Gui::MultiplayerPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
                     }
                     break;
                     case Gui::id::HOST:
@@ -413,6 +429,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::HostPanel> p = std::dynamic_pointer_cast<Gui::HostPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
                     }
                     break;
                     case Gui::id::CONNECT:
@@ -422,6 +440,8 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                         std::shared_ptr<Gui::ConnectPanel> p = std::dynamic_pointer_cast<Gui::ConnectPanel>(cust);
                         p->init(window.getSize().x, window.getSize().y);
                         gui.add(cust, "PanelPointer");
+                        gui.add(pongFrame->paddle1Hud);
+                        gui.add(pongFrame->paddle2Hud);
 
                     }
                     break;
@@ -498,6 +518,20 @@ void StateBase::handleGUEvent(GU::Engin::Engin& engin, GU::Evt::EventPtr event, 
                     case Gui::id::PORT:
                     {
                         Settings::port = std::stoi(temp->m_text.c_str());
+                    } 
+                    break;
+                    case Gui::id::PLAYER_TITLE:
+                    {
+                        if (Settings::isClient)
+                        {
+                            Settings::rightPaddleTitle = temp->m_text;
+                            pongFrame->paddle2Hud->setScore(pongFrame->paddle2Hud->getScore(), Settings::rightPaddleTitle);
+                        }
+                        else 
+                        {
+                            Settings::leftPaddleTitle = temp->m_text; 
+                            pongFrame->paddle1Hud->setScore(pongFrame->paddle1Hud->getScore(), Settings::leftPaddleTitle);
+                        }
                     } 
                     break;
                 }

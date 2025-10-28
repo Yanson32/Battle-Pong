@@ -63,7 +63,8 @@ namespace Gui
         PORT,
         LICENSE,
         RESET,
-        RESOLUTION
+        RESOLUTION,
+        PLAYER_TITLE
     };
 }
 #endif 

@@ -16,7 +16,7 @@ namespace Gui
 
         setScore(score);
 
-        this->setSize({150, Settings::wallThickness});
+        this->setSize({Settings::dimensions.x / 2.0, Settings::wallThickness});
 
 
         scoreLabel = tgui::Label::create();

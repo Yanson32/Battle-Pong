@@ -6,6 +6,7 @@
 #include <GameUtilities/Event/Events/Widget/OnItemSelected.h>
 #include <GameUtilities/Event/Events/Widget/OnCheck.h>
 #include <GameUtilities/Core/PreferencesManager.h>
+#include <GameUtilities/Event/Events/Widget/OnTextChanged.h>
 #include "Gui/GuiId.h"
 #include "TGUIFunctions.h"
 
@@ -20,6 +21,14 @@ namespace Gui
         {
             tgui::Label::Ptr aiSettingLabel = tgui::Label::create(toTguiString(Settings::ai));
             getContentPane()->append("Ai", aiSettingLabel);
+            
+            playerTitleBox = tgui::EditBox::create();
+            if (Settings::isClient)
+                playerTitleBox->setText(Settings::rightPaddleTitle);      
+            else
+                playerTitleBox->setText(Settings::leftPaddleTitle);      
+            getContentPane()->append("Title", playerTitleBox);
+            playerTitleBox->setEnabled(false);
         }
         else
         {
@@ -33,6 +42,25 @@ namespace Gui
                 Settings::ai = aiCombo->getSelectedItem().toStdString();
             });
             getContentPane()->append("Ai", aiCombo);
+            
+
+            playerTitleBox = tgui::EditBox::create();
+
+            if (Settings::isClient)
+            {
+                playerTitleBox->setText(Settings::rightPaddleTitle);      
+                
+            }
+            else
+            {
+                playerTitleBox->setText(Settings::leftPaddleTitle);      
+            }
+
+            playerTitleBox->onTextChange([&]()
+            {
+                EventManager::inst().post<GU::Evt::OnTextChanged>(nullptr, Gui::id::PLAYER_TITLE, playerTitleBox->getText().toStdString());
+            });
+            getContentPane()->append("Title", playerTitleBox);
         }
     }
     void GeneralPanel::init(const int &width, const int &height)

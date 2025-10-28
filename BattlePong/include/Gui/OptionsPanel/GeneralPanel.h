@@ -37,6 +37,9 @@ namespace Gui
 
             tgui::ComboBox::Ptr aiCombo;
             tgui::Label::Ptr aiLable;
+            
+            tgui::EditBox::Ptr playerTitleBox;
+            tgui::Label::Ptr playerTitle;
     };
 }
 #endif // GUI_GENERALPANEL_H
