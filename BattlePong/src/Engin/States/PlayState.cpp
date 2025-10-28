@@ -254,7 +254,6 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
                     }
                     else 
                     {
-                        std::cout << "Paused" << std::endl;
                         Settings::playerPaused = !Settings::playerPaused;
                         if(Settings::playerPaused)
                             pongFrame->userMessageIndex = 8;
