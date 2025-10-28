@@ -164,24 +164,25 @@ void LicenseState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
     switch(event.type)
     {
         case sf::Event::KeyPressed:
-            if(event.key.code == sf::Keyboard::Escape)
+        {
+            if(event.key.code == toKey(Settings::keyboardControlMenu))
             {
                 Game *game = static_cast<Game*>(&engin);
                 game->setPop(true);
             }
             break;
-            case sf::Event::Resized:
-            {
-                sf::Vector2f winSize;
-                winSize.y = window.getSize().y;
-                winSize.x = window.getSize().x;
-                textArea->setSize(winSize.x / 1.5, winSize.y / 2);
-                textArea->setPosition(winSize.x / 4, winSize.y / 3);
-                tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
-                renderer->setTextSize(winSize.x / 50);
-                
-            }
-            break;
+        }
+        case sf::Event::Resized:
+        {
+            sf::Vector2f winSize;
+            winSize.y = window.getSize().y;
+            winSize.x = window.getSize().x;
+            textArea->setSize(winSize.x / 1.5, winSize.y / 2);
+            textArea->setPosition(winSize.x / 4, winSize.y / 3);
+            tgui::TextAreaRenderer *renderer = textArea->getSharedRenderer();
+            renderer->setTextSize(winSize.x / 50);
+        }
+        break;
         default:
             break;
     }

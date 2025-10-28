@@ -218,7 +218,7 @@ void CreditsState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std:
             {
                 m_creditsPanel.prev();
             }
-            else */if(event.key.code == sf::Keyboard::Escape)
+            else */if(event.key.code == toKey(Settings::keyboardControlMenu))
             {
                 Game *game = static_cast<Game*>(&engin);
                 game->setPop(true);
