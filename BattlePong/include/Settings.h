@@ -135,6 +135,7 @@ namespace Settings
 
     extern bool systemPaused;
     extern bool playerPaused;
+    extern bool clientPaused;
 }
 
 

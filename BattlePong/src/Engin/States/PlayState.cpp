@@ -27,7 +27,7 @@
 #include <GameUtilities/Event/Events/OnLog.h>
 #include <GameUtilities/Core/Macros.h>
 #include "Log.h"
-
+#include "SFMLFunctions.h"
 
 void connect(Server *server);
 PlayState::PlayState(GU::Engin::Engin& newEngin, sf::RenderWindow &newWindow, DebugDraw &debugDraw, tgui::Gui &newGui, const StateId newId): StateBase(newEngin, newWindow, debugDraw, newGui, newId)
@@ -82,13 +82,20 @@ void PlayState::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
 
     StateBase::update(engin, deltaTime, frame);
 
-    if(!Settings::playerPaused)
+    if(!Settings::clientPaused)
     {
-        if(!Settings::systemPaused)
+        if(!Settings::playerPaused)
         {
-            pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
+            if(!Settings::systemPaused)
+            {
+                pongFrame->world->Step( deltaTime, Settings::velocityIterations, Settings::positionIterations);
+            }
         }
     }
+
+    if(Settings::clientPaused || Settings::playerPaused || Settings::systemPaused)
+        collisionClock.restart(); 
+
         debugDraw.update();
         pongFrame->ball->update();
         pongFrame->ground->update();
@@ -232,43 +239,47 @@ void PlayState::sfEvent(GU::Engin::Engin& engin, const sf::Event &event, std::sh
     switch(event.type)
     {
         case sf::Event::KeyPressed:
-            switch(event.key.code)
+
+            if(event.key.code == toKey(Settings::keyboardControlPause))
             {
-                case sf::Keyboard::Escape:
+                if(!Settings::systemPaused)
                 {
-                
-                    if(gui.get("PanelPointer") == nullptr)
+                    if(Settings::isClient)
                     {
-                        gui.removeAllWidgets();
-                        StateBase::init(engin, frame);
-                        tgui::Panel::Ptr cust(new Gui::PlayPanel());
-                        std::shared_ptr<Gui::PlayPanel> p = std::dynamic_pointer_cast<Gui::PlayPanel>(cust);
-                        p->init(window.getSize().x, window.getSize().y);
-                        gui.add(cust, "PanelPointer");
-                        EventManager::inst().post<GU::Evt::OnClick>(Gui::id::GENERAL_TAB);
+                        Settings::clientPaused = !Settings::clientPaused;
+                        if(Settings::clientPaused)
+                            pongFrame->userMessageIndex = 8;
+                        else
+                            pongFrame->userMessageIndex = 0;
                     }
-                    else
+                    else 
                     {
-                        tgui::Widget::Ptr widget = gui.get("PanelPointer");
-                        gui.remove(widget);
-                    }
-                }
-                break;
-                case sf::Keyboard::P:
-                {
-                    if(!Settings::systemPaused)
-                    {
+                        std::cout << "Paused" << std::endl;
                         Settings::playerPaused = !Settings::playerPaused;
                         if(Settings::playerPaused)
                             pongFrame->userMessageIndex = 8;
                         else
                             pongFrame->userMessageIndex = 0;
                     }
-        
                 }
-                break;
-                default:
-                    break;
+            }
+            else if (event.key.code == toKey(Settings::keyboardControlMenu))
+            {
+                if(gui.get("PanelPointer") == nullptr)
+                {
+                    gui.removeAllWidgets();
+                    StateBase::init(engin, frame);
+                    tgui::Panel::Ptr cust(new Gui::PlayPanel());
+                    std::shared_ptr<Gui::PlayPanel> p = std::dynamic_pointer_cast<Gui::PlayPanel>(cust);
+                    p->init(window.getSize().x, window.getSize().y);
+                    gui.add(cust, "PanelPointer");
+                    EventManager::inst().post<GU::Evt::OnClick>(Gui::id::GENERAL_TAB);
+                }
+                else
+                {
+                    tgui::Widget::Ptr widget = gui.get("PanelPointer");
+                    gui.remove(widget);
+                }
             }
             break;
         default:

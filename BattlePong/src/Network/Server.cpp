@@ -101,17 +101,26 @@ bool Server::recieve(std::shared_ptr<PongFrame> frame)
     {
         packet >> frame->rightPaddle;
 
-        //Set the system pause status 
-        //packet >> Settings::systemPaused;
-
-
-        //Set the player pause status
-        packet >> Settings::playerPaused;
-
-
         //Set the resolution of the game
         packet >> Settings::dimensions.x; 
         packet >> Settings::dimensions.y;
+
+        bool tempClientPaused = false;
+        
+        //Client paused
+        packet >> tempClientPaused;
+       
+
+        if(tempClientPaused != Settings::clientPaused)
+        { 
+            Settings::clientPaused = tempClientPaused;
+
+            if(Settings::clientPaused)
+                frame->userMessageIndex = 8;
+            else
+                frame->userMessageIndex = 0;
+        }
+
         return true;
     } 
     else

@@ -109,4 +109,5 @@ namespace Settings
     
     bool systemPaused = false;
     bool playerPaused = false;
+    bool clientPaused = false;
 }

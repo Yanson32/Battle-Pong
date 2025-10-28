@@ -81,7 +81,7 @@ void StateBase::update(GU::Engin::Engin& engin, const float &deltaTime, std::sha
     }
 
     backgroundRect.setSize({window.getView().getSize().x, window.getView().getSize().y});
-    if(!Settings::playerPaused)
+    if(!Settings::playerPaused && !Settings::clientPaused)
     {
 
         if(!Settings::multiplayer || Settings::isHost)

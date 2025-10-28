@@ -39,10 +39,9 @@ bool Client::send(std::shared_ptr<PongFrame> frame)
 {
     sf::Packet packet;
     packet << frame->rightPaddle;
-    //packet << Settings::systemPaused;
-    packet << Settings::playerPaused; 
     packet << Settings::dimensions.x;
     packet << Settings::dimensions.y;
+    packet << Settings::clientPaused;
 
     if(socket.send(packet) != sf::Socket::Done)
     {
