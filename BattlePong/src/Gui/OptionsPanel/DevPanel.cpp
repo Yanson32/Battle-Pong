@@ -19,6 +19,41 @@ namespace Gui
     {
         //Create header for the game section
         getContentPane()->appendSpace();
+        getContentPane()->appendHeader("Network");
+        
+        //Create checkbox for host
+        isHost = tgui::CheckBox::create("");
+
+        isHost->onCheck([&]()
+        {
+            //EventManager::inst().post<GU::Evt::OnCheck>(nullptr, Gui::id::DEBUG_AABB, true);
+        });
+        isHost->onUncheck([&]()
+        {
+            //     EventManager::inst().post<GU::Evt::OnCheck>(nullptr, Gui::id::DEBUG_AABB, false);
+        });
+        
+        isHost->setChecked(Settings::isHost);
+        isHost->setEnabled(false);
+        getContentPane()->append("isHost", isHost);
+        
+        //Create checkbox for client
+        isClient = tgui::CheckBox::create("");
+
+        isClient->onCheck([&]()
+        {
+            //EventManager::inst().post<GU::Evt::OnCheck>(nullptr, Gui::id::DEBUG_AABB, true);
+        });
+        isClient->onUncheck([&]()
+        {
+            //     EventManager::inst().post<GU::Evt::OnCheck>(nullptr, Gui::id::DEBUG_AABB, false);
+        });
+        
+        isClient->setChecked(Settings::isClient);
+        isClient->setEnabled(false);
+        getContentPane()->append("isClient", isClient);
+        
+        getContentPane()->appendSpace();
         getContentPane()->appendHeader("Game");
        
         //Create reset button 

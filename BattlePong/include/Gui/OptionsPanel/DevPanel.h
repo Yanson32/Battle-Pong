@@ -30,6 +30,8 @@ namespace Gui
             void init(const int32 flags, const int &width, const int &height);
             virtual ~DevPanel();
         protected:
+            tgui::CheckBox::Ptr isHost;
+            tgui::CheckBox::Ptr isClient;
             tgui::CheckBox::Ptr aabb;
             tgui::CheckBox::Ptr shapes;
             tgui::CheckBox::Ptr joints;
