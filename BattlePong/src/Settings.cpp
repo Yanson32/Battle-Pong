@@ -15,8 +15,8 @@ namespace Settings
     int paddleThickness = 25;
     int paddleOffset= 25;
     StateId stateId = StateId::INTRO_STATE;
-    int ballRadius = 5;  
-    int ballSpeed = 3;
+    int ballRadius = 10;  
+    int ballSpeed = 10;
     int paddleSpeed = 200;
     std::string logFile = "log.txt";
     sf::Color textColor = sf::Color::Red;
