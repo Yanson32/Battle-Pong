@@ -81,7 +81,7 @@ int main(int argc, char* argv[])
     
     programArguments(argc, argv);
  
-    BP_LOG_MESSAGE("GAME_CONFIG_DIR = " + Settings::GAME_CONFIG_DIR);   
+    BP_LOG_MESSAGE("GAME_CONFIG_DIR = " + Settings::GAME_CONFIG_DIR.string());   
     Settings::publicIp.setString("0.0.0.0");
  
     //Retrieving the public ip address can take a while, especially if there is no internet connection.
@@ -94,8 +94,7 @@ int main(int argc, char* argv[])
     
     //Set the path to the preferences file
     Settings::preferencesFile = Settings::GAME_CONFIG_DIR;
-    if(Settings::preferencesFile.back() != '/')
-        Settings::preferencesFile  += "/preferences.txt";
+    Settings::preferencesFile  /= "preferences.txt";
 
     //Write settings on game close
     WriteSettings write;
@@ -105,7 +104,10 @@ int main(int argc, char* argv[])
 
     //Set game icon
     sf::Image gameIcon;
-    if(!gameIcon.loadFromFile(Settings::GAME_CONFIG_DIR + "/Icons/BattlePong.png"))
+    std::filesystem::path iconPath = Settings::GAME_CONFIG_DIR;
+    iconPath /= "Icons";
+    iconPath /= "BattlePong.png";
+    if(!gameIcon.loadFromFile(iconPath.string()))
     {
         BP_LOG_ERROR("Unable to load game icon");
     }

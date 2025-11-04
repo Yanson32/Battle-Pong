@@ -79,10 +79,10 @@ namespace Settings
     std::string localIp = sf::IpAddress::getLocalAddress().toString();
     std::string clientIp = "";
 
-    std::string preferencesFile = "";
+    std::filesystem::path preferencesFile = "";
 
     //Directories
-    const std::string GAME_CONFIG_DIR = TO_STR(BP_GAME_CONFIG_DIR);
+    const std::filesystem::path GAME_CONFIG_DIR = TO_STR(BP_GAME_CONFIG_DIR);
     int logSeverity = static_cast<int>(GU::Log::LogType::GU_MESSAGE);
 
 

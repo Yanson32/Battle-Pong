@@ -106,10 +106,10 @@ namespace Settings
     extern std::string currentTheme;
     extern std::vector<std::string> themes;
 
-    extern std::string preferencesFile;
+    extern std::filesystem::path preferencesFile;
 
     //Directories
-    extern const std::string GAME_CONFIG_DIR;
+    extern const std::filesystem::path GAME_CONFIG_DIR;
 
     extern int logSeverity;
 
