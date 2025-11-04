@@ -243,7 +243,8 @@ namespace Gui
 
         //Create Log checkbox
         log = tgui::EditBox::create();
-        log->setText(Settings::logFile);
+        log->setText(Settings::logFile.string());
+        log->setEnabled(false);
 
         getContentPane()->append("Log File", log);
 

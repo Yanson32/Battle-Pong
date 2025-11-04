@@ -72,10 +72,7 @@ int main(int argc, char* argv[])
 
     //Set the log file path 
     Settings::logFile = Settings::GAME_CONFIG_DIR;
-    if(Settings::logFile.back() != '/')
-        Settings::logFile += "/Log.txt";
-    else
-        Settings::logFile += "Log.txt";
+    Settings::logFile /= "Log.txt";
         
 
     //Delete log file

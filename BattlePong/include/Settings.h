@@ -48,7 +48,7 @@ namespace Settings
     extern int ballRadius;  
     extern int ballSpeed;
     extern int paddleSpeed;
-    extern std::string logFile;
+    extern std::filesystem::path logFile;
     extern sf::Color textColor;
     extern int collisionTime;
     extern std::string leftPaddleTitle;

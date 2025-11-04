@@ -18,7 +18,7 @@ namespace Settings
     int ballRadius = 10;  
     int ballSpeed = 10;
     int paddleSpeed = 200;
-    std::string logFile = "log.txt";
+    std::filesystem::path logFile = "log.txt";
     sf::Color textColor = sf::Color::Red;
     int collisionTime = 15;
     std::string leftPaddleTitle = "Left";
