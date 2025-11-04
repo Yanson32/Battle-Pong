@@ -27,7 +27,6 @@ namespace Gui
         
         portBox = tgui::EditBox::create();
         portBox->setInputValidator("[0-9]+");
-        portBox->setMaximumCharacters(3);
         portBox->limitTextWidth(true);
         portBox->setText(toTguiString(Settings::port));      
         portBox->onTextChange([&](){
