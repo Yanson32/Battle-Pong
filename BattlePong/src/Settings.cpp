@@ -82,7 +82,7 @@ namespace Settings
     std::filesystem::path preferencesFile = "";
 
     //Directories
-    const std::filesystem::path GAME_CONFIG_DIR = TO_STR(BP_GAME_CONFIG_DIR);
+    const std::filesystem::path GAME_CONFIG_DIR = std::filesystem::canonical(TO_STR(BP_GAME_CONFIG_DIR));
     int logSeverity = static_cast<int>(GU::Log::LogType::GU_MESSAGE);
 
 
