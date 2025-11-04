@@ -6,7 +6,7 @@ ResourceHolder<sf::SoundBuffer, soundId> ResourceManager::m_sound;
 ResourceHolder<sf::Font, fontId> ResourceManager::m_font;
 ResourceHolder<sf::Texture, textureId> ResourceManager::m_texture;
 sf::Music ResourceManager::m_music;
-std::filesystem::path ResourceManager::m_path =  std::filesystem::current_path() += "/Resources";
+std::filesystem::path ResourceManager::m_path =  (std::filesystem::current_path() /= "Resources");
 ResourceManager::ResourceManager()
 {
 
@@ -19,7 +19,8 @@ void ResourceManager::loadSound(const soundId &sound, const std::string &name)
     if(!m_sound.isLoaded(sound))
     {
         std::filesystem::path path = m_path;
-        path += std::filesystem::path("/Sounds/" + name);
+        path /= "Sounds";
+        path /= name;
         if(std::filesystem::exists(path))
             m_sound.load(sound, path.string());
 
@@ -92,9 +93,13 @@ void ResourceManager::loadTexture(const textureId &texture, const std::string &n
     if(!m_texture.isLoaded(texture))
     {
         std::filesystem::path path = m_path;
-        path += std::filesystem::path("/Textures/");
+        path /= "Textures";
         if(std::filesystem::exists(path))
-            m_texture.load(texture, sf::String(path.string() + Settings::currentTheme + "/" + name));
+        { 
+            path /= Settings::currentTheme;
+            path /= name;
+            m_texture.load(texture, sf::String(path.string()));
+        }
 
     }
 
@@ -132,9 +137,13 @@ void ResourceManager::loadBackground(const std::string &name)
     if(!m_texture.isLoaded(textureId::BACKGROUND))
     {
         std::filesystem::path path = m_path;
-        path += std::filesystem::path("/Textures/Backgrounds/");
+        path /= "Textures";
+        path /= "Backgrounds";
         if(std::filesystem::exists(path))
-            m_texture.load(textureId::BACKGROUND, path.string()  + name);
+        {
+            path /= name;
+            m_texture.load(textureId::BACKGROUND, path.string());
+        }
     }
 
 }
@@ -142,18 +151,21 @@ void ResourceManager::loadBackground(const std::string &name)
 
 void ResourceManager::loadTheme(const std::string &name)
 {
-   std::filesystem::path path = m_path;
-   path += std::filesystem::path("/TGUI/Theme/");
-   if(name == "Default")
-   {
+    std::filesystem::path path = m_path;
+    path /= "TGUI";
+    path /= "Theme";
+    if(name == "Default")
+    {
         tgui::Theme::setDefault(nullptr);
         Settings::currentTheme = name;
-   }
-   else if(std::filesystem::exists(path))
-   {
-        tgui::Theme::setDefault(path.string() + name + ".txt");
+    }
+    else if(std::filesystem::exists(path))
+    {
+        path /= (name + ".txt");
+
+        tgui::Theme::setDefault(path.string());
         Settings::currentTheme = name;
-   }
+    }
 
 }
 
@@ -169,7 +181,9 @@ bool ResourceManager::loadFont(const fontId &font, const std::string &name)
     if(!m_font.isLoaded(font))
     {
         std::filesystem::path path = m_path;
-        path += std::filesystem::path("/Fonts/" + name + "/" + name + ".ttf");
+        path /= "Fonts";
+        path /= name;
+        path /= (name + ".ttf");
         if(std::filesystem::exists(path))
             m_font.load(font, path.string());
 
